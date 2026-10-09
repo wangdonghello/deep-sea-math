@@ -2,11 +2,13 @@ import { describe, expect, it } from 'vitest'
 
 import {
   EVENT_TYPES,
+  FIVE_STEP_TYPES,
   QUEST_CATEGORIES,
   QUIZ_TYPES,
   createQuestion,
   type AnswerEvent,
   type DomainEvent,
+  type FiveStepType,
   type QuestCategory,
   type QuizType,
   type QuestionInput,
@@ -27,6 +29,21 @@ const ALL_QUIZ_TYPES = {
   'unit-time-route': true,
   'pattern-data': true,
 } as const satisfies Record<QuizType, true>
+
+/**
+ * `FiveStepType` 编译期穷尽检查，与 {@link ALL_QUIZ_TYPES} 同一手法。
+ *
+ * 它锁的是 M6 修的那个约定：步骤类型由 `as const` 数组推导 union，而不是
+ * 手写字面量 union。这份字面量若与 union 脱节，`tsc` 立刻报错——否则有人
+ * 把 `FiveStepType` 改回手写 union 时，运行时真源与类型会静默漂移。
+ */
+const ALL_FIVE_STEP_TYPES = {
+  known: true,
+  unknown: true,
+  relation: true,
+  expression: true,
+  answer: true,
+} as const satisfies Record<FiveStepType, true>
 
 /** 构造一道合法题目的最小输入（省略了两个带默认值的字段）。 */
 function buildQuestionInput(): QuestionInput {
@@ -151,6 +168,24 @@ describe('domain/model: QuizType', () => {
 
   it('六个取值互不重复', () => {
     expect(new Set(QUIZ_TYPES).size).toBe(6)
+  })
+})
+
+describe('domain/model: FiveStepType', () => {
+  it('由 as const 数组推导，五个步骤齐全且互不重复', () => {
+    expect(FIVE_STEP_TYPES).toEqual(Object.keys(ALL_FIVE_STEP_TYPES))
+    expect(new Set(FIVE_STEP_TYPES).size).toBe(5)
+  })
+
+  it('顺序就是 design §3 的迁移链', () => {
+    expect([...FIVE_STEP_TYPES]).toEqual(['known', 'unknown', 'relation', 'expression', 'answer'])
+  })
+
+  it('五步链与数学题型两个维度取值不重叠', () => {
+    // FiveStepType 描述引导步序，QuizType 描述数学题型；两者共用字符串会让
+    // "该给哪类题排五步"无法只凭 type 判断。
+    const overlap = FIVE_STEP_TYPES.filter((step) => (QUIZ_TYPES as readonly string[]).includes(step))
+    expect(overlap).toEqual([])
   })
 })
 

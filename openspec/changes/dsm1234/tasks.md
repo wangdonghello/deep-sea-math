@@ -24,11 +24,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 3: 答案判等与五步状态机
 
-- [ ] **Step RED**: 写 `tests/domain/quiz/answerJudgement.test.ts`：断言 `6`/`6颗`/`6 颗` 对答案 `{value:6,unit:'颗'}` 均判对，`8` 判错，`24÷4` 对 `{expression:'24÷4'}` 判对，`6/24` 判错。写 `tests/domain/quiz/fiveStepMachine.test.ts`：断言合法迁移 KNOWN→UNKNOWN→RELATION→EXPRESSION→ANSWER、非法迁移抛错、已完成步可回看不可重做。
-- [ ] **Step GREEN**: 建 `src/domain/quiz/answerJudgement.ts`（数值归一化 / 单位归一化 / 算式 token 比对三路判等）与 `src/domain/quiz/fiveStepMachine.ts`（纯函数状态机，无副作用）。
-- [ ] **Step REFACTOR**: 抽出单位映射表 `unitAliases`；给两个模块补 JSDoc；确保 machine 返回新状态对象而非原地修改；跑全套测试。
-- [ ] **验证**: 三路判等各有正反用例；状态机对任意非法迁移稳定抛错。
-- [ ] **Commit**: `[DSM1234] feat: T3 - answer judgement and five-step machine`
+- [x] **Step RED**: 写 `tests/domain/quiz/answerJudgement.test.ts`：断言 `6`/`6颗`/`6 颗` 对答案 `{value:6,unit:'颗'}` 均判对，`8` 判错，`24÷4` 对 `{expression:'24÷4'}` 判对，`6/24` 判错。写 `tests/domain/quiz/fiveStepMachine.test.ts`：断言合法迁移 KNOWN→UNKNOWN→RELATION→EXPRESSION→ANSWER、非法迁移抛错、已完成步可回看不可重做。
+- [x] **Step GREEN**: 建 `src/domain/quiz/answerJudgement.ts`（数值归一化 / 单位归一化 / 算式 token 比对三路判等）与 `src/domain/quiz/fiveStepMachine.ts`（纯函数状态机，无副作用）。
+- [x] **Step REFACTOR**: 抽出单位映射表 `unitAliases`；给两个模块补 JSDoc；确保 machine 返回新状态对象而非原地修改；跑全套测试。
+- [x] **验证**: 三路判等各有正反用例；状态机对任意非法迁移稳定抛错。
+- [x] **Commit**: `[DSM1234] feat: T3 - answer judgement and five-step machine`
 
 ### Task 4: 组题与难度自适应
 

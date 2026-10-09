@@ -55,8 +55,29 @@ export const QUEST_CATEGORIES = ['basic', 'applied', 'probe'] as const
 /** 题组槽位类别，与 {@link QUEST_CATEGORIES} 一一对应。 */
 export type QuestCategory = (typeof QUEST_CATEGORIES)[number]
 
-/** 五步思考引导的五个步骤（`fiveStepMachine` 的合法迁移链）。 */
-export type FiveStepType = 'known' | 'unknown' | 'relation' | 'expression' | 'answer'
+/**
+ * 五步思考引导的五个步骤（`fiveStepMachine` 的合法迁移链）。
+ *
+ * 与 {@link QUIZ_TYPES} / {@link EVENT_TYPES} / {@link MASTERY_LEVELS} 保持
+ * 同一模式：先声明 `as const` 数组作为**运行时真源**，再由它推导 union。
+ * 写成字面量 union 会让「运行时可遍历的步骤表」与「编译期类型」各有一份
+ * 定义，向链里新增一步时可能出现类型放行而运行时校验漏掉（或反之）。
+ */
+export const FIVE_STEP_TYPES = [
+  /** 已知：读题并点选出已知条件。 */
+  'known',
+  /** 未知：点选这道题要求的是什么。 */
+  'unknown',
+  /** 关系：单选已知与未知之间的数量关系。 */
+  'relation',
+  /** 算式：输入这一步的数量关系表达式。 */
+  'expression',
+  /** 答案：输入最终算得的结果。 */
+  'answer',
+] as const
+
+/** 五步类型的编译期类型，与 {@link FIVE_STEP_TYPES} 一一对应。 */
+export type FiveStepType = (typeof FIVE_STEP_TYPES)[number]
 
 /**
  * 五步引导中的单一步骤模板。
