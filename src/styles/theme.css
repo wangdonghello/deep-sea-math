@@ -1,0 +1,30 @@
+/*
+ * 全局深海主题入口（占位）。
+ *
+ * 完整的色板、字号阶与微光粒子变量由 Task 10 按设计稿 A 落地；
+ * 这里只放与主题无关的全局基线，避免影响 Task 10 的对比度测试。
+ */
+
+:root {
+  /* 让表单控件与滚动条跟随深色主题（完整色板见 Task 10） */
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* 手机网页：禁用橡皮筋滚动带来的布局跳动 */
+  overscroll-behavior: none;
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
+}

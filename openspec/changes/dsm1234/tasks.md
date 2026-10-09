@@ -8,11 +8,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 1: 项目脚手架（Vue 3 + TS + Vite + Vitest）
 
-- [ ] **Step RED**: 写 `tests/smoke.test.ts`，断言 `src/App.vue` 可被挂载且渲染出 `<div id="app">`（此时项目尚不存在，测试必须失败）。
-- [ ] **Step GREEN**: 初始化项目：`npm create vite@latest . -- --template vue-ts`；安装 `vue-router` `pinia` `idb` `typescript` `vite` `vitest` `@vue/test-utils` `jsdom` `fake-indexeddb`；配置 `vitest.config.ts`（environment: jsdom）；建 `src/main.ts` `src/App.vue` `src/router/index.ts`；`package.json` 加 `test`/`type-check` 脚本。
-- [ ] **Step REFACTOR**: 清理脚手架默认产物（`HelloWorld.vue`、默认 CSS、`components/__tests__` 示例）；按 design §1 建 `src/domain` `src/data` `src/features` `src/views` 目录与占位 `README.md` 说明各层职责；跑全套测试确认仍 GREEN。
-- [ ] **验证**: `npm run test` 全绿、`npm run type-check` 通过、`npm run dev` 能起。
-- [ ] **Commit**: `[DSM1234] chore: T1 - scaffold vue3 ts vite vitest`
+- [x] **Step RED**: 写 `tests/smoke.test.ts`，断言 `src/App.vue` 可被挂载且渲染出 `<div id="app">`（此时项目尚不存在，测试必须失败）。
+- [x] **Step GREEN**: 初始化项目：创建 Vue3+TS+Vite 脚手架；安装 `vue-router` `pinia` `idb` `typescript` `vite` `vitest` `@vue/test-utils` `jsdom` `fake-indexeddb`；配置 `vitest.config.ts`（environment: jsdom）；建 `src/main.ts` `src/App.vue` `src/router/index.ts`；`package.json` 加 `test`/`type-check` 脚本。
+- [x] **Step REFACTOR**: 清理脚手架默认产物（`HelloWorld.vue`、默认 CSS、`components/__tests__` 示例）；按 design §1 建 `src/domain` `src/data` `src/features` `src/views` 目录与占位 `README.md` 说明各层职责；跑全套测试确认仍 GREEN。
+- [x] **验证**: `npm run test` 全绿、`npm run type-check` 通过、`npm run dev` 能起。
+- [x] **Commit**: `[DSM1234] chore: T1 - scaffold vue3 ts vite vitest`
 
 ### Task 2: domain 基础模型与 crypto 抽象
 
