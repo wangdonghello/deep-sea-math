@@ -32,11 +32,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 4: 组题与难度自适应
 
-- [ ] **Step RED**: 写 `tests/domain/quiz/buildDailyQuest.test.ts`：给定 60 题池与 settings(5/3/1)，断言返回 9 题；断言已独立掌握的题被排除、池不足时 `repeatCount>0`；断言注入固定 `idGenerator` 与 `clock` 后**两次调用结果完全一致**（确定性）；写 `tests/domain/quiz/difficulty.test.ts`：断言连续答对升档、连续提示后答对降档、clamp 在 1..3 内、回落写 `difficultyFallback`。
-- [ ] **Step GREEN**: 建 `src/domain/quiz/difficulty.ts`（依据 masteryByTopic 事件摘要计算档位）与 `src/domain/quiz/buildDailyQuest.ts`（按三类数量取题 + 排除已掌握 + 确定性排序）。
-- [ ] **Step REFACTOR**: 取题算法改为单次分区而非三次过滤（避免循环内重复遍历）；补 JSDoc；跑全套测试。
-- [ ] **验证**: 注入固定时钟与 ID 发生器时，同输入必同输出（回归锁定确定性）。
-- [ ] **Commit**: `[DSM1234] feat: T4 - daily quest builder and difficulty adaptation`
+- [x] **Step RED**: 写 `tests/domain/quiz/buildDailyQuest.test.ts`：给定 60 题池与 settings(5/3/1)，断言返回 9 题；断言已独立掌握的题被排除、池不足时 `repeatCount>0`；断言注入固定 `idGenerator` 与 `clock` 后**两次调用结果完全一致**（确定性）；写 `tests/domain/quiz/difficulty.test.ts`：断言连续答对升档、连续提示后答对降档、clamp 在 1..3 内、回落写 `difficultyFallback`。
+- [x] **Step GREEN**: 建 `src/domain/quiz/difficulty.ts`（依据 masteryByTopic 事件摘要计算档位）与 `src/domain/quiz/buildDailyQuest.ts`（按三类数量取题 + 排除已掌握 + 确定性排序）。
+- [x] **Step REFACTOR**: 取题算法改为单次分区而非三次过滤（避免循环内重复遍历）；补 JSDoc；跑全套测试。
+- [x] **验证**: 注入固定时钟与 ID 发生器时，同输入必同输出（回归锁定确定性）。
+- [x] **Commit**: `[DSM1234] feat: T4 - daily quest builder and difficulty adaptation`
 
 ### Task 5: 掌握状态机与提示链选择
 

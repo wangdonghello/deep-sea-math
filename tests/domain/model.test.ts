@@ -118,6 +118,9 @@ describe('domain/model: 事件 union', () => {
       'session-completed': true,
       'unlock-granted': true,
       'settings-updated': true,
+      // Task 4 登记的回落事件：这里与 EVENT_TYPES 同步增长，漏加则编译期
+      // 就报错（Record 要求穷尽），不会等到重放层静默丢事件。
+      'difficulty-fallback': true,
     }
 
     expect(Object.keys(exhaustive).sort()).toEqual([...EVENT_TYPES].sort())

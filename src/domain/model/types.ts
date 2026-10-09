@@ -3,7 +3,7 @@
  *
  * 这里只放**值对象与类型**，没有任何业务规则实现（判等在 `quiz/`、掌握状态
  * 迁移在 `mastery/`、投影重放在 `eventLog/`）。之所以把模型单独抽出来：
- * 六类题型、四档掌握状态、九类事件是**跨层共用的词汇表**，`data/` 的内容
+ * 六类题型、四档掌握状态、全部领域事件是**跨层共用的词汇表**，`data/` 的内容
  * JSON、`features/` 的组件、`eventLog/` 的重放都要引用同一份定义，避免各处
  * 手写字符串字面量后漂移。
  *
@@ -310,6 +310,7 @@ export const EVENT_TYPES = [
   'session-completed',
   'unlock-granted',
   'settings-updated',
+  'difficulty-fallback',
 ] as const
 
 /** 事件类型字面量，与 {@link EVENT_TYPES} 一一对应。 */
@@ -435,9 +436,37 @@ export interface SettingsUpdatedEvent extends EventBase {
 }
 
 /**
+ * 难度档位回落：目标档位题量不足，改从相邻档位取题并留痕。
+ *
+ * 对应 spec `题型与难度覆盖` 需求的「高档位题量不足回落」场景，以及 design §3
+ * 难度自适应段落末尾的「档位回落时写 `difficultyFallback` 事件」。
+ * 它是家长报告解释「为什么孩子今天拿到的题看起来偏易/偏难」的唯一依据，
+ * 因此 `requestedDifficulty` / `actualDifficulty` 两个档位都要显式记录，
+ * 只记结果会让报告退化成一个无法归因的难度数字。
+ */
+export interface DifficultyFallbackEvent extends EventBase {
+  type: 'difficulty-fallback'
+  /** 所属当日题组（回落的题组）。 */
+  sessionId: string
+  /** 自适应算出的目标档位，即回落前想要的档。 */
+  requestedDifficulty: Difficulty
+  /** 实际取题的档位，回落后的生效档。 */
+  actualDifficulty: Difficulty
+  /** 发生回落的题组槽位类别（basic / applied / probe）。 */
+  category: QuestCategory
+  /**
+   * 回落原因，供家长报告展示。
+   *
+   * 由 `difficulty/createDifficultyFallbackEvent` 生成而非调用方拼字符串：
+   * 文案只有一处产出，报告层不会出现两种口径。
+   */
+  reason: string
+}
+
+/**
  * 答题流程事件 union——驱动掌握状态、错题本与题目进度的四个事件。
  *
- * 之所以先从九类事件里切出这四类：掌握状态机的输入只有它们（`design §3`
+ * 之所以先从事件全集里切出这四类：掌握状态机的输入只有它们（`design §3`
  * 的迁移箭头全部由「答对 / 用了提示 / 看答案 / 订正答对」触发），把输入
  * 类型收窄后，Task 5 的状态机函数签名不必再背负建档与设置事件。
  */
@@ -460,3 +489,4 @@ export type DomainEvent =
   | SessionCompletedEvent
   | UnlockGrantedEvent
   | SettingsUpdatedEvent
+  | DifficultyFallbackEvent
