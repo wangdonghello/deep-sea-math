@@ -16,11 +16,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 2: domain 基础模型与 crypto 抽象
 
-- [ ] **Step RED**: 写 `tests/domain/model.test.ts`：断言 `QuizType` 六个取值齐全、`Question` 必填字段可由构造函数补全默认值（`requiresFiveStep` 缺省 false、`similarQuestionIds` 缺省 []）；写 `tests/domain/crypto/hashPin.test.ts`：断言同一 PIN + 同一 salt 得到相同哈希、不同 salt 得到不同哈希、哈希不含明文 PIN。
-- [ ] **Step GREEN**: 建 `src/domain/model/types.ts`（Question / FiveStep / Profile / AnswerEvent / MasteryState / BestiaryEntry / Session / Settings 及事件 union）；建 `src/domain/crypto/hashPin.ts`，实现依赖注入的 `hashPin(pin, salt, digest)` 与 `verifyPin(pin, salt, hash, digest)`，默认注入 `crypto.subtle.digest`，测试注入同步 SHA-256 实现。
-- [ ] **Step REFACTOR**: 为每个导出加 JSDoc（含 `@throws`）；把 `digest` 注入类型收敛为窄接口 `DigestFn`，不泄漏 Web Crypto 全局类型到 domain；跑全套测试。
-- [ ] **验证**: 单测覆盖 hashPin 全部分支；`hashPin` 输出不包含子串 "1234"（对 PIN=1234 的情况）。
-- [ ] **Commit**: `[DSM1234] feat: T2 - domain models and pin hashing`
+- [x] **Step RED**: 写 `tests/domain/model.test.ts`：断言 `QuizType` 六个取值齐全、`Question` 必填字段可由构造函数补全默认值（`requiresFiveStep` 缺省 false、`similarQuestionIds` 缺省 []）；写 `tests/domain/crypto/hashPin.test.ts`：断言同一 PIN + 同一 salt 得到相同哈希、不同 salt 得到不同哈希、哈希不含明文 PIN。
+- [x] **Step GREEN**: 建 `src/domain/model/types.ts`（Question / FiveStep / Profile / AnswerEvent / MasteryState / BestiaryEntry / Session / Settings 及事件 union）；建 `src/domain/crypto/hashPin.ts`，实现依赖注入的 `hashPin(pin, salt, digest)` 与 `verifyPin(pin, salt, hash, digest)`，默认注入 `crypto.subtle.digest`，测试注入同步 SHA-256 实现。
+- [x] **Step REFACTOR**: 为每个导出加 JSDoc（含 `@throws`）；把 `digest` 注入类型收敛为窄接口 `DigestFn`，不泄漏 Web Crypto 全局类型到 domain；跑全套测试。
+- [x] **验证**: 单测覆盖 hashPin 全部分支；`hashPin` 输出不包含子串 "1234"（对 PIN=1234 的情况）。
+- [x] **Commit**: `[DSM1234] feat: T2 - domain models and pin hashing`
 
 ### Task 3: 答案判等与五步状态机
 
