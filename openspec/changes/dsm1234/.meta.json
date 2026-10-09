@@ -1,0 +1,18 @@
+---
+change_id: DSM1234
+slug: dsm1234
+created_at: 2026-10-09T16:00:00+08:00
+dry_run: true
+dop_status: spec-in-progress
+delta_capabilities:
+  - daily-math-quest
+  - creature-bestiary
+  - child-profiles
+  - offline-event-log
+  - hint-and-correction
+---
+
+# 深海数学探险 · 阶段一 核心学习循环
+
+**change-id**: DSM1234
+**状态**: spec-in-progress
