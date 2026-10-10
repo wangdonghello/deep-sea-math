@@ -63,6 +63,7 @@ describe('domain/quiz: streakSignal — 非提交事件', () => {
       type: 'answer-revealed',
       sessionId: 's-1',
       questionId: 'q-1',
+      revealedAnswer: true,
     }
     expect(classifyStreakSignal(reveal)).toBe('breaker')
   })

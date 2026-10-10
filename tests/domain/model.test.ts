@@ -144,7 +144,7 @@ describe('domain/model: 事件 union', () => {
         ms: 1200,
       },
       { eventId: 'e-2', profileId: 'p-1', occurredAt: 1, type: 'hint-used', sessionId: 's-1', questionId: 'q-1', level: 1 },
-      { eventId: 'e-3', profileId: 'p-1', occurredAt: 2, type: 'answer-revealed', sessionId: 's-1', questionId: 'q-1' },
+      { eventId: 'e-3', profileId: 'p-1', occurredAt: 2, type: 'answer-revealed', sessionId: 's-1', questionId: 'q-1', revealedAnswer: true },
       {
         eventId: 'e-4',
         profileId: 'p-1',

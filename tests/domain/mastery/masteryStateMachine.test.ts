@@ -64,6 +64,7 @@ function revealed(questionId: string): AnswerRevealedEvent {
     type: 'answer-revealed',
     sessionId: 's-1',
     questionId,
+    revealedAnswer: true,
   }
 }
 

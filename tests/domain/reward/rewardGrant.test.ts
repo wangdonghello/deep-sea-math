@@ -81,6 +81,7 @@ function revealed(questionId: string): DomainEvent {
     type: 'answer-revealed',
     sessionId: 'session-1',
     questionId,
+    revealedAnswer: true,
   }
 }
 

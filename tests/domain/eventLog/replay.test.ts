@@ -88,6 +88,7 @@ function revealed(eventId: string, overrides: Partial<AnswerRevealedEvent> = {})
     type: 'answer-revealed',
     sessionId: 's-1',
     questionId: 'q-1',
+    revealedAnswer: true,
     ...overrides,
   }
 }
@@ -556,7 +557,7 @@ function randomEvent(random: () => number, index: number): DomainEvent {
     case 3:
       return { ...base, type: 'hint-used', sessionId, questionId, level: 1 + Math.floor(random() * 5) }
     case 4:
-      return { ...base, type: 'answer-revealed', sessionId, questionId }
+      return { ...base, type: 'answer-revealed', sessionId, questionId, revealedAnswer: true }
     case 5:
       return {
         ...base,

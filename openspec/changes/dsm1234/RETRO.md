@@ -164,3 +164,11 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 - `src/data` 分支覆盖 86.66% → 97.14%
 
 **已知取舍**：台账随事件数线性增长（已用 `removeByProfile` 同步清理）；台账与事件分两次 `getAll`（`Promise.all` 并发），无循环内查询。
+
+---
+
+## R11. T13 类型遗漏 `revealedAnswer`（已补正）
+
+**问题**：此前模型类型 `AnswerRevealedEvent` 漏记 `hint-and-correction` spec §直接看答案要求的 `revealedAnswer: true` 字段。
+
+**修复**：将字段补为必填字面量类型，并在 T13 事件和全仓测试夹具中写入 `true`；同步修正曾断言该字段不存在的测试。

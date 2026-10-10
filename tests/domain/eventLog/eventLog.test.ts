@@ -96,6 +96,7 @@ describe('domain/eventLog: logicalEventKey — 逻辑组合键', () => {
       type: 'answer-revealed',
       sessionId: 's-1',
       questionId: 'q-3',
+      revealedAnswer: true,
     }
     // 同题同组的第二次看答案（ eventId 不同）会被判为语义重复事件。
     expect(logicalEventKey(reveal)).toBe('answer-revealed|s-1|q-3')
@@ -271,6 +272,7 @@ describe('domain/eventLog: appendEvents — 同一逻辑组合去重', () => {
       type: 'answer-revealed',
       sessionId: 's-1',
       questionId: 'q-3',
+      revealedAnswer: true,
     }
     const merged = appendEvents([reveal], [{ ...reveal, eventId: 'e-reveal-2' }])
     expect(merged).toHaveLength(1)

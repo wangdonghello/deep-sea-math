@@ -9,9 +9,9 @@ import HintStack from '@/features/quizStage/HintStack.vue'
 import Numpad from '@/features/quizStage/Numpad.vue'
 import QuestView from '@/views/QuestView.vue'
 
-function question(requiresFiveStep = false): Question {
+function question(requiresFiveStep = false, id = requiresFiveStep ? 'applied' : 'basic'): Question {
   return createQuestion({
-    id: requiresFiveStep ? 'applied' : 'basic', type: 'add-sub', difficulty: 1,
+    id, type: 'add-sub', difficulty: 1,
     category: requiresFiveStep ? 'applied' : 'basic',
     story: { title: '海星收集贝壳', body: '收集 3 个，又找到 4 个，一共有几个？' },
     requiresFiveStep,
@@ -151,8 +151,48 @@ describe('QuestView feedback', () => {
     expect(events.some((event) => event.type === 'hint-used' && event.level === 1)).toBe(true)
     await view.get('[data-testid="reveal-answer"]').trigger('click')
     await flushPromises()
-    expect(events.some((event) => event.type === 'answer-revealed' && !('revealedAnswer' in event))).toBe(true)
+    expect(events.some((event) => event.type === 'answer-revealed' && event.revealedAnswer === true)).toBe(true)
     expect(events.some((event) => event.type === 'session-completed')).toBe(false)
+  })
+
+  it('看完题但未完成时提供继续练习，订正后才显示完成并发奖', async () => {
+    const events: DomainEvent[] = [{
+      eventId: 'started', profileId: 'profile', occurredAt: 1, type: 'session-started',
+      sessionId: 'session', questionIds: ['basic', 'second'], difficultyTrace: [1, 1],
+    }]
+    const store = {
+      async listEvents() { return [...events] },
+      async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
+    }
+    const view = mount(QuestView, {
+      props: { sessionId: 'session', profileId: 'profile', questions: [question(), question(false, 'second')], store },
+    })
+    await flushPromises()
+    await view.get('[data-testid="reveal-answer"]').trigger('click')
+    await flushPromises()
+    await view.get('[data-testid="reveal-answer"]').trigger('click')
+    await flushPromises()
+    expect(view.find('[data-testid="quest-completed"]').exists()).toBe(false)
+    expect(view.text()).toContain('已看完题目，但直接看答案不计入任务完成')
+    expect(view.get('[data-testid="continue-practice"]').text()).toContain('继续练习')
+    expect(events.some((event) => event.type === 'session-completed')).toBe(false)
+
+    await view.get('[data-testid="continue-practice"]').trigger('click')
+    expect(view.find('[data-testid="direct-answer"]').exists()).toBe(true)
+    await view.get('[data-key="8"]').trigger('click')
+    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await flushPromises()
+    expect(view.find('[data-testid="direct-answer"]').exists()).toBe(true)
+    await view.get('[data-key="backspace"]').trigger('click')
+    await view.get('[data-key="7"]').trigger('click')
+    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await flushPromises()
+    await view.get('[data-testid="continue-practice"]').trigger('click')
+    await view.get('[data-key="7"]').trigger('click')
+    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await flushPromises()
+    expect(events.some((event) => event.type === 'session-completed')).toBe(true)
+    expect(view.find('[data-testid="quest-completed"]').exists()).toBe(true)
   })
 
   it('存储错误只显示中性状态，日志脱敏', async () => {

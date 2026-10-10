@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { createQuestion } from '@/domain/model/types'
 import type { DomainEvent, Question } from '@/domain/model/types'
@@ -17,7 +17,11 @@ function makeQuestion(
   })
 }
 
-function setup(questions: Question[], targets: { creatureId?: string; zoneId?: string } = {}) {
+function setup(
+  questions: Question[],
+  targets: { creatureId?: string; zoneId?: string } = {},
+  useDefaultIdGenerator = false,
+) {
   const similarIds = new Set(questions.flatMap((question) => question.similarQuestionIds))
   const roots = questions.filter((question) => !similarIds.has(question.id))
   const events: DomainEvent[] = [{
@@ -37,7 +41,8 @@ function setup(questions: Question[], targets: { creatureId?: string; zoneId?: s
     sessionId: 'session-1', profileId: 'profile-1', questions: roots,
     similarQuestionPool: questions.filter((question) => !roots.includes(question)), store,
     ...targets,
-    clock: () => 1000 + events.length, idGenerator: () => `event-${++id}`,
+    clock: () => 1000 + events.length,
+    ...(useDefaultIdGenerator ? {} : { idGenerator: () => `event-${++id}` }),
   })
   return { session, events, store }
 }
@@ -74,12 +79,13 @@ describe('useQuizSession', () => {
       .toBe(true)
   })
 
-  it('看答案写 answer-revealed 及 sessionId，不引入 revealedAnswer 字段', async () => {
+  it('看答案写 answer-revealed、sessionId 与 revealedAnswer=true', async () => {
     const { session, events } = setup([makeQuestion('q1')])
     await session.revealAnswer()
     const revealed = events.find((event) => event.type === 'answer-revealed')
-    expect(revealed).toMatchObject({ type: 'answer-revealed', sessionId: 'session-1', questionId: 'q1' })
-    expect(revealed).not.toHaveProperty('revealedAnswer')
+    expect(revealed).toMatchObject({
+      type: 'answer-revealed', sessionId: 'session-1', questionId: 'q1', revealedAnswer: true,
+    })
   })
 
   it('数值答案接受等价单位写法并由事件重放得到独立掌握', async () => {
@@ -88,10 +94,26 @@ describe('useQuizSession', () => {
     expect(events.find((event) => event.type === 'answer-submitted')).toMatchObject({ correct: true, usedHintLevel: 0 })
     expect(events.find((event) => event.type === 'session-completed'))
       .toMatchObject({
-        type: 'session-completed', eventId: 'profile-1:session-1:session-completed',
+        type: 'session-completed', eventId: 'event-2',
         rewards: ['quest-complete', 'independent-mastery'],
       })
     expect(replayProjections(events, { profileId: 'profile-1' }).masteryByQuestion.q1?.level).toBe('independent')
+  })
+
+  it('默认 session-completed eventId 使用 Web Crypto UUID', async () => {
+    const randomUUID = vi.fn()
+      .mockReturnValueOnce('123e4567-e89b-42d3-a456-426614174001')
+      .mockReturnValueOnce('123e4567-e89b-42d3-a456-426614174002')
+    vi.stubGlobal('crypto', { randomUUID })
+    try {
+      const { session, events } = setup([makeQuestion('q1')], {}, true)
+      await session.submitAnswer('7')
+      expect(events.find((event) => event.type === 'session-completed')?.eventId)
+        .toBe('123e4567-e89b-42d3-a456-426614174002')
+      expect(randomUUID).toHaveBeenCalledTimes(2)
+    } finally {
+      vi.unstubAllGlobals()
+    }
   })
 
   it('只看答案不会完成题组或发奖', async () => {
@@ -99,6 +121,26 @@ describe('useQuizSession', () => {
     await session.revealAnswer()
     expect(events.some((event) => event.type === 'session-completed')).toBe(false)
     expect(events.some((event) => event.type === 'unlock-granted')).toBe(false)
+  })
+
+  it('看完题后可继续订正；每题提交答案后 T7 才完成题组', async () => {
+    const { session, events } = setup([makeQuestion('q1'), makeQuestion('q2')])
+    await session.revealAnswer()
+    await session.revealAnswer()
+    expect(session.currentQuestion.value).toBeNull()
+    expect(session.sessionCompleted.value).toBe(false)
+    expect(events.some((event) => event.type === 'session-completed')).toBe(false)
+
+    session.continuePractice()
+    expect(session.currentQuestion.value?.id).toBe('q1')
+    await session.submitAnswer('6')
+    expect(session.currentQuestion.value?.id).toBe('q1')
+    await session.submitAnswer('7')
+    session.continuePractice()
+    expect(session.currentQuestion.value?.id).toBe('q2')
+    await session.submitAnswer('7')
+    expect(events.some((event) => event.type === 'session-completed')).toBe(true)
+    expect(session.sessionCompleted.value).toBe(true)
   })
 
   it('完成后的重放不会重复发奖', async () => {

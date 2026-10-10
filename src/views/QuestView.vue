@@ -80,7 +80,21 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
       直接看答案
     </button>
     <p v-if="errorMessage" role="status">{{ errorMessage }}</p>
-    <p v-if="!question && !errorMessage" data-testid="quest-completed">这一组完成啦，继续探索深海吧！</p>
+    <p v-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
+      这一组完成啦，继续探索深海吧！
+    </p>
+    <template v-else-if="!question && !errorMessage">
+      <p v-if="session.practiceQuestionAvailable.value" data-testid="quest-incomplete">
+        已看完题目，但直接看答案不计入任务完成，仍可继续作答完成任务。
+      </p>
+      <p v-else data-testid="quest-incomplete">这一组尚未完成。</p>
+      <button
+        v-if="session.practiceQuestionAvailable.value"
+        type="button"
+        data-testid="continue-practice"
+        @click="session.continuePractice"
+      >继续练习</button>
+    </template>
   </main>
 </template>
 
