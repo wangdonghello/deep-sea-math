@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import type {
   AnswerSubmittedEvent,
@@ -21,12 +21,18 @@ import unlockRulesSource from '../../../src/domain/reward/unlockRules.ts?raw'
  *    既有事件）；
  * 3. 直接看答案（`answer-revealed`）的题 MUST NOT 计入独立答对率
  *    （spec `hint-and-correction` §直接看答案）；
- * 4. **确定**：不进随机源，同一入参反复调用得到同一结果；
+ * 4. **决策确定**：奖励选择不进随机源；注入稳定 ID factory 后，同一入参反复调用得到同一结果；
  * 5. **纯函数**：不修改入参的事件数组。
  */
 
 /** 静态时间戳：测试里的所有事件共用同一时刻，避免时钟干扰。 */
 const NOW = 1_700_000_000_000
+
+/** 可重复的 UUID 形状 unlock ID；每次 input() 都从同一序列开始。 */
+function stableUnlockEventIdFactory(): () => string {
+  let sequence = 0
+  return () => `11111111-1111-4111-8111-${String(++sequence).padStart(12, '0')}`
+}
 
 /** 建档事件，作为事件历史的“锚”，同时验证 profileId 隔离。 */
 function profileCreated(): ProfileCreatedEvent {
@@ -104,6 +110,7 @@ function input(overrides: Partial<RewardGrantInput> = {}): RewardGrantInput {
     events: [profileCreated(), ...answeredEveryQuestion(9)],
     creatureId: 'creature-anglerfish',
     zoneId: 'zone-twilight',
+    unlockEventIdFactory: stableUnlockEventIdFactory(),
     ...overrides,
   }
 }
@@ -114,6 +121,45 @@ describe('domain/reward: 完成整组的发放', () => {
     expect(result.granted).toBe(true)
     expect(result.sessionCompletedEvent?.type).toBe('session-completed')
     expect(result.unlockGrantedEvents.map((event) => event.kind)).toEqual(['creature', 'zone'])
+  })
+
+  it('未注入 unlock factory 时默认生成标准 UUID', () => {
+    const randomUUID = vi.spyOn(globalThis.crypto, 'randomUUID')
+      .mockReturnValueOnce('123e4567-e89b-42d3-a456-426614174001')
+      .mockReturnValueOnce('123e4567-e89b-42d3-a456-426614174002')
+    try {
+      const result = grantRewards(input({ unlockEventIdFactory: undefined }))
+
+      expect(result.unlockGrantedEvents.map((event) => event.eventId)).toEqual([
+        '123e4567-e89b-42d3-a456-426614174001',
+        '123e4567-e89b-42d3-a456-426614174002',
+      ])
+      expect(result.unlockGrantedEvents.every((event) =>
+        /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(event.eventId),
+      )).toBe(true)
+      expect(new Set(result.unlockGrantedEvents.map((event) => event.eventId)).size).toBe(2)
+      expect(randomUUID).toHaveBeenCalledTimes(2)
+    } finally {
+      randomUUID.mockRestore()
+    }
+  })
+
+  it('注入 unlock factory 时使用注入的事件 ID', () => {
+    const factory = vi.fn()
+      .mockReturnValueOnce('22222222-2222-4222-8222-000000000001')
+      .mockReturnValueOnce('22222222-2222-4222-8222-000000000002')
+
+    const result = grantRewards(input({ unlockEventIdFactory: factory }))
+
+    expect(result.unlockGrantedEvents.map((event) => event.eventId)).toEqual([
+      '22222222-2222-4222-8222-000000000001',
+      '22222222-2222-4222-8222-000000000002',
+    ])
+    expect(result.unlockGrantedEvents.every((event) =>
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(event.eventId),
+    )).toBe(true)
+    expect(new Set(result.unlockGrantedEvents.map((event) => event.eventId)).size).toBe(2)
+    expect(factory).toHaveBeenCalledTimes(2)
   })
 
   it('徽章写进 session-completed.rewards', () => {
@@ -348,7 +394,7 @@ describe('domain/reward: 未完成整组不得发奖', () => {
 })
 
 describe('domain/reward: 确定性与纯函数契约', () => {
-  it('同一入参反复调用得到同一结果（不进随机源）', () => {
+  it('注入稳定 ID factory 后同一入参反复调用得到同一结果', () => {
     const first = grantRewards(input())
     for (let attempt = 0; attempt < 20; attempt += 1) {
       expect(JSON.stringify(grantRewards(input()))).toBe(JSON.stringify(first))

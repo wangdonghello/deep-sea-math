@@ -159,6 +159,8 @@ describe('useQuizSession', () => {
     expect(events.filter((event) => event.type === 'unlock-granted')).toMatchObject([
       { kind: 'creature', targetId: 'lanternfish' }, { kind: 'zone', targetId: 'zone-2' },
     ])
+    expect(events.filter((event) => event.type === 'unlock-granted').map((event) => event.eventId))
+      .toEqual(['event-3', 'event-4'])
   })
 
   it('默认 demo 池无需外注相似题池即可完成订正与相似题练习', async () => {

@@ -195,6 +195,7 @@ export function useQuizSession(options: QuizSessionOptions) {
       eventId: idGenerator(),
       questionIds: started.questionIds, events: events.value,
       creatureId: options.creatureId, zoneId: options.zoneId,
+      unlockEventIdFactory: () => idGenerator(),
     })
     if (result.granted) await appendMany(result.events)
   }

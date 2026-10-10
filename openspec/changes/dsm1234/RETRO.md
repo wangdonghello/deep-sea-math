@@ -172,3 +172,15 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **问题**：此前模型类型 `AnswerRevealedEvent` 漏记 `hint-and-correction` spec §直接看答案要求的 `revealedAnswer: true` 字段。
 
 **修复**：将字段补为必填字面量类型，并在 T13 事件和全仓测试夹具中写入 `true`；同步修正曾断言该字段不存在的测试。
+
+---
+
+## R12. T4/T7 生产事件 ID 不符合 UUID 约束（已修）
+
+**问题**：T4 `difficulty-fallback` 与 T7 `unlock-granted` 曾以业务字段拼接 `eventId`，不满足 `offline-event-log` 对所有事件 ID 为全局唯一 UUID 的要求。
+
+**修复**：两类事件现在都通过注入的 ID 发生器生成；未注入时使用 Web Crypto UUID。T4 组题会检测 session ID、`session-started` 与回落事件 ID 的重复并明确报错；T13 将 `unlockEventIdFactory` 接到会话共用的 `idGenerator`。
+
+**确定性边界**：纯奖励规则与奖励选择仍对相同输入确定；只有事件 ID 是随机源，测试/重放需要稳定输出时可注入确定性 UUID。
+
+**审计备注**：现有 `logicalEventKey` 的 `unlock-granted` 去重键是 `kind + targetId`，未包含 `profileId`。本次按规格衍生逻辑保持不变；该键语义留待独立审查，不扩入本修复。
