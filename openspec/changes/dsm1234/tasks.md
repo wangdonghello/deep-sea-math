@@ -48,11 +48,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 6: 事件日志、ID 幂等与投影重建
 
-- [ ] **Step RED**: 写 `tests/domain/eventLog/eventLog.test.ts`：断言 `appendEvents` 对同一 `eventId` 去重、对同一 `sessionId+questionId+retryCount+level` 逻辑组合去重；写 `tests/domain/eventLog/replay.test.ts`：构造一段真实事件序列，断言 `replayProjections(events)` 得到的 `questProgress` / `masteryByQuestion` / `mistakeBook` / `bestiaryUnlock` 与逐事件增量维护的结果**深度相等**。
-- [ ] **Step GREEN**: 建 `src/domain/eventLog/ids.ts`（可注入 `randomUUID`）、`src/domain/eventLog/appendEvents.ts`（去重规则）、`src/domain/eventLog/replay.ts`（reduce 出全部投影）。
-- [ ] **Step REFACTOR**: 重放改为一次 `reduce` 处理全量事件（**禁止循环内逐条查询**）；补 JSDoc；跑全套测试。
-- [ ] **验证**: 随机事件序列（固定种子的 fuzz 循环 200 次）下重放与增量始终一致。
-- [ ] **Commit**: `[DSM1234] feat: T6 - event log idempotency and projection replay`
+- [x] **Step RED**: 写 `tests/domain/eventLog/eventLog.test.ts`：断言 `appendEvents` 对同一 `eventId` 去重、对同一 `sessionId+questionId+retryCount+level` 逻辑组合去重；写 `tests/domain/eventLog/replay.test.ts`：构造一段真实事件序列，断言 `replayProjections(events)` 得到的 `questProgress` / `masteryByQuestion` / `mistakeBook` / `bestiaryUnlock` 与逐事件增量维护的结果**深度相等**。
+- [x] **Step GREEN**: 建 `src/domain/eventLog/ids.ts`（可注入 `randomUUID`）、`src/domain/eventLog/appendEvents.ts`（去重规则）、`src/domain/eventLog/replay.ts`（reduce 出全部投影）。
+- [x] **Step REFACTOR**: 重放改为一次 `reduce` 处理全量事件（**禁止循环内逐条查询**）；补 JSDoc；跑全套测试。
+- [x] **验证**: 随机事件序列（固定种子的 fuzz 循环 200 次）下重放与增量始终一致。
+- [x] **Commit**: `[DSM1234] feat: T6 - event log idempotency and projection replay`
 
 ### Task 7: 解锁与奖励规则
 
