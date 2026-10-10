@@ -14,6 +14,21 @@ const PATTERN_SEQUENCE_SKILLS = [
   'skill-double-and-add-one-sequence',
 ] as const
 
+const EXPECTED_STANDARDS_BY_SKILL: Record<string, string[]> = {
+  'skill-addition': ['3.NBT.2'], 'skill-subtraction': ['3.NBT.2'],
+  'skill-repeated-subtraction': ['3.NBT.2'], 'skill-merge-and-remove-duplicates': ['3.NBT.2', '3.OA.8'],
+  'skill-equal-groups-multiplication': ['3.OA.3'], 'skill-equal-share-division': ['3.OA.3'],
+  'skill-multiplication-addition': ['3.OA.8'], 'skill-division-addition': ['3.OA.8'],
+  'skill-multiplication-subtraction': ['3.OA.8'], 'skill-addsub-unknown': ['3.OA.8', '3.NBT.2'],
+  'skill-muldiv-unknown': ['3.OA.4'], 'skill-add-length': ['3.NBT.2'],
+  'skill-add-elapsed-time': ['3.MD.1'], 'skill-multi-step-distance': ['3.OA.8'],
+  'skill-subtract-elapsed-time': ['3.MD.1'], 'skill-mass-total': ['3.MD.2'],
+  'skill-rate-distance': ['3.OA.3'], 'skill-subtract-length': ['3.NBT.2'],
+  'skill-constant-difference-sequence': ['3.OA.9'], 'skill-doubling-sequence': ['3.OA.9'],
+  'skill-second-difference-sequence': ['3.OA.9'], 'skill-square-number-sequence': ['3.OA.9'],
+  'skill-double-and-add-one-sequence': ['3.OA.9'],
+}
+
 /** Loads the checked-in question bank as JSON so tests exercise shipped content. */
 function readQuestionBank(): unknown {
   return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.json'), 'utf8'))
@@ -127,19 +142,16 @@ describe('question bank content', () => {
     expect(() => assertValidQuestionBank(missingBucket)).toThrow(/pattern-data.*3/)
   })
 
-  it('maps precise standard tags to accessible Common Core domain pages', () => {
+  it('maps each tagged skill to its independently specified standard domain', () => {
     const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
     for (const question of bank.questions) {
       const tags = question.tags as string[]
       const standards = tags.filter((tag) => tag.startsWith('standard:'))
-      const expected = question.type === 'add-sub' ? ['3.NBT.2']
-        : question.type === 'mul-div' ? [tags.includes('skill-muldiv-unknown') ? '3.OA.4' : '3.OA.3']
-          : question.type === 'two-step-app' ? ['3.OA.8']
-            : question.type === 'unknown-relation' ? tags.includes('skill-addsub-unknown') ? ['3.OA.8', '3.NBT.2'] : ['3.OA.4']
-              : question.type === 'unit-time-route' ? tags.some((tag) => /elapsed-time|time-unit/.test(tag)) ? ['3.MD.1']
-                : tags.some((tag) => ['mass', 'liquid-volume', 'skill-mass-total'].includes(tag)) ? ['3.MD.2'] : ['3.MD.4']
-              : ['3.OA.9']
-      for (const standard of expected) expect(standards, `${question.id} standard`).toContain(`standard:${standard}`)
+      const skills = tags.filter((tag) => tag.startsWith('skill-'))
+      expect(skills, `${question.id} has one mapped skill`).toHaveLength(1)
+      const expected = EXPECTED_STANDARDS_BY_SKILL[skills[0]]
+      expect(expected, `${question.id} skill ${skills[0]} is mapped`).toBeDefined()
+      expect(standards.sort(), `${question.id} standards`).toEqual([...expected].map((standard) => `standard:${standard}`).sort())
       for (const standardTag of standards) {
         const standard = standardTag.slice('standard:'.length)
         const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
@@ -148,6 +160,67 @@ describe('question bank content', () => {
       }
       expect(question.sources.every((source: string) => !/\/3\/(?:NBT|OA|MD)\/\d/.test(source)), `${question.id} uses domain URL only`).toBe(true)
     }
+  })
+
+  it('keeps representative length, time, and mass questions within their grade-level standards', () => {
+    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
+    const byId = Object.fromEntries(bank.questions.map((question) => [question.id, question]))
+    expect(byId.q049.answer.value).toBe(500)
+    expect(byId.q049.tags).toContain('standard:3.NBT.2')
+    expect(byId.q051.tags).toContain('standard:3.OA.8')
+    expect(byId.q051.answer.value).toBe(25)
+    expect(byId.q051.steps.map((step: { prompt: string }) => step.prompt).join(' ')).toMatch(/10 \+ 3 × 5/)
+    expect(byId.q053.answer.value).toBe(900)
+    expect(byId.q058.answer.value).toBe(600)
+    expect(byId.q058.tags).toContain('standard:3.NBT.2')
+    expect(byId.q059.answer.value).toBe(325)
+    expect(byId.q057.tags).not.toContain('standard:3.MD.4')
+    for (const id of ['q050', 'q052', 'q054', 'q056', 'q060']) {
+      const question = byId[id]
+      expect(question.answer.value).toBeLessThanOrEqual(60)
+      const content = [question.story.body, ...question.hints, ...(question.steps ?? []).map((step: { prompt: string }) => step.prompt)].join(' ')
+      expect((content.match(/\d+/g) ?? []).map(Number).every((value) => value <= 60), `${id} time values within one hour`).toBe(true)
+    }
+    expect(byId.q055.answer.value).toBe(6)
+    expect(byId.q055.tags).toContain('standard:3.MD.2')
+  })
+
+  it('requires 3.OA.8 for the two-step distance question', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const q051 = invalid.questions.find((question) => question.id === 'q051')!
+    q051.tags = q051.tags.filter((tag: string) => tag !== 'standard:3.OA.8')
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/missing standard:3\.OA\.8/i)
+  })
+
+  it('rejects length addition and subtraction operands above 1000', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const q058 = invalid.questions.find((question) => question.id === 'q058')!
+    q058.story.body = q058.story.body.replace('950', '2500')
+    q058.hints[3] = '列式：2500 - 350。'
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/length operands.*1000/i)
+  })
+
+  it('avoids duplicate arithmetic templates while preserving similar-question links', () => {
+    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
+    const byId = Object.fromEntries(bank.questions.map((question) => [question.id, question]))
+    expect(byId.q025.answer.value).not.toBe(byId.q026.answer.value)
+    expect(byId.q026.answer.value).not.toBe(byId.q027.answer.value)
+    expect(byId.q061.answer.value).not.toBe(byId.q063.answer.value)
+    expect(byId.q063.story.body).toMatch(/3、6、9、12/)
+    expect(byId.q014.answer.value).not.toBe(byId.q039.answer.value)
+    expect(byId.q026.similarQuestionIds).toContain('q029')
+    expect(byId.q039.similarQuestionIds).toContain('q043')
+  })
+
+  it('keeps q034 specimen quantities and its two-step answer dimensionally consistent', () => {
+    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
+    const question = bank.questions.find((candidate) => candidate.id === 'q034')!
+    expect(question.story.body).toMatch(/每盒共有多少份/)
+    expect(question.answer).toEqual({ value: 49, unit: '份' })
+    expect(question.steps.map((step: { prompt: string }) => step.prompt).join(' ')).toMatch(/144 ÷ 12 \+ 37/)
+    expect(question.hints.join(' ')).toMatch(/144 ÷ 12 \+ 37/)
   })
 
   it('links only same-type questions with a shared precise skill tag', () => {
