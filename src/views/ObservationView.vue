@@ -5,9 +5,7 @@ import SourceNote from '@/features/bestiary/SourceNote.vue'
 import { depthRangeLabel } from '@/features/bestiary/depthRangeLabel'
 import type { CreatureContent } from '@/features/bestiary/types'
 
-type CreatureObservation = CreatureContent & { bodySize?: string }
-
-defineProps<{ creature: CreatureObservation }>()
+defineProps<{ creature: CreatureContent }>()
 </script>
 
 <template>
@@ -16,7 +14,7 @@ defineProps<{ creature: CreatureObservation }>()
     <p class="observation-view__scientific"><i>{{ creature.scientificName }}</i></p>
     <p>活动深度范围：{{ depthRangeLabel(creature) }}</p>
     <p class="observation-view__note">这是已知记录/教学区域范围，不是唯一分布；物种可能跨区。</p>
-    <p v-if="creature.bodySize">记录/最大体型（不是每个个体的恒定值）：{{ creature.bodySize }}</p>
+    <p>记录/最大体型（来源记录的上限，不是每头个体的恒定值）：{{ creature.bodySize }}</p>
     <CreatureCanvas :creature="creature">
       <KnowledgeCardList :cards="creature.knowledgeCards" />
     </CreatureCanvas>

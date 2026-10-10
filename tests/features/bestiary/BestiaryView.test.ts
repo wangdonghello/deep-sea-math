@@ -207,13 +207,26 @@ describe('ObservationView', () => {
     }
   })
 
-  it('shows body size as a sourced record rather than an individual constant', () => {
-    const sample = { ...creature, bodySize: '雌鱼最大 18.0 cm TL；雄鱼/未性别最大 2.9 cm TL' }
-    const view = mount(ObservationView, { props: { creature: sample } })
+  it('shows every real bank body-size record with its source measurement basis and caveat', () => {
+    for (const entry of CREATURE_BANK.creatures) {
+      const view = mount(ObservationView, { props: { creature: entry } })
 
-    expect(view.text()).toContain('记录/最大体型')
-    expect(view.text()).toContain(sample.bodySize)
-    for (const source of sample.sources) expect(view.find(`a[href="${source}"]`).exists()).toBe(true)
+      expect(view.text()).toContain('记录/最大体型')
+      expect(view.text()).toContain(entry.bodySize)
+      expect(view.text()).toMatch(/不是每头个体的恒定值/)
+      expect(entry.bodySize).toMatch(/最大(?:体长|标准体长|外套膜长)/)
+      expect(entry.bodySize).toMatch(/(TL|SL|ML)/)
+      for (const source of entry.sources) expect(view.find(`a[href="${source}"]`).exists()).toBe(true)
+    }
+  })
+
+  it('states the body size of every bank creature as a maximum record, never a per-individual constant', () => {
+    for (const entry of CREATURE_BANK.creatures) {
+      const view = mount(ObservationView, { props: { creature: entry } })
+
+      expect(view.text()).toContain(entry.bodySize)
+      expect(view.text()).toContain('每头个体')
+    }
   })
 })
 
@@ -234,6 +247,28 @@ describe('MapView', () => {
     expect(view.find('[role="status"]').exists()).toBe(false)
     expect(view.find('[data-testid="zone-base"]').exists()).toBe(true)
     expect(view.findAll('[data-testid^="zone-"]')).toHaveLength(5)
+  })
+
+  it('asks for a profile instead of showing the base when no profile is selected', async () => {
+    const view = mount(MapView, { props: { profileId: null, store: store([]) } })
+    await flushPromises()
+
+    expect(view.find('[data-testid="map-no-profile"]').text()).toContain('请先选择学习档案')
+    expect(view.find('[data-testid="zone-base"]').exists()).toBe(false)
+    expect(view.find('[data-testid="zone-twilight"]').exists()).toBe(false)
+  })
+
+  it('hides the base and zones once the active profile is cleared', async () => {
+    const view = mount(MapView, { props: { profileId: 'profile-a', store: store([]) } })
+    await flushPromises()
+    expect(view.find('[data-testid="zone-base"]').exists()).toBe(true)
+
+    await view.setProps({ profileId: null })
+    await flushPromises()
+
+    expect(view.find('[data-testid="map-no-profile"]').exists()).toBe(true)
+    expect(view.find('[data-testid="zone-base"]').exists()).toBe(false)
+    expect(view.find('[data-testid^="zone-"]').exists()).toBe(false)
   })
 
   it('shows the base and four interval zones without inventing zone unlocks', async () => {

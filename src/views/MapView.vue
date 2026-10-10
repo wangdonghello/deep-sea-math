@@ -14,7 +14,8 @@ const map = useBestiary({ profileId: computed(() => props.profileId), store: pro
     <FishBackdrop :count="6" :size="64" />
     <section class="map-view__content">
       <h1>深海地图</h1>
-      <p v-if="map.loading.value" role="status">正在读取地图…</p>
+      <p v-if="map.noProfile.value" data-testid="map-no-profile" role="status">请先选择学习档案，再查看深海地图。</p>
+      <p v-else-if="map.loading.value" role="status">正在读取地图…</p>
       <p v-else-if="map.error.value" data-testid="map-error" role="status">地图暂时打不开，请稍后再试</p>
       <template v-else>
         <div class="map-view__base" data-testid="zone-base" :data-current="map.currentZoneId.value === BASE_ZONE.id">

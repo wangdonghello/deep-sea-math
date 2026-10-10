@@ -17,6 +17,14 @@ export function useBestiary(options: { store: BestiaryStore; profileId: MaybeRef
     return zones.value.find((zone) => zone.current)?.id ?? BASE_ZONE.id
   })
 
+  /**
+   * True while no learning profile is selected.
+   *
+   * An absent profile must never be presented as "standing at the base": the map
+   * keeps its content hidden until a profile is chosen.
+   */
+  const noProfile = computed(() => toValue(options.profileId) === null)
+
   /** Rebuilds both views from the profile's full event history. */
   async function load(): Promise<void> {
     const profileId = toValue(options.profileId)
@@ -47,7 +55,7 @@ export function useBestiary(options: { store: BestiaryStore; profileId: MaybeRef
   }
 
   watch(() => toValue(options.profileId), () => { void load() }, { immediate: true })
-  return { items, zones, loading, error, currentZoneId, load }
+  return { items, zones, loading, error, noProfile, currentZoneId, load }
 }
 
 /** Selects the deepest explicitly unlocked zone; creature unlocks do not count. */
