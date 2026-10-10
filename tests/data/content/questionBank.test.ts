@@ -6,6 +6,14 @@ import { QUEST_CATEGORIES, QUIZ_TYPES } from '../../../src/domain/model/types'
 import { assertValidQuestionBank } from '../../../src/data/content/schema'
 import { CREATURE_BANK, QUESTION_BANK, QUESTION_INDEX } from '../../../src/data/content'
 
+const PATTERN_SEQUENCE_SKILLS = [
+  'skill-constant-difference-sequence',
+  'skill-second-difference-sequence',
+  'skill-square-number-sequence',
+  'skill-doubling-sequence',
+  'skill-double-and-add-one-sequence',
+] as const
+
 /** Loads the checked-in question bank as JSON so tests exercise shipped content. */
 function readQuestionBank(): unknown {
   return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.json'), 'utf8'))
@@ -71,11 +79,39 @@ describe('question bank content', () => {
     malformedUrl.questions[0].sources = ['https://']
     expect(() => assertValidQuestionBank(malformedUrl)).toThrow(/valid HTTP\(S\) URL/i)
     const mismatchedStandard = structuredClone(bank)
-    mismatchedStandard.questions[36].tags = mismatchedStandard.questions[36].tags.map((tag: string) => tag === 'standard:3.OA' ? 'standard:3.OA.4' : tag)
+    mismatchedStandard.questions[36].tags = mismatchedStandard.questions[36].tags.map((tag: string) => tag === 'standard:3.OA.8' ? 'standard:3.OA.4' : tag)
     expect(() => assertValidQuestionBank(mismatchedStandard)).toThrow(/standard tag does not match/i)
     const wrongUnknownSkill = structuredClone(bank)
     wrongUnknownSkill.questions[36].tags = wrongUnknownSkill.questions[36].tags.map((tag: string) => tag === 'skill-addsub-unknown' ? 'skill-muldiv-unknown' : tag)
     expect(() => assertValidQuestionBank(wrongUnknownSkill)).toThrow(/expected skill-addsub-unknown/i)
+  })
+
+  it('rejects a sequence skill mislabeled as data-table standard with an MD source', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const q062 = invalid.questions.find((question) => question.id === 'q062')!
+    q062.tags = q062.tags.filter((tag: string) => tag !== 'standard:3.OA.9')
+    q062.tags.push('standard:3.MD')
+    q062.sources = ['https://www.thecorestandards.org/Math/Content/3/MD/']
+
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/standard tag does not match/i)
+  })
+
+  it('maps every pattern sequence skill to 3.OA.9 even when presented as a data table', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const patternQuestions = bank.questions.filter((question) => question.type === 'pattern-data')
+    expect(patternQuestions.every((question) => question.tags.some((tag: string) => PATTERN_SEQUENCE_SKILLS.includes(tag as typeof PATTERN_SEQUENCE_SKILLS[number])))).toBe(true)
+
+    for (const skill of PATTERN_SEQUENCE_SKILLS) {
+      const candidate = structuredClone(bank)
+      for (const question of candidate.questions.filter((item) => item.type === 'pattern-data')) {
+        question.tags = question.tags.filter((tag: string) => !tag.startsWith('skill-') && !tag.startsWith('standard:'))
+        question.tags.push(skill, 'standard:3.OA.9')
+        question.sources = question.sources.map((source: string) =>
+          source.replace(/\/Math\/Content\/3\/(?:OA|MD)\//, '/Math/Content/3/OA/'))
+      }
+      expect(() => assertValidQuestionBank(candidate), skill).not.toThrow()
+    }
   })
 
   it('requires 60–80 questions and every type/difficulty bucket', () => {
@@ -91,25 +127,32 @@ describe('question bank content', () => {
     expect(() => assertValidQuestionBank(missingBucket)).toThrow(/pattern-data.*3/)
   })
 
-  it('cites a matching Common Core domain page for every tagged skill', () => {
+  it('maps precise standard tags to accessible Common Core domain pages', () => {
     const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
     for (const question of bank.questions) {
-      const expectedStandard = question.type === 'add-sub' ? '3.NBT'
-        : question.type === 'mul-div' || question.type === 'two-step-app' || question.type === 'unknown-relation' ? '3.OA'
-        : question.type === 'unit-time-route'
-          ? question.tags.some((tag: string) => /elapsed-time|time-unit/.test(tag)) ? '3.MD.1'
-            : question.tags.includes('skill-mass-total') ? '3.MD.2' : '3.MD.4'
-          : question.type === 'pattern-data' && question.tags.some((tag: string) => ['data-table', 'graphed-values'].includes(tag)) ? '3.MD'
-            : question.type === 'pattern-data' ? '3.OA.9' : ''
-      const domain = expectedStandard.includes('NBT') ? 'NBT' : expectedStandard.includes('OA') ? 'OA' : 'MD'
-      expect(question.tags.some((tag: string) => tag.startsWith('standard:')), `${question.id} standard tag`).toBe(true)
-      expect(question.tags).toContain(`standard:${expectedStandard}`)
-      expect(question.sources.some((source: string) => source === `https://www.thecorestandards.org/Math/Content/3/${domain}/`), `${question.id} domain`).toBe(true)
+      const tags = question.tags as string[]
+      const standards = tags.filter((tag) => tag.startsWith('standard:'))
+      const expected = question.type === 'add-sub' ? ['3.NBT.2']
+        : question.type === 'mul-div' ? [tags.includes('skill-muldiv-unknown') ? '3.OA.4' : '3.OA.3']
+          : question.type === 'two-step-app' ? ['3.OA.8']
+            : question.type === 'unknown-relation' ? tags.includes('skill-addsub-unknown') ? ['3.OA.8', '3.NBT.2'] : ['3.OA.4']
+              : question.type === 'unit-time-route' ? tags.some((tag) => /elapsed-time|time-unit/.test(tag)) ? ['3.MD.1']
+                : tags.some((tag) => ['mass', 'liquid-volume', 'skill-mass-total'].includes(tag)) ? ['3.MD.2'] : ['3.MD.4']
+              : ['3.OA.9']
+      for (const standard of expected) expect(standards, `${question.id} standard`).toContain(`standard:${standard}`)
+      for (const standardTag of standards) {
+        const standard = standardTag.slice('standard:'.length)
+        const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
+        expect(question.sources, `${question.id} ${standard} domain`)
+          .toContain(`https://www.thecorestandards.org/Math/Content/3/${domain}/`)
+      }
+      expect(question.sources.every((source: string) => !/\/3\/(?:NBT|OA|MD)\/\d/.test(source)), `${question.id} uses domain URL only`).toBe(true)
     }
   })
 
   it('links only same-type questions with a shared precise skill tag', () => {
     for (const question of QUESTION_BANK.questions) {
+      expect(new Set(question.similarQuestionIds).size, `${question.id} has no duplicate links`).toBe(question.similarQuestionIds.length)
       for (const id of question.similarQuestionIds) {
         const target = QUESTION_BANK.questions.find((candidate) => candidate.id === id)!
         expect(target.type, `${question.id} → ${id} type`).toBe(question.type)
@@ -152,6 +195,13 @@ describe('question bank content', () => {
     const invalid = structuredClone(bank)
     invalid.questions[0].similarQuestionIds = ['not-in-bank']
     expect(() => assertValidQuestionBank(invalid)).toThrow(/similarQuestionIds/)
+  })
+
+  it('rejects duplicate similar-question IDs', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    invalid.questions[2].similarQuestionIds = ['q009', 'q009']
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/similarQuestionIds.*duplicate/i)
   })
 
   it('rejects an expression that does not produce its declared value', () => {

@@ -23,8 +23,37 @@ describe('creature content', () => {
       expect(creature.knowledgeCards.length).toBeGreaterThanOrEqual(3)
       expect(creature.knowledgeCards.length).toBeLessThanOrEqual(5)
       expect(creature.sources.length).toBeGreaterThan(0)
+      expect(creature.bodySize.trim()).not.toBe('')
       expect(creature.illustrationRef).toMatch(/^original-/)
     }
+  })
+
+  it('includes size records with their original measurement basis and direct species citations', () => {
+    const creatures = (readCreatures() as { creatures: Array<Record<string, any>> }).creatures
+    const expected = [
+      ['johnson-anglerfish', '18厘米', '2.9厘米', 'TL', 'https://www.fishbase.se/summary/Melanocetus-johnsonii.html'],
+      ['giant-cusk-eel', '127厘米', 'SL', 'https://www.fishbase.se/summary/Spectrunculus-grandis.html'],
+      ['deep-sea-lizardfish', '64.0厘米', 'SL', 'https://www.fishbase.se/summary/Bathysaurus-ferox.html'],
+      ['jewel-squid', '33厘米', 'ML', 'https://www.sealifebase.se/summary/Histioteuthis-bonnellii.html'],
+    ]
+    for (const [id, ...details] of expected) {
+      const creature = creatures.find((item) => item.id === id)!
+      const citation = details.pop()!
+      for (const detail of details) {
+        expect(creature.bodySize, `${id} bodySize includes ${detail}`).toContain(detail)
+      }
+      expect(creature.sources).toContain(citation)
+    }
+  })
+
+  it('rejects missing or blank body-size data', () => {
+    const bestiary = readCreatures() as { version: string; creatures: Array<Record<string, any>> }
+    const missing = structuredClone(bestiary)
+    delete missing.creatures[0].bodySize
+    expect(() => assertValidCreatures(missing)).toThrow(/bodySize.*non-empty/i)
+    const blank = structuredClone(bestiary)
+    blank.creatures[0].bodySize = '   '
+    expect(() => assertValidCreatures(blank)).toThrow(/bodySize.*non-empty/i)
   })
 
   it('includes Johnson’s anglerfish and rejects fixed-depth claims', () => {
@@ -53,7 +82,7 @@ describe('creature content', () => {
       expect(creature.depthRange).toEqual({ min, max })
       expect(creature.sources).toContain(`https://api.obis.org/v3/taxon/${taxonId}`)
       expect(creature.sources).toContain(`https://api.obis.org/v3/occurrence?taxonid=${taxonId}&size=10000`)
-      expect(creature.habitat).toMatch(/OBIS.*观测记录范围.*不代表(?:物种)?完整分布/)
+      expect(creature.habitat).toMatch(/OBIS.*(?:观测|水深).*(?:不代表|不等于)(?:物种)?完整分布/)
       expect(creature.knowledgeCards.join(' ')).toContain(`${count}条`)
     }
   })

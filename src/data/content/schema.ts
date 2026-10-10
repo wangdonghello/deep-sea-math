@@ -16,6 +16,14 @@ const QUESTION_UNITS = new Set([
   '份', '项', '格', '瓶', '节', '次', '轮',
 ])
 
+const PATTERN_SEQUENCE_SKILLS = new Set([
+  'skill-constant-difference-sequence',
+  'skill-second-difference-sequence',
+  'skill-square-number-sequence',
+  'skill-doubling-sequence',
+  'skill-double-and-add-one-sequence',
+])
+
 /** Versioned, validated question content. */
 export interface QuestionBank {
   version: string
@@ -24,6 +32,8 @@ export interface QuestionBank {
 
 /** Creature content adds the mandatory visual disclaimer used by observation views. */
 export interface CreatureContent extends BestiaryEntry {
+  /** Maximum body measurement; preserve total length (TL), standard length (SL), or mantle length (ML) and never conflate bases. */
+  bodySize: string
   illustrationLabel: '原创示意插画，非真实影像'
 }
 
@@ -80,23 +90,26 @@ function hasSpeciesScopedSource(sources: readonly string[]): boolean {
     const url = new URL(source)
     const host = url.hostname.toLowerCase()
     const fishBasePage = ['fishbase.se', 'www.fishbase.se'].includes(host) && /^\/summary\/[^/]+\.html$/i.test(url.pathname)
+    const seaLifeBasePage = ['sealifebase.se', 'www.sealifebase.se'].includes(host) && /^\/summary\/[^/]+\.html$/i.test(url.pathname)
     const mbariPage = host === 'www.mbari.org' && /^\/animal\/[^/]+\/?$/i.test(url.pathname) && !/deep-sea-anglerfish/i.test(url.pathname)
     const obisId = host === 'api.obis.org' && (/^\/v3\/taxon\/\d+$/.test(url.pathname) || url.searchParams.has('taxonid') && /^\d+$/.test(url.searchParams.get('taxonid') ?? ''))
     const noaaRecord = (host === 'noaa.gov' || host.endsWith('.noaa.gov')) && /\/(?:observation|species)\/[^/]+\/?$/i.test(url.pathname)
-    return fishBasePage || mbariPage || obisId || noaaRecord
+    return fishBasePage || seaLifeBasePage || mbariPage || obisId || noaaRecord
   })
 }
 
 /** Returns the curriculum standard codes required by the tagged question skill. */
 function requiredStandards(type: QuizType, tags: readonly string[]): string[] {
-  if (type === 'add-sub') return ['3.NBT']
-  if (type === 'mul-div' || type === 'two-step-app' || type === 'unknown-relation') return ['3.OA']
+  if (type === 'add-sub') return tags.includes('multi-operation') && tags.includes('application') ? ['3.NBT.2', '3.OA.8'] : ['3.NBT.2']
+  if (type === 'mul-div') return ['3.OA.3']
+  if (type === 'two-step-app') return ['3.OA.8']
+  if (type === 'unknown-relation') return tags.includes('skill-addsub-unknown') ? ['3.OA.8', '3.NBT.2'] : ['3.OA.4']
   if (type === 'unit-time-route') {
     if (tags.some((tag) => /elapsed-time|time-unit/.test(tag))) return ['3.MD.1']
     if (tags.includes('skill-mass-total') || tags.some((tag) => ['mass', 'liquid-volume'].includes(tag))) return ['3.MD.2']
-    return ['3.MD.4']
+    return tags.includes('rate-distance') ? ['3.MD.4', '3.OA.3'] : ['3.MD.4']
   }
-  if (tags.includes('data-table') || tags.includes('graphed-values')) return ['3.MD']
+  if (type === 'pattern-data' && tags.some((tag) => PATTERN_SEQUENCE_SKILLS.has(tag))) return ['3.OA.9']
   return ['3.OA.9']
 }
 
@@ -196,6 +209,9 @@ function validateQuestion(value: unknown, path: string): Question {
 
   if (!Array.isArray(question.similarQuestionIds)) throw new Error(`${path}.similarQuestionIds: expected an array`)
   question.similarQuestionIds.forEach((id, index) => nonEmptyString(id, `${path}.similarQuestionIds[${index}]`))
+  if (new Set(question.similarQuestionIds).size !== question.similarQuestionIds.length) {
+    throw new Error(`${path}.similarQuestionIds: duplicate references are forbidden`)
+  }
   if (question.requiresFiveStep) validateSteps(question.steps, `${path}.steps`)
   else if (question.steps !== undefined) validateSteps(question.steps, `${path}.steps`)
   return question as unknown as Question
@@ -295,6 +311,7 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
     ids.add(id)
     nonEmptyString(creature.name, `${path}.name`)
     nonEmptyString(creature.scientificName, `${path}.scientificName`)
+    nonEmptyString(creature.bodySize, `${path}.bodySize`)
     validateDepthRange(creature.depthRange, `${path}.depthRange`)
     const habitat = nonEmptyString(creature.habitat, `${path}.habitat`)
     const uniqueDepthClaim = /唯一(?:的)?(?:分布|栖息)?深度/.test(habitat)
