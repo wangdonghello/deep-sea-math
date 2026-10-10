@@ -104,11 +104,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 13: 答题页与五步引导
 
-- [ ] **Step RED**: 写 `tests/features/quizStage/QuizStage.test.ts`：断言基础题不显示 `FiveStepBar`、应用题显示且停在第一步；点选已知条件后自动前进到下一步；`HintStack` 初始只显示 0 层、点击一次显示第 1 层、第三次显示第 3 层；`Numpad` 输入/退格/运算符正确。写 `tests/features/quizStage/useQuizSession.test.ts`：断言提交答案后写事件、答错不显示红色弹窗、订正答对后追加相似题、看答案后事件带 `revealedAnswer`。
-- [ ] **Step GREEN**: 建 `StageHeader.vue` `QuizStage.vue` `FiveStepBar.vue` `StepBody.vue` `HintStack.vue` `Numpad.vue` `useQuizSession.ts` 与 `views/QuestView.vue`；接通 Task 3/4/5/6 的 domain 函数与仓储。
-- [ ] **Step REFACTOR**: 五步渲染改为按 `stepType` 映射组件表；抽 `submitting` 状态防止重复提交；跑全套测试。
-- [ ] **验证**: 规格 `hint-and-correction` 与 `daily-math-quest` 的每个 Scenario 均有对应用例。
-- [ ] **Commit**: `[DSM1234] feat: T13 - quest view with five-step guidance and hints`
+- [x] **Step RED**: 写 `tests/features/quizStage/QuizStage.test.ts`：断言基础题不显示 `FiveStepBar`、应用题显示且停在第一步；点选已知条件后自动前进到下一步；`HintStack` 初始只显示 0 层、点击一次显示第 1 层、第三次显示第 3 层；`Numpad` 输入/退格/运算符正确。写 `tests/features/quizStage/useQuizSession.test.ts`：断言提交答案后写事件、答错不显示红色弹窗、订正答对后追加相似题、看答案后事件带 `revealedAnswer`。
+- [x] **Step GREEN**: 建 `StageHeader.vue` `QuizStage.vue` `FiveStepBar.vue` `StepBody.vue` `HintStack.vue` `Numpad.vue` `useQuizSession.ts` 与 `views/QuestView.vue`；接通 Task 3/4/5/6 的 domain 函数与仓储。
+- [x] **Step REFACTOR**: 五步渲染改为按 `stepType` 映射组件表；抽 `submitting` 状态防止重复提交；跑全套测试。
+- [x] **验证**: 规格 `hint-and-correction` 与 `daily-math-quest` 的每个 Scenario 均有对应用例。
+- [x] **Commit**: `[DSM1234] feat: T13 - quest view with five-step guidance and hints`
 
 ### Task 14: 图鉴、观察舱与地图视图
 
