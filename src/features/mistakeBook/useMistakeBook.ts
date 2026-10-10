@@ -6,6 +6,7 @@ import type { DomainEvent, QuizType } from '@/domain/model/types'
 import { filterMistakes } from './filterMistakes'
 import type { MistakeBookItem, MistakeBookStore, MistakeFilterState, MistakeQuestionCatalog } from './types'
 
+/** Loads and projects one profile's mistake book, filters it, and prepares practice payloads. */
 export function useMistakeBook(
   profileId: MaybeRefOrGetter<string | null>,
   store: MistakeBookStore,
