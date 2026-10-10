@@ -1,11 +1,15 @@
 import { computed, ref } from 'vue'
 
-import { revealHint } from '@/domain/hint/hintChainSelector'
+import { MAX_HINT_LAYERS, revealHint, type RevealedHint } from '@/domain/hint/hintChainSelector'
 import { createEventId } from '@/domain/eventLog/ids'
 import { replayProjections } from '@/domain/eventLog/replay'
-import { isCorrect, matchesNumericValue } from '@/domain/quiz/answerJudgement'
-import type { AnswerSubmittedEvent, DomainEvent, Question } from '@/domain/model/types'
+import { completeCurrentStep, createFiveStepMachine, resumeProgress, revisitStep } from '@/domain/quiz/fiveStepMachine'
+import type { FiveStepState } from '@/domain/quiz/fiveStepMachine'
+import { isCorrect, matchesExpression, matchesNumericValue } from '@/domain/quiz/answerJudgement'
+import type { AnswerSubmittedEvent, DomainEvent, FiveStep, FiveStepType, Question } from '@/domain/model/types'
+import { grantRewards } from '@/domain/reward/rewardGrant'
 import { DEMO_QUESTION_POOL } from '@/features/home/fixtures'
+import { DEMO_SIMILAR_QUESTIONS, DEMO_SIMILAR_QUESTION_MAPPING } from './demoSimilarQuestions'
 
 /** Minimal event-log capability required by a quiz session. */
 export interface QuizSessionStore {
@@ -21,22 +25,41 @@ export interface QuizSessionOptions {
   questions?: readonly Question[]
   /** Available linked-question content when `questions` contains only session roots. */
   similarQuestionPool?: readonly Question[]
+  /** Optional target metadata consumed by T7's reward rules. */
+  creatureId?: string
+  zoneId?: string
   store: QuizSessionStore
   clock?: () => number
   idGenerator?: () => string
 }
+
+const DEMO_FIVE_STEP_TEMPLATES: readonly FiveStep[] = [
+  { type: 'known', prompt: '找出题目里的已知条件' },
+  { type: 'unknown', prompt: '找出题目要求的内容' },
+  { type: 'relation', prompt: '选择已知与未知的数量关系' },
+  { type: 'expression', prompt: '写出算式' },
+  { type: 'answer', prompt: '写出计算结果' },
+]
 
 /**
  * Owns answer-flow events; visible progress is rebuilt from the returned event log.
  * Task 8 content replaces the temporary DEMO_QUESTION_POOL fallback.
  */
 export function useQuizSession(options: QuizSessionOptions) {
-  const rootQuestions = options.questions ?? DEMO_QUESTION_POOL
-  const questionPool = options.questions === undefined
-    ? DEMO_QUESTION_POOL
-    : [...options.questions, ...(options.similarQuestionPool ?? [])]
+  const isDemoSession = options.questions === undefined
+  const rootQuestions = (options.questions ?? DEMO_QUESTION_POOL).map((question) => {
+    const linkedIds = isDemoSession ? DEMO_SIMILAR_QUESTION_MAPPING[question.id] : undefined
+    return linkedIds === undefined ? question : {
+      ...question, similarQuestionIds: [...question.similarQuestionIds, ...linkedIds],
+    }
+  })
+  const questionPool = isDemoSession
+    ? [...rootQuestions, ...DEMO_SIMILAR_QUESTIONS]
+    : [...rootQuestions, ...(options.similarQuestionPool ?? [])]
   const events = ref<readonly DomainEvent[]>([])
   const feedback = ref('')
+  const stepFeedback = ref('')
+  const fiveStepStates = ref<Record<string, FiveStepState>>({})
   const submitting = ref(false)
   const clock = options.clock ?? (() => Date.now())
   const idGenerator = options.idGenerator ?? (() => createEventId())
@@ -50,10 +73,15 @@ export function useQuizSession(options: QuizSessionOptions) {
     const ids = sessionStarted.value?.type === 'session-started'
       ? sessionStarted.value.questionIds : rootQuestions.map((question) => question.id)
     const byId = new Map(questionPool.map((question) => [question.id, question]))
-    return ids.flatMap((id) => {
+    return [...new Set(ids)].flatMap((id) => {
       const question = byId.get(id)
       return question === undefined ? [] : [question]
     })
+  })
+  const duplicateSlotCount = computed(() => {
+    const ids = sessionStarted.value?.type === 'session-started'
+      ? sessionStarted.value.questionIds : rootQuestions.map((question) => question.id)
+    return ids.length - new Set(ids).size
   })
 
   const answerEvents = computed(() => events.value.filter(
@@ -61,6 +89,7 @@ export function useQuizSession(options: QuizSessionOptions) {
       event.type === 'answer-submitted' && event.sessionId === options.sessionId,
   ))
   const projections = computed(() => replayProjections(events.value, { profileId: options.profileId }))
+  // Reveal advances the learning queue only; T7's grantRewards still requires submitted answers.
   const resolvedIds = computed(() => new Set([
     ...(projections.value.questProgress[options.sessionId]?.correctQuestionIds ?? []),
     ...(projections.value.questProgress[options.sessionId]?.revealedQuestionIds ?? []),
@@ -77,11 +106,18 @@ export function useQuizSession(options: QuizSessionOptions) {
       )
       const similarId = question.similarQuestionIds.find((id) => byId.has(id))
       const similar = corrected && similarId !== undefined ? byId.get(similarId) : undefined
-      if (similar !== undefined && !result.some((entry) => entry.id === similar.id)) result.push(similar)
+      const isAnotherRoot = similar !== undefined && roots.value.some((root) => root.id === similar.id)
+      if (similar !== undefined && !isAnotherRoot && !result.some((entry) => entry.id === similar.id)) result.push(similar)
     }
     return result
   })
   const currentQuestion = computed(() => queue.value.find((question) => !resolvedIds.value.has(question.id)) ?? null)
+  const fiveStepTemplates = computed(() => currentQuestion.value?.steps ?? DEMO_FIVE_STEP_TEMPLATES)
+  const fiveStepState = computed(() => {
+    const question = currentQuestion.value
+    if (question === null || !question.requiresFiveStep) return null
+    return fiveStepStates.value[question.id] ?? createFiveStepMachine(fiveStepTemplates.value)
+  })
   const currentPosition = computed(() => {
     const index = queue.value.findIndex((question) => question.id === currentQuestion.value?.id)
     return index < 0 ? queue.value.length : index + 1
@@ -91,6 +127,12 @@ export function useQuizSession(options: QuizSessionOptions) {
     event.type === 'hint-used' && event.sessionId === options.sessionId &&
     event.questionId === currentQuestion.value?.id,
   ).length)
+  const revealedHints = computed((): readonly RevealedHint[] => {
+    const question = currentQuestion.value
+    return question === null ? [] : Array.from(
+      { length: Math.min(usedHintLevel.value, MAX_HINT_LAYERS) }, (_, index) => revealHint(question, index),
+    )
+  })
 
   async function refreshEvents(): Promise<void> {
     events.value = (await options.store.listEvents(options.profileId))
@@ -99,9 +141,13 @@ export function useQuizSession(options: QuizSessionOptions) {
     if (active !== null && !questionStartedAt.has(active.id)) questionStartedAt.set(active.id, clock())
   }
 
-  async function append(event: DomainEvent): Promise<void> {
-    events.value = (await options.store.appendEvents([event]))
+  async function appendMany(incoming: readonly DomainEvent[]): Promise<void> {
+    events.value = (await options.store.appendEvents(incoming))
       .filter((stored) => stored.profileId === options.profileId)
+  }
+
+  async function append(event: DomainEvent): Promise<void> {
+    await appendMany([event])
   }
 
   function baseEvent(occurredAt = clock()) {
@@ -116,11 +162,48 @@ export function useQuizSession(options: QuizSessionOptions) {
   async function finishIfComplete(): Promise<void> {
     const queueNow = queue.value
     if (queueNow.length === 0 || queueNow.some((question) => !resolvedIds.value.has(question.id))) return
-    const alreadyCompleted = events.value.some((event) =>
-      event.type === 'session-completed' && event.sessionId === options.sessionId,
-    )
-    if (!alreadyCompleted) {
-      await append({ ...baseEvent(), type: 'session-completed', sessionId: options.sessionId, rewards: [] })
+    const started = sessionStarted.value
+    if (started?.type !== 'session-started') return
+    const result = grantRewards({
+      profileId: options.profileId, sessionId: options.sessionId, occurredAt: clock(),
+      // Stable across retries so T7 and the event store both retain idempotence.
+      eventId: `${options.profileId}:${options.sessionId}:session-completed`,
+      questionIds: started.questionIds, events: events.value,
+      creatureId: options.creatureId, zoneId: options.zoneId,
+    })
+    if (result.granted) await appendMany(result.events)
+  }
+
+  function completeFiveStep(value: string): boolean {
+    const question = currentQuestion.value
+    const machine = fiveStepState.value
+    if (
+      question === null || machine === null || machine.current === 'answer' ||
+      machine.completed.includes(machine.current)
+    ) return false
+    if (machine.current === 'expression' && question.answer.expression !== undefined &&
+      !matchesExpression(value, question.answer.expression)) {
+      stepFeedback.value = '再看看数量关系，试着列出对应的算式。'
+      return false
+    }
+    fiveStepStates.value = { ...fiveStepStates.value, [question.id]: completeCurrentStep(machine) }
+    stepFeedback.value = ''
+    return true
+  }
+
+  function revisitFiveStep(step: FiveStepType): void {
+    const question = currentQuestion.value
+    const machine = fiveStepState.value
+    if (question !== null && machine !== null) {
+      fiveStepStates.value = { ...fiveStepStates.value, [question.id]: revisitStep(machine, step) }
+    }
+  }
+
+  function resumeFiveStepProgress(): void {
+    const question = currentQuestion.value
+    const machine = fiveStepState.value
+    if (question !== null && machine !== null) {
+      fiveStepStates.value = { ...fiveStepStates.value, [question.id]: resumeProgress(machine) }
     }
   }
 
@@ -134,13 +217,15 @@ export function useQuizSession(options: QuizSessionOptions) {
     feedback.value = hint.text
   }
 
-  async function submitAnswer(submitted: string): Promise<void> {
-    if (submitting.value) return
+  async function submitAnswer(submitted: string): Promise<boolean> {
+    if (submitting.value) return false
     submitting.value = true
     try {
       await refreshEvents()
       const question = currentQuestion.value
-      if (question === null) return
+      if (question === null) return false
+      const answerStepState = question.requiresFiveStep && fiveStepState.value?.current === 'answer'
+        ? fiveStepState.value : null
       const occurredAt = clock()
       const startedAt = questionStartedAt.get(question.id) ?? occurredAt
       const correct = question.requiresFiveStep
@@ -163,9 +248,12 @@ export function useQuizSession(options: QuizSessionOptions) {
             questionId: question.id, level: hint.layer,
           })
         }
-        return
+        return false
       }
 
+      if (answerStepState !== null) {
+        fiveStepStates.value = { ...fiveStepStates.value, [question.id]: completeCurrentStep(answerStepState) }
+      }
       feedback.value = retryCount > 0 ? '很好，我们再练一道差不多的' : '太棒了，继续下潜！'
       const parent = roots.value.find((candidate) => candidate.similarQuestionIds.includes(question.id))
       if (parent !== undefined && answerEvents.value.some((item) =>
@@ -178,6 +266,7 @@ export function useQuizSession(options: QuizSessionOptions) {
       }
       markNextQuestionStarted(occurredAt)
       await finishIfComplete()
+      return true
     } finally {
       submitting.value = false
     }
@@ -205,6 +294,8 @@ export function useQuizSession(options: QuizSessionOptions) {
 
   return {
     events: computed(() => events.value), currentQuestion, currentPosition, totalQuestions, feedback, submitting,
-    usedHintLevel, refreshEvents, useHint, submitAnswer, revealAnswer,
+    stepFeedback, fiveStepTemplates, fiveStepState, fiveStepStates: computed(() => fiveStepStates.value),
+    duplicateSlotCount, revealedHints, usedHintLevel, refreshEvents, useHint, submitAnswer,
+    completeFiveStep, revisitFiveStep, resumeFiveStepProgress, revealAnswer,
   }
 }

@@ -14,6 +14,8 @@ const props = defineProps<{
   profileId: string
   questions?: readonly Question[]
   similarQuestionPool?: readonly Question[]
+  creatureId?: string
+  zoneId?: string
   store: QuizSessionStore
   clock?: () => number
   idGenerator?: () => string
@@ -23,6 +25,7 @@ const props = defineProps<{
 const session = useQuizSession({
   sessionId: props.sessionId, profileId: props.profileId, questions: props.questions,
   similarQuestionPool: props.similarQuestionPool,
+  creatureId: props.creatureId, zoneId: props.zoneId,
   store: props.store, clock: props.clock, idGenerator: props.idGenerator,
 })
 const errorMessage = ref('')
@@ -54,16 +57,25 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
       v-if="question"
       :key="question.id"
       :question="question"
+      :steps="session.fiveStepTemplates.value"
+      :machine="session.fiveStepState.value"
+      :step-feedback="session.stepFeedback.value"
       @submit="run(() => session.submitAnswer($event), 'quiz-submit-failed')"
+      @complete-step="session.completeFiveStep"
+      @revisit-step="session.revisitFiveStep"
+      @resume-progress="session.resumeFiveStepProgress"
     />
     <HintStack
       v-if="question"
       :key="`hints-${question.id}`"
-      :question="question"
+      :hints="session.revealedHints.value"
       :used="session.usedHintLevel.value"
       @reveal="run(session.useHint, 'quiz-hint-failed')"
     />
     <p v-if="session.feedback.value" data-testid="quiz-feedback">{{ session.feedback.value }}</p>
+    <p v-if="session.duplicateSlotCount.value > 0" data-testid="duplicate-slot-fallback">
+      题库暂时不够，重复题目已合并为一次练习。
+    </p>
     <button v-if="question" type="button" data-testid="reveal-answer" :disabled="session.submitting.value" @click="run(session.revealAnswer, 'quiz-reveal-failed')">
       直接看答案
     </button>
