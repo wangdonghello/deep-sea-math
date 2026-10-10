@@ -14,10 +14,12 @@
 
 | 文件 | 职责 |
 |---|---|
-| `db.ts` | IndexedDB schema + 版本迁移（v1） |
-| `repositories/` | `profileRepo` / `eventRepo` / `settingsRepo` / `bestiaryRepo` |
+| `db.ts` | IndexedDB schema + 版本迁移（v1）+ `resolveStorage` 门面解析 |
+| `repositories/` | `profileRepo` / `eventRepo` / `settingsRepo` / `bestiaryRepo`（接口 + 实现分离） |
 | `memoryFallback.ts` | 存储降级：IndexedDB 不可用时切换内存态 |
-| `content/` | 题库 JSON（60–80 题）、4 条生物条目、初始内容 |
+| `content/` | 题库 JSON（60–80 题）、4 条生物条目、初始内容（Task 8） |
 
-本目录在 Task 1 阶段仅为占位，尚无代码。快速开始请见仓库根目录的 `README.md`。测试用 `fake-indexeddb` 注入全局
-`indexedDB`（jsdom 不实现 IndexedDB）。
+`resolveStorage()` 返回统一门面：正常为 `kind: 'indexeddb'`，IndexedDB 不可用时为
+`kind: 'memory'` 并置 `degraded` / `degradedReason`，家长区警示条据此渲染。测试用
+`fake-indexeddb` 注入全局 `indexedDB`（jsdom 不实现 IndexedDB）——必须整组注入
+`IDBRequest` 等构造器，只赋 `indexedDB` 不够，见 `tests/data/fakeIndexedDb.ts`。
