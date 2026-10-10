@@ -29,6 +29,14 @@ export interface ParentReport {
   averageMs: number
   hintCount: number
   masteryByTopic: Readonly<Record<QuizType, Partial<Record<MasteryLevel, number>>>>
+  /**
+   * 题型掌握分布是否可用：注入了非空 `questionTypeById` 才有归属口径。
+   *
+   * 缺表时各题型分布只能是静默的 0（没有任何 `masteryByQuestion` 的题目
+   * 能被归属到题型），界面据此显示占位提示而不是一排假 0。缺省视为可用
+   * （`undefined` 时保持既有渲染），由 {@link useParentPanel} 始终显式赋值。
+   */
+  topicMasteryAvailable?: boolean
 }
 
 export interface ParentPanelOptions {

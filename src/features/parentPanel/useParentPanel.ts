@@ -20,7 +20,16 @@ export function useParentPanel(options: ParentPanelOptions) {
   const id = options.idGenerator ?? (() => createEventId())
   const settings = ref<Settings>({ ...DEFAULT_SETTINGS })
   const persistedSettings = ref<Settings>({ ...DEFAULT_SETTINGS })
-  const report = ref<ParentReport>(emptyReport())
+  /**
+   * 题型掌握分布的可用口径：只有注入非空题型表，`masteryByQuestion` 才能被
+   * 归属到题型；否则分布全是静默 0，报告区改显占位提示（避免假装已生效）。
+   */
+  const topicMasteryAvailable = computed(() => {
+    const table = options.questionTypeById
+    return table !== undefined && Object.keys(table).length > 0
+  })
+
+  const report = ref<ParentReport>({ ...emptyReport(), topicMasteryAvailable: topicMasteryAvailable.value })
   const reportPeriod = ref<'today' | '7days'>('7days')
   const profiles = ref<Array<Pick<Profile, 'id' | 'nickname' | 'avatarId'>>>([])
   const loading = ref(false)
@@ -66,6 +75,7 @@ export function useParentPanel(options: ParentPanelOptions) {
       averageMs: completed.size === 0 ? 0 : Math.round([...completed.values()].reduce((sum, ms) => sum + ms, 0) / completed.size),
       hintCount: rangeEvents.filter((event) => event.type === 'hint-used').length,
       masteryByTopic,
+      topicMasteryAvailable: topicMasteryAvailable.value,
     }
   }
 
@@ -224,6 +234,7 @@ export function useParentPanel(options: ParentPanelOptions) {
   return {
     degraded: computed(() => degraded.value),
     degradedReason: options.store.degradedReason,
+    topicMasteryAvailable,
     settings, report, reportPeriod, profiles, loading, errorMessage, successMessage, created, deleted,
     confirmDelete, createForm, resetForm, deleteForm, resetProfileId,
     load, refreshReport, createProfile, saveSettings, resetPin, deleteProfile,

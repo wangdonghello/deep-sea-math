@@ -258,3 +258,36 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 
 ---
 
+## R19. T16 装配适配器：门面→`ParentStore` 接线与两处半合规占位
+
+**适配器接线**：新增 `src/features/parentPanel/createParentStore.ts`，把 T9 的
+`StorageFacade` 适配成家长区窄接口 `ParentStore`（T17 装配一行接上）：
+
+| ParentStore         | StorageFacade               | 说明                                      |
+|---------------------|-----------------------------|-------------------------------------------|
+| `profiles.*`        | `profiles.*`                | 直通                                      |
+| `events.*`          | `events.*`                  | 直通                                      |
+| `settings.*`        | `settings.*`                | 直通（R18 已补 `settings.remove`）        |
+| `bestiary.remove`   | `bestiary.clear`            | 语义等价：图鉴投影是可重建缓存，清缓存即删该行，解锁事实在事件日志不受影响 |
+| `degraded(_Reason)` | `degraded(_Reason)`         | 透传，驱动警示条                           |
+
+`tests/features/parentPanel/createParentStore.test.ts` 用 fake-indexeddb 驱动
+真实 `resolveStorage` 门面锁接线：四仓储写后读回、remove 后消失；
+`settings.remove` 后**重开门面**仍回落默认值（排除"写回默认值冒充删除"的
+孤立行路径）；降级内存态下 `degraded/degradedReason` 透传且同样可用。
+
+**两处 T16 审查的半合规项（本 task 只做诚实占位，不冒充已生效）**：
+
+1. `maxMinutes` 无消费方：`SettingsForm` 增加说明"时长上限将用于首页预估用时
+   与后续答题计时；当前阶段先保存设置。"——修改与保存照常可用，但不宣称已
+   参与首页估算或答题计时。
+2. 题型掌握分布在缺 `questionTypeById` 时静默为 0：`ParentReport` 增加
+   `topicMasteryAvailable`（`useParentPanel` 依据注入的题型表是否非空置位并
+   暴露），`ReportPanel` 在该 flag 为假时显示"题型掌握分布暂不可用"占位而
+   不是一排假 0；flag 缺省视为可用，保持旧夹具/旧装配行为。
+
+**T17 待办（不在本 task 范围）**：
+- 真实 `questionTypeById` 注入：从 Task 8 题库索引按 `questionId → QuizType`
+  建表，装配进 `useParentPanel` 选项与 `ParentView` props（T17 路由装配时）。
+- `maxMinutes` 消费：Task 12/13 的首页预估用时与答题计时接入该设置；当前
+  仅持久化。

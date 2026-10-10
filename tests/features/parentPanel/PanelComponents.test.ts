@@ -24,6 +24,26 @@ describe('parent panel components', () => {
     expect(wrapper.emitted('update:period')?.[0]).toEqual(['today'])
   })
 
+  it('explains that maxMinutes is saved now and consumed by the home estimate later', () => {
+    const wrapper = mount(SettingsForm, { props: { settings: { basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 15 } } })
+    expect(wrapper.get('[data-testid="settings-form"]').text())
+      .toContain('时长上限将用于首页预估用时与后续答题计时；当前阶段先保存设置。')
+  })
+
+  it('shows a placeholder instead of silent zeros when the question type table is unavailable', async () => {
+    const report: ParentReport = {
+      completedQuestions: 0, averageMs: 0, hintCount: 0, topicMasteryAvailable: false,
+      masteryByTopic: { 'add-sub': {}, 'mul-div': {}, 'two-step-app': {}, 'unknown-relation': {}, 'unit-time-route': {}, 'pattern-data': {} },
+    }
+    const wrapper = mount(ReportPanel, { props: { report, period: '7days' } })
+    expect(wrapper.get('[data-testid="topic-mastery-unavailable"]').text()).toBe('题型掌握分布暂不可用')
+    expect(wrapper.find('ul').exists()).toBe(false)
+
+    await wrapper.setProps({ report: { ...report, topicMasteryAvailable: true, completedQuestions: 3 } })
+    expect(wrapper.find('[data-testid="topic-mastery-unavailable"]').exists()).toBe(false)
+    expect(wrapper.find('ul').exists()).toBe(true)
+  })
+
   it('requires confirmation before exposing a usable delete action and emits reset requests', async () => {
     const wrapper = mount(DangerZone, { props: {
       profileNickname: '海星', resetPin: '', confirmResetPin: '', deleteNickname: '', confirmDelete: false, deleted: false,

@@ -94,6 +94,24 @@ describe('useParentPanel', () => {
     expect(panel.report.value.masteryByTopic['mul-div']).toEqual({ hinted: 1 })
   })
 
+  it('flags topic mastery available only when a question type table was injected', async () => {
+    const events: DomainEvent[] = [
+      { type: 'session-started', eventId: 's1', profileId: 'child-a', occurredAt: 86_400_000, sessionId: 'today', questionIds: ['q1'], difficultyTrace: [1] },
+      { type: 'answer-submitted', eventId: 'a1', profileId: 'child-a', occurredAt: 86_400_100, sessionId: 'today', questionId: 'q1', submitted: '2', correct: true, usedHintLevel: 0, retryCount: 0, ms: 1000 },
+    ]
+    const withTable = useParentPanel({ store: makeStore(events).store, profileId: 'child-a', clock: () => 86_400_300, questionTypeById: { q1: 'add-sub' }, ...testOptions })
+    await withTable.load()
+    expect(withTable.topicMasteryAvailable.value).toBe(true)
+    expect(withTable.report.value.topicMasteryAvailable).toBe(true)
+
+    // 没有题型表时分布只能静默为 0：flag 置假，让报告区显示占位提示而不是假数字。
+    const withoutTable = useParentPanel({ store: makeStore(events).store, profileId: 'child-a', clock: () => 86_400_300, ...testOptions })
+    await withoutTable.load()
+    expect(withoutTable.topicMasteryAvailable.value).toBe(false)
+    expect(withoutTable.report.value.topicMasteryAvailable).toBe(false)
+    expect(withoutTable.report.value.masteryByTopic['add-sub']).toEqual({})
+  })
+
   it('resets the PIN with a fresh salt and clears both short-lived inputs', async () => {
     const fake = makeStore()
     const original: Profile = { id: 'child-a', nickname: '海星', avatarId: 'avatar-1', pinHash: await hashPin('1111', 'old-salt', sha256), salt: 'old-salt', createdAt: 1 }

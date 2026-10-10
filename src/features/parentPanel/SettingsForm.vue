@@ -22,6 +22,7 @@ function update(key: keyof Settings, event: Event): void {
     <label>探测题数 <input type="number" min="0" :value="draft.probeCount" @input="update('probeCount', $event)"></label>
     <label>每日时长上限（分钟） <input type="number" min="1" :value="draft.maxMinutes" @input="update('maxMinutes', $event)"></label>
     <p>新设置从下一次生成题组起生效。</p>
+    <p>时长上限将用于首页预估用时与后续答题计时；当前阶段先保存设置。</p>
     <button type="submit" :disabled="saving">保存设置</button>
   </form>
 </template>
