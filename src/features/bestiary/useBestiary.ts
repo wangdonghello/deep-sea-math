@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, toValue, watch, type MaybeRefOrGetter } from 'vue'
 
 import { CREATURE_BANK } from '@/data/content'
 import { replayProjections } from '@/domain/eventLog/replay'
@@ -6,11 +6,12 @@ import { BASE_ZONE, ZONES } from '@/features/home/zones'
 import type { BestiaryItem, BestiaryStore, MapZoneItem } from './types'
 
 /** Loads event-authoritative creature and zone unlocks for one profile. */
-export function useBestiary(options: { store: BestiaryStore; profileId: string }) {
+export function useBestiary(options: { store: BestiaryStore; profileId: MaybeRefOrGetter<string | null> }) {
   const items = ref<readonly BestiaryItem[]>([])
   const zones = ref<readonly MapZoneItem[]>([])
-  const loading = ref(true)
+  const loading = ref(false)
   const error = ref(false)
+  let generation = 0
   const currentZoneId = computed(() => {
     if (loading.value || error.value) return null
     return zones.value.find((zone) => zone.current)?.id ?? BASE_ZONE.id
@@ -18,25 +19,34 @@ export function useBestiary(options: { store: BestiaryStore; profileId: string }
 
   /** Rebuilds both views from the profile's full event history. */
   async function load(): Promise<void> {
-    loading.value = true
+    const profileId = toValue(options.profileId)
+    const request = ++generation
+    items.value = []
+    zones.value = []
     error.value = false
+    if (profileId === null) {
+      loading.value = false
+      return
+    }
+    loading.value = true
     try {
-      const events = await options.store.listEvents(options.profileId)
-      const unlocks = replayProjections(events, { profileId: options.profileId }).bestiaryUnlock
+      const events = await options.store.listEvents(profileId)
+      if (request !== generation) return
+      const unlocks = replayProjections(events, { profileId }).bestiaryUnlock
       items.value = CREATURE_BANK.creatures.map((creature) => ({
         creature,
         unlocked: unlocks[`creature:${creature.id}`] !== undefined,
       }))
       zones.value = mapZones(unlocks)
     } catch {
+      if (request !== generation) return
       error.value = true
-      items.value = []
-      zones.value = mapZones({})
     } finally {
-      loading.value = false
+      if (request === generation) loading.value = false
     }
   }
 
+  watch(() => toValue(options.profileId), () => { void load() }, { immediate: true })
   return { items, zones, loading, error, currentZoneId, load }
 }
 

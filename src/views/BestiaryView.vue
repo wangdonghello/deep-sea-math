@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import CreatureCard from '@/features/bestiary/CreatureCard.vue'
 import { overlapsZone } from '@/features/bestiary/zoneFilter'
 import { useBestiary } from '@/features/bestiary/useBestiary'
 import type { BestiaryStore } from '@/features/bestiary/types'
 import { ZONES } from '@/features/home/zones'
 
-const props = defineProps<{ profileId: string; store: BestiaryStore }>()
+const props = defineProps<{ profileId: string | null; store: BestiaryStore }>()
 const emit = defineEmits<{ (event: 'observe', creatureId: string): void }>()
-const bestiary = useBestiary({ profileId: props.profileId, store: props.store })
+const bestiary = useBestiary({ profileId: computed(() => props.profileId), store: props.store })
 const activeZoneId = ref<string | null>(null)
 const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) => {
   const zone = ZONES.find((entry) => entry.id === activeZoneId.value)
   return zone === undefined || overlapsZone(creature, zone)
 }))
-onMounted(() => bestiary.load())
 </script>
 
 <template>

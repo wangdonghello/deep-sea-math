@@ -28,6 +28,14 @@ describe('bestiary zone filtering', () => {
       .toEqual(['twilight', 'midnight', 'abyss', 'hadal'])
     expect(overlapsZone({ depthRange: { min: 20, max: 100 } }, ZONES[0])).toBe(false)
   })
+
+  it('includes creatures touching either finite zone boundary', () => {
+    for (const zone of ZONES.filter(({ min, max }) => min !== null && max !== null)) {
+      expect(overlapsZone({ depthRange: { min: zone.min!, max: zone.min! } }, zone)).toBe(true)
+      expect(overlapsZone({ depthRange: { min: zone.max!, max: zone.max! } }, zone)).toBe(true)
+    }
+    expect(overlapsZone({ depthRange: { min: 6000, max: 6000 } }, ZONES[3])).toBe(true)
+  })
 })
 
 function store(events: readonly DomainEvent[]): BestiaryStore {
@@ -76,6 +84,15 @@ describe('BestiaryView', () => {
     expect(view.find('img').exists()).toBe(false)
   })
 
+  it('shows the empty-state message when the hadal zone has no creature records', async () => {
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
+    await flushPromises()
+    await view.get(`button[aria-label="筛选${ZONES[3].name}"]`).trigger('click')
+
+    expect(view.text()).toContain('这个教学区域暂无对应记录')
+    expect(view.findAll('[data-testid^="creature-card-"]')).toHaveLength(0)
+  })
+
   it('shows unlocked content by replaying only the requested profile events', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([unlocked]) } })
     await flushPromises()
@@ -92,6 +109,63 @@ describe('BestiaryView', () => {
 
     expect(view.text()).toContain('继续下潜解锁')
     expect(view.text()).not.toContain(creature.name)
+  })
+
+  it('reloads locked records after switching profiles', async () => {
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([unlocked]) } })
+    await flushPromises()
+    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(true)
+
+    await view.setProps({ profileId: 'profile-b' })
+    await flushPromises()
+
+    expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
+    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(false)
+  })
+
+  it('clears the previous profile while the next profile is loading', async () => {
+    let resolveB!: (events: readonly DomainEvent[]) => void
+    const pendingB = new Promise<readonly DomainEvent[]>((resolve) => { resolveB = resolve })
+    const switchingStore: BestiaryStore = {
+      listEvents: (profileId) => profileId === 'profile-a' ? Promise.resolve([unlocked]) : pendingB,
+    }
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: switchingStore } })
+    await flushPromises()
+    await view.setProps({ profileId: 'profile-b' })
+
+    expect(view.find('[role="status"]').text()).toContain('正在读取图鉴')
+    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(false)
+    resolveB([])
+    await flushPromises()
+    expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
+  })
+
+  it('clears profile records when the profile becomes null', async () => {
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([unlocked]) } })
+    await flushPromises()
+
+    await view.setProps({ profileId: null })
+
+    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(false)
+    expect(view.text()).toContain('还没有可查看的生物')
+  })
+
+  it('does not let a late response from the previous profile overwrite the new one', async () => {
+    let resolveA!: (events: readonly DomainEvent[]) => void
+    const lateA = new Promise<readonly DomainEvent[]>((resolve) => { resolveA = resolve })
+    const delayed: BestiaryStore = {
+      listEvents: (profileId) => profileId === 'profile-a' ? lateA : Promise.resolve([]),
+    }
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: delayed } })
+    await view.setProps({ profileId: 'profile-b' })
+    await flushPromises()
+    expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
+
+    resolveA([unlocked])
+    await flushPromises()
+
+    expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
+    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(false)
   })
 
   it('emits the selected unlocked creature id for observation navigation', async () => {
@@ -144,6 +218,24 @@ describe('ObservationView', () => {
 })
 
 describe('MapView', () => {
+  it('shows a loading status before rendering map data, then becomes ready', async () => {
+    let resolveEvents!: (events: readonly DomainEvent[]) => void
+    const pendingEvents = new Promise<readonly DomainEvent[]>((resolve) => { resolveEvents = resolve })
+    const pendingStore: BestiaryStore = { listEvents: () => pendingEvents }
+    const view = mount(MapView, { props: { profileId: 'profile-a', store: pendingStore } })
+
+    expect(view.find('[role="status"]').text()).toContain('正在读取地图')
+    expect(view.find('[data-testid="zone-base"]').exists()).toBe(false)
+    expect(view.find('[data-testid^="zone-"]').exists()).toBe(false)
+
+    resolveEvents([])
+    await flushPromises()
+
+    expect(view.find('[role="status"]').exists()).toBe(false)
+    expect(view.find('[data-testid="zone-base"]').exists()).toBe(true)
+    expect(view.findAll('[data-testid^="zone-"]')).toHaveLength(5)
+  })
+
   it('shows the base and four interval zones without inventing zone unlocks', async () => {
     const creatureOnly: DomainEvent = { ...unlocked, targetId: 'johnson-anglerfish' }
     const view = mount(MapView, { props: { profileId: 'profile-a', store: store([creatureOnly]) } })
