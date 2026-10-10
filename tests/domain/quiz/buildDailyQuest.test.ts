@@ -18,12 +18,17 @@ import { buildDailyQuest } from '../../../src/domain/quiz/buildDailyQuest'
 /** 固定时钟，两次调用的返回值完全相同才能证明确定性不依赖隐式时间。 */
 const FIXED_NOW = 1_700_000_000_000
 
-/** 固定 ID 发生器：每次调用返回同一个 sessionId。 */
-const FIXED_ID = 'session-fixed-1'
-const fixedIdGenerator = () => FIXED_ID
+/** 可重复的 UUID 发生器：每个组题实例从同一序列开始。 */
+const FIXED_ID = '33333333-3333-4333-8333-000000000001'
+function createFixedIdGenerator(): () => string {
+  let sequence = 0
+  return () => `33333333-3333-4333-8333-${String(++sequence).padStart(12, '0')}`
+}
 
 /** 固定时钟注入。 */
 const fixedClock = () => FIXED_NOW
+
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 /** 默认设置 5 基础 / 3 应用 / 1 探测（spec 默认值）。 */
 function defaultSettings(): Settings {
@@ -82,7 +87,7 @@ describe('domain/quiz: buildDailyQuest — 题量与题序', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: buildPool(),
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds).toHaveLength(9)
@@ -97,7 +102,7 @@ describe('domain/quiz: buildDailyQuest — 题量与题序', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: buildPool(),
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     // 题序按槽位分组数出来，而不是靠 id 前缀猜：探测题即使 id 不含 probe
@@ -129,7 +134,7 @@ describe('domain/quiz: buildDailyQuest — 题量与题序', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: buildPool(),
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     // 默认档位 1（无历史）：三类都应取 1 档题，槽位内按 id 升序。
@@ -162,7 +167,7 @@ describe('domain/quiz: buildDailyQuest — 题量与题序', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool,
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds).toContain('p-1')
@@ -179,7 +184,7 @@ describe('domain/quiz: buildDailyQuest — 难度档位', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: buildPool(),
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     // trace 按槽位顺序（基础→应用→探测）各记一个生效档；无回落时三者相同。
@@ -207,7 +212,7 @@ describe('domain/quiz: buildDailyQuest — 难度档位', () => {
       history: { profileId: 'p-1', events, now: FIXED_NOW },
       pool: buildPool(),
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.session.difficultyTrace).toEqual([2, 2, 2])
@@ -240,7 +245,7 @@ describe('domain/quiz: buildDailyQuest — 排除已掌握与重复', () => {
         'basic-d1-1': { level: 'stable', independentStreak: 3 },
       },
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds).not.toContain('basic-d1-0')
@@ -273,7 +278,7 @@ describe('domain/quiz: buildDailyQuest — 排除已掌握与重复', () => {
         'basic-d1-1': { level: 'stable', independentStreak: 3 },
       },
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds).not.toContain('basic-d1-0')
@@ -305,7 +310,7 @@ describe('domain/quiz: buildDailyQuest — 排除已掌握与重复', () => {
         'basic-d1-1': { level: 'unmastered', independentStreak: 0 },
       },
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds).toContain('basic-d1-0')
@@ -321,7 +326,7 @@ describe('domain/quiz: buildDailyQuest — 排除已掌握与重复', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: [question('b-0', 'basic', 1), question('b-1', 'basic', 1)],
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.repeatCount).toBeGreaterThan(0)
@@ -336,7 +341,7 @@ describe('domain/quiz: buildDailyQuest — 排除已掌握与重复', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: [question('only-basic', 'basic', 1)],
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds.slice(0, 5)).toEqual(Array(5).fill('only-basic'))
@@ -353,7 +358,7 @@ describe('domain/quiz: buildDailyQuest — 排除已掌握与重复', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: [question('b-0', 'basic', 1), question('b-1', 'basic', 1)],
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.questionIds).toEqual(['b-0', 'b-1', 'b-0', 'b-1', 'b-0'])
@@ -370,7 +375,7 @@ describe('domain/quiz: buildDailyQuest — 确定性', () => {
       history: { profileId: 'p-1', events: [] as DomainEvent[], now: FIXED_NOW },
       pool,
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     }
   }
 
@@ -448,7 +453,7 @@ describe('domain/quiz: buildDailyQuest — 档位回落', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW, baseDifficulty: 2 },
       pool: scarce,
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     // trace 按槽位记生效档：基础回落 2→1，应用题与探测题照原档。
@@ -475,7 +480,7 @@ describe('domain/quiz: buildDailyQuest — 档位回落', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW, baseDifficulty: 1 },
       pool,
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     // 1 档探测题全被抽走 → 探测槽位回落到 2 档，事件必须带本次 sessionId。
@@ -485,11 +490,33 @@ describe('domain/quiz: buildDailyQuest — 档位回落', () => {
     expect(quest.questionIds[quest.questionIds.length - 1]).toBe('probe-d2-0')
   })
 
+  it('默认 ID 路径为 session、session-started 与回落事件生成互异 UUID', () => {
+    const pool = buildPool().filter((item) => !(item.category === 'probe' && item.difficulty === 1))
+    const quest = buildDailyQuest({
+      profileId: 'p-1', settings: defaultSettings(),
+      history: { profileId: 'p-1', events: [], now: FIXED_NOW, baseDifficulty: 1 },
+      pool,
+    })
+    const ids = [quest.session.id, quest.sessionStartedEvent.eventId,
+      ...quest.fallbackEvents.map((event) => event.eventId)]
+
+    expect(quest.fallbackEvents.length).toBeGreaterThan(0)
+    expect(ids.every((id) => UUID_PATTERN.test(id))).toBe(true)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('同一组题内 ID 发生器重复时明确报错', () => {
+    const pool = buildPool().filter((item) => !(item.category === 'probe' && item.difficulty === 1))
+
+    expect(() => buildDailyQuest({
+      profileId: 'p-1', settings: defaultSettings(),
+      history: { profileId: 'p-1', events: [], now: FIXED_NOW, baseDifficulty: 1 },
+      pool, clock: fixedClock, idGenerator: () => FIXED_ID,
+    })).toThrow(/duplicate.*ID|ID.*duplicate/i)
+  })
+
   it('不同 sessionId 产生不同 eventId（跨日不被去重吞掉）', () => {
-    // F-1 回归锁定：同档案同 category 在 day1 与 day2 都会回落，若 eventId
-    // 只由 (profileId, category) 拼出，两天会拿到同一个 ID，Task 6 的 eventId
-    // 去重会把 day2 的回落判成 day1 的重放而静默丢弃——家长报告少一条记录。
-    // sessionId 每次组题都不同，所以 eventId 必须带上它。
+    // 两次组题分别注入独立 UUID 序列；回落 ID 由发生器生成，不拼 session/category。
     const pool = buildPool().filter((item) => !(item.category === 'probe' && item.difficulty === 1))
 
     const args = {
@@ -500,15 +527,38 @@ describe('domain/quiz: buildDailyQuest — 档位回落', () => {
       clock: fixedClock,
     }
 
-    const day1 = buildDailyQuest({ ...args, idGenerator: () => 'session-day1' })
-    const day2 = buildDailyQuest({ ...args, idGenerator: () => 'session-day2' })
+    const day1 = buildDailyQuest({
+      ...args,
+      idGenerator: (() => { let id = 0; return () => `44444444-4444-4444-8444-${String(++id).padStart(12, '0')}` })(),
+    })
+    const day2 = buildDailyQuest({
+      ...args,
+      idGenerator: (() => { let id = 0; return () => `55555555-5555-4555-8555-${String(++id).padStart(12, '0')}` })(),
+    })
 
     expect(day1.fallbackEvents).toHaveLength(1)
     expect(day2.fallbackEvents).toHaveLength(1)
     // 同档案、同 category、同 pool、同历史——唯一差别是 sessionId。
     expect(day1.fallbackEvents[0].eventId).not.toBe(day2.fallbackEvents[0].eventId)
-    expect(day1.fallbackEvents[0].eventId).toContain('session-day1')
-    expect(day2.fallbackEvents[0].eventId).toContain('session-day2')
+    expect(UUID_PATTERN.test(day1.fallbackEvents[0].eventId)).toBe(true)
+    expect(UUID_PATTERN.test(day2.fallbackEvents[0].eventId)).toBe(true)
+  })
+
+  it('注入相同序列时回落事件可复现，且同组所有 ID 不重复', () => {
+    const pool = buildPool().filter((item) => !(item.category === 'probe' && item.difficulty === 1))
+    const questArgs = {
+      profileId: 'p-1', settings: defaultSettings(),
+      history: { profileId: 'p-1', events: [] as DomainEvent[], now: FIXED_NOW, baseDifficulty: 1 as const },
+      pool, clock: fixedClock,
+    }
+    const first = buildDailyQuest({ ...questArgs, idGenerator: createFixedIdGenerator() })
+    const second = buildDailyQuest({ ...questArgs, idGenerator: createFixedIdGenerator() })
+    const ids = [first.session.id, first.sessionStartedEvent.eventId,
+      ...first.fallbackEvents.map((event) => event.eventId)]
+
+    expect(second).toEqual(first)
+    expect(ids.every((id) => UUID_PATTERN.test(id))).toBe(true)
+    expect(new Set(ids).size).toBe(ids.length)
   })
 
   it('各档题量充足时不产出回落事件', () => {
@@ -518,7 +568,7 @@ describe('domain/quiz: buildDailyQuest — 档位回落', () => {
       history: { profileId: 'p-1', events: [], now: FIXED_NOW },
       pool: buildPool(),
       clock: fixedClock,
-      idGenerator: fixedIdGenerator,
+      idGenerator: createFixedIdGenerator(),
     })
 
     expect(quest.fallbackEvents).toEqual([])

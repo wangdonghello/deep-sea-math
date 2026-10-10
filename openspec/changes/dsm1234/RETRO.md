@@ -167,6 +167,23 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 
 ---
 
+## R11. T13 类型遗漏 `revealedAnswer`（已补正）
+
+**问题**：此前模型类型 `AnswerRevealedEvent` 漏记 `hint-and-correction` spec §直接看答案要求的 `revealedAnswer: true` 字段。
+
+**修复**：将字段补为必填字面量类型，并在 T13 事件和全仓测试夹具中写入 `true`；同步修正曾断言该字段不存在的测试。
+
+---
+
+## R12. T4/T7 生产事件 ID 不符合 UUID 约束（已修）
+
+**问题**：T4 `difficulty-fallback` 与 T7 `unlock-granted` 曾以业务字段拼接 `eventId`，不满足 `offline-event-log` 对所有事件 ID 为全局唯一 UUID 的要求。
+
+**修复**：两类事件现在都通过注入的 ID 发生器生成；未注入时使用 Web Crypto UUID。T4 组题会检测 session ID、`session-started` 与回落事件 ID 的重复并明确报错；T13 将 `unlockEventIdFactory` 接到会话共用的 `idGenerator`。
+
+**确定性边界**：纯奖励规则与奖励选择仍对相同输入确定；只有事件 ID 是随机源，测试/重放需要稳定输出时可注入确定性 UUID。
+
+**审计备注**：现有 `logicalEventKey` 的 `unlock-granted` 去重键是 `kind + targetId`，未包含 `profileId`。本次按规格衍生逻辑保持不变；该键语义留待独立审查，不扩入本修复。
 ## R13. T8 首次规格审查：来源、相似题与运行时覆盖（已修复）
 
 **发现**：数学题来源使用宽泛课程首页或不相关物种页，无法佐证具体技能；深海蜥鱼和宝石鱿鱼引用的 Smithsonian slideshow 宽泛且返回 403，无法核验物种水深；Johnson 鮟鱇鱼也需区分 FishBase 物种级范围与 MBARI 观察；部分相似题跨越了运算技能；运行时题库校验只要求非空。
@@ -174,3 +191,26 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **修复**：按题型/运算替换为对应 Common Core 三年级具体标准页；生物引用改用 FishBase、MBARI 与 OBIS 物种分类/出现记录，并区分数据库观测范围与完整分布、区分 Johnson 的物种记录范围与 MBARI 约 580 米观察；为题目补精确 `skill-*` 标签，仅保留同题型、同技能相似链接，不适合的题目使用空链接数组。
 
 **校验**：运行时强制 60–80 题及所有题型×难度组合覆盖，并拒绝跨题型/无共享技能标签的相似链接；测试逐桶对拍索引及来源映射。事实真实性仍由引用来源支撑，schema 不声称自动核实生物事实。
+
+## R14. T8 第二轮内容复核：标准映射、观测范围与相似题表示（已修复）
+
+**发现**：部分 Core Standards 具体小节 URL 重定向 404，且有技能映射错误（加减 missing-part 误引 OA.4、长度/距离误引 MD.2）；OBIS occurrence 水深计数和范围把无效/零深度或不同数据集口径混入；相似题测试核对了答案表示，但运行时 validator 未约束答案单位与表达式形状。MBARI 深海鮟鱇页是 Lophiiformes 类群页，当前可见内容不能确认约 580 米为 Johnson 鮟鱇鱼单种观测。
+
+**修复**：标准来源改为可访问 NBT/OA/MD domain pages，并用 `standard:*` 与 `skill-*` 标签按技能映射；相似题仅保留同题型、共享精确技能且答案单位和表达式 presence 一致的链接，不适配者置空。来源 validator 检查 HTTP(S)、技能对应的课程域页及物种级来源标识，但不声称自动证明事实真实性。
+
+**证据范围**：保留 FishBase 的 *Melanocetus johnsonii* 物种范围 100–4,500 米（通常 100–1,500 米），仅将 MBARI 的 300–4,000 米标作类群概述并移除未能由当前页确认的 580 米单种观察；Bathysaurus OBIS 共 795 条，剔除 2 条 depth=0 后 587 条正水深记录，222.5–3,516 米；Histioteuthis 共 341 条，277 条正水深记录，15.5–4,276 米。数据库记录范围不等于物种完整分布。
+
+## R15. T8 第三轮复核：可访问标准域页、物种体型与观测口径（已修复）
+
+**发现**：Core Standards 小节 URL（如 `/3/OA/4/`、`/3/MD/2/`）返回 404，只有 NBT/OA/MD 领域页实测为 200；加减法缺项误标 OA.4、长度/距离误配质量或液体体积标准。OBIS 观测条目计数和范围须按正水深记录口径；T14 观察舱缺少带来源的体型字段。
+
+**修复**：题目保留精确 `standard:*` 语义标签，来源只链接可访问的领域页，并按加减、多位数运算、两步应用、未知关系、时间/质量/长度距离及数列/数据分别校验映射。相似题链接清除重复项，测试与运行时校验均拒绝重复 ID。
+
+**物种与体型口径**：Johnson 范围采用 FishBase 单种页 100–4,500 米（通常 100–1,500 米）；MBARI 的 300–4,000 米仅作为鮟鱇鱼类群概述，移除所有 580 米说法。Bathysaurus 记录为 587 条正水深 occurrence、约 223–3,516 米；Histioteuthis 为 277 条、15.5–4,276 米。OBIS 范围仅是当前数据库已记录 occurrence，不代表完整分布或生理极限。4 个条目新增直接引用的体型数据，并区分总长 TL、标准体长 SL 与外套膜长 ML。
+## R17. T15 错题本稳定掌握筛选与失败日志契约（已修）
+
+**发现**：规格审查发现 View 越过 feature 边界直接执行事件重放/筛选，且将完整 `Error` 交给通用 `redact()`；其保留 `message`/`stack`，message 中的凭据可能进入日志。另，`stable` 只存在 `masteryByTopic`，按题目级状态筛选会漏掉所有稳定掌握项。
+
+**裁决与修复**：把加载、档案隔离、投影、筛选、重练元数据及错误状态移入 `useMistakeBook`。错题模型分别保留 `questionMasteryLevel` 与 `topicMasteryLevel`；`stable` 按题型轨匹配，其余状态按单题轨匹配，列表和筛选标签明确标示来源。失败日志只输出固定事件及 `errorType: 'read-failed'`，不读取或记录异常文本。
+
+**验证**：以三道同题型不同题独立答对后、其中一题成为错题的真实事件验证 topic=`stable`、question=`independent`；另覆盖混档事件隔离及 `Error('token=secret-123')` 不泄漏。

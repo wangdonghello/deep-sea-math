@@ -9,12 +9,13 @@
  * 2. **幂等**：同一题组重复完成不重复发奖。`session-completed` 按 `sessionId`
  *    比对、`unlock-granted` 按 `targetId` 比对既有事件（Task 9 仓储层的
  *    `eventId` 去重之外的第二道闸）；
- * 3. **确定**：不进随机源。`eventId` 与时间戳全部由调用方注入，同输入必得
- *    同输出（Task 6 重放可复现）；
+ * 3. **纯奖励决策确定**：奖励规则与解锁选择只依赖输入，不进随机源；事件 ID
+ *    则由调用方或 UUID 发生器提供，因此未注入时事件 ID 不保证可复现；
  * 4. **纯函数**：不修改入参事件数组与其中事件，返回全新事件对象。
  */
 
 import type { DomainEvent, SessionCompletedEvent, UnlockGrantedEvent } from '../model/types'
+import { createEventId } from '../eventLog/ids'
 
 import { evaluateRewardRules, type RewardGrant } from './unlockRules'
 
@@ -36,7 +37,7 @@ export interface RewardGrantInput {
   readonly creatureId?: string
   /** 完成后下潜到的区域 id；缺省表示本次不下发区域。 */
   readonly zoneId?: string
-  /** 生成 `unlock-granted` 事件 id 的方式；缺省 `${eventId}-unlock-${kind}-${targetId}`。 */
+  /** 生成 `unlock-granted` 事件 id 的方式；缺省使用 Web Crypto UUID。 */
   readonly unlockEventIdFactory?: (grant: RewardGrant) => string
 }
 
@@ -61,19 +62,6 @@ const NOTHING_GRANTED: RewardGrantResult = {
   unlockGrantedEvents: [],
   rewards: [],
   events: [],
-}
-
-/**
- * 默认的 `unlock-granted` 事件 id 生成方式。
- *
- * 由 `eventId + kind + targetId` 确定性拼出而**不**用随机 UUID：同一题组的
- * 同一次发奖重复调用（刷新、离线重试）会得到同一事件 id，Task 9 的 `eventId`
- * 去重因此能把它们折叠成一条；而真的解锁了新生物（新题组）时 `eventId` 不同，
- * 事件 id 也不会撞。`kind` 进 id 是为了让 creature 与 zone 撞同一个 targetId
- * 时仍能区分（两条解锁是两次发放，不是一次）。
- */
-function defaultUnlockEventId(eventId: string, grant: RewardGrant): string {
-  return `${eventId}-unlock-${grant.kind}-${grant.targetId}`
 }
 
 /**
@@ -178,6 +166,10 @@ function countIndependentCorrect(
  * 4. **装配**：徽章进 `session-completed.rewards`；图鉴卡 / 区域产
  *    `unlock-granted` 事件，`targetId` 已在既有事件里出现过的跳过。
  *
+ * 奖励选择与奖励内容对相同输入保持确定；未注入的 `unlockEventIdFactory` 会生成
+ * 新的 UUID，因此整个调用结果（尤其 `unlock-granted.eventId`）不保证逐次一致。
+ * 调用方需要可复现结果时应注入确定性的 UUID factory。
+ *
  * `unlock-granted` 的 `kind` 只取 `creature` / `zone`（`model/types` 的定义
  * 如此），徽章没有对应事件类型——徽章信息全在 `session-completed.rewards`
  * 里，解锁动画按 `targetId` 反查。
@@ -252,7 +244,7 @@ export function grantRewards(input: RewardGrantInput): RewardGrantResult {
     unlockEvents.push({
       eventId: input.unlockEventIdFactory
         ? input.unlockEventIdFactory(grant)
-        : defaultUnlockEventId(input.eventId, grant),
+        : createEventId(),
       profileId,
       occurredAt: input.occurredAt,
       type: 'unlock-granted',

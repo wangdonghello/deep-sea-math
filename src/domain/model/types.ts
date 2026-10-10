@@ -389,12 +389,16 @@ export interface HintUsedEvent extends EventBase {
   level: number
 }
 
-/** 直接看答案：该题 MUST NOT 计为独立掌握。 */
+/**
+ * 直接看答案：该题 MUST NOT 计为独立掌握。
+ * spec `hint-and-correction` §直接看答案要求事件记录 `revealedAnswer: true`。
+ */
 export interface AnswerRevealedEvent extends EventBase {
   type: 'answer-revealed'
   /** 所属当日题组，用途见 {@link AnswerSubmittedEvent.sessionId}。 */
   sessionId: string
   questionId: string
+  revealedAnswer: true
 }
 
 /** 订正答对并完成相似题。 */

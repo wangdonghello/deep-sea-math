@@ -138,6 +138,7 @@ describe('domain/quiz: difficulty — 降档', () => {
         type: 'answer-revealed',
         sessionId: 's-1',
         questionId: 'q-1',
+        revealedAnswer: true,
       },
       hintedAnswer('q-2', 2),
     ]

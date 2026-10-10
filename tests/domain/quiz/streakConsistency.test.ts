@@ -122,7 +122,7 @@ describe('连击对拍: 行为一致', () => {
       },
       {
         eventId: 'e-rev', profileId: 'p-1', occurredAt: NOW + 60, type: 'answer-revealed',
-        sessionId: 's-1', questionId: 'q5',
+        sessionId: 's-1', questionId: 'q5', revealedAnswer: true,
       },
       independent('q6', 7),
       independent('q7', 8),

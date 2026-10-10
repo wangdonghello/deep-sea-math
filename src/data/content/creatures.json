@@ -5,10 +5,22 @@
       "id": "johnson-anglerfish",
       "name": "约翰逊鮟鱇鱼",
       "scientificName": "Melanocetus johnsonii",
-      "depthRange": { "min": 100, "max": 4500 },
-      "habitat": "FishBase物种专页记录水深范围100–4,500米（常见记录约100–1,500米）；MBARI记录的该物种个体自然栖息观察约580米。两来源记录口径不同，均不代表完整分布。",
-      "knowledgeCards": ["学名为 Melanocetus johnsonii。", "FishBase物种专页记录的水深范围为100–4,500米，常见记录约100–1,500米。", "MBARI记录到该物种个体在约580米处的自然栖息观察。", "鮟鱇鱼头部前方有一根像钓竿的鳍条，末端是发光诱饵。"],
-      "sources": ["https://www.mbari.org/animal/deep-sea-anglerfish/", "https://www.fishbase.se/summary/Melanocetus-johnsonii.html"],
+      "bodySize": "最大体长约18厘米（雌鱼；雄鱼或未定性记录约2.9厘米；TL，总长）",
+      "depthRange": {
+        "min": 100,
+        "max": 4500
+      },
+      "habitat": "MBARI深海鮟鱇鱼类群页面概述类群水深300–4,000米；FishBase物种专页记录100–4,500米（通常100–1,500米）。来源口径不同，均不代表完整分布。",
+      "knowledgeCards": [
+        "学名为 Melanocetus johnsonii。",
+        "FishBase物种专页记录的水深范围为100–4,500米，通常100–1,500米。",
+        "MBARI概述的300–4,000米是深海鮟鱇鱼类群页面范围，不是该物种专属范围。",
+        "鮟鱇鱼类群可用带发光诱饵的鳍条吸引猎物。"
+      ],
+      "sources": [
+        "https://www.mbari.org/animal/deep-sea-anglerfish/",
+        "https://www.fishbase.se/summary/Melanocetus-johnsonii.html"
+      ],
       "illustrationRef": "original-johnson-anglerfish",
       "illustrationLabel": "原创示意插画，非真实影像"
     },
@@ -16,10 +28,22 @@
       "id": "giant-cusk-eel",
       "name": "深海大鼬鳚",
       "scientificName": "Spectrunculus grandis",
-      "depthRange": { "min": 2000, "max": 4300 },
+      "bodySize": "最大标准体长约127厘米（SL，标准体长）",
+      "depthRange": {
+        "min": 2000,
+        "max": 4300
+      },
       "habitat": "MBARI记录其约2,000–4,300米深度的海底生活；这一区间是已知活动范围，不代表唯一分布。",
-      "knowledgeCards": ["它生活在深海海底附近，是体型较大的深海硬骨鱼之一。", "它有发达的嗅觉器官，能帮助它在海底寻找食物。", "MBARI记录它会吃海底无脊椎动物，也会取食动物尸体。", "已知资料显示它分布于太平洋和大西洋的深海区域。"],
-      "sources": ["https://www.mbari.org/animal/giant-cusk-eel/"],
+      "knowledgeCards": [
+        "它生活在深海海底附近，是体型较大的深海硬骨鱼之一。",
+        "它有发达的嗅觉器官，能帮助它在海底寻找食物。",
+        "MBARI记录它会吃海底无脊椎动物，也会取食动物尸体。",
+        "已知资料显示它分布于太平洋和大西洋的深海区域。"
+      ],
+      "sources": [
+        "https://www.mbari.org/animal/giant-cusk-eel/",
+        "https://www.fishbase.se/summary/Spectrunculus-grandis.html"
+      ],
       "illustrationRef": "original-giant-cusk-eel",
       "illustrationLabel": "原创示意插画，非真实影像"
     },
@@ -27,10 +51,22 @@
       "id": "deep-sea-lizardfish",
       "name": "深海蜥鱼",
       "scientificName": "Bathysaurus ferox",
-      "depthRange": { "min": 222.5, "max": 3516 },
-      "habitat": "OBIS物种出现条目已有222.5–3,516米水深观测记录范围；这些是数据库观测条目记录，不代表物种完整分布。",
-      "knowledgeCards": ["OBIS分类接口列出的接受物种学名为 Bathysaurus ferox。", "本次核验的OBIS出现条目中有589条记录含有效水深值。", "OBIS物种出现条目中的水深记录范围为222.5–3,516米，不代表物种完整分布。"],
-      "sources": ["https://api.obis.org/v3/taxon/126369", "https://api.obis.org/v3/occurrence?taxonid=126369&size=10000"],
+      "bodySize": "最大标准体长约64.0厘米（SL，标准体长）",
+      "depthRange": {
+        "min": 222.5,
+        "max": 3516
+      },
+      "habitat": "当前 OBIS 数据库 occurrence 中，剔除2条 depth=0 后有587条正水深记录；观测水深范围约223–3,516米（精确范围222.5–3,516米），不代表完整分布。",
+      "knowledgeCards": [
+        "OBIS分类接口列出的接受物种学名为 Bathysaurus ferox。",
+        "当前 OBIS 数据库 occurrence 共795条；剔除2条 depth=0 后，有587条正水深记录。",
+        "正水深观测记录范围约223–3,516米（精确下限222.5米）；仅代表数据库已记录 occurrence，不代表完整分布。"
+      ],
+      "sources": [
+        "https://api.obis.org/v3/taxon/126369",
+        "https://api.obis.org/v3/occurrence?taxonid=126369&size=10000",
+        "https://www.fishbase.se/summary/Bathysaurus-ferox.html"
+      ],
       "illustrationRef": "original-deep-sea-lizardfish",
       "illustrationLabel": "原创示意插画，非真实影像"
     },
@@ -38,10 +74,22 @@
       "id": "jewel-squid",
       "name": "宝石鱿鱼",
       "scientificName": "Histioteuthis bonnellii",
-      "depthRange": { "min": 291, "max": 5416 },
-      "habitat": "OBIS物种出现条目已有291–5,416米水深观测记录范围；这些是数据库观测条目记录，不代表物种完整分布。",
-      "knowledgeCards": ["OBIS分类接口列出的接受物种学名为 Histioteuthis bonnellii。", "OBIS物种出现条目中的水深记录范围为291–5,416米。", "该区间表示数据库已有水深观测条目，不代表物种完整分布。"],
-      "sources": ["https://api.obis.org/v3/taxon/140111", "https://api.obis.org/v3/occurrence?taxonid=140111&size=10000"],
+      "bodySize": "最大外套膜长约33厘米（ML，mantle length）",
+      "depthRange": {
+        "min": 15.5,
+        "max": 4276
+      },
+      "habitat": "当前 OBIS 数据库已记录的正水深 occurrence 范围为15.5–4,276米（约16–4,276米）；这是观测记录范围，不代表物种完整分布或生理极限。",
+      "knowledgeCards": [
+        "OBIS分类接口列出的接受物种学名为 Histioteuthis bonnellii。",
+        "当前数据库341条 occurrence 中有277条正水深记录，记录范围为15.5–4,276米（约16–4,276米）。",
+        "该区间只表示数据库已记录的水深观测，不代表完整分布或生理极限。"
+      ],
+      "sources": [
+        "https://api.obis.org/v3/taxon/140111",
+        "https://api.obis.org/v3/occurrence?taxonid=140111&size=10000",
+        "https://www.sealifebase.se/summary/Histioteuthis-bonnellii.html"
+      ],
       "illustrationRef": "original-jewel-squid",
       "illustrationLabel": "原创示意插画，非真实影像"
     }

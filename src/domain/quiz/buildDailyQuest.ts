@@ -25,9 +25,9 @@ import {
  * 2. **切池**：按 `question.category`（槽位维度）取题，而非 `type`；
  * 3. **不重复已答对的题**：排除 `masteryByQuestion` 中独立/稳定掌握的题，
  *    池不足时允许重复并记录 `repeatCount`；
- * 4. **确定性**：同输入必同输出——题序由固定排序键决定，`sessionId` 与
- *    `startedAt` 来自注入的 `idGenerator` / `clock`，模块内不碰任何随机源
- *    与真实时钟。这是「刷新页面不重新抽题」能成立的前提。
+ * 4. **选题确定**：同输入的题序由固定排序键决定；`sessionId`、`session-started`
+ *    与 `difficulty-fallback` 的 `eventId` 由注入的 `idGenerator` 产生，时间来自
+ *    `clock`。未注入时 ID 使用 Web Crypto UUID，不影响选题结果。
  */
 
 /**
@@ -68,7 +68,7 @@ export interface DailyQuestInput {
   masteryByQuestion?: MasteryByQuestion
   /** 注入的时钟，产出 `session.startedAt`。缺省 `Date.now`。 */
   clock?: () => number
-  /** 注入的 ID 发生器，产出 `session.id`。缺省 `crypto.randomUUID()`。 */
+  /** 注入的 ID 发生器，依次产出 session ID 与组题事件 ID。缺省 `crypto.randomUUID()`。 */
   idGenerator?: () => string
 }
 
@@ -152,6 +152,15 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   const { profileId, settings, pool } = input
   const clock = input.clock ?? defaultClock
   const idGenerator = input.idGenerator ?? defaultIdGenerator
+  const generatedIds = new Set<string>()
+  const nextUniqueId = (purpose: string): string => {
+    const id = idGenerator()
+    if (generatedIds.has(id)) {
+      throw new Error(`Duplicate ID generated for ${purpose}: ${id}`)
+    }
+    generatedIds.add(id)
+    return id
+  }
 
   const currentDifficulty = computeCurrentDifficulty(input.history)
 
@@ -179,7 +188,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   let repeatCount = 0
 
   // 先取 sessionId：回落事件要挂到所属题组上，而它来自注入的 idGenerator。
-  const sessionId = idGenerator()
+  const sessionId = nextUniqueId('session')
   const startedAt = clock()
   const difficultyTrace: number[] = []
 
@@ -198,14 +207,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     if (effective.fallback) {
       fallbackEvents.push(
         createDifficultyFallbackEvent({
-          // eventId 由 (sessionId, category) 确定性拼出而**不**调 idGenerator：
-          // 一次组题里每类最多一条回落，因此这两段足以在同一 quest 内唯一；
-          // 而 sessionId 每次组题都会重新生成（生产走 randomUUID），于是 day2
-          // 的同category回落拿到不同的 eventId，不会被 Task 6 的 eventId 去重
-          // 当成 day1 的重放而静默吞掉。
-          // 不调 idGenerator 的原因：注入固定发生器时，同一 quest 内的两条回落
-          // 会拿到同一个 eventId——那反而会让去重吞掉其中一条。
-          eventId: `fallback-${sessionId}-${category}`,
+          eventId: nextUniqueId('difficulty-fallback event'),
           occurredAt: startedAt,
           profileId,
           sessionId: sessionId,
@@ -248,7 +250,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   }
 
   const sessionStartedEvent: SessionStartedEvent = {
-    eventId: idGenerator(),
+    eventId: nextUniqueId('session-started event'),
     profileId,
     occurredAt: startedAt,
     type: 'session-started',
