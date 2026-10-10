@@ -68,6 +68,18 @@
 
 ---
 
+## R7. T10 质量审查的次要项（不阻塞，待后续 task 处理）
+
+| 位置 | 问题 | 处理时点 |
+|---|---|---|
+| `FishBackdrop.vue:43` | `count` 无上限（传入 10000 会掉帧，影响"孩子用家长旧手机"场景） | T12 装配首页时 clamp 上限 |
+| `tests/features/theme/contrast.test.ts:121` | `--ds-accent-text` 是文字前景色，却放在"按钮底色"列表断言，语义误导（实测 9.84/7.47/11.41 均达标，无漏测） | T12 消费 token 时拆成独立用例 |
+| `contrast.test.ts:130-145` | 玻璃卡片场景只合成到 `--ds-bg-shallow`，未覆盖半透明卡片叠深色背景 × accent-text 组合 | T12/T13 用玻璃卡片时补 |
+| `contrastRatio.ts:39` | 拒绝 `color-mix()`/`oklch()` 是隐性陷阱，合法新语法接入会 TypeError | T18 收尾时补 JSDoc 显式声明写法约束 |
+| `theme.css` | 约 25 个 token（`--ds-font-size-*` / `--ds-space-*` / `--ds-radius-*` / `--ds-motion-*` / `--ds-glass-*`）暂无消费者 | T12/T13 消费时标注"Task 12/13 预留" |
+
+---
+
 ## R6. T6 遗留：`masteryByTopic` 依赖注入的题型表（接入时需确认）
 
 **问题**：`DomainEvent` 不带 `Question.type`，题型级轨道必须由调用方传 `questionTypeById` 给 `replayProjections`。若 T9/T16 调用方忘传，题型级投影会静默为空（单向失败，不污染题目轨，但无告警）。
