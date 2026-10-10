@@ -88,8 +88,79 @@
 
 ---
 
-## R8. T11 待补：实现者披露的裁决结果
+## R8. T11 实现者披露的裁决结果
 
-**问题**：`DomainEvent` 不带 `Question.type`，题型级轨道必须由调用方传 `questionTypeById` 给 `replayProjections`。若 T9/T16 调用方忘传，题型级投影会静默为空（单向失败，不污染题目轨，但无告警）。
+| # | 披露 | 裁决 |
+|---|---|---|
+| 1 | `ProfileStore` 窄接口（因 T9 并行开发、本 worktree 无 profileRepo，故自定义最小接口 + 内存 fake） | **可接受**；`list()`/`verify()` 与 T9 `data/README.md` 约束兼容。已由 R9 的适配器方案收口 |
+| 2 | 未引 T10 主题/FishBackdrop，用语义化 class | **可接受**，T10 合并后自然生效，零返工 |
+| 3 | `pushDigit` 不强校验数字字符 | **构成偏离（API 契约完整性）**，已修：`useProfileSelect.ts` 加 `if (!/^[0-9]$/.test(digit)) return` 并补测试（含全角数字） |
+| 4 | 60 秒锁定仅内存态，刷新归零 | **可接受，不属本 task 范畴**。规格原文只要求"连续 5 次错误后锁定 60 秒"，未要求跨刷新持久化；且本地哈希+盐的威胁模型下持久化收益有限。已在 `usePinLock.ts` JSDoc 记录局限（时间前跳会尽早解锁、后跳经 `Math.max(0,…)` 收敛，两方向均不拒绝服务），T17 跟进持久化 |
+| 5 | `redact()` 放新建 `src/shared/` 层 | **可接受**。`shared` 定位是"不属于任何功能域、不得含业务规则"的横切层，T16 家长区确定复用；单一职责已核实，无全局单例 |
 
-**待办**：T12/T16 接线时确认题库侧能提供该表（T8 的 `questionBank.json` 可派生）。
+**同类遗留（已记入 R9）**：`load()` 失败在 UI 中不可见 → 已补"列表为空且出错"的全局错误段；"真没档案"vs"读失败"的语义区分需新状态位，留 T17。
+
+---
+
+## R9. T11 与 T9 并行开发：tasks.md Step GREEN 的"接入 profileRepo"在 T11 完成时不成立
+
+**发现时间**：T11 代码质量审查（合并前）。
+
+**矛盾点**：tasks.md Task 11 Step GREEN 勾选的是「接入 Task 2 的 hashPin/verifyPin
+与 Task 9 的 profileRepo」。但 T11 与 T9 是**并行开发**的两个 worktree —— T11 完成并
+勾选时，`src/data/repositories/profileRepo.ts` 尚不存在， T11 侧无从"接入"。该勾选
+描述的是**合并后**的状态，不是 T11 交付时的状态。
+
+需要说明的是：这不是"把没做的勾成做了"，而是**任务描述本身**对并行开发时序的误判
+（T9 完成时 T11 已勾选；T11 完成时 T9 未合并）。Task 2 的接入是真实完成的（适配器
+内调 `verifyPin`，有单测对拍）；Task 9 的接入按设计推迟到装配期。
+
+**修复（适配器方案，已把承诺变成事实）**：新增
+`src/features/profileSelect/createProfileSelectStore.ts`，以**结构式**最小面
+（`get` / `list`，不 import T9 文件）接收 T9 的 `ProfileRepo`，组合出
+`ProfileStore`：
+
+- `list()` 就地投影为 `ProfileSummary`，`pinHash` / `salt` 不外泄
+- `verify()` 走 `repo.get(id)` + Task 2 的 `verifyPin`（一条读，不把全部档案的
+  盐与哈希拉进内存）
+- 档案不存在（T9 的 `get` 返回 `undefined`）与 PIN 错误合并为同一个 `false`
+
+之所以不在 T9 侧加 `verify()`：PIN 比对属 `domain/crypto` 职责，仓储只该存取。
+适配器有 5 条单测（含 `get` 返回 `undefined` 的约定、与 `hashPin`/`verifyPin`
+对拍、不注入 digest 的默认分支）。
+
+**待办（T17 装配时一行接线）**：
+```ts
+useProfileSelect({ store: createProfileSelectStore(profileRepo) })
+```
+
+**同类遗留（审查提出，本 task 按裁定未做）**：`useProfileSelect` 的 `load()` 失败在
+UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selectedProfile !== null` 在
+列表为空时不成立，用户只会看到"还没有档案，请家长去新建"，把存储故障误导成建档引导。
+本 task 只补了"列表为空且出错"时的全局错误段（复用 `RETRY_MESSAGE`，未引入新状态位，
+因规格未定义该场景文案）；若要区分"真没档案"与"读失败"两种语义，需新增状态位，
+建议 T17 或后续 task 处理。
+
+---
+
+## R10. T9 事项：同毫秒事件排序语义断层（已修）与接缝对拍
+
+**矛盾点**：T6 的 `replayProjections` 刻意不按 `occurredAt` 重排，其契约是"调用方传入顺序即写入顺序"。而 T9 仓储层按 `occurredAt` 排序交出去。同毫秒事件下，`append()` 返回到达序与 `listByProfile` 返回的 eventId 字典序**不同序** → 重放与增量结果会分叉。若不修，T11–T16 接入重放路径时会把「增量 vs 重建」的口径分叉固化进代码。
+
+**修复（方案 A，不动规格、不改 `src/domain/**`）**：新增 `eventOrder` 台账库（`autoIncrement` 主键），把"第几条写入"显式落库。
+
+- `listByProfile` 改为显式双键：`occurredAt` 升序 → 同刻按台账 `rank` 升序
+- `append()` 在同一事务里写 `events` + 台账，台账条目按本批次 `incoming` 先后追加
+- `append` 的 `@returns` 契约修正为「与 `listByProfile` **逐条一致**」（原承诺"顺序一致"属实但不精确），并补"返回值可能少于 `incoming` 长度（先到者胜去重）"
+
+**测试证据**：同毫秒多条事件按写入序返回（事件 ID 取字典序与写入序相反的 `z3/z2/z1`）、`append` 返回值与 `listByProfile` 逐条一致、跨批次后到事件排在同刻先到事件之后、关连接重开后台账次序不回退；**接缝对拍**「仓储返回顺序喂给重放 == 写入序列喂给重放」（T9 worktree 可同时 import T6 与 T9，故在本地完成）。
+
+**变异验证**：把 `orderEvents` 的同刻比较退化为 `eventId.localeCompare` 后 5 条测试立刻红。
+
+**附带修复**：
+- `openDb` 加 `blocked` 处理（`OPEN_BLOCKED_TIMEOUT_MS = 3000`）：另一标签页持有旧版本连接不关时超时 reject 明确错误，由 `resolveStorage` 捕获降级，不再无限挂起；放弃时关掉迟到连接
+- `tests/data/db.test.ts` 的失实注释重写（原声称"`idb` 代理把方法 `this` 指向代理对象"属未验证归因）
+- `DB_VERSION` 现为 **3**（1→2 引入四库、2→3 引入台账）；JSDoc 已说明"数字版本号 ≠ 表意版本 v1"及新增库必须跳版本的原因
+- `src/data` 分支覆盖 86.66% → 97.14%
+
+**已知取舍**：台账随事件数线性增长（已用 `removeByProfile` 同步清理）；台账与事件分两次 `getAll`（`Promise.all` 并发），无循环内查询。
