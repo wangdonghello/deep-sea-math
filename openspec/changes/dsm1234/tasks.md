@@ -96,11 +96,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 12: 首页（地图主体 + 任务卡浮层）
 
-- [ ] **Step RED**: 写 `tests/features/home/HomeView.test.ts`：断言渲染 `MapPanel` 与 `QuestCard`；有未完成题组时展示进度"N / 9"与"开始下潜"按钮，无题组时展示"领取今日任务"；断言 `FishBackdrop` 出现在首页。
-- [ ] **Step GREEN**: 建 `views/HomeView.vue`、`MapPanel.vue`（起点潜水艇基地 + 四区 + 深度刻度）、`QuestCard.vue`（预计用时 / 进度 / 目标奖励 / 开始按钮）、`DepthScale.vue`、`TabBar.vue`；按设计稿 A 布局。
-- [ ] **Step REFACTOR**: 地图区数据驱动（`zones` 配置数组），避免硬编码四个 `<div>`；跑全套测试。
-- [ ] **验证**: 视觉对齐设计稿 A；首页不出现任何网络请求。
-- [ ] **Commit**: `[DSM1234] feat: T12 - home view with map panel and quest card`
+- [x] **Step RED**: 写 `tests/features/home/HomeView.test.ts`：断言渲染 `MapPanel` 与 `QuestCard`；有未完成题组时展示进度"N / 9"与"开始下潜"按钮，无题组时展示"领取今日任务"；断言 `FishBackdrop` 出现在首页。
+- [x] **Step GREEN**: 建 `views/HomeView.vue`、`MapPanel.vue`（起点潜水艇基地 + 四区 + 深度刻度）、`QuestCard.vue`（预计用时 / 进度 / 目标奖励 / 开始按钮）、`DepthScale.vue`、`TabBar.vue`；按设计稿 A 布局。
+- [x] **Step REFACTOR**: 地图区数据驱动（`zones` 配置数组），避免硬编码四个 `<div>`；跑全套测试。
+- [x] **验证**: 视觉对齐设计稿 A；首页不出现任何网络请求。
+- [x] **Commit**: `[DSM1234] feat: T12 - home view with map panel and quest card`
 
 ### Task 13: 答题页与五步引导
 

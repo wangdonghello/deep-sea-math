@@ -77,6 +77,13 @@
   --ds-shadow-card: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
+/*
+ * Task 12 消费：以下 token 自首页（HomeView / MapPanel / QuestCard /
+ * DepthScale / TabBar）起有了首个真实消费者，此前仅 Task 10 的 FishBackdrop
+ * 引用色板。字体阶、间距阶、圆角/动效、玻璃态四项自此不再是无消费者声明。
+ * （RETRO R7 待办的解除声明，不改任何取值。）
+ */
+
 *,
 *::before,
 *::after {
