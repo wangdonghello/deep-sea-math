@@ -56,11 +56,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 7: 解锁与奖励规则
 
-- [ ] **Step RED**: 写 `tests/domain/reward/unlockRules.test.ts`：断言整组完成必得图鉴卡+徽章、独立答对率≥60% 额外得独立掌握徽章、未完成不得解锁、奖励计算不依赖随机数。写 `tests/domain/reward/rewardGrant.test.ts`：断言追加型事件（无 `unlock-revoked` 类型）、重复完成同一题组不重复发奖。
-- [ ] **Step GREEN**: 建 `src/domain/reward/unlockRules.ts` 与 `src/domain/reward/rewardGrant.ts`。
-- [ ] **Step REFACTOR**: 奖励规则抽为可声明的 `RewardRule[]`；补 JSDoc；跑全套测试。
-- [ ] **验证**: 单测断言模块中不存在 `unlock-revoked` 字符串（防回退语义回流）。
-- [ ] **Commit**: `[DSM1234] feat: T7 - unlock and reward rules`
+- [x] **Step RED**: 写 `tests/domain/reward/unlockRules.test.ts`：断言整组完成必得图鉴卡+徽章、独立答对率≥60% 额外得独立掌握徽章、未完成不得解锁、奖励计算不依赖随机数。写 `tests/domain/reward/rewardGrant.test.ts`：断言追加型事件（无 `unlock-revoked` 类型）、重复完成同一题组不重复发奖。
+- [x] **Step GREEN**: 建 `src/domain/reward/unlockRules.ts` 与 `src/domain/reward/rewardGrant.ts`。
+- [x] **Step REFACTOR**: 奖励规则抽为可声明的 `RewardRule[]`；补 JSDoc；跑全套测试。
+- [x] **验证**: 单测断言模块中不存在 `unlock-revoked` 字符串（防回退语义回流）。
+- [x] **Commit**: `[DSM1234] feat: T7 - unlock and reward rules`
 
 ### Task 8: 题库与生物内容（含内容校验测试）
 
