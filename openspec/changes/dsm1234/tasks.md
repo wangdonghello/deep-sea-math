@@ -136,11 +136,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 17: 解锁反馈、路由与整体装配
 
-- [ ] **Step RED**: 写 `tests/App.test.ts`：断言整组完成后 `UnlockOverlay` 出现并展示奖励名；断言路由 `/` 重定向到档案选择、`/home` `/quest` `/bestiary` `/observation/:id` `/mistakes` `/parent` 可达；断言 `prefers-reduced-motion` 下鱼群静止。
-- [ ] **Step GREEN**: 建 `UnlockOverlay.vue`，配置 `src/router/index.ts` 全部路由与导航守卫（未选档案跳档案选择），在 `App.vue` 组装全局布局。
-- [ ] **Step REFACTOR**: 守卫逻辑抽为纯函数 `nextRoute(state)` 并单测；跑全套测试。
-- [ ] **验证**: `npm run test` 全绿、`npm run type-check` 通过、`npm run build` 成功；真机 iOS Safari / Android Chrome 手动验收首页→答题→订正→解锁→观察舱全流程。
-- [ ] **Commit**: `[DSM1234] feat: T17 - unlock overlay routing and app assembly`
+- [x] **Step RED**: 写 `tests/App.test.ts`：断言整组完成后 `UnlockOverlay` 出现并展示奖励名；断言路由 `/` 重定向到档案选择、`/home` `/quest` `/bestiary` `/observation/:id` `/mistakes` `/parent` 可达；断言 `prefers-reduced-motion` 下鱼群静止。
+- [x] **Step GREEN**: 建 `UnlockOverlay.vue`，配置 `src/router/index.ts` 全部路由与导航守卫（未选档案跳档案选择），在 `App.vue` 组装全局布局。
+- [x] **Step REFACTOR**: 守卫逻辑抽为纯函数 `nextRoute(state)` 并单测；跑全套测试。
+- [x] **验证**: `npm run test` 全绿、`npm run type-check` 通过、`npm run build` 成功；真机 iOS Safari / Android Chrome 手动验收首页→答题→订正→解锁→观察舱全流程。
+- [x] **Commit**: `[DSM1234] feat: T17 - unlock overlay routing and app assembly`
 
 ### Task 18: README 与收尾
 

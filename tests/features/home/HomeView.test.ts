@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import HomeView from '@/views/HomeView.vue'
 import type { HomeStore } from '@/features/home/types'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
-import type { AnswerSubmittedEvent, DomainEvent, SessionStartedEvent } from '@/domain/model/types'
+import type { AnswerSubmittedEvent, DomainEvent, SessionStartedEvent, Settings } from '@/domain/model/types'
 
 /**
  * `views/HomeView` 的行为契约（design §4：地图主体 + 任务卡浮层，方案 A）。
@@ -257,6 +257,38 @@ describe('views: HomeView', () => {
     expect(view.find('[data-testid="tab-bar"]').exists()).toBe(true)
     expect(view.find('[data-testid="tab-home"]').exists()).toBe(true)
     expect(view.emitted('navigate')).toBeUndefined()
+  })
+
+  it('预计用时收敛到家长设置的时长上限', async () => {
+    // 9 题粗估 14 分钟，但家长把上限设成 5：卡片必须显示 5，而不是 14。
+    const store = createStore([sessionStarted('s-cap')])
+    store.readSettings = async () =>
+      ({ basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 5 })
+    const view = await mountHome({ store })
+
+    const card = view.find('[data-testid="quest-card"]')
+    expect(card.text()).toContain('5 分钟')
+    expect(card.text()).not.toContain('14 分钟')
+  })
+
+  it('上限被设成 0 时预估至少 1 分钟（不显示 0 分钟）', async () => {
+    const store = createStore([sessionStarted('s-zero')])
+    store.readSettings = async () =>
+      ({ basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 0 })
+    const view = await mountHome({ store })
+
+    expect(view.find('[data-testid="quest-card"]').text()).toContain('1 分钟')
+    expect(view.find('[data-testid="quest-card"]').text()).not.toContain('0 分钟')
+  })
+
+  it('没有上限（旧档案缺 maxMinutes）时按题量粗估，不收敛', async () => {
+    const store = createStore([sessionStarted('s-nocap')])
+    store.readSettings = async () =>
+      ({ basicCount: 5, appliedCount: 3, probeCount: 1 }) as Settings
+    const view = await mountHome({ store })
+
+    // 9 题 × 1.5 = 13.5 → 向上取整 14 分钟（maxMinutes 缺省视为不设限）
+    expect(view.find('[data-testid="quest-card"]').text()).toContain('14 分钟')
   })
 
   it('存储读取失败时只给中性文案，不泄露错因', async () => {

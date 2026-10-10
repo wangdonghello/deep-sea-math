@@ -116,14 +116,27 @@ export function useHomeQuest(options: HomeQuestOptions) {
   }
 
   /**
-   * 预计用时：按题量粗估（每题 1.5 分钟，向上取整，至少 1 分钟）。
+   * 预计用时：按题量粗估（每题 1.5 分钟，向上取整），再按家长设置的时长上限
+   * 收敛。
    *
    * 之所以由 composable 算而不是组件算：`maxMinutes` 是家长设的**上限**而不是
    * 估值，「5+3+1 每题 1.5 分钟」这类口径一旦写进模板，家长区（Task 16）改
    * 设置时就无人同步。真实耗时在 Task 13 答题时计量，届时可改为按 `ms` 汇总。
+   *
+   * `max(min(estimate, maxMinutes), 1)` 的次序是刻意的（RETRO R19 的口径）：
+   * - **先 min 后 max**：上限被设成 0（家长想关掉时长提示）时预估收敛到 1，
+   *   而不是 0——"0 分钟"会让孩子以为这组题不用做；
+   * - **外层的 max** 兜的是"上限为 0 或负数"，不是"题量算出来是 0"；
+   * - **只有上限缺省**（旧档案还没有 `settings-updated` 事件）才不设限，退回
+   *   原估值。缺省与 0 是两件事：前者是"家长没表态"，后者是"家长表态了"。
+   *
+   * @param total 题数（有题组时取题组实际长度）。
+   * @param maxMinutes 家长设置的时长上限；`undefined` 表示缺省（不设限）。
    */
-  function estimateMinutes(total: number): number {
-    return Math.max(1, Math.ceil(total * 1.5))
+  function estimateMinutes(total: number, maxMinutes?: number): number {
+    const estimate = Math.max(1, Math.ceil(total * 1.5))
+    if (maxMinutes === undefined) return estimate
+    return Math.max(Math.min(estimate, maxMinutes), 1)
   }
 
   /**
@@ -197,7 +210,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
 
   /** 把快照翻译成任务卡模型（纯函数，不碰存储）。 */
   function buildCard(current: HomeProfile, snapshot: HomeSnapshot): QuestCardModel {
-    const { sessionId, progress, total } = snapshot
+    const { sessionId, progress, total, settings } = snapshot
     if (sessionId === null || progress === undefined) {
       // 当日题组不存在（新一天 / 新档案）：总题数以家长设置为准
       return {
@@ -205,7 +218,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
         nickname: current.nickname,
         answered: 0,
         total,
-        estimatedMinutes: estimateMinutes(total),
+        estimatedMinutes: estimateMinutes(total, settings.maxMinutes),
         rewardLabel: rewardLabel(),
         sessionId: null,
       }
@@ -221,7 +234,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
       nickname: current.nickname,
       answered: progress.answeredQuestionIds.length,
       total: questTotal,
-      estimatedMinutes: estimateMinutes(questTotal),
+      estimatedMinutes: estimateMinutes(questTotal, settings.maxMinutes),
       rewardLabel: rewardLabel(),
       sessionId,
     }
