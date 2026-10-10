@@ -112,11 +112,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 14: 图鉴、观察舱与地图视图
 
-- [ ] **Step RED**: 写 `tests/features/bestiary/BestiaryView.test.ts`：断言未解锁生物显示剪影与"继续下潜解锁"、已解锁显示名称与插画；`ObservationView` 断言展示学名/深度区间/知识卡 3–5 条/来源，且标注"原创示意插画"。写 `tests/features/bestiary/CreatureCanvas.test.ts`：断言插画加载失败时显示文字占位且知识卡仍渲染。
-- [ ] **Step GREEN**: 建 `views/BestiaryView.vue` `views/ObservationView.vue` `views/MapView.vue` 与 `CreatureCanvas.vue` `KnowledgeCardList.vue` `SourceNote.vue`；读取 Task 8 的 `creatures.json` 与投影中的解锁状态。
-- [ ] **Step REFACTOR**: 生物条目渲染抽为复用组件；插画加载失败统一用 `onError` 降级；跑全套测试。
-- [ ] **验证**: 深度文案全部为区间表述（内容测试已锁，这里补 UI 断言）。
-- [ ] **Commit**: `[DSM1234] feat: T14 - bestiary observation and map views`
+- [x] **Step RED**: 写 `tests/features/bestiary/BestiaryView.test.ts`：断言未解锁生物显示剪影与"继续下潜解锁"、已解锁显示名称与插画；`ObservationView` 断言展示学名/深度区间/知识卡 3–5 条/来源，且标注"原创示意插画"。写 `tests/features/bestiary/CreatureCanvas.test.ts`：断言插画加载失败时显示文字占位且知识卡仍渲染。
+- [x] **Step GREEN**: 建 `views/BestiaryView.vue` `views/ObservationView.vue` `views/MapView.vue` 与 `CreatureCanvas.vue` `KnowledgeCardList.vue` `SourceNote.vue`；读取 Task 8 的 `creatures.json` 与投影中的解锁状态。
+- [x] **Step REFACTOR**: 生物条目渲染抽为复用组件；插画加载失败统一用 `onError` 降级；跑全套测试。
+- [x] **验证**: 深度文案全部为区间表述（内容测试已锁，这里补 UI 断言）。
+- [x] **Commit**: `[DSM1234] feat: T14 - bestiary observation and map views`
 
 ### Task 15: 错题本
 
