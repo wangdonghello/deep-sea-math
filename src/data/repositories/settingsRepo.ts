@@ -38,6 +38,17 @@ export interface SettingsRepo {
    * @param settings 家长设置。
    */
   save(profileId: string, settings: Settings): Promise<void>
+
+  /**
+   * 删除某档案的设置行。
+   *
+   * 区别于 {@link SettingsRepo.save} 写回默认值：删档后 `get()` 会因无记录而
+   * 回落默认值，但库里不会残留一条属于已删档案的孤立行——"删档要清干净关联
+   * 数据"（spec `child-profiles` §删除档案）包含这一条。
+   *
+   * @param profileId 档案 ID；档案不存在时无操作（IndexedDB delete 本就幂等）。
+   */
+  remove(profileId: string): Promise<void>
 }
 
 /**
@@ -57,6 +68,10 @@ export function createSettingsRepo(db: DeepSeaDb): SettingsRepo {
       return db
         .put(STORE_NAMES.settings, { profileId, settings: { ...settings } })
         .then(() => undefined)
+    },
+
+    remove(profileId) {
+      return db.delete(STORE_NAMES.settings, profileId).then(() => undefined)
     },
   }
 }

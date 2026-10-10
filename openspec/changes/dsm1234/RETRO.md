@@ -214,3 +214,22 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **裁决与修复**：把加载、档案隔离、投影、筛选、重练元数据及错误状态移入 `useMistakeBook`。错题模型分别保留 `questionMasteryLevel` 与 `topicMasteryLevel`；`stable` 按题型轨匹配，其余状态按单题轨匹配，列表和筛选标签明确标示来源。失败日志只输出固定事件及 `errorType: 'read-failed'`，不读取或记录异常文本。
 
 **验证**：以三道同题型不同题独立答对后、其中一题成为错题的真实事件验证 topic=`stable`、question=`independent`；另覆盖混档事件隔离及 `Error('token=secret-123')` 不泄漏。
+
+---
+
+## R18. T16 审查发现 `SettingsRepo` 缺删除能力（已补齐）
+
+**问题**：T16 规格审查发现 `ParentStore` 需要的删除能力在 T9 仓储中不完整：
+- `SettingsRepo` 只有 `get`/`save`，没有 `remove`。不能用「写回默认值」冒充删除
+  ——那会在库里留下属于已删档案的孤立行，而 `get()` 无记录即回落默认值会让
+  删档操作看起来成功，实际没清干净关联数据（spec `child-profiles` §删除档案）。
+- `BestiaryRepo` 的删除方法叫 `clear` 而非 `remove`，语义等价（投影缓存可重建），
+  仅命名差异，由装配层适配。
+
+**修复**：为 `SettingsRepo` 接口、IndexedDB 实现与内存态实现补齐
+`remove(profileId)`，并补测试锁三件事：remove 后读回落默认值、库里真无该行
+（非"被改回默认值的孤儿记录"）、不影响其他档案；remove 未写过的档案幂等不抛错。
+
+**后续**：T16 侧 `createParentStore(storage)` 负责把 `clear` 适配为 `remove`，
+`settings.remove` 现在可直接使用。原计划中"适配器暴露 settings 删除缺失"的
+降级路径不再需要。

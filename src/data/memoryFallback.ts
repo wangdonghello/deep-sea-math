@@ -95,6 +95,9 @@ export function createMemorySettingsRepo(): SettingsRepo {
     async save(profileId, settings) {
       records.set(profileId, { ...settings })
     },
+    async remove(profileId) {
+      records.delete(profileId)
+    },
   }
 }
 

@@ -61,4 +61,37 @@ describe('data/repositories/settingsRepo', () => {
     expect(await repo.get(PROFILE_A)).toEqual(DEFAULT_SETTINGS)
     expect((await repo.get(PROFILE_B)).probeCount).toBe(3)
   })
+
+  it('remove 之后 get 回落默认值，且库里不残留该档案的行', async () => {
+    const repo = createSettingsRepo(db)
+
+    await repo.save(PROFILE_A, { ...makeSettings(), basicCount: 7 })
+
+    await repo.remove(PROFILE_A)
+
+    // 读侧与"从没写过"不可区分，家长看不到删档残留。
+    expect(await repo.get(PROFILE_A)).toEqual(DEFAULT_SETTINGS)
+    // 但写侧是真删除：直接查库应为空，而不是一行被改回默认值的孤儿记录
+    // （那会让 spec child-profiles §删除档案 的"清干净关联数据"只做了一半）。
+    const stored = await db.get('settings', PROFILE_A)
+    expect(stored).toBeUndefined()
+  })
+
+  it('remove 不碰其他档案的设置', async () => {
+    const repo = createSettingsRepo(db)
+
+    await repo.save(PROFILE_A, { ...makeSettings(), basicCount: 7 })
+    await repo.save(PROFILE_B, { ...makeSettings(), basicCount: 6 })
+
+    await repo.remove(PROFILE_A)
+
+    expect((await repo.get(PROFILE_B)).basicCount).toBe(6)
+  })
+
+  it('remove 一个从未写过的档案是无操作，不抛错', async () => {
+    const repo = createSettingsRepo(db)
+
+    await expect(repo.remove(PROFILE_A)).resolves.toBeUndefined()
+    expect(await repo.get(PROFILE_A)).toEqual(DEFAULT_SETTINGS)
+  })
 })

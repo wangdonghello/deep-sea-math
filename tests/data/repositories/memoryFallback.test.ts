@@ -125,6 +125,21 @@ describe('memoryFallback: 与 IndexedDB 态同契约', () => {
     expect(await repo.get(PROFILE_B)).toEqual(DEFAULT_SETTINGS)
   })
 
+  it('settingsRepo：remove 回落默认且不影响其他档案（删档清理用）', async () => {
+    const repo = createMemorySettingsRepo()
+
+    await repo.save(PROFILE_A, makeSettings())
+    await repo.save(PROFILE_B, makeSettings())
+
+    await repo.remove(PROFILE_A)
+
+    expect(await repo.get(PROFILE_A)).toEqual(DEFAULT_SETTINGS)
+    expect(await repo.get(PROFILE_B)).toEqual(makeSettings())
+    // 再写一次可以正常覆盖，说明 remove 真删了行而不是打了个标记。
+    await repo.save(PROFILE_A, { ...makeSettings(), basicCount: 2 })
+    expect((await repo.get(PROFILE_A)).basicCount).toBe(2)
+  })
+
   it('bestiaryRepo：未写过为 undefined，覆盖写，clear 回到 undefined', async () => {
     const repo = createMemoryBestiaryRepo()
 
