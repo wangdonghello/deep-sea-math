@@ -207,3 +207,10 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **修复**：题目保留精确 `standard:*` 语义标签，来源只链接可访问的领域页，并按加减、多位数运算、两步应用、未知关系、时间/质量/长度距离及数列/数据分别校验映射。相似题链接清除重复项，测试与运行时校验均拒绝重复 ID。
 
 **物种与体型口径**：Johnson 范围采用 FishBase 单种页 100–4,500 米（通常 100–1,500 米）；MBARI 的 300–4,000 米仅作为鮟鱇鱼类群概述，移除所有 580 米说法。Bathysaurus 记录为 587 条正水深 occurrence、约 223–3,516 米；Histioteuthis 为 277 条、15.5–4,276 米。OBIS 范围仅是当前数据库已记录 occurrence，不代表完整分布或生理极限。4 个条目新增直接引用的体型数据，并区分总长 TL、标准体长 SL 与外套膜长 ML。
+## R17. T15 错题本稳定掌握筛选与失败日志契约（已修）
+
+**发现**：规格审查发现 View 越过 feature 边界直接执行事件重放/筛选，且将完整 `Error` 交给通用 `redact()`；其保留 `message`/`stack`，message 中的凭据可能进入日志。另，`stable` 只存在 `masteryByTopic`，按题目级状态筛选会漏掉所有稳定掌握项。
+
+**裁决与修复**：把加载、档案隔离、投影、筛选、重练元数据及错误状态移入 `useMistakeBook`。错题模型分别保留 `questionMasteryLevel` 与 `topicMasteryLevel`；`stable` 按题型轨匹配，其余状态按单题轨匹配，列表和筛选标签明确标示来源。失败日志只输出固定事件及 `errorType: 'read-failed'`，不读取或记录异常文本。
+
+**验证**：以三道同题型不同题独立答对后、其中一题成为错题的真实事件验证 topic=`stable`、question=`independent`；另覆盖混档事件隔离及 `Error('token=secret-123')` 不泄漏。
