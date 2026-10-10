@@ -72,11 +72,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 9: IndexedDB 仓储、版本迁移与降级
 
-- [ ] **Step RED**: 写 `tests/data/repositories/*.test.ts`（用 `fake-indexeddb`）：断言 eventRepo 写入后读回一致、同 eventId 重复写入不产生两条、按 profileId 隔离；断言 `openDb` 版本迁移从 v0 到 v1 保留既有事件；断言 `resolveStorage` 在 `indexedDB.open` 抛错时返回内存态实现且界面层可见降级标记。
-- [ ] **Step GREEN**: 建 `src/data/db.ts`（对象库：`events` / `projections` / `profiles` / `settings`，v1 schema + migration）、`src/data/memoryFallback.ts`、`src/data/repositories/{profileRepo,eventRepo,settingsRepo,bestiaryRepo}.ts`（接口与实现分离，便于内存态替换）。
-- [ ] **Step REFACTOR**: 仓储读取统一 `getAll` 一次取回后在内存处理（不在循环内逐条读）；补 JSDoc；跑全套测试。
-- [ ] **验证**: 降级路径有单测覆盖；`npm run type-check` 通过。
-- [ ] **Commit**: `[DSM1234] feat: T9 - indexeddb repositories migration and fallback`
+- [x] **Step RED**: 写 `tests/data/repositories/*.test.ts`（用 `fake-indexeddb`）：断言 eventRepo 写入后读回一致、同 eventId 重复写入不产生两条、按 profileId 隔离；断言 `openDb` 版本迁移从 v0 到 v1 保留既有事件；断言 `resolveStorage` 在 `indexedDB.open` 抛错时返回内存态实现且界面层可见降级标记。
+- [x] **Step GREEN**: 建 `src/data/db.ts`（对象库：`events` / `projections` / `profiles` / `settings`，v1 schema + migration）、`src/data/memoryFallback.ts`、`src/data/repositories/{profileRepo,eventRepo,settingsRepo,bestiaryRepo}.ts`（接口与实现分离，便于内存态替换）。
+- [x] **Step REFACTOR**: 仓储读取统一 `getAll` 一次取回后在内存处理（不在循环内逐条读）；补 JSDoc；跑全套测试。
+- [x] **验证**: 降级路径有单测覆盖；`npm run type-check` 通过。
+- [x] **Commit**: `[DSM1234] feat: T9 - indexeddb repositories migration and fallback`
 
 ### Task 10: 全局深海主题样式与 FishBackdrop
 

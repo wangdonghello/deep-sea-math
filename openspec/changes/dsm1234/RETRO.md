@@ -68,6 +68,14 @@
 
 ---
 
+## R6. T6 遗留：`masteryByTopic` 依赖注入的题型表（接入时需确认）
+
+**问题**：`DomainEvent` 不带 `Question.type`，题型级轨道必须由调用方传 `questionTypeById` 给 `replayProjections`。若 T9/T16 调用方忘传，题型级投影会静默为空（单向失败，不污染题目轨，但无告警）。
+
+**待办**：T12/T16 接线时确认题库侧能提供该表（T8 的 `questionBank.json` 可派生）。
+
+---
+
 ## R7. T10 质量审查的次要项（不阻塞，待后续 task 处理）
 
 | 位置 | 问题 | 处理时点 |
@@ -80,7 +88,7 @@
 
 ---
 
-## R6. T6 遗留：`masteryByTopic` 依赖注入的题型表（接入时需确认）
+## R8. T11 待补：实现者披露的裁决结果
 
 **问题**：`DomainEvent` 不带 `Question.type`，题型级轨道必须由调用方传 `questionTypeById` 给 `replayProjections`。若 T9/T16 调用方忘传，题型级投影会静默为空（单向失败，不污染题目轨，但无告警）。
 
