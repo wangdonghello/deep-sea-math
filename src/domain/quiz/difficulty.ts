@@ -1,4 +1,5 @@
 import type { Difficulty, DifficultyFallbackEvent, DomainEvent, MasteryState, QuestCategory } from '../model/types'
+import { classifyStreakSignal } from './streakSignal'
 
 /**
  * `src/domain/quiz/difficulty` —— 难度自适应与档位回落。
@@ -119,34 +120,16 @@ function clampDifficulty(value: number): Difficulty {
 }
 
 /**
- * 判断一次答题是否算「首次独立答对」。
+ * 「连续独立答对」等连击判定已抽到共享真源 {@link classifyStreakSignal}
+ * （`quiz/streakSignal`）。
  *
- * 三条同时成立：`correct` 为真、`usedHintLevel === 0`（未展开任何提示）、
- * `retryCount === 0`（第一次提交就对，不是试错多次后的碰中）。
- *
- * `retryCount` 这一条是刻意加的：没有它，同一题连错 5 次后蒙对会被计成
- * 「独立答对」，难度只升不降——孩子会反复体验「反正乱填也能过」。
+ * 原先这里有一对私有谓词 `isIndependentCorrect` / `isHintedCorrect`，
+ * 但它们与 `mastery/masteryStateMachine` 的口径是两份平行实现——Task 6
+ * 重放会同时喂给两边，任何一边悄悄改判定都会让 `replayProjections` 与
+ * `computeCurrentDifficulty` 对同一段流的连击数给出不同答案。故删除私有
+ * 副本，改由 {@link classifyStreakSignal} 统一供数：本模块只保留难度特有
+ * 的「提示连击」与门槛计算，不再自己判断一次答题算不算独立。
  */
-function isIndependentCorrect(event: DomainEvent): event is Extract<DomainEvent, { type: 'answer-submitted' }> {
-  return (
-    event.type === 'answer-submitted' &&
-    event.correct === true &&
-    event.usedHintLevel === 0 &&
-    event.retryCount === 0
-  )
-}
-
-/**
- * 判断一次答题是否算「提示后才答对」。
- *
- * `correct` 为真且 `usedHintLevel > 0`。**看答案（`answer-revealed`）不计入
- * 这一档**：看答案意味着孩子没有独立完成这道题，把它算成「提示后答对」等于
- * 给「直接抄答案」发了一个比提示更轻的处罚，反而可能诱导孩子跳过思考。
- * 看答案的处理见 {@link computeCurrentDifficulty} 里对连击的清零分支。
- */
-function isHintedCorrect(event: DomainEvent): event is Extract<DomainEvent, { type: 'answer-submitted' }> {
-  return event.type === 'answer-submitted' && event.correct === true && event.usedHintLevel > 0
-}
 
 /**
  * 计算该档案的当前难度档（design §3 难度自适应公式）。
@@ -159,16 +142,20 @@ function isHintedCorrect(event: DomainEvent): event is Extract<DomainEvent, { ty
  * {@link CORRECT_STREAK_FOR_UPGRADE} / {@link HINTED_STREAK_FOR_DOWNGRADE} 控制
  * 是否触发，因此连对 9 题也只会 +1，不会连跳两档。
  *
- * 连击的推进规则（按事件时间正序单次遍历）：
+ * 连击的推进规则（按事件时间正序单次遍历），判定统一来自共享真源
+ * {@link classifyStreakSignal}：
  * - 首次独立答对 → 独立连击 +1，提示连击清零
  * - 提示后才答对 → 提示连击 +1，独立连击清零
- * - 答错 / 看答案 / **重试后才答对** → 两者都清零（连击断了就是断了，
- *   不保留一半；“改过错才算会”不计入连续独立答对）
+ * - 答错 / 看答案 / **重试后才答对** / **订正完成** → 两者都清零（连击断了
+ *   就是断了，不保留一半；“改过错才算会”、订正过才算完，都不计入连续独立答对）
+ * - `hint-used` 等非答题流程事件 → ignored，读了也不影响档位（否则展开一次
+ *   提示就会把「提示后答对」的连击清零，降档永远触发不了）
  *
- * 只有 `answer-submitted` 与 `answer-revealed` 两类事件参与连击计算：
- * `hint-used` / `correction-done` 等流程事件不构成成败信号，读了也不该
- * 影响档位（否则展开一次提示就会把「提示后答对」的连击清零，降档永远
- * 触发不了）。
+ * **与 mastery 的对齐**：这里对「订正完成」从 ignored 改为 breaker（过去两
+ * 处口径不一致会让 Task 6 重放给出两个独立连击数）。判定函数已抽到
+ * {@link classifyStreakSignal} 由本模块与 `mastery/masteryStateMachine` 共用，
+ * 详情与对拍测试见 `tests/domain/quiz/streakSignal.test.ts` 与
+ * `streakConsistency.test.ts`。本模块只保留难度特有的「提示连击」与门槛计算。
  *
  * 只要末态连击数达标就触发修正，因此「前 2 连独立 + 答错 + 1 连独立」的
  * 末态是 1 连，不升档——这正是 spec「连续答对升档」里「连续」二字的含义。
@@ -192,31 +179,31 @@ export function computeCurrentDifficulty(history: DifficultyHistory): Difficulty
   let hintedStreak = 0
 
   for (const event of recent) {
-    // 只有「答题」与「看答案」两种事件参与连击计算。hint-used /
-    // correction-done 等流程事件不构成成败信号——孩子展开提示并不等于失败，
-    // 若在这里清零，会导致「提示后答对」永远攒不到 2 连而降不了档。
-    if (event.type !== 'answer-submitted' && event.type !== 'answer-revealed') {
-      continue
-    }
+    // 连击判定走共享真源（与 mastery/masteryStateMachine 同一处），本模块只
+    // 在信号之上叠加「难度特有」的提示连击与门槛。ignored（hint-used /
+    // session-* 等流程事件）直接跳过：展开提示不等于失败，若它打断连击，
+    // 「连续提示后答对降档」永远攒不到 2 连。
+    const signal = classifyStreakSignal(event)
 
-    if (isIndependentCorrect(event)) {
+    if (signal === 'independent') {
       independentStreak += 1
       hintedStreak = 0
       continue
     }
 
-    if (isHintedCorrect(event)) {
+    if (signal === 'hinted') {
       hintedStreak += 1
       independentStreak = 0
       continue
     }
 
-    // 走到这里的有三种：答错（提交且不正确）、看答案、以及**重试后才答对**
-    // （`retryCount > 0` 不算首次独立答对）。三者都清零两种连击——一次失败、
-    // 直接求助、或要改错才碰中，都说明这题不是「独立」会的，半个连击不该留到
-    // 下一次。
-    independentStreak = 0
-    hintedStreak = 0
+    // breaker：答错、看答案、改错后才对、订正完成——这几种都清零两种连击。
+    // 一次失败、直接求助、要改错才碰中、或订正过才算完，都说明这题不是
+    // 「独立」会的，半个连击不该留到下一次。ignored 不进入此分支。
+    if (signal === 'breaker') {
+      independentStreak = 0
+      hintedStreak = 0
+    }
   }
 
   const upgrade = independentStreak >= CORRECT_STREAK_FOR_UPGRADE ? 1 : 0
