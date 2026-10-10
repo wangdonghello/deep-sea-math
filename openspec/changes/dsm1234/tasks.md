@@ -64,11 +64,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 8: 题库与生物内容（含内容校验测试）
 
-- [ ] **Step RED**: 写 `tests/data/content/questionBank.test.ts`：载入 `src/data/content/questionBank.json`，逐条断言必填字段非空、`answer` 合法、`hints.length === 5`、`similarQuestionIds` 均存在于题库、`requiresFiveStep=true` 的题必有 `steps`、`sources` 非空。写 `tests/data/content/creatures.test.ts`：断言 4 条条目学名/深度范围/知识卡 3–5 条/来源链接均非空，且深度文案为区间形式。
-- [ ] **Step GREEN**: 写 `src/data/content/questionBank.json`（60–80 题，覆盖六类题型 × 三档难度，深海宠物任务包装，每条带 sources）与 `src/data/content/creatures.json`（4 条：约翰逊鮟鱇鱼 *Melanocetus johnsonii* + 其余 3 条自规格 12 候选中选取），含原创插画引用占位与知识卡。
-- [ ] **Step REFACTOR**: 抽 `src/data/content/schema.ts` 与共享校验函数供运行时复用；为题库加分类索引减少查询遍历；跑全套测试。
-- [ ] **验证**: 题库通过 schema 校验；`npm run test` 中内容测试全绿；深度断言拒绝"唯一固定深度"表述。
-- [ ] **Commit**: `[DSM1234] feat: T8 - question bank and creature content with validation`
+- [x] **Step RED**: 写 `tests/data/content/questionBank.test.ts`：载入 `src/data/content/questionBank.json`，逐条断言必填字段非空、`answer` 合法、`hints.length === 5`、`similarQuestionIds` 均存在于题库、`requiresFiveStep=true` 的题必有 `steps`、`sources` 非空。写 `tests/data/content/creatures.test.ts`：断言 4 条条目学名/深度范围/知识卡 3–5 条/来源链接均非空，且深度文案为区间形式。
+- [x] **Step GREEN**: 写 `src/data/content/questionBank.json`（60–80 题，覆盖六类题型 × 三档难度，深海宠物任务包装，每条带 sources）与 `src/data/content/creatures.json`（4 条：约翰逊鮟鱇鱼 *Melanocetus johnsonii* + 其余 3 条自规格 12 候选中选取），含原创插画引用占位与知识卡。
+- [x] **Step REFACTOR**: 抽 `src/data/content/schema.ts` 与共享校验函数供运行时复用；为题库加分类索引减少查询遍历；跑全套测试。
+- [x] **验证**: 题库通过 schema 校验；`npm run test` 中内容测试全绿；深度断言拒绝"唯一固定深度"表述。
+- [x] **Commit**: `[DSM1234] feat: T8 - question bank and creature content with validation`
 
 ### Task 9: IndexedDB 仓储、版本迁移与降级
 

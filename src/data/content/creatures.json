@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "creatures": [
+    {
+      "id": "johnson-anglerfish",
+      "name": "约翰逊鮟鱇鱼",
+      "scientificName": "Melanocetus johnsonii",
+      "depthRange": { "min": 300, "max": 4000 },
+      "habitat": "MBARI给出的深海鮟鱇鱼观察范围约300–4,000米；不同个体和生活阶段可能不同，这不是唯一分布深度。",
+      "knowledgeCards": ["鮟鱇鱼头部前方有一根像钓竿的鳍条，末端是发光诱饵。", "发光诱饵能吸引小鱼和甲壳类靠近，鮟鱇鱼会等待时机捕食。", "深海鲜少阳光，部分深海鮟鱇鱼的暗色皮肤有助于隐藏身影。", "MBARI的观察资料显示，深海鮟鱇鱼不常被遇见，每次观察都能补充认识。"],
+      "sources": ["https://www.mbari.org/animal/deep-sea-anglerfish"],
+      "illustrationRef": "original-johnson-anglerfish",
+      "illustrationLabel": "原创示意插画，非真实影像"
+    },
+    {
+      "id": "giant-cusk-eel",
+      "name": "深海大鼬鳚",
+      "scientificName": "Spectrunculus grandis",
+      "depthRange": { "min": 2000, "max": 4300 },
+      "habitat": "MBARI记录其约2,000–4,300米深度的海底生活；这一区间是已知活动范围，不代表唯一分布。",
+      "knowledgeCards": ["它生活在深海海底附近，是体型较大的深海硬骨鱼之一。", "它有发达的嗅觉器官，能帮助它在海底寻找食物。", "MBARI记录它会吃海底无脊椎动物，也会取食动物尸体。", "已知资料显示它分布于太平洋和大西洋的深海区域。"],
+      "sources": ["https://www.mbari.org/animal/giant-cusk-eel/"],
+      "illustrationRef": "original-giant-cusk-eel",
+      "illustrationLabel": "原创示意插画，非真实影像"
+    },
+    {
+      "id": "deep-sea-lizardfish",
+      "name": "深海蜥鱼",
+      "scientificName": "Bathysaurus ferox",
+      "depthRange": { "min": 600, "max": 3500 },
+      "habitat": "Smithsonian列出的深海蜥鱼活动范围约600–3,500米；这是资料中的范围描述，并非固定栖息深度。",
+      "knowledgeCards": ["深海蜥鱼是生活在海洋深处的鱼类。", "它的学名是 Bathysaurus ferox，属于蜥鱼类。", "公开资料给出的活动范围约600–3,500米，可跨越不同深度教学区。"],
+      "sources": ["https://ocean.si.edu/ocean-life/invertebrates/deep-ocean-diversity-slideshow"],
+      "illustrationRef": "original-deep-sea-lizardfish",
+      "illustrationLabel": "原创示意插画，非真实影像"
+    },
+    {
+      "id": "jewel-squid",
+      "name": "宝石鱿鱼",
+      "scientificName": "Histioteuthis bonnellii",
+      "depthRange": { "min": 500, "max": 2000 },
+      "habitat": "Smithsonian资料列出的宝石鱿鱼活动深度约500–2,000米；观察记录可能随个体和阶段而异。",
+      "knowledgeCards": ["宝石鱿鱼是生活在海洋中的头足类软体动物。", "它的学名是 Histioteuthis bonnellii，属于鱿鱼。", "Smithsonian资料给出的深度范围约500–2,000米，跨越暮光区和深海区。"],
+      "sources": ["https://ocean.si.edu/ocean-life/invertebrates/deep-ocean-diversity-slideshow"],
+      "illustrationRef": "original-jewel-squid",
+      "illustrationLabel": "原创示意插画，非真实影像"
+    }
+  ]
+}
