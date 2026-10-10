@@ -172,8 +172,8 @@ function validateSteps(value: unknown, path: string): void {
 export function assertValidQuestionBank(value: unknown): asserts value is QuestionBank {
   const bank = record(value, 'questionBank')
   nonEmptyString(bank.version, 'questionBank.version')
-  if (!Array.isArray(bank.questions) || bank.questions.length === 0) {
-    throw new Error('questionBank.questions: expected a non-empty array')
+  if (!Array.isArray(bank.questions) || bank.questions.length < 60 || bank.questions.length > 80) {
+    throw new Error('questionBank.questions: expected 60–80 questions')
   }
   const ids = new Set<string>()
   const questions = bank.questions.map((question, index) => {
@@ -182,11 +182,22 @@ export function assertValidQuestionBank(value: unknown): asserts value is Questi
     ids.add(validated.id)
     return validated
   })
+  for (const type of QUIZ_TYPES) {
+    for (const difficulty of [1, 2, 3]) {
+      if (!questions.some((question) => question.type === type && question.difficulty === difficulty)) {
+        throw new Error(`questionBank.questions: missing type/difficulty coverage for ${type} difficulty ${difficulty}`)
+      }
+    }
+  }
   for (const [index, question] of questions.entries()) {
     for (const similarId of question.similarQuestionIds) {
-      if (!ids.has(similarId) || similarId === question.id) {
+      const target = questions.find((candidate) => candidate.id === similarId)
+      if (target === undefined || similarId === question.id) {
         throw new Error(`questionBank.questions[${index}].similarQuestionIds: missing or self reference ${similarId}`)
       }
+      if (target.type !== question.type) throw new Error(`questionBank.questions[${index}].similarQuestionIds: type mismatch ${similarId}`)
+      const skills = question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag))
+      if (skills.length === 0) throw new Error(`questionBank.questions[${index}].similarQuestionIds: no shared skill tag with ${similarId}`)
     }
   }
 }
@@ -263,8 +274,8 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
     throw new Error('creatures.johnson-anglerfish.scientificName: expected Melanocetus johnsonii')
   }
   const anglerfishDepth = record(anglerfish.depthRange, 'creatures.johnson-anglerfish.depthRange')
-  if (anglerfishDepth.min !== 300 || anglerfishDepth.max !== 4000) {
-    throw new Error('creatures.johnson-anglerfish.depthRange: expected approximately 300–4,000 meters')
+  if (anglerfishDepth.min !== 100 || anglerfishDepth.max !== 4500) {
+    throw new Error('creatures.johnson-anglerfish.depthRange: expected FishBase species record 100–4,500 meters')
   }
 }
 

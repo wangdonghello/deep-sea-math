@@ -31,6 +31,23 @@ describe('question bank content', () => {
     expect(QUESTION_INDEX.byCategory.probe).toHaveLength(18)
     expect(QUESTION_INDEX.byType['add-sub']).toHaveLength(12)
     expect(QUESTION_INDEX.byDifficulty[3]).toHaveLength(24)
+    for (const category of QUEST_CATEGORIES) {
+      expect(QUESTION_INDEX.byCategory[category]).toEqual(bank.questions.filter((question) => question.category === category))
+    }
+    for (const type of QUIZ_TYPES) {
+      expect(QUESTION_INDEX.byType[type]).toEqual(bank.questions.filter((question) => question.type === type))
+      for (const difficulty of [1, 2, 3]) {
+        const bucket = QUESTION_INDEX.byType[type].filter((question) => question.difficulty === difficulty)
+        expect(bucket).toEqual(bank.questions.filter((question) => question.type === type && question.difficulty === difficulty))
+        for (const category of QUEST_CATEGORIES) {
+          const indexed = QUESTION_INDEX.byCategory[category].filter((question) => question.type === type && question.difficulty === difficulty)
+          expect(indexed).toEqual(bank.questions.filter((question) => question.type === type && question.difficulty === difficulty && question.category === category))
+        }
+      }
+    }
+    for (const difficulty of [1, 2, 3] as const) {
+      expect(QUESTION_INDEX.byDifficulty[difficulty]).toEqual(bank.questions.filter((question) => question.difficulty === difficulty))
+    }
     const creatureIds = new Set(CREATURE_BANK.creatures.map((creature) => creature.id))
     expect(QUESTION_BANK.questions.every((question) => creatureIds.has(question.creatureRef ?? ''))).toBe(true)
   })
@@ -40,6 +57,62 @@ describe('question bank content', () => {
     const invalid = structuredClone(bank)
     invalid.questions[0].hints.pop()
     expect(() => assertValidQuestionBank(invalid)).toThrow(/questions/)
+  })
+
+  it('requires 60–80 questions and every type/difficulty bucket', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const tooSmall = structuredClone(bank)
+    tooSmall.questions = tooSmall.questions.slice(0, 59)
+    expect(() => assertValidQuestionBank(tooSmall)).toThrow(/60–80/)
+    const tooLarge = structuredClone(bank)
+    tooLarge.questions.push(...structuredClone(bank.questions.slice(0, 9)))
+    expect(() => assertValidQuestionBank(tooLarge)).toThrow(/60–80/)
+    const missingBucket = structuredClone(bank)
+    missingBucket.questions = missingBucket.questions.filter((question) => !(question.type === 'pattern-data' && question.difficulty === 3))
+    expect(() => assertValidQuestionBank(missingBucket)).toThrow(/pattern-data.*3/)
+  })
+
+  it('cites a matching Common Core standard for every math skill', () => {
+    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
+    const standardByType: Record<string, RegExp> = {
+      'add-sub': /thecorestandards\.org\/Math\/Content\/3\/NBT\/2\//,
+      'two-step-app': /thecorestandards\.org\/Math\/Content\/3\/OA\/8\//,
+      'unknown-relation': /thecorestandards\.org\/Math\/Content\/3\/OA\/4\//,
+      'unit-time-route': /thecorestandards\.org\/Math\/Content\/3\/(?:MD\/[12]|NBT\/2)\//,
+      'pattern-data': /thecorestandards\.org\/Math\/Content\/3\/OA\/9\//,
+    }
+    for (const question of bank.questions) {
+      const standard = question.type === 'mul-div'
+        ? question.tags.includes('multiplication') ? /\/OA\/3\// : /\/OA\/[24]\//
+        : question.type === 'unit-time-route'
+          ? /skill-(?:time-unit|add-elapsed|subtract-elapsed)/.test(question.tags.join(' ')) ? /\/MD\/1\// : /\/MD\/2\//
+          : standardByType[question.type]
+      expect(question.sources.some((source: string) => standard.test(source))).toBe(true)
+    }
+  })
+
+  it('links only same-type questions with a shared precise skill tag', () => {
+    for (const question of QUESTION_BANK.questions) {
+      for (const id of question.similarQuestionIds) {
+        const target = QUESTION_BANK.questions.find((candidate) => candidate.id === id)!
+        expect(target.type, `${question.id} → ${id} type`).toBe(question.type)
+        expect(question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag)), `${question.id} → ${id} skill`).not.toHaveLength(0)
+        const representation = (item: typeof question) => item.answer.unit ? 'unit' : item.answer.expression ? 'expression' : 'number'
+        expect(representation(target), `${question.id} → ${id} answer representation`).toBe(representation(question))
+      }
+    }
+  })
+
+  it('rejects cross-skill and cross-type similar-question references', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const crossSkill = structuredClone(bank)
+    crossSkill.questions[2].similarQuestionIds = ['q005']
+    crossSkill.questions[4].tags = crossSkill.questions[4].tags.filter((tag: string) => !tag.startsWith('skill-'))
+    expect(() => assertValidQuestionBank(crossSkill)).toThrow(/similarQuestionIds.*skill/i)
+    const crossType = structuredClone(bank)
+    crossType.questions[2].similarQuestionIds = ['q013']
+    crossType.questions[12].tags.push('skill-addition')
+    expect(() => assertValidQuestionBank(crossType)).toThrow(/similarQuestionIds.*type/i)
   })
 
   it('rejects dangling similar-question IDs', () => {
