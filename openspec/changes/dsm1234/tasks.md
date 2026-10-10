@@ -88,11 +88,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 11: 档案选择与 PIN 交互
 
-- [ ] **Step RED**: 写 `tests/features/profileSelect/ProfileSelectView.test.ts`：断言档案列表渲染、选中档案出现 PIN 盘、PIN 错误显示"再试一次"且不含错因、连续 5 次错误后按钮禁用并显示 60 秒倒计时（注入假时钟）。写 `tests/features/profileSelect/useProfileSelect.test.ts`：断言成功后进入 Home 且 store 载入该档案投影。
-- [ ] **Step GREEN**: 建 `ProfileCard.vue` `PinPad.vue` `useProfileSelect.ts` 与 `views/ProfileSelectView.vue`；接入 Task 2 的 hashPin/verifyPin 与 Task 9 的 profileRepo。
-- [ ] **Step REFACTOR**: 锁定倒计时逻辑移到 composable，组件只渲染；跑全套测试。
-- [ ] **验证**: 单测断言错误提示文案不含"错误""不对"等归因措辞之外的敏感信息；日志经 `redact()` 脱敏。
-- [ ] **Commit**: `[DSM1234] feat: T11 - profile select and pin interaction`
+- [x] **Step RED**: 写 `tests/features/profileSelect/ProfileSelectView.test.ts`：断言档案列表渲染、选中档案出现 PIN 盘、PIN 错误显示"再试一次"且不含错因、连续 5 次错误后按钮禁用并显示 60 秒倒计时（注入假时钟）。写 `tests/features/profileSelect/useProfileSelect.test.ts`：断言成功后进入 Home 且 store 载入该档案投影。
+- [x] **Step GREEN**: 建 `ProfileCard.vue` `PinPad.vue` `useProfileSelect.ts` 与 `views/ProfileSelectView.vue`；接入 Task 2 的 hashPin/verifyPin 与 Task 9 的 profileRepo。
+- [x] **Step REFACTOR**: 锁定倒计时逻辑移到 composable，组件只渲染；跑全套测试。
+- [x] **验证**: 单测断言错误提示文案不含"错误""不对"等归因措辞之外的敏感信息；日志经 `redact()` 脱敏。
+- [x] **Commit**: `[DSM1234] feat: T11 - profile select and pin interaction`
 
 ### Task 12: 首页（地图主体 + 任务卡浮层）
 
