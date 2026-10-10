@@ -64,11 +64,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 8: 题库与生物内容（含内容校验测试）
 
-- [ ] **Step RED**: 写 `tests/data/content/questionBank.test.ts`：载入 `src/data/content/questionBank.json`，逐条断言必填字段非空、`answer` 合法、`hints.length === 5`、`similarQuestionIds` 均存在于题库、`requiresFiveStep=true` 的题必有 `steps`、`sources` 非空。写 `tests/data/content/creatures.test.ts`：断言 4 条条目学名/深度范围/知识卡 3–5 条/来源链接均非空，且深度文案为区间形式。
-- [ ] **Step GREEN**: 写 `src/data/content/questionBank.json`（60–80 题，覆盖六类题型 × 三档难度，深海宠物任务包装，每条带 sources）与 `src/data/content/creatures.json`（4 条：约翰逊鮟鱇鱼 *Melanocetus johnsonii* + 其余 3 条自规格 12 候选中选取），含原创插画引用占位与知识卡。
-- [ ] **Step REFACTOR**: 抽 `src/data/content/schema.ts` 与共享校验函数供运行时复用；为题库加分类索引减少查询遍历；跑全套测试。
-- [ ] **验证**: 题库通过 schema 校验；`npm run test` 中内容测试全绿；深度断言拒绝"唯一固定深度"表述。
-- [ ] **Commit**: `[DSM1234] feat: T8 - question bank and creature content with validation`
+- [x] **Step RED**: 写 `tests/data/content/questionBank.test.ts`：载入 `src/data/content/questionBank.json`，逐条断言必填字段非空、`answer` 合法、`hints.length === 5`、`similarQuestionIds` 均存在于题库、`requiresFiveStep=true` 的题必有 `steps`、`sources` 非空。写 `tests/data/content/creatures.test.ts`：断言 4 条条目学名/深度范围/知识卡 3–5 条/来源链接均非空，且深度文案为区间形式。
+- [x] **Step GREEN**: 写 `src/data/content/questionBank.json`（60–80 题，覆盖六类题型 × 三档难度，深海宠物任务包装，每条带 sources）与 `src/data/content/creatures.json`（4 条：约翰逊鮟鱇鱼 *Melanocetus johnsonii* + 其余 3 条自规格 12 候选中选取），含原创插画引用占位与知识卡。
+- [x] **Step REFACTOR**: 抽 `src/data/content/schema.ts` 与共享校验函数供运行时复用；为题库加分类索引减少查询遍历；跑全套测试。
+- [x] **验证**: 题库通过 schema 校验；`npm run test` 中内容测试全绿；深度断言拒绝"唯一固定深度"表述。
+- [x] **Commit**: `[DSM1234] feat: T8 - question bank and creature content with validation`
 
 ### Task 9: IndexedDB 仓储、版本迁移与降级
 
@@ -112,19 +112,19 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 14: 图鉴、观察舱与地图视图
 
-- [ ] **Step RED**: 写 `tests/features/bestiary/BestiaryView.test.ts`：断言未解锁生物显示剪影与"继续下潜解锁"、已解锁显示名称与插画；`ObservationView` 断言展示学名/深度区间/知识卡 3–5 条/来源，且标注"原创示意插画"。写 `tests/features/bestiary/CreatureCanvas.test.ts`：断言插画加载失败时显示文字占位且知识卡仍渲染。
-- [ ] **Step GREEN**: 建 `views/BestiaryView.vue` `views/ObservationView.vue` `views/MapView.vue` 与 `CreatureCanvas.vue` `KnowledgeCardList.vue` `SourceNote.vue`；读取 Task 8 的 `creatures.json` 与投影中的解锁状态。
-- [ ] **Step REFACTOR**: 生物条目渲染抽为复用组件；插画加载失败统一用 `onError` 降级；跑全套测试。
-- [ ] **验证**: 深度文案全部为区间表述（内容测试已锁，这里补 UI 断言）。
-- [ ] **Commit**: `[DSM1234] feat: T14 - bestiary observation and map views`
+- [x] **Step RED**: 写 `tests/features/bestiary/BestiaryView.test.ts`：断言未解锁生物显示剪影与"继续下潜解锁"、已解锁显示名称与插画；`ObservationView` 断言展示学名/深度区间/知识卡 3–5 条/来源，且标注"原创示意插画"。写 `tests/features/bestiary/CreatureCanvas.test.ts`：断言插画加载失败时显示文字占位且知识卡仍渲染。
+- [x] **Step GREEN**: 建 `views/BestiaryView.vue` `views/ObservationView.vue` `views/MapView.vue` 与 `CreatureCanvas.vue` `KnowledgeCardList.vue` `SourceNote.vue`；读取 Task 8 的 `creatures.json` 与投影中的解锁状态。
+- [x] **Step REFACTOR**: 生物条目渲染抽为复用组件；插画加载失败统一用 `onError` 降级；跑全套测试。
+- [x] **验证**: 深度文案全部为区间表述（内容测试已锁，这里补 UI 断言）。
+- [x] **Commit**: `[DSM1234] feat: T14 - bestiary observation and map views`
 
 ### Task 15: 错题本
 
-- [ ] **Step RED**: 写 `tests/features/mistakeBook/MistakeBookView.test.ts`：断言按题型与掌握状态筛选、空态提示、点击错题进入重练并携带相似题。
-- [ ] **Step GREEN**: 建 `views/MistakeBookView.vue`、`MistakeList.vue`、`MistakeFilter.vue`，读 `mistakeBook` 投影。
-- [ ] **Step REFACTOR**: 筛选逻辑抽为纯函数并加单测；跑全套测试。
-- [ ] **验证**: 筛选纯函数有用例覆盖。
-- [ ] **Commit**: `[DSM1234] feat: T15 - mistake book`
+- [x] **Step RED**: 写 `tests/features/mistakeBook/MistakeBookView.test.ts`：断言按题型与掌握状态筛选、空态提示、点击错题进入重练并携带相似题。
+- [x] **Step GREEN**: 建 `views/MistakeBookView.vue`、`MistakeList.vue`、`MistakeFilter.vue`，读 `mistakeBook` 投影。
+- [x] **Step REFACTOR**: 筛选逻辑抽为纯函数并加单测；跑全套测试。
+- [x] **验证**: 筛选纯函数有用例覆盖。
+- [x] **Commit**: `[DSM1234] feat: T15 - mistake book`
 
 ### Task 16: 家长区（设置 / 报告 / PIN 重置 / 删除档案）
 
