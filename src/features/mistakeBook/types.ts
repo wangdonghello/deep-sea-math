@@ -15,7 +15,8 @@ export type MistakeQuestionCatalog = Readonly<Record<string, MistakeQuestionMeta
 export interface MistakeBookItem extends MistakeEntry {
   readonly type: QuizType | null
   readonly title?: string
-  readonly masteryLevel: MasteryLevel
+  readonly questionMasteryLevel: MasteryLevel
+  readonly topicMasteryLevel: MasteryLevel | null
 }
 
 /** `all` is a view-only option and is never a domain mastery level or quiz type. */

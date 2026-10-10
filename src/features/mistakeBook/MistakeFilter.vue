@@ -30,7 +30,7 @@ function updateMastery(masteryLevel: MasteryLevel | 'all'): void {
         <option v-for="type in QUIZ_TYPES" :key="type" :value="type">{{ typeLabels[type] }}</option>
       </select>
     </label>
-    <label>掌握状态
+    <label>掌握状态（稳定按题型，其余按单题）
       <select data-testid="filter-mastery" :value="modelValue.masteryLevel" @change="updateMastery(($event.target as HTMLSelectElement).value as MasteryLevel | 'all')">
         <option value="all">全部状态</option>
         <option v-for="level in MASTERY_LEVELS" :key="level" :value="level">{{ masteryLabels[level] }}</option>

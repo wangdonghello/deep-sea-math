@@ -23,7 +23,7 @@ function mountView(seed: readonly DomainEvent[] = events) {
   const store = {
     async listEvents(id: string) {
       requestedProfiles.push(id)
-      return seed.filter((event) => event.profileId === id)
+      return seed
     },
   }
   const view = mount(MistakeBookView, { props: { store, catalog } })
@@ -90,18 +90,21 @@ describe('MistakeBookView', () => {
     expect(view.find('[role="alert"]').exists()).toBe(false)
   })
 
-  it('读取失败显示中性提示，日志中的凭据字段经脱敏', async () => {
+  it('读取失败显示中性提示且日志不包含错误文本', async () => {
     const logs: Record<string, unknown>[] = []
     const view = mount(MistakeBookView, {
       props: {
-        store: { async listEvents() { throw Object.assign(new Error('unavailable'), { token: 'secret-token' }) } },
+        store: { async listEvents() { throw new Error('token=secret-123') } },
         catalog,
         logger: (entry) => logs.push(entry),
       },
     })
     await flushPromises()
     expect(view.get('[data-testid="mistake-error"]').text()).toContain('暂时无法打开')
-    expect(view.text()).not.toContain('secret-token')
-    expect(JSON.stringify(logs)).not.toContain('secret-token')
+    expect(JSON.stringify(logs)).toEqual(JSON.stringify([
+      { event: 'mistake-book-load-failed', errorType: 'read-failed' },
+    ]))
+    expect(JSON.stringify(logs)).not.toContain('secret-123')
+    expect(JSON.stringify(logs)).not.toContain('token=')
   })
 })

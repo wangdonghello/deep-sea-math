@@ -7,6 +7,8 @@ export function filterMistakes(
 ): MistakeBookItem[] {
   return mistakes.filter((mistake) =>
     (filter.type === 'all' || mistake.type === filter.type) &&
-    (filter.masteryLevel === 'all' || mistake.masteryLevel === filter.masteryLevel),
+    (filter.masteryLevel === 'all' || (filter.masteryLevel === 'stable'
+      ? mistake.topicMasteryLevel === 'stable'
+      : mistake.questionMasteryLevel === filter.masteryLevel)),
   )
 }
