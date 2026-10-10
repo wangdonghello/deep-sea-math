@@ -184,6 +184,7 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **确定性边界**：纯奖励规则与奖励选择仍对相同输入确定；只有事件 ID 是随机源，测试/重放需要稳定输出时可注入确定性 UUID。
 
 **审计备注**：现有 `logicalEventKey` 的 `unlock-granted` 去重键是 `kind + targetId`，未包含 `profileId`。本次按规格衍生逻辑保持不变；该键语义留待独立审查，不扩入本修复。
+
 ## R13. T8 首次规格审查：来源、相似题与运行时覆盖（已修复）
 
 **发现**：数学题来源使用宽泛课程首页或不相关物种页，无法佐证具体技能；深海蜥鱼和宝石鱿鱼引用的 Smithsonian slideshow 宽泛且返回 403，无法核验物种水深；Johnson 鮟鱇鱼也需区分 FishBase 物种级范围与 MBARI 观察；部分相似题跨越了运算技能；运行时题库校验只要求非空。
@@ -191,6 +192,8 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **修复**：按题型/运算替换为对应 Common Core 三年级具体标准页；生物引用改用 FishBase、MBARI 与 OBIS 物种分类/出现记录，并区分数据库观测范围与完整分布、区分 Johnson 的物种记录范围与 MBARI 约 580 米观察；为题目补精确 `skill-*` 标签，仅保留同题型、同技能相似链接，不适合的题目使用空链接数组。
 
 **校验**：运行时强制 60–80 题及所有题型×难度组合覆盖，并拒绝跨题型/无共享技能标签的相似链接；测试逐桶对拍索引及来源映射。事实真实性仍由引用来源支撑，schema 不声称自动核实生物事实。
+
+---
 
 ## R14. T8 第二轮内容复核：标准映射、观测范围与相似题表示（已修复）
 
@@ -200,6 +203,8 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 
 **证据范围**：保留 FishBase 的 *Melanocetus johnsonii* 物种范围 100–4,500 米（通常 100–1,500 米），仅将 MBARI 的 300–4,000 米标作类群概述并移除未能由当前页确认的 580 米单种观察；Bathysaurus OBIS 共 795 条，剔除 2 条 depth=0 后 587 条正水深记录，222.5–3,516 米；Histioteuthis 共 341 条，277 条正水深记录，15.5–4,276 米。数据库记录范围不等于物种完整分布。
 
+---
+
 ## R15. T8 第三轮复核：可访问标准域页、物种体型与观测口径（已修复）
 
 **发现**：Core Standards 小节 URL（如 `/3/OA/4/`、`/3/MD/2/`）返回 404，只有 NBT/OA/MD 领域页实测为 200；加减法缺项误标 OA.4、长度/距离误配质量或液体体积标准。OBIS 观测条目计数和范围须按正水深记录口径；T14 观察舱缺少带来源的体型字段。
@@ -207,6 +212,21 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **修复**：题目保留精确 `standard:*` 语义标签，来源只链接可访问的领域页，并按加减、多位数运算、两步应用、未知关系、时间/质量/长度距离及数列/数据分别校验映射。相似题链接清除重复项，测试与运行时校验均拒绝重复 ID。
 
 **物种与体型口径**：Johnson 范围采用 FishBase 单种页 100–4,500 米（通常 100–1,500 米）；MBARI 的 300–4,000 米仅作为鮟鱇鱼类群概述，移除所有 580 米说法。Bathysaurus 记录为 587 条正水深 occurrence、约 223–3,516 米；Histioteuthis 为 277 条、15.5–4,276 米。OBIS 范围仅是当前数据库已记录 occurrence，不代表完整分布或生理极限。4 个条目新增直接引用的体型数据，并区分总长 TL、标准体长 SL 与外套膜长 ML。
+
+---
+
+## R16. 家长区补齐首次建档闭环（授权范围扩展）
+
+**发现时间**：T16 实现时复核 T11 首次打开路径。
+
+**问题**：T11 的空档案页只能提示“去家长区新建”，但 T16 原任务只覆盖设置、报告、重置 PIN 与删除，没有建档表单。全新部署没有任何档案，孩子无法从首次打开进入游戏；这也与 `specs/child-profiles/spec.md` §档案创建与 PIN 切换的“系统 SHALL 支持在本地创建多个孩子档案”不一致。
+
+**调整**：在 `ParentView` 增加最小建档表单（虚拟昵称、头像、4 位 PIN 与确认）。PIN 仅短暂存在于输入态，保存前使用每档随机 salt 与 `hashPin`；先保存 Profile，再追加 `profile-created` 事件。成功后提示返回档案选择页。表单只收集昵称与头像，不收集真实姓名、学校、电话或位置；家长区文案明确其仅在本机管理、不承诺家长身份验证。未改 T11 页面或路由，返回导航由页面事件交给 T17 装配。
+
+**Task/API 接缝**：本 worktree HEAD `1d570ba` 的 `SettingsRepo` 暂无 `remove(profileId)`，`BestiaryRepo` 暴露 `load/save/clear`，与本任务说明所列 `settings.remove` / `bestiary.remove` 不同。按范围约束未改 `src/data/**`；`ParentStore` 按指定的删除能力建模，T17/合并接线时必须确认仓储 API 已补齐或提供等价适配，不能把覆盖默认设置冒充为删除。当前组件测试以完整窄接口 fake 验证跨库顺序及部分失败态。
+
+---
+
 ## R17. T15 错题本稳定掌握筛选与失败日志契约（已修）
 
 **发现**：规格审查发现 View 越过 feature 边界直接执行事件重放/筛选，且将完整 `Error` 交给通用 `redact()`；其保留 `message`/`stack`，message 中的凭据可能进入日志。另，`stable` 只存在 `masteryByTopic`，按题目级状态筛选会漏掉所有稳定掌握项。
@@ -214,6 +234,8 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **裁决与修复**：把加载、档案隔离、投影、筛选、重练元数据及错误状态移入 `useMistakeBook`。错题模型分别保留 `questionMasteryLevel` 与 `topicMasteryLevel`；`stable` 按题型轨匹配，其余状态按单题轨匹配，列表和筛选标签明确标示来源。失败日志只输出固定事件及 `errorType: 'read-failed'`，不读取或记录异常文本。
 
 **验证**：以三道同题型不同题独立答对后、其中一题成为错题的真实事件验证 topic=`stable`、question=`independent`；另覆盖混档事件隔离及 `Error('token=secret-123')` 不泄漏。
+
+---
 
 ---
 
@@ -233,3 +255,39 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **后续**：T16 侧 `createParentStore(storage)` 负责把 `clear` 适配为 `remove`，
 `settings.remove` 现在可直接使用。原计划中"适配器暴露 settings 删除缺失"的
 降级路径不再需要。
+
+---
+
+## R19. T16 装配适配器：门面→`ParentStore` 接线与两处半合规占位
+
+**适配器接线**：新增 `src/features/parentPanel/createParentStore.ts`，把 T9 的
+`StorageFacade` 适配成家长区窄接口 `ParentStore`（T17 装配一行接上）：
+
+| ParentStore         | StorageFacade               | 说明                                      |
+|---------------------|-----------------------------|-------------------------------------------|
+| `profiles.*`        | `profiles.*`                | 直通                                      |
+| `events.*`          | `events.*`                  | 直通                                      |
+| `settings.*`        | `settings.*`                | 直通（R18 已补 `settings.remove`）        |
+| `bestiary.remove`   | `bestiary.clear`            | 语义等价：图鉴投影是可重建缓存，清缓存即删该行，解锁事实在事件日志不受影响 |
+| `degraded(_Reason)` | `degraded(_Reason)`         | 透传，驱动警示条                           |
+
+`tests/features/parentPanel/createParentStore.test.ts` 用 fake-indexeddb 驱动
+真实 `resolveStorage` 门面锁接线：四仓储写后读回、remove 后消失；
+`settings.remove` 后**重开门面**仍回落默认值（排除"写回默认值冒充删除"的
+孤立行路径）；降级内存态下 `degraded/degradedReason` 透传且同样可用。
+
+**两处 T16 审查的半合规项（本 task 只做诚实占位，不冒充已生效）**：
+
+1. `maxMinutes` 无消费方：`SettingsForm` 增加说明"时长上限将用于首页预估用时
+   与后续答题计时；当前阶段先保存设置。"——修改与保存照常可用，但不宣称已
+   参与首页估算或答题计时。
+2. 题型掌握分布在缺 `questionTypeById` 时静默为 0：`ParentReport` 增加
+   `topicMasteryAvailable`（`useParentPanel` 依据注入的题型表是否非空置位并
+   暴露），`ReportPanel` 在该 flag 为假时显示"题型掌握分布暂不可用"占位而
+   不是一排假 0；flag 缺省视为可用，保持旧夹具/旧装配行为。
+
+**T17 待办（不在本 task 范围）**：
+- 真实 `questionTypeById` 注入：从 Task 8 题库索引按 `questionId → QuizType`
+  建表，装配进 `useParentPanel` 选项与 `ParentView` props（T17 路由装配时）。
+- `maxMinutes` 消费：Task 12/13 的首页预估用时与答题计时接入该设置；当前
+  仅持久化。

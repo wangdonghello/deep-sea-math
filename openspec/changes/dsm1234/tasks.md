@@ -128,11 +128,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 16: 家长区（设置 / 报告 / PIN 重置 / 删除档案）
 
-- [ ] **Step RED**: 写 `tests/features/parentPanel/*.test.ts`：断言修改三类题量与时长上限后写 `settings-updated` 事件且次日生效；报告展示完成题数/平均用时/提示次数/掌握分布；索引库降级时常驻警示条出现；删除档案需二次确认并输入档案昵称，确认后该档案数据被清除。
-- [ ] **Step GREEN**: 建 `views/ParentView.vue`、`SettingsForm.vue`、`ReportPanel.vue`、`DangerZone.vue`；存储降级时从 `resolveStorage` 的降级标记驱动警示条。
-- [ ] **Step REFACTOR**: 报告数据由 `replayProjections` 单次计算，避免多处重复 reduce；跑全套测试。
-- [ ] **验证**: 单测断言家长区渲染内容不含 PIN 明文；`redact()` 覆盖日志出口。
-- [ ] **Commit**: `[DSM1234] feat: T16 - parent panel settings report and deletion`
+- [x] **Step RED**: 写 `tests/features/parentPanel/*.test.ts`：断言修改三类题量与时长上限后写 `settings-updated` 事件且次日生效；报告展示完成题数/平均用时/提示次数/掌握分布；索引库降级时常驻警示条出现；删除档案需二次确认并输入档案昵称，确认后该档案数据被清除。
+- [x] **Step GREEN**: 建 `views/ParentView.vue`、`SettingsForm.vue`、`ReportPanel.vue`、`DangerZone.vue`；存储降级时从 `resolveStorage` 的降级标记驱动警示条。
+- [x] **Step REFACTOR**: 报告数据由 `replayProjections` 单次计算，避免多处重复 reduce；跑全套测试。
+- [x] **验证**: 单测断言家长区渲染内容不含 PIN 明文；`redact()` 覆盖日志出口。
+- [x] **Commit**: `[DSM1234] feat: T16 - parent panel settings report and deletion`
 
 ### Task 17: 解锁反馈、路由与整体装配
 
@@ -149,5 +149,4 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 - [ ] **Step REFACTOR**: 清理无用占位文件与示例代码；统一 JSDoc；跑全套测试。
 - [ ] **验证**: `npm run test` 全绿、覆盖率 ≥ 80%（domain ≥ 90%）；`openspec validate dsm1234 --strict` 通过。
 - [ ] **Commit**: `[DSM1234] docs: T18 - readme and wrap-up`
-
 
