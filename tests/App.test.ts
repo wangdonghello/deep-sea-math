@@ -211,6 +211,22 @@ async function waitForOverlayGone(timeoutMs = 2000): Promise<boolean> {
 }
 
 /**
+ * 等路由落到指定路径（点按页签触发的导航专用）。
+ *
+ * 页签的 `router.push` 是 fire-and-forget（见 `routes/HomeRoute.vue`），而守卫
+ * 要 await 生产存储的 IndexedDB 连接——那是**宏任务**，`flushPromises` 排不完。
+ * 因此这里按真实节奏轮询，断言"真的落了地"，而不是"我以为已经落地"。
+ */
+async function waitForPath(path: string, timeoutMs = 2000): Promise<boolean> {
+  const deadline = Date.now() + timeoutMs
+  while (Date.now() < deadline) {
+    if (router.currentRoute.value.path === path) return true
+    await new Promise((resolve) => setTimeout(resolve, 20))
+  }
+  return false
+}
+
+/**
  * 把一条由多次 IndexedDB 读写串成的链路跑完。
  *
  * 为什么不能只 `flushPromises()` 一次：`submitAnswer` 内部是
@@ -287,6 +303,31 @@ describe('App: 整体装配', () => {
 
     expect(router.currentRoute.value.path).toBe('/home')
     expect(app!.find('[data-testid="quest-view"]').exists()).toBe(false)
+  })
+
+  it('首页常驻导航只含孩子页签：不含家长区，点页签到不了 /parent', async () => {
+    await seed([])
+    await bootApp({ signedIn: true })
+    await router.push('/home')
+    await flushPromises()
+
+    // 常驻导航只剩三个孩子页签（家长区不在其中，见 TabBar.test.ts）
+    expect(app!.findAll('[data-testid="tab-bar"] .tab-bar__item')).toHaveLength(3)
+    expect(app!.find('[data-testid="tab-bar"]').text()).not.toContain('家长区')
+
+    // 逐个点击：落点必须是孩子页面，绝不能是家长区
+    for (const [tabId, path] of [
+      ['tab-bestiary', '/bestiary'],
+      ['tab-mistake', '/mistakes'],
+      ['tab-home', '/home'],
+    ] as const) {
+      // 每次先回首页：TabBar 只在首页常驻（其他页面各有自己的布局）
+      await router.push('/home')
+      await flushPromises()
+      await app!.get(`[data-testid="${tabId}"]`).trigger('click')
+      expect(await waitForPath(path)).toBe(true)
+      expect(router.currentRoute.value.path).not.toBe('/parent')
+    }
   })
 
   it('图鉴、错题本、家长区、地图均可达', async () => {
@@ -393,6 +434,66 @@ describe('App: 整体装配', () => {
 
     expect(router.currentRoute.value.path).toBe('/quest')
     expect(app!.find('[data-testid="quest-view"]').exists()).toBe(true)
+  })
+
+  it('/quest?session=<当日另一组> 打开的就是那一组（参数真正生效，不是摆设）', async () => {
+    await seed([
+      sessionStarted(),
+      // 同日的第二组题：当日题组索引先到者胜，指向第一组
+      {
+        eventId: 'ev-start-second',
+        profileId: PROFILE_ID,
+        occurredAt: Date.now() + 1,
+        type: 'session-started' as const,
+        sessionId: 'session-second',
+        questionIds: [QUESTION_IDS[1]],
+        difficultyTrace: [1, 1, 1],
+      },
+    ])
+    await bootApp({ signedIn: true })
+    await router.push('/quest?session=session-second')
+    await flushPromises()
+
+    // 守卫优先采纳 query.session：手里的题是第二组的那一道，而不是当日索引那组
+    expect(router.currentRoute.value.path).toBe('/quest')
+    expect(app!.find('[data-testid="quest-view"]').exists()).toBe(true)
+    expect(app!.text()).toContain(QUESTION_BANK.questions[1].story.title)
+    expect(app!.text()).not.toContain(QUESTION_BANK.questions[0].story.title)
+  })
+
+  it('/quest?session=<别档/未知 id> 回落当日题组，绝不渲染别档的题', async () => {
+    await seed([sessionStarted()])
+    // 另一个档案的题组事件：守卫只能按当前档案校验归属
+    const { storage } = await initProductionStores()
+    await storage.events.append([{
+      eventId: 'ev-other-start',
+      profileId: 'profile-other',
+      occurredAt: Date.now(),
+      type: 'session-started',
+      sessionId: 'session-other',
+      questionIds: [QUESTION_IDS[1]],
+      difficultyTrace: [1, 1, 1],
+    }])
+    await bootApp({ signedIn: true })
+    await router.push('/quest?session=session-other')
+    await flushPromises()
+
+    // 归属校验不通过：回落当日题组（第一组的第一题），而不是别档的题
+    expect(router.currentRoute.value.path).toBe('/quest')
+    expect(app!.find('[data-testid="quest-view"]').exists()).toBe(true)
+    expect(app!.text()).toContain(QUESTION_BANK.questions[0].story.title)
+    expect(app!.text()).not.toContain(QUESTION_BANK.questions[1].story.title)
+  })
+
+  it('/quest?practice=<题库里没有的题号> 回落首页，不留死路', async () => {
+    await seed([])
+    await bootApp({ signedIn: true })
+    await router.push('/quest?practice=q-not-in-bank')
+    await flushPromises()
+
+    // 没有可练的题：宁可回首页，也不要渲染一个"题库暂时不够"的死胡同
+    expect(router.currentRoute.value.path).toBe('/home')
+    expect(app!.find('[data-testid="quest-view"]').exists()).toBe(false)
   })
 
   it('端到端：答题页作答 → 发奖落库 → 解锁反馈 → 观察舱可达', async () => {

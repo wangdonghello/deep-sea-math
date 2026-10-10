@@ -47,11 +47,13 @@ function pickQuestions(ids: readonly string[]): Question[] {
 }
 
 /**
- * 由当前档案的**当日题组**装配答题页上下文。
+ * 装配答题页上下文：当日题组 / 深链题组 / 错题重练 三选一。
  *
  * 题序的唯一权威是 `session-started.questionIds`（spec §刷新页面不换题），
  * 因此这里不重新抽题、不排序——守卫传入什么顺序就照什么顺序渲染。
- * 没有当日题组时返回 `sessionId: null`，路由据此把 `/quest` 打回首页。
+ * 选择顺序：`practiceIds`（错题重练）→ `sessionId`（深链，须确属当前档案）
+ * → 当日题组索引。三者都落空时返回 `sessionId: null`，路由据此把 `/quest`
+ * 打回首页。
  *
  * @param profileId 当前档案 id。
  * @param events 该档案的全量事件（调用方已按写入次序排好）。
@@ -61,24 +63,47 @@ function pickQuestions(ids: readonly string[]): Question[] {
  *   此时会话 id 由本函数合成（没有对应的 `session-started`），因此重练
  *   完成不会重复发放当日题组的奖励——它该改善的是掌握状态，那是重放投影
  *   的事（`answer-submitted` 一律计入，与所属会话无关）。
+ * @param options.sessionId 深链接指定的题组（来自 `/quest?session=`）。
+ *   **必须确属当前档案**：先用它定位该题的 `session-started`，只有找到才
+ *   采纳（刷新后仍回到同一组）；找不到或不属于该档案就回落当日题组——
+ *   否则一个随手改的 query 就能打开别人的题组。
  */
 export function buildQuestContext(
   profileId: string,
   events: readonly DomainEvent[],
   now: number,
-  options: { practiceIds?: readonly string[] } = {},
+  options: { practiceIds?: readonly string[]; sessionId?: string | null } = {},
 ): QuestRouteContext {
   const practiceIds = options.practiceIds ?? []
   const projections = replayProjections(events, { profileId })
   const dailySessionId = projections.dailyQuestIndex[utcDayKey(now)] ?? null
 
   const isPractice = practiceIds.length > 0
-  const sessionId = isPractice ? `practice-${practiceIds.join('-')}` : dailySessionId
+
+  /**
+   * 深链接题组：只在**确属当前档案**时采纳。
+   *
+   * `events` 已是按档案过滤后的全量事件，因此这里再比对一次 `profileId`
+   * 是双保险：万一调用方传了未过滤的事件，也绝不跨档案取题序。
+   */
+  const linkedStarted = isPractice || options.sessionId == null
+    ? undefined
+    : events.find(
+        (event) =>
+          event.type === 'session-started' &&
+          event.sessionId === options.sessionId &&
+          event.profileId === profileId,
+      ) as { questionIds?: string[] } | undefined
+  const linkedSessionId = linkedStarted === undefined ? null : options.sessionId
+
+  const sessionId = isPractice
+    ? `practice-${practiceIds.join('-')}`
+    : (linkedSessionId ?? dailySessionId)
 
   const rawIds = isPractice
     ? practiceIds
     : (events.find(
-        (event) => event.type === 'session-started' && event.sessionId === dailySessionId,
+        (event) => event.type === 'session-started' && event.sessionId === sessionId,
       ) as { questionIds?: string[] } | undefined)?.questionIds ?? []
   const questions = pickQuestions(rawIds)
 

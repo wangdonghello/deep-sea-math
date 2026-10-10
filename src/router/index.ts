@@ -85,10 +85,21 @@ router.beforeEach(async (to) => {
     const practiceIds = typeof practiceParam === 'string'
       ? practiceParam.split(',').filter((id) => id !== '')
       : []
-    const context = buildQuestContext(profileId!, events, Date.now(), { practiceIds })
+    // `/quest?session=<id>`：深链指定题组（首页「开始下潜」带上的当日题组）。
+    // 归属校验在 `buildQuestContext` 里做：别档/查不到的 id 回落当日题组。
+    const sessionParam = to.query.session
+    const requestedSessionId = typeof sessionParam === 'string' && sessionParam !== ''
+      ? sessionParam
+      : null
+    const context = buildQuestContext(profileId!, events, Date.now(), {
+      practiceIds,
+      sessionId: requestedSessionId,
+    })
 
     // 只有"当日题组不存在且不是重练"才打回首页：重练没有当日题组也做得成。
-    if (context.sessionId === null) return HOME_PATH
+    // 题号在题库里查不到（或题组一题都取不出来）时同样打回：宁可回首页，
+    // 也不要留一个"题库暂时不够"的空答题页。
+    if (context.sessionId === null || context.questions.length === 0) return HOME_PATH
     // `meta` 是本次导航的私有载荷：同一路径下次进入会重新装配，不会残留。
     to.meta.questContext = context
   }

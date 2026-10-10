@@ -6,9 +6,9 @@
  * - `start(sessionId)` → `/quest?session=<id>`（题组 id 走 query，刷新后仍能
  *   回到同一组——`session-started` 已把题序固定，深链必须是可复现的）；
  * - `navigate(tabId)` → 页签路径。`TabBar` 的载荷是**页签 id**（`home` /
- *   `bestiary` / `mistake` / `parent`），不是路径，因此这里做一次 id → path
- *   映射；`parent` 是家长区，孩子常驻导航里保留它只是设计稿的既有形态，
- *   真正的建档入口在档案选择页（不显眼的一行小字）。
+ *   `bestiary` / `mistake`），不是路径，因此这里做一次 id → path 映射。
+ *   **`parent` 不在表里**：家长区入口刻意只留在档案选择页的页脚小字，
+ *   孩子的常驻导航不含它（`/parent` 无身份验证，见 `features/home/TabBar.vue`）。
  */
 import { useRouter } from 'vue-router'
 
@@ -23,7 +23,6 @@ const TAB_PATHS: Readonly<Record<string, string>> = {
   home: '/home',
   bestiary: '/bestiary',
   mistake: '/mistakes',
-  parent: '/parent',
 }
 
 function onNavigate(tabId: string): void {
