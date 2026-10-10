@@ -65,8 +65,53 @@ function sourceList(value: unknown, path: string): string[] {
   const sources = stringList(value, path)
   for (const source of sources) {
     if (!/^https?:\/\//i.test(source)) throw new Error(`${path}: source must be an HTTP(S) URL`)
+    try {
+      if (!new URL(source).hostname) throw new Error('missing hostname')
+    } catch {
+      throw new Error(`${path}: source must be a valid HTTP(S) URL`)
+    }
   }
   return sources
+}
+
+/** Accepts identifiable species pages or taxon/observation IDs, not category homepages. */
+function hasSpeciesScopedSource(sources: readonly string[]): boolean {
+  return sources.some((source) => {
+    const url = new URL(source)
+    const host = url.hostname.toLowerCase()
+    const fishBasePage = ['fishbase.se', 'www.fishbase.se'].includes(host) && /^\/summary\/[^/]+\.html$/i.test(url.pathname)
+    const mbariPage = host === 'www.mbari.org' && /^\/animal\/[^/]+\/?$/i.test(url.pathname) && !/deep-sea-anglerfish/i.test(url.pathname)
+    const obisId = host === 'api.obis.org' && (/^\/v3\/taxon\/\d+$/.test(url.pathname) || url.searchParams.has('taxonid') && /^\d+$/.test(url.searchParams.get('taxonid') ?? ''))
+    const noaaRecord = (host === 'noaa.gov' || host.endsWith('.noaa.gov')) && /\/(?:observation|species)\/[^/]+\/?$/i.test(url.pathname)
+    return fishBasePage || mbariPage || obisId || noaaRecord
+  })
+}
+
+/** Returns the curriculum standard codes required by the tagged question skill. */
+function requiredStandards(type: QuizType, tags: readonly string[]): string[] {
+  if (type === 'add-sub') return ['3.NBT']
+  if (type === 'mul-div' || type === 'two-step-app' || type === 'unknown-relation') return ['3.OA']
+  if (type === 'unit-time-route') {
+    if (tags.some((tag) => /elapsed-time|time-unit/.test(tag))) return ['3.MD.1']
+    if (tags.includes('skill-mass-total') || tags.some((tag) => ['mass', 'liquid-volume'].includes(tag))) return ['3.MD.2']
+    return ['3.MD.4']
+  }
+  if (tags.includes('data-table') || tags.includes('graphed-values')) return ['3.MD']
+  return ['3.OA.9']
+}
+
+/** Requires standards evidence to match the subject domain, without claiming URL authority. */
+function validateQuestionSources(value: unknown, path: string, type: QuizType, tags: readonly string[]): void {
+  const sources = sourceList(value, path)
+  const standards = requiredStandards(type, tags)
+  const declaredStandards = tags.filter((tag) => tag.startsWith('standard:')).map((tag) => tag.slice('standard:'.length))
+  if (declaredStandards.some((standard) => !standards.includes(standard))) throw new Error(`${path}: standard tag does not match question skill`)
+  for (const standard of standards) {
+    if (!tags.includes(`standard:${standard}`)) throw new Error(`${path}: missing standard:${standard} tag for skill`)
+    const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
+    const domainUrl = new RegExp(`^https?://www\\.thecorestandards\\.org/Math/Content/3/${domain}/?$`, 'i')
+    if (!sources.some((source) => domainUrl.test(source))) throw new Error(`${path}: missing matching standards domain URL`)
+  }
 }
 
 /** Evaluates a supported arithmetic expression, returning null for invalid syntax. */
@@ -140,8 +185,13 @@ function validateQuestion(value: unknown, path: string): Question {
   if (!Array.isArray(hints) || hints.length !== 5) throw new Error(`${path}.hints: exactly five levels are required`)
   hints.forEach((hint, index) => nonEmptyString(hint, `${path}.hints[${index}]`))
   validateAnswer(question.answer, `${path}.answer`)
-  stringList(question.tags, `${path}.tags`)
-  sourceList(question.sources, `${path}.sources`)
+  const tags = stringList(question.tags, `${path}.tags`)
+  if (question.type === 'unknown-relation') {
+    const expectedSkill = tags.some((tag) => ['missing-part', 'inverse-addition', 'inverse-subtraction'].includes(tag))
+      ? 'skill-addsub-unknown' : 'skill-muldiv-unknown'
+    if (!tags.includes(expectedSkill)) throw new Error(`${path}.tags: expected ${expectedSkill} for unknown relation`)
+  }
+  validateQuestionSources(question.sources, `${path}.sources`, question.type as QuizType, tags)
   if (question.creatureRef !== undefined) nonEmptyString(question.creatureRef, `${path}.creatureRef`)
 
   if (!Array.isArray(question.similarQuestionIds)) throw new Error(`${path}.similarQuestionIds: expected an array`)
@@ -198,6 +248,10 @@ export function assertValidQuestionBank(value: unknown): asserts value is Questi
       if (target.type !== question.type) throw new Error(`questionBank.questions[${index}].similarQuestionIds: type mismatch ${similarId}`)
       const skills = question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag))
       if (skills.length === 0) throw new Error(`questionBank.questions[${index}].similarQuestionIds: no shared skill tag with ${similarId}`)
+      if (target.answer.unit !== question.answer.unit) throw new Error(`questionBank.questions[${index}].similarQuestionIds: answer unit mismatch ${similarId}`)
+      if (Boolean(target.answer.expression) !== Boolean(question.answer.expression)) {
+        throw new Error(`questionBank.questions[${index}].similarQuestionIds: answer expression shape mismatch ${similarId}`)
+      }
     }
   }
 }
@@ -259,7 +313,10 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
       throw new Error(`${path}.knowledgeCards: expected three to five cards`)
     }
     creature.knowledgeCards.forEach((card, cardIndex) => nonEmptyString(card, `${path}.knowledgeCards[${cardIndex}]`))
-    sourceList(creature.sources, `${path}.sources`)
+    const sources = sourceList(creature.sources, `${path}.sources`)
+    if (!hasSpeciesScopedSource(sources)) {
+      throw new Error(`${path}.sources: expected a species-scoped or species-specific source`)
+    }
     if (typeof creature.illustrationRef !== 'string' || !/^original-[a-z0-9-]+$/.test(creature.illustrationRef)) {
       throw new Error(`${path}.illustrationRef: expected an original-* placeholder key`)
     }

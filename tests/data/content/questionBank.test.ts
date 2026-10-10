@@ -59,6 +59,25 @@ describe('question bank content', () => {
     expect(() => assertValidQuestionBank(invalid)).toThrow(/questions/)
   })
 
+  it('rejects question sources without the skill-matched standards domain', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    invalid.questions[0].sources = ['https://www.thecorestandards.org/']
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/standards domain/i)
+    const invalidProtocol = structuredClone(bank)
+    invalidProtocol.questions[0].sources = ['ftp://www.thecorestandards.org/Math/Content/3/NBT/']
+    expect(() => assertValidQuestionBank(invalidProtocol)).toThrow(/HTTP\(S\)/i)
+    const malformedUrl = structuredClone(bank)
+    malformedUrl.questions[0].sources = ['https://']
+    expect(() => assertValidQuestionBank(malformedUrl)).toThrow(/valid HTTP\(S\) URL/i)
+    const mismatchedStandard = structuredClone(bank)
+    mismatchedStandard.questions[36].tags = mismatchedStandard.questions[36].tags.map((tag: string) => tag === 'standard:3.OA' ? 'standard:3.OA.4' : tag)
+    expect(() => assertValidQuestionBank(mismatchedStandard)).toThrow(/standard tag does not match/i)
+    const wrongUnknownSkill = structuredClone(bank)
+    wrongUnknownSkill.questions[36].tags = wrongUnknownSkill.questions[36].tags.map((tag: string) => tag === 'skill-addsub-unknown' ? 'skill-muldiv-unknown' : tag)
+    expect(() => assertValidQuestionBank(wrongUnknownSkill)).toThrow(/expected skill-addsub-unknown/i)
+  })
+
   it('requires 60–80 questions and every type/difficulty bucket', () => {
     const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
     const tooSmall = structuredClone(bank)
@@ -72,22 +91,20 @@ describe('question bank content', () => {
     expect(() => assertValidQuestionBank(missingBucket)).toThrow(/pattern-data.*3/)
   })
 
-  it('cites a matching Common Core standard for every math skill', () => {
+  it('cites a matching Common Core domain page for every tagged skill', () => {
     const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    const standardByType: Record<string, RegExp> = {
-      'add-sub': /thecorestandards\.org\/Math\/Content\/3\/NBT\/2\//,
-      'two-step-app': /thecorestandards\.org\/Math\/Content\/3\/OA\/8\//,
-      'unknown-relation': /thecorestandards\.org\/Math\/Content\/3\/OA\/4\//,
-      'unit-time-route': /thecorestandards\.org\/Math\/Content\/3\/(?:MD\/[12]|NBT\/2)\//,
-      'pattern-data': /thecorestandards\.org\/Math\/Content\/3\/OA\/9\//,
-    }
     for (const question of bank.questions) {
-      const standard = question.type === 'mul-div'
-        ? question.tags.includes('multiplication') ? /\/OA\/3\// : /\/OA\/[24]\//
+      const expectedStandard = question.type === 'add-sub' ? '3.NBT'
+        : question.type === 'mul-div' || question.type === 'two-step-app' || question.type === 'unknown-relation' ? '3.OA'
         : question.type === 'unit-time-route'
-          ? /skill-(?:time-unit|add-elapsed|subtract-elapsed)/.test(question.tags.join(' ')) ? /\/MD\/1\// : /\/MD\/2\//
-          : standardByType[question.type]
-      expect(question.sources.some((source: string) => standard.test(source))).toBe(true)
+          ? question.tags.some((tag: string) => /elapsed-time|time-unit/.test(tag)) ? '3.MD.1'
+            : question.tags.includes('skill-mass-total') ? '3.MD.2' : '3.MD.4'
+          : question.type === 'pattern-data' && question.tags.some((tag: string) => ['data-table', 'graphed-values'].includes(tag)) ? '3.MD'
+            : question.type === 'pattern-data' ? '3.OA.9' : ''
+      const domain = expectedStandard.includes('NBT') ? 'NBT' : expectedStandard.includes('OA') ? 'OA' : 'MD'
+      expect(question.tags.some((tag: string) => tag.startsWith('standard:')), `${question.id} standard tag`).toBe(true)
+      expect(question.tags).toContain(`standard:${expectedStandard}`)
+      expect(question.sources.some((source: string) => source === `https://www.thecorestandards.org/Math/Content/3/${domain}/`), `${question.id} domain`).toBe(true)
     }
   })
 
@@ -97,8 +114,8 @@ describe('question bank content', () => {
         const target = QUESTION_BANK.questions.find((candidate) => candidate.id === id)!
         expect(target.type, `${question.id} → ${id} type`).toBe(question.type)
         expect(question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag)), `${question.id} → ${id} skill`).not.toHaveLength(0)
-        const representation = (item: typeof question) => item.answer.unit ? 'unit' : item.answer.expression ? 'expression' : 'number'
-        expect(representation(target), `${question.id} → ${id} answer representation`).toBe(representation(question))
+        expect(target.answer.unit, `${question.id} → ${id} answer unit`).toBe(question.answer.unit)
+        expect(Boolean(target.answer.expression), `${question.id} → ${id} expression presence`).toBe(Boolean(question.answer.expression))
       }
     }
   })
@@ -113,6 +130,21 @@ describe('question bank content', () => {
     crossType.questions[2].similarQuestionIds = ['q013']
     crossType.questions[12].tags.push('skill-addition')
     expect(() => assertValidQuestionBank(crossType)).toThrow(/similarQuestionIds.*type/i)
+  })
+
+  it('rejects similar answers with different units or expression shape', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const unitMismatch = structuredClone(bank)
+    unitMismatch.questions[1].similarQuestionIds = ['q006']
+    expect(() => assertValidQuestionBank(unitMismatch)).toThrow(/similarQuestionIds.*answer unit/i)
+    const expressionMismatch = structuredClone(bank)
+    expressionMismatch.questions[2].answer = { value: 17 }
+    expressionMismatch.questions[2].similarQuestionIds = []
+    for (const question of expressionMismatch.questions) {
+      question.similarQuestionIds = question.similarQuestionIds.filter((id: string) => id !== 'q003')
+    }
+    expressionMismatch.questions[0].similarQuestionIds = ['q003']
+    expect(() => assertValidQuestionBank(expressionMismatch)).toThrow(/similarQuestionIds.*expression/i)
   })
 
   it('rejects dangling similar-question IDs', () => {
