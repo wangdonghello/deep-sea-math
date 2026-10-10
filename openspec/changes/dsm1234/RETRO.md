@@ -184,3 +184,15 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 **确定性边界**：纯奖励规则与奖励选择仍对相同输入确定；只有事件 ID 是随机源，测试/重放需要稳定输出时可注入确定性 UUID。
 
 **审计备注**：现有 `logicalEventKey` 的 `unlock-granted` 去重键是 `kind + targetId`，未包含 `profileId`。本次按规格衍生逻辑保持不变；该键语义留待独立审查，不扩入本修复。
+
+---
+
+## R16. 家长区补齐首次建档闭环（授权范围扩展）
+
+**发现时间**：T16 实现时复核 T11 首次打开路径。
+
+**问题**：T11 的空档案页只能提示“去家长区新建”，但 T16 原任务只覆盖设置、报告、重置 PIN 与删除，没有建档表单。全新部署没有任何档案，孩子无法从首次打开进入游戏；这也与 `specs/child-profiles/spec.md` §档案创建与 PIN 切换的“系统 SHALL 支持在本地创建多个孩子档案”不一致。
+
+**调整**：在 `ParentView` 增加最小建档表单（虚拟昵称、头像、4 位 PIN 与确认）。PIN 仅短暂存在于输入态，保存前使用每档随机 salt 与 `hashPin`；先保存 Profile，再追加 `profile-created` 事件。成功后提示返回档案选择页。表单只收集昵称与头像，不收集真实姓名、学校、电话或位置；家长区文案明确其仅在本机管理、不承诺家长身份验证。未改 T11 页面或路由，返回导航由页面事件交给 T17 装配。
+
+**Task/API 接缝**：本 worktree HEAD `1d570ba` 的 `SettingsRepo` 暂无 `remove(profileId)`，`BestiaryRepo` 暴露 `load/save/clear`，与本任务说明所列 `settings.remove` / `bestiary.remove` 不同。按范围约束未改 `src/data/**`；`ParentStore` 按指定的删除能力建模，T17/合并接线时必须确认仓储 API 已补齐或提供等价适配，不能把覆盖默认设置冒充为删除。当前组件测试以完整窄接口 fake 验证跨库顺序及部分失败态。
