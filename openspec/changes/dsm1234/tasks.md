@@ -120,11 +120,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 15: 错题本
 
-- [ ] **Step RED**: 写 `tests/features/mistakeBook/MistakeBookView.test.ts`：断言按题型与掌握状态筛选、空态提示、点击错题进入重练并携带相似题。
-- [ ] **Step GREEN**: 建 `views/MistakeBookView.vue`、`MistakeList.vue`、`MistakeFilter.vue`，读 `mistakeBook` 投影。
-- [ ] **Step REFACTOR**: 筛选逻辑抽为纯函数并加单测；跑全套测试。
-- [ ] **验证**: 筛选纯函数有用例覆盖。
-- [ ] **Commit**: `[DSM1234] feat: T15 - mistake book`
+- [x] **Step RED**: 写 `tests/features/mistakeBook/MistakeBookView.test.ts`：断言按题型与掌握状态筛选、空态提示、点击错题进入重练并携带相似题。
+- [x] **Step GREEN**: 建 `views/MistakeBookView.vue`、`MistakeList.vue`、`MistakeFilter.vue`，读 `mistakeBook` 投影。
+- [x] **Step REFACTOR**: 筛选逻辑抽为纯函数并加单测；跑全套测试。
+- [x] **验证**: 筛选纯函数有用例覆盖。
+- [x] **Commit**: `[DSM1234] feat: T15 - mistake book`
 
 ### Task 16: 家长区（设置 / 报告 / PIN 重置 / 删除档案）
 
