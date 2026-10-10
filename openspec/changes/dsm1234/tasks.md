@@ -80,11 +80,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 10: 全局深海主题样式与 FishBackdrop
 
-- [ ] **Step RED**: 写 `tests/features/theme/FishBackdrop.test.ts`：断言组件渲染出至少 1 条鱼形 `<svg>` 且带 `data-testid="fish-backdrop"`；写 `tests/features/theme/contrast.test.ts`：断言主题 CSS 变量中正文色与背景色对比度 ≥ 4.5:1（用可访问性对比度工具函数计算）。
-- [ ] **Step GREEN**: 建 `src/styles/theme.css`（设计稿 A 的色板与字号阶，深靛蓝渐变 + 暖橙强调 + 微光粒子变量）、`src/features/theme/FishBackdrop.vue`（SVG 鱼群，缓慢漂移动画，`prefers-reduced-motion` 时静止）。
-- [ ] **Step REFACTOR**: 鱼群元素数量与尺寸参数化；动画改用 transform（不触发重排）；抽取 `contrastRatio()` 到共享工具；跑全套测试。
-- [ ] **验证**: 对比度测试通过（儿童可读硬门槛）。
-- [ ] **Commit**: `[DSM1234] feat: T10 - deep-sea theme and fish backdrop`
+- [x] **Step RED**: 写 `tests/features/theme/FishBackdrop.test.ts`：断言组件渲染出至少 1 条鱼形 `<svg>` 且带 `data-testid="fish-backdrop"`；写 `tests/features/theme/contrast.test.ts`：断言主题 CSS 变量中正文色与背景色对比度 ≥ 4.5:1（用可访问性对比度工具函数计算）。
+- [x] **Step GREEN**: 建 `src/styles/theme.css`（设计稿 A 的色板与字号阶，深靛蓝渐变 + 暖橙强调 + 微光粒子变量）、`src/features/theme/FishBackdrop.vue`（SVG 鱼群，缓慢漂移动画，`prefers-reduced-motion` 时静止）。
+- [x] **Step REFACTOR**: 鱼群元素数量与尺寸参数化；动画改用 transform（不触发重排）；抽取 `contrastRatio()` 到共享工具；跑全套测试。
+- [x] **验证**: 对比度测试通过（儿童可读硬门槛）。
+- [x] **Commit**: `[DSM1234] feat: T10 - deep-sea theme and fish backdrop`
 
 ### Task 11: 档案选择与 PIN 交互
 
