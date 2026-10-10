@@ -40,11 +40,11 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 5: 掌握状态机与提示链选择
 
-- [ ] **Step RED**: 写 `tests/domain/mastery/masteryStateMachine.test.ts`：断言未掌握→独立掌握、提示后→提示后掌握、看答案→提示后掌握、同题型连续 3 次独立答对→题型稳定掌握、看答案后不得进独立掌握。写 `tests/domain/hint/hintChainSelector.test.ts`：断言同一题第 n 次取提示返回第 n 层、超过 5 层不再前进、步内提示返回该步专属文案。
-- [ ] **Step GREEN**: 建 `src/domain/mastery/masteryStateMachine.ts`（题目级 + 题型级双轨迁移）与 `src/domain/hint/hintChainSelector.ts`。
-- [ ] **Step REFACTOR**: 迁移表抽为纯数据结构 `MASTERY_TRANSITIONS`，去掉散落的 if 分支；补 JSDoc；跑全套测试。
-- [ ] **验证**: 状态机每个迁移分支至少一条正反用例。
-- [ ] **Commit**: `[DSM1234] feat: T5 - mastery state machine and hint chain`
+- [x] **Step RED**: 写 `tests/domain/mastery/masteryStateMachine.test.ts`：断言未掌握→独立掌握、提示后→提示后掌握、看答案→提示后掌握、同题型连续 3 次独立答对→题型稳定掌握、看答案后不得进独立掌握。写 `tests/domain/hint/hintChainSelector.test.ts`：断言同一题第 n 次取提示返回第 n 层、超过 5 层不再前进、步内提示返回该步专属文案。
+- [x] **Step GREEN**: 建 `src/domain/mastery/masteryStateMachine.ts`（题目级 + 题型级双轨迁移）与 `src/domain/hint/hintChainSelector.ts`。
+- [x] **Step REFACTOR**: 迁移表抽为纯数据结构 `MASTERY_TRANSITIONS`，去掉散落的 if 分支；补 JSDoc；跑全套测试。
+- [x] **验证**: 状态机每个迁移分支至少一条正反用例。
+- [x] **Commit**: `[DSM1234] feat: T5 - mastery state machine and hint chain`
 
 ### Task 6: 事件日志、ID 幂等与投影重建
 
