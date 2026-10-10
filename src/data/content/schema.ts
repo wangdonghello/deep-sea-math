@@ -16,13 +16,25 @@ const QUESTION_UNITS = new Set([
   '份', '项', '格', '瓶', '节', '次', '轮',
 ])
 
-const PATTERN_SEQUENCE_SKILLS = new Set([
-  'skill-constant-difference-sequence',
-  'skill-second-difference-sequence',
-  'skill-square-number-sequence',
-  'skill-doubling-sequence',
-  'skill-double-and-add-one-sequence',
-])
+const STANDARDS_BY_SKILL: Record<string, readonly string[]> = {
+  'skill-addition': ['3.NBT.2'], 'skill-subtraction': ['3.NBT.2'],
+  'skill-repeated-subtraction': ['3.NBT.2'], 'skill-merge-and-remove-duplicates': ['3.NBT.2', '3.OA.8'],
+  'skill-equal-groups-multiplication': ['3.OA.3'], 'skill-equal-share-division': ['3.OA.3'],
+  'skill-multiplication-addition': ['3.OA.8'], 'skill-division-addition': ['3.OA.8'],
+  'skill-multiplication-subtraction': ['3.OA.8'], 'skill-addsub-unknown': ['3.OA.8', '3.NBT.2'],
+  'skill-muldiv-unknown': ['3.OA.4'], 'skill-add-length': ['3.NBT.2'],
+  'skill-add-elapsed-time': ['3.MD.1'], 'skill-multi-step-distance': ['3.OA.8'],
+  'skill-subtract-elapsed-time': ['3.MD.1'], 'skill-mass-total': ['3.MD.2'],
+  'skill-rate-distance': ['3.OA.3'], 'skill-subtract-length': ['3.NBT.2'],
+  'skill-constant-difference-sequence': ['3.OA.9'], 'skill-doubling-sequence': ['3.OA.9'],
+  'skill-second-difference-sequence': ['3.OA.9'], 'skill-square-number-sequence': ['3.OA.9'],
+  'skill-double-and-add-one-sequence': ['3.OA.9'],
+}
+
+const DEFAULT_STANDARDS_BY_TYPE: Partial<Record<QuizType, readonly string[]>> = {
+  'add-sub': ['3.NBT.2'], 'mul-div': ['3.OA.3'], 'two-step-app': ['3.OA.8'],
+  'unknown-relation': ['3.OA.4'], 'pattern-data': ['3.OA.9'],
+}
 
 /** Versioned, validated question content. */
 export interface QuestionBank {
@@ -100,17 +112,8 @@ function hasSpeciesScopedSource(sources: readonly string[]): boolean {
 
 /** Returns the curriculum standard codes required by the tagged question skill. */
 function requiredStandards(type: QuizType, tags: readonly string[]): string[] {
-  if (type === 'add-sub') return tags.includes('multi-operation') && tags.includes('application') ? ['3.NBT.2', '3.OA.8'] : ['3.NBT.2']
-  if (type === 'mul-div') return ['3.OA.3']
-  if (type === 'two-step-app') return ['3.OA.8']
-  if (type === 'unknown-relation') return tags.includes('skill-addsub-unknown') ? ['3.OA.8', '3.NBT.2'] : ['3.OA.4']
-  if (type === 'unit-time-route') {
-    if (tags.some((tag) => /elapsed-time|time-unit/.test(tag))) return ['3.MD.1']
-    if (tags.includes('skill-mass-total') || tags.some((tag) => ['mass', 'liquid-volume'].includes(tag))) return ['3.MD.2']
-    return tags.includes('rate-distance') ? ['3.MD.4', '3.OA.3'] : ['3.MD.4']
-  }
-  if (type === 'pattern-data' && tags.some((tag) => PATTERN_SEQUENCE_SKILLS.has(tag))) return ['3.OA.9']
-  return ['3.OA.9']
+  const skill = tags.find((tag) => tag in STANDARDS_BY_SKILL)
+  return skill === undefined ? [...(DEFAULT_STANDARDS_BY_TYPE[type] ?? [])] : [...STANDARDS_BY_SKILL[skill]]
 }
 
 /** Requires standards evidence to match the subject domain, without claiming URL authority. */
@@ -124,6 +127,25 @@ function validateQuestionSources(value: unknown, path: string, type: QuizType, t
     const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
     const domainUrl = new RegExp(`^https?://www\\.thecorestandards\\.org/Math/Content/3/${domain}/?$`, 'i')
     if (!sources.some((source) => domainUrl.test(source))) throw new Error(`${path}: missing matching standards domain URL`)
+  }
+}
+
+/** Keeps length addition/subtraction data within the tagged grade-level range. */
+function validateLengthOperands(question: Record<string, unknown>, path: string, tags: readonly string[]): void {
+  if (!tags.some((tag) => ['skill-add-length', 'skill-subtract-length'].includes(tag))) return
+  const story = record(question.story, `${path}.story`)
+  const evidence = [nonEmptyString(story.body, `${path}.story.body`)]
+  if (Array.isArray(question.hints)) evidence.push(...question.hints.filter((hint): hint is string => typeof hint === 'string'))
+  if (Array.isArray(question.steps)) {
+    for (const item of question.steps) {
+      const step = record(item, `${path}.steps`)
+      if (step.type === 'expression') evidence.push(nonEmptyString(step.prompt, `${path}.steps.expression.prompt`))
+    }
+  }
+  const values = evidence.flatMap((text) => (text.match(/\d+/g) ?? []).map(Number))
+  const answer = record(question.answer, `${path}.answer`)
+  if (values.some((value) => value > 1000) || (typeof answer.value === 'number' && answer.value > 1000)) {
+    throw new Error(`${path}: length operands and result must be at most 1000`)
   }
 }
 
@@ -199,6 +221,7 @@ function validateQuestion(value: unknown, path: string): Question {
   hints.forEach((hint, index) => nonEmptyString(hint, `${path}.hints[${index}]`))
   validateAnswer(question.answer, `${path}.answer`)
   const tags = stringList(question.tags, `${path}.tags`)
+  validateLengthOperands(question, path, tags)
   if (question.type === 'unknown-relation') {
     const expectedSkill = tags.some((tag) => ['missing-part', 'inverse-addition', 'inverse-subtraction'].includes(tag))
       ? 'skill-addsub-unknown' : 'skill-muldiv-unknown'
