@@ -202,6 +202,34 @@ function validateAnswer(value: unknown, path: string): void {
   }
 }
 
+/** Extracts whole-number tokens so multi-digit runs stay atomic (13 never matches inside 130). */
+function numberTokens(text: string): number[] {
+  return (text.match(/\d+/g) ?? []).map(Number)
+}
+
+/**
+ * Keeps the worked-example layer (hints[4]) instructive without revealing the answer.
+ *
+ * The layer must carry at least a short sentence, and must reuse neither the answer
+ * value nor any operand of the answer expression — those digits are compared as whole
+ * numbers so 13 is not mistaken for a prefix of 130.
+ */
+function validateWorkedExampleHint(hints: unknown, answer: Record<string, unknown>, path: string): void {
+  const finalLayer = nonEmptyString((hints as unknown[])[4], `${path}.hints[4]`)
+  if (finalLayer.length < 6) {
+    throw new Error(`${path}.hints[4]: the worked-example layer needs at least six characters`)
+  }
+  const forbidden = new Set<number>()
+  if (typeof answer.value === 'number' && Number.isFinite(answer.value)) forbidden.add(answer.value)
+  if (typeof answer.expression === 'string') {
+    for (const token of numberTokens(answer.expression)) forbidden.add(token)
+  }
+  const revealed = numberTokens(finalLayer).filter((token) => forbidden.has(token))
+  if (revealed.length > 0) {
+    throw new Error(`${path}.hints[4]: worked example must not reuse the answer digits ${revealed.join(', ')}`)
+  }
+}
+
 /** Validates every required model field and returns the narrowed question. */
 function validateQuestion(value: unknown, path: string): Question {
   const question = record(value, path)
@@ -220,6 +248,7 @@ function validateQuestion(value: unknown, path: string): Question {
   if (!Array.isArray(hints) || hints.length !== 5) throw new Error(`${path}.hints: exactly five levels are required`)
   hints.forEach((hint, index) => nonEmptyString(hint, `${path}.hints[${index}]`))
   validateAnswer(question.answer, `${path}.answer`)
+  validateWorkedExampleHint(hints, record(question.answer, `${path}.answer`), path)
   const tags = stringList(question.tags, `${path}.tags`)
   validateLengthOperands(question, path, tags)
   if (question.type === 'unknown-relation') {
@@ -236,7 +265,9 @@ function validateQuestion(value: unknown, path: string): Question {
     throw new Error(`${path}.similarQuestionIds: duplicate references are forbidden`)
   }
   if (question.requiresFiveStep) validateSteps(question.steps, `${path}.steps`)
-  else if (question.steps !== undefined) validateSteps(question.steps, `${path}.steps`)
+  else if (question.steps !== undefined) {
+    throw new Error(`${path}.steps: questions without five-step guidance must not declare steps`)
+  }
   return question as unknown as Question
 }
 
@@ -290,6 +321,9 @@ export function assertValidQuestionBank(value: unknown): asserts value is Questi
       if (target.answer.unit !== question.answer.unit) throw new Error(`questionBank.questions[${index}].similarQuestionIds: answer unit mismatch ${similarId}`)
       if (Boolean(target.answer.expression) !== Boolean(question.answer.expression)) {
         throw new Error(`questionBank.questions[${index}].similarQuestionIds: answer expression shape mismatch ${similarId}`)
+      }
+      if (target.similarQuestionIds.includes(question.id) && target.answer.value === question.answer.value) {
+        throw new Error(`questionBank.questions[${index}].similarQuestionIds: linked answer ${similarId} must differ in value from ${question.id}`)
       }
     }
   }

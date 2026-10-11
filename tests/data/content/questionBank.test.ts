@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest'
 import { QUEST_CATEGORIES, QUIZ_TYPES } from '../../../src/domain/model/types'
 import { assertValidQuestionBank } from '../../../src/data/content/schema'
 import { CREATURE_BANK, QUESTION_BANK, QUESTION_INDEX } from '../../../src/data/content'
+import { FIVE_STEP_TYPES } from '../../../src/domain/model/types'
 
 const PATTERN_SEQUENCE_SKILLS = [
   'skill-constant-difference-sequence',
@@ -214,12 +215,35 @@ describe('question bank content', () => {
     expect(byId.q039.similarQuestionIds).toContain('q043')
   })
 
+  it('gives every bidirectional link and reused sequence a distinct answer', () => {
+    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
+    const byId = Object.fromEntries(bank.questions.map((question) => [question.id, question]))
+    expect(byId.q052.answer.value).toBe(45)
+    expect(byId.q054.answer.value).toBe(39)
+    expect(byId.q054.story.body).toMatch(/18分钟/)
+    expect(byId.q065.answer.value).toBe(30)
+    expect(byId.q066.answer.value).toBe(38)
+    expect(byId.q066.story.body).toMatch(/18、23、28、33/)
+    expect(byId.q067.answer.value).toBe(20)
+    expect(byId.q067.story.body).toMatch(/5、10、15/)
+    for (const question of bank.questions) {
+      for (const id of question.similarQuestionIds) {
+        const target = byId[id]
+        if (target.similarQuestionIds.includes(question.id)) {
+          expect(target.answer.value, `${question.id} ↔ ${id}`).not.toBe(question.answer.value)
+        }
+      }
+    }
+  })
+
   it('keeps q034 specimen quantities and its two-step answer dimensionally consistent', () => {
     const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
     const question = bank.questions.find((candidate) => candidate.id === 'q034')!
     expect(question.story.body).toMatch(/每盒共有多少份/)
     expect(question.answer).toEqual({ value: 49, unit: '份' })
-    expect(question.steps.map((step: { prompt: string }) => step.prompt).join(' ')).toMatch(/144 ÷ 12 \+ 37/)
+    expect(question.category).toBe('basic')
+    expect(question.requiresFiveStep).toBe(false)
+    expect(question.steps).toBeUndefined()
     expect(question.hints.join(' ')).toMatch(/144 ÷ 12 \+ 37/)
   })
 
@@ -304,5 +328,55 @@ describe('question bank content', () => {
     const reorderedSteps = structuredClone(bank)
     reorderedSteps.questions[2].steps.reverse()
     expect(() => assertValidQuestionBank(reorderedSteps)).toThrow(/steps/)
+  })
+
+  it('keeps the first hint layer a reading cue instead of restating the numbers', () => {
+    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
+    const numbers = (text: string) => new Set((text.match(/\d+/g) ?? []).map(Number))
+    for (const question of bank.questions) {
+      const storyNumbers = numbers(question.story.body)
+      const hintNumbers = numbers(question.hints[0])
+      expect([...hintNumbers].filter((token) => storyNumbers.has(token)), question.id).toEqual([])
+    }
+  })
+
+  it('rejects a basic question that still declares five-step steps', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const basic = invalid.questions.find((question) => question.id === 'q002')!
+    basic.steps = FIVE_STEP_TYPES.map((type) => ({ type, prompt: '引导' }))
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/without five-step guidance/)
+  })
+
+  it('rejects a worked-example layer that reuses the answer digits', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const target = invalid.questions.find((question) => question.id === 'q001')!
+    target.hints[4] = '比如 4 + 8 = 12，你就能得到答案。'
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/worked example must not reuse the answer digits/)
+  })
+
+  it('rejects a worked-example layer that is too short to teach', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const target = invalid.questions.find((question) => question.id === 'q001')!
+    target.hints[4] = '算一下'
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/at least six characters/)
+  })
+
+  it('does not treat a longer run as a prefix of the answer digits', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const valid = structuredClone(bank)
+    const target = valid.questions.find((question) => question.id === 'q038')!
+    target.hints[4] = '比如先数到 130 个，就能看出比原数更接近。'
+    expect(() => assertValidQuestionBank(valid), 'answer 13 must not match inside 130').not.toThrow()
+  })
+
+  it('rejects a similar-question pair that shares the same answer value', () => {
+    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+    const invalid = structuredClone(bank)
+    const similar = invalid.questions.find((question) => question.id === 'q009')!
+    similar.answer.value = 17
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/linked answer q009 must differ in value from q003/)
   })
 })
