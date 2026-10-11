@@ -11,11 +11,11 @@ import {
 assertValidQuestionBank(rawQuestionBank)
 assertValidCreatures(rawCreatureBank)
 
-/** Validated question data shared by quiz and reporting features. */
+/** 已通过运行时校验的题库，供组题、错题本与家长报告共用。 */
 export const QUESTION_BANK = rawQuestionBank as QuestionBank
 
-/** Validated bestiary data shared by map and observation features. */
+/** 已通过运行时校验的图鉴库，供地图与观察舱共用。 */
 export const CREATURE_BANK = rawCreatureBank as CreatureBank
 
-/** Precomputed category, quiz-type, and difficulty pools for consumers. */
+/** 预建的三个维度索引（槽位 / 题型 / 难度），供消费者按维度取题。 */
 export const QUESTION_INDEX = createQuestionIndexes(QUESTION_BANK.questions)

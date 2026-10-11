@@ -142,11 +142,10 @@ export function useHomeQuest(options: HomeQuestOptions) {
   /**
    * 目标奖励文案。
    *
-   * 数据来源（T8 前的过渡口径）：spec creature-bestiary §解锁与奖励发放 规定
-   * 「完成整组 SHALL 解锁对应生物图鉴卡与区域下潜」，而"对应哪只生物"由图鉴
-   * 内容（Task 8/14）决定。这里因此给一句固定文案，**不**内联一份生物表——
-   * 那会让首页在图鉴落地前就持有一份必然漂移的清单。T14 接入
-   * `bestiaryUnlock` 投影后，改为展示下一只待解锁生物的条目。
+   * 数据来源（spec creature-bestiary §解锁与奖励发放）：「完成整组 SHALL 解锁
+   * 对应生物图鉴卡与区域下潜」，而"对应哪只生物"由图鉴内容与
+   * `bestiaryUnlock` 投影决定。这里因此给一句固定文案，**不**内联一份生物表——
+   * 那会让首页持有一份与图鉴内容必然漂移的清单。
    */
   function rewardLabel(): string {
     return '下一区图鉴卡 + 徽章'

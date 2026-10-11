@@ -59,7 +59,7 @@ export interface HomeQuestOptions {
   clock?: () => number
   /** ID 发生器；产出 `session.id` 与事件 ID。缺省 Web Crypto UUID。 */
   idGenerator?: () => string
-  /** 候选题目池；缺省用 Task 8 落地前的过渡池（见 `fixtures.ts`）。 */
+  /** 候选题目池；缺省用演示题池（见 `fixtures.ts`；正式路径由 `app/` 装配题库）。 */
   pool?: readonly Question[]
   /**
    * 日志出口；发出的对象先经 `redact()` 脱敏。

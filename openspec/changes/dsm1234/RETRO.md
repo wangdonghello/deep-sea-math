@@ -310,3 +310,41 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 - q034 保留 `basic` 槽位但关掉五步引导（不转 applied，避免 basic 槽位需补题），`two-step-app/3/basic` 仍有 q033 兜底。
 
 **未做（独立内容需求，走后续 change）**：21/23 技能是单形状模板、d1/d2 有 5 个空槽技能、q001 是全库唯一算式型答案。扩充题库多样性属内容增量，不阻塞收口。
+
+---
+
+## R21. T18 收尾：README 重写与四处过期占位文档的纠正
+
+**RED→GREEN**：`tests/readme.test.ts` 把"新人照着 README 能不能把项目跑起来"变成
+断言——章节结构（七个必备 `##`）、围栏命令块可解析且含 `npm install` / `npm run dev`、
+配置说明覆盖 `VITE_BASE` 与 GitHub Pages、以及 `src/README.md` 列出六层与依赖方向。
+**只锁结构不锁措辞**：README 内容会持续演进，锁文案只会逼人每次改文档都改测试。
+
+**根 README 从 23 行"设计规格目录说明"重写为七节**：项目简介 / 快速开始 / 目录分层 /
+配置说明 / 使用示例 / 阶段一范围与后续阶段 / 测试。三处此前文档里没有的事实被写实：
+
+1. **依赖方向不是四层而是六层**：真实结构是
+   `views → router/routes → features → domain`，`data` 与 `domain` 平级，
+   外加 `app/`（`productionStores` 装配）与 `shared/`（`redact`）。旧
+   `src/README.md` 的 `views → features → domain ← data` 四层说法漏了
+   Task 17 才落地的路由封装层，照它读代码会找不到 store 从哪来。
+2. **演示题池不是"待删除的过渡产物"**：`features/home/fixtures.ts` 与
+   `quizStage/demoSimilarQuestions.ts` 的注释原写"Task 8 落地后整体删除"，
+   但 T8 之后它们仍是 composable 未注入 `pool` 时的缺省值（`useHomeQuest`
+   line 278、`useQuizSession` line 50）。已改为准确的定位说明：正式路径由
+   `app/productionStores.ts` 装配真实题库，演示池保留作兜底，并说明它的小池
+   尺寸是**刻意**的（让 `repeatCount` 真实分支在首页演示里被执行）。
+3. **四个层 README 的"本目录在 Task 1 阶段仅为占位，尚无代码"全是假话**：18 个
+   task 之后四层都有真实代码，这些句子会主动误导读者。已逐层重写为真实清单
+   （domain 七个子目录、data 四文件、views 八页面对应路由、features 八个功能域），
+   并把 features 表中两个从未落地的规划条目（`quest/`、`mapPanel/`）与真实落地
+   的 `home/`、`unlock/` 对齐。
+
+**统一 JSDoc**：`data/content/index.ts`、`schema.ts`、`quizStage/useQuizSession.ts`、
+`demoSimilarQuestions.ts` 里残留的英文注释改为中文，与仓库其余注释一致。
+
+**验收**：`npm run test` 51 文件 643 用例全绿；`npm run type-check` 通过；
+`npm run build` 成功（产物 `dist/`）；覆盖率总体 statements 94.16% / branches
+91.67% / lines 95.77%，`src/domain/` statements 100% / branches 99.65%；
+`openspec validate dsm1234 --strict` 通过。
+

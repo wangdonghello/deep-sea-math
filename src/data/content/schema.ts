@@ -49,13 +49,13 @@ export interface CreatureContent extends BestiaryEntry {
   illustrationLabel: '原创示意插画，非真实影像'
 }
 
-/** Versioned bestiary content. */
+/** 带版本号的图鉴内容。 */
 export interface CreatureBank {
   version: string
   creatures: CreatureContent[]
 }
 
-/** Precomputed views over the three independent question dimensions. */
+/** 三个正交维度上的题目分组视图。 */
 export interface QuestionIndexes {
   byCategory: Record<QuestCategory, Question[]>
   byType: Record<QuizType, Question[]>
@@ -208,11 +208,10 @@ function numberTokens(text: string): number[] {
 }
 
 /**
- * Keeps the worked-example layer (hints[4]) instructive without revealing the answer.
+ * 让讲解示例层（`hints[4]`）有教学价值，同时不泄露答案。
  *
- * The layer must carry at least a short sentence, and must reuse neither the answer
- * value nor any operand of the answer expression — those digits are compared as whole
- * numbers so 13 is not mistaken for a prefix of 130.
+ * 该层至少是一句完整的话，且不得复用答案值或答案算式的任一操作数——数字按
+ * **整数边界**比对，因此 `13` 不会被误判成 `130` 的前缀。
  */
 function validateWorkedExampleHint(hints: unknown, answer: Record<string, unknown>, path: string): void {
   const finalLayer = nonEmptyString((hints as unknown[])[4], `${path}.hints[4]`)
@@ -284,10 +283,10 @@ function validateSteps(value: unknown, path: string): void {
 }
 
 /**
- * Validates a versioned bank, each question, and all similar-question references.
+ * 校验带版本号的题库：版本字段、逐题规则，以及全部相似题引用。
  *
- * @param value Untrusted parsed JSON content.
- * @throws {Error} With the invalid field path when any content rule fails.
+ * @param value 不可信的解析后 JSON 内容。
+ * @throws {Error} 任一内容规则不满足时抛出，消息带出错的字段路径。
  */
 export function assertValidQuestionBank(value: unknown): asserts value is QuestionBank {
   const bank = record(value, 'questionBank')
@@ -330,10 +329,10 @@ export function assertValidQuestionBank(value: unknown): asserts value is Questi
 }
 
 /**
- * Groups questions once for efficient category, type, and difficulty lookups.
+ * 一次性把题目按三个正交维度分组，供按维度取题（避免每次查询都全量遍历）。
  *
- * @param questions Validated question records.
- * @returns Mutable arrays indexed by each question dimension.
+ * @param questions 已通过校验的题目记录。
+ * @returns 各维度下的可变数组（题目在题库加载后不再变动）。
  */
 export function createQuestionIndexes(questions: readonly Question[]): QuestionIndexes {
   const byCategory = Object.fromEntries(QUEST_CATEGORIES.map((category) => [category, []])) as unknown as QuestionIndexes['byCategory']
@@ -348,10 +347,10 @@ export function createQuestionIndexes(questions: readonly Question[]): QuestionI
 }
 
 /**
- * Validates the four sourced bestiary entries and rejects fixed-depth wording.
+ * 校验 4 条带来源的图鉴条目，并拒绝"唯一固定深度"的表述。
  *
- * @param value Untrusted parsed JSON content.
- * @throws {Error} With the invalid field path when any content rule fails.
+ * @param value 不可信的解析后 JSON 内容。
+ * @throws {Error} 任一内容规则不满足时抛出，消息带出错的字段路径。
  */
 export function assertValidCreatures(value: unknown): asserts value is CreatureBank {
   const bank = record(value, 'creatures')

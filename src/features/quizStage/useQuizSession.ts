@@ -42,8 +42,12 @@ const DEMO_FIVE_STEP_TEMPLATES: readonly FiveStep[] = [
 ]
 
 /**
- * Owns answer-flow events; visible progress is rebuilt from the returned event log.
- * Task 8 content replaces the temporary DEMO_QUESTION_POOL fallback.
+ * 答题 composable 的**演示题池缺省值**（未注入 `questions` 时使用）。
+ *
+ * 答题页的正式路径由 `app/productionStores.ts` 装配 → 路由守卫经
+ * `app/questContext.ts` 从题库取题并挂到 `meta.questContext`；本文件只在没有
+ * 题库上下文时兜底（组件测试、`.vue` 预览）。相似题链接同理由题库的
+ * `similarQuestionIds` 提供，这里只补演示池自己的成对关系。
  */
 export function useQuizSession(options: QuizSessionOptions) {
   const isDemoSession = options.questions === undefined

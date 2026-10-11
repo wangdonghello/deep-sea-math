@@ -1,22 +1,23 @@
 /**
- * `features/home/fixtures.ts` —— Task 8 落地前的**过渡题池**。
+ * `features/home/fixtures.ts` —— 首页 composable 的**演示题池**（缺省池）。
  *
- * ⚠️ 这是临时产物：等 `data/content/questionBank.json`（Task 8）就位后，本文件
- * 整体删除，首页改从题库取题。之所以现在就放 4 道而不是等 T8：首页要在没有
- * 题库的条件下也能跑通「领取 → 组题 → 下潜」全链路（TDD 无法测一条不存在的
- * 路径），而组题的确定性、难度回落、重复取题都只依赖 `pool` 的形态，与题目
- * 具体是什么数学题无关。
+ * 定位：`useHomeQuest` 在调用方没有注入 `pool` 时用它（见 `home/types.ts` 的
+ * `HomeQuestOptions.pool`）。题库（`data/content/questionBank.json`）已落地，
+ * 正式路由路径由 `app/productionStores.ts` 装配真实题库，本文件保留两个作用：
+ *   1. 没有题库上下文时首页仍可跑通「领取 → 组题 → 下潜」全链路（组件测试与
+ *      `.vue` 预览都靠它）；
+ *   2. **刻意维持小池**（4 道，覆盖 5/3/1 三个槽位但不足量）：这样演示数据会
+ *      自然走「池不足 → 循环取用 → repeatCount」这条真实分支，而不是悄悄退化
+ *      成一条永不执行的兜底路径。
  *
- * 刻意做成**小池**（4 道，覆盖 5/3/1 三个槽位但不足量）：这样首页的演示数据
- * 会自然走「池不足 → 循环取用 → repeatCount」这条真实分支，而不是悄悄退化
- * 成一条永不执行的兜底路径。题目文案仍按深海宠物任务包装（design §2）。
+ * 题目文案仍按深海宠物任务包装（design §2）。
  */
 
 import { createQuestion } from '@/domain/model/types'
 import type { Question } from '@/domain/model/types'
 
 /**
- * 过渡题池：3 道基础 + 1 道应用 + 1 道探测中的可用子集。
+ * 演示题池：3 道基础 + 1 道应用 + 1 道探测中的可用子集。
  *
  * 类别分布刻意不齐（探测题只有一道且难度 1）：`buildDailyQuest` 在探测槽位
  * 会因题量不足重复取用它，正好把 `repeatCount` 的真实行为暴露在首页演示里。
@@ -33,7 +34,7 @@ export const DEMO_QUESTION_POOL: readonly Question[] = [
     similarQuestionIds: [],
     tags: ['demo', 'add-sub'],
     creatureRef: 'lanternfish',
-    sources: ['过渡数据：Task 8 落地后替换为 questionBank.json'],
+    sources: ['演示题池数据：正式路径见 data/content/questionBank.json'],
   }),
   createQuestion({
     id: 'demo-basic-2',
@@ -46,7 +47,7 @@ export const DEMO_QUESTION_POOL: readonly Question[] = [
     similarQuestionIds: [],
     tags: ['demo', 'mul-div'],
     creatureRef: 'seahorse',
-    sources: ['过渡数据：Task 8 落地后替换为 questionBank.json'],
+    sources: ['演示题池数据：正式路径见 data/content/questionBank.json'],
   }),
   createQuestion({
     id: 'demo-applied-1',
@@ -60,7 +61,7 @@ export const DEMO_QUESTION_POOL: readonly Question[] = [
     similarQuestionIds: [],
     tags: ['demo', 'unit-time-route'],
     creatureRef: 'submarine',
-    sources: ['过渡数据：Task 8 落地后替换为 questionBank.json'],
+    sources: ['演示题池数据：正式路径见 data/content/questionBank.json'],
   }),
   createQuestion({
     id: 'demo-probe-1',
@@ -74,6 +75,6 @@ export const DEMO_QUESTION_POOL: readonly Question[] = [
     similarQuestionIds: [],
     tags: ['demo', 'unknown-relation'],
     creatureRef: 'anglerfish',
-    sources: ['过渡数据：Task 8 落地后替换为 questionBank.json'],
+    sources: ['演示题池数据：正式路径见 data/content/questionBank.json'],
   }),
 ]

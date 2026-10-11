@@ -144,9 +144,9 @@ commit message 一律用本文件给出的格式；禁止修改 `specs/*.md` 与
 
 ### Task 18: README 与收尾
 
-- [ ] **Step RED**: 写 `tests/readme.test.ts`：断言 `README.md` 含"快速开始""配置说明""使用示例"三节且命令块可解析（含 `npm install` 与 `npm run dev`），含 `src/README.md` 分层说明。
-- [ ] **Step GREEN**: 重写 `README.md`（项目简介 / 快速开始 / 目录分层 / 配置说明 / 使用示例 / 阶段一范围与后续阶段说明），写 `src/README.md` 说明 domain-data-features-views 依赖方向。
-- [ ] **Step REFACTOR**: 清理无用占位文件与示例代码；统一 JSDoc；跑全套测试。
-- [ ] **验证**: `npm run test` 全绿、覆盖率 ≥ 80%（domain ≥ 90%）；`openspec validate dsm1234 --strict` 通过。
-- [ ] **Commit**: `[DSM1234] docs: T18 - readme and wrap-up`
+- [x] **Step RED**: 写 `tests/readme.test.ts`：断言 `README.md` 含"快速开始""配置说明""使用示例"三节且命令块可解析（含 `npm install` 与 `npm run dev`），含 `src/README.md` 分层说明。
+- [x] **Step GREEN**: 重写 `README.md`（项目简介 / 快速开始 / 目录分层 / 配置说明 / 使用示例 / 阶段一范围与后续阶段说明），写 `src/README.md` 说明 domain-data-features-views 依赖方向。
+- [x] **Step REFACTOR**: 清理无用占位文件与示例代码；统一 JSDoc；跑全套测试。
+- [x] **验证**: `npm run test` 全绿、覆盖率 ≥ 80%（domain ≥ 90%）；`openspec validate dsm1234 --strict` 通过。
+- [x] **Commit**: `[DSM1234] docs: T18 - readme and wrap-up`
 
