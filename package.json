@@ -13,7 +13,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "dependencies": {
     "idb": "^8.0.4",

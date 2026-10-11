@@ -23,7 +23,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # jsdom@30 依赖 undici 的 webidl 工具，Node 20 下会抛
+          # `webidl.util.markAsUncloneable is not a function`（本地 Node 24 无此问题）。
+          # package.json 的 engines 同样声明 >=24，两者保持一致。
+          node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run test
