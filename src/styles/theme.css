@@ -1,0 +1,117 @@
+/*
+ * 全局深海主题（Task 10 落地，设计稿 A「深海夜色 + 生物发光」）。
+ *
+ * 本文件是整套视觉规范的**唯一出处**：色板、字号阶、间距/圆角/动效时长
+ * 都以 CSS 自定义属性（`--ds-*`）定义，组件一律 `var()` 引用，不写死色值。
+ * 之所以集中在这里，是因为 Task 10 的儿童可读硬门槛（正文与背景对比度
+ * ≥ 4.5:1，见 `tests/features/theme/contrast.test.ts`）需要能从一个地方
+ * 静态解析出全部前景/背景色对——色值散落到各组件里，门槛就无从校验。
+ *
+ * 命名：`--ds-bg-*` 背景、`--ds-text-*` 文字、`--ds-accent-*` 强调、
+ * `--ds-glow-*` 生物发光点缀、`--ds-glass-*` 半透明玻璃卡片、
+ * `--ds-font-size-*` 字号阶、`--ds-space-*`/`--ds-radius-*`/`--ds-motion-*`
+ * 间距圆角动效。视觉规范来自头脑风暴阶段定稿的设计稿 A（鮟鱇鱼发光诱饵
+ * 的暖橙渐变作强调色）。
+ */
+
+:root {
+  /* 让表单控件与滚动条跟随深色主题 */
+  color-scheme: dark;
+
+  /* ── 背景：深靛蓝三段渐变（上浅下深，制造"下潜"的方向感） ── */
+  --ds-bg-deep: #061530; /* 最深处 */
+  --ds-bg-mid: #0b2b52; /* 中段 */
+  --ds-bg-shallow: #123f6b; /* 最亮段：正文对比度以它为分母最严苛 */
+  --ds-bg-gradient: linear-gradient(
+    170deg,
+    var(--ds-bg-deep) 0%,
+    var(--ds-bg-mid) 55%,
+    var(--ds-bg-shallow) 100%
+  );
+
+  /* ── 文字色：暗底上的三级层次，全部对最亮背景段 ≥ 4.5:1 ── */
+  --ds-text-primary: #e8f2fd; /* 标题与正文 */
+  --ds-text-secondary: #b9d4ee; /* 次级说明 */
+  --ds-text-muted: #9dbcd8; /* 弱化提示（仍满足 AA） */
+  --ds-accent-text: #ffc774; /* 强调文字：奖励名、里程碑 */
+
+  /* ── 强调色：暖橙渐变（鮟鱇鱼发光诱饵），用于主按钮与进度条终点 ── */
+  --ds-accent-500: #ffb347;
+  --ds-accent-600: #ff8a3d;
+  --ds-accent-gradient: linear-gradient(135deg, var(--ds-accent-500), var(--ds-accent-600));
+  --ds-on-accent: #2a1400; /* 橙底上的深棕文字：不用纯黑，避免生硬 */
+
+  /* ── 生物发光点缀：微光粒子与次级高亮 ── */
+  --ds-glow-primary: #9be8ff;
+  --ds-glow-secondary: #7fd4ff;
+  --ds-glass-particle: rgba(120, 200, 255, 0.5);
+  --ds-glass-glow: rgba(255, 190, 90, 0.75);
+
+  /* ── 半透明玻璃卡片（任务卡、设置项等浮层） ── */
+  --ds-glass-surface: rgba(9, 26, 48, 0.92);
+  --ds-glass-border: rgba(140, 200, 255, 0.22);
+
+  /* ── 字号阶：儿童可读，最小 13px 起跳、正文 17px（大于常见 16px） ── */
+  --ds-font-size-caption: 13px;
+  --ds-font-size-body: 17px;
+  --ds-font-size-title: 21px;
+  --ds-font-size-display: 28px;
+  --ds-line-height-body: 1.6;
+
+  /* ── 间距 / 圆角 / 动效：全站统一节奏 ── */
+  --ds-space-xs: 4px;
+  --ds-space-sm: 8px;
+  --ds-space-md: 12px;
+  --ds-space-lg: 16px;
+  --ds-space-xl: 24px;
+
+  --ds-radius-sm: 10px;
+  --ds-radius-md: 14px;
+  --ds-radius-lg: 20px;
+  --ds-radius-pill: 999px;
+
+  --ds-motion-fast: 160ms;
+  --ds-motion-base: 260ms;
+  --ds-motion-drift: 26s; /* 背景鱼群一次完整漂移的时长 */
+
+  --ds-shadow-card: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+/*
+ * Task 12 消费：以下 token 自首页（HomeView / MapPanel / QuestCard /
+ * DepthScale / TabBar）起有了首个真实消费者，此前仅 Task 10 的 FishBackdrop
+ * 引用色板。字体阶、间距阶、圆角/动效、玻璃态四项自此不再是无消费者声明。
+ * （RETRO R7 待办的解除声明，不改任何取值。）
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* 手机网页：禁用橡皮筋滚动带来的布局跳动 */
+  overscroll-behavior: none;
+}
+
+body {
+  /* 渐变 + 主文字色是全局基线：任何漏写配色的组件也不会出现白底黑字 */
+  background: var(--ds-bg-gradient);
+  color: var(--ds-text-primary);
+  font-family: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: var(--ds-font-size-body);
+  line-height: var(--ds-line-height-body);
+  /* 手机网页：禁止长按弹出菜单干扰答题交互 */
+  -webkit-tap-highlight-color: transparent;
+  /* 禁止 iOS Safari 在横屏时自动放大字号 */
+  -webkit-text-size-adjust: 100%;
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
+}

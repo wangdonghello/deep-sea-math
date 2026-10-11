@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    /*
+     * 测试项目专用的全局类型。
+     *
+     * `vitest.globals` 只在这里引入，不放进 `tsconfig.app.json` 的 `types`，
+     * 是为了让「浏览器 app 代码」与「测试代码」的全局作用域保持分离：
+     * app（尤其 `domain/`）不该看到 Node 全局，测试则需要 `describe` /
+     * `it` / `expect` 等注入的全局。
+     *
+     * `node` 同样只在这里引入：测试跑在 Node 运行时上，`tests/domain/crypto/
+     * hashPin.test.ts` 之类的用例需要 `node:crypto` 的模块类型来注入一个
+     * 同步 SHA-256（jsdom 不提供 `crypto.subtle`）。加在这里而不是
+     * `tsconfig.app.json`，才能守住「app/domain 代码看不到 Node 全局」这条
+     * 边界 —— `domain/` 里误写 `process.env` 仍会在 app 项目被拦住。
+     */
+    "types": ["vite/client", "vitest/globals", "node"]
+  },
+  "include": ["tests/**/*.ts", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

@@ -1,0 +1,35 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    /*
+     * 只引入浏览器侧类型。刻意不引入 "node"，也不引入 "vitest/globals"：
+     * 一旦引入 Node 类型，`process` / `Buffer` 等全局就会在 app（含
+     * domain）中通过类型检查，与 design「domain 不依赖任何浏览器/Node
+     * 运行时」的意图相悖——未来在 domain 里误写 `process.env.X` 也不会被
+     * 拦住。测试所需的 `vitest/globals` 由 `tsconfig.test.json` 提供。
+     */
+    "types": ["vite/client"],
+
+    /*
+     * 让 TypeScript 与 Vite 使用同一份 `@ → src` 路径别名（定义在
+     * `./vite.shared.ts`）。少了这一段，`import x from '@/foo'` 能被
+     * Vite 打包成功、却在 `vue-tsc` 下报 TS2307 —— 必须两端同时配置。
+     * TS 6 弃用了 `baseUrl`，改用不依赖 `baseUrl` 的 `paths`（相对本
+     * tsconfig 所在目录解析）。
+     */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  // 只覆盖 app 自身；测试文件由 tsconfig.test.json 负责，两边分工明确：
+  // app 项目看不到 Node / vitest 全局，测试项目才需要。
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+}
