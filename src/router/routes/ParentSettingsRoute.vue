@@ -1,52 +1,58 @@
 <script setup lang="ts">
 /**
- * 家长区·设置的路由封装（P1 占位）。
+ * 家长区·设置与报告的路由封装（P2）。
  *
- * P2 会把 T16 的 `SettingsForm` / `ReportPanel` 装进来（题量、时长上限与学习
- * 报告）。P1 只保证这条路径可达、且未解锁时会被守卫拦回门禁页。
+ * 注入项：
+ * - `stores.parent` → `:store`、`QUESTION_TYPE_BY_ID` → `:question-type-by-id`
+ * - 默认选中孩子：`?child=`（从总览卡片点进来）优先，否则当前登录档案的 id
+ *   （家长区允许不选档案进入——未登录档案会话时为 null）
+ *
+ * 三个 emit 分别翻译成：切页 → 对应功能区路径；返回 → 档案选择页。
  */
-import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-import { PROFILES_PATH } from '@/router/nextRoute'
+import { getProductionStores, QUESTION_TYPE_BY_ID } from '@/app/productionStores'
+import LearningSettingsSection from '@/features/parentPanel/LearningSettingsSection.vue'
+import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import {
+  PARENT_MANAGE_PATH,
+  PARENT_OVERVIEW_PATH,
+  PARENT_SETTINGS_PATH,
+  PROFILES_PATH,
+} from '@/router/nextRoute'
+import type { ParentSection } from '@/features/parentPanel/types'
 
+const route = useRoute()
 const router = useRouter()
+const stores = getProductionStores()
+const session = useProfileSessionStore()
+
+/** 功能区 id → 路由路径。 */
+const SECTION_PATHS: Readonly<Record<string, string>> = {
+  overview: PARENT_OVERVIEW_PATH,
+  settings: PARENT_SETTINGS_PATH,
+  manage: PARENT_MANAGE_PATH,
+}
+
+/** 默认选中的孩子：`?child=` 优先，其次当前档案。 */
+const defaultProfileId = computed(() => {
+  const child = route.query.child
+  return typeof child === 'string' && child !== '' ? child : session.activeProfileId
+})
+
+function onNavigate(section: ParentSection): void {
+  const path = SECTION_PATHS[section]
+  if (path !== undefined) void router.push(path)
+}
 </script>
 
 <template>
-  <main class="parent-section" data-testid="parent-settings">
-    <h1 class="parent-section__title">家长区 · 设置</h1>
-    <p class="parent-section__hint">每日题量、时长上限与学习报告将在这里调整。</p>
-    <button
-      type="button"
-      class="parent-section__back"
-      data-testid="parent-back"
-      @click="router.push(PROFILES_PATH)"
-    >
-      返回档案选择
-    </button>
-  </main>
+  <LearningSettingsSection
+    :store="stores.parent"
+    :default-profile-id="defaultProfileId"
+    :question-type-by-id="QUESTION_TYPE_BY_ID"
+    @navigate="onNavigate"
+    @back="() => router.push(PROFILES_PATH)"
+  />
 </template>
-
-<style scoped>
-.parent-section {
-  display: grid;
-  gap: var(--ds-space-lg);
-  max-width: 48rem;
-  margin: 0 auto;
-  padding: var(--ds-space-lg);
-  color: var(--ds-text-primary);
-}
-.parent-section__hint {
-  color: var(--ds-text-secondary);
-}
-.parent-section__back {
-  justify-self: start;
-  min-height: 2.75rem;
-  padding: var(--ds-space-sm) var(--ds-space-md);
-  border: 1px solid var(--ds-glass-border);
-  border-radius: var(--ds-radius-md);
-  color: var(--ds-text-primary);
-  background: var(--ds-glass-surface);
-  font: inherit;
-}
-</style>

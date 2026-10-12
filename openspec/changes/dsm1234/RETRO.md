@@ -487,3 +487,45 @@ autocomplete="one-time-code" maxlength="4">`（`data-testid="pin-input"`，外�
   含上线后修复），直接切回 `004-dsm1234` 会丢这些修复。因此本 task 从 `main`
   新建 `004-dsm1234-p1` 提交，未改任何既有分支历史、未 push。
 
+## R23. P2 家长区三区页面（总览 / 设置与报告 / 档案管理）
+
+P1 的三条子路由占位换成正式界面。三个功能区页面落在
+`features/parentPanel/`（`FamilyOverviewSection` / `LearningSettingsSection` /
+`ProfileManageSection`），由 `routes/Parent*Route.vue` 薄封装注入
+`stores.parent`、`QUESTION_TYPE_BY_ID` 与当前档案 id 后挂载；底部导航
+`ParentSectionNav` 只认功能区 id，路由翻译留在封装里（`features/` 不依赖
+`router/`）。
+
+**"本周概况"派生**：新增 `useFamilyOverview`（`ChildOverview` 类型进
+`types.ts`）。它对每个孩子调一次 `replayProjections`（也算一次题型掌握），再
+对事件流做一趟区间过滤算出近 7 天完成题数 / 平均用时 / 学习天数，并据题目级
+掌握投影（经注入的题型表归类）挑出"未掌握 + 提示后掌握"最多的题型，拼一句
+"需要关注"。组件只渲染结果，**绝不**在模板里 reduce 事件。
+
+**组件复用 vs 泛化**：`SettingsForm` / `ReportPanel` / `DangerZone` 原样复用，
+未复制第二份。`DangerZone` 未改签名——档案管理页改成**每个孩子一条可展开的
+"安全"区**，一次只展开一个，展开即把 `useParentPanel` 的当前选中切到该孩子，
+于是 `resetForm` / `deleteForm` 这些短生命周期输入永远只属于一个孩子。
+`useParentPanel` 为此新增 `selectedProfileId` + `selectProfile()`（切换时清空
+上一个孩子的半截 PIN/删档确认），`saveSettings` / `refreshReport` /
+`deleteProfile` 一律改以它为准。新增组件 `ChildSummaryCard`、
+`ParentSectionShell`（三页共享的标题/隐私说明/降级警示条/底部导航外壳）。
+
+**`ParentView.vue` 删除**：P1 起 `/parent` 是门禁页，三类操作已分散到三个子
+页，该视图不再被任何路由使用，连同其单测一并删除；`src/views/README.md` 的
+`/parent → ParentView` 过时行改为 `ParentGateView`，并注明三个功能区页面住在
+`features/parentPanel/`。
+
+**验证**：
+
+- `npm run test`：56 文件 / 698 用例全绿；
+- `npm run type-check`：通过；
+- `npm run test:coverage`：全绿（Statements 94.27% / Branches 91.74% /
+  Functions 93.99% / Lines 95.71%，阈值 80%）；
+- `npm run build`：成功；
+- 三区行为逐条有测试：总览按昵称出卡、完成题数/平均用时由注入事件投影算出、
+  点卡进该孩子设置、无档案给建档引导；切孩子表单与报告换人、保存写
+  `settings-updated`、缺题型表显示"暂不可用"；建档回到列表、重置 PIN 后旧
+  PIN 失效新 PIN 可用（`verifyPin` 断言）、删除需勾选 + 昵称一致且清理事件；
+  降级三页均见警示条；导航高亮与切换；PIN 明文不进渲染文本与日志。
+

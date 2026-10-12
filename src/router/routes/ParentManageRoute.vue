@@ -1,53 +1,47 @@
 <script setup lang="ts">
 /**
- * 家长区·档案管理的路由封装（P1 占位）。
+ * 家长区·档案管理的路由封装（P2）。
  *
- * P2 会把建档表单、PIN 重置与删除档案（T16 的 `DangerZone` 等）装进来。首次
- * 安装没有档案时，这条路径仍然可达（`PROFILE_OPTIONAL_PATHS` 收了它，见
- * `router/nextRoute.ts`）——建档正是发生在"还没有档案"的前提下。
+ * 注入 `stores.parent` / `QUESTION_TYPE_BY_ID` 与当前档案 id（默认选中）。
+ * 首次安装没有档案时这条路径仍可达（`PROFILE_OPTIONAL_PATHS` 收了它）——
+ * 建档正是发生在"还没有档案"的前提下。
  */
 import { useRouter } from 'vue-router'
 
-import { PROFILES_PATH } from '@/router/nextRoute'
+import { getProductionStores, QUESTION_TYPE_BY_ID } from '@/app/productionStores'
+import ProfileManageSection from '@/features/parentPanel/ProfileManageSection.vue'
+import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import {
+  PARENT_MANAGE_PATH,
+  PARENT_OVERVIEW_PATH,
+  PARENT_SETTINGS_PATH,
+  PROFILES_PATH,
+} from '@/router/nextRoute'
+import type { ParentSection } from '@/features/parentPanel/types'
 
 const router = useRouter()
+const stores = getProductionStores()
+const session = useProfileSessionStore()
+
+/** 功能区 id → 路由路径。 */
+const SECTION_PATHS: Readonly<Record<string, string>> = {
+  overview: PARENT_OVERVIEW_PATH,
+  settings: PARENT_SETTINGS_PATH,
+  manage: PARENT_MANAGE_PATH,
+}
+
+function onNavigate(section: ParentSection): void {
+  const path = SECTION_PATHS[section]
+  if (path !== undefined) void router.push(path)
+}
 </script>
 
 <template>
-  <main class="parent-section" data-testid="parent-manage">
-    <h1 class="parent-section__title">家长区 · 档案管理</h1>
-    <p class="parent-section__hint">新建孩子档案、重置 PIN 与删除档案将在这里进行。</p>
-    <button
-      type="button"
-      class="parent-section__back"
-      data-testid="parent-back"
-      @click="router.push(PROFILES_PATH)"
-    >
-      返回档案选择
-    </button>
-  </main>
+  <ProfileManageSection
+    :store="stores.parent"
+    :default-profile-id="session.activeProfileId"
+    :question-type-by-id="QUESTION_TYPE_BY_ID"
+    @navigate="onNavigate"
+    @back="() => router.push(PROFILES_PATH)"
+  />
 </template>
-
-<style scoped>
-.parent-section {
-  display: grid;
-  gap: var(--ds-space-lg);
-  max-width: 48rem;
-  margin: 0 auto;
-  padding: var(--ds-space-lg);
-  color: var(--ds-text-primary);
-}
-.parent-section__hint {
-  color: var(--ds-text-secondary);
-}
-.parent-section__back {
-  justify-self: start;
-  min-height: 2.75rem;
-  padding: var(--ds-space-sm) var(--ds-space-md);
-  border: 1px solid var(--ds-glass-border);
-  border-radius: var(--ds-radius-md);
-  color: var(--ds-text-primary);
-  background: var(--ds-glass-surface);
-  font: inherit;
-}
-</style>

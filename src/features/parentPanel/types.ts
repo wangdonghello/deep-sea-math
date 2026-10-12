@@ -40,6 +40,37 @@ export interface ParentReport {
   topicMasteryAvailable?: boolean
 }
 
+/**
+ * 家庭总览里一个孩子的摘要。
+ *
+ * 由 {@link useFamilyOverview} 从该孩子的事件日志派生（一次重放 + 一段区间
+ * 过滤），**不在组件里 reduce 事件**：组件只渲染，派生口径只有一处。
+ */
+export interface ChildOverview {
+  profileId: string
+  nickname: string
+  avatarId: string
+  /** 近 7 天内有过答题的天数（按 UTC 日界去重）。 */
+  daysStudied: number
+  /** 近 7 天内答对的题数（按 `sessionId:questionId` 去重）。 */
+  completedQuestions: number
+  /** 上述已完成题目的平均用时（毫秒）；无完成题时为 0。 */
+  averageMs: number
+  /** 取自题型掌握最弱项的一句"需要关注"提示。 */
+  focusHint: string
+}
+
+/** 家长区三个功能区（底部导航的页签 id）。 */
+export type ParentSection = 'overview' | 'settings' | 'manage'
+
+/** {@link useFamilyOverview} 的输入选项。 */
+export interface FamilyOverviewOptions {
+  store: ParentStore
+  clock?: () => number
+  questionTypeById?: Readonly<Record<string, QuizType>>
+  logger?: (entry: Record<string, unknown>) => void
+}
+
 export interface ParentPanelOptions {
   store: ParentStore
   profileId: string | null
