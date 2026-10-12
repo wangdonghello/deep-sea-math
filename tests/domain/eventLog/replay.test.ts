@@ -280,11 +280,10 @@ function incrementalProjections(
       if (progress.questionIds.length === 0) {
         progress.questionIds.push(...event.questionIds)
       }
-      // 当日题组索引按 UTC 日界取日期键；同一天先到者胜（刷新不重抽）。
+      // 当日题组索引按 UTC 日界取日期键；同一天**后者覆盖**（最新一组胜出，
+      // 让内容换版后失去引用的旧题组能被重新领取的题组顶掉）。
       const day = new Date(event.occurredAt).toISOString().slice(0, 10)
-      if (dailyQuestIndex[day] === undefined) {
-        dailyQuestIndex[day] = event.sessionId
-      }
+      dailyQuestIndex[day] = event.sessionId
       continue
     }
 

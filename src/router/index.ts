@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
 import { initProductionStores } from '@/app/productionStores'
@@ -50,7 +50,17 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  /**
+   * hash 模式（`/#/home`）而不是 history 模式。
+   *
+   * GitHub Pages 是纯静态托管，无法配置「把任意路径回退到 index.html」的
+   * 服务端规则；用 history 模式时，`/deep-sea-math/profiles` 这类**直接访问或
+   * 刷新**会命中 GitHub 的 404 页，孩子的进度页面一刷新就没了。
+   * hash 模式把路由放在 `#` 之后，浏览器不会把它发给服务器，因此刷新、深链、
+   * 微信内置浏览器打开都稳定，且不需要额外的 404.html 重定向技巧。
+   * 代价仅是不再有"干净 URL"，对本应用无实际影响。
+   */
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
 })
 

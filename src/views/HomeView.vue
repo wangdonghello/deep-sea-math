@@ -24,9 +24,18 @@ import QuestCard from '@/features/home/QuestCard.vue'
 import TabBar from '@/features/home/TabBar.vue'
 import { useHomeQuest } from '@/features/home/useHomeQuest'
 import type { HomeStore } from '@/features/home/types'
+import type { Question } from '@/domain/model/types'
 
 const props = defineProps<{
   store: HomeStore
+  /**
+   * 候选题目池（**必填**，来自正式题库）。
+   *
+   * 必填是刻意的：早先它缺省到一份演示 fixture，而答题页按正式题库查题，
+   * 于是首页组出的题在答题页一道都渲染不出来，守卫把 `/quest` 打回首页，
+   * 表现为“点开始下潜没有任何反应”。显式传入后，这类错误在编译期就会暴露。
+   */
+  pool: readonly Question[]
   clock?: () => number
   idGenerator?: () => string
   logger?: (entry: Record<string, unknown>) => void
@@ -41,6 +50,7 @@ const emit = defineEmits<{
 
 const home = useHomeQuest({
   store: props.store,
+  pool: props.pool,
   clock: props.clock,
   idGenerator: props.idGenerator,
   logger: props.logger,

@@ -348,3 +348,35 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 91.67% / lines 95.77%，`src/domain/` statements 100% / branches 99.65%；
 `openspec validate dsm1234 --strict` 通过。
 
+
+---
+
+## R21. 上线后验收发现的三个接线缺陷（已修）
+
+**A. 输完 PIN 点「确定」页面不跳转。** `src/router/routes/ProfilesRoute.vue` 用
+`@navigate="onNavigate"`（事件监听）传导航回调，而 `ProfileSelectView` 把
+`navigate` 声明为**可选 prop**、并未 `defineEmits` 该事件——于是
+`props.navigate` 恒为 `undefined`，`useProfileSelect` 回落到 no-op，PIN 验证
+成功、输入被清空，页面却不动。改为 `:navigate="onNavigate"`。
+
+**B. 刷新或直接访问 `/profiles` 返回 GitHub Pages 404。** 纯静态托管无法配置
+「任意路径回退到 index.html」，`createWebHistory` 下的深链与刷新必然 404。
+改用 `createWebHashHistory`（`/#/home`），刷新、深链、微信内置浏览器均稳定，
+无需额外的 404.html 重定向技巧。
+
+**C. 点「开始下潜」没有任何反应。** 首页组题时 `pool` 缺省到 T12 的**演示
+fixture**（`demo-basic-1` 等），而答题页经 `app/questContext.ts` 按**正式题库**
+（`q001`…）查题，两端内容不一致 → 题组一道都取不出来 → 守卫把 `/quest` 打回
+`/home`，表现为“点了没反应”。修复分三层：
+- 题池改为**必填**（`HomeQuestOptions.pool`、`QuizSessionOptions.questions`、
+  `HomeView.pool`、`QuestView.questions`），缺池在编译期报错而非静默降级；
+- 删除演示 fixture（`home/fixtures.ts`、`quizStage/demoSimilarQuestions.ts`）；
+- `HomeRoute` 从 `QUESTION_BANK` 显式注入题池，与 `questContext` 同源。
+
+**顺带：悬空题组自愈。** `dailyQuestIndex` 由“先到者胜”改为**后者覆盖**，
+并让首页把“当日题组在当前题池里一道都取不到”视为“今天还没有题组”。这样
+内容换版后遗留的旧题组能让位给重新领取的新题组，否则孩子会被永久卡在一个
+渲染不出题的会话里（`claimToday` 会因“今天已有题组”而拒绝重抽）。
+
+**验证**：643 测试全绿、type-check 通过；本地浏览器实测建档 → PIN → 首页 →
+领取 → 开始下潜 → 答题页渲染出题库真实题目；`/` 与深链刷新均正常。

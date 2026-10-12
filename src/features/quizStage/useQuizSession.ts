@@ -8,8 +8,6 @@ import type { FiveStepState } from '@/domain/quiz/fiveStepMachine'
 import { isCorrect, matchesExpression, matchesNumericValue } from '@/domain/quiz/answerJudgement'
 import type { AnswerSubmittedEvent, DomainEvent, FiveStep, FiveStepType, Question } from '@/domain/model/types'
 import { grantRewards } from '@/domain/reward/rewardGrant'
-import { DEMO_QUESTION_POOL } from '@/features/home/fixtures'
-import { DEMO_SIMILAR_QUESTIONS, DEMO_SIMILAR_QUESTION_MAPPING } from './demoSimilarQuestions'
 
 /** Minimal event-log capability required by a quiz session. */
 export interface QuizSessionStore {
@@ -21,9 +19,15 @@ export interface QuizSessionStore {
 export interface QuizSessionOptions {
   sessionId: string
   profileId: string
-  /** Main session questions, in the order fixed by session-started. */
-  questions?: readonly Question[]
-  /** Available linked-question content when `questions` contains only session roots. */
+  /**
+   * 本题组的题目（顺序与 `session-started.questionIds` 一致，**必填**）。
+   *
+   * 必填是刻意的：早先它缺省到演示 fixture 时，首页用演示池组题、答题页按正式
+   * 题库查题，两端内容不一致，孩子看到的是“点开始下潜没有任何反应”。让调用方
+   * 必须显式给题，错配在编译期就暴露。
+   */
+  questions: readonly Question[]
+  /** 相似题池：本组题目 `similarQuestionIds` 引到的题。 */
   similarQuestionPool?: readonly Question[]
   /** Optional target metadata consumed by T7's reward rules. */
   creatureId?: string
@@ -33,7 +37,14 @@ export interface QuizSessionOptions {
   idGenerator?: () => string
 }
 
-const DEMO_FIVE_STEP_TEMPLATES: readonly FiveStep[] = [
+/**
+ * 五步引导模板的兜底。
+ *
+ * 只在题目自己没带 `steps` 时使用（正式题库的五步题都必须带 `steps`，由内容
+ * 校验保证）。它不是“演示内容”，是模板缺省，因此不属于上面要消除的那类
+ * 「两端内容不一致」的隐患。
+ */
+const DEFAULT_FIVE_STEP_TEMPLATES: readonly FiveStep[] = [
   { type: 'known', prompt: '找出题目里的已知条件' },
   { type: 'unknown', prompt: '找出题目要求的内容' },
   { type: 'relation', prompt: '选择已知与未知的数量关系' },
@@ -41,25 +52,9 @@ const DEMO_FIVE_STEP_TEMPLATES: readonly FiveStep[] = [
   { type: 'answer', prompt: '写出计算结果' },
 ]
 
-/**
- * 答题 composable 的**演示题池缺省值**（未注入 `questions` 时使用）。
- *
- * 答题页的正式路径由 `app/productionStores.ts` 装配 → 路由守卫经
- * `app/questContext.ts` 从题库取题并挂到 `meta.questContext`；本文件只在没有
- * 题库上下文时兜底（组件测试、`.vue` 预览）。相似题链接同理由题库的
- * `similarQuestionIds` 提供，这里只补演示池自己的成对关系。
- */
 export function useQuizSession(options: QuizSessionOptions) {
-  const isDemoSession = options.questions === undefined
-  const rootQuestions = (options.questions ?? DEMO_QUESTION_POOL).map((question) => {
-    const linkedIds = isDemoSession ? DEMO_SIMILAR_QUESTION_MAPPING[question.id] : undefined
-    return linkedIds === undefined ? question : {
-      ...question, similarQuestionIds: [...question.similarQuestionIds, ...linkedIds],
-    }
-  })
-  const questionPool = isDemoSession
-    ? [...rootQuestions, ...DEMO_SIMILAR_QUESTIONS]
-    : [...rootQuestions, ...(options.similarQuestionPool ?? [])]
+  const rootQuestions = options.questions
+  const questionPool = [...rootQuestions, ...(options.similarQuestionPool ?? [])]
   const events = ref<readonly DomainEvent[]>([])
   const feedback = ref('')
   const stepFeedback = ref('')
@@ -133,7 +128,7 @@ export function useQuizSession(options: QuizSessionOptions) {
     (event) => event.type === 'session-completed' && event.sessionId === options.sessionId &&
       event.profileId === options.profileId,
   ))
-  const fiveStepTemplates = computed(() => currentQuestion.value?.steps ?? DEMO_FIVE_STEP_TEMPLATES)
+  const fiveStepTemplates = computed(() => currentQuestion.value?.steps ?? DEFAULT_FIVE_STEP_TEMPLATES)
   const fiveStepState = computed(() => {
     const question = currentQuestion.value
     if (question === null || !question.requiresFiveStep) return null

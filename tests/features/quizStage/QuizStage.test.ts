@@ -102,17 +102,20 @@ describe('Numpad', () => {
 })
 
 describe('QuestView feedback', () => {
-  it('默认演示题池合并重复 session 槽位时明确提示 fallback', async () => {
+  it('题组槽位重复时明确提示已合并，不静默重复推进', async () => {
+    const questions = [question(false, 'dup-1'), question(false, 'dup-2')]
     const events: DomainEvent[] = [{
       eventId: 'started', profileId: 'profile', occurredAt: 1, type: 'session-started',
-      sessionId: 'session', questionIds: ['demo-basic-1', 'demo-basic-1', 'demo-basic-2'],
+      sessionId: 'session', questionIds: ['dup-1', 'dup-1', 'dup-2'],
       difficultyTrace: [1, 1, 1],
     }]
     const store = {
       async listEvents() { return [...events] },
       async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
     }
-    const view = mount(QuestView, { props: { sessionId: 'session', profileId: 'profile', store } })
+    const view = mount(QuestView, {
+      props: { sessionId: 'session', profileId: 'profile', questions, store },
+    })
     await flushPromises()
     expect(view.find('[data-testid="duplicate-slot-fallback"]').text()).toContain('重复题目已合并')
   })

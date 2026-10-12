@@ -20,14 +20,21 @@ import { PARENT_PATH } from '@/router/nextRoute'
 const router = useRouter()
 const stores = getProductionStores()
 
-/** 登录成功的落点由组件翻译成路由动作（视图自己不 import router）。 */
+/**
+ * 登录成功的落点由组件翻译成路由动作（视图自己不 import router）。
+ *
+ * 注意这里是**传入 prop** 而不是监听事件：`ProfileSelectView` 把导航回调声明为
+ * 可选 prop `navigate`，并没有 `defineEmits` 出 `navigate` 事件。早先写成
+ * `@navigate` 时 `props.navigate` 恒为 `undefined`，`useProfileSelect` 内部
+ * 回落到 no-op —— 表现为「输完 PIN 点确定，PIN 被清空但页面不动」。
+ */
 function onNavigate(path: string): void {
   void router.push(path)
 }
 </script>
 
 <template>
-  <ProfileSelectView :store="stores.profileSelect" @navigate="onNavigate" />
+  <ProfileSelectView :store="stores.profileSelect" :navigate="onNavigate" />
   <footer class="profiles-route__footer">
     <button type="button" data-testid="goto-parent" @click="router.push(PARENT_PATH)">家长区</button>
   </footer>

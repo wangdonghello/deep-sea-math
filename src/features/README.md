@@ -21,6 +21,9 @@
 | `unlock/` | 整组完成后的解锁浮层反馈（`useUnlockFeedback`） | 不做奖励计算（属 `domain/reward/`） |
 | `theme/` | 全局深海主题的纯展示组件（`FishBackdrop`）与对比度工具 | 不含任何业务规则（非功能域，仅展示性子目录） |
 
-`fixtures.ts`（`home/`）与 `demoSimilarQuestions.ts`（`quizStage/`）是**演示题池**：只在 composable 未注入题库时兜底，正式路径由 `app/productionStores.ts` 装配真实题库（见文件头注释）。
+题池由调用方显式注入（首页 `HomeView` 的 `pool` prop、答题页 `QuestView` 的
+`questions` prop），二者都来自 `data/content` 的正式题库。这些 prop 是**必填**的
+——早前它们缺省到一份演示 fixture 时，首页用演示池组题、答题页按正式题库查题，
+两端内容不一致，表现为“点开始下潜没有任何反应”。
 
 分层总览与依赖方向见 [`../README.md`](../README.md)。

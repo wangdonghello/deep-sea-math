@@ -27,7 +27,6 @@ import type { Projections, QuestProgress } from '@/domain/eventLog/replay'
 import type { DomainEvent, Settings } from '@/domain/model/types'
 
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
-import { DEMO_QUESTION_POOL } from './fixtures'
 import type { HomeProfile, HomeQuestOptions, HomeStore } from './types'
 
 /** 默认时钟：宿主当前时间（仅"今天是哪一天"需要它）。 */
@@ -95,6 +94,13 @@ export function useHomeQuest(options: HomeQuestOptions) {
   const store: HomeStore = options.store
   const clock = options.clock ?? systemClock
   const idGenerator = options.idGenerator ?? systemIdGenerator
+  /**
+   * 当前题池的全部题目 id。
+   *
+   * 用于判断库里那条当日题组是否**还取得到题**（见 {@link readSnapshot}）：
+   * 悬空题组要让位给“重新领取”，否则孩子会卡在“点开始下潜没反应”。
+   */
+  const poolIds = new Set(options.pool.map((question) => question.id))
 
   const session = useProfileSessionStore()
 
@@ -167,7 +173,20 @@ export function useHomeQuest(options: HomeQuestOptions) {
       store.listEvents(profileId),
     ])
     const projections = replayProjections(events, { profileId })
-    const sessionId = projections.dailyQuestIndex[utcDayKey(clock())] ?? null
+    const indexedSessionId = projections.dailyQuestIndex[utcDayKey(clock())] ?? null
+    /*
+     * 校验当日题组在当前题库里**还取得到题**。
+     *
+     * 为什么必须校验：题组一旦生成就固定（spec §刷新页面不换题），所以库里可能
+     * 留着一条指向**当前题库已不存在的题目**的旧记录（题库换版、或早前版本用
+     * 演示题池组出的题）。这种悬空题组在答题页渲染不出任何题，守卫会把
+     * `/quest` 打回首页——孩子看到的是“点开始下潜没反应”，而没有任何提示。
+     * 把它当成“今天还没有题组”，孩子就能重新领取；重新领取写下的新
+     * `session-started` 会顶掉索引（`dailyQuestIndex` 是后者覆盖），从而自愈。
+     */
+    const sessionId = indexedSessionId !== null && resolvesAtLeastOneQuestion(projections, indexedSessionId)
+      ? indexedSessionId
+      : null
     return {
       sessionId,
       progress: sessionId === null ? undefined : projections.questProgress[sessionId],
@@ -176,6 +195,12 @@ export function useHomeQuest(options: HomeQuestOptions) {
       events,
       projections,
     }
+  }
+
+  /** 该题组的 `questionIds` 里是否至少有一道存在于当前题池。 */
+  function resolvesAtLeastOneQuestion(projections: Projections, sessionId: string): boolean {
+    const ids = projections.questProgress[sessionId]?.questionIds ?? []
+    return ids.some((id) => poolIds.has(id))
   }
 
   /**
@@ -274,7 +299,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
         // 难度历史喂**全量事件**而不是摘要：`computeCurrentDifficulty` 要的是
         // 事件流（见 `difficulty.ts` 对 `DifficultyHistory` 的说明）。
         history: { profileId: current.profileId, events: snapshot.events, now: clock() },
-        pool: options.pool ?? DEMO_QUESTION_POOL,
+        pool: options.pool,
         masteryByQuestion: snapshot.projections.masteryByQuestion,
         clock,
         idGenerator,

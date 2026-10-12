@@ -15,7 +15,7 @@ import type { AnswerEvent, DomainEvent, MasteryState, QuizType } from '../model/
  * | `masteryByTopic` | `QuizType` | 同上（题型级轨道） |
  * | `mistakeBook` | `questionId` | `answer-submitted`(错) / `answer-revealed` / `correction-done` |
  * | `bestiaryUnlock` | `kind:targetId` | `unlock-granted` / `session-completed`（追加型） |
- * | `dailyQuestIndex` | UTC 日期键 | `session-started`（先到者胜） |
+ * | `dailyQuestIndex` | UTC 日期键 | `session-started`（后者覆盖，见实现处说明） |
  *
  * **事件是唯一事实来源**：本函数不接收任何既有投影入参，输出完全由
  * `events` 决定。因此「清空投影缓存仍可恢复」不是额外代码路径，而是这个
@@ -220,9 +220,21 @@ function foldEvent(
       progress.questionIds.push(...event.questionIds)
     }
     const day = utcDayKey(event.occurredAt)
-    if (draft.dailyQuestIndex[day] === undefined) {
-      draft.dailyQuestIndex[day] = event.sessionId
-    }
+    /*
+     * **后者覆盖**（最新的 `session-started` 胜出），而不是先到者胜。
+     *
+     * 这条规则是“内容变更后的自愈”开关：当日题组一旦生成就固定（spec
+     * §刷新页面不换题），但如果那组题里存的是**当前题库已不存在的题目**
+     * （典型场景：题库换版后，旧题组成了悬空引用），派生的当日题组就无法
+     * 渲染。此时首页会把它视为“今天还没有题组”并允许重新领取，新题组写进
+     * 日志后必须能顶掉那条悬空记录，否则孩子会被永久卡在一个取不出题的
+     * 会话里（旧行为就是如此：索引先到者胜，新题组永远不可达）。
+     *
+     * 并发风险：两个标签页同时“领取”的窗口极短，且 `claimToday` 已有
+     * `claiming` 闸门；万一真撞上，两条写入完成后两个标签页读到的都是**最新**
+     * 那条（都重新投影），不会各看一组题，收敛性与先到者胜一致。
+     */
+    draft.dailyQuestIndex[day] = event.sessionId
     return draft
   }
 

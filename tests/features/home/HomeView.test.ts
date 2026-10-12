@@ -5,7 +5,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import HomeView from '@/views/HomeView.vue'
 import type { HomeStore } from '@/features/home/types'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
-import type { AnswerSubmittedEvent, DomainEvent, SessionStartedEvent, Settings } from '@/domain/model/types'
+import { createQuestion } from '@/domain/model/types'
+import type {
+  AnswerSubmittedEvent,
+  DomainEvent,
+  Question,
+  SessionStartedEvent,
+  Settings,
+} from '@/domain/model/types'
 
 /**
  * `views/HomeView` 的行为契约（design §4：地图主体 + 任务卡浮层，方案 A）。
@@ -31,6 +38,43 @@ const PROFILE_ID = 'p-home'
 
 /** 默认 9 题（5 基础 / 3 应用 / 1 探测），进度断言的分母。 */
 const QUESTION_IDS = Array.from({ length: 9 }, (_, index) => `q-${index + 1}`)
+
+/**
+ * 与 {@link QUESTION_IDS} 同 id 的题目池。
+ *
+ * 题池现在是 `HomeView` 的必填 prop（见 `features/home/types.ts` 的说明），
+ * 而且首页会拿它校验「当日题组是否还取得到题」——用真实可解析的题目，
+ * 三条断言（进度、开始下潜、领取后写事件）才落在同一条路径上。
+ */
+function makePool(): readonly Question[] {
+  return QUESTION_IDS.map((id, index) => {
+    const category = index < 5 ? 'basic' : index < 8 ? 'applied' : 'probe'
+    const requiresFiveStep = category !== 'basic'
+    return createQuestion({
+      id,
+      type: 'add-sub',
+      difficulty: 1,
+      category,
+      story: { title: `${id} 任务`, body: '深海探险需要你的计算。' },
+      requiresFiveStep,
+      ...(requiresFiveStep
+        ? {
+            steps: [
+              { type: 'known', prompt: '找出已知条件' },
+              { type: 'unknown', prompt: '找出未知量' },
+              { type: 'relation', prompt: '选择数量关系' },
+              { type: 'expression', prompt: '写出算式' },
+              { type: 'answer', prompt: '写出结果' },
+            ],
+          }
+        : {}),
+      hints: ['审题', '已知未知', '数量关系', '列算式', '看示例'],
+      answer: { value: index + 1, unit: '个' },
+      tags: ['test'],
+      sources: ['https://example.com/test'],
+    })
+  })
+}
 
 /** 造一条 `session-started` 事件（当日题组的起点）。 */
 function sessionStarted(sessionId: string, occurredAt: number = NOW): SessionStartedEvent {
@@ -103,6 +147,7 @@ async function mountHome(options: {
   const view = mount(HomeView, {
     props: {
       store: options.store ?? createStore(),
+      pool: makePool(),
       clock: () => options.now ?? NOW,
       idGenerator: makeIdGenerator(),
       logger: options.logger,
@@ -197,7 +242,7 @@ describe('views: HomeView', () => {
     expect(view.find('[data-testid="quest-claim"]').exists()).toBe(false)
   })
 
-  it('同一天重复进入不再重新抽题（dailyQuestIndex 先到者胜）', async () => {
+  it('同一天重复进入不再重新抽题（当日索引已有可解析题组时不重抽）', async () => {
     const store = createStore([])
     const view = await mountHome({ store })
 

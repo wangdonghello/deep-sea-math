@@ -14,9 +14,19 @@ import { useRouter } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
 import { getProductionStores } from '@/app/productionStores'
+import { QUESTION_BANK } from '@/data/content'
 
 const router = useRouter()
 const stores = getProductionStores()
+
+/**
+ * 候选题目池：**正式题库**。
+ *
+ * 必须在这里显式传入，且与答题页（`app/questContext.ts` 也读 `QUESTION_BANK`）
+ * 用同一份内容。这两处一旦分叉，首页组出的题在答题页就查不到，守卫会把
+ * `/quest` 打回首页——正是早前“点开始下潜没反应”的成因。
+ */
+const POOL = QUESTION_BANK.questions
 
 /** 页签 id → 路由路径（`TabBar` 只认页签 id，见 `features/home/TabBar.vue`）。 */
 const TAB_PATHS: Readonly<Record<string, string>> = {
@@ -36,6 +46,7 @@ function onNavigate(tabId: string): void {
 <template>
   <HomeView
     :store="stores.home"
+    :pool="POOL"
     @start="(sessionId) => router.push(`/quest?session=${sessionId}`)"
     @navigate="onNavigate"
   />

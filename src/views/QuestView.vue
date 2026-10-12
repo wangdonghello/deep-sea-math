@@ -12,7 +12,8 @@ import { useQuizSession } from '@/features/quizStage/useQuizSession'
 const props = defineProps<{
   sessionId: string
   profileId: string
-  questions?: readonly Question[]
+  /** 本组题目（必填，来自正式题库；见 `useQuizSession` 的说明）。 */
+  questions: readonly Question[]
   similarQuestionPool?: readonly Question[]
   creatureId?: string
   zoneId?: string

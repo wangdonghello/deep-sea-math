@@ -59,8 +59,15 @@ export interface HomeQuestOptions {
   clock?: () => number
   /** ID 发生器；产出 `session.id` 与事件 ID。缺省 Web Crypto UUID。 */
   idGenerator?: () => string
-  /** 候选题目池；缺省用演示题池（见 `fixtures.ts`；正式路径由 `app/` 装配题库）。 */
-  pool?: readonly Question[]
+  /**
+   * 候选题目池（**必填**）。
+   *
+   * 刻意没有缺省值：早先缺省到一份演示 fixture 时，首页用它组出的题组在答题页
+   * （按正式题库查题）里一道都查不到，守卫把 `/quest` 打回首页，表现为“点开始
+   * 下潜没有任何反应”。让调用方必须显式给池后，这类接线错误在编译期就暴露，
+   * 而不是变成一次静默的、看不出原因的跳转失败。
+   */
+  pool: readonly Question[]
   /**
    * 日志出口；发出的对象先经 `redact()` 脱敏。
    *

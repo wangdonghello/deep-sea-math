@@ -163,39 +163,37 @@ describe('useQuizSession', () => {
       .toEqual(['event-3', 'event-4'])
   })
 
-  it('默认 demo 池无需外注相似题池即可完成订正与相似题练习', async () => {
-    const events: DomainEvent[] = [{
-      eventId: 'started', profileId: 'profile-1', occurredAt: 1, type: 'session-started',
-      sessionId: 'session-1', questionIds: ['demo-basic-1'], difficultyTrace: [1],
-    }]
-    const store = {
-      async listEvents() { return [...events] },
-      async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
-    }
-    const session = useQuizSession({ sessionId: 'session-1', profileId: 'profile-1', store })
+  it('显式注入题组与相似题池即可完成订正与相似题练习', async () => {
+    const root = makeQuestion('root-1', ['similar-1'], { value: 7, unit: '个' })
+    const similar = makeQuestion('similar-1', [], { value: 9, unit: '个' })
+    const { session, events } = setup([root, similar])
+
     await session.submitAnswer('6')
     await session.submitAnswer('7')
-    expect(session.currentQuestion.value?.id).not.toBe('demo-basic-1')
-    const similarAnswer = String(session.currentQuestion.value?.answer.value)
-    await session.submitAnswer(similarAnswer)
+    expect(session.currentQuestion.value?.id).toBe('similar-1')
+    await session.submitAnswer('9')
     expect(events.some((event) => event.type === 'correction-done')).toBe(true)
   })
 
   it('重复题目槽位明确合并并暴露 fallback 数量，不按 ID 静默重复推进', async () => {
+    const first = makeQuestion('dup-1')
+    const second = makeQuestion('dup-2')
     const events: DomainEvent[] = [{
       eventId: 'started', profileId: 'profile-1', occurredAt: 1, type: 'session-started',
-      sessionId: 'session-1', questionIds: ['demo-basic-1', 'demo-basic-1', 'demo-basic-2'],
+      sessionId: 'session-1', questionIds: ['dup-1', 'dup-1', 'dup-2'],
       difficultyTrace: [1, 1, 1],
     }]
     const store = {
       async listEvents() { return [...events] },
       async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
     }
-    const session = useQuizSession({ sessionId: 'session-1', profileId: 'profile-1', store })
+    const session = useQuizSession({
+      sessionId: 'session-1', profileId: 'profile-1', questions: [first, second], store,
+    })
     await session.refreshEvents()
     expect(session.totalQuestions.value).toBe(2)
     expect(session.duplicateSlotCount.value).toBe(1)
-    expect(session.currentQuestion.value?.id).toBe('demo-basic-1')
+    expect(session.currentQuestion.value?.id).toBe('dup-1')
   })
 
   it('五步答案只有答对才完成 answer 步', async () => {
