@@ -59,6 +59,15 @@ const emit = defineEmits<{
 <style scoped>
 .parent-section {
   position: relative;
+  /*
+   * 底部导航的高度预算。
+   *
+   * `ParentSectionNav` 是 `position: sticky; bottom: 0`——sticky 元素**不为自己
+   * 占位**，内容长到需要滚动时，最后一行（例如「创建档案」按钮）会滚进导航
+   * 底下被盖住，点不到。这里把导航高度声明成变量，外壳用它垫出底部空间、
+   * 导航用它约束自身最小高度，两处共用同一个值，避免改一处忘一处。
+   */
+  --parents-nav-space: 4.25rem;
   /* 纵向 flex：底部导航用 margin-top:auto 顶到视口底，内容长时可滚动 */
   display: flex;
   flex-direction: column;

@@ -41,10 +41,12 @@ const SECTIONS: ReadonlyArray<{ id: ParentSection; label: string }> = [
    `margin-top:auto` 把导航顶到视口底（内容短时），内容长时 sticky 吸附在
    视口底部——两种情况都"在心里有底"的位置，不需要滚到页面末尾找。 */
 .parent-nav {
-  position: sticky;
-  bottom: 0;
-  z-index: 2;
+  /* 不用 `position: sticky`：sticky 元素不为自己占位，内容一长就会盖住末尾
+     控件（实测「创建档案」按钮被它挡到点不到）。家长区是低频管理界面，不需要
+     「随时可见」的导航；作为普通块级元素排在内容末尾即可，短页面由
+     `margin-top: auto` 顶到视口底。 */
   margin-top: auto;
+  min-height: var(--parents-nav-space, 4.25rem);
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
