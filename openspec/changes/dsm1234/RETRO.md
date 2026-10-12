@@ -601,3 +601,68 @@ sticky 随即失效；横向溢出改为在源头处理（flex 子项 `min-width
 对 `type=password` 的填值方式不触发组件所需的输入事件，非应用缺陷。
 
 **验证**：705 测试全绿、build 通过；iPhone 14 视口实测「家长 PIN → 档案管理 → 创建档案 → 总览」全程可点，截图确认三页视觉与首页/图鉴一致。
+
+---
+
+## R26. 答题按钮状态机 + 看答案释义 + 家长区入口按钮（真机验收后的第三轮修复）
+
+**背景**：家长在真机验收后提出三条：答题页三个按钮（提交/提示/看答案）始终同屏、答对后自动跳下一题、家长区入口是一行低对比小字。三处一起改。
+
+### 1. 作答阶段状态机（`useQuizSession`）
+
+新增 `AnswerPhase = 'answering' | 'correct' | 'wrong' | 'revealed'` 与 `heldQuestionId` /
+`displayedQuestion`。关键设计：
+
+- `currentQuestion` 仍由 `resolvedIds` 派生（答对/看答案后**立刻**推进队列），**不**改为按住——
+  这保住了 `revealAnswer` 连续两次作用于两题、`submitAnswer` 订正后自动移到相似题等既有事件流
+  语义（旧单测原样通过）。
+- 界面用另加的 `displayedQuestion`：`heldQuestionId` 非空时按住那一题，`currentPosition` /
+  提示链 / 五步状态等 UI 读数改以它为准。答对后 `phase='correct'` 且按住，孩子点 `nextQuestion()`
+  才松开、回到 `answering`。
+- `submitAnswer` 答对 → `correct`、答错 → `wrong`（**仍自动写一条 `hint-used` 第一层**，见下）；
+  `revealAnswer` 写 `answer-revealed` 后 → `revealed` 且 `explanationVisible=true`；新增
+  `showExplanation()` **只展开释义、不写任何事件**（答对后看详解，避免把已答对的题降级为提示后掌握）。
+
+### 2. 底部统一动作区（`QuestView`）
+
+三处分散按钮（`QuizStage` 提交、`HintStack` 提示、页尾直接看答案）合并为底部一个动作区，按
+`phase` 只渲染两个：`action-submit`/`action-hint` → `action-next`/`action-explain` →
+`action-submit`/`action-reveal` → `action-next`。为把提交按钮上移，输入值经
+`QuizStage`/`StepBody` 的 `defineModel` 上抛给 `QuestView` 的 `draft`；答案步不再自带
+`submit-step-answer` 按钮（`QuizStage`/`StepBody` 单测相应改为断言 model 上抛）。`HintStack`
+新增 `showRevealButton`（缺省 `true`，答题页传 `false`），`reveal-hint` 单测原样通过。
+
+**与规格的张力（显式留痕）**：`daily-math-quest` §答题流程与判定 要求「答错时展开提示链第一层」，
+而按用户要求答错态只留「提交答案 / 看答案」两个按钮、不再显示「我需要提示」。处理为：答错时
+**仍自动写 `hint-used` 第一层并展开该层**（规格满足），只是不再重复暴露提示入口（已在
+`useQuizSession` 注释中写明来源）。
+
+**既有测试的显式更新**：`reveal-answer`→`action-reveal`、`submit-answer`→`action-submit`、
+`reveal-hint`（答题页）→`action-hint`；「看完题但未完成 / continue-practice」用例改为以存量
+`answer-revealed` 事件重放该状态——新界面已不允许「不作答就 reveal」，该路径现在只对旧版
+遗留会话有意义。
+
+### 3. 看答案释义面板（`AnswerExplanation`）
+
+题目下方新增 `data-testid="answer-explanation"`：五层提示按顺序展开（取自 `question.hints`，
+标签取 `HINT_LAYER_LABELS`）+ 最终答案（算式优先，否则「数值 + 单位」）。两处显示时机：答错后
+`看答案` → 显示且写 `answer-revealed`；答对后 `看答案详解` → 显示但**不**写事件。面板纯展示、
+不持状态，写不写事件由 `useQuizSession` 决定。
+
+### 4. 家长区入口按钮（`ProfilesRoute`）
+
+页脚那行小字改为玻璃底 + `--ds-glass-border` 描边的次级按钮（不抢「选择你的档案」的暖橙主色），
+`min-height: 2.75rem` + 水平内边距满足触屏点按，位置仍在主内容之后；`data-testid="goto-parent"`
+保留。
+
+### 验证
+
+- `npm run test`：57 文件 / 712 用例全绿（新增：阶段机 phase/按住/nextQuestion、showExplanation
+  不写事件、动作区按阶段渐进、释义面板五层 + 答案、HintStack `showRevealButton=false`）；
+- `npm run type-check`：通过；`npm run test:coverage`：全绿（阈值 80%）；
+- `npm run build`：成功；
+- iPhone 14 视口 agent-browser 实测：档案页 `家长区（家长管理）` 按钮清晰可点；答题页未作答只
+  见「提交答案/我需要提示」→ 答错后「提交答案/看答案」并自动展开第二层提示 → 看答案后展开
+  「答案与讲解」五层 + 答案、只余「下一题」→ 答对后「下一题/看答案详解」，看详解展开释义且不
+  写事件。
+

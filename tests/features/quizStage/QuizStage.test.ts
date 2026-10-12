@@ -56,13 +56,15 @@ describe('QuizStage', () => {
     expect(view.emitted('completeStep')).toEqual([[question(true).story.body]])
   })
 
-  it('答案步只转发提交，由 composable 判定并推进状态', async () => {
+  it('答案步只采集输入并上抛，提交由答题页动作区统一发起', async () => {
     const source = question(true)
     const applied = createQuestion({ ...source, answer: { value: 7, unit: '个', expression: '3+4' } })
-    const view = mount(QuizStage, { props: stageProps(applied, 4) })
+    const view = mount(QuizStage, { props: { ...stageProps(applied, 4), answer: '' } })
+    // 答案步不再自带提交按钮：它已并入底部统一动作区
+    expect(view.find('[data-testid="submit-step-answer"]').exists()).toBe(false)
     await view.get('[data-key="7"]').trigger('click')
-    await view.get('[data-testid="submit-step-answer"]').trigger('click')
-    expect(view.emitted('submit')).toEqual([['7']])
+    expect(view.emitted('update:answer')?.at(-1)).toEqual(['7'])
+    expect(view.get('[data-testid="step-input-value"]').text()).toBe('7')
   })
 })
 
@@ -82,6 +84,12 @@ describe('HintStack', () => {
     await view.setProps({ hints: [1, 2, 3, 4, 5].map((layer) => ({ layer, text: `提示${['一', '二', '三', '四', '五'][layer - 1]}` })), used: 5 })
     expect(view.findAll('[data-testid="hint-layer"]')).toHaveLength(5)
     expect((view.get('[data-testid="reveal-hint"]').element as HTMLButtonElement).disabled).toBe(true)
+  })
+
+  it('showRevealButton=false 时隐藏提示按钮，交由答题页动作区统一入口', () => {
+    const view = mount(HintStack, { props: { hints: [], used: 0, showRevealButton: false } })
+    expect(view.find('[data-testid="reveal-hint"]').exists()).toBe(false)
+    expect(view.find('[data-testid="hint-layer"]').exists()).toBe(false)
   })
 })
 
@@ -120,6 +128,71 @@ describe('QuestView feedback', () => {
     expect(view.find('[data-testid="duplicate-slot-fallback"]').text()).toContain('重复题目已合并')
   })
 
+  it('底部动作区按作答阶段渐进只显示两个按钮', async () => {
+    const events: DomainEvent[] = [{
+      eventId: 'started', profileId: 'profile', occurredAt: 1, type: 'session-started',
+      sessionId: 'session', questionIds: ['basic'], difficultyTrace: [1],
+    }]
+    const store = {
+      async listEvents() { return [...events] },
+      async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
+    }
+    const view = mount(QuestView, {
+      props: { sessionId: 'session', profileId: 'profile', questions: [question()], store },
+    })
+    await flushPromises()
+    // 未作答：提交答案 + 我需要提示
+    expect(view.find('[data-testid="action-submit"]').exists()).toBe(true)
+    expect(view.find('[data-testid="action-hint"]').exists()).toBe(true)
+    expect(view.find('[data-testid="action-next"]').exists()).toBe(false)
+    expect(view.find('[data-testid="reveal-hint"]').exists()).toBe(false)
+
+    // 答对：下一题 + 看答案详解
+    await view.get('[data-key="7"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
+    await flushPromises()
+    expect(view.find('[data-testid="action-submit"]').exists()).toBe(false)
+    expect(view.find('[data-testid="action-next"]').exists()).toBe(true)
+    expect(view.find('[data-testid="action-explain"]').exists()).toBe(true)
+
+    // 看答案详解：展开释义面板，且不写 answer-revealed（答对的题不该被降级）
+    await view.get('[data-testid="action-explain"]').trigger('click')
+    expect(view.find('[data-testid="answer-explanation"]').exists()).toBe(true)
+    expect(events.some((event) => event.type === 'answer-revealed')).toBe(false)
+
+    // 下一题：单题题组落到完成态
+    await view.get('[data-testid="action-next"]').trigger('click')
+    await flushPromises()
+    expect(view.find('[data-testid="quest-completed"]').exists()).toBe(true)
+  })
+
+  it('答错后看答案展开五层提示与最终答案', async () => {
+    const events: DomainEvent[] = []
+    const store = {
+      async listEvents() { return [...events] },
+      async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
+    }
+    const view = mount(QuestView, {
+      props: { sessionId: 'session', profileId: 'profile', questions: [question()], store },
+    })
+    await flushPromises()
+    await view.get('[data-key="8"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
+    await flushPromises()
+    // 答错：提交答案 + 看答案
+    expect(view.find('[data-testid="action-reveal"]').exists()).toBe(true)
+    await view.get('[data-testid="action-reveal"]').trigger('click')
+    await flushPromises()
+    const panel = view.get('[data-testid="answer-explanation"]')
+    expect(panel.findAll('[data-testid="explanation-hint"]')).toHaveLength(5)
+    expect(panel.text()).toContain('审题提醒')
+    expect(panel.text()).toContain('提示五')
+    expect(panel.get('[data-testid="explanation-answer"]').text()).toContain('7')
+    // 看过答案：只剩「下一题」
+    expect(view.find('[data-testid="action-next"]').exists()).toBe(true)
+    expect(view.find('[data-testid="action-reveal"]').exists()).toBe(false)
+  })
+
   it('答错显示正向提示，不渲染失败弹窗或 alert', async () => {
     const events: DomainEvent[] = []
     const store = {
@@ -131,12 +204,17 @@ describe('QuestView feedback', () => {
     })
     await flushPromises()
     await view.get('[data-key="8"]').trigger('click')
-    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
     await flushPromises()
     expect(view.find('[role="alert"]').exists()).toBe(false)
     expect(view.find('[data-testid="quiz-feedback"]').text()).toContain('再想想')
     expect(view.text()).not.toContain('答题失败')
+    // 答错仍按规格自动展开提示链第一层
     expect(view.findAll('[data-testid="hint-layer"]')).toHaveLength(1)
+    // 但答错态底部只留「提交答案 / 看答案」两个按钮，不再显示「我需要提示」
+    expect(view.find('[data-testid="action-submit"]').exists()).toBe(true)
+    expect(view.find('[data-testid="action-reveal"]').exists()).toBe(true)
+    expect(view.find('[data-testid="action-hint"]').exists()).toBe(false)
   })
 
   it('持久化分层提示与直接看答案事件', async () => {
@@ -149,20 +227,38 @@ describe('QuestView feedback', () => {
       props: { sessionId: 'session', profileId: 'profile', questions: [question()], store },
     })
     await flushPromises()
-    await view.get('[data-testid="reveal-hint"]').trigger('click')
+    await view.get('[data-testid="action-hint"]').trigger('click')
     await flushPromises()
     expect(events.some((event) => event.type === 'hint-used' && event.level === 1)).toBe(true)
-    await view.get('[data-testid="reveal-answer"]').trigger('click')
+    // 「看答案」入口只在答错后出现：先提交一个错答案进入答错态
+    await view.get('[data-key="8"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
+    await flushPromises()
+    await view.get('[data-testid="action-reveal"]').trigger('click')
     await flushPromises()
     expect(events.some((event) => event.type === 'answer-revealed' && event.revealedAnswer === true)).toBe(true)
     expect(events.some((event) => event.type === 'session-completed')).toBe(false)
   })
 
-  it('看完题但未完成时提供继续练习，订正后才显示完成并发奖', async () => {
-    const events: DomainEvent[] = [{
-      eventId: 'started', profileId: 'profile', occurredAt: 1, type: 'session-started',
-      sessionId: 'session', questionIds: ['basic', 'second'], difficultyTrace: [1, 1],
-    }]
+  it('续做已看过答案的旧题组时提供继续练习，作答后才显示完成并发奖', async () => {
+    // 旧版界面允许「直接看答案」而不先作答，留下的会话可能整组只被 reveal、
+    // 没有任何 answer-submitted。这种"未完成"的存量会话在新界面里仍要能续做：
+    // 这里用已落库的 answer-revealed 事件重放该状态（新界面本身已不允许
+    // 不作答就 reveal，故无法从 UI 点击走到这里）。
+    const events: DomainEvent[] = [
+      {
+        eventId: 'started', profileId: 'profile', occurredAt: 1, type: 'session-started',
+        sessionId: 'session', questionIds: ['basic', 'second'], difficultyTrace: [1, 1],
+      },
+      {
+        eventId: 'reveal-1', profileId: 'profile', occurredAt: 2, type: 'answer-revealed',
+        sessionId: 'session', questionId: 'basic', revealedAnswer: true,
+      },
+      {
+        eventId: 'reveal-2', profileId: 'profile', occurredAt: 3, type: 'answer-revealed',
+        sessionId: 'session', questionId: 'second', revealedAnswer: true,
+      },
+    ]
     const store = {
       async listEvents() { return [...events] },
       async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
@@ -171,30 +267,32 @@ describe('QuestView feedback', () => {
       props: { sessionId: 'session', profileId: 'profile', questions: [question(), question(false, 'second')], store },
     })
     await flushPromises()
-    await view.get('[data-testid="reveal-answer"]').trigger('click')
-    await flushPromises()
-    await view.get('[data-testid="reveal-answer"]').trigger('click')
-    await flushPromises()
     expect(view.find('[data-testid="quest-completed"]').exists()).toBe(false)
     expect(view.text()).toContain('已看完题目，但直接看答案不计入任务完成')
     expect(view.get('[data-testid="continue-practice"]').text()).toContain('继续练习')
     expect(events.some((event) => event.type === 'session-completed')).toBe(false)
 
+    // 回到第一题作答：答错 8 → 订正为 7
     await view.get('[data-testid="continue-practice"]').trigger('click')
     expect(view.find('[data-testid="direct-answer"]').exists()).toBe(true)
     await view.get('[data-key="8"]').trigger('click')
-    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
     await flushPromises()
-    expect(view.find('[data-testid="direct-answer"]').exists()).toBe(true)
     await view.get('[data-key="backspace"]').trigger('click')
     await view.get('[data-key="7"]').trigger('click')
-    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
+    await flushPromises()
+    // 答对后停在本题，点「下一题」后再续做第二题
+    await view.get('[data-testid="action-next"]').trigger('click')
     await flushPromises()
     await view.get('[data-testid="continue-practice"]').trigger('click')
     await view.get('[data-key="7"]').trigger('click')
-    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
     await flushPromises()
     expect(events.some((event) => event.type === 'session-completed')).toBe(true)
+    // 答对后停在本题：点「下一题」才落到完成态
+    await view.get('[data-testid="action-next"]').trigger('click')
+    await flushPromises()
     expect(view.find('[data-testid="quest-completed"]').exists()).toBe(true)
   })
 
@@ -214,7 +312,7 @@ describe('QuestView feedback', () => {
     })
     await flushPromises()
     await view.get('[data-key="8"]').trigger('click')
-    await view.get('[data-testid="submit-answer"]').trigger('click')
+    await view.get('[data-testid="action-submit"]').trigger('click')
     await flushPromises()
     expect(view.find('[role="status"]').text()).toContain('暂时无法保存')
     expect(JSON.stringify(logs)).not.toContain('sensitive-value')

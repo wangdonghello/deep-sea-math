@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 import type { FiveStep, FiveStepType, Question } from '@/domain/model/types'
 import type { FiveStepState } from '@/domain/quiz/fiveStepMachine'
@@ -19,7 +19,13 @@ const emit = defineEmits<{
   revisitStep: [step: FiveStepType]
   resumeProgress: []
 }>()
-const directAnswer = ref('')
+/**
+ * 当前输入（基础题键盘值 / 五步数值步的值）。
+ *
+ * 提交按钮已上移到答题页底部统一动作区（`data-testid="action-submit"`），
+ * 因此输入值需经此 model 上抛给父级；本组件只负责采集与渲染。
+ */
+const answer = defineModel<string>('answer', { default: '' })
 const currentTemplate = computed(() => props.steps.find((step) => step.type === props.machine?.current))
 const currentIsComplete = computed(() => props.machine?.completed.includes(props.machine.current) ?? false)
 </script>
@@ -35,6 +41,7 @@ const currentIsComplete = computed(() => props.machine?.completed.includes(props
       <StepBody
         v-else
         :key="currentTemplate.type"
+        v-model:value="answer"
         :question="question"
         :step="currentTemplate"
         @complete="emit('completeStep', $event)"
@@ -42,9 +49,8 @@ const currentIsComplete = computed(() => props.machine?.completed.includes(props
       />
     </template>
     <div v-else data-testid="direct-answer">
-      <output data-testid="answer-value">{{ directAnswer }}</output>
-      <Numpad v-model="directAnswer" />
-      <button type="button" data-testid="submit-answer" :disabled="!directAnswer.trim()" @click="emit('submit', directAnswer)">提交答案</button>
+      <output data-testid="answer-value">{{ answer }}</output>
+      <Numpad v-model="answer" />
     </div>
   </section>
 </template>

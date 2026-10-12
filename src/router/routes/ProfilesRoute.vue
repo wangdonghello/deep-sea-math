@@ -37,22 +37,30 @@ function onNavigate(path: string): void {
 <template>
   <ProfileSelectView :store="stores.profileSelect" :navigate="onNavigate" />
   <footer class="profiles-route__footer">
-    <button type="button" data-testid="goto-parent" @click="router.push(PARENT_PATH)">家长区</button>
+    <button type="button" data-testid="goto-parent" @click="router.push(PARENT_PATH)">家长区（家长管理）</button>
   </footer>
 </template>
 
 <style scoped>
-/* 低对比、小字号：找得到，但不与"选择你的档案"抢注意力 */
+/*
+ * 次级按钮：玻璃底 + `--ds-glass-border`，刻意不用主色暖橙——它不能与
+ * 「选择你的档案」的主操作抢注意力；但要有明确边框与足够的点按高度，
+ * 让家长一眼看得到、一点就中（原先是一行低对比小字，家长找不到）。
+ */
 .profiles-route__footer {
+  display: flex;
+  justify-content: center;
   padding: var(--ds-space-lg);
-  text-align: center;
 }
 
 .profiles-route__footer button {
-  border: 0;
-  background: none;
+  min-height: 2.75rem;
+  padding: 0 1.5rem;
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-md, 0.75rem);
+  background: var(--ds-glass-surface, rgba(9, 26, 48, 0.92));
   color: var(--ds-text-muted);
-  font-size: var(--ds-font-size-caption);
+  font-size: var(--ds-font-size-body, 15px);
   cursor: pointer;
 }
 </style>

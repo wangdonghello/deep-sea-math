@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 import { redact } from '@/shared/redact'
 import type { Question } from '@/domain/model/types'
+import AnswerExplanation from '@/features/quizStage/AnswerExplanation.vue'
 import HintStack from '@/features/quizStage/HintStack.vue'
 import StageHeader from '@/features/quizStage/StageHeader.vue'
 import QuizStage from '@/features/quizStage/QuizStage.vue'
@@ -30,7 +31,13 @@ const session = useQuizSession({
   store: props.store, clock: props.clock, idGenerator: props.idGenerator,
 })
 const errorMessage = ref('')
-const question = computed(() => session.currentQuestion.value)
+/** 界面显示中的题（答对/看答案后按住原题，不立刻跳下一题）。 */
+const question = computed(() => session.displayedQuestion.value)
+/** 当前输入（键盘/五步数值步），提交由底部动作区统一发起。 */
+const draft = ref('')
+
+// 换题时清空输入，避免把上一题的答案带到新题上。
+watch(() => question.value?.id, () => { draft.value = '' })
 
 function logFailure(event: string, error: unknown): void {
   props.logger?.({ event, ...redact({ error }) })
@@ -57,6 +64,7 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
     <QuizStage
       v-if="question"
       :key="question.id"
+      v-model:answer="draft"
       :question="question"
       :steps="session.fiveStepTemplates.value"
       :machine="session.fiveStepState.value"
@@ -71,15 +79,53 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
       :key="`hints-${question.id}`"
       :hints="session.revealedHints.value"
       :used="session.usedHintLevel.value"
+      :show-reveal-button="false"
       @reveal="run(session.useHint, 'quiz-hint-failed')"
+    />
+    <AnswerExplanation
+      v-if="question && session.explanationVisible.value"
+      :question="question"
     />
     <p v-if="session.feedback.value" data-testid="quiz-feedback">{{ session.feedback.value }}</p>
     <p v-if="session.duplicateSlotCount.value > 0" data-testid="duplicate-slot-fallback">
       题库暂时不够，重复题目已合并为一次练习。
     </p>
-    <button v-if="question" type="button" data-testid="reveal-answer" :disabled="session.submitting.value" @click="run(session.revealAnswer, 'quiz-reveal-failed')">
-      直接看答案
-    </button>
+
+    <!-- 底部统一动作区：按作答阶段只显示两个按钮 -->
+    <div v-if="question" class="quest-actions" data-testid="quest-actions">
+      <template v-if="session.phase.value === 'answering'">
+        <button
+          type="button" data-testid="action-submit"
+          :disabled="session.submitting.value || draft.trim() === ''"
+          @click="run(() => session.submitAnswer(draft), 'quiz-submit-failed')"
+        >提交答案</button>
+        <button
+          type="button" data-testid="action-hint"
+          :disabled="session.submitting.value"
+          @click="run(session.useHint, 'quiz-hint-failed')"
+        >我需要提示</button>
+      </template>
+      <template v-else-if="session.phase.value === 'correct'">
+        <button type="button" data-testid="action-next" @click="session.nextQuestion()">下一题</button>
+        <button type="button" data-testid="action-explain" @click="session.showExplanation()">看答案详解</button>
+      </template>
+      <template v-else-if="session.phase.value === 'wrong'">
+        <button
+          type="button" data-testid="action-submit"
+          :disabled="session.submitting.value || draft.trim() === ''"
+          @click="run(() => session.submitAnswer(draft), 'quiz-submit-failed')"
+        >提交答案</button>
+        <button
+          type="button" data-testid="action-reveal"
+          :disabled="session.submitting.value"
+          @click="run(session.revealAnswer, 'quiz-reveal-failed')"
+        >看答案</button>
+      </template>
+      <template v-else-if="session.phase.value === 'revealed'">
+        <button type="button" data-testid="action-next" @click="session.nextQuestion()">下一题</button>
+      </template>
+    </div>
+
     <p v-if="errorMessage" role="status">{{ errorMessage }}</p>
     <p v-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
       这一组完成啦，继续探索深海吧！
@@ -101,6 +147,8 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
 
 <style scoped>
 .quest-view { display: grid; gap: 1rem; max-width: 42rem; margin: 0 auto; padding: 1rem; }
-.quest-view > button { min-height: 3rem; border: 0; border-radius: 1rem; background: var(--color-accent, #ffb454); color: #162c48; font-weight: 700; }
+.quest-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.75rem; }
+.quest-actions button { min-height: 3rem; border: 0; border-radius: 1rem; background: var(--color-accent, #ffb454); color: #162c48; font-weight: 700; }
+.quest-actions button[data-testid="action-hint"] { background: var(--color-panel, #17365b); color: var(--color-text, #fff); }
 [data-testid="quiz-feedback"] { color: var(--color-text, #fff); }
 </style>

@@ -9,6 +9,19 @@ import { isCorrect, matchesExpression, matchesNumericValue } from '@/domain/quiz
 import type { AnswerSubmittedEvent, DomainEvent, FiveStep, FiveStepType, Question } from '@/domain/model/types'
 import { grantRewards } from '@/domain/reward/rewardGrant'
 
+/**
+ * 作答阶段——驱动答题页底部动作区显示哪两个按钮。
+ *
+ * - `answering`：未作答，显示「提交答案 / 我需要提示」
+ * - `correct`：答对后暂停在当前题，显示「下一题 / 看答案详解」
+ * - `wrong`：答错后显示「提交答案（订正）/ 看答案」
+ * - `revealed`：看过答案后显示「下一题」
+ *
+ * 阶段只描述界面状态，不落事件：真正的作答事实仍由 `answer-submitted` /
+ * `answer-revealed` / `hint-used` 事件承载。
+ */
+export type AnswerPhase = 'answering' | 'correct' | 'wrong' | 'revealed'
+
 /** Minimal event-log capability required by a quiz session. */
 export interface QuizSessionStore {
   listEvents(profileId: string): Promise<readonly DomainEvent[]>
@@ -61,6 +74,18 @@ export function useQuizSession(options: QuizSessionOptions) {
   const fiveStepStates = ref<Record<string, FiveStepState>>({})
   const submitting = ref(false)
   const practiceQuestionId = ref<string | null>(null)
+  /**
+   * 当前作答阶段（见 {@link AnswerPhase}）。
+   *
+   * 关键变化：答对后**不再自动前进**——`currentQuestion` 由 `resolvedIds`
+   * 派生，答对即会移到下一道未解题，因此这里额外用 `heldQuestionId` 把
+   * 界面上「正在显示的那道题」按住（见 {@link displayedQuestion}）。
+   */
+  const phase = ref<AnswerPhase>('answering')
+  /** 界面按住不动的题 id；`null` 时界面跟随 `currentQuestion`。 */
+  const heldQuestionId = ref<string | null>(null)
+  /** 释义面板是否展开（答对看详解 / 答错看答案后为真）。 */
+  const explanationVisible = ref(false)
   const clock = options.clock ?? (() => Date.now())
   const idGenerator = options.idGenerator ?? (() => createEventId())
   const questionStartedAt = new Map<string, number>()
@@ -121,6 +146,22 @@ export function useQuizSession(options: QuizSessionOptions) {
     }
     return queue.value.find((question) => !resolvedIds.value.has(question.id)) ?? null
   })
+  /**
+   * 界面上「正在显示的那道题」。
+   *
+   * 与 `currentQuestion` 的区别：`currentQuestion` 由 `resolvedIds` 派生，答对
+   * 或看过答案后会**立即**移到下一题；而本 computed 在 `heldQuestionId` 非空时
+   * 按住那一题不放，让界面停在原题等待孩子点「下一题」。所有面向 UI 的读数
+   * （进度、提示、五步状态）都以它为准；`submitAnswer` / `revealAnswer` 等
+   * 写事件的动作仍走 `currentQuestion`，保持事件流「答对即推进队列」的语义。
+   */
+  const displayedQuestion = computed(() => {
+    if (heldQuestionId.value !== null) {
+      const held = queue.value.find((question) => question.id === heldQuestionId.value)
+      if (held !== undefined) return held
+    }
+    return currentQuestion.value
+  })
   const practiceQuestionAvailable = computed(() => queue.value.some(
     (question) => !correctlyAnsweredIds.value.has(question.id),
   ))
@@ -128,23 +169,23 @@ export function useQuizSession(options: QuizSessionOptions) {
     (event) => event.type === 'session-completed' && event.sessionId === options.sessionId &&
       event.profileId === options.profileId,
   ))
-  const fiveStepTemplates = computed(() => currentQuestion.value?.steps ?? DEFAULT_FIVE_STEP_TEMPLATES)
+  const fiveStepTemplates = computed(() => displayedQuestion.value?.steps ?? DEFAULT_FIVE_STEP_TEMPLATES)
   const fiveStepState = computed(() => {
-    const question = currentQuestion.value
+    const question = displayedQuestion.value
     if (question === null || !question.requiresFiveStep) return null
     return fiveStepStates.value[question.id] ?? createFiveStepMachine(fiveStepTemplates.value)
   })
   const currentPosition = computed(() => {
-    const index = queue.value.findIndex((question) => question.id === currentQuestion.value?.id)
+    const index = queue.value.findIndex((question) => question.id === displayedQuestion.value?.id)
     return index < 0 ? queue.value.length : index + 1
   })
   const totalQuestions = computed(() => queue.value.length)
   const usedHintLevel = computed(() => events.value.filter((event) =>
     event.type === 'hint-used' && event.sessionId === options.sessionId &&
-    event.questionId === currentQuestion.value?.id,
+    event.questionId === displayedQuestion.value?.id,
   ).length)
   const revealedHints = computed((): readonly RevealedHint[] => {
-    const question = currentQuestion.value
+    const question = displayedQuestion.value
     return question === null ? [] : Array.from(
       { length: Math.min(usedHintLevel.value, MAX_HINT_LAYERS) }, (_, index) => revealHint(question, index),
     )
@@ -180,8 +221,35 @@ export function useQuizSession(options: QuizSessionOptions) {
     const next = queue.value.find((question) => !correctlyAnsweredIds.value.has(question.id))
     if (next !== undefined) {
       practiceQuestionId.value = next.id
+      phase.value = 'answering'
+      heldQuestionId.value = null
+      explanationVisible.value = false
       if (!questionStartedAt.has(next.id)) questionStartedAt.set(next.id, clock())
     }
+  }
+
+  /**
+   * 站起来走到下一题：清掉「按住」与作答阶段，回到 `answering`。
+   *
+   * 因为 `currentQuestion` 在答对/看答案后已经自行推进，这里只需松开按住；
+   * 界面随之回落到 `currentQuestion` 指向的下一道未解题。
+   */
+  function nextQuestion(): void {
+    heldQuestionId.value = null
+    phase.value = 'answering'
+    explanationVisible.value = false
+    feedback.value = ''
+  }
+
+  /**
+   * 只展开释义面板，**不写任何事件**。
+   *
+   * 供「答对后看答案详解」使用：孩子已经答对，展示讲解不应把这道题标记成
+   * 「看过答案」，否则会污染掌握度判定（`answer-revealed` 会把它降为提示后
+   * 掌握）。答错后看答案走 {@link revealAnswer}，那条路径才写事件。
+   */
+  function showExplanation(): void {
+    explanationVisible.value = true
   }
 
   async function finishIfComplete(): Promise<void> {
@@ -263,10 +331,17 @@ export function useQuizSession(options: QuizSessionOptions) {
         retryCount, ms: Math.max(0, occurredAt - startedAt),
       }
       await append(event)
+      explanationVisible.value = false
+      heldQuestionId.value = question.id
 
       if (!correct) {
+        phase.value = 'wrong'
         feedback.value = '再想想，可以看看题目里的条件'
         if (usedHintLevel.value < 5) {
+          // 规格 `daily-math-quest` §答题流程与判定 要求「答错时展开提示链第一层」，
+          // 因此这里仍自动写一条 `hint-used`。但按真机验收的用户要求，答错态底部
+          // 动作区只留「提交答案 / 看答案」两个按钮，`我需要提示` 按钮在答错态
+          // 不显示（提示已在下方展开，无需重复入口）。这条张力在此显式留痕。
           const hint = revealHint(question, usedHintLevel.value)
           await append({
             ...baseEvent(), type: 'hint-used', sessionId: options.sessionId,
@@ -276,6 +351,7 @@ export function useQuizSession(options: QuizSessionOptions) {
         return false
       }
 
+      phase.value = 'correct'
       if (answerStepState !== null) {
         fiveStepStates.value = { ...fiveStepStates.value, [question.id]: completeCurrentStep(answerStepState) }
       }
@@ -311,6 +387,9 @@ export function useQuizSession(options: QuizSessionOptions) {
         questionId: question.id, revealedAnswer: true,
       })
       feedback.value = `答案是 ${question.answer.expression ?? `${question.answer.value}${question.answer.unit ?? ''}`}`
+      heldQuestionId.value = question.id
+      phase.value = 'revealed'
+      explanationVisible.value = true
       markNextQuestionStarted(occurredAt)
       await finishIfComplete()
     } finally {
@@ -319,8 +398,10 @@ export function useQuizSession(options: QuizSessionOptions) {
   }
 
   return {
-    events: computed(() => events.value), currentQuestion, currentPosition, totalQuestions, feedback, submitting,
-    sessionCompleted, practiceQuestionAvailable, continuePractice,
+    events: computed(() => events.value), currentQuestion, displayedQuestion,
+    currentPosition, totalQuestions, feedback, submitting,
+    phase: computed(() => phase.value), explanationVisible: computed(() => explanationVisible.value),
+    sessionCompleted, practiceQuestionAvailable, continuePractice, nextQuestion, showExplanation,
     stepFeedback, fiveStepTemplates, fiveStepState, fiveStepStates: computed(() => fiveStepStates.value),
     duplicateSlotCount, revealedHints, usedHintLevel, refreshEvents, useHint, submitAnswer,
     completeFiveStep, revisitFiveStep, resumeFiveStepProgress, revealAnswer,

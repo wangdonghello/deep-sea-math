@@ -79,6 +79,43 @@ describe('useQuizSession', () => {
       .toBe(true)
   })
 
+  it('答对后按住当前题（phase=correct），nextQuestion 才前进', async () => {
+    const { session } = setup([makeQuestion('q1'), makeQuestion('q2')])
+    await session.submitAnswer('7')
+    // 答对不自动前进：界面仍显示 q1，队列指针已移到 q2
+    expect(session.phase.value).toBe('correct')
+    expect(session.displayedQuestion.value?.id).toBe('q1')
+    expect(session.currentQuestion.value?.id).toBe('q2')
+    session.nextQuestion()
+    expect(session.phase.value).toBe('answering')
+    expect(session.displayedQuestion.value?.id).toBe('q2')
+  })
+
+  it('答错进入 wrong 阶段并保持当前题，且自动展开第一层提示', async () => {
+    const { session, events } = setup([makeQuestion('q1')])
+    await session.submitAnswer('6')
+    expect(session.phase.value).toBe('wrong')
+    expect(session.displayedQuestion.value?.id).toBe('q1')
+    expect(events.filter((event) => event.type === 'hint-used')).toHaveLength(1)
+  })
+
+  it('看答案进入 revealed 阶段并展开释义', async () => {
+    const { session } = setup([makeQuestion('q1')])
+    await session.revealAnswer()
+    expect(session.phase.value).toBe('revealed')
+    expect(session.explanationVisible.value).toBe(true)
+  })
+
+  it('showExplanation 只展开释义、不写 answer-revealed', async () => {
+    const { session, events } = setup([makeQuestion('q1')])
+    await session.submitAnswer('7') // 答对
+    const before = events.length
+    session.showExplanation()
+    expect(session.explanationVisible.value).toBe(true)
+    expect(events.length).toBe(before)
+    expect(events.some((event) => event.type === 'answer-revealed')).toBe(false)
+  })
+
   it('看答案写 answer-revealed、sessionId 与 revealedAnswer=true', async () => {
     const { session, events } = setup([makeQuestion('q1')])
     await session.revealAnswer()

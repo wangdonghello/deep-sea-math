@@ -513,7 +513,7 @@ describe('App: 整体装配', () => {
     for (const key of ['7', '+', '5']) {
       await app!.get(`[data-key="${key}"]`).trigger('click')
     }
-    await app!.get('[data-testid="submit-answer"]').trigger('click')
+    await app!.get('[data-testid="action-submit"]').trigger('click')
     await settle()
 
     // 发奖真的落了库：整组完成徽章 + 图鉴卡 + 区域下潜
