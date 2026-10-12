@@ -133,7 +133,6 @@ const CREATURES = [
 //   `null` 表示"只求数值 + 单位"的形态（如带余数除法求商）。
 // 数字量级按三年级课程标准上调：3.NBT.2 为 1000 以内加减；3.OA 为
 // 乘除法与两步应用；3.MD 为时间/质量/长度。**全库不再出现个位数加减**，
-// 唯一例外是 tests/App.test.ts 端到端用例锁死的 q001 暖身题（见 WARMUP）。
 
 /** 反复抽数直到满足条件，防死循环上限后回退。 */
 function drawWhile(make, ok, limit = 400) {
@@ -170,8 +169,10 @@ const BUILDERS = {
       return { n: { a, b }, value: a - b, expression: `${a} - ${b}` }
     }
     if (d === 2) {
-      const a = randInt(320, 940)
-      const b = randInt(115, 450)
+      const a = randInt(360, 940)
+      // 被减数必须大于减数：早先两者独立取值，生成过 `417 - 419 = -2` 这种
+      // 负结果的题（内容校验抓到了）。这里把 b 的上界绑到 a 上。
+      const b = randInt(115, Math.min(450, a - 60))
       return { n: { a, b }, value: a - b, expression: `${a} - ${b}` }
     }
     const [a, b] = drawWhile(
@@ -767,31 +768,6 @@ function buildQuestion({ id, type, difficulty, category, scenario, problem, slot
 /** 题库版本号（扩容与量级上调后升到 2.0.0）。 */
 const VERSION = '2.0.0'
 
-/**
- * q001 暖身题：`tests/App.test.ts` 的端到端用例逐字敲 `7 + 5` 提交并期望
- * 整组完成，它是全库**唯一**保留个位数操作数的题。题库其余 215 题一律按
- * 三年级量级生成；`questionBank.test.ts` 的数字量级断言显式放行这一题。
- */
-const WARMUP = {
-  type: 'add-sub',
-  difficulty: 1,
-  category: 'basic',
-  story: { title: '点亮鮟鱇鱼诱饵', body: '观察员记录到7个微光点，后来又发现5个。写出表示合起来数量的算式。' },
-  requiresFiveStep: false,
-  hints: [
-    '读题，找出要解决的问题。',
-    '圈出已经发现的7个和后来发现的5个。',
-    '合在一起要用加法。',
-    '把两个数量写成加法算式。',
-    '比如原来6份又添4份：6 + 4 = 10，相加后总数比两部分都大。',
-  ],
-  answer: { value: 12, expression: '7 + 5' },
-  similarQuestionIds: [],
-  tags: ['add-sub', 'addition', 'difficulty-1', 'skill-addition', 'standard:3.NBT.2'],
-  creatureRef: 'johnson-anglerfish',
-  sources: ['https://www.thecorestandards.org/Math/Content/3/NBT/'],
-}
-
 /** 给同格内"同技能 + 同答案形态 + 答案值不同"的相邻两题建双向相似链接。 */
 function linkSimilar(list) {
   const byCell = new Map()
@@ -834,10 +810,6 @@ for (const type of Object.keys(SCENARIOS)) {
     const step = coprimeStep(pool.length)
     const offset = randInt(0, pool.length - 1)
     for (let slot = 0; slot < PER_CELL; slot += 1) {
-      if (type === 'add-sub' && difficulty === 1 && slot === 0) {
-        questions.push({ ...WARMUP, id: nextId() })
-        continue
-      }
       const scenario = pool[(slot * step + offset) % pool.length]
       const problem = BUILDERS[scenario.kind](difficulty)
       questions.push(buildQuestion({

@@ -230,20 +230,16 @@ describe('question bank content', () => {
 
   it('keeps add-sub questions at grade-3 magnitude (two-digit operands and up)', () => {
     const addSub = readQuestionBank().questions.filter((question) => question.type === 'add-sub')
+    expect(addSub.length).toBeGreaterThan(0)
     for (const question of addSub) {
-      if (question.id === PINNED_WARMUP_ID) continue
       const operands = expressionOperands(question)
       expect(operands.length, `${question.id} has an equation hint`).toBeGreaterThanOrEqual(2)
       for (const operand of operands) {
+        // 三年级量级：加减法不再出现个位数操作数（早先为迁就端到端用例保留的
+        // 个位数暖身题已随题库扩容去掉；测试不再反过来约束题库内容）。
         expect(operand, `${question.id} operand magnitude`).toBeGreaterThanOrEqual(10)
       }
     }
-    // 个位数加减全库只剩 q001 这一道暖身题（App.test.ts 端到端用例锁定）。
-    const oneDigit = addSub.filter((question) => question.id !== PINNED_WARMUP_ID && expressionOperands(question).some((value) => value < 10))
-    expect(oneDigit.map((question) => question.id), '只有 q001 允许个位数').toEqual([])
-    const warmup = addSub.find((question) => question.id === PINNED_WARMUP_ID)!
-    expect(warmup.answer).toEqual({ value: 12, expression: '7 + 5' })
-    expect(byId(PINNED_WARMUP_ID)).toEqual(QUESTION_BANK.questions[0])
   })
 
   it('keeps mul-div difficulty 1 away from trivial one-digit facts', () => {

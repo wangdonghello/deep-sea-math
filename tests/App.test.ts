@@ -7,7 +7,7 @@ import router from '@/router/index.ts'
 import { initProductionStores } from '@/app/productionStores'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 import { useParentSessionStore } from '@/features/parentPanel/parentSessionStore'
-import { QUESTION_BANK } from '@/data/content'
+import { CREATURE_BANK, QUESTION_BANK } from '@/data/content'
 import type { DomainEvent, Profile } from '@/domain/model/types'
 import { deleteDatabase, installFakeIndexedDb } from './data/fakeIndexedDb'
 
@@ -502,15 +502,27 @@ describe('App: 整体装配', () => {
   })
 
   it('端到端：答题页作答 → 发奖落库 → 解锁反馈 → 观察舱可达', async () => {
-    // 当日题组只含 q001（基础题，答案可经数字键盘敲出）：最小可完成的闭环
-    await seed([sessionStartedFor(['q001'])])
+    /*
+     * 当日题组只含一道基础题，且**作答值从题库条目派生**而不是写死某个算式：
+     * 早先这里逐字敲 `7 + 5`，结果反过来把题库钉死了一道个位数的暖身题
+     * （内容要为测试让路）。现在题库怎么改，这条用例都跟着走。
+     */
+    const target = QUESTION_BANK.questions.find(
+      (question) =>
+        question.category === 'basic' &&
+        question.answer.expression === undefined &&
+        question.creatureRef !== undefined,
+    )!
+    const creatureId = target.creatureRef!
+    const creature = CREATURE_BANK.creatures.find((entry) => entry.id === creatureId)!
+    await seed([sessionStartedFor([target.id])])
     await bootApp({ signedIn: true })
     await router.push('/quest')
     await flushPromises()
     expect(app!.find('[data-testid="quest-view"]').exists()).toBe(true)
 
-    // 经真实组件作答：`7 + 5`（判等按 token 归一，空格不影响）
-    for (const key of ['7', '+', '5']) {
+    // 经真实组件逐位敲出该题的数值答案（判等接受数值形态，单位可选）
+    for (const key of String(target.answer.value)) {
       await app!.get(`[data-key="${key}"]`).trigger('click')
     }
     await app!.get('[data-testid="action-submit"]').trigger('click')
@@ -524,20 +536,22 @@ describe('App: 整体装配', () => {
     const unlocked = events.filter(
       (event) => event.type === 'unlock-granted' && event.kind === 'creature',
     )
-    expect(unlocked.map((event) => (event as { targetId: string }).targetId)).toEqual([CREATURE_ID])
+    // 解锁的生物就是这道题包装里的主角（题目内容即权威映射）
+    expect(target.creatureRef).toBeDefined()
+    expect(unlocked.map((event) => (event as { targetId: string }).targetId)).toEqual([target.creatureRef])
 
     // 解锁反馈展示奖励名（含物种名，而不是标识）
     expect(await waitForOverlay()).toBe(true)
     const overlay = app!.find('[data-testid="unlock-overlay"]')
     expect(overlay.text()).toContain('整组完成徽章')
-    expect(overlay.text()).toContain('约翰逊鮟鱇鱼')
+    expect(overlay.text()).toContain(creature.name)
     await app!.get('[data-testid="unlock-overlay-close"]').trigger('click')
 
     // 刚解锁的生物现在进得去观察舱（守卫放行，而不是打回图鉴）
-    await router.push(`/observation/${CREATURE_ID}`)
+    await router.push(`/observation/${creatureId}`)
     await flushPromises()
-    expect(router.currentRoute.value.path).toBe(`/observation/${CREATURE_ID}`)
-    expect(app!.find('[data-testid="observation-view"]').text()).toContain('约翰逊鮟鱇鱼')
+    expect(router.currentRoute.value.path).toBe(`/observation/${creatureId}`)
+    expect(app!.find('[data-testid="observation-view"]').text()).toContain(creature.name)
   })
 
   it('首次安装可直接进家长区门禁页（未设过 PIN → 设置模式）', async () => {
