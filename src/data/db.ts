@@ -3,13 +3,15 @@ import type { DBSchema, IDBPDatabase, IDBPTransaction } from 'idb'
 
 import type { Profile, Settings, DomainEvent } from '../domain/model/types'
 
-import { createMemoryBestiaryRepo, createMemoryEventRepo, createMemoryProfileRepo, createMemorySettingsRepo } from './memoryFallback'
+import { createMemoryBestiaryRepo, createMemoryEventRepo, createMemoryGuardRepo, createMemoryProfileRepo, createMemorySettingsRepo } from './memoryFallback'
 import { createBestiaryRepo } from './repositories/bestiaryRepo'
 import { createEventRepo } from './repositories/eventRepo'
+import { createGuardRepo } from './repositories/guardRepo'
 import { createProfileRepo } from './repositories/profileRepo'
 import { createSettingsRepo } from './repositories/settingsRepo'
 import type { BestiaryRepo } from './repositories/bestiaryRepo'
 import type { EventRepo } from './repositories/eventRepo'
+import type { GuardRepo } from './repositories/guardRepo'
 import type { ProfileRepo } from './repositories/profileRepo'
 import type { SettingsRepo } from './repositories/settingsRepo'
 
@@ -18,12 +20,12 @@ import type { SettingsRepo } from './repositories/settingsRepo'
  *
  * 三个职责分层清楚：
  * 1. **schema 与迁移**（{@link STORE_NAMES} / {@link DeepSeaSchema} /
- *    {@link openDb}）：v1 schema 的四个对象库，以及从"旧版构建留下的库"升级
+ *    {@link openDb}）：v1 schema 的六个对象库，以及从"旧版构建留下的库"升级
  *    时**保留既有事件**的迁移步骤（详见 {@link openDb} 的版本阶梯说明）。
  * 2. **存储门面解析**（{@link resolveStorage}）：探测 IndexedDB 可用性，
  *    不可用时返回内存态门面并置降级标记——spec `offline-event-log`
  *    §存储降级与家长提示要求家长区展示醒目提示，MUST NOT 静默丢弃数据。
- * 3. **仓储装配**：把四个仓储接口的 IndexedDB 实现装到门面上；实现本身在
+ * 3. **仓储装配**：把六个仓储接口的 IndexedDB 实现装到门面上；实现本身在
  *    `repositories/`，内存态替换在 `memoryFallback.ts`，两边同接口可互换。
  *
  * 全部 API 都返回 Promise：读写不得阻塞渲染线程（Constitution Check
@@ -34,7 +36,7 @@ import type { SettingsRepo } from './repositories/settingsRepo'
 export const DB_NAME = 'deep-sea-math'
 
 /**
- * 四个对象库的名字。
+ * 六个对象库的名字。
  *
  * 作为运行时真源导出：仓储与测试都引用它，而不是各自写字面量——`'events'`
  * 拼错一个字母会得到一个"查了却总是空"的库，这种静默失败很难排查。
@@ -48,6 +50,14 @@ export const STORE_NAMES = {
   projections: 'projections',
   /** 家长设置：`profileId` 为主键。 */
   settings: 'settings',
+  /**
+   * 家长 PIN：`id` 为主键，全场唯一一条（`'parent'`）。
+   *
+   * 与 `settings` 分开的理由：家长 PIN 是**家长区门禁**，不与任何孩子档案
+   * 绑定，而 `settings` 的 keyPath 是 `profileId`（按档案一行），塞进去会被
+   * 迫编造一个假档案 ID。
+   */
+  guard: 'guard',
   /**
    * 事件写入次序台账（`autoIncrement` 主键）。
    *
@@ -116,6 +126,20 @@ export interface ProjectionRecord {
   unlockedCreatureIds: string[]
 }
 
+/**
+ * `guard` 对象库的唯一一条记录：家长 PIN。
+ *
+ * 全场只有 `'parent'` 一条 —— 家长 PIN 是家长区的门禁，不与任何孩子档案绑定。
+ */
+export interface GuardRecord {
+  /** 固定为 `'parent'`：家长 PIN 全场只有一条。 */
+  id: 'parent'
+  /** PIN 的 SHA-256 十六进制哈希，MUST NOT 存明文。 */
+  pinHash: string
+  /** 该 PIN 专属的加盐值。 */
+  salt: string
+}
+
 /** 本应用的 IndexedDB schema（供 `idb` 的泛型推断出强类型仓储调用）。 */
 export interface DeepSeaSchema extends DBSchema {
   events: {
@@ -140,16 +164,20 @@ export interface DeepSeaSchema extends DBSchema {
     key: number
     value: EventOrderRecord
   }
+  guard: {
+    key: string
+    value: GuardRecord
+  }
 }
 
 /** 打开后的强类型数据库句柄。 */
 export type DeepSeaDb = IDBPDatabase<DeepSeaSchema>
 
 /**
- * 当前 schema 的 IDB 数字版本号（= 3）。
+ * 当前 schema 的 IDB 数字版本号（= 4）。
  *
- * **表意版本 v1 / 数字版本 3**：本 schema 仍是应用的第一版 schema（v1），
- * 但数字版本号被推进过两次，两次都不是"表意版本升级"：
+ * **表意版本 v1 / 数字版本 4**：本 schema 仍是应用的第一版 schema（v1），
+ * 但数字版本号被推进过三次，三次都不是"表意版本升级"：
  * - **1 → 2**：引入四库 schema（`events` / `profiles` / `settings` /
  *   `projections`）。IndexedDB 规范与 `fake-indexeddb` 都不允许 version 0
  *   （`open(name, 0)` 直接抛 `TypeError`），所以"无 schema 的旧状态"在数字上
@@ -158,20 +186,23 @@ export type DeepSeaDb = IDBPDatabase<DeepSeaSchema>
  * - **2 → 3**：新增 `eventOrder` 台账（同毫秒事件的写入次序）。新增对象库
  *   只能通过版本跳变完成——若不跳版本，已装过的库里根本没有这个库，写入会
  *   一直 `NotFoundError`。
+ * - **3 → 4**：新增 `guard` 库（家长 PIN，全场唯一一条）。同样是"新增对象库
+ *   必须跳版本"——旧库里没有 `guard`，不跳版本的话门禁读不到、也写不进，
+ *   表现为"家长 PIN 永远设置不上"。
  *
  * 若把当前 schema 停在任何早于"旧库实际版本"的数字上，`upgradeneeded` 不会
  * 触发，缺库/缺索引的状态会被永久保留，而它只在用户"装过旧版又升级"时出现，
  * 本地开发永远碰不到。
  */
-export const DB_VERSION = 3
+export const DB_VERSION = 4
 
 /**
  * 把库升级到当前 schema。
  *
  * 每一步都先 `contains` 判断再创建，因为两条真实升级路径的状态不同：
- * - **全新安装**（此前无库）：四个库一次建齐；
+ * - **全新安装**（此前无库）：六个库一次建齐；
  * - **旧版库**（`LEGACY_VERSION`，只有一个 `events` 库）：`events` 已有
- *   内容，**绝不能重建**（重建等于清空历史进度），只补三个新库与
+ *   内容，**绝不能重建**（重建等于清空历史进度），只补其余库与
  *   `by_profile` 索引——`createIndex` 只是给存量行补一份键值映射，
  *   不触碰行数据本身。
  *
@@ -187,7 +218,7 @@ function applyMigrations(
   db: DeepSeaDb,
   transaction: IDBPTransaction<
     DeepSeaSchema,
-    ArrayLike<'events' | 'profiles' | 'projections' | 'settings' | 'eventOrder'>,
+    ArrayLike<'events' | 'profiles' | 'projections' | 'settings' | 'eventOrder' | 'guard'>,
     'versionchange'
   >,
 ): void {
@@ -215,6 +246,11 @@ function applyMigrations(
   // 写入次序台账：不指定 keyPath，靠 autoIncrement 自增分配主键。
   if (!db.objectStoreNames.contains(STORE_NAMES.eventOrder)) {
     db.createObjectStore(STORE_NAMES.eventOrder, { autoIncrement: true })
+  }
+
+  // 家长 PIN：keyPath 取 `id`（固定 `'parent'`），全场唯一一条，`put` 天然覆盖。
+  if (!db.objectStoreNames.contains(STORE_NAMES.guard)) {
+    db.createObjectStore(STORE_NAMES.guard, { keyPath: 'id' })
   }
 }
 
@@ -307,6 +343,8 @@ export interface StorageFacade {
   readonly settings: SettingsRepo
   /** 图鉴投影缓存仓储。 */
   readonly bestiary: BestiaryRepo
+  /** 家长 PIN 仓储（家长区门禁）。 */
+  readonly guard: GuardRepo
   /** 释放底层资源（IndexedDB 连接 / 无操作）。 */
   close(): Promise<void>
 }
@@ -343,6 +381,7 @@ export async function resolveStorage(): Promise<StorageFacade> {
       events: createEventRepo(db),
       settings: createSettingsRepo(db),
       bestiary: createBestiaryRepo(db),
+      guard: createGuardRepo(db),
       close: async () => {
         db.close()
       },
@@ -356,6 +395,7 @@ export async function resolveStorage(): Promise<StorageFacade> {
       events: createMemoryEventRepo(),
       settings: createMemorySettingsRepo(),
       bestiary: createMemoryBestiaryRepo(),
+      guard: createMemoryGuardRepo(),
       close: async () => undefined,
     }
   }

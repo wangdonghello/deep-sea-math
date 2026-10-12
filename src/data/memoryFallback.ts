@@ -1,7 +1,9 @@
 import { appendEvents } from '../domain/eventLog/appendEvents'
 import type { DomainEvent, Profile, Settings } from '../domain/model/types'
+import type { GuardRecord } from './db'
 import type { BestiaryCache, BestiaryRepo } from './repositories/bestiaryRepo'
 import type { EventRepo } from './repositories/eventRepo'
+import type { GuardRepo } from './repositories/guardRepo'
 import type { ProfileRepo } from './repositories/profileRepo'
 import type { SettingsRepo } from './repositories/settingsRepo'
 import { DEFAULT_SETTINGS } from './repositories/settingsRepo'
@@ -14,7 +16,7 @@ import { DEFAULT_SETTINGS } from './repositories/settingsRepo'
  * 提示"进度不会被保存，请退出隐私模式"——内存态把数据留在当前会话里，
  * 既不静默丢弃，也不冒充持久化（刷新后仍在的是 IndexedDB 那条路）。
  *
- * 四个仓储与 `repositories/` 的 IndexedDB 态**同一份接口**：上层（features/
+ * 六个仓储与 `repositories/` 的 IndexedDB 态**同一份接口**：上层（features/
  * views）只依赖接口，不关心背后是库还是 Map，因此降级不需要任何调用方改动。
  */
 
@@ -118,6 +120,29 @@ export function createMemoryBestiaryRepo(): BestiaryRepo {
     },
     async clear(profileId) {
       caches.delete(profileId)
+    },
+  }
+}
+
+/**
+ * 内存态家长 PIN 仓储。
+ *
+ * 语义与 IndexedDB 态一致：只有 `'parent'` 一条记录，`save` 覆盖写，
+ * `clear` 之后 `load` 回到 `undefined`。用单变量而不是 `Map`：keyPath 是
+ * 固定的 `'parent'`，没有"按 key 多行"的可能。
+ */
+export function createMemoryGuardRepo(): GuardRepo {
+  let record: GuardRecord | undefined
+
+  return {
+    load() {
+      return Promise.resolve(record === undefined ? undefined : clone(record))
+    },
+    async save(next) {
+      record = clone(next)
+    },
+    async clear() {
+      record = undefined
     },
   }
 }

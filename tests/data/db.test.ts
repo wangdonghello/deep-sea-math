@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { DB_NAME, DB_VERSION, STORE_NAMES, openDb } from '../../src/data/db'
 import type { DeepSeaDb } from '../../src/data/db'
 import { deleteDatabase, installFakeIndexedDb } from './fakeIndexedDb'
-import { PROFILE_A, answerSubmittedEvent, profileCreatedEvent, sessionStartedEvent } from './fixtures'
+import { PROFILE_A, answerSubmittedEvent, makeProfile, profileCreatedEvent, sessionStartedEvent } from './fixtures'
 
 /**
  * `src/data/db` 的行为契约（design §5「IndexedDB 不可用降级」与 §2 数据模型）。
@@ -36,7 +36,7 @@ function track(opening: Promise<DeepSeaDb>): Promise<DeepSeaDb> {
 }
 
 /** 对象库名（供 `idb` 的高层方法做 StoreNames 形参）。 */
-type StoreName = 'events' | 'profiles' | 'settings' | 'projections' | 'eventOrder'
+type StoreName = 'events' | 'profiles' | 'settings' | 'projections' | 'eventOrder' | 'guard'
 
 /** 用 `idb` 高层方法写一条记录。 */
 function putIn(db: DeepSeaDb, store: StoreName, value: never): Promise<void> {
@@ -88,12 +88,13 @@ describe('data/db: openDb — v1 schema', () => {
     restore()
   })
 
-  it('一次建齐 events / profiles / settings / projections / eventOrder 五个对象库', async () => {
+  it('一次建齐 events / profiles / settings / projections / eventOrder / guard 六个对象库', async () => {
     const db = await track(openDb())
 
     expect([...db.objectStoreNames].sort()).toEqual([
       'eventOrder',
       'events',
+      'guard',
       'profiles',
       'projections',
       'settings',
@@ -108,12 +109,13 @@ describe('data/db: openDb — v1 schema', () => {
     expect([...tx.store.indexNames]).toContain('by_profile')
   })
 
-  it('profiles / settings / projections 的主键分别是 id / profileId / profileId', async () => {
+  it('profiles / settings / projections / guard 的主键分别是 id / profileId / profileId / id', async () => {
     const db = await track(openDb())
 
     expect(db.transaction('profiles', 'readonly').store.keyPath).toBe('id')
     expect(db.transaction('settings', 'readonly').store.keyPath).toBe('profileId')
     expect(db.transaction('projections', 'readonly').store.keyPath).toBe('profileId')
+    expect(db.transaction('guard', 'readonly').store.keyPath).toBe('id')
   })
 
   it('打开后的实际版本与导出的 DB_VERSION 一致（版本号常量不会悄悄漂移）', async () => {
@@ -160,10 +162,11 @@ describe('data/db: openDb — 版本迁移', () => {
     expect(byEventId(events)).toEqual(
       byEventId([profileCreatedEvent(PROFILE_A), answerSubmittedEvent(PROFILE_A)]),
     )
-    // 迁移同时补齐了其余库、台账与档案索引，否则升级后仓储依然不可用。
+    // 迁移同时补齐了其余库、台账、档案索引与 guard 库，否则升级后仓储依然不可用。
     expect([...db.objectStoreNames].sort()).toEqual([
       'eventOrder',
       'events',
+      'guard',
       'profiles',
       'projections',
       'settings',
@@ -213,6 +216,48 @@ describe('data/db: openDb — 版本迁移', () => {
     expect([...db.objectStoreNames]).toContain('eventOrder')
     expect(await getAllFrom(db, 'events')).toEqual([profileCreatedEvent(PROFILE_A)])
     db.close()
+  })
+
+  it('从"已有五库但缺 guard"的 v3 中间态升级到 v4：补建 guard 且既有数据原样保留', async () => {
+    // 铺一个停在 v3（尚无 guard 库）的库，里面已有一条档案、一条事件与一条台账。
+    const middle = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = globalThis.indexedDB.open(DB_NAME, DB_VERSION - 1)
+      request.onupgradeneeded = () => {
+        const db = request.result
+        db.createObjectStore('events', { keyPath: 'eventId' }).createIndex('by_profile', 'profileId')
+        db.createObjectStore('profiles', { keyPath: 'id' })
+        db.createObjectStore('settings', { keyPath: 'profileId' })
+        db.createObjectStore('projections', { keyPath: 'profileId' })
+        db.createObjectStore('eventOrder', { autoIncrement: true })
+      }
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
+    })
+    await putInRaw(middle, 'events', profileCreatedEvent(PROFILE_A))
+    await putInRaw(middle, 'profiles', makeProfile(PROFILE_A))
+    middle.close()
+
+    const db = await track(openDb())
+    expect(db.version).toBe(DB_VERSION)
+    // 补建了 guard 库，且它一开始是空的（家长尚未设置 PIN）。
+    expect(db.transaction('guard', 'readonly').store.keyPath).toBe('id')
+    expect(await getAllFrom(db, 'guard')).toEqual([])
+    // 既有事件与档案在升级中原样保留。
+    expect(await getAllFrom(db, 'events')).toEqual([profileCreatedEvent(PROFILE_A)])
+    expect(await getAllFrom(db, 'profiles')).toEqual([makeProfile(PROFILE_A)])
+    db.close()
+  })
+
+  it('已是 v4 的库重复打开时 guard 里的家长 PIN 不被清空（reopen 幂等）', async () => {
+    const first = await track(openDb())
+    await putIn(first, 'guard', { id: 'parent', pinHash: 'a'.repeat(64), salt: 'b'.repeat(16) } as never)
+    first.close()
+
+    const second = await track(openDb())
+    expect(await getAllFrom(second, 'guard')).toEqual([
+      { id: 'parent', pinHash: 'a'.repeat(64), salt: 'b'.repeat(16) },
+    ])
+    second.close()
   })
 })
 

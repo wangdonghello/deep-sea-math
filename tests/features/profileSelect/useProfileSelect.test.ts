@@ -214,6 +214,48 @@ describe('features/profileSelect: useProfileSelect', () => {
     expect(select.pin.value).toBe('1234')
   })
 
+  it('setPin（掩码输入框整体赋值）：剥掉非数字并截到 4 位', async () => {
+    const store = makeStore({ profiles: [{ id: 'p1', nickname: '小深', avatarId: 'angler' }] })
+    const select = useProfileSelect({ store, clock: new ManualClock() })
+
+    await select.load()
+    select.setPin('12')
+    expect(select.pin.value).toBe('12')
+
+    // 打字途中的杂质被剥掉，框里剩下的就是真正生效的值
+    select.setPin('1a2')
+    expect(select.pin.value).toBe('12')
+
+    // 粘贴超长被截断
+    select.setPin('123456')
+    expect(select.pin.value).toBe('1234')
+
+    // 清空
+    select.setPin('')
+    expect(select.pin.value).toBe('')
+
+    // 与 pushDigit 同一口径：全角数字不算
+    select.setPin('１２３４')
+    expect(select.pin.value).toBe('')
+  })
+
+  it('setPin 在锁定期不接收输入（与 pushDigit 同一道闸）', async () => {
+    const clock = new ManualClock()
+    const store = makeStore({ profiles: [{ id: 'p1', nickname: '小深', avatarId: 'angler' }], correctPin: '1234' })
+    const select = useProfileSelect({ store, clock })
+
+    await select.load()
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      select.setPin('9999')
+      await select.submit()
+    }
+    expect(select.locked.value).toBe(true)
+
+    select.setPin('1234')
+
+    expect(select.pin.value).toBe('')
+  })
+
   it('未选档案时提交无效且不调用 store.verify', async () => {
     const verifyCalls: string[] = []
     const store = makeStore({ profiles: [], verifyCalls })

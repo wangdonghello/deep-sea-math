@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
   createMemoryBestiaryRepo,
   createMemoryEventRepo,
+  createMemoryGuardRepo,
   createMemoryProfileRepo,
   createMemorySettingsRepo,
 } from '../../../src/data/memoryFallback'
@@ -170,6 +171,35 @@ describe('memoryFallback: 与 IndexedDB 态同契约', () => {
     cache?.unlockedCreatureIds.push('被改坏了')
 
     expect((await repo.load(PROFILE_A))?.unlockedCreatureIds).toEqual(['a'])
+  })
+
+  it('guardRepo：未设置为 undefined，覆盖写，clear 回到 undefined', async () => {
+    const repo = createMemoryGuardRepo()
+    const record = { id: 'parent' as const, pinHash: 'a'.repeat(64), salt: 'b'.repeat(16) }
+
+    expect(await repo.load()).toBeUndefined()
+    await repo.save(record)
+    expect(await repo.load()).toEqual(record)
+
+    // 覆盖写：同一 id 只保留最后一份。
+    await repo.save({ ...record, pinHash: 'c'.repeat(64) })
+    expect((await repo.load())?.pinHash).toBe('c'.repeat(64))
+
+    await repo.clear()
+    expect(await repo.load()).toBeUndefined()
+  })
+
+  it('guardRepo：读回的是副本，改调用方对象不污染库内记录', async () => {
+    const repo = createMemoryGuardRepo()
+    await repo.save({ id: 'parent', pinHash: 'a'.repeat(64), salt: 'b'.repeat(16) })
+
+    const read = await repo.load()
+    if (read === undefined) {
+      throw new Error('家长 PIN 记录应当存在')
+    }
+    read.pinHash = '被改坏了'
+
+    expect((await repo.load())?.pinHash).toBe('a'.repeat(64))
   })
 
   it('eventRepo：追加 settings-updated 这类无逻辑组合键的事件只按 eventId 去重', async () => {

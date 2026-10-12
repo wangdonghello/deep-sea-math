@@ -6,6 +6,7 @@ import App from '@/App.vue'
 import router from '@/router/index.ts'
 import { initProductionStores } from '@/app/productionStores'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import { useParentSessionStore } from '@/features/parentPanel/parentSessionStore'
 import { QUESTION_BANK } from '@/data/content'
 import type { DomainEvent, Profile } from '@/domain/model/types'
 import { deleteDatabase, installFakeIndexedDb } from './data/fakeIndexedDb'
@@ -151,6 +152,9 @@ async function clearStorage(): Promise<void> {
     await storage.bestiary.clear(profile.id)
     await storage.profiles.remove(profile.id)
   }
+  // 家长 PIN 与档案无关，按上面的循环清不掉；不清它会让下一个用例的门禁页
+  // 误判成"已设过 PIN"，进而断言到"校验"模式。
+  await storage.guard.clear()
 }
 
 /** 写入会话态（等价于孩子在档案选择页输对了 PIN）。 */
@@ -330,14 +334,15 @@ describe('App: 整体装配', () => {
     }
   })
 
-  it('图鉴、错题本、家长区、地图均可达', async () => {
+  it('图鉴、错题本、家长区门禁页、地图均可达', async () => {
     await seed([])
     await bootApp({ signedIn: true })
 
     for (const [path, testid] of [
       ['/bestiary', 'bestiary-view'],
       ['/mistakes', 'mistake-book'],
-      ['/parent', 'parent-view'],
+      // P1 起 `/parent` 是门禁页（不是旧的一体化家长页）
+      ['/parent', 'parent-gate'],
       ['/map', 'map-view'],
     ] as const) {
       await router.push(path)
@@ -535,16 +540,89 @@ describe('App: 整体装配', () => {
     expect(app!.find('[data-testid="observation-view"]').text()).toContain('约翰逊鮟鱇鱼')
   })
 
-  it('首次安装可直接进家长区建档（然后回到档案选择页）', async () => {
+  it('首次安装可直接进家长区门禁页（未设过 PIN → 设置模式）', async () => {
     await seed([])
     await bootApp({ signedIn: false })
     expect(router.currentRoute.value.path).toBe('/profiles')
 
     // 档案选择页有一个不显眼的家长区入口（T16 审查的残余风险：不进孩子常驻导航）
     await app!.get('[data-testid="goto-parent"]').trigger('click')
+    // `gate.load()` 要读一次 IndexedDB（宏任务），`flushPromises` 等不到。
+    await settle()
+    expect(router.currentRoute.value.path).toBe('/parent')
+    // 没设过家长 PIN：门禁页进入"设置"模式（而不是把"没设过"当成"密码错了"）
+    expect(app!.find('[data-testid="parent-gate"]').exists()).toBe(true)
+    expect(app!.find('[data-testid="parent-gate-hint"]').text()).toContain('设置')
+    expect(app!.find('[data-testid="pin-input"]').exists()).toBe(true)
+  })
+
+  it('未解锁时家长区三个子路径一律打回门禁页', async () => {
+    await seed([])
+    await bootApp({ signedIn: true })
+
+    for (const path of ['/parent/overview', '/parent/settings', '/parent/manage']) {
+      await router.push(path)
+      await flushPromises()
+      expect(router.currentRoute.value.path).toBe('/parent')
+      expect(app!.find('[data-testid="parent-gate"]').exists()).toBe(true)
+    }
+  })
+
+  it('门禁设置 PIN（输两次）通过后落到总览，三个子页占位均可达', async () => {
+    await seed([])
+    await bootApp({ signedIn: true })
+
+    await router.push('/parent')
+    await settle()
+
+    // 首次设置：输 4 位 → 确认 4 位 → 落总览
+    const enter = async (digits: string): Promise<void> => {
+      for (const digit of digits) {
+        await app!.get(`[data-testid="pin-key-${digit}"]`).trigger('click')
+      }
+      await app!.get('[data-testid="pin-submit"]').trigger('click')
+      // 提交要落一次 IndexedDB（salt 哈希 + 写 guard 库），等它真正完成。
+      await settle()
+    }
+    await enter('1234')
+    await enter('1234')
+
+    // 放行后的导航由组件内的 `void router.push` 发起：懒加载的路由组件要等一个
+    // 宏任务，`flushPromises`/`settle` 都排不完，必须按真实节奏等它落地。
+    expect(await waitForPath('/parent/overview')).toBe(true)
+    for (const [path, testid] of [
+      ['/parent/overview', 'parent-overview'],
+      ['/parent/settings', 'parent-settings'],
+      ['/parent/manage', 'parent-manage'],
+    ] as const) {
+      await router.push(path)
+      await flushPromises()
+      expect(router.currentRoute.value.path).toBe(path)
+      expect(app!.find(`[data-testid="${testid}"]`).exists()).toBe(true)
+    }
+    // 占位页的"返回"回到档案选择页（同样是组件内 push，按真实节奏等）。
+    // 本用例是"已登录"状态，守卫规则 3 会把档案选择页再落到首页——这是全站
+    // 一致的既有行为（已选档案却停在选档案是死路），不是本页特例。
+    await app!.get('[data-testid="parent-back"]').trigger('click')
+    expect(await waitForPath('/home')).toBe(true)
+  })
+
+  it('家长区解锁态只存在于本次会话（新会话必须重新验证）', async () => {
+    await seed([])
+    await bootApp({ signedIn: true })
+
+    // 本次会话解锁后子路径可达
+    useParentSessionStore().unlock()
+    await router.push('/parent/settings')
+    await flushPromises()
+    expect(router.currentRoute.value.path).toBe('/parent/settings')
+
+    // 模拟"刷新"：换一份全新 Pinia（会话态是易失态，MUST NOT 跨刷新留存）
+    setActivePinia(createPinia())
+    await router.push('/parent/manage')
     await flushPromises()
     expect(router.currentRoute.value.path).toBe('/parent')
-    expect(app!.find('[data-testid="create-profile"]').exists()).toBe(true)
+    expect(app!.find('[data-testid="parent-gate"]').exists()).toBe(true)
   })
 
   it('prefers-reduced-motion 下鱼群静止', async () => {

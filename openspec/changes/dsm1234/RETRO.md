@@ -380,3 +380,110 @@ fixture**（`demo-basic-1` 等），而答题页经 `app/questContext.ts` 按**�
 
 **验证**：643 测试全绿、type-check 通过；本地浏览器实测建档 → PIN → 首页 →
 领取 → 开始下潜 → 答题页渲染出题库真实题目；`/` 与深链刷新均正常。
+
+---
+
+## R22. P1 家长门禁与三区路由骨架（管道先行，页面留 P2）
+
+**范围**：这是"家长区重构"的前半部分——只做**管道**（家长 PIN 存储、门禁、
+三区路由、PIN 掩码输入框），不做三区页面的视觉；页面内容 P2 替换。
+
+### 1. 家长 PIN 独立成 `guard` 对象库（`DB_VERSION` 3 → 4）
+
+家长 PIN 与**任何孩子档案无关**（它是家长区门禁，不是某个孩子的凭据），因此
+不能塞进 keyPath 为 `profileId` 的 `settings`（那会迫使编造一个假档案 ID）。
+新增 `guard` 库（`keyPath: 'id'`，全场唯一一条 `id: 'parent'`）：
+
+- `STORE_NAMES.guard` / `DeepSeaSchema.guard` / `GuardRecord`（只含 `pinHash` 与
+  `salt`，无明文字段）；
+- `DB_VERSION` 3 → 4。新增对象库**只能靠版本跳变**完成（不跳版本时旧库里没有
+  这个库，读写一路 `NotFoundError`，表现为"家长 PIN 永远设置不上"）；
+- `applyMigrations` 沿用"先 `contains` 再建"，对全新安装、旧版单库、v3 五库三种
+  存量状态都幂等；
+- `StorageFacade.guard` + `resolveStorage()` 两条分支（IndexedDB / 内存降级）
+  都装配（降级态下门禁同样可用）。
+
+数据保留用例：`tests/data/db.test.ts` 铺一个停在 v3（五库、无 `guard`）的库，
+里面已有一条档案与一条事件，升级后断言 `version === DB_VERSION`、`guard` 库存在
+且为空、既有 events / profiles 原样保留；另有"已是 v4 的库 reopen 时 guard 里的
+家长 PIN 不被清空"。
+
+### 2. 门禁规则（`useParentGate` + `parentSessionStore`）
+
+- **首次**（`guard.load()` 返回 `undefined`）：进入"设置家长密码"模式，需输入
+  两次（PIN + 确认）；两次不一致给中性文案（"两次输入不一致，请重新设置"，
+  不含任何"哪里错了"的归因）并回到第一步；一致才 `hashPin` + 新随机盐落库，
+  并置 `unlocked`。
+- **已设过**：`verifyPin` 比对已存哈希；失败只说"再试一次"，连续 5 次锁定 60 秒
+  ——与孩子 PIN **同一套口径**（直接复用 `usePinLock` 与 `features/profileSelect/
+  types.ts` 的阈值常量，避免两侧限速行为漂移）。
+- **是否跨刷新**：MUST NOT。`parentSessionStore` 是纯内存 Pinia（`unlocked` 一个
+  ref），刷新后重新验证。孩子与家长共用设备，家长区操作（改题量/重置 PIN/删档）
+  是破坏性的，门禁跨刷新留存等于给孩子留后门。
+- **安全**：PIN 明文只活在 `pin` 这个短生命周期 ref，`submit()` 的 `finally` 里
+  立刻清空（成功失败都清）；`fail()` 统一收口使"校验返回 false"与"校验抛错"
+  行为一致（否则反复触发存储异常就成了绕过 5 次锁定的后门）；日志出口经
+  `redact()`，且本函数从不主动把 PIN/盐当字段写进日志（有用例断言）。
+
+### 3. 三区路由骨架与 `nextRoute` 纯函数
+
+路由表（`src/router/index.ts`）四条，全部懒加载：
+
+| 路径 | 组件 | 说明 |
+|---|---|---|
+| `/parent` | `ParentGateRoute.vue` | **门禁页**（旧的一体化 `ParentRoute.vue` 已删） |
+| `/parent/overview` | `ParentOverviewRoute.vue` | 门禁通过后的落点 |
+| `/parent/settings` | `ParentSettingsRoute.vue` | 待 P2 填 |
+| `/parent/manage` | `ParentManageRoute.vue` | 待 P2 填 |
+
+`nextRoute` 新增第 4 条规则：**家长子路径未解锁 → `/parent`**。规则只看内存态
+`unlocked`，守卫里**不做任何异步 PIN 校验**（校验只发生在门禁页内）；门禁页自身
+不在 `PARENT_CHILD_PATHS` 里，否则目标等于当前路径，vue-router 会判无限重定向。
+`PROFILE_OPTIONAL_PATHS` 收进四个家长路径：首个档案正是在"还没有档案"的前提下
+创建的，无档案时也要拦到门禁页（而不是档案选择页）。
+
+三个子页面在 P1 是极简占位（标题 + 半句说明 + 返回按钮，均带 `data-testid`），
+P2 替换。
+
+### 4. PIN 掩码输入框（孩子与家长共用）
+
+`PinPad` 在点数回显上方新增 `<input type="password" inputmode="numeric"
+autocomplete="one-time-code" maxlength="4">`（`data-testid="pin-input"`，外层
+`<label>` 提供无障碍名）。同步方式：
+
+- 打字/粘贴 → emit `setpin`（整体赋值），由 `useProfileSelect.setPin` /
+  `useParentGate.setPin` 过滤（剥非数字 + 截到 4 位，锁定期间不接收）；
+- 组件不复制过滤规则：`onInput` 等一个 `nextTick` 后把 `props.value` 写回 DOM，
+  被拒的输入不会作为明文残影留在框里；
+- 点按键盘 → `props.value` 变化后输入框随 `:value` 同步（用例断言双向一致）。
+
+`PinPad` 的 `nickname` 变为可选并新增 `title`（标题泛化，不复制第二份组件），
+现有 `pin-dots` / `pin-error` / `pin-lock-countdown` / `pin-submit` / `pin-key-*`
+的 testid 全部保留。
+
+### 5. 本 task 的偏离与遗留
+
+| # | 事项 | 说明 |
+|---|---|---|
+| 1 | **改了 `src/views/ProfileSelectView.vue`** | 不在任务书"可改/新增"清单内。但孩子侧的掩码输入框必须由该视图把 `@setpin` 接到 `useProfileSelect.setPin`，否则要求"孩子与家长共用同一套输入"就不成立。改动仅一行（`@setpin="select.setPin"`） |
+| 2 | **`/parent` 不再渲染旧的 `ParentView.vue`** | P1 的 `/parent` 是门禁页，三个子页是占位——因此**建档 / 设置 / 报告 / 删档在 P2 落地前暂时不可达**。这是任务书明确的分期边界（"P2 再填真正的总览/设置报告/档案管理"），但会造成一个中间态功能缺口，P2 必须补齐 |
+| 3 | `src/views/README.md` 的 `/parent → ParentView` 行已过时 | 该文件不在本 task 可改清单内，未动；P2 应一并更正 |
+| 4 | `ParentView.vue` 覆盖率由 ~100% 降到 38.7% | 成因同 #2：App 级用例不再经 `/parent` 渲染它，只剩它自己的组件测试。总体阈值仍达标（见下），P2 重新接线后回升 |
+| 5 | `productionStores.parent` 暂只有 P2 会消费 | 保留原装配不动；新增 `parentGate: storage.guard` 供门禁页用 |
+| 6 | 三个子路由**未**注入 `getProductionStores()` 窄接口 | 占位页不消费任何 store，注入了就是死代码（`noUnusedLocals` 也会拦）。窄接口注入随 P2 的真实内容一起加 |
+
+### 6. 验证
+
+- `npm run test`：55 文件 / 687 用例全绿（较 P1 前 +44 用例）；
+- `npm run type-check`：通过；
+- `npm run test:coverage`：全绿（Statements 93.91% / Branches 91.65% /
+  Functions 92.42% / Lines 95.52%，阈值 80%）；
+- `npm run build`：成功；
+- 需求改动逐条有测试：guard 库 save/load/clear/覆盖写/未设置为 `undefined`、
+  v3 → v4 保留数据、内存态降级同契约；门禁首次设置 / 校验 / 5 次锁定 / 不跨刷新；
+  `nextRoute` 未解锁打回 / 已解锁放行 / 门禁页不自重定向；掩码输入框可输入、
+  过滤非数字、满 4 位、与键盘双向同步、不回显明文。
+- 分支：仓库 HEAD 的 `004-dsm1234` 已是 `main` 的**祖先**（`main` 领先 3 个提交，
+  含上线后修复），直接切回 `004-dsm1234` 会丢这些修复。因此本 task 从 `main`
+  新建 `004-dsm1234-p1` 提交，未改任何既有分支历史、未 push。
+

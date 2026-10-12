@@ -28,7 +28,7 @@ import { createParentStore } from '@/features/parentPanel/createParentStore'
 import { createProfileSelectStore } from '@/features/profileSelect/createProfileSelectStore'
 import type { HomeStore } from '@/features/home/types'
 import type { MistakeBookStore, MistakeQuestionCatalog, MistakeQuestionMetadata } from '@/features/mistakeBook/types'
-import type { ParentStore } from '@/features/parentPanel/types'
+import type { ParentGuardStore, ParentStore } from '@/features/parentPanel/types'
 import type { ProfileStore } from '@/features/profileSelect/types'
 import type { BestiaryStore } from '@/features/bestiary/types'
 import type { QuizSessionStore } from '@/features/quizStage/useQuizSession'
@@ -51,6 +51,8 @@ export interface ProductionStores {
   readonly mistakeCatalog: MistakeQuestionCatalog
   /** 家长区（T16）。 */
   readonly parent: ParentStore
+  /** 家长区门禁的 PIN 仓储（P1：`/parent` 门禁页用）。 */
+  readonly parentGate: ParentGuardStore
 }
 
 /**
@@ -108,6 +110,8 @@ function assemble(storage: StorageFacade): ProductionStores {
     mistakes: { listEvents: eventAccess.listEvents },
     mistakeCatalog: MISTAKE_CATALOG,
     parent: createParentStore(storage),
+    // 门禁只要"读/写一条家长 PIN"两个成员；GuardRepo 结构上满足这个窄接口。
+    parentGate: storage.guard,
   }
 }
 

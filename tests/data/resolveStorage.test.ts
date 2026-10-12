@@ -102,7 +102,7 @@ describe('data/db: resolveStorage — 正常环境', () => {
     restore()
   })
 
-  it('返回 IndexedDB 态门面：degraded 为 false，四个仓储齐备', async () => {
+  it('返回 IndexedDB 态门面：degraded 为 false，五个仓储齐备', async () => {
     const storage = await track(resolveStorage())
 
     expect(storage.kind).toBe('indexeddb')
@@ -112,6 +112,7 @@ describe('data/db: resolveStorage — 正常环境', () => {
     expect(storage.events).toBeDefined()
     expect(storage.settings).toBeDefined()
     expect(storage.bestiary).toBeDefined()
+    expect(storage.guard).toBeDefined()
   })
 
   it('同一份数据跨两次 resolveStorage 仍可读（IndexedDB 持久在库中）', async () => {
@@ -178,6 +179,7 @@ describe('data/db: resolveStorage — 降级路径', () => {
     await storage.profiles.save(makeProfile(PROFILE_A))
     await storage.settings.save(PROFILE_A, makeSettings())
     await storage.bestiary.save({ profileId: PROFILE_A, unlockedCreatureIds: ['johnsons-anglerfish'] })
+    await storage.guard.save({ id: 'parent', pinHash: 'a'.repeat(64), salt: 'b'.repeat(16) })
 
     expect(await storage.profiles.get(PROFILE_A)).toEqual(makeProfile(PROFILE_A))
     expect(await storage.settings.get(PROFILE_A)).toEqual(makeSettings())
@@ -185,6 +187,8 @@ describe('data/db: resolveStorage — 降级路径', () => {
       profileId: PROFILE_A,
       unlockedCreatureIds: ['johnsons-anglerfish'],
     })
+    // 家长 PIN 在降级态同样可用：门禁不因隐私模式而失效。
+    expect(await storage.guard.load()).toEqual({ id: 'parent', pinHash: 'a'.repeat(64), salt: 'b'.repeat(16) })
     await storage.close()
   })
 

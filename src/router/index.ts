@@ -5,7 +5,17 @@ import { initProductionStores } from '@/app/productionStores'
 import { buildQuestContext } from '@/app/questContext'
 import { findUnlockedCreature } from '@/app/unlockedCreature'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
-import { HOME_PATH, PROFILES_PATH, nextRoute, pathnameOf } from './nextRoute'
+import { useParentSessionStore } from '@/features/parentPanel/parentSessionStore'
+import {
+  HOME_PATH,
+  PARENT_MANAGE_PATH,
+  PARENT_OVERVIEW_PATH,
+  PARENT_PATH,
+  PARENT_SETTINGS_PATH,
+  PROFILES_PATH,
+  nextRoute,
+  pathnameOf,
+} from './nextRoute'
 
 /**
  * 全局路由表（Task 17）。
@@ -45,7 +55,17 @@ const routes: RouteRecordRaw[] = [
     props: (route) => ({ creature: route.meta.creature }),
   },
   { path: '/mistakes', name: 'mistakes', component: () => import('./routes/MistakesRoute.vue') },
-  { path: '/parent', name: 'parent', component: () => import('./routes/ParentRoute.vue') },
+  /*
+   * 家长区（P1 三区骨架）。
+   *
+   * `/parent` 是**门禁页**：输入家长 PIN 后才 emit 放行，由 `ParentGateRoute`
+   * 翻译成 `router.push('/parent/overview')`。三个子路径是门禁通过后的实际
+   * 功能区，由守卫按 `parentSessionStore.unlocked` 拦回门禁页。
+   */
+  { path: PARENT_PATH, name: 'parent-gate', component: () => import('./routes/ParentGateRoute.vue') },
+  { path: PARENT_OVERVIEW_PATH, name: 'parent-overview', component: () => import('./routes/ParentOverviewRoute.vue') },
+  { path: PARENT_SETTINGS_PATH, name: 'parent-settings', component: () => import('./routes/ParentSettingsRoute.vue') },
+  { path: PARENT_MANAGE_PATH, name: 'parent-manage', component: () => import('./routes/ParentManageRoute.vue') },
   { path: '/map', name: 'map', component: () => import('./routes/MapRoute.vue') },
 ]
 
@@ -77,8 +97,13 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const stores = await initProductionStores()
   const session = useProfileSessionStore()
+  const parentSession = useParentSessionStore()
   const hasProfile = session.projection !== null
-  const target = nextRoute({ path: pathnameOf(to.path), hasProfile })
+  const target = nextRoute({
+    path: pathnameOf(to.path),
+    hasProfile,
+    parentUnlocked: parentSession.unlocked,
+  })
 
   // 未选档案（或已有档案却落在档案选择页）：重定向，并保留 query 里的
   // 原始意图（例如被要求登录后继续 `/quest?session=x`）。
