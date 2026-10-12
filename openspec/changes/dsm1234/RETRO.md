@@ -529,3 +529,56 @@ P1 的三条子路由占位换成正式界面。三个功能区页面落在
   PIN 失效新 PIN 可用（`verifyPin` 断言）、删除需勾选 + 昵称一致且清理事件；
   降级三页均见警示条；导航高亮与切换；PIN 明文不进渲染文本与日志。
 
+---
+
+## R24. P3 家长区表单与卡片视觉打磨（真机验收后的修复）
+
+**问题**：P2 删除 `views/ParentView.vue` 时，那段负责表单外观的 scoped 样式
+一并消失，家长区输入框退化成浏览器默认控件（系统深色底、直角），档案管理页
+与设置页"简陋"的观感正来源于此。**当时没有任何测试变红**——它只影响观感。
+
+**表单样式落点**：新增 `src/styles/parentForms.css`，以 `ParentSectionShell`
+的根类 `.parent-section` 为作用域（三页与全部子组件都渲染在该根节点内），由
+`ParentSectionShell.vue` 引入一次。之所以不复用"每页各写一份 scoped 样式"：
+那正是 P2 翻车的形态——删掉一个视图，样式跟着陪葬。为什么不全局生效：家长的
+答题页、图鉴等不属于家长区，不该被这套外观染指。
+
+规则覆盖：label 单列（标签在输入框上方）→ text/password/number/select 玻璃底
++ `var(--ds-radius-md)` + 聚焦 `var(--ds-accent-500)` 描边 + **font-size 16px**
+（< 16px 时 iOS 聚焦会放大整页）→ 主按钮暖橙渐变、次要玻璃描边、危险操作玫红
+（新增 `--ds-danger-*`，不用刺眼纯红）→ fieldset/legend 去边框并入卡片。
+
+**头像可视化**：`avatar-1/2/3` 的文字 radio 换成三个可点选图形块
+（`data-testid="avatar-option-1..3"`，内联 SVG：小鲸 / 海星 / 水母，颜色各异，
+不含性别刻画）。radio 的 `name="avatar"` 与**在 DOM 中的顺序**都保留，只是
+视觉隐藏——既有按 `form.findAll('input')` 下标定位的测试因此原样通过；新增
+测试按 `data-testid` + `aria-label` 定位，不断言色值。
+
+**安全区折叠**：`manage-toggle-*` 从裸按钮变成整行可点的卡片（昵称 + `▸/▾`
+字形），并加 `aria-expanded`；展开后 `DangerZone` 包进玻璃卡片，删除档案一块
+用玫红分隔线与描边，勾选确认 + 输入昵称的门槛不变。卡片内的重复标题改为
+"安全设置"（昵称已在折叠行上，避免两行说同样的话）。
+
+**空数据文案**：`ChildSummaryCard` 在 `completedQuestions === 0` 时平均用时
+显示"—"（原来渲染 "0.0 秒"，会让人以为孩子答题快到 0 秒）；有记录才显示真值。
+
+**布局**：`ParentSectionShell` 改为纵向 flex + `min-height: 100dvh`，底部导航
+`margin-top: auto` + `position: sticky; bottom: 0`（内容短时贴底、长时吸底）。
+注意这里**刻意不给根节点加 `overflow-x: hidden`**：它会把根节点变成滚动容器，
+sticky 随即失效；横向溢出改为在源头处理（flex 子项 `min-width: 0`、长文本
+`overflow-wrap: anywhere`）。`ReportPanel` 的 `dl` 改为"标签左 / 数值右"的行，
+题型分布改为每档一个小块，纯 CSS、不改数据。
+
+**验证**：
+
+- `npm run test`：57 文件 / 705 用例全绿（新增 4 条：头像图形块与提交值一致、
+  安全区 `aria-expanded` 与字形同步且一次只展开一个、空数据"—"、共享样式被
+  外壳引入且全部规则限定在 `.parent-section`）；
+- `npm run type-check`：通过；
+- `npm run test:coverage`：全绿（Statements 94.33% / Branches 91.81% /
+  Functions 94.15% / Lines 95.77%，阈值 80%）；
+- `npm run build`：成功；
+- agent-browser 375×667 实测三页：`scrollWidth === clientWidth === 375`（无横向
+  溢出），长昵称（24 字）在卡片内换行不撑破，底部导航三页均贴视口底，
+  截图确认建档表单、头像块、安全区折叠与"平均用时 —"的观感与首页/图鉴一致。
+

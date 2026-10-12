@@ -52,9 +52,9 @@ onMounted(() => {
       空态：本机还没有孩子档案。建档入口在档案管理页——这里给一条明确的路，
       而不是一句"暂无数据"让孩子/家长对着空白屏。
     -->
-    <section v-else-if="overview.children.value.length === 0" class="overview__empty" data-testid="overview-empty">
+    <section v-else-if="overview.children.value.length === 0" class="overview__empty parent-card" data-testid="overview-empty">
       <p>还没有孩子档案，先去档案管理页添加一个吧。</p>
-      <button type="button" data-testid="overview-goto-manage" @click="emit('navigate', 'manage')">
+      <button type="button" class="parent-button" data-testid="overview-goto-manage" @click="emit('navigate', 'manage')">
         去档案管理
       </button>
     </section>
@@ -72,6 +72,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* 卡片的玻璃质感来自 ChildSummaryCard 自身；这里只管列表节奏 */
 .overview__list,
 .overview__empty {
   display: grid;
@@ -79,16 +80,5 @@ onMounted(() => {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.overview__empty button {
-  justify-self: start;
-  min-height: 2.75rem;
-  padding: var(--ds-space-sm) var(--ds-space-md);
-  border: 1px solid var(--ds-glass-border);
-  border-radius: var(--ds-radius-md);
-  color: var(--ds-text-primary);
-  background: var(--ds-glass-surface);
-  font: inherit;
 }
 </style>

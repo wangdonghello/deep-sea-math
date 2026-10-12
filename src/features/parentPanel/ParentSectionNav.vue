@@ -37,8 +37,14 @@ const SECTIONS: ReadonlyArray<{ id: ParentSection; label: string }> = [
 </template>
 
 <style scoped>
-/* 底部共享导航：与首页 TabBar 同源的玻璃条，当前页用暖橙描边高亮。 */
+/* 底部共享导航：与首页 TabBar 同源的玻璃条，当前页用暖橙描边高亮。
+   `margin-top:auto` 把导航顶到视口底（内容短时），内容长时 sticky 吸附在
+   视口底部——两种情况都"在心里有底"的位置，不需要滚到页面末尾找。 */
 .parent-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  margin-top: auto;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -51,6 +57,7 @@ const SECTIONS: ReadonlyArray<{ id: ParentSection; label: string }> = [
 }
 
 .parent-nav__item {
+  min-width: 0;
   min-height: 2.75rem;
   padding: var(--ds-space-sm);
   border: 1px solid transparent;
@@ -58,6 +65,7 @@ const SECTIONS: ReadonlyArray<{ id: ParentSection; label: string }> = [
   color: var(--ds-text-secondary);
   background: none;
   font: inherit;
+  font-size: var(--ds-font-size-caption);
   cursor: pointer;
 }
 

@@ -64,9 +64,9 @@ onMounted(() => {
     <p v-if="panel.errorMessage.value" role="alert" data-testid="settings-error">{{ panel.errorMessage.value }}</p>
     <p v-if="panel.successMessage.value" role="status" data-testid="settings-success">{{ panel.successMessage.value }}</p>
 
-    <section v-if="panel.profiles.value.length === 0" data-testid="settings-empty">
+    <section v-if="panel.profiles.value.length === 0" class="parent-card" data-testid="settings-empty">
       <p>还没有孩子档案，先去档案管理页添加一个吧。</p>
-      <button type="button" data-testid="settings-goto-manage" @click="emit('navigate', 'manage')">去档案管理</button>
+      <button type="button" class="parent-button" data-testid="settings-goto-manage" @click="emit('navigate', 'manage')">去档案管理</button>
     </section>
 
     <template v-else>
@@ -98,23 +98,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* 控件外观（label 单列、select 玻璃底、按钮）来自 styles/parentForms.css */
 .settings__picker {
-  display: grid;
-  gap: var(--ds-space-xs);
-}
-
-.settings__picker select {
-  min-height: 2.75rem;
-  font: inherit;
-}
-
-[data-testid='settings-empty'] button {
-  min-height: 2.75rem;
-  padding: var(--ds-space-sm) var(--ds-space-md);
-  border: 1px solid var(--ds-glass-border);
-  border-radius: var(--ds-radius-md);
-  color: var(--ds-text-primary);
-  background: var(--ds-glass-surface);
-  font: inherit;
+  max-width: 20rem;
 }
 </style>

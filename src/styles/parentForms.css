@@ -1,0 +1,203 @@
+/*
+ * 家长区表单与卡片共享样式（P3）。
+ *
+ * 落点：P2 删除 `views/ParentView.vue` 时，那段负责表单外观的 scoped 样式
+ * 一并消失，输入框于是退化成浏览器默认控件（系统深色底、直角、与深海主题
+ * 冲突）。这里把家长区的控件外观收回**一处**——作用域用 `ParentSectionShell`
+ * 的根类 `.parent-section` 限定（三页与其全部子组件都渲染在该根节点内），
+ * 由 `ParentSectionShell.vue` 引入一次，因此不存在"某页忘了带上样式"。
+ */
+.parent-section {
+  /* 危险操作色：玫红一档，刻意不用刺眼纯红，也与暖橙强调色拉开区分 */
+  --ds-danger-text: #ffa8b6;
+  --ds-danger-border: rgba(255, 138, 160, 0.6);
+}
+
+/* ── 标签：放在输入框上方（移动端单列），避免 label 与 input 同排导致宽度参差 ── */
+.parent-section label {
+  display: grid;
+  gap: var(--ds-space-xs);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-caption);
+}
+
+/* ── 文本/数字/密码输入与下拉：深海玻璃卡片质感，高度与首页按钮一致 ── */
+.parent-section input[type='text'],
+.parent-section input[type='password'],
+.parent-section input[type='number'],
+.parent-section select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text-primary);
+  background: var(--ds-glass-surface);
+  font: inherit;
+  /* ≥ 16px：iOS Safari 在更小字号上聚焦会自动放大整页 */
+  font-size: 16px;
+}
+
+.parent-section input:focus-visible,
+.parent-section select:focus-visible {
+  outline: 2px solid var(--ds-accent-500);
+  outline-offset: 1px;
+}
+
+/* ── 按钮：主按钮暖橙渐变（与首页「开始下潜」同一支），次要按钮玻璃描边 ── */
+.parent-section .parent-button {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text-primary);
+  background: var(--ds-glass-surface);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.parent-section .parent-button--primary {
+  border-color: transparent;
+  color: var(--ds-on-accent);
+  background: var(--ds-accent-gradient);
+}
+
+/* 危险操作（删除档案）：玫红描边 + 淡底，可识别但不刺眼 */
+.parent-section .parent-button--danger {
+  border-color: var(--ds-danger-border);
+  color: var(--ds-danger-text);
+  background: transparent;
+}
+
+.parent-section .parent-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── fieldset/legend：去掉默认边框与内边距，视觉上并入所在卡片 ── */
+.parent-section fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.parent-section legend {
+  padding: 0;
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-caption);
+}
+
+/* 说明性小字：统一次级色，不与标签抢注意力 */
+.parent-section .parent-hint {
+  margin: 0;
+  color: var(--ds-text-muted);
+  font-size: var(--ds-font-size-caption);
+}
+
+/* ── 头像选择：三个可点选的图形块 ──
+   radio 的 `name="avatar"` 语义与 DOM 顺序都保留（辅助技术与既有测试仍按
+   input 定位），只是把控件本体视觉隐藏，选中态由 label 的描边表达。 */
+.parent-section .avatar-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-md);
+}
+
+.parent-section label.avatar-option {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--ds-space-xs);
+  padding: var(--ds-space-sm);
+  border: 2px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-glass-surface);
+  color: var(--ds-text-secondary);
+  cursor: pointer;
+  transition: border-color var(--ds-motion-fast) ease;
+}
+
+.parent-section label.avatar-option--selected {
+  border-color: var(--ds-accent-500);
+  color: var(--ds-text-primary);
+  box-shadow: var(--ds-shadow-card);
+}
+
+.parent-section label.avatar-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.parent-section .avatar-option__figure {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--ds-radius-pill);
+  color: #9be8ff;
+  background: rgba(155, 232, 255, 0.14);
+}
+
+/* 三个头像用不同图案色区分；图案由各选项内联 SVG 用 currentColor 绘制 */
+.parent-section .avatar-option[data-avatar='avatar-2'] .avatar-option__figure {
+  color: #ffc774;
+  background: rgba(255, 199, 116, 0.16);
+}
+
+.parent-section .avatar-option[data-avatar='avatar-3'] .avatar-option__figure {
+  color: #7ce0c0;
+  background: rgba(124, 224, 192, 0.16);
+}
+
+.parent-section label.avatar-option:focus-within,
+.parent-section .avatar-option input:focus-visible + .avatar-option__figure {
+  outline: 2px solid var(--ds-accent-500);
+  outline-offset: 2px;
+}
+
+/* ── 卡片：家长区各页的成块内容统一玻璃卡片，圆角/阴影与图鉴页一致 ── */
+.parent-section .parent-card {
+  display: grid;
+  gap: var(--ds-space-md);
+  padding: var(--ds-space-md);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-glass-surface);
+  box-shadow: var(--ds-shadow-card);
+}
+
+/* 长昵称不撑破卡片（375px 下的横向溢出多来自这里） */
+.parent-section .parent-wrap {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ── 危险区：删除档案一块用玫红分隔线，与重置 PIN 明确分区 ── */
+.parent-section .danger__delete {
+  display: grid;
+  gap: var(--ds-space-md);
+  padding-top: var(--ds-space-md);
+  border-top: 1px solid var(--ds-danger-border);
+}
+
+/* 确认勾选框：与文字同排、不参与"标签在输入框上方"的单列规则 */
+.parent-section label.parent-check {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-sm);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-caption);
+}
+
+.parent-section label.parent-check input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--ds-danger-text);
+}

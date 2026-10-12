@@ -161,6 +161,60 @@ describe('views: 家长区三区页面', () => {
     expect(wrapper.emitted('navigate')?.[0]).toEqual(['settings'])
   })
 
+  it('档案管理：头像改为可点选的图形块，选中态与提交的 avatarId 一致', async () => {
+    const fake = makeParentStore()
+    const wrapper = mount(ProfileManageSection, { props: { store: fake.store, clock: () => 5000 } })
+    await flushPromises()
+
+    const options = wrapper.findAll('[data-testid^="avatar-option-"]')
+    expect(options).toHaveLength(3)
+    // 语义仍是 name="avatar" 的 radio：辅助技术与既有按 input 顺序定位的测试照旧
+    expect(options.every((option) => option.find('input[type="radio"][name="avatar"]').exists())).toBe(true)
+    // 每个选项是可视图形块（内联 SVG，不引外部图片）且有可读标签
+    expect(options.every((option) => option.find('svg').exists())).toBe(true)
+    expect(options[2]!.get('input').attributes('aria-label')).toContain('头像')
+    // 默认选中第一个，选中态由 label 的类表达（样式不写进断言）
+    expect(options[0]!.classes()).toContain('avatar-option--selected')
+    expect(options[2]!.classes()).not.toContain('avatar-option--selected')
+
+    await options[2]!.get('input').setValue(true)
+    expect(options[2]!.classes()).toContain('avatar-option--selected')
+    expect(options[0]!.classes()).not.toContain('avatar-option--selected')
+
+    const form = wrapper.get('[data-testid="create-profile"]')
+    const inputs = form.findAll('input')
+    await inputs.at(0)!.setValue('新同学')
+    await inputs.at(4)!.setValue('0427')
+    await inputs.at(5)!.setValue('0427')
+    await form.trigger('submit')
+    await vi.waitFor(() => { expect(fake.profiles.size).toBe(1) })
+
+    expect([...fake.profiles.values()][0]!.avatarId).toBe('avatar-3')
+  })
+
+  it('档案管理：安全区是可展开卡片，展开字形与 aria-expanded 同步', async () => {
+    const fake = makeParentStore({ profiles })
+    const wrapper = mount(ProfileManageSection, { props: { store: fake.store, defaultProfileId: 'a', clock: () => 5000 } })
+    await flushPromises()
+
+    expect(wrapper.get('[data-testid="manage-toggle-a"]').attributes('aria-expanded')).toBe('false')
+    expect(wrapper.get('[data-testid="manage-toggle-a"]').text()).toContain('海星')
+    expect(wrapper.get('[data-testid="manage-toggle-a"] .manage__toggle-glyph').text()).toBe('▸')
+    expect(wrapper.find('[data-testid="danger-zone"]').exists()).toBe(false)
+
+    await wrapper.get('[data-testid="manage-toggle-a"]').trigger('click')
+    await flushPromises()
+    expect(wrapper.get('[data-testid="manage-toggle-a"]').attributes('aria-expanded')).toBe('true')
+    expect(wrapper.get('[data-testid="manage-toggle-a"] .manage__toggle-glyph').text()).toBe('▾')
+    expect(wrapper.find('[data-testid="danger-zone"]').exists()).toBe(true)
+
+    // 一次只展开一个：展开 b 后 a 收起
+    await wrapper.get('[data-testid="manage-toggle-b"]').trigger('click')
+    await flushPromises()
+    expect(wrapper.get('[data-testid="manage-toggle-a"]').attributes('aria-expanded')).toBe('false')
+    expect(wrapper.get('[data-testid="manage-toggle-b"]').attributes('aria-expanded')).toBe('true')
+  })
+
   it('不泄露：建档填入的 PIN 明文不出现在渲染文本与脱敏日志里', async () => {
     const logs: Record<string, unknown>[] = []
     const fake = makeParentStore({ profiles: [{ id: 'a', nickname: '海星', avatarId: 'avatar-1', pinHash: 'safe-hash', salt: 'private-salt', createdAt: 1 }] })

@@ -8,6 +8,16 @@
 import ParentSectionNav from './ParentSectionNav.vue'
 import type { ParentSection } from './types'
 
+/**
+ * 家长区共享的表单/卡片外观（P3）。
+ *
+ * P2 删除 `views/ParentView.vue` 后表单样式一并消失，输入框退化成浏览器
+ * 默认控件。样式收在 `styles/parentForms.css`，以 `.parent-section` 为作用域，
+ * 由本外壳引入一次——三页与全部子组件都在 `.parent-section` 之内，因此必然
+ * 共享，不依赖各页记得带上。
+ */
+import '@/styles/parentForms.css'
+
 defineProps<{
   title: string
   /** 当前功能区（底部导航高亮）。 */
@@ -49,14 +59,23 @@ const emit = defineEmits<{
 <style scoped>
 .parent-section {
   position: relative;
-  display: grid;
+  /* 纵向 flex：底部导航用 margin-top:auto 顶到视口底，内容长时可滚动 */
+  display: flex;
+  flex-direction: column;
   gap: var(--ds-space-lg);
-  align-content: start;
   max-width: 48rem;
   min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
   padding: var(--ds-space-xl) var(--ds-space-lg);
   color: var(--ds-text-primary);
+}
+
+/* flex 子项默认 min-width:auto，长昵称会把卡片顶宽；此处显式归零，
+   而不是给根节点加 `overflow-x: hidden`——后者会把根节点变成滚动容器，
+   底部导航的 `position: sticky` 随之失效。 */
+.parent-section > * {
+  min-width: 0;
 }
 
 .parent-section__back {
