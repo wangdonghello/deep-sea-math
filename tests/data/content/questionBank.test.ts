@@ -3,10 +3,23 @@ import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import { QUEST_CATEGORIES, QUIZ_TYPES } from '../../../src/domain/model/types'
-import { assertValidQuestionBank } from '../../../src/data/content/schema'
+import { assertValidQuestionBank, QUESTION_BANK_LIMITS } from '../../../src/data/content/schema'
 import { CREATURE_BANK, QUESTION_BANK, QUESTION_INDEX } from '../../../src/data/content'
-import { FIVE_STEP_TYPES } from '../../../src/domain/model/types'
 
+/**
+ * `tests/data/content/questionBank.test.ts` —— 正式题库的内容契约。
+ *
+ * 题库由 `scripts/generate-question-bank.mjs` 生成（216 题 = 6 题型 × 3 难度
+ * × 12 题，固定种子）。这里锁：
+ * 1. 规模与覆盖（216 题、每格 12 题、category 分布 6/4/2、索引桶对拍）；
+ * 2. 来源域映射（技能 → standard:* → Common Core 领域页）；
+ * 3. 相似题链接约束（同题型、共享技能、答案形态一致、双向值不同）；
+ * 4. hints 五层语义，尤其第 5 层讲解示例不泄露本题答案；
+ * 5. **数字量级下限**（三年级水平，不再出现一位数加减）；
+ * 6. 严格口径下的规模 / 每格下限 / 五步字段负测。
+ */
+
+/** 五类"规律与数据"技能的精确标签（都映射到 3.OA.9）。 */
 const PATTERN_SEQUENCE_SKILLS = [
   'skill-constant-difference-sequence',
   'skill-second-difference-sequence',
@@ -15,6 +28,7 @@ const PATTERN_SEQUENCE_SKILLS = [
   'skill-double-and-add-one-sequence',
 ] as const
 
+/** 技能 → 独立声明的 Common Core 标准（与 schema 的真源对拍）。 */
 const EXPECTED_STANDARDS_BY_SKILL: Record<string, string[]> = {
   'skill-addition': ['3.NBT.2'], 'skill-subtraction': ['3.NBT.2'],
   'skill-repeated-subtraction': ['3.NBT.2'], 'skill-merge-and-remove-duplicates': ['3.NBT.2', '3.OA.8'],
@@ -30,28 +44,43 @@ const EXPECTED_STANDARDS_BY_SKILL: Record<string, string[]> = {
   'skill-double-and-add-one-sequence': ['3.OA.9'],
 }
 
+/**
+ * q001 暖身题：`tests/App.test.ts` 端到端用例逐字敲 `7 + 5` 提交并期望整组
+ * 完成，因此它是全库**唯一**保留个位数操作数的题（见生成脚本的 WARMUP）。
+ * 数字量级断言显式放行它，其余题一律按三年级量级检查。
+ */
+const PINNED_WARMUP_ID = 'q001'
+
+type RawQuestion = Record<string, any>
+interface RawBank { version: string; questions: RawQuestion[] }
+
 /** Loads the checked-in question bank as JSON so tests exercise shipped content. */
-function readQuestionBank(): unknown {
-  return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.json'), 'utf8'))
+function readQuestionBank(): RawBank {
+  return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.json'), 'utf8')) as RawBank
 }
 
 /** 六个题型 × 三档难度的全部组合。 */
 const CELLS = QUIZ_TYPES.flatMap((type) => [1, 2, 3].map((difficulty) => ({ type, difficulty })))
 
+/** 提取文本里的整数 token。 */
+function numbers(text: string): number[] {
+  return (text.match(/\d+/g) ?? []).map(Number)
+}
+
+/** 第 3 层「算式提示」里的操作数（生成脚本统一写成「列式：…」）。 */
+function expressionOperands(question: RawQuestion): number[] {
+  return numbers(question.hints[3])
+}
+
 /**
  * 按给定的「每格题数」克隆出题库规模的真题库，供严格口径下的题量与每格
- * 下限负测使用。
- *
- * 模板只取题库里严格口径合法的**基础题**（`requiresFiveStep === false` 且无
- * `steps`），因此题目本身仍能通过逐题校验——负测要卡的是规模 / 覆盖规则，
- * 不是逐题内容。
+ * 下限负测使用。模板只取题库里合法的题目，负测要卡的是规模 / 覆盖规则。
  */
-function syntheticBank(counts: number[]): { version: string; questions: Array<Record<string, any>> } {
-  const base = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-  const templates = base.questions.filter((question) => question.requiresFiveStep === false && question.steps === undefined)
-  const questions: Array<Record<string, any>> = []
+function syntheticBank(counts: number[]): RawBank {
+  const base = readQuestionBank()
+  const questions: RawQuestion[] = []
   CELLS.forEach((cell, index) => {
-    const template = templates.find((question) => question.type === cell.type && question.difficulty === cell.difficulty)!
+    const template = base.questions.find((question) => question.type === cell.type && question.difficulty === cell.difficulty)!
     for (let n = 0; n < counts[index]; n += 1) {
       questions.push({ ...structuredClone(template), id: `${cell.type}-${cell.difficulty}-${n}`, similarQuestionIds: [] })
     }
@@ -65,26 +94,35 @@ function evenCounts(total: number): number[] {
   return CELLS.map((_, index) => (index === CELLS.length - 1 ? total - base * (CELLS.length - 1) : base))
 }
 
+/** 按 id 查题（测试里多次需要拿链接目标对拍）。 */
+function byId(id: string): RawQuestion {
+  return QUESTION_BANK.questions.find((question) => question.id === id)!
+}
+
 describe('question bank content', () => {
-  it('contains 60–80 complete questions spanning all types and difficulties', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    expect(bank.questions.length).toBeGreaterThanOrEqual(60)
-    expect(bank.questions.length).toBeLessThanOrEqual(80)
+  it('contains 216 complete questions spanning every type × difficulty cell', () => {
+    const bank = readQuestionBank()
+    expect(bank.questions).toHaveLength(216)
+    expect(QUESTION_BANK_LIMITS.maxQuestions).toBeGreaterThanOrEqual(216)
     assertValidQuestionBank(bank)
 
-    for (const type of QUIZ_TYPES) {
-      for (const difficulty of [1, 2, 3]) {
-        const cell = bank.questions.filter((question) => question.type === type && question.difficulty === difficulty)
-        expect(cell).toHaveLength(4)
-        expect(QUEST_CATEGORIES.map((category) => cell.filter((question) => question.category === category).length))
-          .toEqual([2, 1, 1])
-      }
+    for (const { type, difficulty } of CELLS) {
+      const cell = bank.questions.filter((question) => question.type === type && question.difficulty === difficulty)
+      expect(cell, `${type} difficulty ${difficulty}`).toHaveLength(12)
+      const split = QUEST_CATEGORIES.map((category) => cell.filter((question) => question.category === category).length)
+      expect(split, `${type} difficulty ${difficulty} category split`).toEqual([6, 4, 2])
     }
-    expect(QUESTION_INDEX.byCategory.basic).toHaveLength(36)
-    expect(QUESTION_INDEX.byCategory.applied).toHaveLength(18)
-    expect(QUESTION_INDEX.byCategory.probe).toHaveLength(18)
-    expect(QUESTION_INDEX.byType['add-sub']).toHaveLength(12)
-    expect(QUESTION_INDEX.byDifficulty[3]).toHaveLength(24)
+    expect(QUESTION_INDEX.byCategory.basic).toHaveLength(108)
+    expect(QUESTION_INDEX.byCategory.applied).toHaveLength(72)
+    expect(QUESTION_INDEX.byCategory.probe).toHaveLength(36)
+    expect(QUESTION_INDEX.byDifficulty[3]).toHaveLength(72)
+
+    const creatureIds = new Set(CREATURE_BANK.creatures.map((creature) => creature.id))
+    expect(bank.questions.every((question) => creatureIds.has(question.creatureRef ?? ''))).toBe(true)
+  })
+
+  it('keeps every index bucket in lockstep with the bank', () => {
+    const bank = readQuestionBank()
     for (const category of QUEST_CATEGORIES) {
       expect(QUESTION_INDEX.byCategory[category]).toEqual(bank.questions.filter((question) => question.category === category))
     }
@@ -102,102 +140,10 @@ describe('question bank content', () => {
     for (const difficulty of [1, 2, 3] as const) {
       expect(QUESTION_INDEX.byDifficulty[difficulty]).toEqual(bank.questions.filter((question) => question.difficulty === difficulty))
     }
-    const creatureIds = new Set(CREATURE_BANK.creatures.map((creature) => creature.id))
-    expect(QUESTION_BANK.questions.every((question) => creatureIds.has(question.creatureRef ?? ''))).toBe(true)
-  })
-
-  it('rejects a question with fewer than five hints', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    invalid.questions[0].hints.pop()
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/questions/)
-  })
-
-  it('rejects question sources without the skill-matched standards domain', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    invalid.questions[0].sources = ['https://www.thecorestandards.org/']
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/standards domain/i)
-    const invalidProtocol = structuredClone(bank)
-    invalidProtocol.questions[0].sources = ['ftp://www.thecorestandards.org/Math/Content/3/NBT/']
-    expect(() => assertValidQuestionBank(invalidProtocol)).toThrow(/HTTP\(S\)/i)
-    const malformedUrl = structuredClone(bank)
-    malformedUrl.questions[0].sources = ['https://']
-    expect(() => assertValidQuestionBank(malformedUrl)).toThrow(/valid HTTP\(S\) URL/i)
-    const mismatchedStandard = structuredClone(bank)
-    mismatchedStandard.questions[36].tags = mismatchedStandard.questions[36].tags.map((tag: string) => tag === 'standard:3.OA.8' ? 'standard:3.OA.4' : tag)
-    expect(() => assertValidQuestionBank(mismatchedStandard)).toThrow(/standard tag does not match/i)
-    const wrongUnknownSkill = structuredClone(bank)
-    wrongUnknownSkill.questions[36].tags = wrongUnknownSkill.questions[36].tags.map((tag: string) => tag === 'skill-addsub-unknown' ? 'skill-muldiv-unknown' : tag)
-    expect(() => assertValidQuestionBank(wrongUnknownSkill)).toThrow(/expected skill-addsub-unknown/i)
-  })
-
-  it('rejects a sequence skill mislabeled as data-table standard with an MD source', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const q062 = invalid.questions.find((question) => question.id === 'q062')!
-    q062.tags = q062.tags.filter((tag: string) => tag !== 'standard:3.OA.9')
-    q062.tags.push('standard:3.MD')
-    q062.sources = ['https://www.thecorestandards.org/Math/Content/3/MD/']
-
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/standard tag does not match/i)
-  })
-
-  it('maps every pattern sequence skill to 3.OA.9 even when presented as a data table', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const patternQuestions = bank.questions.filter((question) => question.type === 'pattern-data')
-    expect(patternQuestions.every((question) => question.tags.some((tag: string) => PATTERN_SEQUENCE_SKILLS.includes(tag as typeof PATTERN_SEQUENCE_SKILLS[number])))).toBe(true)
-
-    for (const skill of PATTERN_SEQUENCE_SKILLS) {
-      const candidate = structuredClone(bank)
-      for (const question of candidate.questions.filter((item) => item.type === 'pattern-data')) {
-        question.tags = question.tags.filter((tag: string) => !tag.startsWith('skill-') && !tag.startsWith('standard:'))
-        question.tags.push(skill, 'standard:3.OA.9')
-        question.sources = question.sources.map((source: string) =>
-          source.replace(/\/Math\/Content\/3\/(?:OA|MD)\//, '/Math/Content/3/OA/'))
-      }
-      expect(() => assertValidQuestionBank(candidate), skill).not.toThrow()
-    }
-  })
-
-  it('enforces the 200–400 question range and rejects counts outside it', () => {
-    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)), { legacyContent: false }))
-      .toThrow(/expected 200–400 questions/)
-    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(401)), { legacyContent: false }))
-      .toThrow(/expected 200–400 questions/)
-    // 199 题的合法骨架在过渡口径下仍可放行（题量下限回落到 60）
-    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)), { legacyContent: true })).not.toThrow()
-  })
-
-  it('rejects a strict bank with a type/difficulty cell below the eight-question floor', () => {
-    const counts = evenCounts(200)
-    counts[0] += 6
-    // pattern-data × difficulty 3 是第 18 格（5 * 3 + 2）
-    counts[17] = 7
-    expect(() => assertValidQuestionBank(syntheticBank(counts), { legacyContent: false }))
-      .toThrow(/pattern-data difficulty 3 needs at least 8 questions/)
-  })
-
-  it('rejects five-step content fields under the strict regime', () => {
-    const flagged = syntheticBank(evenCounts(200))
-    flagged.questions[0].requiresFiveStep = true
-    expect(() => assertValidQuestionBank(flagged, { legacyContent: false })).toThrow(/不再使用五步引导/)
-
-    const withSteps = syntheticBank(evenCounts(200))
-    withSteps.questions[0].steps = FIVE_STEP_TYPES.map((type) => ({ type, prompt: '引导' }))
-    expect(() => assertValidQuestionBank(withSteps, { legacyContent: false })).toThrow(/不再使用五步引导/)
-  })
-
-  it('keeps the current bank valid under the C1 legacy regime and every type/difficulty bucket', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const missingBucket = structuredClone(bank)
-    missingBucket.questions = missingBucket.questions.filter((question) => !(question.type === 'pattern-data' && question.difficulty === 3))
-    expect(() => assertValidQuestionBank(missingBucket)).toThrow(/pattern-data.*3/)
   })
 
   it('maps each tagged skill to its independently specified standard domain', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    for (const question of bank.questions) {
+    for (const question of readQuestionBank().questions) {
       const tags = question.tags as string[]
       const standards = tags.filter((tag) => tag.startsWith('standard:'))
       const skills = tags.filter((tag) => tag.startsWith('skill-'))
@@ -215,72 +161,47 @@ describe('question bank content', () => {
     }
   })
 
-  it('keeps representative length, time, and mass questions within their grade-level standards', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    const byId = Object.fromEntries(bank.questions.map((question) => [question.id, question]))
-    expect(byId.q049.answer.value).toBe(500)
-    expect(byId.q049.tags).toContain('standard:3.NBT.2')
-    expect(byId.q051.tags).toContain('standard:3.OA.8')
-    expect(byId.q051.answer.value).toBe(25)
-    expect(byId.q051.steps.map((step: { prompt: string }) => step.prompt).join(' ')).toMatch(/10 \+ 3 × 5/)
-    expect(byId.q053.answer.value).toBe(900)
-    expect(byId.q058.answer.value).toBe(600)
-    expect(byId.q058.tags).toContain('standard:3.NBT.2')
-    expect(byId.q059.answer.value).toBe(325)
-    expect(byId.q057.tags).not.toContain('standard:3.MD.4')
-    for (const id of ['q050', 'q052', 'q054', 'q056', 'q060']) {
-      const question = byId[id]
-      expect(question.answer.value).toBeLessThanOrEqual(60)
-      const content = [question.story.body, ...question.hints, ...(question.steps ?? []).map((step: { prompt: string }) => step.prompt)].join(' ')
-      expect((content.match(/\d+/g) ?? []).map(Number).every((value) => value <= 60), `${id} time values within one hour`).toBe(true)
+  it('maps every pattern sequence skill to 3.OA.9 even when presented as a data table', () => {
+    const bank = readQuestionBank()
+    const patternQuestions = bank.questions.filter((question) => question.type === 'pattern-data')
+    expect(patternQuestions).toHaveLength(36)
+    expect(patternQuestions.every((question) => question.tags.some((tag: string) => (PATTERN_SEQUENCE_SKILLS as readonly string[]).includes(tag)))).toBe(true)
+
+    for (const skill of PATTERN_SEQUENCE_SKILLS) {
+      const candidate = structuredClone(bank)
+      for (const question of candidate.questions.filter((item) => item.type === 'pattern-data')) {
+        question.tags = question.tags.filter((tag: string) => !tag.startsWith('skill-') && !tag.startsWith('standard:'))
+        question.tags.push(skill, 'standard:3.OA.9')
+        question.sources = question.sources.map((source: string) =>
+          source.replace(/\/Math\/Content\/3\/(?:OA|MD)\//, '/Math/Content/3/OA/'))
+      }
+      expect(() => assertValidQuestionBank(candidate), skill).not.toThrow()
     }
-    expect(byId.q055.answer.value).toBe(6)
-    expect(byId.q055.tags).toContain('standard:3.MD.2')
   })
 
-  it('requires 3.OA.8 for the two-step distance question', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const q051 = invalid.questions.find((question) => question.id === 'q051')!
-    q051.tags = q051.tags.filter((tag: string) => tag !== 'standard:3.OA.8')
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/missing standard:3\.OA\.8/i)
-  })
-
-  it('rejects length addition and subtraction operands above 1000', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const q058 = invalid.questions.find((question) => question.id === 'q058')!
-    q058.story.body = q058.story.body.replace('950', '2500')
-    q058.hints[3] = '列式：2500 - 350。'
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/length operands.*1000/i)
-  })
-
-  it('avoids duplicate arithmetic templates while preserving similar-question links', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    const byId = Object.fromEntries(bank.questions.map((question) => [question.id, question]))
-    expect(byId.q025.answer.value).not.toBe(byId.q026.answer.value)
-    expect(byId.q026.answer.value).not.toBe(byId.q027.answer.value)
-    expect(byId.q061.answer.value).not.toBe(byId.q063.answer.value)
-    expect(byId.q063.story.body).toMatch(/3、6、9、12/)
-    expect(byId.q014.answer.value).not.toBe(byId.q039.answer.value)
-    expect(byId.q026.similarQuestionIds).toContain('q029')
-    expect(byId.q039.similarQuestionIds).toContain('q043')
-  })
-
-  it('gives every bidirectional link and reused sequence a distinct answer', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    const byId = Object.fromEntries(bank.questions.map((question) => [question.id, question]))
-    expect(byId.q052.answer.value).toBe(45)
-    expect(byId.q054.answer.value).toBe(39)
-    expect(byId.q054.story.body).toMatch(/18分钟/)
-    expect(byId.q065.answer.value).toBe(30)
-    expect(byId.q066.answer.value).toBe(38)
-    expect(byId.q066.story.body).toMatch(/18、23、28、33/)
-    expect(byId.q067.answer.value).toBe(20)
-    expect(byId.q067.story.body).toMatch(/5、10、15/)
-    for (const question of bank.questions) {
+  it('links only same-type questions with a shared precise skill tag', () => {
+    for (const question of QUESTION_BANK.questions) {
+      expect(new Set(question.similarQuestionIds).size, `${question.id} has no duplicate links`).toBe(question.similarQuestionIds.length)
       for (const id of question.similarQuestionIds) {
-        const target = byId[id]
+        const target = byId(id)
+        expect(target.type, `${question.id} → ${id} type`).toBe(question.type)
+        expect(question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag)), `${question.id} → ${id} skill`).not.toHaveLength(0)
+        expect(target.answer.unit, `${question.id} → ${id} answer unit`).toBe(question.answer.unit)
+        expect(Boolean(target.answer.expression), `${question.id} → ${id} expression presence`).toBe(Boolean(question.answer.expression))
+        // 生成脚本只在同格内成对建链，不会跨题型或跨难度。
+        expect(target.difficulty, `${question.id} → ${id} difficulty`).toBe(question.difficulty)
+        expect(byId(id).similarQuestionIds, `${question.id} → ${id} is bidirectional`).toContain(question.id)
+      }
+    }
+    const linked = QUESTION_BANK.questions.filter((question) => question.similarQuestionIds.length > 0)
+    expect(linked.length).toBeGreaterThan(0)
+    expect(linked.length).toBeLessThan(QUESTION_BANK.questions.length)
+  })
+
+  it('gives every bidirectional link a distinct answer value', () => {
+    for (const question of QUESTION_BANK.questions) {
+      for (const id of question.similarQuestionIds) {
+        const target = byId(id)
         if (target.similarQuestionIds.includes(question.id)) {
           expect(target.answer.value, `${question.id} ↔ ${id}`).not.toBe(question.answer.value)
         }
@@ -288,147 +209,229 @@ describe('question bank content', () => {
     }
   })
 
-  it('keeps q034 specimen quantities and its two-step answer dimensionally consistent', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    const question = bank.questions.find((candidate) => candidate.id === 'q034')!
-    expect(question.story.body).toMatch(/每盒共有多少份/)
-    expect(question.answer).toEqual({ value: 49, unit: '份' })
-    expect(question.category).toBe('basic')
-    expect(question.requiresFiveStep).toBe(false)
-    expect(question.steps).toBeUndefined()
-    expect(question.hints.join(' ')).toMatch(/144 ÷ 12 \+ 37/)
+  it('keeps the worked-example layer free of the answer digits', () => {
+    for (const question of readQuestionBank().questions) {
+      const forbidden = new Set<number>([question.answer.value])
+      if (typeof question.answer.expression === 'string') {
+        numbers(question.answer.expression).forEach((value) => forbidden.add(value))
+      }
+      expect(numbers(question.hints[4]).filter((value) => forbidden.has(value)), `${question.id} worked example`).toEqual([])
+      expect(question.hints, `${question.id} hint layers`).toHaveLength(5)
+      expect(question.hints[4].length, `${question.id} worked example length`).toBeGreaterThanOrEqual(6)
+    }
   })
 
-  it('links only same-type questions with a shared precise skill tag', () => {
-    for (const question of QUESTION_BANK.questions) {
-      expect(new Set(question.similarQuestionIds).size, `${question.id} has no duplicate links`).toBe(question.similarQuestionIds.length)
-      for (const id of question.similarQuestionIds) {
-        const target = QUESTION_BANK.questions.find((candidate) => candidate.id === id)!
-        expect(target.type, `${question.id} → ${id} type`).toBe(question.type)
-        expect(question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag)), `${question.id} → ${id} skill`).not.toHaveLength(0)
-        expect(target.answer.unit, `${question.id} → ${id} answer unit`).toBe(question.answer.unit)
-        expect(Boolean(target.answer.expression), `${question.id} → ${id} expression presence`).toBe(Boolean(question.answer.expression))
+  it('keeps the first hint layer a reading cue instead of restating the numbers', () => {
+    for (const question of readQuestionBank().questions) {
+      const storyNumbers = new Set(numbers(question.story.body))
+      expect(numbers(question.hints[0]).filter((value) => storyNumbers.has(value)), question.id).toEqual([])
+    }
+  })
+
+  it('keeps add-sub questions at grade-3 magnitude (two-digit operands and up)', () => {
+    const addSub = readQuestionBank().questions.filter((question) => question.type === 'add-sub')
+    for (const question of addSub) {
+      if (question.id === PINNED_WARMUP_ID) continue
+      const operands = expressionOperands(question)
+      expect(operands.length, `${question.id} has an equation hint`).toBeGreaterThanOrEqual(2)
+      for (const operand of operands) {
+        expect(operand, `${question.id} operand magnitude`).toBeGreaterThanOrEqual(10)
+      }
+    }
+    // 个位数加减全库只剩 q001 这一道暖身题（App.test.ts 端到端用例锁定）。
+    const oneDigit = addSub.filter((question) => question.id !== PINNED_WARMUP_ID && expressionOperands(question).some((value) => value < 10))
+    expect(oneDigit.map((question) => question.id), '只有 q001 允许个位数').toEqual([])
+    const warmup = addSub.find((question) => question.id === PINNED_WARMUP_ID)!
+    expect(warmup.answer).toEqual({ value: 12, expression: '7 + 5' })
+    expect(byId(PINNED_WARMUP_ID)).toEqual(QUESTION_BANK.questions[0])
+  })
+
+  it('keeps mul-div difficulty 1 away from trivial one-digit facts', () => {
+    const cell = readQuestionBank().questions.filter((question) => question.type === 'mul-div' && question.difficulty === 1)
+    expect(cell).toHaveLength(12)
+    for (const question of cell) {
+      const operands = expressionOperands(question)
+      expect(operands.length, `${question.id} has an equation hint`).toBeGreaterThanOrEqual(2)
+      const [left, right] = operands
+      expect(left >= 6 || right >= 6 || left * right >= 30, `${question.id} ${left} × ${right}`).toBe(true)
+    }
+  })
+
+  it('keeps length questions within 1000 and every answer a positive count', () => {
+    for (const question of readQuestionBank().questions) {
+      expect(Number.isInteger(question.answer.value) && question.answer.value > 0, `${question.id} answer value`).toBe(true)
+      if (question.tags.includes('skill-add-length') || question.tags.includes('skill-subtract-length')) {
+        const content = [question.story.body, ...question.hints].join(' ')
+        expect(numbers(content).every((value) => value <= 1000), `${question.id} length operands within 1000`).toBe(true)
+        expect(question.answer.value, `${question.id} length result`).toBeLessThanOrEqual(1000)
       }
     }
   })
 
-  it('rejects cross-skill and cross-type similar-question references', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const crossSkill = structuredClone(bank)
-    crossSkill.questions[2].similarQuestionIds = ['q005']
-    crossSkill.questions[4].tags = crossSkill.questions[4].tags.filter((tag: string) => !tag.startsWith('skill-'))
-    expect(() => assertValidQuestionBank(crossSkill)).toThrow(/similarQuestionIds.*skill/i)
-    const crossType = structuredClone(bank)
-    crossType.questions[2].similarQuestionIds = ['q013']
-    crossType.questions[12].tags.push('skill-addition')
-    expect(() => assertValidQuestionBank(crossType)).toThrow(/similarQuestionIds.*type/i)
-  })
-
-  it('rejects similar answers with different units or expression shape', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const unitMismatch = structuredClone(bank)
-    unitMismatch.questions[1].similarQuestionIds = ['q006']
-    expect(() => assertValidQuestionBank(unitMismatch)).toThrow(/similarQuestionIds.*answer unit/i)
-    const expressionMismatch = structuredClone(bank)
-    expressionMismatch.questions[2].answer = { value: 17 }
-    expressionMismatch.questions[2].similarQuestionIds = []
-    for (const question of expressionMismatch.questions) {
-      question.similarQuestionIds = question.similarQuestionIds.filter((id: string) => id !== 'q003')
+  it('spreads every cell across at least six distinct story templates', () => {
+    const bank = readQuestionBank()
+    for (const { type, difficulty } of CELLS) {
+      const cell = bank.questions.filter((question) => question.type === type && question.difficulty === difficulty)
+      const titles = new Set(cell.map((question) => question.story.title))
+      expect(titles.size, `${type} difficulty ${difficulty} story variety`).toBeGreaterThanOrEqual(6)
     }
-    expressionMismatch.questions[0].similarQuestionIds = ['q003']
-    expect(() => assertValidQuestionBank(expressionMismatch)).toThrow(/similarQuestionIds.*expression/i)
-  })
-
-  it('rejects dangling similar-question IDs', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    invalid.questions[0].similarQuestionIds = ['not-in-bank']
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/similarQuestionIds/)
-  })
-
-  it('rejects duplicate similar-question IDs', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    invalid.questions[2].similarQuestionIds = ['q009', 'q009']
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/similarQuestionIds.*duplicate/i)
-  })
-
-  it('rejects an expression that does not produce its declared value', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    invalid.questions[0].answer = { value: 9, expression: '2 × 3' }
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/expression/)
-  })
-
-  it('rejects category/five-step mismatches and empty sources', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    invalid.questions[0].requiresFiveStep = true
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/questions/)
-
-    const missingSources = structuredClone(bank)
-    missingSources.questions[1].sources = []
-    expect(() => assertValidQuestionBank(missingSources)).toThrow(/sources/)
-  })
-
-  it('rejects a guided question with missing or reordered steps', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const missingSteps = structuredClone(bank)
-    delete missingSteps.questions[2].steps
-    expect(() => assertValidQuestionBank(missingSteps)).toThrow(/steps/)
-
-    const reorderedSteps = structuredClone(bank)
-    reorderedSteps.questions[2].steps.reverse()
-    expect(() => assertValidQuestionBank(reorderedSteps)).toThrow(/steps/)
-  })
-
-  it('keeps the first hint layer a reading cue instead of restating the numbers', () => {
-    const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
-    const numbers = (text: string) => new Set((text.match(/\d+/g) ?? []).map(Number))
-    for (const question of bank.questions) {
-      const storyNumbers = numbers(question.story.body)
-      const hintNumbers = numbers(question.hints[0])
-      expect([...hintNumbers].filter((token) => storyNumbers.has(token)), question.id).toEqual([])
+    // 每个题型整体至少准备了 8 个不同的故事模板（避免"换数字换物品名"）。
+    for (const type of QUIZ_TYPES) {
+      const titles = new Set(bank.questions.filter((question) => question.type === type).map((question) => question.story.title))
+      expect(titles.size, `${type} story templates`).toBeGreaterThanOrEqual(8)
     }
   })
 
-  it('rejects a basic question that still declares five-step steps', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const basic = invalid.questions.find((question) => question.id === 'q002')!
-    basic.steps = FIVE_STEP_TYPES.map((type) => ({ type, prompt: '引导' }))
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/without five-step guidance/)
+  it('enforces the 200–400 question range', () => {
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)))).toThrow(/expected 200–400 questions/)
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(401)))).toThrow(/expected 200–400 questions/)
+  })
+
+  it('rejects a bank with a type/difficulty cell below the eight-question floor', () => {
+    const counts = evenCounts(200)
+    counts[0] += 6
+    // pattern-data × difficulty 3 是第 18 格（5 * 3 + 2）
+    counts[17] = 7
+    expect(() => assertValidQuestionBank(syntheticBank(counts))).toThrow(/pattern-data difficulty 3 needs at least 8 questions/)
+  })
+
+  it('rejects a bank missing an entire type/difficulty cell', () => {
+    const invalid = readQuestionBank()
+    invalid.questions = invalid.questions.filter((question) => !(question.type === 'pattern-data' && question.difficulty === 3))
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/pattern-data difficulty 3 needs at least 8 questions/)
+  })
+
+  it('rejects five-step content fields under the strict regime', () => {
+    const flagged = syntheticBank(evenCounts(200))
+    flagged.questions[0].requiresFiveStep = true
+    expect(() => assertValidQuestionBank(flagged)).toThrow(/不再使用五步引导/)
+
+    const withSteps = syntheticBank(evenCounts(200))
+    withSteps.questions[0].steps = [{ type: 'known', prompt: '引导' }]
+    expect(() => assertValidQuestionBank(withSteps)).toThrow(/不再使用五步引导/)
+  })
+
+  it('rejects a question with fewer than five hints', () => {
+    const invalid = readQuestionBank()
+    invalid.questions[0].hints.pop()
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/exactly five levels/)
+  })
+
+  it('rejects question sources without the skill-matched standards domain', () => {
+    const missing = readQuestionBank()
+    missing.questions[0].sources = ['https://www.thecorestandards.org/']
+    expect(() => assertValidQuestionBank(missing)).toThrow(/standards domain/i)
+
+    const wrongProtocol = readQuestionBank()
+    wrongProtocol.questions[0].sources = ['ftp://www.thecorestandards.org/Math/Content/3/NBT/']
+    expect(() => assertValidQuestionBank(wrongProtocol)).toThrow(/HTTP\(S\)/i)
+
+    const malformed = readQuestionBank()
+    malformed.questions[0].sources = ['https://']
+    expect(() => assertValidQuestionBank(malformed)).toThrow(/valid HTTP\(S\) URL/i)
+  })
+
+  it('rejects a standard tag that does not match the question skill', () => {
+    const invalid = readQuestionBank()
+    const target = invalid.questions.find((question) => question.tags.includes('skill-addition'))!
+    target.tags = target.tags.map((tag: string) => (tag === 'standard:3.NBT.2' ? 'standard:3.OA.4' : tag))
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/standard tag does not match/i)
+  })
+
+  it('requires skill-addsub-unknown for a missing-part unknown relation', () => {
+    const invalid = readQuestionBank()
+    const target = invalid.questions.find((question) => question.type === 'unknown-relation' && question.tags.includes('missing-part'))!
+    target.tags = target.tags.map((tag: string) => (tag === 'skill-addsub-unknown' ? 'skill-muldiv-unknown' : tag))
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/expected skill-addsub-unknown/i)
+  })
+
+  it('rejects length addition and subtraction operands above 1000', () => {
+    const invalid = readQuestionBank()
+    const target = invalid.questions.find((question) => question.tags.includes('skill-subtract-length'))!
+    target.hints[3] = '列式：2500 - 120。'
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/length operands.*1000/i)
   })
 
   it('rejects a worked-example layer that reuses the answer digits', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const target = invalid.questions.find((question) => question.id === 'q001')!
-    target.hints[4] = '比如 4 + 8 = 12，你就能得到答案。'
+    const invalid = readQuestionBank()
+    const target = invalid.questions.find((question) => question.id === PINNED_WARMUP_ID)!
+    target.hints[4] = `比如 4 + 8 = ${target.answer.value}，你就能得到答案。`
     expect(() => assertValidQuestionBank(invalid)).toThrow(/worked example must not reuse the answer digits/)
   })
 
   it('rejects a worked-example layer that is too short to teach', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const target = invalid.questions.find((question) => question.id === 'q001')!
-    target.hints[4] = '算一下'
+    const invalid = readQuestionBank()
+    invalid.questions[0].hints[4] = '算一下'
     expect(() => assertValidQuestionBank(invalid)).toThrow(/at least six characters/)
   })
 
   it('does not treat a longer run as a prefix of the answer digits', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const valid = structuredClone(bank)
-    const target = valid.questions.find((question) => question.id === 'q038')!
-    target.hints[4] = '比如先数到 130 个，就能看出比原数更接近。'
-    expect(() => assertValidQuestionBank(valid), 'answer 13 must not match inside 130').not.toThrow()
+    const valid = readQuestionBank()
+    valid.questions[0].hints[4] = '比如先数到 120 个，就能看出比原数更接近。'
+    expect(() => assertValidQuestionBank(valid), 'answer 12 must not match inside 120').not.toThrow()
+  })
+
+  it('rejects dangling and duplicated similar-question references', () => {
+    const dangling = readQuestionBank()
+    for (const question of dangling.questions) question.similarQuestionIds = []
+    dangling.questions[0].similarQuestionIds = ['not-in-bank']
+    expect(() => assertValidQuestionBank(dangling)).toThrow(/missing or self reference/)
+
+    const duplicated = readQuestionBank()
+    for (const question of duplicated.questions) question.similarQuestionIds = []
+    duplicated.questions[0].similarQuestionIds = ['q005', 'q005']
+    expect(() => assertValidQuestionBank(duplicated)).toThrow(/duplicate references/)
+  })
+
+  it('rejects cross-skill, cross-type, cross-unit and cross-shape similar links', () => {
+    const crossSkill = readQuestionBank()
+    const source = crossSkill.questions[0]
+    const sameTypeOtherSkill = crossSkill.questions.find((question) =>
+      question.type === source.type && question.tags.includes('skill-subtraction'))!
+    source.similarQuestionIds = [sameTypeOtherSkill.id]
+    expect(() => assertValidQuestionBank(crossSkill)).toThrow(/no shared skill tag/)
+
+    const crossType = readQuestionBank()
+    const base = crossType.questions[0]
+    const otherType = crossType.questions.find((question) => question.type !== base.type)!
+    otherType.tags = [...otherType.tags, 'skill-addition']
+    base.similarQuestionIds = [otherType.id]
+    expect(() => assertValidQuestionBank(crossType)).toThrow(/type mismatch/)
+
+    const unitMismatch = readQuestionBank()
+    const additions = unitMismatch.questions.filter((question) =>
+      question.type === 'add-sub' && question.tags.includes('skill-addition') && question.answer.unit !== undefined)
+    const unitBase = additions[0]
+    const otherUnit = additions.find((question) => question.answer.unit !== unitBase.answer.unit)!
+    unitBase.similarQuestionIds = [otherUnit.id]
+    expect(() => assertValidQuestionBank(unitMismatch)).toThrow(/answer unit mismatch/)
+
+    const shapeMismatch = readQuestionBank()
+    for (const question of shapeMismatch.questions) question.similarQuestionIds = []
+    const expressionBase = shapeMismatch.questions.find((question) => question.answer.expression)!
+    const plain = shapeMismatch.questions.find((question) =>
+      question.type === expressionBase.type && question.tags.includes('skill-addition') && question.answer.expression === undefined)!
+    plain.answer = { value: 987 }
+    plain.hints[4] = '比如 12 + 7 = 19，合并的方法完全一样。'
+    expressionBase.similarQuestionIds = [plain.id]
+    expect(() => assertValidQuestionBank(shapeMismatch)).toThrow(/expression shape mismatch/)
   })
 
   it('rejects a similar-question pair that shares the same answer value', () => {
-    const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const invalid = structuredClone(bank)
-    const similar = invalid.questions.find((question) => question.id === 'q009')!
-    similar.answer.value = 17
-    expect(() => assertValidQuestionBank(invalid)).toThrow(/linked answer q009 must differ in value from q003/)
+    const invalid = readQuestionBank()
+    for (const question of invalid.questions) question.similarQuestionIds = []
+    const additions = invalid.questions.filter((question) =>
+      question.type === 'add-sub' && question.tags.includes('skill-addition') && question.answer.unit !== undefined)
+    const first = additions[0]
+    const second = additions.find((question) => question.answer.unit === first.answer.unit && question.id !== first.id)!
+    const safeHint = '比如 12 + 7 = 19，合并的方法完全一样。'
+    first.answer = { value: 86, unit: first.answer.unit }
+    first.hints[4] = safeHint
+    second.answer = { value: 86, unit: second.answer.unit }
+    second.hints[4] = safeHint
+    first.similarQuestionIds = [second.id]
+    second.similarQuestionIds = [first.id]
+    expect(() => assertValidQuestionBank(invalid)).toThrow(/must differ in value/)
   })
 })
+

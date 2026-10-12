@@ -1,5 +1,4 @@
 import {
-  FIVE_STEP_TYPES,
   QUEST_CATEGORIES,
   QUIZ_TYPES,
   type BestiaryEntry,
@@ -19,37 +18,14 @@ const QUESTION_UNITS = new Set([
 /**
  * 题库规模与覆盖下限（spec `daily-math-quest` §题型与难度覆盖）。
  *
- * 目标口径是「题库扩到 200+ 题」之后的值：总量 200–400，且每个
- * `QuizType × Difficulty` 组合至少 8 题——18 格 × 8 = 144，8 是**下限而非
- * 目标**，200 题时平均每格约 11 题。
+ * 总量 200–400，且每个 `QuizType × Difficulty` 组合至少 8 题——18 格 × 8 =
+ * 144，8 是**下限而非目标**；当前题库 216 题，每格 12 题。
  */
 export const QUESTION_BANK_LIMITS = {
   minQuestions: 200,
   maxQuestions: 400,
   minPerCell: 8,
 } as const
-
-/**
- * C1 过渡豁免：现有正式题库仍是 72 题（每格 4 题），且应用题 / 探测题仍带
- * `requiresFiveStep` / `steps`，尚未满足 {@link QUESTION_BANK_LIMITS} 的目标口径。
- *
- * 置 `true` 时，缺省校验按「兼容旧内容」放行（题量下限回落 60、每格下限回落 1，
- * 且不拒绝五步字段）。**C2（题库扩容 + 去五步）合并后必须删除本常量**，让缺省
- * 校验回到严格口径；届时 `assertValidQuestionBank` 的 `legacyContent` 选项也一并
- * 去掉。负测显式传 `{ legacyContent: false }` 锁定严格行为。
- */
-export const ALLOW_LEGACY_QUESTION_CONTENT = true
-
-/** {@link assertValidQuestionBank} 的可选校验开关。 */
-export interface QuestionBankValidationOptions {
-  /**
-   * 是否按 C1 过渡口径放宽题量与五步字段校验。
-   *
-   * 缺省用 {@link ALLOW_LEGACY_QUESTION_CONTENT}；传 `false` 即按
-   * {@link QUESTION_BANK_LIMITS} 与「禁用五步字段」的严格口径校验。
-   */
-  legacyContent?: boolean
-}
 
 const STANDARDS_BY_SKILL: Record<string, readonly string[]> = {
   'skill-addition': ['3.NBT.2'], 'skill-subtraction': ['3.NBT.2'],
@@ -265,7 +241,7 @@ function validateWorkedExampleHint(hints: unknown, answer: Record<string, unknow
 }
 
 /** Validates every required model field and returns the narrowed question. */
-function validateQuestion(value: unknown, path: string, legacyContent: boolean): Question {
+function validateQuestion(value: unknown, path: string): Question {
   const question = record(value, path)
   nonEmptyString(question.id, `${path}.id`)
   if (!(QUIZ_TYPES as readonly unknown[]).includes(question.type)) throw new Error(`${path}.type: unknown quiz type`)
@@ -276,8 +252,9 @@ function validateQuestion(value: unknown, path: string, legacyContent: boolean):
   nonEmptyString(story.body, `${path}.story.body`)
   if (typeof question.requiresFiveStep !== 'boolean') throw new Error(`${path}.requiresFiveStep: expected boolean`)
   // 当前版本界面不再渲染五步流程：作者若仍然声明五步字段，会被界面静默忽略，
-  // 属最难排查的一类缺陷，因此在严格口径下一律拒绝（C1 过渡期由 legacyContent 放行）。
-  if ((question.requiresFiveStep || question.steps !== undefined) && !legacyContent) {
+  // 属最难排查的一类缺陷，因此一律拒绝（`requiresFiveStep` 只允许 false 且
+  // MUST NOT 声明 `steps`）。
+  if (question.requiresFiveStep || question.steps !== undefined) {
     throw new Error(`${path}: 当前版本不再使用五步引导，requiresFiveStep / steps MUST NOT 声明`)
   }
   const hints = question.hints
@@ -300,58 +277,36 @@ function validateQuestion(value: unknown, path: string, legacyContent: boolean):
   if (new Set(question.similarQuestionIds).size !== question.similarQuestionIds.length) {
     throw new Error(`${path}.similarQuestionIds: duplicate references are forbidden`)
   }
-  // 过渡期（legacyContent）仍对旧内容做自洽校验；严格口径已在上面拒绝五步字段。
-  if (question.requiresFiveStep) validateSteps(question.steps, `${path}.steps`)
-  else if (question.steps !== undefined) {
-    throw new Error(`${path}.steps: questions without five-step guidance must not declare steps`)
-  }
+  // 五步字段已在上面一律拒绝，这里不再需要按 `requiresFiveStep` 分叉校验步骤。
   return question as unknown as Question
-}
-
-/** Enforces the canonical five-step sequence for guided questions. */
-function validateSteps(value: unknown, path: string): void {
-  if (!Array.isArray(value) || value.length !== FIVE_STEP_TYPES.length) {
-    throw new Error(`${path}: guided questions require exactly five steps`)
-  }
-  value.forEach((item, index) => {
-    const step = record(item, `${path}[${index}]`)
-    if (step.type !== FIVE_STEP_TYPES[index]) throw new Error(`${path}[${index}].type: invalid five-step order`)
-    nonEmptyString(step.prompt, `${path}[${index}].prompt`)
-  })
 }
 
 /**
  * 校验带版本号的题库：版本字段、逐题规则，以及全部相似题引用。
  *
+ * 一律按严格口径校验（题量 200–400、每格 ≥ 8、禁止五步字段）；C1 的过渡
+ * 豁免常量与 `legacyContent` 选项已在 C2 题库扩容后删除。
+ *
  * @param value 不可信的解析后 JSON 内容。
- * @param options 校验开关；缺省按 {@link ALLOW_LEGACY_QUESTION_CONTENT} 决定
- *   是否采用 C1 过渡口径（见 {@link QuestionBankValidationOptions}）。
  * @throws {Error} 任一内容规则不满足时抛出，消息带出错的字段路径。
  */
-export function assertValidQuestionBank(
-  value: unknown,
-  options: QuestionBankValidationOptions = {},
-): asserts value is QuestionBank {
+export function assertValidQuestionBank(value: unknown): asserts value is QuestionBank {
   const bank = record(value, 'questionBank')
   nonEmptyString(bank.version, 'questionBank.version')
-  const legacyContent = options.legacyContent ?? ALLOW_LEGACY_QUESTION_CONTENT
-  const { minQuestions, maxQuestions, minPerCell } = legacyContent
-    ? { ...QUESTION_BANK_LIMITS, minQuestions: 60, minPerCell: 1 }
-    : QUESTION_BANK_LIMITS
+  const { minQuestions, maxQuestions, minPerCell } = QUESTION_BANK_LIMITS
   if (!Array.isArray(bank.questions) || bank.questions.length < minQuestions || bank.questions.length > maxQuestions) {
     throw new Error(`questionBank.questions: expected ${minQuestions}–${maxQuestions} questions`)
   }
   const ids = new Set<string>()
   const questions = bank.questions.map((question, index) => {
-    const validated = validateQuestion(question, `questionBank.questions[${index}]`, legacyContent)
+    const validated = validateQuestion(question, `questionBank.questions[${index}]`)
     if (ids.has(validated.id)) throw new Error(`questionBank.questions[${index}].id: duplicate ${validated.id}`)
     ids.add(validated.id)
     return validated
   })
   for (const type of QUIZ_TYPES) {
     for (const difficulty of [1, 2, 3]) {
-      // 每格下限（严格口径 8 / 过渡口径 1）：题库扩容后每格至少 8 题，
-      // 保证任一题型 × 难度组合都取得到题，不会组题时突然落空。
+      // 每格下限 8：任一题型 × 难度组合都要取得到题，组题时不会突然落空。
       const cell = questions.filter((question) => question.type === type && question.difficulty === difficulty)
       if (cell.length < minPerCell) {
         throw new Error(
