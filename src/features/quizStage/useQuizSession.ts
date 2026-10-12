@@ -3,10 +3,8 @@ import { computed, ref } from 'vue'
 import { MAX_HINT_LAYERS, revealHint, type RevealedHint } from '@/domain/hint/hintChainSelector'
 import { createEventId } from '@/domain/eventLog/ids'
 import { replayProjections } from '@/domain/eventLog/replay'
-import { completeCurrentStep, createFiveStepMachine, resumeProgress, revisitStep } from '@/domain/quiz/fiveStepMachine'
-import type { FiveStepState } from '@/domain/quiz/fiveStepMachine'
-import { isCorrect, matchesExpression, matchesNumericValue } from '@/domain/quiz/answerJudgement'
-import type { AnswerSubmittedEvent, DomainEvent, FiveStep, FiveStepType, Question } from '@/domain/model/types'
+import { isCorrect } from '@/domain/quiz/answerJudgement'
+import type { AnswerSubmittedEvent, DomainEvent, Question } from '@/domain/model/types'
 import { grantRewards } from '@/domain/reward/rewardGrant'
 
 /**
@@ -50,28 +48,11 @@ export interface QuizSessionOptions {
   idGenerator?: () => string
 }
 
-/**
- * 五步引导模板的兜底。
- *
- * 只在题目自己没带 `steps` 时使用（正式题库的五步题都必须带 `steps`，由内容
- * 校验保证）。它不是“演示内容”，是模板缺省，因此不属于上面要消除的那类
- * 「两端内容不一致」的隐患。
- */
-const DEFAULT_FIVE_STEP_TEMPLATES: readonly FiveStep[] = [
-  { type: 'known', prompt: '找出题目里的已知条件' },
-  { type: 'unknown', prompt: '找出题目要求的内容' },
-  { type: 'relation', prompt: '选择已知与未知的数量关系' },
-  { type: 'expression', prompt: '写出算式' },
-  { type: 'answer', prompt: '写出计算结果' },
-]
-
 export function useQuizSession(options: QuizSessionOptions) {
   const rootQuestions = options.questions
   const questionPool = [...rootQuestions, ...(options.similarQuestionPool ?? [])]
   const events = ref<readonly DomainEvent[]>([])
   const feedback = ref('')
-  const stepFeedback = ref('')
-  const fiveStepStates = ref<Record<string, FiveStepState>>({})
   const submitting = ref(false)
   const practiceQuestionId = ref<string | null>(null)
   /**
@@ -152,7 +133,7 @@ export function useQuizSession(options: QuizSessionOptions) {
    * 与 `currentQuestion` 的区别：`currentQuestion` 由 `resolvedIds` 派生，答对
    * 或看过答案后会**立即**移到下一题；而本 computed 在 `heldQuestionId` 非空时
    * 按住那一题不放，让界面停在原题等待孩子点「下一题」。所有面向 UI 的读数
-   * （进度、提示、五步状态）都以它为准；`submitAnswer` / `revealAnswer` 等
+   * （进度、提示）都以它为准；`submitAnswer` / `revealAnswer` 等
    * 写事件的动作仍走 `currentQuestion`，保持事件流「答对即推进队列」的语义。
    */
   const displayedQuestion = computed(() => {
@@ -169,12 +150,6 @@ export function useQuizSession(options: QuizSessionOptions) {
     (event) => event.type === 'session-completed' && event.sessionId === options.sessionId &&
       event.profileId === options.profileId,
   ))
-  const fiveStepTemplates = computed(() => displayedQuestion.value?.steps ?? DEFAULT_FIVE_STEP_TEMPLATES)
-  const fiveStepState = computed(() => {
-    const question = displayedQuestion.value
-    if (question === null || !question.requiresFiveStep) return null
-    return fiveStepStates.value[question.id] ?? createFiveStepMachine(fiveStepTemplates.value)
-  })
   const currentPosition = computed(() => {
     const index = queue.value.findIndex((question) => question.id === displayedQuestion.value?.id)
     return index < 0 ? queue.value.length : index + 1
@@ -267,39 +242,6 @@ export function useQuizSession(options: QuizSessionOptions) {
     if (result.granted) await appendMany(result.events)
   }
 
-  function completeFiveStep(value: string): boolean {
-    const question = currentQuestion.value
-    const machine = fiveStepState.value
-    if (
-      question === null || machine === null || machine.current === 'answer' ||
-      machine.completed.includes(machine.current)
-    ) return false
-    if (machine.current === 'expression' && question.answer.expression !== undefined &&
-      !matchesExpression(value, question.answer.expression)) {
-      stepFeedback.value = '再看看数量关系，试着列出对应的算式。'
-      return false
-    }
-    fiveStepStates.value = { ...fiveStepStates.value, [question.id]: completeCurrentStep(machine) }
-    stepFeedback.value = ''
-    return true
-  }
-
-  function revisitFiveStep(step: FiveStepType): void {
-    const question = currentQuestion.value
-    const machine = fiveStepState.value
-    if (question !== null && machine !== null) {
-      fiveStepStates.value = { ...fiveStepStates.value, [question.id]: revisitStep(machine, step) }
-    }
-  }
-
-  function resumeFiveStepProgress(): void {
-    const question = currentQuestion.value
-    const machine = fiveStepState.value
-    if (question !== null && machine !== null) {
-      fiveStepStates.value = { ...fiveStepStates.value, [question.id]: resumeProgress(machine) }
-    }
-  }
-
   async function useHint(): Promise<void> {
     if (submitting.value || currentQuestion.value === null || usedHintLevel.value >= 5) return
     await refreshEvents()
@@ -317,13 +259,11 @@ export function useQuizSession(options: QuizSessionOptions) {
       await refreshEvents()
       const question = currentQuestion.value
       if (question === null) return false
-      const answerStepState = question.requiresFiveStep && fiveStepState.value?.current === 'answer'
-        ? fiveStepState.value : null
       const occurredAt = clock()
       const startedAt = questionStartedAt.get(question.id) ?? occurredAt
-      const correct = question.requiresFiveStep
-        ? matchesNumericValue(submitted, question.answer.value, question.answer.unit)
-        : isCorrect(submitted, question.answer)
+      // 判定口径统一走 `isCorrect`：它已覆盖数值 / 带单位 / 算式三种等价形式，
+      // 因此「列算式」与「填答案」两种作答在同一处判定（见 RETRO R27）。
+      const correct = isCorrect(submitted, question.answer)
       const retryCount = answerEvents.value.filter((event) => event.questionId === question.id).length
       const event = {
         ...baseEvent(occurredAt), type: 'answer-submitted' as const, sessionId: options.sessionId,
@@ -352,9 +292,6 @@ export function useQuizSession(options: QuizSessionOptions) {
       }
 
       phase.value = 'correct'
-      if (answerStepState !== null) {
-        fiveStepStates.value = { ...fiveStepStates.value, [question.id]: completeCurrentStep(answerStepState) }
-      }
       practiceQuestionId.value = null
       feedback.value = retryCount > 0 ? '很好，我们再练一道差不多的' : '太棒了，继续下潜！'
       const parent = roots.value.find((candidate) => candidate.similarQuestionIds.includes(question.id))
@@ -402,8 +339,7 @@ export function useQuizSession(options: QuizSessionOptions) {
     currentPosition, totalQuestions, feedback, submitting,
     phase: computed(() => phase.value), explanationVisible: computed(() => explanationVisible.value),
     sessionCompleted, practiceQuestionAvailable, continuePractice, nextQuestion, showExplanation,
-    stepFeedback, fiveStepTemplates, fiveStepState, fiveStepStates: computed(() => fiveStepStates.value),
     duplicateSlotCount, revealedHints, usedHintLevel, refreshEvents, useHint, submitAnswer,
-    completeFiveStep, revisitFiveStep, resumeFiveStepProgress, revealAnswer,
+    revealAnswer,
   }
 }

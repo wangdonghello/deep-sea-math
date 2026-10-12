@@ -3,6 +3,10 @@ import { FIVE_STEP_TYPES, type FiveStepType } from '../model/types'
 /**
  * `src/domain/quiz/fiveStepMachine` —— 五步思考引导状态机。
  *
+ * **当前版本界面不使用五步引导（见 RETRO R27）：答题页只要求孩子给出算式与
+ * 最终答案，解题思路改由题目的 5 层提示链按需提供。保留本模块供将来复用**，
+ * 它是已交付并有单测的纯领域能力，删除会丢掉这部分迁移规则。
+ *
  * design §3：`KNOWN → UNKNOWN → RELATION → EXPRESSION → ANSWER`，每步绑定
  * 一个最小动作，完成后自动前进；**步内答错不判负**，只给该步提示、不扣
  * 进度——所以本状态机只表达「走到哪一步、哪些步已完成」，没有任何

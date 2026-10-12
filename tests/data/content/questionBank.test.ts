@@ -35,6 +35,36 @@ function readQuestionBank(): unknown {
   return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.json'), 'utf8'))
 }
 
+/** 六个题型 × 三档难度的全部组合。 */
+const CELLS = QUIZ_TYPES.flatMap((type) => [1, 2, 3].map((difficulty) => ({ type, difficulty })))
+
+/**
+ * 按给定的「每格题数」克隆出题库规模的真题库，供严格口径下的题量与每格
+ * 下限负测使用。
+ *
+ * 模板只取题库里严格口径合法的**基础题**（`requiresFiveStep === false` 且无
+ * `steps`），因此题目本身仍能通过逐题校验——负测要卡的是规模 / 覆盖规则，
+ * 不是逐题内容。
+ */
+function syntheticBank(counts: number[]): { version: string; questions: Array<Record<string, any>> } {
+  const base = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
+  const templates = base.questions.filter((question) => question.requiresFiveStep === false && question.steps === undefined)
+  const questions: Array<Record<string, any>> = []
+  CELLS.forEach((cell, index) => {
+    const template = templates.find((question) => question.type === cell.type && question.difficulty === cell.difficulty)!
+    for (let n = 0; n < counts[index]; n += 1) {
+      questions.push({ ...structuredClone(template), id: `${cell.type}-${cell.difficulty}-${n}`, similarQuestionIds: [] })
+    }
+  })
+  return { version: base.version, questions }
+}
+
+/** 18 格平均铺满到总题量 `total`。 */
+function evenCounts(total: number): number[] {
+  const base = Math.floor(total / CELLS.length)
+  return CELLS.map((_, index) => (index === CELLS.length - 1 ? total - base * (CELLS.length - 1) : base))
+}
+
 describe('question bank content', () => {
   it('contains 60–80 complete questions spanning all types and difficulties', () => {
     const bank = readQuestionBank() as { questions: Array<Record<string, any>> }
@@ -130,14 +160,36 @@ describe('question bank content', () => {
     }
   })
 
-  it('requires 60–80 questions and every type/difficulty bucket', () => {
+  it('enforces the 200–400 question range and rejects counts outside it', () => {
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)), { legacyContent: false }))
+      .toThrow(/expected 200–400 questions/)
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(401)), { legacyContent: false }))
+      .toThrow(/expected 200–400 questions/)
+    // 199 题的合法骨架在过渡口径下仍可放行（题量下限回落到 60）
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)), { legacyContent: true })).not.toThrow()
+  })
+
+  it('rejects a strict bank with a type/difficulty cell below the eight-question floor', () => {
+    const counts = evenCounts(200)
+    counts[0] += 6
+    // pattern-data × difficulty 3 是第 18 格（5 * 3 + 2）
+    counts[17] = 7
+    expect(() => assertValidQuestionBank(syntheticBank(counts), { legacyContent: false }))
+      .toThrow(/pattern-data difficulty 3 needs at least 8 questions/)
+  })
+
+  it('rejects five-step content fields under the strict regime', () => {
+    const flagged = syntheticBank(evenCounts(200))
+    flagged.questions[0].requiresFiveStep = true
+    expect(() => assertValidQuestionBank(flagged, { legacyContent: false })).toThrow(/不再使用五步引导/)
+
+    const withSteps = syntheticBank(evenCounts(200))
+    withSteps.questions[0].steps = FIVE_STEP_TYPES.map((type) => ({ type, prompt: '引导' }))
+    expect(() => assertValidQuestionBank(withSteps, { legacyContent: false })).toThrow(/不再使用五步引导/)
+  })
+
+  it('keeps the current bank valid under the C1 legacy regime and every type/difficulty bucket', () => {
     const bank = readQuestionBank() as { version: string; questions: Array<Record<string, any>> }
-    const tooSmall = structuredClone(bank)
-    tooSmall.questions = tooSmall.questions.slice(0, 59)
-    expect(() => assertValidQuestionBank(tooSmall)).toThrow(/60–80/)
-    const tooLarge = structuredClone(bank)
-    tooLarge.questions.push(...structuredClone(bank.questions.slice(0, 9)))
-    expect(() => assertValidQuestionBank(tooLarge)).toThrow(/60–80/)
     const missingBucket = structuredClone(bank)
     missingBucket.questions = missingBucket.questions.filter((question) => !(question.type === 'pattern-data' && question.difficulty === 3))
     expect(() => assertValidQuestionBank(missingBucket)).toThrow(/pattern-data.*3/)

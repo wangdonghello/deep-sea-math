@@ -233,31 +233,6 @@ describe('useQuizSession', () => {
     expect(session.currentQuestion.value?.id).toBe('dup-1')
   })
 
-  it('五步答案只有答对才完成 answer 步', async () => {
-    const source = makeQuestion('applied')
-    const applied = createQuestion({ ...source, requiresFiveStep: true, answer: { ...source.answer, expression: '3+4' }, steps: [
-      { type: 'known', prompt: '已知' }, { type: 'unknown', prompt: '未知' },
-      { type: 'relation', prompt: '关系' }, { type: 'expression', prompt: '算式' },
-      { type: 'answer', prompt: '答案' },
-    ] })
-    const { session } = setup([applied])
-    session.completeFiveStep('已知')
-    expect(session.fiveStepStates.value.applied?.current).toBe('unknown')
-    session.revisitFiveStep('known')
-    expect(session.fiveStepStates.value.applied?.current).toBe('known')
-    session.resumeFiveStepProgress()
-    expect(session.fiveStepStates.value.applied?.current).toBe('unknown')
-    session.completeFiveStep('未知')
-    session.completeFiveStep('关系')
-    expect(session.completeFiveStep('3+5')).toBe(false)
-    expect(session.fiveStepStates.value.applied?.current).toBe('expression')
-    session.completeFiveStep('3+4')
-    await session.submitAnswer('6')
-    expect(session.fiveStepStates.value.applied?.completed).not.toContain('answer')
-    await session.submitAnswer('7')
-    expect(session.fiveStepStates.value.applied?.completed).toContain('answer')
-  })
-
   it('提交进行中时忽略重复提交', async () => {
     const { session, events } = setup([makeQuestion('q1')])
     await Promise.all([session.submitAnswer('7'), session.submitAnswer('7')])
@@ -275,11 +250,13 @@ describe('useQuizSession', () => {
     expect(resumed.currentQuestion.value?.id).toBe('q2')
   })
 
-  it('基础算式题比较表达式；五步答案只比较数值结果', async () => {
+  it('统一判定口径：算式题与数值题各自按声明形态判等', async () => {
     const expressionSession = setup([makeQuestion('expression', [], { value: 6, expression: '24÷4' })]).session
     await expressionSession.submitAnswer('24/4')
     expect(expressionSession.feedback.value).toContain('太棒了')
 
+    // 应用题不再走「答案步只比较数值结果」：无论基础题还是应用题，声明了算式
+    // 就按算式判等、声明了数值就按数值（含单位）判等（见 RETRO R27）。
     const source = makeQuestion('applied', [], { value: 7, expression: '3+4' })
     const applied = createQuestion({ ...source, requiresFiveStep: true, steps: [
       { type: 'known', prompt: '已知' }, { type: 'unknown', prompt: '未知' },
@@ -287,9 +264,9 @@ describe('useQuizSession', () => {
       { type: 'answer', prompt: '答案' },
     ] })
     const { session, events } = setup([applied])
-    await session.submitAnswer('3+4')
-    expect(events.find((event) => event.type === 'answer-submitted')).toMatchObject({ correct: false })
     await session.submitAnswer('7')
+    expect(events.find((event) => event.type === 'answer-submitted')).toMatchObject({ correct: false })
+    await session.submitAnswer('3+4')
     expect(events.filter((event) => event.type === 'answer-submitted').at(-1)).toMatchObject({ correct: true, retryCount: 1 })
   })
 })

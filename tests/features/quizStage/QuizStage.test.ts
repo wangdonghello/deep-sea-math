@@ -2,8 +2,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
 import { createQuestion } from '@/domain/model/types'
-import type { DomainEvent, FiveStep, Question } from '@/domain/model/types'
-import { completeCurrentStep, createFiveStepMachine } from '@/domain/quiz/fiveStepMachine'
+import type { DomainEvent, Question } from '@/domain/model/types'
 import QuizStage from '@/features/quizStage/QuizStage.vue'
 import HintStack from '@/features/quizStage/HintStack.vue'
 import Numpad from '@/features/quizStage/Numpad.vue'
@@ -27,44 +26,12 @@ function question(requiresFiveStep = false, id = requiresFiveStep ? 'applied' : 
   })
 }
 
-const fallbackSteps: FiveStep[] = [
-  { type: 'known', prompt: '已知' }, { type: 'unknown', prompt: '未知' },
-  { type: 'relation', prompt: '关系' }, { type: 'expression', prompt: '算式' },
-  { type: 'answer', prompt: '答案' },
-]
-function stageProps(value: Question, completedSteps = 0) {
-  const steps = value.steps ?? fallbackSteps
-  let machine = value.requiresFiveStep ? createFiveStepMachine(steps) : null
-  if (machine !== null) {
-    for (let index = 0; index < completedSteps; index += 1) machine = completeCurrentStep(machine)
-  }
-  return { question: value, steps, machine, stepFeedback: '' }
-}
-
 describe('QuizStage', () => {
-  it('基础题直答且不显示 FiveStepBar', () => {
-    const view = mount(QuizStage, { props: stageProps(question()) })
+  it('只渲染题干、输入与数字键盘，不再渲染任何五步引导', () => {
+    const view = mount(QuizStage, { props: { question: question(), answer: '' } })
     expect(view.find('[data-testid="five-step-bar"]').exists()).toBe(false)
     expect(view.find('[data-testid="direct-answer"]').exists()).toBe(true)
-  })
-
-  it('已知步动作只转发完成请求', async () => {
-    const view = mount(QuizStage, { props: stageProps(question(true)) })
-    expect(view.find('[data-testid="five-step-bar"]').exists()).toBe(true)
-    expect(view.find('[data-current-step="known"]').exists()).toBe(true)
-    await view.get('[data-testid="known-choice"]').trigger('click')
-    expect(view.emitted('completeStep')).toEqual([[question(true).story.body]])
-  })
-
-  it('答案步只采集输入并上抛，提交由答题页动作区统一发起', async () => {
-    const source = question(true)
-    const applied = createQuestion({ ...source, answer: { value: 7, unit: '个', expression: '3+4' } })
-    const view = mount(QuizStage, { props: { ...stageProps(applied, 4), answer: '' } })
-    // 答案步不再自带提交按钮：它已并入底部统一动作区
-    expect(view.find('[data-testid="submit-step-answer"]').exists()).toBe(false)
-    await view.get('[data-key="7"]').trigger('click')
-    expect(view.emitted('update:answer')?.at(-1)).toEqual(['7'])
-    expect(view.get('[data-testid="step-input-value"]').text()).toBe('7')
+    expect(view.text()).toContain(question().story.body)
   })
 })
 

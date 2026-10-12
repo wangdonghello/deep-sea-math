@@ -33,7 +33,7 @@ const session = useQuizSession({
 const errorMessage = ref('')
 /** 界面显示中的题（答对/看答案后按住原题，不立刻跳下一题）。 */
 const question = computed(() => session.displayedQuestion.value)
-/** 当前输入（键盘/五步数值步），提交由底部动作区统一发起。 */
+/** 当前输入（数字或算式），提交由底部动作区统一发起。 */
 const draft = ref('')
 
 // 换题时清空输入，避免把上一题的答案带到新题上。
@@ -66,13 +66,7 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
       :key="question.id"
       v-model:answer="draft"
       :question="question"
-      :steps="session.fiveStepTemplates.value"
-      :machine="session.fiveStepState.value"
-      :step-feedback="session.stepFeedback.value"
       @submit="run(() => session.submitAnswer($event), 'quiz-submit-failed')"
-      @complete-step="session.completeFiveStep"
-      @revisit-step="session.revisitFiveStep"
-      @resume-progress="session.resumeFiveStepProgress"
     />
     <HintStack
       v-if="question"

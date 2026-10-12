@@ -164,3 +164,17 @@ TDD 三阶段贯穿每个 task（RED → GREEN → REFACTOR），domain 先行�
 - TDD gate: PASS (18 tasks all contain RED/GREEN/REFACTOR)
 - Commit format gate: PASS (18/18 use `[DSM1234] <type>: T<n> - <subject>`)
 - Re-check at design complete: no new rules triggered (design 仅新增 test/README 相关 SOFT_RULE 合规策略，已于 Constitution Check 列出)
+
+---
+
+## 设计修订（上线后）
+
+本节记录真机验收后对上述设计的**增量修订**，不改写前文的历史设计，只标注生效变更与依据。
+
+1. **移除五步界面**（RETRO R27）：`QuestView` 只保留「题干 + 算式/答案输入 + 数字键盘」一条路径，删除 `FiveStepBar.vue` 与 `StepBody.vue`；`useQuizSession` 去掉 `fiveStepTemplates` / `fiveStepState(s)` / `stepFeedback` / `completeFiveStep` / `revisitFiveStep` / `resumeFiveStepProgress`。`submitAnswer` 判定统一走 `isCorrect`（数值 / 带单位 / 算式三路等价）。§4 组件边界表中的 `FiveStepBar` / `StepBody` 两项不再渲染。
+2. **`fiveStepMachine` 保留、不再被界面使用**：它是已交付并有单测的纯领域能力（§3 状态机），文件头 JSDoc 已注明当前界面不使用（RETRO R27），供将来复用。
+3. **难度数字上调**：题库规模由 60–80 调为 **200–400**，并把「每个 `QuizType × Difficulty` 组合至少 8 题」写成运行时约束（`data/content/schema.ts` 的 `QUESTION_BANK_LIMITS`）。C1 期间题库仍 72 题，故以 `ALLOW_LEGACY_QUESTION_CONTENT` 过渡豁免，C2 扩容后删除。
+4. **相似题改为可选**：`similarQuestionIds` 空数组合法（订正流程遇到空相似题自动跳过）；一旦声明仍要求同题型、共享技能、答案表示一致（RETRO R27）。
+5. **内容模型约束**：`Question.requiresFiveStep` / `steps` 保留字段但当前版本 MUST NOT 使用；严格口径下内容校验直接拒绝声明的五步字段（RETRO R27）。
+
+> 与已冻结规格的冲突以 `specs/daily-math-quest/spec.md` 的 `## MODIFIED Requirements`（解题思路经分层提示提供）为准。

@@ -134,9 +134,21 @@ export interface Question {
     title: string
     body: string
   }
-  /** 是否需要五步引导（应用题 / 探测题为 true，基础题直答）。 */
+  /**
+   * 是否需要五步引导。
+   *
+   * **当前版本 MUST NOT 使用**：界面已移除内联五步流程，解题思路改为经题目的
+   * 5 层提示链按需提供（见 RETRO R27）。本字段仅为不破坏既有事件 / 内容结构而
+   * 保留；内容校验会拒绝 `requiresFiveStep === true` 的新题目。
+   */
   requiresFiveStep: boolean
-  /** 五步模板，`requiresFiveStep` 为 true 时必有。 */
+  /**
+   * 五步模板（历史字段，**当前版本 MUST NOT 声明**）。
+   *
+   * 与 {@link Question.requiresFiveStep} 一并保留仅为兼容既有内容结构；界面不再
+   * 渲染五步流程，内容校验会拒绝任何声明了 `steps` 的新题目（否则作者写了步骤
+   * 却被界面静默忽略，属最难排查的一类缺陷）。
+   */
   steps?: FiveStep[]
   /** 固定 5 层提示链，顺序即规格：审题 → 已知/未知 → 数量关系 → 算式 → 讲解示例。 */
   hints: string[]

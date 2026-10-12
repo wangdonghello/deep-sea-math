@@ -666,3 +666,33 @@ sticky 随即失效；横向溢出改为在源头处理（flex 子项 `min-width
   「答案与讲解」五层 + 答案、只余「下一题」→ 答对后「下一题/看答案详解」，看详解展开释义且不
   写事件。
 
+---
+
+## R27. 移除五步引导：题目页只留题干 + 算式/答案 + 键盘（真机验收后的改动）
+
+**决策来源**：家长真机验收后提出——
+
+> 有几个应用题在没有要求提示时直接把提示流程写上去了，请去掉，直接让学生列出算式，和最终答案即可。
+
+即：**所有题目都只显示「题干 + 算式/答案输入 + 数字键盘」**，解题思路只在孩子主动点「我需要提示」时经 5 层提示链（审题 → 已知/未知 → 关系 → 算式 → 讲解）按需提供。
+
+**与冻结规格的冲突与处理**：这与 `specs/daily-math-quest/spec.md` 原有的「五步思考引导」需求直接矛盾（该需求要求应用题/探测题走五步进度条）。规格是冻结输入，因此按 Constitution 的修订流程以 **`## MODIFIED Requirements` delta** 改规格，而不是让实现单向偏离：原「五步思考引导」改写为「解题思路经分层提示提供」，原三个场景（应用题进入五步 / 五步自动前进 / 基础题直答）替换为「提示链按需展开」与「判定接受算式或答案」。`design.md` 追加《设计修订（上线后）》一节留痕。
+
+**代码处置**：
+- 删除 `src/features/quizStage/FiveStepBar.vue`、`StepBody.vue`；`QuizStage.vue` 只剩 `direct-answer` 一条渲染路径，props 去掉 `steps`/`machine`/`stepFeedback`，emit 去掉 `completeStep`/`revisitStep`/`resumeProgress`。
+- `useQuizSession.ts` 删除五步状态与函数；`submitAnswer` 判定**统一为 `isCorrect(submitted, question.answer)`**——它已覆盖数值 / 带单位 / 算式三路等价，因此「列算式」与「填答案」在同一处判定。此前「应用题的答案步只比数值结果」的口径随之取消（对应单测已改写）。
+- `QuestView.vue` 去掉传给 `QuizStage` 的五步 props 与事件。
+- **不删** `src/domain/quiz/fiveStepMachine.ts`：它是已交付并有单测的纯领域能力，属未来可能复用的资产；仅在文件头 JSDoc 注明「当前版本界面不使用五步引导（见 RETRO R27），保留本模块供将来复用」。
+
+**内容模型与校验**：
+- `Question.requiresFiveStep` / `steps` 保留字段（不破坏既有事件/内容结构），但 JSDoc 注明当前版本 MUST NOT 使用。
+- `schema.ts` 新增严格口径：任一题目声明 `requiresFiveStep === true` 或 `steps` 即报错（避免作者写了步骤却被界面静默忽略）。C1 期间现有 72 题仍带五步字段，故以 `ALLOW_LEGACY_QUESTION_CONTENT` 过渡豁免，`assertValidQuestionBank` 增加 `legacyContent` 选项；**C2 扩容并去五步后删除该常量**。
+- 题量范围 60–80 → **200–400**，并新增「每个 `QuizType × Difficulty` 组合至少 8 题」运行时约束（常量 `QUESTION_BANK_LIMITS`）；过渡期下限回落 60 / 每格 1。负测覆盖：199 / 401 题被拒、某组合不足 8 题被拒、五步字段被拒。
+- 相似题引用改为**可选**（空数组合法，订正流程遇到空相似题自动跳过）；一旦声明的同题型 / 共享技能 / 答案表示一致校验保留。
+
+**界面上解题思路只剩一条路径**：底部「我需要提示」→ `HintStack` 逐层展开；答错时仍按规格自动展开第一层（R26 已留痕）。
+
+**验证**：`npm run test` 57 文件 / 712 用例全绿；`npm run type-check` 通过；`npm run test:coverage` 全绿（阈值 80%）；`npm run build` 成功；`openspec validate dsm1234 --strict` 通过。
+
+**遗留**：题库扩容到 200+ 与内容侧移除五步字段由后继任务 C2 负责；C2 完成后应删除 `ALLOW_LEGACY_QUESTION_CONTENT` 并把 `legacyContent` 选项一并去掉。
+
