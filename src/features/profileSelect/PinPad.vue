@@ -9,13 +9,15 @@
  * 无障碍取向：错误提示与倒计时用 `role="status"` + `aria-live` 播报，
  * 让孩子在不看屏幕时也能听见"再试一次 / 还需等 N 秒"。
  */
-import { computed } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 
 import { PIN_LENGTH } from './types'
 
 const props = defineProps<{
-  /** 当前选中档案的昵称（PIN 盘标题）。 */
-  nickname: string
+  /** 当前选中档案的昵称；家长门禁这类无档案场景改用 `title`。 */
+  nickname?: string
+  /** 显式标题；给定时优先于由 `nickname` 拼出的标题。 */
+  title?: string
   /** 已输入的 PIN（用于渲染点数，MUST NOT 回显明文）。 */
   value: string
   /** 是否禁用输入（锁定期）。 */
@@ -33,11 +35,39 @@ const emit = defineEmits<{
   (event: 'digit', digit: string): void
   /** 退格。 */
   (event: 'backspace'): void
+  /** 整体赋值（掩码输入框的打字/粘贴路径）。 */
+  (event: 'setpin', value: string): void
   /** 提交。 */
   (event: 'submit'): void
 }>()
 
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+/** 掩码输入框；用于把"被过滤掉的输入"从 DOM 里抹回权威值。 */
+const inputEl = ref<HTMLInputElement | null>(null)
+
+/** 标题：优先 `title`，其次由昵称拼出，最后退回中性的"密码"。 */
+const heading = computed(() => {
+  if (props.title !== undefined) return props.title
+  return props.nickname === undefined ? '密码' : `${props.nickname}的密码`
+})
+
+/**
+ * 把 DOM 输入框拉回 `props.value`。
+ *
+ * 过滤规则**只**在 composable 一处（`useProfileSelect.setPin` /
+ * `useParentGate.setPin`）：组件拿不到"这次输入是否被接受"的答案，能做的
+ * 只是等 composable 处理完，再把权威值写回框里。少了这一步，被拒的非数字
+ * 会作为明文残影留在输入框里，与点数回显对不上。
+ */
+async function onInput(event: Event): Promise<void> {
+  const raw = (event.target as HTMLInputElement).value
+  emit('setpin', raw)
+  await nextTick()
+  if (inputEl.value !== null && inputEl.value.value !== props.value) {
+    inputEl.value.value = props.value
+  }
+}
 
 /** 点的填充状态数组，长度固定为 {@link PIN_LENGTH}。 */
 const dots = computed(() =>
@@ -48,8 +78,31 @@ const dots = computed(() =>
 <template>
   <section class="pin-pad" :data-testid="'pin-pad'">
     <h2 class="pin-pad__title">
-      {{ nickname }}的密码
+      {{ heading }}
     </h2>
+
+    <!--
+      掩码输入框：与数字键盘共用的第二条输入路径。
+      - `type="password"` 保证明文不回显（点数回显才是给孩子的进度提示）；
+      - `inputmode="numeric"` 让手机弹出数字键盘（`maxlength` 只是原生兜底，
+        真正的位数约束在 composable 里）；
+      - `<label>` 包住输入框，读屏与点标签都能聚焦到它。
+    -->
+    <label class="pin-pad__field">
+      <span class="pin-pad__field-label">密码</span>
+      <input
+        ref="inputEl"
+        class="pin-pad__input"
+        data-testid="pin-input"
+        type="password"
+        inputmode="numeric"
+        autocomplete="one-time-code"
+        :maxlength="PIN_LENGTH"
+        :value="value"
+        :disabled="disabled || submitting"
+        @input="onInput"
+      />
+    </label>
 
     <!-- 点数回显：只显示“输了几个”，绝不回显明文 PIN。 -->
     <div

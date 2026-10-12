@@ -250,3 +250,65 @@ describe('views: ProfileSelectView', () => {
     expect(verifyCalls).toEqual([])
   })
 })
+
+/**
+ * 掩码输入框与数字键盘是**同一份输入状态**的两条路，因此这一组用例只在装配
+ * 层面断言"两条路读到的位数一致"——过滤规则本身归 `useProfileSelect` 的单测。
+ */
+describe('views: ProfileSelectView 掩码输入框', () => {
+  it('打字同步点数回显，非数字被过滤且不留残影', async () => {
+    const clock = new ManualClock()
+    const store = await makeVerifiedStore('1234')
+    const view = await mountView({ store, clock })
+    const input = view.get<HTMLInputElement>('[data-testid="pin-input"]')
+
+    input.element.value = '12'
+    await input.trigger('input')
+    await flushPromises()
+    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('2')
+
+    input.element.value = '12a'
+    await input.trigger('input')
+    await flushPromises()
+    // 位数不变（'a' 被 composable 剥掉），框里也被抹回权威值。
+    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('2')
+    expect(input.element.value).toBe('12')
+  })
+
+  it('点按键盘与退格都会让输入框值同步', async () => {
+    const clock = new ManualClock()
+    const store = await makeVerifiedStore('1234')
+    const view = await mountView({ store, clock })
+    const input = view.get<HTMLInputElement>('[data-testid="pin-input"]')
+
+    await view.get('[data-testid="pin-key-3"]').trigger('click')
+    expect(input.element.value).toBe('3')
+
+    await view.get('[data-testid="pin-key-4"]').trigger('click')
+    expect(input.element.value).toBe('34')
+
+    await view.get('[data-testid="pin-backspace"]').trigger('click')
+    expect(input.element.value).toBe('3')
+  })
+
+  it('从输入框打字也能完成一次登录（两条路等价）', async () => {
+    const clock = new ManualClock()
+    const store = await makeVerifiedStore('1234')
+    const navigated: string[] = []
+    const view = await mountView({
+      store,
+      clock,
+      navigate: (path: string) => {
+        navigated.push(path)
+      },
+    })
+    const input = view.get<HTMLInputElement>('[data-testid="pin-input"]')
+
+    input.element.value = '1234'
+    await input.trigger('input')
+    await submitPin(view)
+
+    expect(navigated).toEqual(['/home'])
+    expect(useProfileSessionStore().activeProfileId).toBe('p1')
+  })
+})

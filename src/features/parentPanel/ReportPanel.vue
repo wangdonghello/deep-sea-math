@@ -12,7 +12,7 @@ const topicMasteryAvailable = computed(() => props.report.topicMasteryAvailable 
 </script>
 
 <template>
-  <section class="report" data-testid="report-panel">
+  <section class="report parent-card" data-testid="report-panel">
     <h2>学习报告</h2>
     <label>统计范围
       <select :value="period" @change="emit('update:period', ($event.target as HTMLSelectElement).value as 'today' | '7days')">
@@ -34,3 +34,59 @@ const topicMasteryAvailable = computed(() => props.report.topicMasteryAvailable 
     </ul>
   </section>
 </template>
+
+<style scoped>
+/* 指标一行一项：标签在左、数值在右，扫一眼就能读到数（原来 dt/dd 各占一行） */
+.report dl {
+  display: grid;
+  gap: var(--ds-space-sm);
+  margin: 0;
+}
+
+.report dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-md);
+  padding-bottom: var(--ds-space-xs);
+  border-bottom: 1px solid var(--ds-glass-border);
+}
+
+.report dt {
+  color: var(--ds-text-secondary);
+}
+
+.report dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.report h2,
+.report h3 {
+  margin: 0;
+}
+
+/* 题型分布：每个题型一行，四档掌握各占一个小块，避免长句子连成一片 */
+.report ul {
+  display: grid;
+  gap: var(--ds-space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.report li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-xs);
+  align-items: center;
+}
+
+.report li span {
+  padding: var(--ds-space-xs) var(--ds-space-sm);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-caption);
+}
+</style>

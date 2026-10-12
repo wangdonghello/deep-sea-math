@@ -121,6 +121,22 @@ export function useProfileSelect(options: ProfileSelectOptions) {
   }
 
   /**
+   * 整体赋值（掩码输入框的打字/粘贴路径）。
+   *
+   * 与 {@link pushDigit} 同一口径：先剥掉非数字，再截到 {@link PIN_LENGTH} 位；
+   * 锁定期间不接收任何输入。**剥而不拒**是刻意的——在输入框里打字时用户会先
+   * 敲出半截内容，整段拒绝会让框里的显示与内部状态对不上；剥掉非法字符后
+   * 框里剩下的就是真正生效的值。
+   *
+   * @param value 输入框当前的完整字符串。
+   */
+  function setPin(value: string): void {
+    if (lock.locked.value) return
+    pin.value = value.replace(/[^0-9]/g, '').slice(0, PIN_LENGTH)
+    errorMessage.value = ''
+  }
+
+  /**
    * 失败分支的统一收口：计数、清空输入、给中性文案。
    *
    * 抽成函数是为了让「verify 返回 false」与「verify 抛错」两条路径行为完全
@@ -192,6 +208,7 @@ export function useProfileSelect(options: ProfileSelectOptions) {
     selectProfile,
     pushDigit,
     backspace,
+    setPin,
     submit,
   }
 }

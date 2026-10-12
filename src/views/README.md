@@ -22,6 +22,11 @@
 | `ObservationView.vue` | `/observation/:id` | 观察舱：学名、深度区间、知识卡、来源 |
 | `MapView.vue` | `/map` | 四区地图与深度进度 |
 | `MistakeBookView.vue` | `/mistakes` | 错题本与筛选 |
-| `ParentView.vue` | `/parent` | 家长区：设置、报告、PIN 重置、删除档案 |
+| `ParentGateView.vue` | `/parent` | 家长区门禁：输家长 PIN 后进入总览 / 设置与报告 / 档案管理 |
+
+家长区的三个功能区页面（`FamilyOverviewSection` / `LearningSettingsSection` /
+`ProfileManageSection`）是 `features/parentPanel/` 下的组件，由
+`routes/Parent*Route.vue` 三个薄封装注入存储后挂载——它们不是 `views/` 的
+页面组件（`views/` 只收路由级页面）。
 
 生产 store 的装配在 `src/router/routes/*.vue`（薄封装）与 `src/app/productionStores.ts`，不在本目录。分层总览见 [`../README.md`](../README.md)。

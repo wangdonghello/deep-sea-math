@@ -380,3 +380,224 @@ fixture**（`demo-basic-1` 等），而答题页经 `app/questContext.ts` 按**�
 
 **验证**：643 测试全绿、type-check 通过；本地浏览器实测建档 → PIN → 首页 →
 领取 → 开始下潜 → 答题页渲染出题库真实题目；`/` 与深链刷新均正常。
+
+---
+
+## R22. P1 家长门禁与三区路由骨架（管道先行，页面留 P2）
+
+**范围**：这是"家长区重构"的前半部分——只做**管道**（家长 PIN 存储、门禁、
+三区路由、PIN 掩码输入框），不做三区页面的视觉；页面内容 P2 替换。
+
+### 1. 家长 PIN 独立成 `guard` 对象库（`DB_VERSION` 3 → 4）
+
+家长 PIN 与**任何孩子档案无关**（它是家长区门禁，不是某个孩子的凭据），因此
+不能塞进 keyPath 为 `profileId` 的 `settings`（那会迫使编造一个假档案 ID）。
+新增 `guard` 库（`keyPath: 'id'`，全场唯一一条 `id: 'parent'`）：
+
+- `STORE_NAMES.guard` / `DeepSeaSchema.guard` / `GuardRecord`（只含 `pinHash` 与
+  `salt`，无明文字段）；
+- `DB_VERSION` 3 → 4。新增对象库**只能靠版本跳变**完成（不跳版本时旧库里没有
+  这个库，读写一路 `NotFoundError`，表现为"家长 PIN 永远设置不上"）；
+- `applyMigrations` 沿用"先 `contains` 再建"，对全新安装、旧版单库、v3 五库三种
+  存量状态都幂等；
+- `StorageFacade.guard` + `resolveStorage()` 两条分支（IndexedDB / 内存降级）
+  都装配（降级态下门禁同样可用）。
+
+数据保留用例：`tests/data/db.test.ts` 铺一个停在 v3（五库、无 `guard`）的库，
+里面已有一条档案与一条事件，升级后断言 `version === DB_VERSION`、`guard` 库存在
+且为空、既有 events / profiles 原样保留；另有"已是 v4 的库 reopen 时 guard 里的
+家长 PIN 不被清空"。
+
+### 2. 门禁规则（`useParentGate` + `parentSessionStore`）
+
+- **首次**（`guard.load()` 返回 `undefined`）：进入"设置家长密码"模式，需输入
+  两次（PIN + 确认）；两次不一致给中性文案（"两次输入不一致，请重新设置"，
+  不含任何"哪里错了"的归因）并回到第一步；一致才 `hashPin` + 新随机盐落库，
+  并置 `unlocked`。
+- **已设过**：`verifyPin` 比对已存哈希；失败只说"再试一次"，连续 5 次锁定 60 秒
+  ——与孩子 PIN **同一套口径**（直接复用 `usePinLock` 与 `features/profileSelect/
+  types.ts` 的阈值常量，避免两侧限速行为漂移）。
+- **是否跨刷新**：MUST NOT。`parentSessionStore` 是纯内存 Pinia（`unlocked` 一个
+  ref），刷新后重新验证。孩子与家长共用设备，家长区操作（改题量/重置 PIN/删档）
+  是破坏性的，门禁跨刷新留存等于给孩子留后门。
+- **安全**：PIN 明文只活在 `pin` 这个短生命周期 ref，`submit()` 的 `finally` 里
+  立刻清空（成功失败都清）；`fail()` 统一收口使"校验返回 false"与"校验抛错"
+  行为一致（否则反复触发存储异常就成了绕过 5 次锁定的后门）；日志出口经
+  `redact()`，且本函数从不主动把 PIN/盐当字段写进日志（有用例断言）。
+
+### 3. 三区路由骨架与 `nextRoute` 纯函数
+
+路由表（`src/router/index.ts`）四条，全部懒加载：
+
+| 路径 | 组件 | 说明 |
+|---|---|---|
+| `/parent` | `ParentGateRoute.vue` | **门禁页**（旧的一体化 `ParentRoute.vue` 已删） |
+| `/parent/overview` | `ParentOverviewRoute.vue` | 门禁通过后的落点 |
+| `/parent/settings` | `ParentSettingsRoute.vue` | 待 P2 填 |
+| `/parent/manage` | `ParentManageRoute.vue` | 待 P2 填 |
+
+`nextRoute` 新增第 4 条规则：**家长子路径未解锁 → `/parent`**。规则只看内存态
+`unlocked`，守卫里**不做任何异步 PIN 校验**（校验只发生在门禁页内）；门禁页自身
+不在 `PARENT_CHILD_PATHS` 里，否则目标等于当前路径，vue-router 会判无限重定向。
+`PROFILE_OPTIONAL_PATHS` 收进四个家长路径：首个档案正是在"还没有档案"的前提下
+创建的，无档案时也要拦到门禁页（而不是档案选择页）。
+
+三个子页面在 P1 是极简占位（标题 + 半句说明 + 返回按钮，均带 `data-testid`），
+P2 替换。
+
+### 4. PIN 掩码输入框（孩子与家长共用）
+
+`PinPad` 在点数回显上方新增 `<input type="password" inputmode="numeric"
+autocomplete="one-time-code" maxlength="4">`（`data-testid="pin-input"`，外层
+`<label>` 提供无障碍名）。同步方式：
+
+- 打字/粘贴 → emit `setpin`（整体赋值），由 `useProfileSelect.setPin` /
+  `useParentGate.setPin` 过滤（剥非数字 + 截到 4 位，锁定期间不接收）；
+- 组件不复制过滤规则：`onInput` 等一个 `nextTick` 后把 `props.value` 写回 DOM，
+  被拒的输入不会作为明文残影留在框里；
+- 点按键盘 → `props.value` 变化后输入框随 `:value` 同步（用例断言双向一致）。
+
+`PinPad` 的 `nickname` 变为可选并新增 `title`（标题泛化，不复制第二份组件），
+现有 `pin-dots` / `pin-error` / `pin-lock-countdown` / `pin-submit` / `pin-key-*`
+的 testid 全部保留。
+
+### 5. 本 task 的偏离与遗留
+
+| # | 事项 | 说明 |
+|---|---|---|
+| 1 | **改了 `src/views/ProfileSelectView.vue`** | 不在任务书"可改/新增"清单内。但孩子侧的掩码输入框必须由该视图把 `@setpin` 接到 `useProfileSelect.setPin`，否则要求"孩子与家长共用同一套输入"就不成立。改动仅一行（`@setpin="select.setPin"`） |
+| 2 | **`/parent` 不再渲染旧的 `ParentView.vue`** | P1 的 `/parent` 是门禁页，三个子页是占位——因此**建档 / 设置 / 报告 / 删档在 P2 落地前暂时不可达**。这是任务书明确的分期边界（"P2 再填真正的总览/设置报告/档案管理"），但会造成一个中间态功能缺口，P2 必须补齐 |
+| 3 | `src/views/README.md` 的 `/parent → ParentView` 行已过时 | 该文件不在本 task 可改清单内，未动；P2 应一并更正 |
+| 4 | `ParentView.vue` 覆盖率由 ~100% 降到 38.7% | 成因同 #2：App 级用例不再经 `/parent` 渲染它，只剩它自己的组件测试。总体阈值仍达标（见下），P2 重新接线后回升 |
+| 5 | `productionStores.parent` 暂只有 P2 会消费 | 保留原装配不动；新增 `parentGate: storage.guard` 供门禁页用 |
+| 6 | 三个子路由**未**注入 `getProductionStores()` 窄接口 | 占位页不消费任何 store，注入了就是死代码（`noUnusedLocals` 也会拦）。窄接口注入随 P2 的真实内容一起加 |
+
+### 6. 验证
+
+- `npm run test`：55 文件 / 687 用例全绿（较 P1 前 +44 用例）；
+- `npm run type-check`：通过；
+- `npm run test:coverage`：全绿（Statements 93.91% / Branches 91.65% /
+  Functions 92.42% / Lines 95.52%，阈值 80%）；
+- `npm run build`：成功；
+- 需求改动逐条有测试：guard 库 save/load/clear/覆盖写/未设置为 `undefined`、
+  v3 → v4 保留数据、内存态降级同契约；门禁首次设置 / 校验 / 5 次锁定 / 不跨刷新；
+  `nextRoute` 未解锁打回 / 已解锁放行 / 门禁页不自重定向；掩码输入框可输入、
+  过滤非数字、满 4 位、与键盘双向同步、不回显明文。
+- 分支：仓库 HEAD 的 `004-dsm1234` 已是 `main` 的**祖先**（`main` 领先 3 个提交，
+  含上线后修复），直接切回 `004-dsm1234` 会丢这些修复。因此本 task 从 `main`
+  新建 `004-dsm1234-p1` 提交，未改任何既有分支历史、未 push。
+
+## R23. P2 家长区三区页面（总览 / 设置与报告 / 档案管理）
+
+P1 的三条子路由占位换成正式界面。三个功能区页面落在
+`features/parentPanel/`（`FamilyOverviewSection` / `LearningSettingsSection` /
+`ProfileManageSection`），由 `routes/Parent*Route.vue` 薄封装注入
+`stores.parent`、`QUESTION_TYPE_BY_ID` 与当前档案 id 后挂载；底部导航
+`ParentSectionNav` 只认功能区 id，路由翻译留在封装里（`features/` 不依赖
+`router/`）。
+
+**"本周概况"派生**：新增 `useFamilyOverview`（`ChildOverview` 类型进
+`types.ts`）。它对每个孩子调一次 `replayProjections`（也算一次题型掌握），再
+对事件流做一趟区间过滤算出近 7 天完成题数 / 平均用时 / 学习天数，并据题目级
+掌握投影（经注入的题型表归类）挑出"未掌握 + 提示后掌握"最多的题型，拼一句
+"需要关注"。组件只渲染结果，**绝不**在模板里 reduce 事件。
+
+**组件复用 vs 泛化**：`SettingsForm` / `ReportPanel` / `DangerZone` 原样复用，
+未复制第二份。`DangerZone` 未改签名——档案管理页改成**每个孩子一条可展开的
+"安全"区**，一次只展开一个，展开即把 `useParentPanel` 的当前选中切到该孩子，
+于是 `resetForm` / `deleteForm` 这些短生命周期输入永远只属于一个孩子。
+`useParentPanel` 为此新增 `selectedProfileId` + `selectProfile()`（切换时清空
+上一个孩子的半截 PIN/删档确认），`saveSettings` / `refreshReport` /
+`deleteProfile` 一律改以它为准。新增组件 `ChildSummaryCard`、
+`ParentSectionShell`（三页共享的标题/隐私说明/降级警示条/底部导航外壳）。
+
+**`ParentView.vue` 删除**：P1 起 `/parent` 是门禁页，三类操作已分散到三个子
+页，该视图不再被任何路由使用，连同其单测一并删除；`src/views/README.md` 的
+`/parent → ParentView` 过时行改为 `ParentGateView`，并注明三个功能区页面住在
+`features/parentPanel/`。
+
+**验证**：
+
+- `npm run test`：56 文件 / 698 用例全绿；
+- `npm run type-check`：通过；
+- `npm run test:coverage`：全绿（Statements 94.27% / Branches 91.74% /
+  Functions 93.99% / Lines 95.71%，阈值 80%）；
+- `npm run build`：成功；
+- 三区行为逐条有测试：总览按昵称出卡、完成题数/平均用时由注入事件投影算出、
+  点卡进该孩子设置、无档案给建档引导；切孩子表单与报告换人、保存写
+  `settings-updated`、缺题型表显示"暂不可用"；建档回到列表、重置 PIN 后旧
+  PIN 失效新 PIN 可用（`verifyPin` 断言）、删除需勾选 + 昵称一致且清理事件；
+  降级三页均见警示条；导航高亮与切换；PIN 明文不进渲染文本与日志。
+
+---
+
+## R24. P3 家长区表单与卡片视觉打磨（真机验收后的修复）
+
+**问题**：P2 删除 `views/ParentView.vue` 时，那段负责表单外观的 scoped 样式
+一并消失，家长区输入框退化成浏览器默认控件（系统深色底、直角），档案管理页
+与设置页"简陋"的观感正来源于此。**当时没有任何测试变红**——它只影响观感。
+
+**表单样式落点**：新增 `src/styles/parentForms.css`，以 `ParentSectionShell`
+的根类 `.parent-section` 为作用域（三页与全部子组件都渲染在该根节点内），由
+`ParentSectionShell.vue` 引入一次。之所以不复用"每页各写一份 scoped 样式"：
+那正是 P2 翻车的形态——删掉一个视图，样式跟着陪葬。为什么不全局生效：家长的
+答题页、图鉴等不属于家长区，不该被这套外观染指。
+
+规则覆盖：label 单列（标签在输入框上方）→ text/password/number/select 玻璃底
++ `var(--ds-radius-md)` + 聚焦 `var(--ds-accent-500)` 描边 + **font-size 16px**
+（< 16px 时 iOS 聚焦会放大整页）→ 主按钮暖橙渐变、次要玻璃描边、危险操作玫红
+（新增 `--ds-danger-*`，不用刺眼纯红）→ fieldset/legend 去边框并入卡片。
+
+**头像可视化**：`avatar-1/2/3` 的文字 radio 换成三个可点选图形块
+（`data-testid="avatar-option-1..3"`，内联 SVG：小鲸 / 海星 / 水母，颜色各异，
+不含性别刻画）。radio 的 `name="avatar"` 与**在 DOM 中的顺序**都保留，只是
+视觉隐藏——既有按 `form.findAll('input')` 下标定位的测试因此原样通过；新增
+测试按 `data-testid` + `aria-label` 定位，不断言色值。
+
+**安全区折叠**：`manage-toggle-*` 从裸按钮变成整行可点的卡片（昵称 + `▸/▾`
+字形），并加 `aria-expanded`；展开后 `DangerZone` 包进玻璃卡片，删除档案一块
+用玫红分隔线与描边，勾选确认 + 输入昵称的门槛不变。卡片内的重复标题改为
+"安全设置"（昵称已在折叠行上，避免两行说同样的话）。
+
+**空数据文案**：`ChildSummaryCard` 在 `completedQuestions === 0` 时平均用时
+显示"—"（原来渲染 "0.0 秒"，会让人以为孩子答题快到 0 秒）；有记录才显示真值。
+
+**布局**：`ParentSectionShell` 改为纵向 flex + `min-height: 100dvh`，底部导航
+`margin-top: auto` + `position: sticky; bottom: 0`（内容短时贴底、长时吸底）。
+注意这里**刻意不给根节点加 `overflow-x: hidden`**：它会把根节点变成滚动容器，
+sticky 随即失效；横向溢出改为在源头处理（flex 子项 `min-width: 0`、长文本
+`overflow-wrap: anywhere`）。`ReportPanel` 的 `dl` 改为"标签左 / 数值右"的行，
+题型分布改为每档一个小块，纯 CSS、不改数据。
+
+**验证**：
+
+- `npm run test`：57 文件 / 705 用例全绿（新增 4 条：头像图形块与提交值一致、
+  安全区 `aria-expanded` 与字形同步且一次只展开一个、空数据"—"、共享样式被
+  外壳引入且全部规则限定在 `.parent-section`）；
+- `npm run type-check`：通过；
+- `npm run test:coverage`：全绿（Statements 94.33% / Branches 91.81% /
+  Functions 94.15% / Lines 95.77%，阈值 80%）；
+- `npm run build`：成功；
+- agent-browser 375×667 实测三页：`scrollWidth === clientWidth === 375`（无横向
+  溢出），长昵称（24 字）在卡片内换行不撑破，底部导航三页均贴视口底，
+  截图确认建档表单、头像块、安全区折叠与"平均用时 —"的观感与首页/图鉴一致。
+
+
+---
+
+## R25. 家长区底部导航遮挡表单（已修）
+
+**问题**：`ParentSectionNav` 原为 `position: sticky; bottom: 0`。sticky 元素**不为自己
+占位**，且 `margin-top: auto` 只在内容短于视口时才有作用——内容一长，导航会盖住
+末尾控件。实测在 iPhone 14 视口下，「创建档案」按钮被导航压住，点击事件落在
+导航上（`agent-browser` 报 `Element is covered by nav.parent-nav`），家长无法建档。
+
+**修复**：取消 `sticky`，改为普通块级元素排在内容末尾（短页面仍由 `margin-top: auto`
+顶到视口底）。家长区是低频管理界面，不需要「导航随时可见」；能点到按钮比导航吸底
+重要。同时把导航高度收敛成外壳上的 `--parents-nav-space` 变量，避免两处各写一个高度。
+
+**顺带核对**：`PinPad` 的掩码输入框在真实浏览器里可用（聚焦后用键盘逐字输入 4 位，
+点数回显与输入框值同步为 `4` / `1357`）。此前 `agent-browser fill` 看似无效，是该工具
+对 `type=password` 的填值方式不触发组件所需的输入事件，非应用缺陷。
+
+**验证**：705 测试全绿、build 通过；iPhone 14 视口实测「家长 PIN → 档案管理 → 创建档案 → 总览」全程可点，截图确认三页视觉与首页/图鉴一致。

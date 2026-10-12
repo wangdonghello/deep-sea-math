@@ -1,8 +1,9 @@
 import { mount } from '@vue/test-utils'
+import ChildSummaryCard from '@/features/parentPanel/ChildSummaryCard.vue'
 import SettingsForm from '@/features/parentPanel/SettingsForm.vue'
 import ReportPanel from '@/features/parentPanel/ReportPanel.vue'
 import DangerZone from '@/features/parentPanel/DangerZone.vue'
-import type { ParentReport } from '@/features/parentPanel/types'
+import type { ChildOverview, ParentReport } from '@/features/parentPanel/types'
 
 describe('parent panel components', () => {
   it('emits edited settings and saves only on submit', async () => {
@@ -42,6 +43,20 @@ describe('parent panel components', () => {
     await wrapper.setProps({ report: { ...report, topicMasteryAvailable: true, completedQuestions: 3 } })
     expect(wrapper.find('[data-testid="topic-mastery-unavailable"]').exists()).toBe(false)
     expect(wrapper.find('ul').exists()).toBe(true)
+  })
+
+  it('shows an em dash instead of a misleading "0.0 秒" when the child has no record yet', () => {
+    const empty: ChildOverview = {
+      profileId: 'a', nickname: '海星', avatarId: 'avatar-1',
+      daysStudied: 0, completedQuestions: 0, averageMs: 0, focusHint: '近 7 天还没有足够的学习记录',
+    }
+    const withoutRecord = mount(ChildSummaryCard, { props: { child: empty } })
+    expect(withoutRecord.get('[data-testid="child-average"]').text()).toBe('—')
+    expect(withoutRecord.get('[data-testid="child-card-a"]').text()).not.toContain('0.0 秒')
+
+    const withRecord = mount(ChildSummaryCard, { props: { child: { ...empty, completedQuestions: 4, averageMs: 2500 } } })
+    expect(withRecord.get('[data-testid="child-average"]').text()).toBe('2.5')
+    expect(withRecord.get('[data-testid="child-card-a"]').text()).toContain('2.5 秒')
   })
 
   it('requires confirmation before exposing a usable delete action and emits reset requests', async () => {

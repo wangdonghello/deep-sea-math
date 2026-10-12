@@ -109,6 +109,7 @@ onMounted(async () => {
       :submitting="select.status.value === 'verifying'"
       @digit="select.pushDigit"
       @backspace="select.backspace"
+      @setpin="select.setPin"
       @submit="select.submit"
     />
   </main>
