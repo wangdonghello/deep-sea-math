@@ -1,0 +1,11 @@
+Model Information:
+* title:	Deep Sea Fish #3DSM4
+* source:	https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55
+* author:	Carlo Bergonzini (https://sketchfab.com/carlo-bergonzini)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Deep Sea Fish #3DSM4" (https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55) by Carlo Bergonzini (https://sketchfab.com/carlo-bergonzini) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
