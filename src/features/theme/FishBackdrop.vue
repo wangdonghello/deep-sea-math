@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+
+import { MAX_BACKDROP_FISH } from './types'
 
 /**
  * 单条背景鱼的布局参数。
@@ -109,6 +111,18 @@ onUnmounted(() => {
 })
 
 /**
+ * 当前要渲染的鱼群：条数收敛到 {@link MAX_BACKDROP_FISH} 以内。
+ *
+ * 之所以用 computed 而不是在模板里直接调 `buildFishSchool(props.count, …)`：
+ * 模板表达式每次重渲染都会重跑一遍整群鱼的推导（24 个对象 + 4 次伪随机），
+ * 而条数/尺寸不变时结果完全相同。收敛上限也放在这里 —— 组件的公开契约是
+ * 「最多这么多条」，调用方传 10000 与传 24 必须得到同一个 DOM。
+ */
+const fishSchool = computed(() =>
+  buildFishSchool(Math.min(props.count, MAX_BACKDROP_FISH), props.size),
+)
+
+/**
  * 把索引映射到 [0, 1) 的确定性伪随机数。
  *
  * 用整数运算而非 `Math.random`：组件测试需要"同一 props → 同一鱼群"，
@@ -153,7 +167,7 @@ function buildFishSchool(count: number, size: number): FishSpec[] {
     aria-hidden="true"
   >
     <svg
-      v-for="fish in buildFishSchool(props.count, props.size)"
+      v-for="fish in fishSchool"
       :key="fish.id"
       class="fish-backdrop__fish"
       :class="[

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 
 import FishBackdrop from '@/features/theme/FishBackdrop.vue'
+import { MAX_BACKDROP_FISH } from '@/features/theme/types'
 
 /**
  * `features/theme/FishBackdrop` 的行为契约。
@@ -72,6 +73,13 @@ describe('FishBackdrop', () => {
       expect(width).toBeGreaterThanOrEqual(96 * 0.75)
       expect(width).toBeLessThanOrEqual(96 * 1.25)
     }
+  })
+
+  it('count 超过上限时收敛到 24 条，避免低端机被鱼群拖垮', () => {
+    const wrapper = mount(FishBackdrop, { props: { count: 5000 } })
+
+    const fishes = wrapper.findAll('[data-testid="fish-backdrop"] svg')
+    expect(fishes).toHaveLength(MAX_BACKDROP_FISH)
   })
 
   it('prefers-reduced-motion: reduce 时鱼群静止', () => {
