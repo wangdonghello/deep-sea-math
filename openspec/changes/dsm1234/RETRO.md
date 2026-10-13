@@ -742,3 +742,84 @@ sticky 随即失效；横向溢出改为在源头处理（flex 子项 `min-width
 
 **验证**：全库审计 216 题无负数、无超 1000 的加减结果、无五步字段残留、ID 唯一；
 709 测试全绿；`openspec validate dsm1234 --strict` 通过。
+
+---
+
+## R28. 观察舱接入授权 3D 模型（上线后授权范围内的范围扩展）
+
+**背景**：`proposal.md` 明确排除「3D 模型（Three.js）」，图鉴四条目均只有原创 2D 插画。
+用户从 Sketchfab 下载了若干深海鱼资源并授权接入其中**许可明确**的一个；其余
+（`fish_deep.glb` / `manta_ray_birostris_animated.glb`）无随附许可证，未纳入。
+
+**范围裁决**（用户确认）：这批改动挂在 **DSM1234** 下、直接提交 `main`（与历史一致）。
+它与 proposal 的排除项冲突，因此在此显式记录范围扩展，不让实现单向偏离规格。
+
+### 1. 资产与许可
+
+| 项 | 值 |
+|---|---|
+| 模型 | `Deep Sea Fish #3DSM4`，Carlo Bergonzini |
+| 许可 | CC BY 4.0（允许商用、允许修改，必须署名） |
+| 原始体积 | 14.27 MB / 约 178 万面 |
+| 交付体积 | `public/models/deep-sea-fish-3dsm4.glb`，**1.3 MB** |
+
+- `public/models/anglerfish-license.txt` 为**原作者的许可文本原文照抄**。
+- 优化手段：`gltf-transform optimize --compress meshopt --texture-compress webp --texture-size 1024 --simplify-ratio 0.35 --simplify-error 0.001`，
+  并先用 `@gltf-transform/core` 的 `NodeIO` 摘掉与目标生物无关的场景节点
+  （`BezierCurve` / `Plane.3595` / `MegaFish LIte` / `Sphere.001`）。
+- `model.attribution` 的 "Changes:" 一句如实写明「移除无关场景元素、简化几何、压缩贴图」。
+
+### 2. 物种口径（不可模糊的一点）
+
+该模型是**深海鮟鱇鱼的授权示意模型，不是约翰逊鮟鱇鱼的精确解剖复原**。
+`creature.json` 的 `model.note` 明写这句，观察舱页面上与署名同屏显示；
+`schema.ts` 强制该字段非空，避免后续内容编辑悄悄弱化免责表述。
+
+### 3. 代码落点
+
+- `src/data/content/schema.ts`：新增 `CreatureModelAsset` 与校验——`ref` 必须匹配
+  `^[a-z0-9]+(?:-[a-z0-9]+)*$`（挡路径穿越）、`attribution`/`license`/`note` 非空、
+  `sourceUrl` 与 `licenseUrl` 必须 HTTPS（新增 `secureHttpsUrl` 辅助函数）。
+- `src/features/bestiary/CreatureModelViewer.vue`：新组件。限制 DPR ≤ 1.5、
+  按窄屏上调相机距离（避免鱼被裁切）、`ResizeObserver` 无实现时回退 `resize` 事件、
+  卸载时释放动画循环与几何/材质/贴图。
+- `src/features/bestiary/CreatureCanvas.vue`：新增 `preferModel` prop（缺省 `false`）
+  与 `modelFailed` 回退。**只有观察舱传 `true`**——图鉴卡片继续用轻量 2D 插画，
+  避免 N 个物种各拖 1–2 MB 把首屏压垮。
+- `src/views/ObservationView.vue`：`:prefer-model="true"`。
+
+### 4. 三条回退路径（都有测试）
+
+1. WebGL 不可用 → `WebGLRenderer` 构造失败 → emit `error` → 退回原创插画；
+2. 模型加载失败 → `loadAsync` reject → 同上；
+3. 运行中 `webglcontextlost` → `preventDefault()` + emit `error` → 同上。
+4. 任一回退后**署名与许可链接仍显示**（CC BY 的署名要求不因降级而消失）。
+
+### 5. 本轮顺带修复的遗留项
+
+| 来源 | 问题 | 处置 |
+|---|---|---|
+| R7 | `FishBackdrop` 的 `count` 无上限，传 10000 会掉帧 | 收敛到 `MAX_BACKDROP_FISH = 24`，常量提至 `src/features/theme/types.ts` 供实现与测试共用；模板内联推导改 computed |
+| 本轮新增 | Three.js 使 `CreatureModelViewer` 分块 639 kB 触发构建告警 | `vite.config.ts` 加 `manualChunks` 拆出 `three-vendor`（635 kB / gzip 160 kB，仅 3D 路由下载），业务代码降至 3.97 kB，告警消除 |
+| — | 后续接入新模型无指引 | 新增 `docs/3d-model-assets.md`：许可门槛、落位、压缩命令、`creatures.json` 登记与 schema 约束、回退契约、验证清单 |
+
+**顺带修正**：`CreatureCanvas` 的插画路径改为 `import.meta.env.BASE_URL` 前缀——
+原 2D 插画在 GitHub Pages 子路径下同样是 404 的，只是没人报过。
+
+### 6. 产品裁决（本项不写代码）
+
+- **R4「看答案是否算完成该题」**：维持现状（看答案不计完成、不写事件、不改变掌握状态）。
+- **PIN 5 次锁 60 秒是否跨刷新保留**：维持内存态。规格只要求「连续 5 次错误后锁定
+  60 秒」，未要求跨刷新；本地哈希 + 盐的威胁模型下持久化收益有限。
+
+### 7. 验证
+
+`npm run test` 59 文件 / 716 用例全绿（新增：模型元数据校验与负测、许可原件存在性、
+`CreatureModelViewer` 的 WebGL 失败与 context-loss 回退、FishBackdrop 上限）；
+`npm run type-check` 通过；`npm run test:coverage` 全绿（statements 91.82% / branches
+89.82% / functions 92.70% / lines 93.52%，阈值 80%）；`npm run build` 成功且无分块告警。
+iPhone 视口（375×812）实测：观察舱模型加载成功、可拖动/缩放、署名与许可链接可见、
+页面无横向溢出；`getContext` 返回 null 时正确回退到原创插画。
+
+**遗留**：用户将继续手工下载更多深海鱼资源；后续物种接入按
+`docs/3d-model-assets.md` 执行，**拿不到许可证文件的模型不接入**。
