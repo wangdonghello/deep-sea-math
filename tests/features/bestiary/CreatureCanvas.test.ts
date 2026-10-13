@@ -39,8 +39,8 @@ describe('CreatureCanvas', () => {
     expect(image.attributes('data-scale')).toBe('1')
   })
 
-  it('shows the complete original illustration disclaimer', () => {
+  it('shows the original illustration disclaimer without claiming 3D is unavailable', () => {
     const view = mount(CreatureCanvas, { props: { creature: CREATURE_BANK.creatures[0] } })
-    expect(view.get('figcaption').text()).toBe('原创示意插画，非真实影像，本阶段不含3D模型与视频')
+    expect(view.get('figcaption').text()).toBe('原创示意插画，非真实影像')
   })
 })

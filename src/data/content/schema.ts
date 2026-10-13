@@ -53,11 +53,24 @@ export interface QuestionBank {
   questions: Question[]
 }
 
-/** Creature content adds the mandatory visual disclaimer used by observation views. */
+/** A locally hosted 3D model with explicit license and source attribution. */
+export interface CreatureModelAsset {
+  /** Safe filename stem resolved under the application base URL in public/models. */
+  ref: string
+  attribution: string
+  license: string
+  licenseUrl: string
+  sourceUrl: string
+  /** Clarifies whether the model is species-accurate or an illustrative representation. */
+  note: string
+}
+
+/** Creature content adds mandatory visual disclaimers and optional licensed 3D media. */
 export interface CreatureContent extends BestiaryEntry {
   /** Maximum body measurement; preserve total length (TL), standard length (SL), or mantle length (ML) and never conflate bases. */
   bodySize: string
   illustrationLabel: '原创示意插画，非真实影像'
+  model?: CreatureModelAsset
 }
 
 /** 带版本号的图鉴内容。 */
@@ -85,6 +98,19 @@ function record(value: unknown, path: string): Record<string, unknown> {
 function nonEmptyString(value: unknown, path: string): string {
   if (typeof value !== 'string' || value.trim() === '') throw new Error(`${path}: expected non-empty text`)
   return value
+}
+
+/** Requires a well-formed HTTPS URL for links attached to third-party model metadata. */
+function secureHttpsUrl(value: unknown, path: string): string {
+  const source = nonEmptyString(value, path)
+  let parsed: URL
+  try {
+    parsed = new URL(source)
+  } catch {
+    throw new Error(`${path}: expected an HTTPS URL`)
+  }
+  if (parsed.protocol !== 'https:') throw new Error(`${path}: expected an HTTPS URL`)
+  return source
 }
 
 /** Throws unless a field is a non-empty array of non-empty strings. */
@@ -405,6 +431,17 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
     }
     if (creature.illustrationLabel !== '原创示意插画，非真实影像') {
       throw new Error(`${path}.illustrationLabel: expected the original-illustration disclaimer`)
+    }
+    if (creature.model !== undefined) {
+      const model = record(creature.model, `${path}.model`)
+      if (typeof model.ref !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(model.ref)) {
+        throw new Error(`${path}.model.ref: expected a safe lowercase asset key`)
+      }
+      nonEmptyString(model.attribution, `${path}.model.attribution`)
+      nonEmptyString(model.license, `${path}.model.license`)
+      nonEmptyString(model.note, `${path}.model.note`)
+      secureHttpsUrl(model.sourceUrl, `${path}.model.sourceUrl`)
+      secureHttpsUrl(model.licenseUrl, `${path}.model.licenseUrl`)
     }
   })
   const johnson = bank.creatures.find((item) => record(item, 'creatures.entry').id === 'johnson-anglerfish')

@@ -1,5 +1,25 @@
 import { flushPromises, mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { defineComponent, h } from 'vue'
+import { describe, expect, it, vi } from 'vitest'
+
+vi.mock('@/features/bestiary/CreatureModelViewer.vue', () => ({
+  __esModule: true,
+  name: 'CreatureModelViewer',
+  __isTeleport: false,
+  __isSuspense: false,
+  __isKeepAlive: false,
+  __isTransition: false,
+  default: defineComponent({
+    name: 'CreatureModelViewer',
+    props: ['asset'],
+    render() {
+      return h('div', {
+        'data-testid': 'creature-model-viewer',
+        'data-model-ref': (this as { asset: { ref: string } }).asset.ref,
+      })
+    },
+  }),
+}))
 
 import BestiaryView from '@/views/BestiaryView.vue'
 import MapView from '@/views/MapView.vue'
@@ -100,7 +120,8 @@ describe('BestiaryView', () => {
     expect(view.text()).toContain(creature.name)
     const card = view.find(`[data-testid="creature-card-${creature.id}"]`)
     expect(card.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
-    expect(card.find('[data-testid="creature-illustration"]').attributes('src')).toBe(`/illustrations/${creature.illustrationRef}.svg`)
+    expect(card.find('[data-testid="creature-illustration"]').attributes('src'))
+      .toBe(`${import.meta.env.BASE_URL}illustrations/${creature.illustrationRef}.svg`)
   })
 
   it('does not expose an unlock belonging to a different profile', async () => {
@@ -187,12 +208,16 @@ describe('BestiaryView', () => {
 })
 
 describe('ObservationView', () => {
-  it('renders audited facts, 3–5 knowledge cards, sources, caveats, and illustration disclaimer', () => {
+  it('renders audited facts, 3–5 knowledge cards, sources, caveats, and licensed model attribution', async () => {
     const view = mount(ObservationView, { props: { creature } })
+    await flushPromises()
     expect(view.text()).toContain(creature.scientificName)
     expect(view.text()).toContain('约 100–4,500 米')
     expect(view.text()).toContain(creature.habitat)
-    expect(view.text()).toContain('原创示意插画，非真实影像，本阶段不含3D模型与视频')
+    expect(view.find('[data-testid="creature-model-viewer"]').attributes('data-model-ref')).toBe(creature.model?.ref)
+    expect(view.text()).toContain(creature.model?.note)
+    expect(view.text()).toContain(creature.model?.attribution)
+    expect(view.find(`a[href="${creature.model?.sourceUrl}"]`).exists()).toBe(true)
     expect(view.text()).toContain('不是唯一分布')
     expect(view.findAll('[data-testid="knowledge-card"]')).toHaveLength(creature.knowledgeCards.length)
     for (const source of creature.sources) expect(view.find(`a[href="${source}"]`).exists()).toBe(true)

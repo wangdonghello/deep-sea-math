@@ -72,6 +72,44 @@ describe('creature content', () => {
     expect(() => assertValidCreatures(invalid)).toThrow(/fixed|固定|唯一/i)
   })
 
+  it('keeps licensed model attribution separate from species facts and validates asset metadata', () => {
+    const bestiary = readCreatures() as { version: string; creatures: Array<Record<string, any>> }
+    const johnson = bestiary.creatures.find((creature) => creature.id === 'johnson-anglerfish')!
+    expect(johnson.model).toMatchObject({
+      ref: 'deep-sea-fish-3dsm4',
+      license: 'CC BY 4.0',
+      licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+      sourceUrl: 'https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55',
+    })
+    expect(johnson.model.attribution).toContain('Carlo Bergonzini')
+    expect(johnson.model.attribution).toContain('CC-BY-4.0')
+    expect(johnson.model.note).toMatch(/约翰逊鮟鱇鱼.*精确/)
+    assertValidCreatures(bestiary)
+
+    const unsafeRef = structuredClone(bestiary)
+    unsafeRef.creatures.find((creature) => creature.id === 'johnson-anglerfish')!.model!.ref = '../private/model'
+    expect(() => assertValidCreatures(unsafeRef)).toThrow(/model\.ref.*safe/i)
+
+    const missingAttribution = structuredClone(bestiary)
+    missingAttribution.creatures.find((creature) => creature.id === 'johnson-anglerfish')!.model!.attribution = ' '
+    expect(() => assertValidCreatures(missingAttribution)).toThrow(/model\.attribution.*non-empty/i)
+
+    const insecureLicenseUrl = structuredClone(bestiary)
+    insecureLicenseUrl.creatures.find((creature) => creature.id === 'johnson-anglerfish')!.model!.licenseUrl = 'http://creativecommons.org/licenses/by/4.0/'
+    expect(() => assertValidCreatures(insecureLicenseUrl)).toThrow(/model\.licenseUrl.*HTTPS/i)
+  })
+
+  it('ships the optimized model and its license notice as local assets', () => {
+    const modelPath = resolve(process.cwd(), 'public/models/deep-sea-fish-3dsm4.glb')
+    const licensePath = resolve(process.cwd(), 'public/models/anglerfish-license.txt')
+    const model = readFileSync(modelPath)
+    const license = readFileSync(licensePath, 'utf8')
+
+    expect(model.byteLength).toBeLessThan(2 * 1024 * 1024)
+    expect(license).toContain('CC-BY-4.0')
+    expect(license).toContain('Carlo Bergonzini')
+  })
+
   it('uses species-level OBIS observation sources without claiming complete ranges', () => {
     const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
     for (const [id, taxonId, min, max, count] of [
