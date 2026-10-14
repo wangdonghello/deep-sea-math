@@ -74,16 +74,24 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 
 ## 5. 在哪里显示
 
-只有观察舱显示 3D：
+观察舱与图鉴卡片都显示 3D，但**模式不同**：
 
 ```vue
+<!-- 观察舱：完整交互，持续旋转 -->
 <CreatureCanvas :creature="creature" :prefer-model="true" />
+
+<!-- 图鉴卡片：缩略图，单帧、无控制按钮、不可拖动 -->
+<CreatureCanvas :creature="creature" :prefer-model="true" :thumbnail="true" />
 ```
 
-- `prefer-model` 缺省为 `false` → 图鉴卡片继续用轻量 2D 插画。不要给列表页
-  打开它：一个 1–2 MB 的模型乘以 N 个物种会直接把首屏拖死。
+- `prefer-model` 缺省为 `false` → 用轻量 2D 插画。地图、错题本等次要位置
+  不要打开它。
+- `thumbnail` 只影响**要不要持续动**：图鉴列表会同时存在多张卡，每张都跑
+  渲染循环会让低端机的合成层持续满载；卡片要传达的只是"这是什么鱼"。
+- 两处必须用**同一份模型**——否则同一物种在卡片里和观察舱里长得不一样，
+  孩子会在图鉴里认不出刚看过的鱼。
 - 渲染组件 `features/bestiary/CreatureModelViewer.vue` 按需懒加载
-  （`defineAsyncComponent`），Three.js 只在真正打开观察舱时才下载。
+  （`defineAsyncComponent`），Three.js 只在真正用到 3D 时才下载。
 - 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回原创
   插画，`modelAttribution` 的署名与许可链接仍然显示（CC BY 要求不因降级而消失）。
 
