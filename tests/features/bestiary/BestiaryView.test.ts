@@ -11,11 +11,12 @@ vi.mock('@/features/bestiary/CreatureModelViewer.vue', () => ({
   __isTransition: false,
   default: defineComponent({
     name: 'CreatureModelViewer',
-    props: ['asset'],
+    props: ['asset', 'thumbnail'],
     render() {
       return h('div', {
         'data-testid': 'creature-model-viewer',
         'data-model-ref': (this as { asset: { ref: string } }).asset.ref,
+        'data-thumbnail': (this as { thumbnail?: boolean }).thumbnail === true ? 'true' : 'false',
       })
     },
   }),
@@ -120,8 +121,8 @@ describe('BestiaryView', () => {
     expect(view.text()).toContain(creature.name)
     const card = view.find(`[data-testid="creature-card-${creature.id}"]`)
     expect(card.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
-    expect(card.find('[data-testid="creature-illustration"]').attributes('src'))
-      .toBe(`${import.meta.env.BASE_URL}illustrations/${creature.illustrationRef}.svg`)
+    // 图鉴卡片与观察舱用同一份 3D 模型（缩略图模式），不再退回 2D 插画
+    expect(card.find('[data-testid="creature-model-viewer"]').attributes('data-thumbnail')).toBe('true')
   })
 
   it('does not expose an unlock belonging to a different profile', async () => {
@@ -135,13 +136,13 @@ describe('BestiaryView', () => {
   it('reloads locked records after switching profiles', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([unlocked]) } })
     await flushPromises()
-    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(true)
+    expect(view.find('[data-testid="creature-model-viewer"]').exists()).toBe(true)
 
     await view.setProps({ profileId: 'profile-b' })
     await flushPromises()
 
     expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
-    expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(false)
+    expect(view.find('[data-testid="creature-model-viewer"]').exists()).toBe(false)
   })
 
   it('clears the previous profile while the next profile is loading', async () => {

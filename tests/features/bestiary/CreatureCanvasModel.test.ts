@@ -14,7 +14,7 @@ vi.mock('@/features/bestiary/CreatureModelViewer.vue', () => ({
   __isTransition: false,
   default: defineComponent({
     name: 'CreatureModelViewer',
-    props: ['asset'],
+    props: ['asset', 'thumbnail'],
     emits: ['error'],
     render() {
       return h('div', {

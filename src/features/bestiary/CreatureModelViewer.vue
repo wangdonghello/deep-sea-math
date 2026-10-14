@@ -10,6 +10,14 @@ const props = defineProps<{
   asset: CreatureModelAsset
   name: string
   previewSrc: string
+  /**
+   * 缩略图模式（图鉴卡片用）。
+   *
+   * 与观察舱的差别只在**要不要持续动**：缩略图只渲染一帧、没有控制按钮、
+   * 不接受指针交互。理由是图鉴列表会同时存在多张卡，每张都跑一个渲染循环
+   * 会让低端机的合成层持续满载；而卡片要传达的只是"这是什么鱼"。
+   */
+  thumbnail?: boolean
 }>()
 const emit = defineEmits<{ error: [] }>()
 
@@ -139,6 +147,12 @@ async function loadModel(): Promise<void> {
       renderer.render(scene, modelCamera)
     }
     renderer.setAnimationLoop(renderFrame)
+    // 缩略图模式：只画一帧就停。卡片场景要的是"看得见这是什么鱼"，
+    // 持续旋转既费电又会让图鉴列表变成一串不停重画的 canvas。
+    if (props.thumbnail) {
+      renderFrame()
+      renderer.setAnimationLoop(null)
+    }
     const ResizeObserverConstructor = Reflect.get(window, 'ResizeObserver') as
       (new (callback: ResizeObserverCallback) => ResizeObserver) | undefined
     if (ResizeObserverConstructor) {
@@ -171,18 +185,20 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="stage" class="creature-model" :class="{ 'creature-model--ready': canvasReady }"
+  <div ref="stage" class="creature-model" :class="[
+    { 'creature-model--ready': canvasReady, 'creature-model--thumbnail': thumbnail },
+  ]"
     data-testid="creature-model-viewer" :aria-label="`${name} 3D 示意模型`">
     <img class="creature-model__preview" :src="previewSrc" alt="" aria-hidden="true">
     <p class="creature-model__status" role="status" aria-live="polite">{{ status }}</p>
-    <div class="creature-model__controls" aria-label="模型控制">
+    <div v-if="!thumbnail" class="creature-model__controls" aria-label="模型控制">
       <button type="button" :aria-pressed="autoRotate" @click="autoRotate = !autoRotate">
         {{ autoRotate ? '暂停旋转' : '自动旋转' }}
       </button>
       <button type="button" aria-label="放大模型" @click="zoom(-0.7)">＋</button>
       <button type="button" aria-label="缩小模型" @click="zoom(0.7)">−</button>
     </div>
-    <p class="creature-model__hint">拖动旋转 · 使用按钮缩放</p>
+    <p v-if="!thumbnail" class="creature-model__hint">拖动旋转 · 使用按钮缩放</p>
     <canvas ref="canvas" role="img" :aria-label="`${name} 3D 示意模型`" @pointerdown="onPointerDown"
       @pointermove="onPointerMove" @pointerup="onPointerUp" @pointercancel="onPointerUp"
       @webglcontextlost="onWebGLContextLost" />
@@ -206,6 +222,20 @@ onBeforeUnmount(() => {
 .creature-model--ready .creature-model__preview { opacity: 0; }
 .creature-model canvas { z-index: 1; }
 .creature-model__status { position: absolute; z-index: 2; top: .65rem; left: .75rem; margin: 0; color: #b9d6ea; font-size: .75rem; }
+
+/* 缩略图模式：更矮、无交互状态文案、不可拖动 */
+.creature-model--thumbnail {
+  min-height: 0;
+  height: min(46vw, 11rem);
+  touch-action: auto;
+  pointer-events: none;
+}
+.creature-model--thumbnail .creature-model__status {
+  top: .4rem;
+  left: .5rem;
+  font-size: .65rem;
+}
+.creature-model--thumbnail canvas { pointer-events: none; }
 .creature-model__controls { position: absolute; z-index: 3; right: .65rem; bottom: .65rem; display: flex; gap: .4rem; }
 .creature-model button { min-width: 2.75rem; min-height: 2.75rem; border: 1px solid #7295ae; border-radius: .7rem; color: #fff; background: #0d2744eF; }
 .creature-model__hint { position: absolute; z-index: 2; bottom: .85rem; left: .75rem; margin: 0; color: #b9d6ea; font-size: .75rem; pointer-events: none; }

@@ -2,15 +2,25 @@
 import { computed, defineAsyncComponent, ref, watch } from 'vue'
 import type { CreatureContent } from '@/data/content/schema'
 
-const CreatureModelViewer = defineAsyncComponent(() => import('./CreatureModelViewer.vue'))
+const CreatureModelViewer = defineAsyncComponent(() =>
+  import('./CreatureModelViewer.vue').then((module) => module.default),
+)
 
-const props = defineProps<{ creature: CreatureContent; locked?: boolean; preferModel?: boolean }>()
+const props = defineProps<{
+  creature: CreatureContent
+  locked?: boolean
+  /** 显示 3D 模型（而非 2D 插画）；仅观察舱与图鉴卡片置 true。 */
+  preferModel?: boolean
+  /** 图鉴卡片用的缩略图模式：单帧、无控制按钮、不可拖动。 */
+  thumbnail?: boolean
+}>()
 const failed = ref(false)
 const modelFailed = ref(false)
 const zoomed = ref(false)
 const imageSource = computed(() => `${import.meta.env.BASE_URL}illustrations/${props.creature.illustrationRef ?? 'missing'}.svg`)
 const showModel = computed(() => props.preferModel === true && props.creature.model !== undefined && !modelFailed.value)
 const modelAttribution = computed(() => props.preferModel === true && !props.locked ? props.creature.model : undefined)
+
 watch(() => props.creature.id, () => { failed.value = false; modelFailed.value = false; zoomed.value = false })
 
 function toggleZoom(): void {
@@ -31,7 +41,7 @@ function onError(): void {
     </div>
     <div v-else-if="showModel && creature.model" class="creature-canvas__model">
       <CreatureModelViewer :asset="creature.model" :name="creature.name" :preview-src="imageSource"
-        @error="modelFailed = true" />
+        :thumbnail="props.thumbnail" @error="modelFailed = true" />
     </div>
     <div v-else class="creature-canvas__art">
       <img v-if="!failed" :src="imageSource" :alt="creature.name" data-testid="creature-illustration"
