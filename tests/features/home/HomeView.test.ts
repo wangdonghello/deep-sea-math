@@ -281,6 +281,103 @@ describe('views: HomeView', () => {
     expect(store.appended).toEqual([])
   })
 
+  it('地图高亮区域来自事件投影：只解锁暮光区时只有暮光区是当前所在', async () => {
+    // 事件里只有 zone:twilight 一条解锁：地图必须只把暮光区标为当前，
+    // 而不是（曾经的错误口径）按"今天这组题完成没完成"给 0/1。
+    const store = createStore([
+      { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
+        targetId: 'twilight', kind: 'zone', reason: 's-1' },
+    ])
+    const view = await mountHome({ store })
+
+    expect(view.find('[data-testid="zone-twilight"]').classes()).toContain('map-panel__zone--current')
+    expect(view.find('[data-testid="zone-midnight"]').classes()).not.toContain('map-panel__zone--current')
+    expect(view.find('[data-testid="zone-abyss"]').classes()).not.toContain('map-panel__zone--current')
+  })
+
+  it('地图高亮区域跟随已解锁的最深区域（与地图 Tab 页同一口径）', async () => {
+    const store = createStore([
+      { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
+        targetId: 'twilight', kind: 'zone', reason: 's-1' },
+      { eventId: 'z-2', profileId: PROFILE_ID, occurredAt: 2, type: 'unlock-granted',
+        targetId: 'abyss', kind: 'zone', reason: 's-2' },
+    ])
+    const view = await mountHome({ store })
+
+    // 暮光与深渊都已解锁 → 当前所在是最深的那个（与 MapView/useBestiary 同源）
+    expect(view.find('[data-testid="zone-abyss"]').classes()).toContain('map-panel__zone--current')
+    expect(view.find('[data-testid="zone-twilight"]').classes()).not.toContain('map-panel__zone--current')
+  })
+
+  it('未解锁区域显示为锁定态而不是当前态', async () => {
+    const view = await mountHome({ store: createStore([]) })
+
+    for (const zone of ['twilight', 'midnight', 'abyss', 'hadal']) {
+      expect(view.find(`[data-testid="zone-${zone}"]`).classes()).not.toContain('map-panel__zone--current')
+    }
+  })
+
+  it('首页展示档案状态条：昵称、当前所在区与深度', async () => {
+    const store = createStore([
+      { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
+        targetId: 'twilight', kind: 'zone', reason: 's-1' },
+    ])
+    const view = await mountHome({ store })
+
+    const status = view.get('[data-testid="home-status"]')
+    expect(status.text()).toContain('小深')
+    // 当前所在区与深度都来自事件投影，"我在哪"不需要孩子自己从地图上找
+    expect(status.text()).toContain('暮光区')
+    expect(status.text()).toContain('200')
+  })
+
+  it('首页展示图鉴与徽章进度（可从事件重建的数字，不写死）', async () => {
+    const store = createStore([
+      { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
+        targetId: 'twilight', kind: 'zone', reason: 's-1' },
+      { eventId: 'c-1', profileId: PROFILE_ID, occurredAt: 2, type: 'unlock-granted',
+        targetId: 'johnson-anglerfish', kind: 'creature', reason: 's-1' },
+      { eventId: 'done-1', profileId: PROFILE_ID, occurredAt: 3, type: 'session-completed',
+        sessionId: 's-1', rewards: ['quest-complete'] },
+    ])
+    const view = await mountHome({ store })
+
+    const summary = view.get('[data-testid="home-progress-summary"]')
+    // 1 / 4 已解锁生物：分母是图鉴总数，不写死"4"之外的魔法数
+    expect(summary.text()).toContain('1 / 4')
+    expect(summary.text()).toContain('徽章')
+  })
+
+  it('没有解锁任何区域时状态条显示潜水艇基地而不是空白', async () => {
+    const view = await mountHome({ store: createStore([]) })
+
+    expect(view.get('[data-testid="home-status"]').text()).toContain('潜水艇基地')
+  })
+
+  it('展示下一区推进提示：告诉孩子还差多少', async () => {
+    const store = createStore([
+      { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
+        targetId: 'twilight', kind: 'zone', reason: 's-1' },
+    ])
+    const view = await mountHome({ store })
+
+    const hint = view.get('[data-testid="home-next-zone"]')
+    // 已解锁暮光区 → 下一区是深海区；文案要说清"下一区是哪、大概多深"
+    expect(hint.text()).toContain('深海区')
+  })
+
+  it('四区全部解锁后不再显示推进提示（没有"下一区"可说）', async () => {
+    const store = createStore(
+      ['twilight', 'midnight', 'abyss', 'hadal'].map((id) => ({
+        eventId: `z-${id}`, profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted' as const,
+        targetId: id, kind: 'zone' as const, reason: 's-1',
+      })),
+    )
+    const view = await mountHome({ store })
+
+    expect(view.find('[data-testid="home-next-zone"]').exists()).toBe(false)
+  })
+
   it('渲染深度刻度：潜水艇基地起点与四区深度范围', async () => {
     const view = await mountHome({})
 

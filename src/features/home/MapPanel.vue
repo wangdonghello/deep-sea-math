@@ -17,7 +17,14 @@ import DepthScale from './DepthScale.vue'
 import { BASE_ZONE, ZONES } from './zones'
 
 defineProps<{
-  /** 当前所在区域下标（0 = 起点，1..4 = 四区）；由 composable 推导。 */
+  /**
+   * 当前所在区域在 {@link ZONES} 中的下标（0 基）。
+   *
+   * **-1 表示还在潜水艇基地**（一个区都没解锁）。此前这个 prop 是 1 基的
+   * （0 = 基地、1..4 = 四区），与 `HomeView` 用事件投影算出的下标差一，
+   * 于是"基地"与"第一区"两个状态被混在同一個值上。现在统一为 0 基，
+   * `-1` 这一档的语义由调用方显式给出。
+   */
   currentZoneIndex: number
   /** 已完成题组数量（深度刻度高亮与文案用）。 */
   completedQuests: number
@@ -49,8 +56,8 @@ defineProps<{
           :key="zone.id"
           class="map-panel__zone"
           :class="{
-            'map-panel__zone--current': index + 1 === currentZoneIndex,
-            'map-panel__zone--locked': index + 1 > currentZoneIndex,
+            'map-panel__zone--current': index === currentZoneIndex,
+            'map-panel__zone--locked': index > currentZoneIndex,
           }"
           :data-testid="`zone-${zone.id}`"
         >

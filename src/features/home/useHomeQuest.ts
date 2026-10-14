@@ -21,12 +21,14 @@
 import { computed, ref } from 'vue'
 
 import { redact } from '@/shared/redact'
+import { CREATURE_BANK } from '@/data/content'
 import { buildDailyQuest } from '@/domain/quiz/buildDailyQuest'
 import { replayProjections } from '@/domain/eventLog/replay'
 import type { Projections, QuestProgress } from '@/domain/eventLog/replay'
 import type { DomainEvent, Settings } from '@/domain/model/types'
 
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import { resolveZoneProgress, zoneIdsFromUnlockKeys, type ZoneProgress } from '@/features/bestiary/zoneProgress'
 import type { HomeProfile, HomeQuestOptions, HomeStore } from './types'
 
 /** 默认时钟：宿主当前时间（仅"今天是哪一天"需要它）。 */
@@ -79,6 +81,43 @@ function utcDayKey(occurredAt: number): string {
   return new Date(occurredAt).toISOString().slice(0, 10)
 }
 
+/** 首页成就概览（纯展示计数，全部可由事件重建）。 */
+export interface ProgressSummary {
+  /** 已获得的徽章数（数 `session-completed.rewards`，同一徽章可重复获得）。 */
+  readonly badgeCount: number
+  /** 已解锁的生物数。 */
+  readonly unlockedCreatureCount: number
+  /** 图鉴生物总数（进度分母）。 */
+  readonly totalCreatures: number
+  /** 已解锁的区域数。 */
+  readonly unlockedZones: number
+}
+
+/**
+ * 由事件与投影统计成就概览。
+ *
+ * 徽章口径：**数事件而不是去重** —— 徽章的语义是"获得过几次"，孩子今天拿了
+ * 整组完成徽章、明天又拿一次，那是两次成就；去重会让进度永远停在 1。
+ * 生物与区域去重：它们是解锁态，同一个 `kind:targetId` 只在投影里出现一次
+ * （`replayProjections` 的追加型锁已保证），所以直接数键即可。
+ */
+function summarizeProgress(
+  events: readonly DomainEvent[],
+  unlocks: Readonly<Record<string, unknown>>,
+): ProgressSummary {
+  let badgeCount = 0
+  for (const event of events) {
+    if (event.type === 'session-completed') badgeCount += event.rewards.length
+  }
+  const keys = Object.keys(unlocks)
+  return {
+    badgeCount,
+    unlockedCreatureCount: keys.filter((key) => key.startsWith('creature:')).length,
+    totalCreatures: CREATURE_BANK.creatures.length,
+    unlockedZones: keys.filter((key) => key.startsWith('zone:')).length,
+  }
+}
+
 /**
  * 首页的组合式逻辑（design §4 `HomeView` 的唯一规则来源）。
  *
@@ -109,6 +148,29 @@ export function useHomeQuest(options: HomeQuestOptions) {
 
   /** 任务卡模型；未加载完成时为 `null`（视图据此渲染占位）。 */
   const card = ref<QuestCardModel | null>(null)
+  /**
+   * 区域进度（当前所在区 / 已解锁区 / 下一区）。
+   *
+   * 与地图 Tab 页（`useBestiary`）**同一个来源、同一套口径**：都从事件重放的
+   * `zone:*` 解锁项推算。此前这里没有这个读数，`HomeView` 只能用"今天这组题
+   * 完成没完成"估 0/1，于是孩子完成过不止一组题时，首页地图与地图 Tab 页
+   * 会给出互相矛盾的"当前所在"。
+   */
+  const zoneProgress = ref<ZoneProgress>(resolveZoneProgress(new Set()))
+
+  /**
+   * 成就概览（徽章数 / 已解锁生物数 / 图鉴总数）。
+   *
+   * 全部从事件投影重建，不额外存一份：spec §投影可由事件重建，缓存派生数据
+   * 只会多一处会漂移的真相。徽章没有专门投影（`session-completed.rewards`
+   * 是唯一来源），因此这里直接数事件的 `rewards` 字段。
+   */
+  const progressSummary = ref<ProgressSummary>({
+    badgeCount: 0,
+    unlockedCreatureCount: 0,
+    totalCreatures: CREATURE_BANK.creatures.length,
+    unlockedZones: 0,
+  })
   /** 首次加载中。 */
   const loading = ref(false)
   /** 领取题组中（防重复点击：同一小时组两次会留下两条当日题组）。 */
@@ -222,7 +284,15 @@ export function useHomeQuest(options: HomeQuestOptions) {
     loading.value = true
     errorMessage.value = ''
     try {
-      card.value = await buildCard(current, await readSnapshot(current.profileId))
+      const snapshot = await readSnapshot(current.profileId)
+      card.value = buildCard(current, snapshot)
+      zoneProgress.value = resolveZoneProgress(
+        zoneIdsFromUnlockKeys(Object.keys(snapshot.projections.bestiaryUnlock)),
+      )
+      progressSummary.value = summarizeProgress(
+        snapshot.events,
+        snapshot.projections.bestiaryUnlock,
+      )
     } catch (error) {
       card.value = null
       errorMessage.value = '今日任务打不开，请稍后再试'
@@ -320,6 +390,8 @@ export function useHomeQuest(options: HomeQuestOptions) {
   return {
     profile,
     card,
+    zoneProgress,
+    progressSummary,
     loading,
     claiming,
     errorMessage,
