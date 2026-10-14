@@ -21,8 +21,12 @@ import { computed, onMounted } from 'vue'
 
 import MapPanel from '@/features/home/MapPanel.vue'
 import QuestCard from '@/features/home/QuestCard.vue'
+import HomeProgressSummary from '@/features/home/HomeProgressSummary.vue'
+import HomeStatusBar from '@/features/home/HomeStatusBar.vue'
+import NextZoneHint from '@/features/home/NextZoneHint.vue'
 import TabBar from '@/features/home/TabBar.vue'
 import { useHomeQuest } from '@/features/home/useHomeQuest'
+import { ZONES } from '@/features/home/zones'
 import type { HomeStore } from '@/features/home/types'
 import type { Question } from '@/domain/model/types'
 
@@ -75,8 +79,14 @@ function onStart(): void {
 /** 已完成题组数量：由当日题组完成态粗估（图鉴落地后改读事件投影）。 */
 const completedQuests = computed(() => (card.value?.state === 'done' ? 1 : 0))
 
-/** 当前所在区域下标：0 = 潜水艇基地，1..4 = 四区（spec §完成题组推进深度）。 */
-const currentZoneIndex = computed(() => completedQuests.value)
+/**
+ * 当前所在区域（来自事件投影的 `zone:*` 解锁项）。
+ *
+ * `-1` 表示还在潜水艇基地，`0..3` 是 {@link ZONES} 的下标 —— 与 `MapPanel`
+ * 的 `currentZoneIndex` 契约一致。**不**再用"今天这组题完成没完成"估 0/1：
+ * 那会让孩子完成过不止一组题时，首页地图与地图 Tab 页给出互相矛盾的答案。
+ */
+const currentZoneIndex = computed(() => home.zoneProgress.value.currentZoneIndex)
 
 onMounted(async () => {
   await home.load()
@@ -91,6 +101,13 @@ onMounted(async () => {
     </p>
 
     <template v-else>
+      <HomeStatusBar
+        :nickname="home.profile.value?.nickname ?? ''"
+        :current-zone-id="home.zoneProgress.value.currentZoneId"
+      />
+      <HomeProgressSummary :summary="home.progressSummary.value" :total-zones="ZONES.length" />
+      <NextZoneHint :next-zone-id="home.zoneProgress.value.nextZoneId" />
+
       <p v-if="home.loading.value" class="home__loading" data-testid="home-loading">正在打开今日任务…</p>
 
       <!--
