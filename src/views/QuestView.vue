@@ -24,6 +24,11 @@ const props = defineProps<{
   logger?: (entry: Record<string, unknown>) => void
 }>()
 
+const emit = defineEmits<{
+  /** 完成态点击「返回首页」：由路由层决定跳转（本视图不 import vue-router）。 */
+  (event: 'go-home'): void
+}>()
+
 const session = useQuizSession({
   sessionId: props.sessionId, profileId: props.profileId, questions: props.questions,
   similarQuestionPool: props.similarQuestionPool,
@@ -124,6 +129,21 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
     <p v-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
       这一组完成啦，继续探索深海吧！
     </p>
+    <!--
+      完成态的出口。
+
+      此前这里只有一句"继续探索深海吧"——没有按钮意味着**死路**：孩子把一组
+      题做完，屏幕上没有任何可点的东西，只能靠浏览器返回或重新打开。按钮同样
+      走 emit（`go-home`），由路由封装翻译成 `router.push('/home')`，因此本视图
+      依旧不依赖 `vue-router`（design §4 组件边界）。
+    -->
+    <button
+      v-if="!question && !errorMessage && session.sessionCompleted.value"
+      type="button"
+      class="quest-back"
+      data-testid="quest-back-home"
+      @click="emit('go-home')"
+    >返回首页</button>
     <template v-else-if="!question && !errorMessage">
       <p v-if="session.practiceQuestionAvailable.value" data-testid="quest-incomplete">
         已看完题目，但直接看答案不计入任务完成，仍可继续作答完成任务。
@@ -142,6 +162,7 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
 <style scoped>
 .quest-view { display: grid; gap: 1rem; max-width: 42rem; margin: 0 auto; padding: 1rem; }
 .quest-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.75rem; }
+.quest-back { min-height: 3rem; margin-top: var(--ds-space-md); border: 1px solid var(--ds-glass-border); border-radius: 1rem; background: var(--ds-glass-surface); color: var(--ds-text-primary); font-weight: 700; }
 .quest-actions button { min-height: 3rem; border: 0; border-radius: 1rem; background: var(--color-accent, #ffb454); color: #162c48; font-weight: 700; }
 .quest-actions button[data-testid="action-hint"] { background: var(--color-panel, #17365b); color: var(--color-text, #fff); }
 [data-testid="quiz-feedback"] { color: var(--color-text, #fff); }

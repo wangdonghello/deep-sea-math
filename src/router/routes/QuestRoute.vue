@@ -14,14 +14,16 @@
  * 3. **注入生产 `QuizSessionStore`**（窄接口：读事件 + 幂等追加）。
  */
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import QuestView from '@/views/QuestView.vue'
 import { getProductionStores } from '@/app/productionStores'
 import type { QuestRouteContext } from '@/app/questContext'
+import { HOME_PATH } from '@/router/nextRoute'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 
 const route = useRoute()
+const router = useRouter()
 const stores = getProductionStores()
 const profileId = computed(() => useProfileSessionStore().activeProfileId ?? '')
 
@@ -45,5 +47,6 @@ const ready = computed(() => context.value !== undefined && context.value.sessio
     :creature-id="context.creatureId"
     :zone-id="context.zoneId"
     :store="stores.quiz"
+    @go-home="router.push(HOME_PATH)"
   />
 </template>

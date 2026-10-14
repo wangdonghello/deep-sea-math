@@ -131,6 +131,12 @@ describe('QuestView feedback', () => {
     await view.get('[data-testid="action-next"]').trigger('click')
     await flushPromises()
     expect(view.find('[data-testid="quest-completed"]').exists()).toBe(true)
+
+    // 完成态必须有出口：只说"继续探索深海吧"而不给按钮 = 死路
+    const back = view.get('[data-testid="quest-back-home"]')
+    expect(back.text()).toContain('返回首页')
+    await back.trigger('click')
+    expect(view.emitted('go-home')).toEqual([[]])
   })
 
   it('答错后看答案展开五层提示与最终答案', async () => {
