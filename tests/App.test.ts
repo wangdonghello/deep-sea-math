@@ -352,6 +352,37 @@ describe('App: 整体装配', () => {
     }
   })
 
+  it('图鉴、错题本、地图、观察舱和答题页均有可用的底部返回出口', async () => {
+    await seed([sessionStartedFor(QUESTION_IDS), ...answersForAll(), ...completionEvents()])
+    await bootApp({ signedIn: true })
+
+    for (const path of ['/bestiary', '/mistakes', '/map', `/observation/${CREATURE_ID}`]) {
+      await router.push(path)
+      await flushPromises()
+      expect(router.currentRoute.value.path).toBe(path)
+      const back = app!.get('[data-testid="page-return-home"]')
+      expect(back.text()).toContain('返回首页')
+      await back.trigger('click')
+      await flushPromises()
+      expect(router.currentRoute.value.path).toBe('/home')
+    }
+
+    await router.push(`/quest?session=${SESSION_ID}`)
+    await flushPromises()
+    expect(router.currentRoute.value.path).toBe('/quest')
+    const questBack = app!.get('[data-testid="quest-back-home"]')
+    await questBack.trigger('click')
+    await flushPromises()
+    expect(router.currentRoute.value.path).toBe('/home')
+
+    await router.push('/parent')
+    await settle()
+    await app!.get('[data-testid="parent-gate-back"]').trigger('click')
+    await flushPromises()
+    // 用户选择页是 root；如果已有会话，守卫会安全地回首页
+    expect(['/profiles', '/home']).toContain(router.currentRoute.value.path)
+  })
+
   it('观察舱只接受已解锁生物：未解锁打回图鉴且不泄露名称', async () => {
     await seed([])
     await bootApp({ signedIn: true })
@@ -560,7 +591,10 @@ describe('App: 整体装配', () => {
     expect(router.currentRoute.value.path).toBe('/profiles')
 
     // 档案选择页有一个不显眼的家长区入口（T16 审查的残余风险：不进孩子常驻导航）
-    await app!.get('[data-testid="goto-parent"]').trigger('click')
+    const parentEntry = app!.get('[data-testid="goto-parent"]')
+    expect(parentEntry.classes()).toContain('profiles-route__parent-card')
+    expect(parentEntry.text()).toContain('查看成长报告')
+    await parentEntry.trigger('click')
     // `gate.load()` 要读一次 IndexedDB（宏任务），`flushPromises` 等不到。
     await settle()
     expect(router.currentRoute.value.path).toBe('/parent')
@@ -568,6 +602,19 @@ describe('App: 整体装配', () => {
     expect(app!.find('[data-testid="parent-gate"]').exists()).toBe(true)
     expect(app!.find('[data-testid="parent-gate-hint"]').text()).toContain('设置')
     expect(app!.find('[data-testid="pin-input"]').exists()).toBe(true)
+  })
+
+  it('家长区门禁页也提供底部返回出口', async () => {
+    await seed([])
+    await bootApp({ signedIn: false })
+    await router.push('/parent')
+    await settle()
+
+    const back = app!.get('[data-testid="parent-gate-back"]')
+    expect(back.text()).toContain('返回')
+    await back.trigger('click')
+    await flushPromises()
+    expect(router.currentRoute.value.path).toBe('/profiles')
   })
 
   it('未解锁时家长区三个子路径一律打回门禁页', async () => {

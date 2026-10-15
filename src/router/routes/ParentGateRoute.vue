@@ -12,18 +12,24 @@
 import { useRouter } from 'vue-router'
 
 import { getProductionStores } from '@/app/productionStores'
-import { PARENT_OVERVIEW_PATH } from '@/router/nextRoute'
+import { HOME_PATH, PARENT_OVERVIEW_PATH, PROFILES_PATH } from '@/router/nextRoute'
 import ParentGateView from '@/views/ParentGateView.vue'
+import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 
 const router = useRouter()
 const stores = getProductionStores()
+const profileSession = useProfileSessionStore()
 
 /** 门禁放行 → 家长总览。 */
 function onUnlocked(): void {
   void router.push(PARENT_OVERVIEW_PATH)
 }
+
+function onBack(): void {
+  void router.push(profileSession.activeProfileId === null ? PROFILES_PATH : HOME_PATH)
+}
 </script>
 
 <template>
-  <ParentGateView :store="stores.parentGate" @unlocked="onUnlocked" />
+  <ParentGateView :store="stores.parentGate" @unlocked="onUnlocked" @back="onBack" />
 </template>

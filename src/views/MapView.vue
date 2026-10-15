@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import FishBackdrop from '@/features/theme/FishBackdrop.vue'
+import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { useBestiary } from '@/features/bestiary/useBestiary'
 import type { BestiaryStore } from '@/features/bestiary/types'
 import { BASE_ZONE } from '@/features/home/zones'
 
 const props = defineProps<{ profileId: string | null; store: BestiaryStore }>()
+const emit = defineEmits<{ (event: 'back-home'): void }>()
 const map = useBestiary({ profileId: computed(() => props.profileId), store: props.store })
 </script>
 
@@ -31,12 +33,13 @@ const map = useBestiary({ profileId: computed(() => props.profileId), store: pro
         </ol>
       </template>
       <p class="map-view__note">这是已知记录/教学区域范围，不是物种唯一分布；物种可能跨区。每种生物的观察记录请查看图鉴说明。</p>
-    </section>
-  </main>
+      </section>
+      <BottomReturnButton @back="emit('back-home')" />
+    </main>
 </template>
 
 <style scoped>
-.map-view { position: relative; min-height: 100%; overflow: hidden; background: var(--ds-bg-gradient); color: var(--ds-text-primary); }
+.map-view { position: relative; min-height: 100dvh; overflow: hidden; padding-bottom: calc(5rem + env(safe-area-inset-bottom)); background: var(--ds-bg-gradient); color: var(--ds-text-primary); }
 .map-view__content { position: relative; padding: var(--ds-space-lg); }
 .map-view__base, .map-view__zones li { padding: var(--ds-space-md); border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-sm); background: var(--ds-glass-surface); }
 .map-view__zones { display: grid; gap: var(--ds-space-md); padding: 0; list-style: none; }

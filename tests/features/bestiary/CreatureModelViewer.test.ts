@@ -5,6 +5,8 @@ import CreatureModelViewer from '@/features/bestiary/CreatureModelViewer.vue'
 
 describe('CreatureModelViewer resilience', () => {
   it('signals fallback when WebGL creation fails and prevents a lost context default', async () => {
+    const originalWebgl = Object.getOwnPropertyDescriptor(window, 'WebGLRenderingContext')
+    Object.defineProperty(window, 'WebGLRenderingContext', { configurable: true, value: class {} })
     const getContext = vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation(() => null)
     const view = mount(CreatureModelViewer, {
       props: {
@@ -12,6 +14,7 @@ describe('CreatureModelViewer resilience', () => {
         previewSrc: '/illustrations/original-johnson-anglerfish.svg',
         asset: {
           ref: 'deep-sea-fish-3dsm4',
+          creditSummary: 'Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0',
           attribution: 'This work is based on "Deep Sea Fish #3DSM4" by Carlo Bergonzini, licensed under CC-BY-4.0.',
           license: 'CC BY 4.0',
           licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
@@ -32,6 +35,8 @@ describe('CreatureModelViewer resilience', () => {
 
     view.unmount()
     getContext.mockRestore()
+    if (originalWebgl === undefined) Reflect.deleteProperty(window, 'WebGLRenderingContext')
+    else Object.defineProperty(window, 'WebGLRenderingContext', originalWebgl)
   })
 
   it('缩略图模式只渲染一帧后停止动画循环（列表里多张卡不会持续满载）', async () => {
@@ -47,6 +52,7 @@ describe('CreatureModelViewer resilience', () => {
         thumbnail: true,
         asset: {
           ref: 'deep-sea-fish-3dsm4',
+          creditSummary: 'Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0',
           attribution: 'CC BY',
           license: 'CC BY 4.0',
           licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
@@ -73,6 +79,7 @@ describe('CreatureModelViewer resilience', () => {
         thumbnail: true,
         asset: {
           ref: 'deep-sea-fish-3dsm4',
+          creditSummary: 'Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0',
           attribution: 'CC BY',
           license: 'CC BY 4.0',
           licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',

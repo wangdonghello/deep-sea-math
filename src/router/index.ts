@@ -50,9 +50,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/observation/:id',
     name: 'observation',
-    component: () => import('@/views/ObservationView.vue'),
-    // 守卫已确认该生物已解锁并通过 `meta` 交付内容对象；视图只收 creature。
-    props: (route) => ({ creature: route.meta.creature }),
+    component: () => import('./routes/ObservationRoute.vue'),
   },
   { path: '/mistakes', name: 'mistakes', component: () => import('./routes/MistakesRoute.vue') },
   /*

@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 import MistakeFilter from '@/features/mistakeBook/MistakeFilter.vue'
 import MistakeList from '@/features/mistakeBook/MistakeList.vue'
+import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { useMistakeBook } from '@/features/mistakeBook/useMistakeBook'
 import type { MistakeBookStore, MistakeQuestionCatalog } from '@/features/mistakeBook/types'
 
@@ -14,6 +15,7 @@ const props = defineProps<{
 }>()
 const emit = defineEmits<{
   (event: 'practice', payload: { questionIds: string[]; similarQuestionIds: string[] }): void
+  (event: 'back-home'): void
 }>()
 
 const session = useProfileSessionStore()
@@ -42,11 +44,12 @@ function practice(questionId: string): void {
       </p>
       <MistakeList v-else :entries="visibleItems" @practice="practice" />
     </template>
+    <BottomReturnButton @back="emit('back-home')" />
   </main>
 </template>
 
 <style scoped>
-.mistake-book { display: grid; gap: 1rem; max-width: 42rem; margin: 0 auto; padding: 1rem; }
+.mistake-book { display: grid; gap: 1rem; min-height: 100dvh; max-width: 42rem; margin: 0 auto; padding: 1rem 1rem calc(5rem + env(safe-area-inset-bottom)); }
 .mistake-list, ul { margin: 0; padding: 0; list-style: none; }
 .mistake-book article { padding: 1rem; border-radius: 1rem; background: rgb(255 255 255 / 8%); }
 .mistake-book button, select { min-height: 2.75rem; }

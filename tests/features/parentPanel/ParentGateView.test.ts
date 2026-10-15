@@ -69,6 +69,7 @@ describe('views: ParentGateView', () => {
     expect(view.find('[data-testid="parent-gate"]').exists()).toBe(true)
     expect(view.get('.pin-pad__title').text()).toBe('设置家长密码')
     expect(view.find('[data-testid="parent-gate-hint"]').text()).toContain('设置')
+    expect(view.find('[data-testid="parent-gate-panel"]').exists()).toBe(true)
     expect(view.find('[data-testid="pin-input"]').exists()).toBe(true)
     // 档案选择页的那套 testid 原样复用（同一套输入交互）
     expect(view.find('[data-testid="pin-dots"]').exists()).toBe(true)

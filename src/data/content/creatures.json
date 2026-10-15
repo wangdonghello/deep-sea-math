@@ -25,6 +25,7 @@
       "illustrationLabel": "原创示意插画，非真实影像",
       "model": {
         "ref": "deep-sea-fish-3dsm4",
+        "creditSummary": "Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0",
         "attribution": "This work is based on \"Deep Sea Fish #3DSM4\" (https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55) by Carlo Bergonzini (https://sketchfab.com/carlo-bergonzini) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/). Changes: unrelated scene elements removed, geometry simplified, and textures compressed for mobile display.",
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",

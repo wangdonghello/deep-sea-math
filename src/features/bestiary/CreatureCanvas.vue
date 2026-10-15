@@ -55,8 +55,19 @@ function onError(): void {
     </button>
     <figcaption v-if="modelAttribution" class="creature-canvas__model-credit" data-testid="model-attribution">
       <span>{{ modelAttribution.note }}</span>
-      <span>{{ modelAttribution.attribution }}</span>
-      <span>来源：<a data-testid="model-source-link" :href="modelAttribution.sourceUrl"
+      <template v-if="thumbnail">
+        <span>授权 3D 模型 · {{ modelAttribution.license }}</span>
+        <details class="creature-canvas__credit-details">
+          <summary data-testid="model-credit-summary">{{ modelAttribution.creditSummary }} · 查看修改说明</summary>
+          <span data-testid="model-full-attribution">{{ modelAttribution.attribution }}</span>
+        </details>
+      </template>
+      <template v-else>
+        <span>{{ modelAttribution.attribution }}</span>
+        <span>来源：<a data-testid="model-source-link" :href="modelAttribution.sourceUrl"
+          target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
+      </template>
+      <span v-if="thumbnail">来源：<a data-testid="model-source-link" :href="modelAttribution.sourceUrl"
         target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
       <span>许可：<a data-testid="model-license-link" :href="modelAttribution.licenseUrl"
         target="_blank" rel="noopener noreferrer">{{ modelAttribution.license }}</a></span>
@@ -74,6 +85,8 @@ function onError(): void {
 .creature-canvas__model { width: 100%; }
 .creature-canvas__model-credit { display: grid; gap: .35rem; margin-top: .75rem; font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
 .creature-canvas__model-credit a { color: var(--ds-text-secondary); }
+.creature-canvas__credit-details { text-align: left; }
+.creature-canvas__credit-details summary { color: var(--ds-text-secondary); cursor: pointer; }
 .creature-canvas button { min-height: 2.75rem; }
 .creature-canvas__silhouette { color: var(--ds-bg-deep); background: var(--ds-glass-surface); }
 .creature-canvas__silhouette svg { width: min(100%, 18rem); fill: currentColor; }

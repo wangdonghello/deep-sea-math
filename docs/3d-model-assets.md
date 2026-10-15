@@ -53,6 +53,7 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 ```json
 "model": {
   "ref": "deep-sea-fish-3dsm4",
+  "creditSummary": "Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0",
   "attribution": "This work is based on \"<标题>\" (<模型页 URL>) by <作者> (<作者页 URL>) licensed under CC-BY-4.0 (<许可 URL>). Changes: <改了什么>.",
   "license": "CC BY 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
@@ -64,6 +65,7 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 字段由 `assertValidCreatures` 强制校验（见 `src/data/content/schema.ts`）：
 
 - `ref` 必须匹配上面的文件名，挡住 `../` 之类的路径穿越；
+- `creditSummary` 非空：用于卡片默认可见的短署名（模型名、作者、许可证）；
 - `attribution` / `license` / `note` 非空；
 - `sourceUrl` 与 `licenseUrl` 必须是 HTTPS；
 - `note` 必须说明模型**不是**精确物种复原——除非真的做了物种级考证，
@@ -86,8 +88,12 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 
 - `prefer-model` 缺省为 `false` → 用轻量 2D 插画。地图、错题本等次要位置
   不要打开它。
+- 卡片默认显示 `creditSummary`、来源页和许可证；完整 `attribution` 与修改说明
+  放在卡片内可展开的署名说明中（卡片空间有限，但作者和许可在默认态可见）。
 - `thumbnail` 只影响**要不要持续动**：图鉴列表会同时存在多张卡，每张都跑
   渲染循环会让低端机的合成层持续满载；卡片要传达的只是"这是什么鱼"。
+  缩略图还通过 `IntersectionObserver` 延迟到接近视口时才建 WebGL context/下载
+  GLB，离屏卡片不占 GPU 纹理和网络带宽。
 - 两处必须用**同一份模型**——否则同一物种在卡片里和观察舱里长得不一样，
   孩子会在图鉴里认不出刚看过的鱼。
 - 渲染组件 `features/bestiary/CreatureModelViewer.vue` 按需懒加载

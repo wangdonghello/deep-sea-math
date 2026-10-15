@@ -15,6 +15,7 @@ import { useRouter } from 'vue-router'
 import BestiaryView from '@/views/BestiaryView.vue'
 import { getProductionStores } from '@/app/productionStores'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import { HOME_PATH } from '@/router/nextRoute'
 
 const router = useRouter()
 const stores = getProductionStores()
@@ -26,5 +27,6 @@ const profileId = computed(() => useProfileSessionStore().activeProfileId)
     :profile-id="profileId"
     :store="stores.bestiary"
     @observe="(creatureId) => router.push(`/observation/${creatureId}`)"
+    @back-home="router.push(HOME_PATH)"
   />
 </template>

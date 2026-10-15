@@ -27,6 +27,7 @@ vi.mock('@/features/bestiary/CreatureModelViewer.vue', () => ({
 
 const model = {
   ref: 'deep-sea-fish-3dsm4',
+  creditSummary: 'Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0',
   attribution: 'This work is based on "Deep Sea Fish #3DSM4" by Carlo Bergonzini, licensed under CC BY 4.0.',
   license: 'CC BY 4.0',
   licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
@@ -55,6 +56,20 @@ describe('CreatureCanvas licensed model display', () => {
 
     expect(view.find('[data-testid="creature-model-viewer"]').exists()).toBe(false)
     expect(view.find('[data-testid="creature-illustration"]').exists()).toBe(true)
+  })
+
+  it('缩略图卡片默认折叠完整授权文字，但保留显眼的授权说明入口', async () => {
+    const creature = { ...CREATURE_BANK.creatures[0], model }
+    const view = mount(CreatureCanvas, { props: { creature, preferModel: true, thumbnail: true } })
+    await flushPromises()
+
+    expect(view.get('[data-testid="model-credit-summary"]').text()).toContain('CC BY 4.0')
+    expect(view.get('[data-testid="model-credit-summary"]').text()).toContain('Carlo Bergonzini')
+    expect((view.get('details').element as HTMLDetailsElement).open).toBe(false)
+    await view.get('[data-testid="model-credit-summary"]').trigger('click')
+    expect((view.get('details').element as HTMLDetailsElement).open).toBe(true)
+    expect(view.get('[data-testid="model-full-attribution"]').text()).toContain(model.attribution)
+    expect(view.get('[data-testid="model-license-link"]').attributes('href')).toBe(model.licenseUrl)
   })
 
   it('falls back to the original illustration when WebGL is unavailable and keeps attribution visible', async () => {

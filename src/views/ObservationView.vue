@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import CreatureCanvas from '@/features/bestiary/CreatureCanvas.vue'
+import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import KnowledgeCardList from '@/features/bestiary/KnowledgeCardList.vue'
 import SourceNote from '@/features/bestiary/SourceNote.vue'
 import { depthRangeLabel } from '@/features/bestiary/depthRangeLabel'
 import type { CreatureContent } from '@/features/bestiary/types'
 
 defineProps<{ creature: CreatureContent }>()
+const emit = defineEmits<{ (event: 'back-home'): void }>()
 </script>
 
 <template>
@@ -19,10 +21,11 @@ defineProps<{ creature: CreatureContent }>()
       <KnowledgeCardList :cards="creature.knowledgeCards" />
     </CreatureCanvas>
     <SourceNote :sources="creature.sources" :habitat="creature.habitat" />
+    <BottomReturnButton @back="emit('back-home')" />
   </main>
 </template>
 
 <style scoped>
-.observation-view { max-width: 48rem; margin: auto; padding: var(--ds-space-lg); color: var(--ds-text-primary); }
+.observation-view { max-width: 48rem; min-height: 100dvh; margin: auto; padding: var(--ds-space-lg) var(--ds-space-lg) calc(5rem + env(safe-area-inset-bottom)); color: var(--ds-text-primary); }
 .observation-view__scientific { color: var(--ds-text-secondary); }
 </style>

@@ -7,15 +7,18 @@
  *（切换档案后地图要重读，而不是停在上一份解锁状态上）。
  */
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 import MapView from '@/views/MapView.vue'
 import { getProductionStores } from '@/app/productionStores'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import { HOME_PATH } from '@/router/nextRoute'
 
+const router = useRouter()
 const stores = getProductionStores()
 const profileId = computed(() => useProfileSessionStore().activeProfileId)
 </script>
 
 <template>
-  <MapView :profile-id="profileId" :store="stores.bestiary" />
+  <MapView :profile-id="profileId" :store="stores.bestiary" @back-home="router.push(HOME_PATH)" />
 </template>

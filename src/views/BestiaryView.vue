@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import CreatureCard from '@/features/bestiary/CreatureCard.vue'
+import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { overlapsZone } from '@/features/bestiary/zoneFilter'
 import { useBestiary } from '@/features/bestiary/useBestiary'
 import type { BestiaryStore } from '@/features/bestiary/types'
 import { ZONES } from '@/features/home/zones'
 
 const props = defineProps<{ profileId: string | null; store: BestiaryStore }>()
-const emit = defineEmits<{ (event: 'observe', creatureId: string): void }>()
+const emit = defineEmits<{
+  (event: 'observe', creatureId: string): void
+  (event: 'back-home'): void
+}>()
 const bestiary = useBestiary({ profileId: computed(() => props.profileId), store: props.store })
 const activeZoneId = ref<string | null>(null)
 const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) => {
@@ -36,11 +40,12 @@ const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) =
         <CreatureCard :creature="item.creature" :unlocked="item.unlocked" @observe="emit('observe', $event)" />
       </li>
     </ul>
+    <BottomReturnButton @back="emit('back-home')" />
   </main>
 </template>
 
 <style scoped>
-.bestiary-view { padding: var(--ds-space-lg); color: var(--ds-text-primary); }
+.bestiary-view { min-height: 100dvh; padding: var(--ds-space-lg) var(--ds-space-lg) calc(5rem + env(safe-area-inset-bottom)); color: var(--ds-text-primary); }
 .bestiary-view__filters { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); }
 .bestiary-view__filters button { min-height: 2.75rem; }
 .bestiary-view__note { color: var(--ds-text-secondary); }

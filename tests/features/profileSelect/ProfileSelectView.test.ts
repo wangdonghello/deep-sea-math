@@ -35,9 +35,7 @@ async function makeVerifiedStore(correctPin: string): Promise<ProfileStore> {
 }
 
 async function enterPin(view: VueWrapper, digits: string): Promise<void> {
-  for (const digit of digits) {
-    await view.get(`[data-testid="pin-key-${digit}"]`).trigger('click')
-  }
+  await view.get<HTMLInputElement>('[data-testid="pin-input"]').setValue(digits)
 }
 
 /**
@@ -48,7 +46,7 @@ async function enterPin(view: VueWrapper, digits: string): Promise<void> {
  * 之前，看到的是“什么都没发生”。
  */
 async function submitPin(view: VueWrapper): Promise<void> {
-  await view.get('[data-testid="pin-submit"]').trigger('click')
+  await view.get('[data-testid="pin-submit-native"]').trigger('click')
   await flushPromises()
 }
 
@@ -91,9 +89,17 @@ describe('views: ProfileSelectView', () => {
     expect(view.findAll('[data-testid^="profile-card-"]')).toHaveLength(2)
     expect(view.text()).toContain('小深')
     expect(view.text()).toContain('小澜')
+    expect(view.findAll('[data-testid="profile-avatar"] svg')).toHaveLength(2)
 
     // 载入后默认选中第一个档案，PIN 盘随之出现（少一次点击）
     expect(view.find('[data-testid="pin-pad"]').text()).toContain('小深')
+    const pinInput = view.get<HTMLInputElement>('[data-testid="pin-input"]')
+    expect(pinInput.attributes('type')).toBe('password')
+    expect(pinInput.attributes('inputmode')).toBe('numeric')
+    expect(view.find('[data-testid="pin-dots"]').exists()).toBe(false)
+    expect(view.find('[data-testid="pin-key-1"]').exists()).toBe(false)
+    expect(view.find('[data-testid="pin-submit-native"]').exists()).toBe(true)
+    expect(view.get('[data-testid="profile-journey"]').text()).toContain('解锁生物')
 
     // 切换到另一个档案：PIN 盘跟随选中项，输入被清空
     await enterPin(view, '1234')
@@ -101,7 +107,7 @@ describe('views: ProfileSelectView', () => {
 
     expect(view.find('[data-testid="pin-pad"]').text()).toContain('小澜')
     expect(view.find('[data-testid="pin-pad"]').text()).not.toContain('小深')
-    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('0')
+    expect(view.get<HTMLInputElement>('[data-testid="pin-input"]').element.value).toBe('')
   })
 
   it('PIN 错误时显示“再试一次”且不含错因', async () => {
@@ -118,7 +124,7 @@ describe('views: ProfileSelectView', () => {
     // 不展示具体错因：不出现“PIN 错误”“不匹配”这类归因措辞
     expect(error.text()).not.toMatch(/错误|不正确|不匹配|哈希|salt/)
     // 失败后输入被清空（不留下疑似正确的 PIN 残影）
-    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('0')
+    expect(view.get<HTMLInputElement>('[data-testid="pin-input"]').element.value).toBe('')
     // 整个页面任何位置都不回显明文 PIN（spec §不采集敏感信息）
     expect(view.text()).not.toContain('9999')
   })
@@ -133,8 +139,9 @@ describe('views: ProfileSelectView', () => {
       await submitPin(view)
     }
 
-    // 锁定：数字键全部禁用（防止继续盲试），倒计时从 60 开始
-    expect(view.get('[data-testid="pin-key-1"]').attributes('disabled')).toBeDefined()
+    // 锁定：掩码输入框与提交都禁用，防止继续盲试
+    expect(view.get('[data-testid="pin-input"]').attributes('disabled')).toBeDefined()
+    expect(view.get('[data-testid="pin-submit-native"]').attributes('disabled')).toBeDefined()
     expect(view.find('[data-testid="pin-lock-countdown"]').text()).toContain('60')
     // 锁定期只出现倒计时文案，"再试一次"必须撤下（否则两条指令同时出现）
     expect(view.find('[data-testid="pin-error"]').exists()).toBe(false)
@@ -142,18 +149,18 @@ describe('views: ProfileSelectView', () => {
     // 推进 59 秒：仍锁定，倒计时降到 1
     clock.advance(59_000)
     await flushPromises()
-    expect(view.get('[data-testid="pin-key-1"]').attributes('disabled')).toBeDefined()
+    expect(view.get('[data-testid="pin-input"]').attributes('disabled')).toBeDefined()
     expect(view.find('[data-testid="pin-lock-countdown"]').text()).toContain('1')
 
     // 推进满 60 秒：解锁，倒计时消失，键盘恢复可用
     clock.advance(1_000)
     await flushPromises()
     expect(view.find('[data-testid="pin-lock-countdown"]').exists()).toBe(false)
-    expect(view.get('[data-testid="pin-key-1"]').attributes('disabled')).toBeUndefined()
+    expect(view.get('[data-testid="pin-input"]').attributes('disabled')).toBeUndefined()
 
     // 解锁后正确 PIN 可再次进入（锁定期真的过去了，而不是只换了文案）
     await enterPin(view, '1234')
-    expect(view.get('[data-testid="pin-submit"]').attributes('disabled')).toBeUndefined()
+    expect(view.get('[data-testid="pin-submit-native"]').attributes('disabled')).toBeUndefined()
     await submitPin(view)
     expect(view.find('[data-testid="pin-error"]').exists()).toBe(false)
   })
@@ -199,10 +206,9 @@ describe('views: ProfileSelectView', () => {
     const view = await mountView({ store, clock })
 
     await enterPin(view, '12')
-    await view.get('[data-testid="pin-backspace"]').trigger('click')
-    await view.vm.$nextTick()
-
-    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('1')
+    const input = view.get<HTMLInputElement>('[data-testid="pin-input"]')
+    await input.setValue('1')
+    expect(input.element.value).toBe('1')
   })
 
   it('list() 抛错时显示全局错误段，且不落到“还没有档案”空态', async () => {
@@ -246,6 +252,8 @@ describe('views: ProfileSelectView', () => {
 
     expect(view.find('[data-testid="profile-empty"]').exists()).toBe(true)
     expect(view.find('[data-testid="profile-empty"]').text()).toContain('家长')
+    expect(view.find('[data-testid="profile-empty-card"]').exists()).toBe(true)
+    expect(view.find('[data-testid="profile-empty-card"]').text()).toContain('一起下潜')
     expect(view.find('[data-testid="pin-pad"]').exists()).toBe(false)
     expect(verifyCalls).toEqual([])
   })
@@ -265,29 +273,25 @@ describe('views: ProfileSelectView 掩码输入框', () => {
     input.element.value = '12'
     await input.trigger('input')
     await flushPromises()
-    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('2')
+    expect(input.element.value).toBe('12')
 
     input.element.value = '12a'
     await input.trigger('input')
     await flushPromises()
     // 位数不变（'a' 被 composable 剥掉），框里也被抹回权威值。
-    expect(view.find('[data-testid="pin-dots"]').attributes('data-filled')).toBe('2')
+    expect(input.element.value).toBe('12')
     expect(input.element.value).toBe('12')
   })
 
-  it('点按键盘与退格都会让输入框值同步', async () => {
+  it('系统数字键盘输入与删除后，受控掩码框保留当前数字', async () => {
     const clock = new ManualClock()
     const store = await makeVerifiedStore('1234')
     const view = await mountView({ store, clock })
     const input = view.get<HTMLInputElement>('[data-testid="pin-input"]')
 
-    await view.get('[data-testid="pin-key-3"]').trigger('click')
-    expect(input.element.value).toBe('3')
-
-    await view.get('[data-testid="pin-key-4"]').trigger('click')
+    await input.setValue('34')
     expect(input.element.value).toBe('34')
-
-    await view.get('[data-testid="pin-backspace"]').trigger('click')
+    await input.setValue('3')
     expect(input.element.value).toBe('3')
   })
 

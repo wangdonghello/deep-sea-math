@@ -57,6 +57,8 @@ export interface QuestionBank {
 export interface CreatureModelAsset {
   /** Safe filename stem resolved under the application base URL in public/models. */
   ref: string
+  /** Compact visible credit for dense contexts (e.g. gallery cards). */
+  creditSummary: string
   attribution: string
   license: string
   licenseUrl: string
@@ -437,6 +439,7 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
       if (typeof model.ref !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(model.ref)) {
         throw new Error(`${path}.model.ref: expected a safe lowercase asset key`)
       }
+      nonEmptyString(model.creditSummary, `${path}.model.creditSummary`)
       nonEmptyString(model.attribution, `${path}.model.attribution`)
       nonEmptyString(model.license, `${path}.model.license`)
       nonEmptyString(model.note, `${path}.model.note`)

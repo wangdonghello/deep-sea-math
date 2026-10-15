@@ -36,6 +36,17 @@ beforeEach(() => {
 })
 
 describe('MistakeBookView', () => {
+  it('错题本提供底部固定的返回首页按钮并向路由层发出事件', async () => {
+    const { view } = mountView()
+    await flushPromises()
+
+    const back = view.get('[data-testid="page-return-home"]')
+    expect(back.text()).toContain('返回首页')
+    expect(back.classes()).toContain('bottom-return-button')
+    await back.trigger('click')
+    expect(view.emitted('back-home')).toEqual([[]])
+  })
+
   it('没有当前档案时不读取存储，也不误显示为空错题本', async () => {
     useProfileSessionStore().clear()
     const { view, requestedProfiles } = mountView()

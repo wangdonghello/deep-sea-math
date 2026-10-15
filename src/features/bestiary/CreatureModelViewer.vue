@@ -29,11 +29,13 @@ const autoRotate = ref(true)
 
 let renderer: THREE.WebGLRenderer | undefined
 let camera: THREE.PerspectiveCamera | undefined
-let observer: ResizeObserver | undefined
+let resizeObserver: ResizeObserver | undefined
+let visibilityObserver: IntersectionObserver | undefined
 let model: THREE.Object3D | undefined
 let disposed = false
 let dragging = false
 let previousPointer = { x: 0, y: 0 }
+let renderCurrentFrame: (() => void) | undefined
 
 function disposeModel(object: THREE.Object3D): void {
   object.traverse((child) => {
@@ -58,6 +60,9 @@ function resize(): void {
   camera.aspect = width / height
   camera.position.z = Math.max(8.2, (8.2 * 1.15) / camera.aspect)
   camera.updateProjectionMatrix()
+  // setSize resets the drawing buffer. Static cards redraw exactly one frame after
+  // each real size change; they never keep an animation loop running.
+  if (props.thumbnail) renderCurrentFrame?.()
 }
 
 function zoom(delta: number): void {
@@ -93,6 +98,12 @@ async function loadModel(): Promise<void> {
 
   try {
     if (!canvas.value) throw new Error('Model canvas is unavailable')
+    // jsdom and genuinely WebGL-less browsers do not expose either context type.
+    // Fail over before Three.js calls canvas.getContext() (jsdom logs a noisy
+    // "not implemented" warning instead of throwing when that API is absent).
+    if (!('WebGLRenderingContext' in window) && !('WebGL2RenderingContext' in window)) {
+      throw new Error('WebGL is unavailable')
+    }
     const scene = new THREE.Scene()
     const modelCamera = new THREE.PerspectiveCamera(34, 1, 0.1, 100)
     camera = modelCamera
@@ -138,7 +149,8 @@ async function loadModel(): Promise<void> {
     if (!Number.isFinite(longestSide) || longestSide <= 0) throw new Error('Model has no visible geometry')
 
     model.position.sub(center)
-    model.scale.setScalar(4.4 / longestSide)
+    // 卡片容器更矮更宽：稍微放大模型，避免 3D 缩略图在大片留白里显得像小点。
+    model.scale.setScalar((props.thumbnail ? 5.8 : 4.4) / longestSide)
     scene.add(model)
 
     const renderFrame = (): void => {
@@ -146,22 +158,20 @@ async function loadModel(): Promise<void> {
       if (autoRotate.value && !dragging && model) model.rotation.y += 0.0025
       renderer.render(scene, modelCamera)
     }
-    renderer.setAnimationLoop(renderFrame)
-    // 缩略图模式：只画一帧就停。卡片场景要的是"看得见这是什么鱼"，
-    // 持续旋转既费电又会让图鉴列表变成一串不停重画的 canvas。
-    if (props.thumbnail) {
-      renderFrame()
-      renderer.setAnimationLoop(null)
-    }
+    renderCurrentFrame = renderFrame
     const ResizeObserverConstructor = Reflect.get(window, 'ResizeObserver') as
       (new (callback: ResizeObserverCallback) => ResizeObserver) | undefined
     if (ResizeObserverConstructor) {
-      observer = new ResizeObserverConstructor(resize)
-      observer.observe(host)
+      resizeObserver = new ResizeObserverConstructor(resize)
+      resizeObserver.observe(host)
     } else {
       window.addEventListener('resize', resize)
     }
+    // Size the drawing buffer before its first frame. setSize clears the canvas, so
+    // doing it after a static thumbnail's first draw would leave that card blank.
     resize()
+    if (props.thumbnail) renderer.setAnimationLoop(null)
+    else renderer.setAnimationLoop(renderFrame)
     canvasReady.value = true
     status.value = '3D 模型已加载'
   } catch {
@@ -170,16 +180,38 @@ async function loadModel(): Promise<void> {
   }
 }
 
-onMounted(() => { void loadModel() })
+onMounted(() => {
+  if (!props.thumbnail) {
+    void loadModel()
+    return
+  }
+
+  // 图鉴卡片列表可能包含很多未来接入的模型：只有快滚动到视口附近的缩略图才
+  // 创建 WebGL context / 下载 GLB，离屏卡片不占用 GPU 纹理和网络带宽。
+  if (typeof IntersectionObserver === 'undefined' || !stage.value) {
+    void loadModel()
+    return
+  }
+  visibilityObserver = new IntersectionObserver((entries) => {
+    if (entries.some((entry) => entry.isIntersecting)) {
+      visibilityObserver?.disconnect()
+      visibilityObserver = undefined
+      void loadModel()
+    }
+  }, { rootMargin: '120px' })
+  visibilityObserver.observe(stage.value)
+})
 onBeforeUnmount(() => {
   disposed = true
-  observer?.disconnect()
+  resizeObserver?.disconnect()
+  visibilityObserver?.disconnect()
   window.removeEventListener('resize', resize)
   if (renderer) {
     renderer.setAnimationLoop(null)
     if (model) disposeModel(model)
     renderer.dispose()
   }
+  renderCurrentFrame = undefined
   camera = undefined
 })
 </script>
@@ -190,7 +222,7 @@ onBeforeUnmount(() => {
   ]"
     data-testid="creature-model-viewer" :aria-label="`${name} 3D 示意模型`">
     <img class="creature-model__preview" :src="previewSrc" alt="" aria-hidden="true">
-    <p class="creature-model__status" role="status" aria-live="polite">{{ status }}</p>
+    <p v-if="!thumbnail" class="creature-model__status" role="status" aria-live="polite">{{ status }}</p>
     <div v-if="!thumbnail" class="creature-model__controls" aria-label="模型控制">
       <button type="button" :aria-pressed="autoRotate" @click="autoRotate = !autoRotate">
         {{ autoRotate ? '暂停旋转' : '自动旋转' }}
@@ -241,6 +273,7 @@ onBeforeUnmount(() => {
 .creature-model__hint { position: absolute; z-index: 2; bottom: .85rem; left: .75rem; margin: 0; color: #b9d6ea; font-size: .75rem; pointer-events: none; }
 @media (max-width: 480px) {
   .creature-model { min-height: 15rem; height: 58vh; max-height: 22rem; }
+  .creature-model--thumbnail { min-height: 0; height: min(46vw, 11rem); max-height: 11rem; }
   .creature-model__hint { bottom: 3.65rem; }
 }
 </style>

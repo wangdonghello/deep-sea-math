@@ -28,6 +28,8 @@ const props = defineProps<{
   remainingSeconds: number
   /** 是否提交中（等待 verify 返回）。 */
   submitting: boolean
+  /** 学生档案页 B 方案：仅使用系统数字键盘，不渲染圆点与屏幕键盘。 */
+  inputOnly?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -101,11 +103,13 @@ const dots = computed(() =>
         :value="value"
         :disabled="disabled || submitting"
         @input="onInput"
+        @keydown.enter.prevent="emit('submit')"
       />
     </label>
 
     <!-- 点数回显：只显示“输了几个”，绝不回显明文 PIN。 -->
     <div
+      v-if="!inputOnly"
       class="pin-pad__dots"
       :data-testid="'pin-dots'"
       :data-filled="value.length"
@@ -145,7 +149,18 @@ const dots = computed(() =>
       请等 {{ remainingSeconds }} 秒后再试
     </p>
 
-    <div class="pin-pad__keys">
+    <button
+      v-if="inputOnly"
+      type="button"
+      class="pin-pad__native-submit"
+      data-testid="pin-submit-native"
+      :disabled="disabled || value.length !== PIN_LENGTH || submitting"
+      @click="emit('submit')"
+    >
+      {{ submitting ? '正在验证…' : '进入探险' }}
+    </button>
+
+    <div v-else class="pin-pad__keys">
       <button
         v-for="key in keys"
         :key="key"
@@ -189,3 +204,33 @@ const dots = computed(() =>
     </div>
   </section>
 </template>
+
+<style scoped>
+.pin-pad { display: grid; gap: var(--ds-space-md); }
+.pin-pad__title { margin: 0; color: var(--ds-text-primary); text-align: center; font-size: var(--ds-font-size-body); }
+.pin-pad__field { display: grid; gap: var(--ds-space-xs); }
+.pin-pad__field-label { color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); }
+.pin-pad__input { width: 100%; min-height: 3.25rem; padding: 0 var(--ds-space-md); border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-md); background: #061426; color: var(--ds-text-primary); font: inherit; font-size: 1.15rem; letter-spacing: .18em; }
+.pin-pad__input:focus { outline: 2px solid var(--ds-glow-primary); outline-offset: 2px; }
+.pin-pad__dots { display: flex; justify-content: center; gap: var(--ds-space-md); }
+.pin-pad__dot { width: .75rem; height: .75rem; border: 1px solid var(--ds-glow-primary); border-radius: 50%; }
+.pin-pad__dot--filled { background: var(--ds-glow-primary); box-shadow: 0 0 10px var(--ds-glass-particle); }
+.pin-pad__keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--ds-space-sm); }
+.pin-pad__key { min-height: 2.9rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-sm); background: #12304b; color: var(--ds-text-primary); font: inherit; }
+.pin-pad__key--primary { border: 0; background: var(--ds-accent-gradient); color: var(--ds-on-accent); font-weight: 700; }
+.pin-pad__key--muted { color: var(--ds-text-muted); }
+.pin-pad__key:disabled { opacity: .45; }
+.pin-pad__message { margin: 0; text-align: center; }
+.pin-pad__native-submit {
+  width: 100%;
+  min-height: 3.25rem;
+  margin-top: var(--ds-space-md);
+  border: 0;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-accent-gradient);
+  color: var(--ds-on-accent);
+  font: inherit;
+  font-weight: 700;
+}
+.pin-pad__native-submit:disabled { opacity: .5; }
+</style>

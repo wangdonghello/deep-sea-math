@@ -4,6 +4,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { redact } from '@/shared/redact'
 import type { Question } from '@/domain/model/types'
 import AnswerExplanation from '@/features/quizStage/AnswerExplanation.vue'
+import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import HintStack from '@/features/quizStage/HintStack.vue'
 import StageHeader from '@/features/quizStage/StageHeader.vue'
 import QuizStage from '@/features/quizStage/QuizStage.vue'
@@ -129,21 +130,6 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
     <p v-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
       这一组完成啦，继续探索深海吧！
     </p>
-    <!--
-      完成态的出口。
-
-      此前这里只有一句"继续探索深海吧"——没有按钮意味着**死路**：孩子把一组
-      题做完，屏幕上没有任何可点的东西，只能靠浏览器返回或重新打开。按钮同样
-      走 emit（`go-home`），由路由封装翻译成 `router.push('/home')`，因此本视图
-      依旧不依赖 `vue-router`（design §4 组件边界）。
-    -->
-    <button
-      v-if="!question && !errorMessage && session.sessionCompleted.value"
-      type="button"
-      class="quest-back"
-      data-testid="quest-back-home"
-      @click="emit('go-home')"
-    >返回首页</button>
     <template v-else-if="!question && !errorMessage">
       <p v-if="session.practiceQuestionAvailable.value" data-testid="quest-incomplete">
         已看完题目，但直接看答案不计入任务完成，仍可继续作答完成任务。
@@ -156,13 +142,14 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
         @click="session.continuePractice"
       >继续练习</button>
     </template>
+    <!-- 题组中途和完成后均提供返回首页出口；进度已逐题写入事件日志。 -->
+    <BottomReturnButton test-id="quest-back-home" @back="emit('go-home')" />
   </main>
 </template>
 
 <style scoped>
-.quest-view { display: grid; gap: 1rem; max-width: 42rem; margin: 0 auto; padding: 1rem; }
+.quest-view { display: grid; gap: 1rem; max-width: 42rem; margin: 0 auto; padding: 1rem 1rem calc(5rem + env(safe-area-inset-bottom)); }
 .quest-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.75rem; }
-.quest-back { min-height: 3rem; margin-top: var(--ds-space-md); border: 1px solid var(--ds-glass-border); border-radius: 1rem; background: var(--ds-glass-surface); color: var(--ds-text-primary); font-weight: 700; }
 .quest-actions button { min-height: 3rem; border: 0; border-radius: 1rem; background: var(--color-accent, #ffb454); color: #162c48; font-weight: 700; }
 .quest-actions button[data-testid="action-hint"] { background: var(--color-panel, #17365b); color: var(--color-text, #fff); }
 [data-testid="quiz-feedback"] { color: var(--color-text, #fff); }

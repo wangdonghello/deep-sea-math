@@ -14,6 +14,7 @@ import { useRouter } from 'vue-router'
 
 import MistakeBookView from '@/views/MistakeBookView.vue'
 import { getProductionStores } from '@/app/productionStores'
+import { HOME_PATH } from '@/router/nextRoute'
 
 const router = useRouter()
 const stores = getProductionStores()
@@ -27,5 +28,6 @@ function onPractice(payload: { questionIds: string[]; similarQuestionIds: string
 </script>
 
 <template>
-  <MistakeBookView :store="stores.mistakes" :catalog="stores.mistakeCatalog" @practice="onPractice" />
+  <MistakeBookView :store="stores.mistakes" :catalog="stores.mistakeCatalog"
+    @practice="onPractice" @back-home="router.push(HOME_PATH)" />
 </template>

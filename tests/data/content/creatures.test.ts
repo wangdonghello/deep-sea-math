@@ -77,6 +77,7 @@ describe('creature content', () => {
     const johnson = bestiary.creatures.find((creature) => creature.id === 'johnson-anglerfish')!
     expect(johnson.model).toMatchObject({
       ref: 'deep-sea-fish-3dsm4',
+      creditSummary: 'Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0',
       license: 'CC BY 4.0',
       licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
       sourceUrl: 'https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55',

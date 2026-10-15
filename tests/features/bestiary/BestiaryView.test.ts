@@ -64,6 +64,17 @@ function store(events: readonly DomainEvent[]): BestiaryStore {
 }
 
 describe('BestiaryView', () => {
+  it('图鉴页提供底部固定的返回首页按钮并向路由层发出事件', async () => {
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
+    await flushPromises()
+
+    const back = view.get('[data-testid="page-return-home"]')
+    expect(back.text()).toContain('返回首页')
+    expect(back.classes()).toContain('bottom-return-button')
+    await back.trigger('click')
+    expect(view.emitted('back-home')).toEqual([[]])
+  })
+
   it('filters by each teaching zone using overlapping depth ranges', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
     await flushPromises()
@@ -123,6 +134,10 @@ describe('BestiaryView', () => {
     expect(card.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
     // 图鉴卡片与观察舱用同一份 3D 模型（缩略图模式），不再退回 2D 插画
     expect(card.find('[data-testid="creature-model-viewer"]').attributes('data-thumbnail')).toBe('true')
+    // 跨区物种不该被误读成"当前就在深渊区"：卡片明确列出所有重叠的教学区
+    expect(card.get('[data-testid="creature-zones"]').text()).toContain('暮光区')
+    expect(card.get('[data-testid="creature-zones"]').text()).toContain('深海区')
+    expect(card.get('[data-testid="creature-zones"]').text()).toContain('深渊区')
   })
 
   it('does not expose an unlock belonging to a different profile', async () => {
@@ -209,6 +224,15 @@ describe('BestiaryView', () => {
 })
 
 describe('ObservationView', () => {
+  it('观察舱有固定的返回首页出口', () => {
+    const view = mount(ObservationView, { props: { creature } })
+    const back = view.get('[data-testid="page-return-home"]')
+    expect(back.classes()).toContain('bottom-return-button')
+    expect(back.text()).toContain('返回首页')
+    back.trigger('click')
+    expect(view.emitted('back-home')).toEqual([[]])
+  })
+
   it('renders audited facts, 3–5 knowledge cards, sources, caveats, and licensed model attribution', async () => {
     const view = mount(ObservationView, { props: { creature } })
     await flushPromises()
@@ -257,6 +281,15 @@ describe('ObservationView', () => {
 })
 
 describe('MapView', () => {
+  it('地图页有固定的返回首页出口', async () => {
+    const view = mount(MapView, { props: { profileId: 'profile-a', store: store([]) } })
+    await flushPromises()
+    const back = view.get('[data-testid="page-return-home"]')
+    expect(back.classes()).toContain('bottom-return-button')
+    await back.trigger('click')
+    expect(view.emitted('back-home')).toEqual([[]])
+  })
+
   it('shows a loading status before rendering map data, then becomes ready', async () => {
     let resolveEvents!: (events: readonly DomainEvent[]) => void
     const pendingEvents = new Promise<readonly DomainEvent[]>((resolve) => { resolveEvents = resolve })
