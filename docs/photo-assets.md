@@ -31,9 +31,9 @@ docs/photo-assets.md             # 本文件：接入口径与来源清单
     补边后还会变成两条竖线。裁掉那两列即可。
 - 长边 ≥ 900、短边 ≥ 480（卡片最大约 320×224 CSS px，2 倍屏够用）。
 - 单张 **≤ 250 KB**（`tests/features/bestiary/photoArtwork.test.ts` 锁死）。
-  四张实拍合计约 230 KB，比一个 3D 模型小一个数量级。
+  四张实拍合计 236 KB，比一个 3D 模型小一个数量级。
 
-重编码用 `Pillow`：
+重编码用 `Pillow`（尺寸按上面的构图规则定，示例取 3:2）：
 
 ```python
 from PIL import Image
@@ -50,7 +50,7 @@ im.resize((960, 640), Image.LANCZOS).save(
 "photo": {
   "ref": "jewel-squid",
   "creditSummary": "NOAA 实拍 · CC0 1.0",
-  "attribution": "\"<素材标题>\" by <作者> (<素材页 URL>), CC0 1.0 (<许可 URL>). 本站版本仅做缩放与补边。",
+  "attribution": "\"<素材标题>\" by <作者> (<素材页 URL>), CC0 1.0 (<许可 URL>). 本站版本仅做裁剪与缩放。",
   "license": "CC0 1.0",
   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
   "sourceUrl": "https://commons.wikimedia.org/wiki/File:NOAA_Histioteuthis_sp.jpg",
