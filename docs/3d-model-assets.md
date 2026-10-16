@@ -3,6 +3,9 @@
 本文说明如何把一个**授权许可明确**的第三方 3D 模型接入观察舱。引入新模型前
 必须先取得许可文件；拿不到许可的模型不要放进 `public/`。
 
+图鉴与观察舱的**默认视觉是实拍影像**（见 `docs/photo-assets.md`），3D 模型是
+"点开才出现"的加分项：接入模型不会让页面默认多下载 2 MB。
+
 ## 1. 确认许可
 
 放进 `public/models/` 的模型必须满足：
@@ -76,30 +79,27 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 
 ## 5. 在哪里显示
 
-观察舱与图鉴卡片都显示 3D，但**模式不同**：
+观察舱在图鉴卡片之上多给一个切换入口（卡片只显示真实影像）：
 
 ```vue
-<!-- 观察舱：完整交互，持续旋转 -->
-<CreatureCanvas :creature="creature" :prefer-model="true" />
+<!-- 观察舱：默认真实影像，点按钮切成完整交互的 3D 模型 -->
+<CreatureCanvas :creature="creature" :allow-model="true" />
 
-<!-- 图鉴卡片：缩略图，单帧、无控制按钮、不可拖动 -->
-<CreatureCanvas :creature="creature" :prefer-model="true" :thumbnail="true" />
+<!-- 图鉴卡片：只显示影像与紧凑署名 -->
+<CreatureCanvas :creature="creature" :thumbnail="true" />
 ```
 
-- `prefer-model` 缺省为 `false` → 用轻量 2D 插画。地图、错题本等次要位置
+- `allow-model` 缺省为 `false` → 只显示真实影像。地图、错题本等次要位置
   不要打开它。
-- 卡片默认显示 `creditSummary`、来源页和许可证；完整 `attribution` 与修改说明
-  放在卡片内可展开的署名说明中（卡片空间有限，但作者和许可在默认态可见）。
-- `thumbnail` 只影响**要不要持续动**：图鉴列表会同时存在多张卡，每张都跑
-  渲染循环会让低端机的合成层持续满载；卡片要传达的只是"这是什么鱼"。
-  缩略图还通过 `IntersectionObserver` 延迟到接近视口时才建 WebGL context/下载
-  GLB，离屏卡片不占 GPU 纹理和网络带宽。
-- 两处必须用**同一份模型**——否则同一物种在卡片里和观察舱里长得不一样，
-  孩子会在图鉴里认不出刚看过的鱼。
+- 观察舱缺省显示影像，模型由孩子点「看 3D 模型」显式切出（切回即
+  「看真实照片」）；同一屏不同时跑 WebGL 和照片，低端机不吃亏。
+- 卡片不再显示 3D 缩略图（家长反馈深色缩略图"太丑、太抽象"）：4 张实拍合计
+  约 200 KB，比每个条目都建一次 WebGL context + 下载 GLB 便宜得多。
 - 渲染组件 `features/bestiary/CreatureModelViewer.vue` 按需懒加载
-  （`defineAsyncComponent`），Three.js 只在真正用到 3D 时才下载。
-- 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回原创
-  插画，`modelAttribution` 的署名与许可链接仍然显示（CC BY 要求不因降级而消失）。
+  （`defineAsyncComponent`），Three.js 只在真正切到 3D 时才下载。
+- 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回真实
+  影像并撤掉切换按钮；模型署名与许可链接只要模型在屏就显示
+  （CC BY 要求署名不因降级而消失，看到什么就署什么名）。
 
 ## 6. 接入后要跑
 

@@ -15,7 +15,7 @@
 | `profileSelect/` | 档案列表渲染、PIN 盘输入与锁定倒计时；`createProfileSelectStore` 把仓储适配成档案窄接口 | 不做 PIN 哈希/比对（属 `domain/crypto/`） |
 | `home/` | 首页地图主体（四区 + 深度刻度 + 潜水艇基地）、任务卡浮层、页签导航；`useHomeQuest` 编排"读设置 → 重放投影 → 定位当日题组" | 不做组题与判等（属 `domain/quiz/`） |
 | `quizStage/` | 单题作答舞台：五步引导渲染、提示栈、数字键盘、提交与订正编排（`useQuizSession`） | 不做五步合法性判定（属 `domain/quiz/fiveStepMachine`） |
-| `bestiary/` | 图鉴列表、四区筛选、观察舱插画与知识卡渲染（`useBestiary`） | 不做解锁判定（属 `domain/reward/`） |
+| `bestiary/` | 图鉴列表、四区筛选、观察舱实拍影像/授权 3D 模型与知识卡渲染（`useBestiary`） | 不做解锁判定（属 `domain/reward/`） |
 | `mistakeBook/` | 错题列表与按题型/掌握状态筛选（`filterMistakes` 为纯函数），进入重练携带相似题 | 不做判等与掌握度迁移（属 `domain/`） |
 | `parentPanel/` | 题量/时长设置、学习报告、PIN 重置、删除档案（`createParentStore` 适配存储门面） | 不做投影重放算法本身（属 `domain/eventLog/replay`） |
 | `unlock/` | 整组完成后的解锁浮层反馈（`useUnlockFeedback`） | 不做奖励计算（属 `domain/reward/`） |

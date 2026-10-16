@@ -13,14 +13,13 @@ const teachingZones = computed(() => ZONES.filter((zone) => overlapsZone(props.c
 <template>
   <article class="creature-card" :data-testid="`creature-card-${creature.id}`">
     <!--
-      图鉴卡片同样用 3D 模型（缩略图模式：单帧、无控制按钮）。
+      图鉴卡片一律显示该物种的真实影像。
 
-      此前卡片只显示 2D 示意插画，而观察舱用 3D —— 同一物种在两个页面长得不
-      一样，孩子会在图鉴里认不出刚在观察舱看过的鱼。改为同一份模型后两边一致；
-      缩略图模式关掉持续旋转与交互，是因为列表里同时存在多张卡，每张都跑渲染
-      循环会让低端机合成层持续满载。
+      卡片此前显示 3D 模型缩略图：家长直接反馈"图鉴的鱼太丑、太抽象"。照片既更好
+      认也更省电（4 张实拍共约 200 KB，而 WebGL 缩略图要加载 GLB + 建 context）。
+      3D 模型仍保留在观察舱，用"看 3D 模型"按钮切换。
     -->
-    <CreatureCanvas :creature="creature" :locked="!unlocked" :prefer-model="true" :thumbnail="true" />
+    <CreatureCanvas :creature="creature" :locked="!unlocked" :thumbnail="true" />
     <h2 v-if="unlocked">{{ creature.name }}</h2>
     <p v-if="unlocked" class="creature-card__zones" data-testid="creature-zones">
       可见于：{{ teachingZones.map((zone) => zone.name).join(' · ') }}

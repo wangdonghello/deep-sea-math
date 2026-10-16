@@ -24,8 +24,72 @@ describe('creature content', () => {
       expect(creature.knowledgeCards.length).toBeLessThanOrEqual(5)
       expect(creature.sources.length).toBeGreaterThan(0)
       expect(creature.bodySize.trim()).not.toBe('')
-      expect(creature.illustrationRef).toMatch(/^original-/)
+      expect(creature.photo.ref).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
     }
+  })
+
+  it('gives every species a licensed photograph with visible attribution', () => {
+    const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
+    const seen = new Set<string>()
+    for (const creature of bestiary.creatures) {
+      const photo = creature.photo
+      // 影像是家长明确要求的视觉口径：不允许悄悄退回示意插画
+      expect(photo, `${creature.id} 缺 photo`).toBeDefined()
+      expect(photo.note, `${creature.id} 的 note 必须说明影像实际内容`).toMatch(/真实影像/)
+      expect(`${photo.creditSummary}${photo.attribution}`).toMatch(/CC|公有领域/)
+      expect(photo.sourceUrl).toMatch(/^https:\/\//)
+      expect(photo.licenseUrl).toMatch(/^https:\/\//)
+      expect(photo.creditSummary.trim()).not.toBe('')
+      expect(seen.has(photo.ref), `影像键重复：${photo.ref}`).toBe(false)
+      seen.add(photo.ref)
+    }
+  })
+
+  it('flags the two images that are only identified to genus', () => {
+    const creatures = (readCreatures() as { creatures: Array<Record<string, any>> }).creatures
+    // 蜥鱼与鱿鱼只找得到属级实拍：孩子看到的并不一定是本页那个物种，必须写明
+    for (const id of ['deep-sea-lizardfish', 'jewel-squid']) {
+      const creature = creatures.find((item) => item.id === id)!
+      expect(creature.photo.note).toContain('只鉴定到属')
+      expect(creature.photo.note).toContain(creature.scientificName)
+    }
+    // 大鼬鳚与鮟鱇鱼的影像与学名可对应；鮟鱇鱼是馆藏照，不能写成水下活体
+    const cusk = creatures.find((item) => item.id === 'giant-cusk-eel')!
+    expect(cusk.photo.note).toContain('Spectrunculus grandis')
+    const anglerfish = creatures.find((item) => item.id === 'johnson-anglerfish')!
+    expect(anglerfish.photo.note).toContain('Melanocetus johnsonii')
+    expect(anglerfish.photo.note).toContain('不是水下活体拍摄')
+    expect(anglerfish.photo.license).toBe('CC BY-SA 4.0')
+    expect(anglerfish.photo.attribution).toContain('Fernando Losada Rodríguez')
+  })
+
+  it('rejects photos without attribution or with an insecure licence link', () => {
+    const bestiary = readCreatures() as { version: string; creatures: Array<Record<string, any>> }
+    const missingPhoto = structuredClone(bestiary)
+    delete missingPhoto.creatures[0].photo
+    expect(() => assertValidCreatures(missingPhoto)).toThrow(/photo.*expected an object/i)
+
+    const unsafeRef = structuredClone(bestiary)
+    unsafeRef.creatures[0].photo.ref = '../private/photo'
+    expect(() => assertValidCreatures(unsafeRef)).toThrow(/photo\.ref.*safe/i)
+
+    const blankAttribution = structuredClone(bestiary)
+    blankAttribution.creatures[0].photo.attribution = '  '
+    expect(() => assertValidCreatures(blankAttribution)).toThrow(/photo\.attribution.*non-empty/i)
+
+    const unnamedLicence = structuredClone(bestiary)
+    unnamedLicence.creatures[0].photo.creditSummary = '图片来自网上'
+    unnamedLicence.creatures[0].photo.attribution = '图片来自网上'
+    unnamedLicence.creatures[0].photo.license = '未标注'
+    expect(() => assertValidCreatures(unnamedLicence)).toThrow(/name the licence/i)
+
+    const insecureSource = structuredClone(bestiary)
+    insecureSource.creatures[0].photo.sourceUrl = 'http://commons.wikimedia.org/wiki/File:X.jpg'
+    expect(() => assertValidCreatures(insecureSource)).toThrow(/photo\.sourceUrl.*HTTPS/i)
+
+    const insecureLicence = structuredClone(bestiary)
+    insecureLicence.creatures[0].photo.licenseUrl = 'http://creativecommons.org/licenses/by-sa/4.0/'
+    expect(() => assertValidCreatures(insecureLicence)).toThrow(/photo\.licenseUrl.*HTTPS/i)
   })
 
   it('includes size records with their original measurement basis and direct species citations', () => {

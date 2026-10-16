@@ -9,22 +9,39 @@ const CreatureModelViewer = defineAsyncComponent(() =>
 const props = defineProps<{
   creature: CreatureContent
   locked?: boolean
-  /** 显示 3D 模型（而非 2D 插画）；仅观察舱与图鉴卡片置 true。 */
-  preferModel?: boolean
-  /** 图鉴卡片用的缩略图模式：单帧、无控制按钮、不可拖动。 */
+  /**
+   * 允许在影像与授权 3D 模型之间切换；只有观察舱打开。
+   *
+   * 缺省（图鉴卡片、地图）只显示真实影像：卡片的职责是"这是什么鱼"，照片比
+   * 深色 3D 缩略图更省电也更好认。
+   */
+  allowModel?: boolean
+  /** 紧凑署名：默认只显示短署名，完整授权收进可展开说明。 */
   thumbnail?: boolean
 }>()
 const failed = ref(false)
 const modelFailed = ref(false)
 const zoomed = ref(false)
-const imageSource = computed(() => `${import.meta.env.BASE_URL}illustrations/${props.creature.illustrationRef ?? 'missing'}.svg`)
-const showModel = computed(() => props.preferModel === true && props.creature.model !== undefined && !modelFailed.value)
-const modelAttribution = computed(() => props.preferModel === true && !props.locked ? props.creature.model : undefined)
+const mode = ref<'photo' | 'model'>('photo')
+const photoSource = computed(() => `${import.meta.env.BASE_URL}photos/${props.creature.photo.ref}.jpg`)
+const hasModel = computed(() => props.creature.model !== undefined && !modelFailed.value)
+const canSwitchModel = computed(() => props.allowModel === true && !props.locked && hasModel.value)
+const showModel = computed(() => canSwitchModel.value && mode.value === 'model')
+const model = computed(() => (showModel.value ? props.creature.model : undefined))
 
-watch(() => props.creature.id, () => { failed.value = false; modelFailed.value = false; zoomed.value = false })
+watch(() => props.creature.id, () => {
+  failed.value = false
+  modelFailed.value = false
+  zoomed.value = false
+  mode.value = 'photo'
+})
 
 function toggleZoom(): void {
   zoomed.value = !zoomed.value
+}
+
+function toggleMode(): void {
+  mode.value = showModel.value ? 'photo' : 'model'
 }
 
 function onError(): void {
@@ -40,39 +57,56 @@ function onError(): void {
       </svg>
     </div>
     <div v-else-if="showModel && creature.model" class="creature-canvas__model">
-      <CreatureModelViewer :asset="creature.model" :name="creature.name" :preview-src="imageSource"
-        :thumbnail="props.thumbnail" @error="modelFailed = true" />
+      <CreatureModelViewer :asset="creature.model" :name="creature.name" :preview-src="photoSource"
+        @error="modelFailed = true" />
     </div>
     <div v-else class="creature-canvas__art">
-      <img v-if="!failed" :src="imageSource" :alt="creature.name" data-testid="creature-illustration"
+      <img v-if="!failed" :src="photoSource" :alt="`${creature.name}真实影像`"
+        data-testid="creature-photo" loading="lazy" decoding="async"
         :data-scale="zoomed ? 1.5 : 1" :style="{ transform: `scale(${zoomed ? 1.5 : 1})` }"
         @dblclick="toggleZoom" @error="onError" />
-      <p v-else data-testid="illustration-fallback">{{ creature.name }}的原创示意插画暂不可用</p>
+      <p v-else data-testid="photo-fallback">{{ creature.name }}的真实影像暂不可用</p>
     </div>
-    <button v-if="!locked && !showModel" type="button" data-testid="creature-zoom-toggle"
-      :aria-label="zoomed ? '还原插画' : '放大插画'" @click="toggleZoom">
-      {{ zoomed ? '还原' : '放大' }}
-    </button>
-    <figcaption v-if="modelAttribution" class="creature-canvas__model-credit" data-testid="model-attribution">
-      <span>{{ modelAttribution.note }}</span>
-      <template v-if="thumbnail">
-        <span>授权 3D 模型 · {{ modelAttribution.license }}</span>
-        <details class="creature-canvas__credit-details">
-          <summary data-testid="model-credit-summary">{{ modelAttribution.creditSummary }} · 查看修改说明</summary>
-          <span data-testid="model-full-attribution">{{ modelAttribution.attribution }}</span>
-        </details>
-      </template>
-      <template v-else>
-        <span>{{ modelAttribution.attribution }}</span>
-        <span>来源：<a data-testid="model-source-link" :href="modelAttribution.sourceUrl"
+    <div v-if="!locked" class="creature-canvas__controls">
+      <button v-if="canSwitchModel" type="button" data-testid="creature-model-toggle"
+        :aria-pressed="showModel" @click="toggleMode">
+        {{ showModel ? '看真实照片' : '看 3D 模型' }}
+      </button>
+      <button v-if="!showModel" type="button" data-testid="creature-zoom-toggle"
+        :aria-label="zoomed ? '还原影像' : '放大影像'" @click="toggleZoom">
+        {{ zoomed ? '还原' : '放大' }}
+      </button>
+    </div>
+    <figcaption v-if="!locked" class="creature-canvas__credit">
+      <!-- 3D 模型与影像各自署名：CC BY / CC BY-SA 要求署名随作品一起出现。 -->
+      <div v-if="model" data-testid="model-attribution">
+        <span>{{ model.note }}</span>
+        <span>{{ model.attribution }}</span>
+        <span>来源：<a data-testid="model-source-link" :href="model.sourceUrl"
           target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
+        <span>许可：<a data-testid="model-license-link" :href="model.licenseUrl"
+          target="_blank" rel="noopener noreferrer">{{ model.license }}</a></span>
+      </div>
+      <template v-else>
+        <div data-testid="photo-attribution">
+          <span>{{ creature.photo.note }}</span>
+          <template v-if="thumbnail">
+            <span>影像授权 · {{ creature.photo.creditSummary }}</span>
+            <details class="creature-canvas__credit-details">
+              <summary data-testid="photo-credit-summary">查看完整署名与许可</summary>
+              <span data-testid="photo-full-attribution">{{ creature.photo.attribution }}</span>
+            </details>
+          </template>
+          <template v-else>
+            <span>{{ creature.photo.attribution }}</span>
+          </template>
+          <span>来源：<a data-testid="photo-source-link" :href="creature.photo.sourceUrl"
+            target="_blank" rel="noopener noreferrer">影像素材页</a></span>
+          <span>许可：<a data-testid="photo-license-link" :href="creature.photo.licenseUrl"
+            target="_blank" rel="noopener noreferrer">{{ creature.photo.license }}</a></span>
+        </div>
       </template>
-      <span v-if="thumbnail">来源：<a data-testid="model-source-link" :href="modelAttribution.sourceUrl"
-        target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
-      <span>许可：<a data-testid="model-license-link" :href="modelAttribution.licenseUrl"
-        target="_blank" rel="noopener noreferrer">{{ modelAttribution.license }}</a></span>
     </figcaption>
-    <figcaption v-else-if="!locked">{{ creature.illustrationLabel }}</figcaption>
     <slot />
   </figure>
 </template>
@@ -81,12 +115,14 @@ function onError(): void {
 .creature-canvas { margin: 0; text-align: center; }
 .creature-canvas__art, .creature-canvas__silhouette { min-height: 10rem; display: grid; place-items: center; }
 .creature-canvas__art { overflow: hidden; }
-.creature-canvas__art img { width: min(100%, 20rem); max-height: 14rem; object-fit: contain; transition: transform .2s ease; }
+.creature-canvas__art img { width: min(100%, 22rem); max-height: 15rem; object-fit: contain; border-radius: var(--ds-radius-sm); transition: transform .2s ease; }
 .creature-canvas__model { width: 100%; }
-.creature-canvas__model-credit { display: grid; gap: .35rem; margin-top: .75rem; font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
-.creature-canvas__model-credit a { color: var(--ds-text-secondary); }
+.creature-canvas__credit { display: grid; gap: .35rem; margin-top: .75rem; font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
+.creature-canvas__credit > div { display: grid; gap: .35rem; }
+.creature-canvas__credit a { color: var(--ds-text-secondary); }
 .creature-canvas__credit-details { text-align: left; }
 .creature-canvas__credit-details summary { color: var(--ds-text-secondary); cursor: pointer; }
+.creature-canvas__controls { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: .75rem; }
 .creature-canvas button { min-height: 2.75rem; }
 .creature-canvas__silhouette { color: var(--ds-bg-deep); background: var(--ds-glass-surface); }
 .creature-canvas__silhouette svg { width: min(100%, 18rem); fill: currentColor; }

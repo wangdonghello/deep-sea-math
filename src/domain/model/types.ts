@@ -270,8 +270,6 @@ export interface BestiaryEntry {
   knowledgeCards: string[]
   /** 可追溯的来源链接，MUST NOT 为空。 */
   sources: string[]
-  /** 原创 2D 插画素材键。 */
-  illustrationRef?: string
 }
 
 /**

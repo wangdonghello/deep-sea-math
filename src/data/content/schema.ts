@@ -67,11 +67,32 @@ export interface CreatureModelAsset {
   note: string
 }
 
-/** Creature content adds mandatory visual disclaimers and optional licensed 3D media. */
+/**
+ * A locally hosted photograph of the animal, with mandatory attribution.
+ *
+ * 每个条目必须有一张许可明确的水下实拍或馆藏影像：家长明确不要示意插画。
+ * `note` 必须写清影像**实际是什么**（活体/标本/模型，以及鉴定到属还是种），
+ * 因为图鉴只拿得到属级实拍时，孩子看到的并不一定是本页那个物种。
+ */
+export interface CreaturePhotoAsset {
+  /** Safe filename stem resolved under the application base URL in public/photos. */
+  ref: string
+  /** Compact visible credit for dense contexts (e.g. gallery cards). */
+  creditSummary: string
+  /** Full credit sentence required by the licence (CC BY / CC BY-SA 强制署名). */
+  attribution: string
+  license: string
+  licenseUrl: string
+  sourceUrl: string
+  /** What the image actually depicts, including any identification caveat. */
+  note: string
+}
+
+/** Creature content pairs the species facts with licensed imagery and optional 3D media. */
 export interface CreatureContent extends BestiaryEntry {
   /** Maximum body measurement; preserve total length (TL), standard length (SL), or mantle length (ML) and never conflate bases. */
   bodySize: string
-  illustrationLabel: '原创示意插画，非真实影像'
+  photo: CreaturePhotoAsset
   model?: CreatureModelAsset
 }
 
@@ -428,11 +449,19 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
     if (!hasSpeciesScopedSource(sources)) {
       throw new Error(`${path}.sources: expected a species-scoped or species-specific source`)
     }
-    if (typeof creature.illustrationRef !== 'string' || !/^original-[a-z0-9-]+$/.test(creature.illustrationRef)) {
-      throw new Error(`${path}.illustrationRef: expected an original-* placeholder key`)
+    const photo = record(creature.photo, `${path}.photo`)
+    if (typeof photo.ref !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(photo.ref)) {
+      throw new Error(`${path}.photo.ref: expected a safe lowercase asset key`)
     }
-    if (creature.illustrationLabel !== '原创示意插画，非真实影像') {
-      throw new Error(`${path}.illustrationLabel: expected the original-illustration disclaimer`)
+    const creditSummary = nonEmptyString(photo.creditSummary, `${path}.photo.creditSummary`)
+    const attribution = nonEmptyString(photo.attribution, `${path}.photo.attribution`)
+    const license = nonEmptyString(photo.license, `${path}.photo.license`)
+    nonEmptyString(photo.note, `${path}.photo.note`)
+    secureHttpsUrl(photo.sourceUrl, `${path}.photo.sourceUrl`)
+    secureHttpsUrl(photo.licenseUrl, `${path}.photo.licenseUrl`)
+    // 署名必须真的写出被署名方与许可口径；"来源见图"这类空话等于没有署名。
+    if (!/(CC|公有领域|public domain)/i.test(`${creditSummary}${attribution}${license}`)) {
+      throw new Error(`${path}.photo: attribution must name the licence, e.g. CC BY 4.0 or 公有领域`)
     }
     if (creature.model !== undefined) {
       const model = record(creature.model, `${path}.model`)

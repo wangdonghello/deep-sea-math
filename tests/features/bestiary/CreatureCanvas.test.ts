@@ -16,14 +16,14 @@ describe('CreatureCanvas', () => {
 
     await view.get('img').trigger('error')
 
-    expect(view.find('[data-testid="illustration-fallback"]').exists()).toBe(true)
+    expect(view.find('[data-testid="photo-fallback"]').exists()).toBe(true)
     expect(view.find('[data-testid="knowledge-card-list"]').exists()).toBe(true)
     expect(view.text()).toContain(creature.knowledgeCards[0])
   })
 
   it('zooms in and back out with the accessible button and double-click', async () => {
     const view = mount(CreatureCanvas, { props: { creature: CREATURE_BANK.creatures[0] } })
-    const image = view.get('[data-testid="creature-illustration"]')
+    const image = view.get('[data-testid="creature-photo"]')
     const zoomButton = view.get('[data-testid="creature-zoom-toggle"]')
 
     expect(image.attributes('data-scale')).toBe('1')
@@ -39,8 +39,30 @@ describe('CreatureCanvas', () => {
     expect(image.attributes('data-scale')).toBe('1')
   })
 
-  it('shows the original illustration disclaimer without claiming 3D is unavailable', () => {
+  it('serves the species photo and states what the image really shows', () => {
+    const creature = CREATURE_BANK.creatures[0]
+    const view = mount(CreatureCanvas, { props: { creature } })
+
+    expect(view.get('[data-testid="creature-photo"]').attributes('src'))
+      .toContain(`photos/${creature.photo.ref}.jpg`)
+    expect(view.get('[data-testid="photo-attribution"]').text()).toContain(creature.photo.note)
+    expect(view.get('[data-testid="photo-attribution"]').text()).toContain(creature.photo.attribution)
+    expect(view.get('[data-testid="photo-source-link"]').attributes('href')).toBe(creature.photo.sourceUrl)
+    expect(view.get('[data-testid="photo-license-link"]').attributes('href')).toBe(creature.photo.licenseUrl)
+    // 影像加载慢时不要让整页的其它卡片一起等
+    expect(view.get('[data-testid="creature-photo"]').attributes('loading')).toBe('lazy')
+  })
+
+  it('does not offer the 3D model unless the observation cabin opts in', () => {
     const view = mount(CreatureCanvas, { props: { creature: CREATURE_BANK.creatures[0] } })
-    expect(view.get('figcaption').text()).toBe('原创示意插画，非真实影像')
+    expect(view.find('[data-testid="creature-model-toggle"]').exists()).toBe(false)
+  })
+
+  it('hides every visual and credit block for locked creatures', () => {
+    const view = mount(CreatureCanvas, { props: { creature: CREATURE_BANK.creatures[0], locked: true } })
+
+    expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
+    expect(view.find('[data-testid="creature-photo"]').exists()).toBe(false)
+    expect(view.find('figcaption').exists()).toBe(false)
   })
 })

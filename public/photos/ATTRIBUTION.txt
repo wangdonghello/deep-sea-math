@@ -1,0 +1,40 @@
+深海数学 · 图鉴与观察舱影像素材的署名与许可
+==================================================
+
+本站图鉴与观察舱里的每一张真实影像都来自许可明确的公开素材，署名与许可如下。
+"改动"一栏说明本站相对原始素材做了什么（裁剪、缩放、补边、压缩）。
+
+1. johnson-anglerfish.jpg —— 约翰逊鮟鱇鱼（Melanocetus johnsonii）
+   原始素材: "Melanocetus johnsonii (Black seadevil) in the Natural History Museum of London"
+   作者:     Fernando Losada Rodríguez
+   素材页:   https://commons.wikimedia.org/wiki/File:Melanocetus_johnsonii.001_-_Natural_History_Museum_of_London.JPG
+   许可:     CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+   改动:     居中裁剪为 3:2，缩放至 960×640，JPEG 压缩
+   说明:     博物馆馆藏展示照，非水下活体拍摄。
+   注意:     本站这张裁剪版本按 CC BY-SA 4.0 提供（同许可要求）。
+
+2. giant-cusk-eel.jpg —— 深海大鼬鳚（Spectrunculus grandis）
+   原始素材: "Giant cusk eel (Spectrunculus grandis) on the Davidson Seamount at 3288 meters"
+   作者:     NOAA / MBARI
+   素材页:   https://commons.wikimedia.org/wiki/File:Spectrunculus_grandis.jpg
+   许可:     公有领域（美国政府作品，PD-USGov-NOAA）
+             https://commons.wikimedia.org/wiki/Template:PD-USGov-NOAA
+   改动:     居中裁剪为 3:2，缩放至 960×640，JPEG 压缩
+   说明:     遥控潜水器在 3,288 米水深拍摄的活体。
+
+3. deep-sea-lizardfish.jpg —— 深海蜥鱼（Bathysaurus ferox）
+   原始素材: "Deep sea fish. A bathysaurus."
+   作者:     NOAA Photo Library
+   素材页:   https://commons.wikimedia.org/wiki/File:Expl9674_(14482341086).jpg
+   许可:     公有领域（美国政府作品，PD-NOAA）
+             https://commons.wikimedia.org/wiki/Template:PD-NOAA
+   改动:     缩放至 960×540（保留原始 16:9，避免切掉头部或尾尖），JPEG 压缩
+   说明:     属级鉴定（Bathysaurus sp.），未必是 Bathysaurus ferox。
+
+4. jewel-squid.jpg —— 宝石鱿鱼（Histioteuthis bonnellii）
+   原始素材: "A deep sea squid from the genus Histioteuthis, the cock-eyed squids"
+   作者:     NOAA
+   素材页:   https://commons.wikimedia.org/wiki/File:NOAA_Histioteuthis_sp.jpg
+   许可:     CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
+   改动:     等比缩放至 721×982（保留竖构图，不补边），裁掉原图左右各 1 列亮边，JPEG 压缩
+   说明:     属级鉴定（Histioteuthis sp.），未必是 Histioteuthis bonnellii。

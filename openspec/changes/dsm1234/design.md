@@ -7,7 +7,7 @@
 
 **Triggered HARD_RULEs**:
 - 安全与合规底线 §1 密钥与凭据 (AGENTS.md:18)：PIN 属于验证凭据，禁止明文存储/输出；无任何 AK/SK/token 落入客户端或日志
-- 安全与合规底线 §5 越权命令 (AGENTS.md:22)：不得产生 `rm -rf /`、`git push --force` 到 main、`drop database` 等操作
+- 安全与合规底线 §5 越权命令 (AGENTS.md:22)：不得产生 `rm -rf /`、强制推送到 main、`drop database` 等操作
 - 提交规范 (AGENTS.md:24)：所有 commit 必须 `[DSM1234] <type>: <subject>` 格式
 - PreToolUse 强制 (AGENTS.md:28)：写文件前已自查硬编码凭据 / `.env` 直编 / 破坏性命令
 
@@ -20,7 +20,7 @@
 
 **Compliance Plan**:
 - PIN 安全：`crypto.subtle.digest('SHA-256', pin + per-profile salt)` 存储哈希，只比对哈希；日志经 `redact()` 脱敏工具统一处理，单测断言日志不含 PIN
-- 越权命令：任务清单中不包含任何删除数据库/强制推送类操作；`git push --force` 由 pre-push hook 阻断
+- 越权命令：任务清单中不包含任何删除数据库/强制推送类操作；对受保护分支的强制推送由 pre-push hook 阻断
 - 提交规范：tasks.md 中每个 task 的 commit message 已预填 `[DSM1234] <type>: T<n> - <subject>` 格式
 - 阶段链：本次已完成 `/sdd-spec`（commit `[DSM1234] spec: ring 1 freeze`），当前处于 `/sdd-plan`
 - 公共 API 文档注释：`domain/*.ts` 一律 JSDoc + `@throws` 标注；`src/README.md` 说明各层职责
@@ -126,7 +126,7 @@ type Question = {
 | `ProfileSelectView` | 选档案 + PIN 校验 | `ProfileCard`, `PinPad` |
 | `HomeView` | 地图主体 + 任务卡浮层（已定方案 A） | `MapPanel`, `QuestCard`, `DepthScale`, `FishBackdrop`, `TabBar` |
 | `QuestView` | 答题 + 五步 + 提示 | `StageHeader`, `QuizStage`, `FiveStepBar`, `StepBody`, `HintStack`, `Numpad` |
-| `ObservationView` | 观察舱：2D 插画 + 知识卡 | `CreatureCanvas`, `KnowledgeCardList`, `SourceNote` |
+| `ObservationView` | 观察舱：真实影像 + 授权 3D 模型（按需切换）+ 知识卡 | `CreatureCanvas`, `KnowledgeCardList`, `SourceNote` |
 | `BestiaryView` | 图鉴列表 + 四区筛选 | `BestiaryList`, `CreatureRow` |
 | `MapView` | 四区地图 + 深度进度 | `ZoneMap`, `DepthMarker` |
 | `MistakeBookView` | 按题型/掌握状态查错题 + 重练 | `MistakeList`, `MistakeFilter` |
@@ -140,7 +140,7 @@ type Question = {
 | 异常 | 处理 | 规格依据 |
 |---|---|---|
 | IndexedDB 不可用 | 切 `memoryFallback`，家长区常驻警示条 | offline-event-log §存储降级 |
-| 插画加载失败 | 文字占位 + 知识卡照常，不阻塞解锁 | creature-bestiary §观察舱 |
+| 影像加载失败 | 文字占位 + 知识卡照常，不阻塞解锁 | creature-bestiary §观察舱 |
 | 高清题目池不足 | 相邻档位补齐 + `difficultyFallback` 事件 | daily-math-quest §难度覆盖 |
 | PIN 连续错 5 次 | 锁定 60s，倒计时提示，不报具体错因 | child-profiles §PIN 切换 |
 | 事件重放冲突 | 只追加不修改，重复写入按 eventId 去重 | offline-event-log §ID 幂等 |
