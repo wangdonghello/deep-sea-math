@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import CreatureCard from '@/features/bestiary/CreatureCard.vue'
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { overlapsZone } from '@/features/bestiary/zoneFilter'
 import { useBestiary } from '@/features/bestiary/useBestiary'
 import type { BestiaryStore } from '@/features/bestiary/types'
-import { ZONES } from '@/features/home/zones'
+import { BASE_ZONE, ZONES } from '@/features/home/zones'
 
 const props = defineProps<{ profileId: string | null; store: BestiaryStore }>()
 const emit = defineEmits<{
@@ -13,7 +13,37 @@ const emit = defineEmits<{
   (event: 'back-home'): void
 }>()
 const bestiary = useBestiary({ profileId: computed(() => props.profileId), store: props.store })
+
+/**
+ * 当前筛选的教学区；`null` 表示「全部」。
+ *
+ * 默认值不再是「全部」：孩子解锁暮光区后进来只看得到暮光区的记录，解锁深海区
+ * 后列表会真的多出深海区物种。此前固定停在「全部」，四个区永远显示同一批卡，
+ * 孩子把暮光区和深海区看成"一模一样"。
+ */
 const activeZoneId = ref<string | null>(null)
+
+/**
+ * 默认只应用**一次**（每个档案一次）。
+ *
+ * 孩子手动点「全部」之后，解锁事件再变化也不该把他踢回某个区——筛选是孩子的
+ * 显式选择，默认只是"他还没选时的起点"。档案一换就重新允许应用一次。
+ */
+let zoneDefaultApplied = false
+
+watch(() => props.profileId, () => {
+  zoneDefaultApplied = false
+  activeZoneId.value = null
+})
+
+watch(() => bestiary.currentZoneId.value, (zoneId) => {
+  if (zoneDefaultApplied || zoneId === null) return
+  zoneDefaultApplied = true
+  // 还没有任何区域解锁（停在潜水艇基地）时退回「全部」：让新档案看到完整的
+  // 待解锁剪影，而不是一个空列表。
+  activeZoneId.value = zoneId === BASE_ZONE.id ? null : zoneId
+})
+
 const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) => {
   const zone = ZONES.find((entry) => entry.id === activeZoneId.value)
   return zone === undefined || overlapsZone(creature, zone)

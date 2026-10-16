@@ -1,4 +1,4 @@
-import { flushPromises, mount } from '@vue/test-utils'
+import { flushPromises, mount, type VueWrapper } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
 
@@ -220,6 +220,90 @@ describe('BestiaryView', () => {
 
     expect(view.find('[data-testid="bestiary-error"]').exists()).toBe(true)
     expect(view.text()).not.toContain('private storage path')
+  })
+})
+
+describe('BestiaryView 默认教学区', () => {
+  /** 区域解锁事件（`zone:<id>` 投影的来源）。 */
+  function zoneUnlock(targetId: string, occurredAt = 1): DomainEvent {
+    return {
+      eventId: `unlock-zone-${targetId}`, profileId: 'profile-a', occurredAt,
+      type: 'unlock-granted', kind: 'zone', targetId, reason: 'quest-1',
+    }
+  }
+
+  /** 当前列出的物种 id（按 DOM 顺序）。 */
+  function shownIds(view: VueWrapper): (string | undefined)[] {
+    return view.findAll('[data-testid^="creature-card-"]')
+      .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
+  }
+
+  const press = (view: VueWrapper, label: string): string | undefined =>
+    view.get(`button[aria-label="${label}"]`).attributes('aria-pressed')
+
+  it('未解锁任何区域时默认列出全部，新档案不会看到空页', async () => {
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
+    await flushPromises()
+
+    expect(press(view, '筛选全部区域')).toBe('true')
+    expect(shownIds(view)).toEqual(CREATURE_BANK.creatures.map((entry) => entry.id))
+  })
+
+  it('默认定位到当前所在区，并把该区的筛选按钮置为按下', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
+    })
+    await flushPromises()
+
+    expect(press(view, '筛选暮光区')).toBe('true')
+    expect(press(view, '筛选全部区域')).toBe('false')
+    expect(shownIds(view)).toEqual(CREATURE_BANK.creatures
+      .filter((entry) => overlapsZone(entry, ZONES[0]))
+      .map((entry) => entry.id))
+  })
+
+  it('解锁更深区域后默认跟着下潜，列表新增该区物种（两区不再一模一样）', async () => {
+    const twilight = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
+    })
+    await flushPromises()
+    const deepSea = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight'), zoneUnlock('midnight', 2)]) },
+    })
+    await flushPromises()
+
+    expect(press(deepSea, '筛选深海区')).toBe('true')
+    // 深海大鼬鳚的记录深度（约 2,000–4,300 米）不进入暮光区，所以只在深海区出现
+    expect(shownIds(deepSea)).toContain('giant-cusk-eel')
+    expect(shownIds(twilight)).not.toContain('giant-cusk-eel')
+    expect(shownIds(deepSea)).not.toEqual(shownIds(twilight))
+  })
+
+  it('手动选择「全部」后不会被自动默认覆盖', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
+    })
+    await flushPromises()
+
+    await view.get('button[aria-label="筛选全部区域"]').trigger('click')
+    await flushPromises()
+
+    expect(press(view, '筛选全部区域')).toBe('true')
+    expect(shownIds(view)).toEqual(CREATURE_BANK.creatures.map((entry) => entry.id))
+  })
+
+  it('切换档案后按新档案的区域重新应用默认', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
+    })
+    await flushPromises()
+    expect(press(view, '筛选暮光区')).toBe('true')
+
+    await view.setProps({ profileId: 'profile-b' })
+    await flushPromises()
+
+    // profile-b 没有任何解锁 → 回到「全部」，而不是停在上一档案的暮光区
+    expect(press(view, '筛选全部区域')).toBe('true')
   })
 })
 

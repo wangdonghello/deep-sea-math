@@ -1,7 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img">
   <title>约翰逊鮟鱇鱼原创示意插画</title>
-  <path d="M35 85c24-38 95-48 145-8l28-24-5 35 5 34-30-20C128 141 62 124 35 85Z" fill="#4dd8e8" stroke="#d7fbff" stroke-width="5"/>
-  <path d="M105 49c-3-25 7-37 24-39 11 11 8 24-3 36" fill="none" stroke="#d7fbff" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="128" cy="10" r="8" fill="#c1fb83"/><circle cx="78" cy="75" r="5" fill="#06263c"/>
-  <path d="M87 108c21 7 40 7 57 0" fill="none" stroke="#06263c" stroke-width="4" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="ja-body" x1="0.15" y1="0" x2="0.45" y2="1">
+      <stop offset="0" stop-color="#9df6ff"/>
+      <stop offset="0.42" stop-color="#3fb2dd"/>
+      <stop offset="1" stop-color="#0c4569"/>
+    </linearGradient>
+    <linearGradient id="ja-fin" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#c9fbff"/>
+      <stop offset="1" stop-color="#2a7ba3"/>
+    </linearGradient>
+    <radialGradient id="ja-esca" cx="0.42" cy="0.38" r="0.62">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#e2ff9e"/>
+      <stop offset="1" stop-color="#5cc133"/>
+    </radialGradient>
+    <radialGradient id="ja-halo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#d9ff8a" stop-opacity="0.8"/>
+      <stop offset="0.55" stop-color="#a8ef66" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#8ce04f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ja-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f2ffc4" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#a8ef66" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 诱饵的光晕 -->
+  <circle cx="76" cy="24" r="30" fill="url(#ja-halo)"/>
+
+  <!-- 尾鳍 -->
+  <path d="M206 88c12-8 22-16 28-24-1 12 0 22 4 32-8 0-16-2-22-6Z" fill="url(#ja-fin)" stroke="#e6ffff" stroke-width="3" stroke-linejoin="round"/>
+  <!-- 背鳍 -->
+  <path d="M160 34c10-14 26-20 40-18-8 10-18 20-30 26Z" fill="url(#ja-fin)" stroke="#e6ffff" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- 身体 -->
+  <path d="M44 74c20-28 58-44 96-42 44 2 73 26 75 56 2 24-17 42-53 48-40 6-84-6-106-24-6-5-8-12-8-18Z" fill="url(#ja-body)" stroke="#e6ffff" stroke-width="3.5" stroke-linejoin="round"/>
+
+  <!-- 腹部反光 -->
+  <path d="M74 112c34 16 76 20 112 10" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- 口腔（张口朝左的深色楔形） -->
+  <path d="M138 88 44 72 52 108Z" fill="#0a1c2f"/>
+  <path d="M54 104c18-4 48-12 80-16" fill="none" stroke="#6d2846" stroke-opacity="0.5" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- 上颌獠牙（向下） -->
+  <path d="M56 72.3 64 73.5 60 84Z M76 75.6 84 76.8 80 87Z M96 78.9 104 80.1 100 90Z M114 81.8 122 83 118 93Z" fill="#f4ffff"/>
+  <!-- 下颌獠牙（向上） -->
+  <path d="M68 104.6 76 103.6 72 93Z M88 99.3 96 98.3 92 88Z M108 93.9 116 92.9 112 83Z" fill="#f4ffff"/>
+
+  <!-- 鳃缝 -->
+  <path d="M156 52c-11 18-11 44 1 64" fill="none" stroke="#06263c" stroke-opacity="0.4" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M166 56c-9 16-9 38 1 56" fill="none" stroke="#06263c" stroke-opacity="0.22" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 眼睛 -->
+  <circle cx="176" cy="68" r="9" fill="#eaffff"/>
+  <circle cx="178" cy="69" r="5.2" fill="#06263c"/>
+  <circle cx="175" cy="66" r="2" fill="#ffffff"/>
+
+  <!-- 胸鳍 -->
+  <path d="M146 106c12 10 30 14 46 10-8 12-34 14-48 4Z" fill="url(#ja-fin)" stroke="#e6ffff" stroke-width="3" stroke-linejoin="round"/>
+  <!-- 腹鳍 -->
+  <path d="M118 130c8 8 20 12 32 10-8 8-26 8-36 0Z" fill="url(#ja-fin)" stroke="#e6ffff" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- 发光器（腹部一排） -->
+  <circle cx="90" cy="126" r="6" fill="url(#ja-glow)"/>
+  <circle cx="108" cy="132" r="7" fill="url(#ja-glow)"/>
+  <circle cx="128" cy="135" r="7" fill="url(#ja-glow)"/>
+  <circle cx="150" cy="134" r="6" fill="url(#ja-glow)"/>
+  <circle cx="172" cy="128" r="5" fill="url(#ja-glow)"/>
+  <circle cx="90" cy="126" r="2.2" fill="#d9ff8a"/>
+  <circle cx="108" cy="132" r="2.6" fill="#d9ff8a"/>
+  <circle cx="128" cy="135" r="2.6" fill="#d9ff8a"/>
+  <circle cx="150" cy="134" r="2.2" fill="#d9ff8a"/>
+  <circle cx="172" cy="128" r="1.9" fill="#d9ff8a"/>
+
+  <!-- 拟饵（发光钓竿 + 饵球） -->
+  <path d="M152 34C136 16 108 8 82 20" fill="none" stroke="#e6ffff" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="76" cy="24" r="8.5" fill="url(#ja-esca)"/>
+  <circle cx="73" cy="21" r="2.6" fill="#ffffff" fill-opacity="0.85"/>
 </svg>
