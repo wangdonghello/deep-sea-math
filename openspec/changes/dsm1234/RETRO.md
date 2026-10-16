@@ -1173,6 +1173,18 @@ docs/photo-assets.md             # 接入口径与来源清单
   模型署名与许可链接同时出现——**3D 能力没有丢，只是不再是默认视觉**。
 - `document.documentElement.scrollWidth === clientWidth`，无横向溢出。
 
+线上（GitHub Pages，run `38895055833` 成功）复核：
+
+- 四张 `photos/*.jpg` 与本地**逐字节一致**（40559 / 58250 / 72283 / 60128 B），
+  `photos/ATTRIBUTION.txt` 200；旧路径 `illustrations/original-*.svg` 已 404。
+- 线上 `CreatureCanvas-*.js` 内含 `photos/${...}.jpg`、`allowModel`、
+  「看 3D 模型」/「看真实照片」与 `photo-attribution`，不含 `preferModel` /
+  `illustrationRef` —— 线上包确实是新实现。
+- 在**生产 URL** 上重跑一遍（注入档案 + 2 区解锁 + 4 生物解锁）：
+  图鉴默认页签 = 深海区，4 张影像 `complete` 且 `naturalWidth` = 960/960/960/721；
+  观察舱缺省显示馆藏照与完整署名，点「看 3D 模型」后 `3D 模型已加载`、
+  模型署名随行，按钮变为「看真实照片」。
+
 ### 遗留
 
 - [ ] 其余三个物种等有明确许可证的模型后按 `docs/3d-model-assets.md` 接入 3D。
