@@ -3,8 +3,8 @@ change_id: DSM1234
 slug: dsm1234
 created_at: 2026-10-09T16:00:00+08:00
 dry_run: true
-dop_status: plan-ready
-dop_status_at: 2026-10-09T16:20:00+08:00
+dop_status: apply-done
+dop_status_at: 2026-10-20T16:19:44+08:00
 delta_capabilities:
   - daily-math-quest
   - creature-bestiary
@@ -16,4 +16,4 @@ delta_capabilities:
 # 深海数学探险 · 阶段一 核心学习循环
 
 **change-id**: DSM1234
-**状态**: spec-in-progress
+**状态**: 已交付（apply-done，2026-10-16 上线）

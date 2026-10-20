@@ -126,7 +126,7 @@ type Question = {
 | `ProfileSelectView` | 选档案 + PIN 校验 | `ProfileCard`, `PinPad` |
 | `HomeView` | 地图主体 + 任务卡浮层（已定方案 A） | `MapPanel`, `QuestCard`, `DepthScale`, `FishBackdrop`, `TabBar` |
 | `QuestView` | 答题 + 五步 + 提示 | `StageHeader`, `QuizStage`, `FiveStepBar`, `StepBody`, `HintStack`, `Numpad` |
-| `ObservationView` | 观察舱：真实影像 + 授权 3D 模型（按需切换）+ 知识卡 | `CreatureCanvas`, `KnowledgeCardList`, `SourceNote` |
+| `ObservationView` | 观察舱：默认 3D 模型（有授权模型时）+ 真实影像（一键切换）+ 知识卡 | `CreatureCanvas`, `KnowledgeCardList`, `SourceNote` |
 | `BestiaryView` | 图鉴列表 + 四区筛选 | `BestiaryList`, `CreatureRow` |
 | `MapView` | 四区地图 + 深度进度 | `ZoneMap`, `DepthMarker` |
 | `MistakeBookView` | 按题型/掌握状态查错题 + 重练 | `MistakeList`, `MistakeFilter` |

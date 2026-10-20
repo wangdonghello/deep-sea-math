@@ -132,9 +132,10 @@ describe('BestiaryView', () => {
     expect(view.text()).toContain(creature.name)
     const card = view.find(`[data-testid="creature-card-${creature.id}"]`)
     expect(card.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
-    // 图鉴卡片一律显示该物种的真实影像：家长明确否掉了示意插画，也不再退回深色 3D 缩略图
-    expect(card.find('[data-testid="creature-photo"]').exists()).toBe(true)
-    expect(card.find('[data-testid="creature-model-viewer"]').exists()).toBe(false)
+    // 有授权模型的物种：图鉴卡片默认展示 3D（家长要求两处都默认 3D），影像可一键切回
+    expect(card.find('[data-testid="creature-model-viewer"]').exists()).toBe(true)
+    expect(card.find('[data-testid="creature-photo"]').exists()).toBe(false)
+    expect(card.find('[data-testid="model-attribution"]').text()).toContain('CC BY 4.0')
     // 跨区物种不该被误读成"当前就在深渊区"：卡片明确列出所有重叠的教学区
     expect(card.get('[data-testid="creature-zones"]').text()).toContain('暮光区')
     expect(card.get('[data-testid="creature-zones"]').text()).toContain('深海区')
@@ -152,13 +153,13 @@ describe('BestiaryView', () => {
   it('reloads locked records after switching profiles', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([unlocked]) } })
     await flushPromises()
-    expect(view.find('[data-testid="creature-photo"]').exists()).toBe(true)
+    expect(view.find('[data-testid="creature-model-viewer"]').exists()).toBe(true)
 
     await view.setProps({ profileId: 'profile-b' })
     await flushPromises()
 
     expect(view.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
-    expect(view.find('[data-testid="creature-photo"]').exists()).toBe(false)
+    expect(view.find('[data-testid="creature-model-viewer"]').exists()).toBe(false)
   })
 
   it('clears the previous profile while the next profile is loading', async () => {
@@ -209,7 +210,7 @@ describe('BestiaryView', () => {
   it('emits the selected unlocked creature id for observation navigation', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([unlocked]) } })
     await flushPromises()
-    await view.get(`[data-testid="creature-card-${creature.id}"] button:not([data-testid="creature-zoom-toggle"])`).trigger('click')
+    await view.get(`[data-testid="creature-card-${creature.id}"] [data-testid="creature-observe"]`).trigger('click')
 
     expect(view.emitted('observe')).toEqual([[creature.id]])
   })
@@ -318,19 +319,19 @@ describe('ObservationView', () => {
     expect(view.emitted('back-home')).toEqual([[]])
   })
 
-  it('renders audited facts, 3–5 knowledge cards, sources, photo attribution and the 3D entry point', async () => {
+  it('renders audited facts, knowledge cards, sources and the 3D model by default', async () => {
     const view = mount(ObservationView, { props: { creature } })
     await flushPromises()
     expect(view.text()).toContain(creature.scientificName)
     expect(view.text()).toContain('约 100–4,500 米')
     expect(view.text()).toContain(creature.habitat)
-    // 家长要求的视觉口径是真实影像：观察舱缺省就显示照片与它的署名
-    expect(view.find('[data-testid="creature-photo"]').exists()).toBe(true)
-    expect(view.text()).toContain(creature.photo.note)
-    expect(view.text()).toContain(creature.photo.attribution)
-    expect(view.find(`a[href="${creature.photo.sourceUrl}"]`).exists()).toBe(true)
-    // 已授权 3D 模型仍在，但要孩子自己点开（缺省不跑 WebGL）
-    expect(view.find('[data-testid="creature-model-toggle"]').exists()).toBe(true)
+    // 家长要求观察舱默认看到 3D 模型；影像保留为「看真实照片」的切换项
+    expect(view.find('[data-testid="creature-model-viewer"]').exists()).toBe(true)
+    expect(view.find('[data-testid="creature-photo"]').exists()).toBe(false)
+    expect(view.text()).toContain(creature.model!.note)
+    expect(view.text()).toContain(creature.model!.attribution)
+    expect(view.find(`a[href="${creature.model!.sourceUrl}"]`).exists()).toBe(true)
+    expect(view.get('[data-testid="creature-model-toggle"]').text()).toBe('看真实照片')
     expect(view.text()).toContain('不是唯一分布')
     expect(view.findAll('[data-testid="knowledge-card"]')).toHaveLength(creature.knowledgeCards.length)
     for (const source of creature.sources) expect(view.find(`a[href="${source}"]`).exists()).toBe(true)

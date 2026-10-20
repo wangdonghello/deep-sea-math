@@ -13,19 +13,21 @@ const teachingZones = computed(() => ZONES.filter((zone) => overlapsZone(props.c
 <template>
   <article class="creature-card" :data-testid="`creature-card-${creature.id}`">
     <!--
-      图鉴卡片一律显示该物种的真实影像。
+      图鉴卡片：有授权 3D 模型的物种默认展示模型（家长明确要求图鉴里先看到 3D），
+      没有模型时展示该物种的真实影像；两种视觉都可一键切换到影像/模型。
 
-      卡片此前显示 3D 模型缩略图：家长直接反馈"图鉴的鱼太丑、太抽象"。照片既更好
-      认也更省电（4 张实拍共约 200 KB，而 WebGL 缩略图要加载 GLB + 建 context）。
-      3D 模型仍保留在观察舱，用"看 3D 模型"按钮切换。
+      影像仍是每个物种的必备素材：它负责"这是什么鱼"的快速识别，也是 WebGL
+      不可用、模型加载失败时的兜底。
     -->
-    <CreatureCanvas :creature="creature" :locked="!unlocked" :thumbnail="true" />
+    <CreatureCanvas :creature="creature" :locked="!unlocked" :thumbnail="true"
+      allow-model prefer-model />
     <h2 v-if="unlocked">{{ creature.name }}</h2>
     <p v-if="unlocked" class="creature-card__zones" data-testid="creature-zones">
       可见于：{{ teachingZones.map((zone) => zone.name).join(' · ') }}
     </p>
     <p v-else>继续下潜解锁</p>
-    <button v-if="unlocked" type="button" @click="emit('observe', creature.id)">进入观察舱</button>
+    <button v-if="unlocked" type="button" data-testid="creature-observe"
+      @click="emit('observe', creature.id)">进入观察舱</button>
   </article>
 </template>
 

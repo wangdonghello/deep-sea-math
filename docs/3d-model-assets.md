@@ -3,8 +3,10 @@
 本文说明如何把一个**授权许可明确**的第三方 3D 模型接入观察舱。引入新模型前
 必须先取得许可文件；拿不到许可的模型不要放进 `public/`。
 
-图鉴与观察舱的**默认视觉是实拍影像**（见 `docs/photo-assets.md`），3D 模型是
-"点开才出现"的加分项：接入模型不会让页面默认多下载 2 MB。
+图鉴与观察舱在**有授权模型时默认展示 3D 模型**；真实影像是每个物种的必备
+素材（见 `docs/photo-assets.md`），负责快速识别、一键切回与加载失败兜底。
+接入模型会让默认页面多下载 GLB（当前压缩后约 1.3 MB），因此接入前先确认体积
+与低端机表现。
 
 ## 1. 确认许可
 
@@ -79,27 +81,30 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 
 ## 5. 在哪里显示
 
-观察舱在图鉴卡片之上多给一个切换入口（卡片只显示真实影像）：
+图鉴卡片与观察舱使用同一套切换逻辑，有模型时默认 3D：
 
 ```vue
-<!-- 观察舱：默认真实影像，点按钮切成完整交互的 3D 模型 -->
-<CreatureCanvas :creature="creature" :allow-model="true" />
+<!-- 观察舱：有模型时默认 3D，点「看真实照片」切回影像 -->
+<CreatureCanvas :creature="creature" allow-model prefer-model />
 
-<!-- 图鉴卡片：只显示影像与紧凑署名 -->
-<CreatureCanvas :creature="creature" :thumbnail="true" />
+<!-- 图鉴卡片：同样默认 3D，模型授权收进紧凑的展开说明 -->
+<CreatureCanvas :creature="creature" :thumbnail="true" allow-model prefer-model />
 ```
 
 - `allow-model` 缺省为 `false` → 只显示真实影像。地图、错题本等次要位置
   不要打开它。
-- 观察舱缺省显示影像，模型由孩子点「看 3D 模型」显式切出（切回即
-  「看真实照片」）；同一屏不同时跑 WebGL 和照片，低端机不吃亏。
-- 卡片不再显示 3D 缩略图（家长反馈深色缩略图"太丑、太抽象"）：4 张实拍合计
-  约 200 KB，比每个条目都建一次 WebGL context + 下载 GLB 便宜得多。
+- `prefer-model` 决定"先看哪个"：与 `allow-model` 同时为真且该物种有模型时
+  默认渲染 3D；点「看真实照片」切回影像，切回后按钮变「看 3D 模型」。没有
+  模型、未解锁或 WebGL 不可用时仍以影像/剪影为默认视觉。
+- 图鉴卡片与观察舱的 3D 用同一个 `CreatureModelViewer`；卡片用 `thumbnail`
+  紧凑署名，完整模型授权与来源收进可展开说明，署名仍随作品出现。
 - 渲染组件 `features/bestiary/CreatureModelViewer.vue` 按需懒加载
-  （`defineAsyncComponent`），Three.js 只在真正切到 3D 时才下载。
+  （`defineAsyncComponent`），Three.js 只在真正渲染 3D 时才下载。
 - 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回真实
   影像并撤掉切换按钮；模型署名与许可链接只要模型在屏就显示
   （CC BY 要求署名不因降级而消失，看到什么就署什么名）。
+- 当前只有鮟鱇鱼一个模型，图鉴列表最多加载 1 个 GLB。后续模型变多时，列表
+  页需要重新评估"每张卡都建 WebGL context"的成本（懒初始化或按需挂载）。
 
 ## 6. 接入后要跑
 

@@ -2,6 +2,10 @@
 
 本文记录 `/sdd-apply` 执行过程中发现的 spec/design 矛盾、范围调整与需要用户决策的事项。
 
+> **编号说明**：早期两条并行工作流各自编号，导致 R21 / R28 / R29 各重复一次。
+> 后出现者加 `b` 后缀（R21b / R28b / R29b），既有编号保持不变，避免打断 commit
+> message、代码注释与 spec/design 里已有的 `RETRO Rxx` 引用。
+
 ---
 
 ## R1. GitHub Pages 部署 + 最小可玩闭环（范围调整）
@@ -20,8 +24,8 @@
 **决策人**：用户（通过 AskUserQuestion 确认部署目标为 GitHub Pages、页面策略为最小可玩闭环）。
 
 **待办**：
-- [ ] 闭环可玩后配置 GitHub Pages（`vite.config.ts` 的 `base` 需设为 `/<repo>/`，并加 GitHub Actions workflow 或 `gh-pages` 分支部署）
-- [ ] T8（题库与生物内容）重新派发——它比 UI task 更早，但首次派发未产出任何文件（worktree 干净、无 commit），需拆分为「生物条目 + schema」与「题库」两个工作流后 squash 成一个 commit
+- [x] 闭环可玩后配置 GitHub Pages（`vite.config.ts` 的 `base` 需设为 `/<repo>/`，并加 GitHub Actions workflow 或 `gh-pages` 分支部署）—— **已完成**：`.github/workflows/deploy-pages.yml` 自动发布，站点已上线并在 2026-10-16 复核。
+- [x] T8（题库与生物内容）重新派发——它比 UI task 更早，但首次派发未产出任何文件（worktree 干净、无 commit），需拆分为「生物条目 + schema」与「题库」两个工作流后 squash 成一个 commit —— **已完成**：题库 216 题与 4 条生物条目均已合入 `main`。
 
 ---
 
@@ -351,7 +355,7 @@ UI 中不可见——错误经 `PinPad` 渲染，而 `PinPad` 的前提 `selecte
 
 ---
 
-## R21. 上线后验收发现的三个接线缺陷（已修）
+## R21b. 上线后验收发现的三个接线缺陷（已修）
 
 **A. 输完 PIN 点「确定」页面不跳转。** `src/router/routes/ProfilesRoute.vue` 用
 `@navigate="onNavigate"`（事件监听）传导航回调，而 `ProfileSelectView` 把
@@ -745,7 +749,7 @@ sticky 随即失效；横向溢出改为在源头处理（flex 子项 `min-width
 
 ---
 
-## R28. 观察舱接入授权 3D 模型（上线后授权范围内的范围扩展）
+## R28b. 观察舱接入授权 3D 模型（上线后授权范围内的范围扩展）
 
 **背景**：`proposal.md` 明确排除「3D 模型（Three.js）」，图鉴四条目均只有原创 2D 插画。
 用户从 Sketchfab 下载了若干深海鱼资源并授权接入其中**许可明确**的一个；其余
@@ -826,7 +830,7 @@ iPhone 视口（375×812）实测：观察舱模型加载成功、可拖动/缩�
 
 ---
 
-## R29. 真机验收后的三处体验缺陷（完成态死路 / 区域口径分叉 / 图鉴不用 3D）
+## R29b. 真机验收后的三处体验缺陷（完成态死路 / 区域口径分叉 / 图鉴不用 3D）
 
 **决策来源**：家长真机验收后提出三条——
 
@@ -1197,3 +1201,63 @@ docs/photo-assets.md             # 接入口径与来源清单
   文本匹配，不看语义）。已把这两处改写成"强制推送到 main"，既保留原意也不再产生
   误报；`src/features/README.md` 上还会报一条 SOFT 的 `readme-missing-quickstart`
   （该规则面向项目根 README，分层文档不适用），不影响提交。
+
+---
+
+## R34. 图鉴卡片与观察舱改为默认 3D
+
+**决策来源**：2026-10-20 用户反馈「打开图鉴，看到的不是鮟鱇鱼的 3D 模型」，并在
+三个方案中明确选择「两处都默认 3D」——图鉴列表卡片与观察舱都要先看到模型。
+
+**与 R33 的关系**：R33 依据家长「要真实影像、不要抽象图」把卡片和观察舱都改成
+默认影像、3D 点开才加载。R34 只改**默认视觉的优先级**，不撤销 R33 的素材结论：
+影像仍是每个物种的必备素材，负责快速识别、一键切回与加载失败兜底。这是同一
+问题在两个月内的第五轮口径调整；后续再改默认视觉前先回到本条确认，避免在
+「照片好认」与「模型好玩」之间来回翻烧饼。
+
+### 1. 行为变化
+
+- `CreatureCanvas` 新增 `preferModel`：与 `allowModel` 同时为真、该物种有模型、
+  且未锁定时默认渲染 3D；否则仍以影像/剪影为默认。`allowModel` 继续表示"允许
+  切换"，两者分开，地图等次要位置不打开。
+- `CreatureCard` 与 `ObservationView` 都传 `allow-model prefer-model`。
+- 卡片默认 3D 时使用紧凑署名：`creditSummary` 默认可见，完整 `attribution`、
+  模型页与许可链接收进「查看完整署名与许可」；观察舱保持完整署名。
+- 失败路径不变：WebGL 不可用、GLB 加载失败、`webglcontextlost` → 自动退回影像、
+  撤掉切换按钮，并保留影像署名。
+- 卡片新增 `creature-observe` testid，避免"进入观察舱"与模型切换按钮在测试与
+  自动化里被混点。
+
+### 2. 代价与边界
+
+- 图鉴列表现在默认下载 1 个 GLB（1.3 MB）并创建 WebGL context。当前只有鮟鱇鱼
+  一个模型，可接受；模型变多后必须重新评估列表页成本（懒初始化 / 可见时才挂载）。
+- 列表卡片会明显变高（一个模型卡约占一屏）。这是"默认看模型"的直接代价，先用
+  真实设备观察；若孩子反馈找不到其它条目，再考虑折叠或缩略图模式。
+- 无 WebGL / 低端机仍退化为影像，知识卡与任务不受影响。
+
+### 3. 规格与文档
+
+- `creature-bestiary` 的「图鉴条目内容 / 观察舱」两条 Requirement 与场景改写为
+  默认 3D；新增「图鉴卡片默认展示模型」「模型署名与许可可达」场景，
+  原「3D 模型按需切换」改为「3D 模型默认展示」。
+- 同步更新 `README.md`、`docs/3d-model-assets.md`、`docs/photo-assets.md`、
+  `design.md` 的视图职责行；`openspec validate dsm1234 --strict` 通过。
+
+### 4. 验证
+
+`npm run test` **60 文件 / 762 用例**全绿；`npm run type-check` 通过；
+`npm run build` 成功，`three-vendor` 仍单独成块（635.60 kB / gzip 159.98 kB）。
+
+无头 Edge 154（390×844，WebGL 2.0 实测可用，IndexedDB 注入档案 + 生物/区域解锁）：
+
+- 图鉴页：鮟鱇鱼卡片 `creature-model-viewer` 存在，状态为「3D 模型已加载」，
+  `canvas.width = 495`，无 `creature-photo`，切换按钮文案为「看真实照片」，
+  紧凑模型署名可展开。
+- 观察舱：默认同样显示模型，标题/学名/深度/体型/知识卡/来源齐备，
+  切换按钮为「看真实照片」，`scrollWidth === clientWidth === 390`，无横向溢出。
+- 点「看真实照片」后模型卸载、影像与影像署名出现；再切回模型正常。
+- 控制台无异常，页面无网络错误。
+
+**遗留**：其余三个物种等有明确许可证的模型后按 `docs/3d-model-assets.md` 接入；
+模型数量增加后重估列表页的 WebGL 成本。

@@ -73,14 +73,15 @@ im.resize((960, 640), Image.LANCZOS).save(
 
 ## 4. 在哪里显示
 
-- **图鉴卡片**：`<CreatureCanvas :creature="c" :thumbnail="true" />` —
-  显示影像 + 紧凑署名（`creditSummary` 默认可见，完整 `attribution` 与来源、
-  许可链接收进可展开说明）。
-- **观察舱**：`<CreatureCanvas :creature="c" :allow-model="true" />` —
-  显示影像 + 完整署名；该物种若有授权 3D 模型，额外给一个
-  「看 3D 模型」/「看真实照片」切换按钮，**缺省显示影像**。
+- **图鉴卡片**：`<CreatureCanvas :creature="c" :thumbnail="true" allow-model prefer-model />`
+  — 有授权模型的物种默认显示模型 + 紧凑模型署名（`creditSummary` 默认可见，
+  完整 `attribution` 与来源、许可链接收进可展开说明）；没有模型时显示影像 +
+  紧凑影像署名。
+- **观察舱**：`<CreatureCanvas :creature="c" allow-model prefer-model />` —
+  有模型时默认显示模型 + 完整模型署名，点「看真实照片」切回影像；没有模型时
+  显示影像 + 完整署名。
 - 影像加载失败：文字占位（`photo-fallback`），知识卡与任务不受影响。
-- 署名必须跟着作品出现：切到 3D 模型时显示模型署名，切回影像时显示影像署名。
+- 署名必须跟着作品出现：显示 3D 模型时显示模型署名，切回影像时显示影像署名。
 
 ## 5. 当前影视素材来源清单
 

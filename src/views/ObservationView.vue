@@ -17,7 +17,7 @@ const emit = defineEmits<{ (event: 'back-home'): void }>()
     <p>活动深度范围：{{ depthRangeLabel(creature) }}</p>
     <p class="observation-view__note">这是已知记录/教学区域范围，不是唯一分布；物种可能跨区。</p>
     <p>记录/最大体型（来源记录的上限，不是每头个体的恒定值）：{{ creature.bodySize }}</p>
-    <CreatureCanvas :creature="creature" :allow-model="true">
+    <CreatureCanvas :creature="creature" allow-model prefer-model>
       <KnowledgeCardList :cards="creature.knowledgeCards" />
     </CreatureCanvas>
     <SourceNote :sources="creature.sources" :habitat="creature.habitat" />

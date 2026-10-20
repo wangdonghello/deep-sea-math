@@ -10,30 +10,40 @@ const props = defineProps<{
   creature: CreatureContent
   locked?: boolean
   /**
-   * 允许在影像与授权 3D 模型之间切换；只有观察舱打开。
+   * 允许在影像与授权 3D 模型之间切换。
    *
-   * 缺省（图鉴卡片、地图）只显示真实影像：卡片的职责是"这是什么鱼"，照片比
-   * 深色 3D 缩略图更省电也更好认。
+   * 图鉴卡片与观察舱都传 `true`；地图等次要位置不传，只显示真实影像。
    */
   allowModel?: boolean
+  /**
+   * 有授权模型时默认展示 3D 模型（而不是影像）。
+   *
+   * 与 `allowModel` 分开：`allowModel` 是"能不能切"，`preferModel` 是"先看
+   * 哪个"。两者都为 `true` 且该物种有模型时才默认 3D；没有模型或未解锁时
+   * 仍以影像/剪影为默认视觉。
+   */
+  preferModel?: boolean
   /** 紧凑署名：默认只显示短署名，完整授权收进可展开说明。 */
   thumbnail?: boolean
 }>()
 const failed = ref(false)
 const modelFailed = ref(false)
 const zoomed = ref(false)
-const mode = ref<'photo' | 'model'>('photo')
-const photoSource = computed(() => `${import.meta.env.BASE_URL}photos/${props.creature.photo.ref}.jpg`)
 const hasModel = computed(() => props.creature.model !== undefined && !modelFailed.value)
 const canSwitchModel = computed(() => props.allowModel === true && !props.locked && hasModel.value)
+const defaultMode = computed<'photo' | 'model'>(() =>
+  props.preferModel === true && canSwitchModel.value ? 'model' : 'photo',
+)
+const mode = ref<'photo' | 'model'>(defaultMode.value)
 const showModel = computed(() => canSwitchModel.value && mode.value === 'model')
 const model = computed(() => (showModel.value ? props.creature.model : undefined))
+const photoSource = computed(() => `${import.meta.env.BASE_URL}photos/${props.creature.photo.ref}.jpg`)
 
 watch(() => props.creature.id, () => {
   failed.value = false
   modelFailed.value = false
   zoomed.value = false
-  mode.value = 'photo'
+  mode.value = defaultMode.value
 })
 
 function toggleZoom(): void {
@@ -81,11 +91,24 @@ function onError(): void {
       <!-- 3D 模型与影像各自署名：CC BY / CC BY-SA 要求署名随作品一起出现。 -->
       <div v-if="model" data-testid="model-attribution">
         <span>{{ model.note }}</span>
-        <span>{{ model.attribution }}</span>
-        <span>来源：<a data-testid="model-source-link" :href="model.sourceUrl"
-          target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
-        <span>许可：<a data-testid="model-license-link" :href="model.licenseUrl"
-          target="_blank" rel="noopener noreferrer">{{ model.license }}</a></span>
+        <template v-if="thumbnail">
+          <span>模型授权 · {{ model.creditSummary }}</span>
+          <details class="creature-canvas__credit-details">
+            <summary data-testid="model-credit-summary">查看完整署名与许可</summary>
+            <span data-testid="model-full-attribution">{{ model.attribution }}</span>
+            <span>来源：<a data-testid="model-source-link" :href="model.sourceUrl"
+              target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
+            <span>许可：<a data-testid="model-license-link" :href="model.licenseUrl"
+              target="_blank" rel="noopener noreferrer">{{ model.license }}</a></span>
+          </details>
+        </template>
+        <template v-else>
+          <span>{{ model.attribution }}</span>
+          <span>来源：<a data-testid="model-source-link" :href="model.sourceUrl"
+            target="_blank" rel="noopener noreferrer">Sketchfab 模型页面</a></span>
+          <span>许可：<a data-testid="model-license-link" :href="model.licenseUrl"
+            target="_blank" rel="noopener noreferrer">{{ model.license }}</a></span>
+        </template>
       </div>
       <template v-else>
         <div data-testid="photo-attribution">
