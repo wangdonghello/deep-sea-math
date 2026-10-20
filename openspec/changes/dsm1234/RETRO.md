@@ -1261,3 +1261,27 @@ docs/photo-assets.md             # 接入口径与来源清单
 
 **遗留**：其余三个物种等有明确许可证的模型后按 `docs/3d-model-assets.md` 接入；
 模型数量增加后重估列表页的 WebGL 成本。
+
+---
+
+## R35. 题型名称改为中文展示
+
+**决策来源**：2026-10-20 用户反馈「题型掌握类型 add-sub mul-div 等都是英文，请改成相应的中文」。
+
+**根因**：`ReportPanel.vue` 的「题型掌握分布」直接渲染 `QUIZ_TYPES` 的内部键名；
+`MistakeList.vue` 的「题型：」也直接渲染 `entry.type`。错题本筛选与家长概览
+其实已有各自的中文映射，但三处各写一份，`unit-time-route` 还出现了
+「单位与路线」/「单位·时间·路线」两种译法。
+
+**修复**：
+- 新增 `src/shared/quizTypeLabel.ts`：`QUIZ_TYPE_LABELS` + `quizTypeLabel()`，
+  六类题型统一为 加减法 / 乘除法 / 两步应用题 / 未知数关系 / 单位·时间·路线 /
+  规律与数据；缺失题型退回「题型待补充」，不回显内部键。
+- `ReportPanel.vue`、`MistakeList.vue`、`MistakeFilter.vue`、`useFamilyOverview.ts`
+  全部改用同一映射，删除两份重复的局部表。
+- `daily-math-quest` 规格新增「界面使用中文题型名」场景，锁住"MUST NOT 出现
+  内部标识符"。
+
+**验证**：`npm run test` 61 文件 / 765 用例全绿（新增 shared 映射测试与
+报告/错题本断言）；`npm run type-check`、`npm run build` 通过；
+`openspec validate dsm1234 --strict` 通过。

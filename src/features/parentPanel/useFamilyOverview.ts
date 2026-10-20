@@ -2,22 +2,13 @@ import { computed, ref } from 'vue'
 
 import { replayProjections } from '@/domain/eventLog/replay'
 import { QUIZ_TYPES, type DomainEvent, type MasteryLevel, type QuizType } from '@/domain/model/types'
+import { QUIZ_TYPE_LABELS } from '@/shared/quizTypeLabel'
 import { redact } from '@/shared/redact'
 
 import type { ChildOverview, FamilyOverviewOptions } from './types'
 
 /** 近 7 天窗口（与 `useParentPanel` 的 `7days` 口径一致）。 */
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000
-
-/** 六类题型的中文标签（沿用题库注释里的说法，家长看得懂）。 */
-const QUIZ_TYPE_LABELS: Readonly<Record<QuizType, string>> = {
-  'add-sub': '加减法',
-  'mul-div': '乘除法',
-  'two-step-app': '两步应用题',
-  'unknown-relation': '未知数关系',
-  'unit-time-route': '单位·时间·路线',
-  'pattern-data': '规律与数据',
-}
 
 /** 没有任何"待加强"题型时的中性提示。 */
 const NEUTRAL_HINT = '近 7 天还没有足够的学习记录'

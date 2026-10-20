@@ -21,6 +21,11 @@ describe('parent panel components', () => {
     const wrapper = mount(ReportPanel, { props: { report, period: '7days' } })
     expect(wrapper.get('[data-testid="report-completed"]').text()).toBe('3')
     expect(wrapper.get('[data-testid="report-average"]').text()).toContain('1500')
+    // 家长看到的是中文题型名，不是事件/投影里的内部键
+    expect(wrapper.text()).toContain('加减法')
+    expect(wrapper.text()).toContain('单位·时间·路线')
+    expect(wrapper.text()).not.toContain('add-sub')
+    expect(wrapper.text()).not.toContain('mul-div')
     await wrapper.get('select').setValue('today')
     expect(wrapper.emitted('update:period')?.[0]).toEqual(['today'])
   })

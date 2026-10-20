@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { QUIZ_TYPES } from '@/domain/model/types'
 import type { MasteryLevel } from '@/domain/model/types'
+import { quizTypeLabel } from '@/shared/quizTypeLabel'
 import type { ParentReport } from './types'
 
 const props = defineProps<{ report: ParentReport; period: 'today' | '7days' }>()
@@ -27,7 +28,7 @@ const topicMasteryAvailable = computed(() => props.report.topicMasteryAvailable 
     <h3>题型掌握分布</h3>
     <p v-if="!topicMasteryAvailable" data-testid="topic-mastery-unavailable">题型掌握分布暂不可用</p>
     <ul v-else>
-      <li v-for="type in QUIZ_TYPES" :key="type">{{ type }}：
+      <li v-for="type in QUIZ_TYPES" :key="type">{{ quizTypeLabel(type) }}：
         <span v-for="level in Object.keys(labels) as MasteryLevel[]" :key="level">
           {{ labels[level] }} {{ report.masteryByTopic[type]?.[level] ?? 0 }} </span>
       </li>

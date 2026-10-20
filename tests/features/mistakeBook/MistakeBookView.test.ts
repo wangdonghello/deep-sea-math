@@ -62,6 +62,8 @@ describe('MistakeBookView', () => {
     expect(requestedProfiles).toEqual([profileId])
     expect(view.text()).toContain('海星数贝壳')
     expect(view.text()).toContain('wrong-add')
+    expect(view.text()).toContain('题型：加减法')
+    expect(view.text()).not.toContain('题型：add-sub')
     expect(view.text()).toContain('1')
     expect(view.text()).not.toContain('foreign')
   })

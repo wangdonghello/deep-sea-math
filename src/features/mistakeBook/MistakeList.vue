@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MasteryLevel } from '@/domain/model/types'
+import { quizTypeLabel } from '@/shared/quizTypeLabel'
 import type { MistakeBookItem } from './types'
 
 defineProps<{ entries: readonly MistakeBookItem[] }>()
@@ -19,7 +20,7 @@ function displayTime(value: number | null): string {
       <article>
         <h2>{{ entry.title ?? entry.questionId }}</h2>
         <p>题目编号：{{ entry.questionId }}</p>
-        <p>题型：{{ entry.type ?? '题型待补充' }}</p>
+        <p>题型：{{ quizTypeLabel(entry.type) }}</p>
         <p>单题掌握状态：{{ masteryLabels[entry.questionMasteryLevel] }}</p>
         <p>题型掌握状态：{{ entry.topicMasteryLevel === null ? '待补充' : masteryLabels[entry.topicMasteryLevel] }}</p>
         <p>答错次数：{{ entry.wrongCount }}</p>

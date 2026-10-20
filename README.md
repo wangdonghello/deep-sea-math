@@ -115,7 +115,7 @@ npm run preview               # 预览 dist/，先用上面的命令构建
 - 多孩子本地档案、4 位 PIN、档案间数据完全隔离；本地家长区（题量与时长设置、学习报告、PIN 重置、删除档案）；
 - 4 个真实图鉴条目 + 四区地图 + 观察舱（有授权模型的鮟鱇鱼默认 3D、其余展示许可明确的实拍/馆藏影像，知识卡、来源标注与署名许可随作品展示）；
 - 事件日志持久化（IndexedDB）+ 投影重建 + 存储降级内存态；
-- 762 条 Vitest 用例，总体覆盖率门槛 80%。
+- 765 条 Vitest 用例，总体覆盖率门槛 80%。
 
 **阶段一未交付（走后续 change）**
 
@@ -130,7 +130,7 @@ npm run preview               # 预览 dist/，先用上面的命令构建
 ## 测试
 
 ```bash
-npm run test           # 全套 Vitest（60 个文件，762 条用例）
+npm run test           # 全套 Vitest（61 个文件，765 条用例）
 npm run test:coverage  # 覆盖率报告（text + html + lcov，产物 coverage/）
 ```
 

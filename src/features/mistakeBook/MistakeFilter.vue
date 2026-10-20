@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { MASTERY_LEVELS, QUIZ_TYPES } from '@/domain/model/types'
 import type { MasteryLevel, QuizType } from '@/domain/model/types'
+import { quizTypeLabel } from '@/shared/quizTypeLabel'
 import type { MistakeFilterState } from './types'
 
 const props = defineProps<{ modelValue: MistakeFilterState }>()
 const emit = defineEmits<{ (event: 'update:modelValue', value: MistakeFilterState): void }>()
 
-const typeLabels: Record<QuizType, string> = {
-  'add-sub': '加减法', 'mul-div': '乘除法', 'two-step-app': '两步应用题',
-  'unknown-relation': '未知数关系', 'unit-time-route': '单位与路线', 'pattern-data': '规律与数据',
-}
 const masteryLabels: Record<MasteryLevel, string> = {
   unmastered: '还在练习', hinted: '提示后掌握', independent: '独立掌握', stable: '稳定掌握',
 }
@@ -27,7 +24,7 @@ function updateMastery(masteryLevel: MasteryLevel | 'all'): void {
     <label>题型
       <select data-testid="filter-type" :value="modelValue.type" @change="updateType(($event.target as HTMLSelectElement).value as QuizType | 'all')">
         <option value="all">全部题型</option>
-        <option v-for="type in QUIZ_TYPES" :key="type" :value="type">{{ typeLabels[type] }}</option>
+        <option v-for="type in QUIZ_TYPES" :key="type" :value="type">{{ quizTypeLabel(type) }}</option>
       </select>
     </label>
     <label>掌握状态（稳定按题型，其余按单题）
