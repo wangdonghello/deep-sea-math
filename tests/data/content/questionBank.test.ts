@@ -15,7 +15,8 @@ import { CREATURE_BANK, QUESTION_BANK, QUESTION_INDEX } from '../../../src/data/
  * 2. 来源域映射（技能 → standard:* → Common Core 领域页）；
  * 3. 相似题链接约束（同题型、共享技能、答案形态一致、双向值不同）；
  * 4. hints 五层语义，尤其第 5 层讲解示例不泄露本题答案；
- * 5. **数字量级下限**（三年级水平，不再出现一位数加减）；
+ * 5. **数字量级下限**（三年级水平：加减三位数、乘除至少两位数 × 一位数，
+ *    除数保持一位数）；
  * 6. 严格口径下的规模 / 每格下限 / 五步字段负测。
  */
 
@@ -43,13 +44,6 @@ const EXPECTED_STANDARDS_BY_SKILL: Record<string, string[]> = {
   'skill-second-difference-sequence': ['3.OA.9'], 'skill-square-number-sequence': ['3.OA.9'],
   'skill-double-and-add-one-sequence': ['3.OA.9'],
 }
-
-/**
- * q001 暖身题：`tests/App.test.ts` 端到端用例逐字敲 `7 + 5` 提交并期望整组
- * 完成，因此它是全库**唯一**保留个位数操作数的题（见生成脚本的 WARMUP）。
- * 数字量级断言显式放行它，其余题一律按三年级量级检查。
- */
-const PINNED_WARMUP_ID = 'q001'
 
 type RawQuestion = Record<string, any>
 interface RawBank { version: string; questions: RawQuestion[] }
@@ -228,28 +222,56 @@ describe('question bank content', () => {
     }
   })
 
-  it('keeps add-sub questions at grade-3 magnitude (two-digit operands and up)', () => {
+  it('keeps add-sub questions at grade-3 magnitude (three-digit operands and up)', () => {
     const addSub = readQuestionBank().questions.filter((question) => question.type === 'add-sub')
     expect(addSub.length).toBeGreaterThan(0)
     for (const question of addSub) {
       const operands = expressionOperands(question)
       expect(operands.length, `${question.id} has an equation hint`).toBeGreaterThanOrEqual(2)
       for (const operand of operands) {
-        // 三年级量级：加减法不再出现个位数操作数（早先为迁就端到端用例保留的
-        // 个位数暖身题已随题库扩容去掉；测试不再反过来约束题库内容）。
-        expect(operand, `${question.id} operand magnitude`).toBeGreaterThanOrEqual(10)
+        // 三年级量级：加减法以三位数为主，不再出现两位数或个位数操作数。
+        expect(operand, `${question.id} operand magnitude`).toBeGreaterThanOrEqual(100)
       }
     }
   })
 
-  it('keeps mul-div difficulty 1 away from trivial one-digit facts', () => {
+  it('starts mul-div at grade-3 magnitude (two-digit factor or dividend)', () => {
     const cell = readQuestionBank().questions.filter((question) => question.type === 'mul-div' && question.difficulty === 1)
     expect(cell).toHaveLength(12)
     for (const question of cell) {
       const operands = expressionOperands(question)
       expect(operands.length, `${question.id} has an equation hint`).toBeGreaterThanOrEqual(2)
       const [left, right] = operands
-      expect(left >= 6 || right >= 6 || left * right >= 30, `${question.id} ${left} × ${right}`).toBe(true)
+      // d1 的乘法是两位数 × 一位数、除法是两位数 ÷ 一位数（商两位数），
+      // 不再是乘法表事实（如 5 × 6、48 ÷ 8）。
+      expect(left, `${question.id} two-digit factor or dividend`).toBeGreaterThanOrEqual(12)
+      expect(right, `${question.id} second operand`).toBeGreaterThanOrEqual(2)
+    }
+  })
+
+  it('moves multiplication to two-digit × two-digit at difficulty 3', () => {
+    const cell = readQuestionBank().questions.filter((question) =>
+      question.type === 'mul-div' && question.difficulty === 3 && question.hints[3].includes('×'))
+    expect(cell.length).toBeGreaterThan(0)
+    for (const question of cell) {
+      const [left, right] = expressionOperands(question)
+      expect(Math.min(left, right), `${question.id} two-digit factors`).toBeGreaterThanOrEqual(12)
+    }
+  })
+
+  it('keeps every division divisor a single digit (grade-3 除数是一位数)', () => {
+    for (const question of readQuestionBank().questions) {
+      const hint = String(question.hints[3])
+      if (!hint.includes('÷')) continue
+      const [, divisor] = numbers(hint)
+      expect(divisor, `${question.id} divisor`).toBeLessThan(10)
+    }
+  })
+
+  it('never uses one-digit-only arithmetic in any cell', () => {
+    for (const question of readQuestionBank().questions) {
+      const operands = expressionOperands(question)
+      expect(Math.max(...operands), `${question.id} magnitude`).toBeGreaterThanOrEqual(12)
     }
   })
 
@@ -350,7 +372,7 @@ describe('question bank content', () => {
 
   it('rejects a worked-example layer that reuses the answer digits', () => {
     const invalid = readQuestionBank()
-    const target = invalid.questions.find((question) => question.id === PINNED_WARMUP_ID)!
+    const target = invalid.questions[0]
     target.hints[4] = `比如 4 + 8 = ${target.answer.value}，你就能得到答案。`
     expect(() => assertValidQuestionBank(invalid)).toThrow(/worked example must not reuse the answer digits/)
   })

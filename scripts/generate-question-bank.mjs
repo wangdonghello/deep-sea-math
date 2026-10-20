@@ -9,7 +9,17 @@
  *     node scripts/generate-question-bank.mjs
  *
  * 产物写入 `src/data/content/questionBank.json`（顶层结构
- * `{ version, questions }`，本版本 `version` 为 `2.0.0`）。
+ * `{ version, questions }`，本版本 `version` 为 `3.0.0`）。
+ *
+ * ── 量级口径（三年级） ────────────────────────────────────────────────
+ * 本题库面向小学三年级，**三档难度都不再使用一二年级量级**：
+ * - 加减法：三位数为主，d3 强制连续进位/退位；
+ * - 乘除法：d1 两位数 × 一位数 / 两位数 ÷ 一位数（商为两位数），
+ *   d3 两位数 × 两位数；除数始终是一位数；
+ * - 时间/长度/质量/路线：至少两位数参与运算，长度结果 ≤ 1000 米；
+ * - 规律题：从两位数起步，d3 出现翻倍、二阶差与平方数。
+ * 改这些范围时请同步改 `EXAMPLE` 里的讲解示例——示例本身也不能再用
+ * 一二年级的个位数算例。
  *
  * **修改题库 MUST 走本脚本，不要手改 JSON**：手改会让「题目 id、相似题
  * 双向链接、答案与算式一致性、hints[4] 不泄露答案」这些互相牵制的约束
@@ -142,16 +152,16 @@ function drawWhile(make, ok, limit = 400) {
 }
 
 const BUILDERS = {
-  // 加法：两部分合并。d3 要求个位与十位都进位。
+  // 加法：两部分合并。d1/d2 为三位数，d3 要求个位与十位都进位。
   add: (d) => {
     if (d === 1) {
-      const a = randInt(14, 46)
-      const b = randInt(13, 38)
+      const a = randInt(120, 480)
+      const b = randInt(110, 390)
       return { n: { a, b }, value: a + b, expression: `${a} + ${b}` }
     }
     if (d === 2) {
-      const a = randInt(126, 470)
-      const b = randInt(115, 398)
+      const a = randInt(260, 680)
+      const b = randInt(150, 290)
       return { n: { a, b }, value: a + b, expression: `${a} + ${b}` }
     }
     const [a, b] = drawWhile(
@@ -161,18 +171,16 @@ const BUILDERS = {
     return { n: { a, b }, value: a + b, expression: `${a} + ${b}` }
   },
 
-  // 减法：求剩余。d3 要求个位与十位都退位。
+  // 减法：求剩余。d1/d2 为三位数，d3 要求个位与十位都退位。
   sub: (d) => {
     if (d === 1) {
-      const a = randInt(45, 96)
-      const b = randInt(12, 38)
+      const a = randInt(320, 860)
+      const b = randInt(120, 310)
       return { n: { a, b }, value: a - b, expression: `${a} - ${b}` }
     }
     if (d === 2) {
-      const a = randInt(360, 940)
-      // 被减数必须大于减数：早先两者独立取值，生成过 `417 - 419 = -2` 这种
-      // 负结果的题（内容校验抓到了）。这里把 b 的上界绑到 a 上。
-      const b = randInt(115, Math.min(450, a - 60))
+      const a = randInt(520, 940)
+      const b = randInt(180, 450)
       return { n: { a, b }, value: a - b, expression: `${a} - ${b}` }
     }
     const [a, b] = drawWhile(
@@ -185,9 +193,9 @@ const BUILDERS = {
   // 连续减法：两次取走。
   repsub: (d) => {
     if (d === 1) {
-      const a = randInt(62, 96)
-      const b = randInt(12, 26)
-      const c = randInt(11, 24)
+      const a = randInt(620, 960)
+      const b = randInt(120, 240)
+      const c = randInt(100, 220)
       return { n: { a, b, c }, value: a - b - c, expression: `${a} - ${b} - ${c}` }
     }
     const a = randInt(680, 960)
@@ -204,35 +212,35 @@ const BUILDERS = {
     return { n: { a, b, c }, value: a + b - c, expression: `${a} + ${b} - ${c}` }
   },
 
-  // 乘法：相同数量合并。d1 保底一边 ≥ 6 且积 ≥ 30。
+  // 乘法：相同数量合并。d1 两位数 × 一位数，d3 两位数 × 两位数。
   mul: (d) => {
     if (d === 1) {
-      const a = drawWhile(() => randInt(5, 9), (x) => x >= 6 || x * 6 >= 30)
-      const b = randInt(6, 9)
+      const a = randInt(12, 34)
+      const b = randInt(3, 6)
       return { n: { a, b }, value: a * b, expression: `${a} × ${b}` }
     }
     if (d === 2) {
-      const a = randInt(12, 34)
-      const b = randInt(3, 9)
+      const [a, b] = drawWhile(
+        () => [randInt(23, 78), randInt(4, 9)],
+        ([x, y]) => (x % 10) * y >= 10,
+      )
       return { n: { a, b }, value: a * b, expression: `${a} × ${b}` }
     }
-    const [a, b] = drawWhile(
-      () => [randInt(23, 48), randInt(4, 9)],
-      ([x, y]) => (x % 10) * y >= 10,
-    )
+    const a = randInt(12, 38)
+    const b = randInt(12, 24)
     return { n: { a, b }, value: a * b, expression: `${a} × ${b}` }
   },
 
-  // 除法（整除）：平均分。d1 被除数 ≥ 30。
+  // 除法（整除）：平均分。d1 两位数 ÷ 一位数且商为两位数。
   div: (d) => {
     if (d === 1) {
-      const b = randInt(6, 9)
-      const q = randInt(6, 9)
+      const b = randInt(3, 6)
+      const q = randInt(12, 24)
       const a = b * q
       return { n: { a, b }, value: q, expression: `${a} ÷ ${b}` }
     }
-    const b = randInt(3, 9)
-    const q = d === 2 ? randInt(11, 24) : randInt(13, 28)
+    const b = randInt(4, 9)
+    const q = d === 2 ? randInt(12, 40) : randInt(20, 80)
     const a = b * q
     return { n: { a, b }, value: q, expression: `${a} ÷ ${b}` }
   },
@@ -240,7 +248,7 @@ const BUILDERS = {
   // 有余数除法：只求"最多装满几份"的商（本题不给算式答案）。
   divrem: (d) => {
     const b = randInt(4, 9)
-    const q = d === 3 ? randInt(14, 32) : randInt(10, 20)
+    const q = d === 3 ? randInt(20, 80) : d === 2 ? randInt(12, 30) : randInt(6, 12)
     const r = randInt(1, b - 1)
     const a = b * q + r
     return { n: { a, b, r }, value: q, expression: null }
@@ -249,100 +257,100 @@ const BUILDERS = {
   // 两步：先乘后加。
   muladd: (d) => {
     if (d === 1) {
-      const a = randInt(4, 9)
-      const b = randInt(4, 9)
-      const c = randInt(12, 28)
+      const a = randInt(12, 24)
+      const b = randInt(3, 6)
+      const c = randInt(20, 60)
       return { n: { a, b, c }, value: a * b + c, expression: `${a} × ${b} + ${c}` }
     }
     if (d === 2) {
-      const a = randInt(12, 34)
-      const b = randInt(3, 8)
-      const c = randInt(15, 48)
+      const a = randInt(23, 58)
+      const b = randInt(4, 9)
+      const c = randInt(50, 160)
       return { n: { a, b, c }, value: a * b + c, expression: `${a} × ${b} + ${c}` }
     }
-    const a = randInt(12, 24)
-    const b = randInt(6, 15)
-    const c = randInt(100, 260)
+    const a = randInt(12, 29)
+    const b = randInt(12, 24)
+    const c = randInt(100, 300)
     return { n: { a, b, c }, value: a * b + c, expression: `${a} × ${b} + ${c}` }
   },
 
   // 两步：先除后加。
   divadd: (d) => {
     if (d === 1) {
-      const b = randInt(4, 9)
-      const q = randInt(5, 9)
-      const c = randInt(12, 28)
+      const b = randInt(3, 6)
+      const q = randInt(12, 24)
+      const c = randInt(20, 60)
       return { n: { a: b * q, b, c }, value: q + c, expression: `${b * q} ÷ ${b} + ${c}` }
     }
     if (d === 2) {
       const b = randInt(4, 9)
-      const q = randInt(9, 18)
-      const c = randInt(16, 48)
+      const q = randInt(12, 35)
+      const c = randInt(50, 160)
       return { n: { a: b * q, b, c }, value: q + c, expression: `${b * q} ÷ ${b} + ${c}` }
     }
-    const b = randInt(6, 12)
-    const q = randInt(12, 24)
-    const c = randInt(50, 180)
+    const b = randInt(6, 9)
+    const q = randInt(20, 60)
+    const c = randInt(100, 300)
     return { n: { a: b * q, b, c }, value: q + c, expression: `${b * q} ÷ ${b} + ${c}` }
   },
 
   // 两步：先乘后减。
   mulsub: (d) => {
     if (d === 2) {
-      const a = randInt(12, 28)
+      const a = randInt(12, 34)
       const b = randInt(3, 8)
-      const t = a * b + randInt(20, 60)
+      const t = a * b + randInt(30, 120)
       return { n: { t, a, b }, value: t - a * b, expression: `${t} - ${a} × ${b}` }
     }
-    const a = randInt(6, 15)
-    const b = randInt(12, 25)
-    const t = a * b + randInt(40, 140)
+    const a = randInt(12, 24)
+    const b = randInt(12, 20)
+    const t = a * b + randInt(100, 400)
     return { n: { t, a, b }, value: t - a * b, expression: `${t} - ${a} × ${b}` }
   },
 
   // 未知数关系：总数 − 已知 = 未知。
   misspart: (d) => {
     if (d === 1) {
-      const t = randInt(46, 96)
-      const k = randInt(13, 40)
+      const t = randInt(320, 860)
+      const k = randInt(120, 300)
       return { n: { t, k }, value: t - k, expression: `${t} - ${k}` }
     }
-    const t = d === 2 ? randInt(320, 640) : randInt(520, 960)
-    const k = d === 2 ? randInt(125, 280) : randInt(150, 380)
+    const t = d === 2 ? randInt(520, 940) : randInt(820, 980)
+    const k = d === 2 ? randInt(180, 450) : randInt(260, 680)
     return { n: { t, k }, value: t - k, expression: `${t} - ${k}` }
   },
 
   // 未知数关系：剩下的 + 送出的 = 原数。
   invadd: (d) => {
     if (d === 1) {
-      const r = randInt(16, 48)
-      const b = randInt(12, 40)
+      const r = randInt(120, 380)
+      const b = randInt(110, 260)
       return { n: { r, b }, value: r + b, expression: `${r} + ${b}` }
     }
-    const r = d === 2 ? randInt(130, 380) : randInt(220, 680)
-    const b = d === 2 ? randInt(115, 280) : randInt(130, 280)
+    const r = d === 2 ? randInt(220, 480) : randInt(320, 480)
+    const b = d === 2 ? randInt(130, 380) : randInt(180, 380)
     return { n: { r, b }, value: r + b, expression: `${r} + ${b}` }
   },
 
-  // 未知数关系（乘除）：总数 ÷ 份数 = 每份数。
+  // 未知数关系（乘除）：总数 ÷ 份数 = 每份数。除数保持一位数。
   eqgroups: (d) => {
-    const g = d === 1 ? randInt(4, 9) : d === 2 ? randInt(5, 9) : randInt(8, 15)
-    const q = d === 1 ? randInt(5, 9) : d === 2 ? randInt(12, 24) : randInt(11, 24)
+    const g = d === 1 ? randInt(3, 6) : d === 2 ? randInt(4, 9) : randInt(6, 9)
+    const q = d === 1 ? randInt(12, 24) : d === 2 ? randInt(20, 60) : randInt(24, 80)
     return { n: { t: g * q, g }, value: q, expression: `${g * q} ÷ ${g}` }
   },
 
   // 未知数关系（乘除）：份数 × 每份数 = 总数。
   invdiv: (d) => {
-    const g = d === 1 ? randInt(4, 9) : d === 2 ? randInt(6, 12) : randInt(9, 18)
-    const p = d === 1 ? randInt(5, 9) : d === 2 ? randInt(9, 20) : randInt(12, 24)
+    const g = d === 1 ? randInt(12, 24) : d === 2 ? randInt(15, 40) : randInt(12, 24)
+    const p = d === 1 ? randInt(3, 6) : d === 2 ? randInt(6, 12) : randInt(12, 30)
     return { n: { g, p }, value: g * p, expression: `${g} × ${p}` }
   },
 
   // 长度相加（≤ 1000，符合 3.NBT.2 与 schema 的长度上限）。
   addlen: (d) => {
     if (d === 1) {
-      const a = randInt(14, 46)
-      const b = randInt(13, 38)
+      const a = randInt(120, 380)
+      const b = randInt(110, 290)
       return { n: { a, b }, value: a + b, expression: `${a} + ${b}` }
     }
     if (d === 2) {
@@ -351,16 +359,16 @@ const BUILDERS = {
       return { n: { a, b }, value: a + b, expression: `${a} + ${b}` }
     }
     const a = randInt(180, 400)
-    const b = randInt(60, 160)
-    const c = randInt(40, 120)
+    const b = randInt(160, 320)
+    const c = randInt(120, 260)
     return { n: { a, b, c }, value: a + b + c, expression: `${a} + ${b} + ${c}` }
   },
 
   // 长度相减（≤ 1000）。
   sublen: (d) => {
     if (d === 1) {
-      const a = randInt(46, 96)
-      const b = randInt(13, 38)
+      const a = randInt(320, 680)
+      const b = randInt(120, 300)
       return { n: { a, b }, value: a - b, expression: `${a} - ${b}` }
     }
     const a = d === 2 ? randInt(620, 950) : randInt(820, 980)
@@ -371,8 +379,8 @@ const BUILDERS = {
   // 经过时间相加（分钟）。
   addtime: (d) => {
     if (d === 1) {
-      const a = randInt(14, 44)
-      const b = randInt(13, 40)
+      const a = randInt(75, 180)
+      const b = randInt(25, 60)
       return { n: { a, b }, value: a + b, expression: `${a} + ${b}` }
     }
     if (d === 2) {
@@ -394,41 +402,41 @@ const BUILDERS = {
   // 经过时间相减（分钟）。
   subtime: (d) => {
     if (d === 1) {
-      const t = randInt(30, 58)
-      const k = randInt(12, 26)
+      const t = randInt(90, 180)
+      const k = randInt(25, 60)
       return { n: { t, k }, value: t - k, expression: `${t} - ${k}` }
     }
-    const t = d === 2 ? randInt(46, 92) : randInt(96, 180)
-    const k = d === 2 ? randInt(15, 38) : randInt(30, 72)
+    const t = d === 2 ? randInt(120, 240) : randInt(240, 480)
+    const k = d === 2 ? randInt(30, 90) : randInt(60, 180)
     return { n: { t, k }, value: t - k, expression: `${t} - ${k}` }
   },
 
   // 质量合计（袋数 × 每袋千克）。
   masstotal: (d) => {
-    const n = d === 1 ? randInt(3, 6) : d === 2 ? randInt(6, 12) : randInt(12, 20)
-    const w = d === 1 ? randInt(2, 9) : d === 2 ? randInt(3, 9) : randInt(6, 18)
+    const n = d === 1 ? randInt(6, 12) : d === 2 ? randInt(12, 24) : randInt(18, 30)
+    const w = d === 1 ? randInt(12, 25) : d === 2 ? randInt(8, 18) : randInt(12, 24)
     return { n: { n, w }, value: n * w, expression: `${w} × ${n}` }
   },
 
   // 速度 × 时间 = 距离。
   ratedist: (d) => {
-    const p = d === 1 ? randInt(4, 9) : d === 2 ? randInt(12, 32) : randInt(24, 48)
-    const t = d === 1 ? randInt(5, 9) : d === 2 ? randInt(4, 9) : randInt(8, 18)
+    const p = d === 1 ? randInt(12, 30) : d === 2 ? randInt(15, 40) : randInt(20, 60)
+    const t = d === 1 ? randInt(4, 9) : d === 2 ? randInt(6, 15) : randInt(12, 25)
     return { n: { p, t }, value: p * t, expression: `${p} × ${t}` }
   },
 
   // 多段路程：先乘后加（结果控制在 1000 米以内）。
   multistepdist: (d) => {
-    const x = d === 1 ? randInt(10, 25) : d === 2 ? randInt(40, 120) : randInt(120, 300)
-    const n = d === 1 ? randInt(3, 5) : d === 2 ? randInt(4, 8) : randInt(6, 15)
-    const dist = d === 1 ? randInt(4, 9) : d === 2 ? randInt(12, 30) : randInt(12, 40)
+    const x = d === 1 ? randInt(120, 300) : d === 2 ? randInt(200, 400) : randInt(80, 240)
+    const n = d === 1 ? randInt(3, 5) : d === 2 ? randInt(4, 8) : randInt(5, 10)
+    const dist = d === 1 ? randInt(20, 40) : d === 2 ? randInt(20, 50) : randInt(20, 50)
     return { n: { x, n, dist }, value: x + n * dist, expression: `${x} + ${n} × ${dist}` }
   },
 
   // 等差序列：求下一项。
   patconst: (d) => {
-    const start = d === 1 ? randInt(2, 9) : d === 2 ? randInt(10, 28) : randInt(14, 40)
-    const step = d === 1 ? randInt(2, 9) : d === 2 ? randInt(6, 15) : randInt(11, 24)
+    const start = d === 1 ? randInt(12, 40) : d === 2 ? randInt(40, 120) : randInt(120, 300)
+    const step = d === 1 ? randInt(6, 15) : d === 2 ? randInt(12, 25) : randInt(20, 45)
     const terms = [start, start + step, start + 2 * step, start + 3 * step]
     const next = start + 4 * step
     return { n: { terms, step }, value: next, expression: `${terms[3]} + ${step}` }
@@ -436,16 +444,16 @@ const BUILDERS = {
 
   // 倍增序列：每次 ×2。
   patdouble: (d) => {
-    const start = d === 2 ? randInt(3, 9) : randInt(4, 12)
+    const start = d === 2 ? randInt(12, 30) : randInt(16, 40)
     const terms = [start, start * 2, start * 4, start * 8]
     return { n: { terms }, value: start * 16, expression: `${terms[3]} × 2` }
   },
 
   // 二阶差序列：差值本身每次增加固定量。
   patsecond: () => {
-    const t0 = randInt(2, 8)
-    const f = randInt(2, 5)
-    const k = randInt(2, 4)
+    const t0 = randInt(12, 20)
+    const f = randInt(3, 8)
+    const k = randInt(2, 5)
     const terms = [t0]
     let diff = f
     for (let i = 0; i < 4; i += 1) {
@@ -458,7 +466,7 @@ const BUILDERS = {
 
   // 平方数序列：n×n。
   patsquare: () => {
-    const base = randInt(2, 5)
+    const base = randInt(6, 12)
     const terms = [0, 1, 2, 3].map((i) => (base + i) * (base + i))
     const next = (base + 4) * (base + 4)
     return { n: { terms, base }, value: next, expression: `${base + 4} × ${base + 4}` }
@@ -466,7 +474,7 @@ const BUILDERS = {
 
   // ×2+1 递推。
   patdoubleaddone: () => {
-    const start = randInt(2, 5)
+    const start = randInt(10, 16)
     const terms = [start]
     for (let i = 0; i < 3; i += 1) terms.push(terms[terms.length - 1] * 2 + 1)
     const last = terms[terms.length - 1]
@@ -522,32 +530,32 @@ function makeExample(avoid, builder) {
 
 /** 每种 kind 的示例句子构造器（内部随机取一组较小的样例数字）。 */
 const EXAMPLE = {
-  add: () => { const x = randInt(6, 19); const y = randInt(6, 19); return `比如 ${x} 与 ${y} 合起来：${x} + ${y} = ${x + y}，总数比每一部分都大。` },
-  sub: () => { const x = randInt(30, 59); const y = randInt(11, 29); return `比如从 ${x} 里去掉 ${y}：${x} - ${y} = ${x - y}，剩下的总比原来少。` },
-  repsub: () => { const x = randInt(60, 89); const y = randInt(11, 22); const z = randInt(11, 22); return `比如 ${x} 先去掉 ${y} 再去掉 ${z}，按顺序一步步减。` },
-  mergededup: () => { const x = randInt(20, 49); const y = randInt(15, 39); const z = randInt(8, 24); return `比如 ${x} + ${y} - ${z}，先合起来再去掉重复的部分。` },
-  mul: () => { const x = randInt(4, 9); const y = randInt(4, 9); return `比如 ${x} × ${y} = ${x * y}，几个相同的数相加可以写成乘法。` },
-  div: () => { const y = randInt(3, 9); const q = randInt(4, 9); return `比如 ${y * q} ÷ ${y} = ${q}，把它平均分成 ${y} 份就是每份的数量。` },
-  divrem: () => { const y = randInt(4, 9); const x = randInt(30, 80); return `比如 ${x} 里每 ${y} 个装一份，最多装满几份就用除法估。` },
-  muladd: () => { const x = randInt(4, 9); const y = randInt(4, 9); const z = randInt(11, 29); return `比如 ${x} × ${y} + ${z}，先算乘法再加。` },
-  divadd: () => { const y = randInt(3, 9); const q = randInt(4, 9); const z = randInt(11, 29); return `比如 ${y * q} ÷ ${y} + ${z}，先算除法再加。` },
-  mulsub: () => { const x = randInt(4, 9); const y = randInt(3, 8); const t = x * y + randInt(20, 60); return `比如 ${t} - ${x} × ${y}，先算乘法再相减。` },
-  misspart: () => { const x = randInt(40, 89); const y = randInt(11, 35); return `比如总数 ${x}、已知 ${y}：${x} - ${y} = ${x - y}，剩下就是未知的部分。` },
-  invadd: () => { const x = randInt(20, 59); const y = randInt(11, 39); return `比如剩下 ${x} 个、又去掉 ${y} 个：${x} + ${y}，合起来才是原来的数量。` },
-  eqgroups: () => { const g = randInt(3, 9); const q = randInt(4, 9); return `比如总数 ${g * q} 平均分成 ${g} 份：${g * q} ÷ ${g}，每份是 ${q}。` },
-  invdiv: () => { const g = randInt(3, 9); const p = randInt(4, 9); return `比如 ${g} 份、每份 ${p}：${g} × ${p}，总数就是每份乘份数。` },
-  addlen: () => { const x = randInt(20, 49); const y = randInt(15, 39); return `比如一段 ${x} 米、另一段 ${y} 米：${x} + ${y}，合起来带上米。` },
-  sublen: () => { const x = randInt(60, 99); const y = randInt(15, 44); return `比如全长 ${x} 米、已走 ${y} 米：${x} - ${y}，剩下就是没走的部分。` },
-  addtime: () => { const x = randInt(16, 44); const y = randInt(15, 39); return `比如第一段 ${x} 分钟、第二段 ${y} 分钟：${x} + ${y}，单位保持分钟。` },
-  subtime: () => { const x = randInt(40, 89); const y = randInt(12, 34); return `比如计划 ${x} 分钟、已经用了 ${y} 分钟：${x} - ${y}，剩下就是还要用的时间。` },
-  masstotal: () => { const n = randInt(3, 7); const w = randInt(3, 9); return `比如 ${n} 份、每份 ${w} 千克：${w} × ${n}，总重带上千克。` },
-  ratedist: () => { const p = randInt(4, 9); const t = randInt(4, 9); return `比如每分钟 ${p} 米、走了 ${t} 分钟：${p} × ${t}，结果是米。` },
-  multistepdist: () => { const x = randInt(300, 340); const n = randInt(3, 5); const d = randInt(6, 9); return `比如先走 ${x} 米，再走 ${n} 段每段 ${d} 米：${x} + ${n} × ${d}。` },
-  patconst: () => { const s = randInt(200, 260); const step = randInt(12, 19); return `比如数列 ${s}、${s + step}、${s + 2 * step}，每次加 ${step}，下一个就接着往后加。` },
-  patdouble: () => { const s = randInt(300, 340); return `比如数列 ${s}、${s * 2}、${s * 4}，每次翻倍，下一个再乘 2。` },
-  patsecond: () => { const d1 = randInt(300, 320); const k = randInt(12, 16); return `比如相邻的差依次是 ${d1}、${d1 + k}，差本身每次多 ${k}，就照这个规律往后推。` },
-  patsquare: () => { const b = randInt(30, 40); return `比如 ${b} × ${b}、${b + 1} × ${b + 1}，下一项就接着往后。` },
-  patdoubleaddone: () => { const x = randInt(60, 80); return `比如 ${x} × 2 + 1 = ${x * 2 + 1}，每一步都这样算。` },
+  add: () => { const x = randInt(120, 380); const y = randInt(110, 290); return `比如 ${x} 与 ${y} 合起来：${x} + ${y} = ${x + y}，总数比每一部分都大。` },
+  sub: () => { const x = randInt(420, 860); const y = randInt(120, 340); return `比如从 ${x} 里去掉 ${y}：${x} - ${y} = ${x - y}，剩下的总比原来少。` },
+  repsub: () => { const x = randInt(620, 900); const y = randInt(120, 220); const z = randInt(120, 220); return `比如 ${x} 先去掉 ${y} 再去掉 ${z}，按顺序一步步减。` },
+  mergededup: () => { const x = randInt(220, 480); const y = randInt(150, 320); const z = randInt(100, 200); return `比如 ${x} + ${y} - ${z}，先合起来再去掉重复的部分。` },
+  mul: () => { const x = randInt(12, 34); const y = randInt(3, 6); return `比如 ${x} × ${y} = ${x * y}，几个相同的数相加可以写成乘法。` },
+  div: () => { const y = randInt(3, 6); const q = randInt(12, 24); return `比如 ${y * q} ÷ ${y} = ${q}，把它平均分成 ${y} 份就是每份的数量。` },
+  divrem: () => { const y = randInt(4, 9); const x = randInt(120, 400); return `比如 ${x} 里每 ${y} 个装一份，最多装满几份就用除法估。` },
+  muladd: () => { const x = randInt(12, 24); const y = randInt(3, 6); const z = randInt(20, 60); return `比如 ${x} × ${y} + ${z}，先算乘法再加。` },
+  divadd: () => { const y = randInt(3, 6); const q = randInt(12, 20); const z = randInt(20, 60); return `比如 ${y * q} ÷ ${y} + ${z}，先算除法再加。` },
+  mulsub: () => { const x = randInt(12, 24); const y = randInt(3, 6); const t = x * y + randInt(30, 90); return `比如 ${t} - ${x} × ${y}，先算乘法再相减。` },
+  misspart: () => { const x = randInt(320, 680); const y = randInt(120, 300); return `比如总数 ${x}、已知 ${y}：${x} - ${y} = ${x - y}，剩下就是未知的部分。` },
+  invadd: () => { const x = randInt(120, 320); const y = randInt(110, 240); return `比如剩下 ${x} 个、又去掉 ${y} 个：${x} + ${y}，合起来才是原来的数量。` },
+  eqgroups: () => { const g = randInt(3, 6); const q = randInt(12, 24); return `比如总数 ${g * q} 平均分成 ${g} 份：${g * q} ÷ ${g}，每份是 ${q}。` },
+  invdiv: () => { const g = randInt(12, 20); const p = randInt(3, 6); return `比如 ${g} 份、每份 ${p}：${g} × ${p}，总数就是每份乘份数。` },
+  addlen: () => { const x = randInt(120, 320); const y = randInt(110, 280); return `比如一段 ${x} 米、另一段 ${y} 米：${x} + ${y}，合起来带上米。` },
+  sublen: () => { const x = randInt(420, 860); const y = randInt(120, 340); return `比如全长 ${x} 米、已走 ${y} 米：${x} - ${y}，剩下就是没走的部分。` },
+  addtime: () => { const x = randInt(75, 150); const y = randInt(25, 60); return `比如第一段 ${x} 分钟、第二段 ${y} 分钟：${x} + ${y}，单位保持分钟。` },
+  subtime: () => { const x = randInt(120, 240); const y = randInt(25, 70); return `比如计划 ${x} 分钟、已经用了 ${y} 分钟：${x} - ${y}，剩下就是还要用的时间。` },
+  masstotal: () => { const n = randInt(6, 12); const w = randInt(12, 24); return `比如 ${n} 份、每份 ${w} 千克：${w} × ${n}，总重带上千克。` },
+  ratedist: () => { const p = randInt(12, 30); const t = randInt(4, 8); return `比如每分钟 ${p} 米、走了 ${t} 分钟：${p} × ${t}，结果是米。` },
+  multistepdist: () => { const x = randInt(120, 320); const n = randInt(3, 5); const d = randInt(20, 40); return `比如先走 ${x} 米，再走 ${n} 段每段 ${d} 米：${x} + ${n} × ${d}。` },
+  patconst: () => { const s = randInt(120, 220); const step = randInt(12, 25); return `比如数列 ${s}、${s + step}、${s + 2 * step}，每次加 ${step}，下一个就接着往后加。` },
+  patdouble: () => { const s = randInt(12, 30); return `比如数列 ${s}、${s * 2}、${s * 4}，每次翻倍，下一个再乘 2。` },
+  patsecond: () => { const d1 = randInt(12, 30); const k = randInt(2, 5); return `比如相邻的差依次是 ${d1}、${d1 + k}，差本身每次多 ${k}，就照这个规律往后推。` },
+  patsquare: () => { const b = randInt(12, 20); return `比如 ${b} × ${b}、${b + 1} × ${b + 1}，下一项就接着往后。` },
+  patdoubleaddone: () => { const x = randInt(12, 20); return `比如 ${x} × 2 + 1 = ${x * 2 + 1}，每一步都这样算。` },
 }
 
 // ── 情境模板池（每个 type ≥ 8 个不同故事） ────────────────────────────
@@ -765,8 +773,8 @@ function buildQuestion({ id, type, difficulty, category, scenario, problem, slot
 
 // ── 主流程：生成 → 建相似题双向链接 → 落盘 ─────────────────────────────
 
-/** 题库版本号（扩容与量级上调后升到 2.0.0）。 */
-const VERSION = '2.0.0'
+/** 题库版本号（三年级量级重标定后升到 3.0.0）。 */
+const VERSION = '3.0.0'
 
 /** 给同格内"同技能 + 同答案形态 + 答案值不同"的相邻两题建双向相似链接。 */
 function linkSimilar(list) {
