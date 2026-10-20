@@ -1315,3 +1315,58 @@ docs/photo-assets.md             # 接入口径与来源清单
 **验证**：`node scripts/generate-question-bank.mjs` 生成 216 题与 48 组相似题
 链接；`npm run test` 61 文件 / 768 用例全绿；`npm run type-check`、`npm run build`
 通过；`openspec validate dsm1234 --strict` 通过。
+
+---
+
+## R37. 补齐其余三个物种的授权 3D 模型
+
+**决策来源**：2026-10-20 用户提供 Sketchfab 鱼类搜索页，要求"根据需要下载相关的 3D 鱼模型"。
+Sketchfab 的下载按钮与 API 都要求登录（匿名 API 返回 401，网页下载被 WAF 挑战），
+最终由用户手动下载三个 glTF 包，我再做压缩、登记与接入。
+
+### 1. 选型（许可先于好看）
+
+| 目标物种 | 模型 | 作者 | 许可 | 原始面数 | 优化后 |
+|---|---|---|---|---|---|
+| 深海大鼬鳚 | [Bassozetus Cusk](https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545) | paumarti | CC BY 4.0 | 49k | 189 KB |
+| 深海蜥鱼 | [LizardfishV3](https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7) | aloxr | CC BY 4.0 | 13k | 644 KB |
+| 宝石鱿鱼 | [Squid](https://sketchfab.com/3d-models/squid-2e211c13614b433ab6191a814364dacd) | Morphin | CC BY 4.0 | 39k | 506 KB |
+
+- 三个 `license.txt` 原文照抄到 `public/models/<ref>-license.txt`；
+- 模型都不是目标物种的精确复原：大鼬鳚是 **Bassozetus 属**、蜥鱼是 **蜥鱼科**、
+  鱿鱼是 **头足类**。`model.note` 都写明"示意模型 / 不代表精确解剖复原"，
+  与 R33 的"属级素材不冒充种级"同一口径；
+- 排除了两个 CC0 蜥鱼扫描件（70 万+ 面、带博物馆色卡）和 678 面的粉色卡通
+  `Cusk Eel`，它们不适合儿童端默认视觉。
+
+### 2. 压缩
+
+- 大鼬鳚原包是 spec/gloss 材质：先 `gltf-transform metalrough` 转 metal/rough，
+  再 `optimize`；
+- 三个模型统一：`optimize --compress meshopt --texture-compress webp
+  --texture-size 1024`，蜥鱼保留骨骼与 idle 动画，几何简化比例 0.7 / 0.8；
+- 结果均 ≤ 2 MB，`creatures.test.ts` 对四个模型逐个检查体积、许可原文与作者名。
+
+### 3. 查看器修正（本轮真机验收发现）
+
+第一版直接渲染时：
+- 蜥鱼因 `Box3.setFromObject` 读不到 SkinnedMesh 的蒙皮包围盒，被缩得极小，
+  且绑定姿态是竖着的，画面里像一条正对镜头的小鱼；
+- 相机 `lookAt(0, -1.35, 0)` 让所有模型偏上、下方大片留白。
+
+修正 `CreatureModelViewer.vue`：
+- `measureBounds()` 对 SkinnedMesh 显式 `computeBoundingBox()` 并按世界矩阵合并；
+- 长轴不是 X 时自动转向：Z 长轴绕 Y 转 90°、Y 长轴（竖着的绑定姿态）绕 Z 转 90°，
+  让相机看到鱼的侧面；
+- 相机改为 `(2.6, 1.4, 8.2)` 看向原点，并按缩放后的中心平移模型，四个物种都居中。
+
+### 4. 验证
+
+`npm run test` 61 文件 / 768 用例全绿；`type-check`、`build` 通过。
+无头 Edge（390×844，WebGL 2.0）实测：图鉴四张卡全部「3D 模型已加载」，
+观察舱四个物种都能渲染、可切换「看真实照片」，控制台无异常。
+视觉截图确认蜥鱼横置且占满取景、鲛鱼/鱿鱼居中、鮟鱇鱼不再偏上。
+
+**代价与遗留**：图鉴列表现在默认创建 **4 个 WebGL context** 并加载约 2.6 MB
+GLB。中端手机可接受；低端机或模型继续增加时需要懒初始化/可见时才挂载。
+其余 8 个图鉴条目等有明确许可证的模型后再接入。

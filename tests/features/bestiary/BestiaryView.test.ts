@@ -338,7 +338,8 @@ describe('ObservationView', () => {
   })
 
   it('offers no 3D entry point for a species that has no licensed model', () => {
-    const view = mount(ObservationView, { props: { creature: CREATURE_BANK.creatures[1] } })
+    const noModel = { ...CREATURE_BANK.creatures[1], model: undefined }
+    const view = mount(ObservationView, { props: { creature: noModel } })
     expect(view.find('[data-testid="creature-model-toggle"]').exists()).toBe(false)
     expect(view.find('[data-testid="creature-photo"]').exists()).toBe(true)
   })

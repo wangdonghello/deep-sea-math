@@ -1,0 +1,11 @@
+Model Information:
+* title:	LizardfishV3
+* source:	https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7
+* author:	aloxr (https://sketchfab.com/aloxr)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "LizardfishV3" (https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7) by aloxr (https://sketchfab.com/aloxr) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

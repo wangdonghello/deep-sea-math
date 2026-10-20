@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bassozetus Cusk
+* source:	https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545
+* author:	paumarti (https://sketchfab.com/paumarti)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bassozetus Cusk" (https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545) by paumarti (https://sketchfab.com/paumarti) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

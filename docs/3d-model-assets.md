@@ -103,8 +103,22 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 - 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回真实
   影像并撤掉切换按钮；模型署名与许可链接只要模型在屏就显示
   （CC BY 要求署名不因降级而消失，看到什么就署什么名）。
-- 当前只有鮟鱇鱼一个模型，图鉴列表最多加载 1 个 GLB。后续模型变多时，列表
-  页需要重新评估"每张卡都建 WebGL context"的成本（懒初始化或按需挂载）。
+- 当前 4 个物种各有一个模型，图鉴列表最多同时加载 4 个 GLB（合计约 2.6 MB）
+  并创建 4 个 WebGL context。中端手机可接受；低端机或模型继续增加时，列表页
+  需要重估成本（懒初始化 / 可见时才挂载）。
+
+## 5.1 当前已接入模型
+
+| 物种 | 模型 | 作者 | 许可 | 本地体积 |
+|---|---|---|---|---|
+| 约翰逊鮟鱇鱼 | Deep Sea Fish #3DSM4 | Carlo Bergonzini | CC BY 4.0 | 1.3 MB |
+| 深海大鼬鳚 | Bassozetus Cusk | paumarti | CC BY 4.0 | 189 KB |
+| 深海蜥鱼 | LizardfishV3 | aloxr | CC BY 4.0 | 644 KB |
+| 宝石鱿鱼 | Squid | Morphin | CC BY 4.0 | 506 KB |
+
+后三个模型均由 `@gltf-transform/cli optimize` 处理：合并网格、几何简化、
+贴图压到 1024px WebP、meshopt 压缩；原始 `license.txt` 原文保存在
+`public/models/<ref>-license.txt`。
 
 ## 6. 接入后要跑
 

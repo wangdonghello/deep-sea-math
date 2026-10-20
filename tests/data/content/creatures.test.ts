@@ -164,15 +164,31 @@ describe('creature content', () => {
     expect(() => assertValidCreatures(insecureLicenseUrl)).toThrow(/model\.licenseUrl.*HTTPS/i)
   })
 
-  it('ships the optimized model and its license notice as local assets', () => {
-    const modelPath = resolve(process.cwd(), 'public/models/deep-sea-fish-3dsm4.glb')
-    const licensePath = resolve(process.cwd(), 'public/models/anglerfish-license.txt')
-    const model = readFileSync(modelPath)
-    const license = readFileSync(licensePath, 'utf8')
+  it('ships every optimized model and its license notice as local assets', () => {
+    const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
+    const modeled = bestiary.creatures.filter((creature) => creature.model !== undefined)
+    expect(modeled).toHaveLength(4)
 
-    expect(model.byteLength).toBeLessThan(2 * 1024 * 1024)
-    expect(license).toContain('CC-BY-4.0')
-    expect(license).toContain('Carlo Bergonzini')
+    /** 鮟鱇鱼的历史文件名不符合 `<ref>-license.txt` 约定，单独映射。 */
+    const licenseFileByRef: Record<string, string> = {
+      'deep-sea-fish-3dsm4': 'anglerfish-license.txt',
+    }
+
+    for (const creature of modeled) {
+      const model = creature.model
+      const asset = readFileSync(resolve(process.cwd(), 'public/models', `${model.ref}.glb`))
+      const license = readFileSync(resolve(
+        process.cwd(),
+        'public/models',
+        licenseFileByRef[model.ref] ?? `${model.ref}-license.txt`,
+      ), 'utf8')
+
+      expect(asset.byteLength, `${creature.id} model size`).toBeLessThan(2 * 1024 * 1024)
+      expect(license, `${creature.id} license`).toContain('CC-BY-4.0')
+      // 许可原文里必须真的出现作者名，避免"拿到模型但署名不可复核"
+      expect(license, `${creature.id} license author`).toContain(model.creditSummary.split(' · ')[1])
+      expect(model.note, `${creature.id} model disclaimer`).toMatch(/示意模型/)
+    }
   })
 
   it('uses species-level OBIS observation sources without claiming complete ranges', () => {

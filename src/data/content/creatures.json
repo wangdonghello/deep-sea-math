@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "creatures": [
     {
       "id": "johnson-anglerfish",
@@ -68,6 +68,15 @@
         "licenseUrl": "https://commons.wikimedia.org/wiki/Template:PD-USGov-NOAA",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spectrunculus_grandis.jpg",
         "note": "真实影像：遥控潜水器在戴维森海山（Davidson Seamount）3,288 米水深处拍摄的深海大鼬鳚（Spectrunculus grandis）活体。"
+      },
+      "model": {
+        "ref": "bassozetus-cusk",
+        "creditSummary": "Bassozetus Cusk · paumarti · CC BY 4.0",
+        "attribution": "This work is based on \"Bassozetus Cusk\" (https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545) by paumarti (https://sketchfab.com/paumarti) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/). Changes: scene graph flattened, meshes joined, geometry simplified, textures resized to 1024px and recompressed as WebP for mobile display.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545",
+        "note": "这是深海鼬鳚属（Bassozetus）的授权示意模型，不代表巨鼬鳚 Spectrunculus grandis 的精确解剖复原。"
       }
     },
     {
@@ -98,6 +107,15 @@
         "licenseUrl": "https://commons.wikimedia.org/wiki/Template:PD-NOAA",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Expl9674_(14482341086).jpg",
         "note": "真实影像：NOAA 遥控潜水器在海底拍摄的深海蜥鱼属（Bathysaurus）活体。该影像只鉴定到属，未必就是本页的 Bathysaurus ferox。"
+      },
+      "model": {
+        "ref": "lizardfish-v3",
+        "creditSummary": "LizardfishV3 · aloxr · CC BY 4.0",
+        "attribution": "This work is based on \"LizardfishV3\" (https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7) by aloxr (https://sketchfab.com/aloxr) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/). Changes: scene graph flattened, meshes joined, geometry simplified, textures resized to 1024px and recompressed as WebP for mobile display.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7",
+        "note": "这是蜥鱼科鱼类的授权示意模型，不代表深海蜥鱼 Bathysaurus ferox 的精确解剖复原。"
       }
     },
     {
@@ -128,6 +146,15 @@
         "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:NOAA_Histioteuthis_sp.jpg",
         "note": "真实影像：NOAA 拍摄的宝石鱿鱼属（Histioteuthis）个体，体表发光器清晰可见。该影像只鉴定到属，未必就是本页的 Histioteuthis bonnellii。"
+      },
+      "model": {
+        "ref": "squid-morphin",
+        "creditSummary": "Squid · Morphin · CC BY 4.0",
+        "attribution": "This work is based on \"Squid\" (https://sketchfab.com/3d-models/squid-2e211c13614b433ab6191a814364dacd) by Morphin (https://sketchfab.com/morphinometr) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/). Changes: scene graph flattened, meshes joined, geometry simplified, textures resized to 1024px and recompressed as WebP for mobile display.",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://sketchfab.com/3d-models/squid-2e211c13614b433ab6191a814364dacd",
+        "note": "这是头足类的授权示意模型，不代表宝石鱿鱼 Histioteuthis bonnellii 的精确解剖复原。"
       }
     }
   ]

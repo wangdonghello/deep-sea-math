@@ -80,6 +80,35 @@ function onWebGLContextLost(event: Event): void {
   emit('error')
 }
 
+/**
+ * 计算模型的实际包围盒。
+ *
+ * `Box3.setFromObject` 对 SkinnedMesh 只读到未蒙皮的几何包围盒；蜥鱼这类
+ * 骨骼绑定模型会因此被缩得极小。这里对蒙皮网格显式调用
+ * `computeBoundingBox()`，把局部包围盒按世界矩阵并入整体包围盒。
+ */
+function measureBounds(object: THREE.Object3D): THREE.Box3 {
+  object.updateMatrixWorld(true)
+  const box = new THREE.Box3()
+  object.traverse((child) => {
+    const skinned = child as THREE.SkinnedMesh
+    if (skinned.isSkinnedMesh === true) {
+      skinned.computeBoundingBox()
+      if (skinned.boundingBox !== null) {
+        box.union(skinned.boundingBox.clone().applyMatrix4(skinned.matrixWorld))
+      }
+      return
+    }
+    const mesh = child as THREE.Mesh
+    if (mesh.isMesh !== true) return
+    mesh.geometry.computeBoundingBox()
+    if (mesh.geometry.boundingBox !== null) {
+      box.union(mesh.geometry.boundingBox.clone().applyMatrix4(mesh.matrixWorld))
+    }
+  })
+  return box
+}
+
 async function loadModel(): Promise<void> {
   const host = stage.value
   if (!host) return
@@ -95,8 +124,8 @@ async function loadModel(): Promise<void> {
     const scene = new THREE.Scene()
     const modelCamera = new THREE.PerspectiveCamera(34, 1, 0.1, 100)
     camera = modelCamera
-    modelCamera.position.set(3.3, 1.9, 8.2)
-    modelCamera.lookAt(0, -1.35, 0)
+    modelCamera.position.set(2.6, 1.4, 8.2)
+    modelCamera.lookAt(0, 0, 0)
 
     renderer = new THREE.WebGLRenderer({
       antialias: window.devicePixelRatio <= 1.5,
@@ -130,15 +159,29 @@ async function loadModel(): Promise<void> {
     }
 
     model = gltf.scene
-    const bounds = new THREE.Box3().setFromObject(model)
+    scene.add(model)
+    const initialBounds = measureBounds(model)
+    if (initialBounds.isEmpty()) throw new Error('Model has no visible geometry')
+    const initialSize = initialBounds.getSize(new THREE.Vector3())
+
+    // 长轴若不是 X，转到 X：相机在 +Z 方向，长轴横过来才能看到鱼的侧面，
+    // 而不是正对鱼头或把触手当成主体。蜥鱼绑定姿态是竖着的，绕 Z 转 90°。
+    if (initialSize.z > initialSize.x * 1.2 && initialSize.z >= initialSize.y * 1.2) {
+      model.rotation.y = Math.PI / 2
+    } else if (initialSize.y > initialSize.x * 1.2) {
+      model.rotation.z = Math.PI / 2
+    }
+
+    const bounds = measureBounds(model)
     const dimensions = bounds.getSize(new THREE.Vector3())
     const center = bounds.getCenter(new THREE.Vector3())
     const longestSide = Math.max(dimensions.x, dimensions.y, dimensions.z)
     if (!Number.isFinite(longestSide) || longestSide <= 0) throw new Error('Model has no visible geometry')
 
-    model.position.sub(center)
-    model.scale.setScalar(4.4 / longestSide)
-    scene.add(model)
+    const scale = 4.4 / longestSide
+    model.scale.setScalar(scale)
+    // 先缩放再按缩放后的中心平移，避免模型偏离画面中心。
+    model.position.set(-center.x * scale, -center.y * scale, -center.z * scale)
 
     const renderFrame = (): void => {
       if (!renderer) return

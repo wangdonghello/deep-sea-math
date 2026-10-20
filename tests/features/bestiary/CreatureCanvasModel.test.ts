@@ -119,8 +119,9 @@ describe('CreatureCanvas 影像与 3D 模型的切换', () => {
   })
 
   it('只解锁到没有模型的物种时，观察舱不出现切换按钮', () => {
+    const noModel = { ...CREATURE_BANK.creatures[1], model: undefined }
     const view = mount(CreatureCanvas, {
-      props: { creature: CREATURE_BANK.creatures[1], allowModel: true, preferModel: true },
+      props: { creature: noModel, allowModel: true, preferModel: true },
     })
     expect(view.find('[data-testid="creature-model-toggle"]').exists()).toBe(false)
     expect(view.find('[data-testid="creature-photo"]').exists()).toBe(true)
