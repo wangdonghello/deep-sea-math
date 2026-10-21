@@ -3,8 +3,8 @@
   "slug": "dsm2001",
   "created_at": "2026-10-21T19:25:00+08:00",
   "dry_run": true,
-  "dop_status": "spec-in-progress",
-  "dop_status_at": "2026-10-21T19:25:00+08:00",
+  "dop_status": "plan-ready",
+  "dop_status_at": "2026-10-21T19:38:00+08:00",
   "delta_capabilities": [
     "grade-personalization",
     "grade-question-bank",
