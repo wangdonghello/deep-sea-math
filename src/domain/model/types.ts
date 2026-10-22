@@ -39,6 +39,24 @@ export type QuizType = (typeof QUIZ_TYPES)[number]
 /** 三档难度：1 见习训练师 / 2 深海训练师 / 3 探险大师。 */
 export type Difficulty = 1 | 2 | 3
 
+/** 小学低年级：第二版首发支持 1–3 年级。 */
+export type Grade = 1 | 2 | 3
+
+/** 主兴趣主题标识；首发三个主题包与内容库中的 id 一一对应。 */
+export type ThemeId = 'deep-sea' | 'dinosaur' | 'space'
+
+/** 题目作答形态：开放输入或四选一。 */
+export type QuestionFormat = 'open' | 'choice'
+
+/** 选择题选项标识，固定 A–D。 */
+export type ChoiceId = 'A' | 'B' | 'C' | 'D'
+
+/** 一道选择题的选项。 */
+export interface ChoiceOption {
+  id: ChoiceId
+  label: string
+}
+
 /**
  * 每日题组的三个槽位类别（spec `daily-math-quest` §每日题组生成）。
  *
@@ -95,12 +113,14 @@ export interface FiveStep {
 
 /** 题干答案的三种等价形态之一，判等规则见 `quiz/answerJudgement`。 */
 export interface Answer {
-  /** 数值答案，取整后比对。 */
+  /** 数值答案，取整后比对；选择题固定为 0，判题只看 optionId。 */
   value: number
   /** 带单位答案的单位（如「颗」），归一化后比对。 */
   unit?: string
   /** 算式答案（如「24÷4」），按 token 序列比对。 */
   expression?: string
+  /** 选择题的正确选项；开放题 MUST NOT 声明。 */
+  optionId?: ChoiceId
 }
 
 /**
@@ -120,6 +140,14 @@ export interface Answer {
 export interface Question {
   /** 题目标识，全库唯一（`similarQuestionIds` 以此为外键）。 */
   id: string
+  /** 所属年级；组题时按它硬过滤，禁止跨年级。 */
+  grade: Grade
+  /** 作答形态；旧题库缺省为开放题。 */
+  format: QuestionFormat
+  /** 选择题选项；开放题 MUST 为空。 */
+  options?: ChoiceOption[]
+  /** 按主题覆盖的题干；键只能是已发布主题。 */
+  themeStories?: Partial<Record<ThemeId, { title: string; body: string }>>
   type: QuizType
   difficulty: Difficulty
   /**
@@ -173,9 +201,12 @@ export interface Question {
  * `category` 刻意**不**在这个可选名单里：它决定组题时的槽位归属（见
  * {@link Question.category} 的说明），漏写的代价是静默错配而非编译错误。
  */
-export type QuestionInput = Omit<Question, 'requiresFiveStep' | 'similarQuestionIds'> & {
+export type QuestionInput = Omit<Question, 'requiresFiveStep' | 'similarQuestionIds' | 'grade' | 'format'> & {
   requiresFiveStep?: boolean
   similarQuestionIds?: string[]
+  /** 旧内容可省略；缺省为 3 年级、开放题。 */
+  grade?: Grade
+  format?: QuestionFormat
 }
 
 /**
@@ -203,6 +234,8 @@ export function createQuestion(input: QuestionInput): Question {
 
   return {
     ...input,
+    grade: input.grade ?? 3,
+    format: input.format ?? 'open',
     requiresFiveStep: input.requiresFiveStep ?? false,
     // `[...]` 而不是直接透传引用：题库 JSON 解析出的对象会被组件反复读取、
     // 也可能被投影逻辑临时改写，共享引用会让「默认空数组」这类字面量在
@@ -253,6 +286,10 @@ export interface Profile {
   salt: string
   /** 建档时间（Unix 毫秒），由注入的 `clock` 提供。 */
   createdAt: number
+  /** 年级；第一版旧档案缺省按 3 年级处理。 */
+  grade?: Grade
+  /** 主兴趣主题；第一版旧档案缺省按深海处理。 */
+  themeId?: ThemeId
 }
 
 /** 图鉴生物条目（`data/content/creatures.json` 的同构类型）。 */
@@ -287,6 +324,10 @@ export interface Session {
   difficultyTrace: number[]
   /** 生成时间（Unix 毫秒），由注入的 `clock` 提供。 */
   startedAt: number
+  /** 组题时的年级快照；旧题组缺省 3 年级。 */
+  grade?: Grade
+  /** 组题时的主题快照；旧题组缺省深海。 */
+  themeId?: ThemeId
 }
 
 /** 家长设置（`settings-updated` 事件载荷的同构类型）。 */
@@ -312,6 +353,7 @@ export interface Settings {
  */
 export const EVENT_TYPES = [
   'profile-created',
+  'profile-preferences-updated',
   'session-started',
   'answer-submitted',
   'hint-used',
@@ -351,6 +393,17 @@ export interface ProfileCreatedEvent extends EventBase {
   avatarId: string
   pinHash: string
   salt: string
+  /** 建档时的年级；旧事件缺省按 3 年级处理。 */
+  grade?: Grade
+  /** 建档时的主主题；旧事件缺省按深海处理。 */
+  themeId?: ThemeId
+}
+
+/** 家长修改年级或主主题；用于审计与重建，档案表仍是读取入口。 */
+export interface ProfilePreferencesUpdatedEvent extends EventBase {
+  type: 'profile-preferences-updated'
+  grade: Grade
+  themeId: ThemeId
 }
 
 /** 开始当日题组：题序当场固定，刷新不重抽。 */
@@ -360,6 +413,10 @@ export interface SessionStartedEvent extends EventBase {
   questionIds: string[]
   /** 出题时的难度档位轨迹，回落时供家长报告解释。 */
   difficultyTrace: number[]
+  /** 生成时的年级快照；旧事件缺省 3 年级。 */
+  grade?: Grade
+  /** 生成时的主题快照；旧事件缺省深海。 */
+  themeId?: ThemeId
 }
 
 /** 提交一次答案（含重试）。 */
@@ -499,6 +556,7 @@ export type AnswerEvent =
 export type DomainEvent =
   | AnswerEvent
   | ProfileCreatedEvent
+  | ProfilePreferencesUpdatedEvent
   | SessionStartedEvent
   | SessionCompletedEvent
   | UnlockGrantedEvent

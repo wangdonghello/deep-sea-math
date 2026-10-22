@@ -241,6 +241,7 @@ function foldEvent(
   // 建档、家长改设置、档位回落不产生任何投影：它们是配置与解释性记录。
   if (
     event.type === 'profile-created' ||
+    event.type === 'profile-preferences-updated' ||
     event.type === 'settings-updated' ||
     event.type === 'difficulty-fallback'
   ) {

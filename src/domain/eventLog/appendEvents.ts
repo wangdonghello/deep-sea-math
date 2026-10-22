@@ -63,6 +63,8 @@ export function logicalEventKey(event: DomainEvent): string | null {
       return `profile-created|${event.profileId}`
     case 'settings-updated':
       return null
+    case 'profile-preferences-updated':
+      return null
   }
 }
 

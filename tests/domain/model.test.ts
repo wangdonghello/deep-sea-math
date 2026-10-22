@@ -110,6 +110,7 @@ describe('domain/model: 事件 union', () => {
     // 编译期保证：DomainEvent 的判别属性集合必须与 EVENT_TYPES 完全一致。
     const exhaustive: Record<DomainEvent['type'], true> = {
       'profile-created': true,
+      'profile-preferences-updated': true,
       'session-started': true,
       'answer-submitted': true,
       'hint-used': true,
