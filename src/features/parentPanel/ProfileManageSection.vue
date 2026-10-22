@@ -47,12 +47,26 @@ const AVATAR_OPTIONS = [
   { id: 'avatar-3', label: '水母' },
 ] as const
 
+const GRADE_OPTIONS = [1, 2, 3] as const
+const THEME_OPTIONS = [
+  { id: 'deep-sea', label: '深海' },
+  { id: 'dinosaur', label: '恐龙' },
+  { id: 'space', label: '太空' },
+] as const
+
 const expandedId = ref<string | null>(null)
 
 /** 展开/收起某个孩子的"安全"区；展开时把当前选中切到该孩子。 */
 function toggle(id: string): void {
   expandedId.value = expandedId.value === id ? null : id
-  if (expandedId.value === id) void panel.selectProfile(id)
+  if (expandedId.value === id) {
+    const profile = panel.profiles.value.find((item) => item.id === id)
+    if (profile !== undefined) {
+      panel.preferencesForm.grade.value = profile.grade ?? 3
+      panel.preferencesForm.themeId.value = profile.themeId ?? 'deep-sea'
+    }
+    void panel.selectProfile(id)
+  }
 }
 
 /** 删除成功后收起该孩子的展开区（它已不在列表里）。 */
@@ -82,6 +96,16 @@ onMounted(() => {
       <form data-testid="create-profile" @submit.prevent="panel.createProfile()">
         <label>虚拟昵称
           <input v-model="panel.createForm.nickname.value" type="text" maxlength="24" autocomplete="off" required>
+        </label>
+        <label>年级
+          <select v-model.number="panel.createForm.grade.value" data-testid="create-grade">
+            <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>
+          </select>
+        </label>
+        <label>兴趣主题
+          <select v-model="panel.createForm.themeId.value" data-testid="create-theme">
+            <option v-for="theme in THEME_OPTIONS" :key="theme.id" :value="theme.id">{{ theme.label }}</option>
+          </select>
         </label>
         <fieldset>
           <legend>选择头像</legend>
@@ -139,6 +163,26 @@ onMounted(() => {
           <span class="manage__toggle-name parent-wrap">{{ profile.nickname }} 的安全设置</span>
           <span class="manage__toggle-glyph" aria-hidden="true">{{ expandedId === profile.id ? '▾' : '▸' }}</span>
         </button>
+        <form
+          v-if="expandedId === profile.id"
+          class="manage__preferences parent-card"
+          data-testid="preferences-form"
+          @submit.prevent="panel.updatePreferences()"
+        >
+          <h2>年级与主题</h2>
+          <p class="parent-hint">修改后从下一组任务起生效，当前题组保持原设置。</p>
+          <label>年级
+            <select v-model.number="panel.preferencesForm.grade.value" data-testid="preferences-grade">
+              <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>
+            </select>
+          </label>
+          <label>兴趣主题
+            <select v-model="panel.preferencesForm.themeId.value" data-testid="preferences-theme">
+              <option v-for="theme in THEME_OPTIONS" :key="theme.id" :value="theme.id">{{ theme.label }}</option>
+            </select>
+          </label>
+          <button type="submit" class="parent-button">保存年级与主题</button>
+        </form>
         <DangerZone
           v-if="expandedId === profile.id"
           :profile-nickname="profile.nickname"

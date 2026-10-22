@@ -3,12 +3,12 @@ import { computed, ref } from 'vue'
 import { hashPin } from '@/domain/crypto/hashPin'
 import { createEventId } from '@/domain/eventLog/ids'
 import { replayProjections } from '@/domain/eventLog/replay'
-import { QUIZ_TYPES, type DomainEvent, type MasteryLevel, type Profile, type QuizType, type Settings } from '@/domain/model/types'
+import { QUIZ_TYPES, type DomainEvent, type Grade, type MasteryLevel, type Profile, type QuizType, type Settings, type ThemeId } from '@/domain/model/types'
 import { redact } from '@/shared/redact'
 
 import type { ParentPanelOptions, ParentReport } from './types'
 
-const DEFAULT_SETTINGS: Settings = { basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 15 }
+const DEFAULT_SETTINGS: Settings = { basicCount: 4, appliedCount: 4, probeCount: 1, maxMinutes: 15 }
 const emptyMastery = (): ParentReport['masteryByTopic'] => Object.fromEntries(QUIZ_TYPES.map((type) => [type, {}])) as ParentReport['masteryByTopic']
 const emptyReport = (): ParentReport => ({ completedQuestions: 0, averageMs: 0, hintCount: 0, masteryByTopic: emptyMastery() })
 const secureRandomBytes = (size: number): Uint8Array => globalThis.crypto.getRandomValues(new Uint8Array(size))
@@ -31,15 +31,16 @@ export function useParentPanel(options: ParentPanelOptions) {
 
   const report = ref<ParentReport>({ ...emptyReport(), topicMasteryAvailable: topicMasteryAvailable.value })
   const reportPeriod = ref<'today' | '7days'>('7days')
-  const profiles = ref<Array<Pick<Profile, 'id' | 'nickname' | 'avatarId'>>>([])
+  const profiles = ref<Array<Pick<Profile, 'id' | 'nickname' | 'avatarId' | 'grade' | 'themeId'>>>([])
   const loading = ref(false)
   const errorMessage = ref('')
   const successMessage = ref('')
   const created = ref(false)
   const deleted = ref(false)
   const confirmDelete = ref(false)
-  const createForm = { nickname: ref(''), avatarId: ref('avatar-1'), pin: ref(''), confirmPin: ref('') }
+  const createForm = { nickname: ref(''), avatarId: ref('avatar-1'), grade: ref<Grade>(3), themeId: ref<ThemeId>('deep-sea'), pin: ref(''), confirmPin: ref('') }
   const resetForm = { pin: ref(''), confirmPin: ref('') }
+  const preferencesForm = { grade: ref<Grade>(3), themeId: ref<ThemeId>('deep-sea') }
   const deleteForm = { nickname: ref('') }
   const resetProfileId = ref(options.profileId)
   /**
@@ -118,15 +119,23 @@ export function useParentPanel(options: ParentPanelOptions) {
     try {
       const salt = saltHex((options.randomBytes ?? secureRandomBytes)(16))
       const pinHash = await hashPin(pin, salt, options.digest)
-      const profile: Profile = { id: id(), nickname, avatarId: createForm.avatarId.value, pinHash, salt, createdAt: clock() }
+      const profile: Profile = {
+        id: id(), nickname, avatarId: createForm.avatarId.value,
+        grade: createForm.grade.value, themeId: createForm.themeId.value,
+        pinHash, salt, createdAt: clock(),
+      }
       await options.store.profiles.save(profile)
       savedProfile = profile
       const event: DomainEvent = {
         type: 'profile-created', eventId: id(), profileId: profile.id, occurredAt: profile.createdAt,
         nickname: profile.nickname, avatarId: profile.avatarId, pinHash, salt,
+        grade: profile.grade, themeId: profile.themeId,
       }
       await options.store.events.append([event])
-      profiles.value = [...profiles.value, { id: profile.id, nickname: profile.nickname, avatarId: profile.avatarId }]
+      profiles.value = [...profiles.value, {
+        id: profile.id, nickname: profile.nickname, avatarId: profile.avatarId,
+        grade: profile.grade, themeId: profile.themeId,
+      }]
       created.value = true
       successMessage.value = '孩子档案已创建，请返回档案选择页开始探索。'
     } catch (error) {
@@ -258,11 +267,42 @@ export function useParentPanel(options: ParentPanelOptions) {
     }
   }
 
+  async function updatePreferences(): Promise<void> {
+    const profileId = selectedProfileId.value
+    if (profileId === null) return
+    errorMessage.value = ''
+    successMessage.value = ''
+    try {
+      const profile = await options.store.profiles.get(profileId)
+      if (profile === undefined) throw new Error('profile not found')
+      await options.store.profiles.save({
+        ...profile,
+        grade: preferencesForm.grade.value,
+        themeId: preferencesForm.themeId.value,
+      })
+      await options.store.events.append([{
+        type: 'profile-preferences-updated',
+        eventId: id(),
+        profileId,
+        occurredAt: clock(),
+        grade: preferencesForm.grade.value,
+        themeId: preferencesForm.themeId.value,
+      }])
+      profiles.value = profiles.value.map((item) => item.id === profileId
+        ? { ...item, grade: preferencesForm.grade.value, themeId: preferencesForm.themeId.value }
+        : item)
+      successMessage.value = '年级与主题已保存，从下一组任务起生效。'
+    } catch (error) {
+      errorMessage.value = '暂时无法保存年级与主题，请稍后重试。'
+      logFailure('preferences', error)
+    }
+  }
+
   async function load(): Promise<void> {
     loading.value = true
     try {
       const listed = await options.store.profiles.list()
-      profiles.value = listed.map(({ id, nickname, avatarId }) => ({ id, nickname, avatarId }))
+      profiles.value = listed.map(({ id, nickname, avatarId, grade, themeId }) => ({ id, nickname, avatarId, grade, themeId }))
       // 默认选中：传入的当前档案原样保留（即使列表暂未列出它，也仍以它为准
       // ——视图的默认选中属于装配决策）；只有未传入时才退回首个档案，可能为
       // null：首次安装尚无任何档案就是这种情况。
@@ -284,7 +324,7 @@ export function useParentPanel(options: ParentPanelOptions) {
     degradedReason: options.store.degradedReason,
     topicMasteryAvailable,
     settings, report, reportPeriod, profiles, loading, errorMessage, successMessage, created, deleted,
-    confirmDelete, createForm, resetForm, deleteForm, resetProfileId, selectedProfileId,
-    load, selectProfile, refreshReport, createProfile, saveSettings, resetPin, deleteProfile,
+    confirmDelete, createForm, preferencesForm, resetForm, deleteForm, resetProfileId, selectedProfileId,
+    load, selectProfile, refreshReport, createProfile, updatePreferences, saveSettings, resetPin, deleteProfile,
   }
 }

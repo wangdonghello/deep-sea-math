@@ -60,6 +60,34 @@ describe('useParentPanel', () => {
     expect(panel.createForm.confirmPin.value).toBe('')
   })
 
+  it('persists grade/theme on create and appends a preferences event on edit', async () => {
+    const fake = makeStore()
+    const panel = useParentPanel({ store: fake.store, profileId: null, clock: () => 123, ...testOptions })
+    panel.createForm.nickname.value = '小恐龙'
+    panel.createForm.grade.value = 1
+    panel.createForm.themeId.value = 'dinosaur'
+    panel.createForm.pin.value = '1234'
+    panel.createForm.confirmPin.value = '1234'
+    await panel.createProfile()
+    expect(fake.profiles.get('generated-id')).toMatchObject({ grade: 1, themeId: 'dinosaur' })
+    expect(fake.appended[0]).toMatchObject({ type: 'profile-created', grade: 1, themeId: 'dinosaur' })
+
+    const existing: Profile = {
+      id: 'child-a', nickname: '海星', avatarId: 'avatar-1', pinHash: 'h', salt: 's', createdAt: 1,
+      grade: 1, themeId: 'dinosaur',
+    }
+    fake.profiles.set('child-a', existing)
+    const editor = useParentPanel({ store: fake.store, profileId: 'child-a', clock: () => 456, ...testOptions })
+    await editor.load()
+    editor.preferencesForm.grade.value = 2
+    editor.preferencesForm.themeId.value = 'space'
+    await editor.updatePreferences()
+    expect(fake.profiles.get('child-a')).toMatchObject({ grade: 2, themeId: 'space' })
+    expect(fake.appended.at(-1)).toMatchObject({
+      type: 'profile-preferences-updated', profileId: 'child-a', grade: 2, themeId: 'space',
+    })
+  })
+
   it('persists all settings and records the change at the current clock time for the next quest', async () => {
     const fake = makeStore()
     let now = 86_400_000

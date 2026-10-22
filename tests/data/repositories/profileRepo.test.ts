@@ -42,6 +42,16 @@ describe('data/repositories/profileRepo', () => {
     expect(await repo.list()).toEqual([profile])
   })
 
+  it('normalizes a first-version profile on read', async () => {
+    const repo = createProfileRepo(db)
+    const legacy = { ...makeProfile(PROFILE_A) } as Record<string, unknown>
+    delete legacy.grade
+    delete legacy.themeId
+    await db.put('profiles', legacy as never)
+
+    expect(await repo.get(PROFILE_A)).toMatchObject({ grade: 3, themeId: 'deep-sea' })
+  })
+
   it('同一 id 重复 save 只保留一条记录（覆盖写）', async () => {
     const repo = createProfileRepo(db)
     await repo.save(makeProfile(PROFILE_A))

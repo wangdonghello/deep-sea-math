@@ -39,6 +39,9 @@ const emit = defineEmits<{
   >
     <ProfileAvatar :avatar-id="profile.avatarId" />
     <span class="profile-card__nickname">{{ profile.nickname }}</span>
+    <span v-if="profile.grade" class="profile-card__meta" data-testid="profile-meta">
+      {{ profile.grade }} 年级 · {{ profile.themeId === 'dinosaur' ? '恐龙' : profile.themeId === 'space' ? '太空' : '深海' }}
+    </span>
     <span v-if="selected" class="profile-card__selected" aria-hidden="true">已选择</span>
   </button>
 </template>
@@ -66,6 +69,7 @@ const emit = defineEmits<{
   border-color: var(--ds-glow-primary);
   box-shadow: 0 0 0 2px rgb(123 226 238 / 15%), var(--ds-shadow-card);
 }
+.profile-card__meta { color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); }
 .profile-card__nickname { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; }
 .profile-card__selected { position: absolute; top: .45rem; right: .55rem; color: var(--ds-glow-primary); font-size: var(--ds-font-size-caption); }
 .profile-card:disabled { opacity: .55; cursor: not-allowed; }

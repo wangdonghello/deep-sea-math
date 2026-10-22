@@ -1,4 +1,5 @@
 import type { Profile } from '../../domain/model/types'
+import { normalizeProfile } from '../../domain/model/normalize'
 import { STORE_NAMES } from '../db'
 import type { DeepSeaDb } from '../db'
 
@@ -57,13 +58,13 @@ export function createProfileRepo(db: DeepSeaDb): ProfileRepo {
     },
 
     get(id) {
-      return db.get(STORE_NAMES.profiles, id)
+      return db.get(STORE_NAMES.profiles, id).then((profile) => profile === undefined ? undefined : normalizeProfile(profile))
     },
 
     list() {
       // 一次 getAll 取回，不做逐条 get（档案数量是个位数，但仍保持同一习惯：
       // 批量读只在仓储层发生一次）。
-      return db.getAll(STORE_NAMES.profiles)
+      return db.getAll(STORE_NAMES.profiles).then((profiles) => profiles.map(normalizeProfile))
     },
 
     remove(id) {

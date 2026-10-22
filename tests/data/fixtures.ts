@@ -134,6 +134,8 @@ export function makeProfile(id: string = PROFILE_A): Profile {  return {
     pinHash: 'c'.repeat(64),
     salt: 'd'.repeat(16),
     createdAt: NOW,
+    grade: 3,
+    themeId: 'deep-sea',
   }
 }
 
