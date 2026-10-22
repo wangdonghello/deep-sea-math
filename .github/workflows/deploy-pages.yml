@@ -1,17 +1,22 @@
-name: Deploy to GitHub Pages
+name: Deploy v1 and v2 to GitHub Pages
+
+# 同一站点同时保留：
+# - 根路径：第一版（tag v1.0.0），家长和孩子原来收藏的地址继续可用；
+# - /v2/：第二版（v2 分支），独立构建、独立 IndexedDB 库。
+#
+# 任一分支更新都会重新组装“v1 根路径 + v2 子路径”的完整产物，
+# 避免两个部署互相覆盖。
 
 on:
   push:
-    branches: [main]
+    branches: [main, v2]
   workflow_dispatch:
 
-# Pages 部署所需的权限集合（最小权限）。
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 同一时间只保留一次部署，新的推送取消排队中的旧部署。
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -20,20 +25,62 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout first version
+        uses: actions/checkout@v4
+        with:
+          ref: v1.0.0
+          path: v1
+
+      - name: Checkout second version
+        uses: actions/checkout@v4
+        with:
+          ref: v2
+          path: v2
+
       - uses: actions/setup-node@v4
         with:
-          # jsdom@30 依赖 undici 的 webidl 工具，Node 20 下会抛
-          # `webidl.util.markAsUncloneable is not a function`（本地 Node 24 无此问题）。
-          # package.json 的 engines 同样声明 >=24，两者保持一致。
           node-version: 24
           cache: npm
-      - run: npm ci
-      - run: npm run test
-      - run: npm run build
+          cache-dependency-path: |
+            v1/package-lock.json
+            v2/package-lock.json
+
+      - name: Install and test first version
+        working-directory: v1
+        run: |
+          npm ci
+          npm run test
+
+      - name: Build first version at site root
+        working-directory: v1
+        run: npm run build
+        env:
+          VITE_BASE: /deep-sea-math/
+
+      - name: Install and test second version
+        working-directory: v2
+        run: |
+          npm ci
+          npm run test
+
+      - name: Build second version under /v2/
+        working-directory: v2
+        run: npm run build
+        env:
+          VITE_BASE: /deep-sea-math/v2/
+          # 两个版本共享同一个 GitHub Pages origin，但绝不能共享 IndexedDB：
+          # 第二版新增事件与档案字段，第一版不认识，混用会互相污染。
+          VITE_DB_NAME: deep-sea-math-v2
+
+      - name: Assemble both versions
+        run: |
+          mkdir -p site/v2
+          cp -R v1/dist/. site/
+          cp -R v2/dist/. site/v2/
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: site
 
   deploy:
     needs: build
