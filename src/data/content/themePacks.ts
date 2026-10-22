@@ -10,6 +10,12 @@ export interface ThemeEntry {
   summary: string
   knowledgeCards: readonly string[]
   sources: readonly string[]
+  /** 可选 3D 模型（当前用于恐龙知识卡）；ref 对应 public/models/dino/<ref>.glb。 */
+  modelRef?: string
+  /** 模型来源页（CC0 素材也保留来源，便于审计）。 */
+  modelSource?: string
+  /** 模型许可证，例如 CC0。 */
+  modelLicense?: string
 }
 
 /** 一个兴趣主题包：4 个阶段、每阶段 2 个条目。 */

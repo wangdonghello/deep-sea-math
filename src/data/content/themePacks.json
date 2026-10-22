@@ -156,7 +156,10 @@
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "triceratops",
+          "modelSource": "https://poly.pizza/m/IGvrUqGrRM",
+          "modelLicense": "CC0"
         },
         {
           "id": "stegosaurus",
@@ -171,7 +174,10 @@
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "stegosaurus",
+          "modelSource": "https://poly.pizza/m/eFcNbOlpvl",
+          "modelLicense": "CC0"
         },
         {
           "id": "tyrannosaurus",
@@ -186,7 +192,10 @@
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "tyrannosaurus",
+          "modelSource": "https://poly.pizza/m/UYtneO5FpF",
+          "modelLicense": "CC0"
         },
         {
           "id": "pteranodon",
@@ -201,37 +210,46 @@
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "pteranodon",
+          "modelSource": "https://poly.pizza/m/1tuiNTr4-MX",
+          "modelLicense": "CC0"
         },
         {
-          "id": "ankylosaurus",
+          "id": "apatosaurus",
           "stage": 3,
-          "name": "甲龙",
-          "emoji": "🛡️",
-          "summary": "身体覆盖骨甲、尾巴像锤子的植食恐龙。",
+          "name": "阿普吐龙",
+          "emoji": "🦕",
+          "summary": "身体很长、脖子较短的植食恐龙，可能成群生活。",
           "knowledgeCards": [
-            "甲龙的尾锤可以击退捕食者。",
-            "它的背部布满骨板。",
-            "甲龙生活在白垩纪晚期。"
+            "阿普吐龙属于蜥脚类恐龙。",
+            "它的牙齿适合撕扯植物。",
+            "化石显示它可能用尾巴保持平衡。"
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "apatosaurus",
+          "modelSource": "https://poly.pizza/m/fvo0x8Zk3z",
+          "modelLicense": "CC0"
         },
         {
-          "id": "brachiosaurus",
+          "id": "diplodocus",
           "stage": 3,
-          "name": "腕龙",
-          "emoji": "🦒",
-          "summary": "脖子很长的植食恐龙，能吃到高处的树叶。",
+          "name": "梁龙",
+          "emoji": "🦴",
+          "summary": "脖子和尾巴都很长的植食恐龙，是蜥脚类中的“长颈鹿”。",
           "knowledgeCards": [
-            "腕龙的前肢比后肢长。",
-            "它的脖子由许多颈椎组成。",
-            "腕龙每天要吃大量植物。"
+            "梁龙的脖子由许多颈椎组成。",
+            "它用钉状牙齿刮取树叶。",
+            "梁龙的尾巴可以保持身体平衡。"
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "diplodocus",
+          "modelSource": "https://poly.pizza/m/12n6ICAVpYB",
+          "modelLicense": "CC0"
         },
         {
           "id": "velociraptor",
@@ -246,7 +264,10 @@
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "velociraptor",
+          "modelSource": "https://poly.pizza/m/cnlGH2UcDd",
+          "modelLicense": "CC0"
         },
         {
           "id": "parasaurolophus",
@@ -261,7 +282,10 @@
           ],
           "sources": [
             "https://www.nhm.ac.uk/"
-          ]
+          ],
+          "modelRef": "parasaurolophus",
+          "modelSource": "https://poly.pizza/m/KeeQrrouRK",
+          "modelLicense": "CC0"
         }
       ]
     },

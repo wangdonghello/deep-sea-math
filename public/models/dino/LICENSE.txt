@@ -1,0 +1,16 @@
+Dinosaur 3D models used by the second version's dinosaur knowledge cards.
+
+All models were downloaded from Poly Pizza (https://poly.pizza) and are published
+under CC0. Source pages:
+
+- tyrannosaurus: https://poly.pizza/m/UYtneO5FpF
+- velociraptor:  https://poly.pizza/m/cnlGH2UcDd
+- triceratops:   https://poly.pizza/m/IGvrUqGrRM
+- diplodocus:    https://poly.pizza/m/12n6ICAVpYB
+- parasaurolophus: https://poly.pizza/m/KeeQrrouRK
+- stegosaurus:   https://poly.pizza/m/eFcNbOlpvl
+- apatosaurus:   https://poly.pizza/m/fvo0x8Zk3z
+- pteranodon:    https://poly.pizza/m/1tuiNTr4-MX
+
+The files are used as-is for non-commercial educational display. Poly Pizza's
+model pages state CC0; keep this attribution file with the assets.

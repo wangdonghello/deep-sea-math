@@ -50,5 +50,6 @@ describe('ThemeCollectionView', () => {
     await flushPromises()
     await view.get('[data-testid="theme-open-triceratops"]').trigger('click')
     expect(view.get('[data-testid="theme-detail"]').text()).toContain('白垩纪')
+    expect(view.find('[data-testid="dino-model-viewer"]').exists()).toBe(true)
   })
 })

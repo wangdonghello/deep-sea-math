@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
+import DinoModelViewer from '@/features/bestiary/DinoModelViewer.vue'
 import { useThemeCollection } from '@/features/bestiary/useThemeCollection'
 import type { ThemeCollectionStore } from '@/features/bestiary/useThemeCollection'
 import type { ThemeId } from '@/domain/model/types'
@@ -99,14 +100,24 @@ function planetStyle(index: number): Record<string, string> {
     </ul>
 
     <section v-if="selected" class="theme-detail" data-testid="theme-detail">
+      <DinoModelViewer
+        v-if="selected.modelRef"
+        :model-ref="selected.modelRef"
+        :name="selected.name"
+        :emoji="selected.emoji"
+      />
       <h2>{{ selected.name }} {{ selected.emoji }}</h2>
       <p>{{ selected.summary }}</p>
       <ul>
         <li v-for="(card, index) in selected.knowledgeCards" :key="index">{{ card }}</li>
       </ul>
       <p class="theme-detail__sources">
-        来源：
+        知识来源：
         <a v-for="source in selected.sources" :key="source" :href="source" target="_blank" rel="noreferrer">{{ source }}</a>
+      </p>
+      <p v-if="selected.modelSource" class="theme-detail__sources">
+        3D 模型：<a :href="selected.modelSource" target="_blank" rel="noreferrer">Poly Pizza</a>
+        （{{ selected.modelLicense ?? 'CC0' }}）
       </p>
       <button type="button" @click="selected = null">收起</button>
     </section>
