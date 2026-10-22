@@ -291,3 +291,37 @@ describe('QuestView feedback', () => {
     expect(JSON.stringify(logs)).not.toContain('sensitive-value')
   })
 })
+
+describe('QuizStage choice questions', () => {
+  function choiceQuestion(): Question {
+    return createQuestion({
+      id: 'choice-1', type: 'add-sub', difficulty: 1, category: 'basic',
+      format: 'choice',
+      story: { title: '选择答案', body: '3 + 4 等于几？' },
+      hints: ['读题', '看加数', '相加', '列式 3+4', '先算三加四'],
+      options: [
+        { id: 'A', label: '6' },
+        { id: 'B', label: '7' },
+        { id: 'C', label: '8' },
+        { id: 'D', label: '9' },
+      ],
+      answer: { value: 7, optionId: 'B' },
+      similarQuestionIds: [], tags: [], sources: ['test'],
+    })
+  }
+
+  it('renders four options and no number pad', () => {
+    const wrapper = mount(QuizStage, { props: { question: choiceQuestion(), answer: '' } })
+    expect(wrapper.find('[data-testid="choice-options"]').exists()).toBe(true)
+    for (const id of ['A', 'B', 'C', 'D']) {
+      expect(wrapper.find(`[data-testid="choice-${id}"]`).exists()).toBe(true)
+    }
+    expect(wrapper.find('.numpad').exists()).toBe(false)
+  })
+
+  it('emits the selected option id', async () => {
+    const wrapper = mount(QuizStage, { props: { question: choiceQuestion(), answer: '' } })
+    await wrapper.get('[data-testid="choice-B"]').trigger('click')
+    expect(wrapper.emitted('update:answer')?.at(-1)).toEqual(['B'])
+  })
+})

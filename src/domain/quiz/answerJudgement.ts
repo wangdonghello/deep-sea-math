@@ -127,6 +127,9 @@ export function matchesExpression(submitted: string, expected: string): boolean 
  * @returns 判对返回 `true`。
  */
 export function isCorrect(submitted: string, answer: Answer): boolean {
+  if (answer.optionId !== undefined) {
+    return submitted.trim().toUpperCase() === answer.optionId
+  }
   if (answer.expression !== undefined) {
     return matchesExpression(submitted, answer.expression)
   }

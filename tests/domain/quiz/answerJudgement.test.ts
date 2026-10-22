@@ -298,6 +298,13 @@ describe('domain/quiz: answerJudgement — 算式 token 比对', () => {
     expect(matchesExpression('6/24', '24÷4')).toBe(false)
   })
 
+  it('选择题按 optionId 判定，大小写不敏感', () => {
+    expect(isCorrect('B', { value: 0, optionId: 'B' })).toBe(true)
+    expect(isCorrect('b', { value: 0, optionId: 'B' })).toBe(true)
+    expect(isCorrect('A', { value: 0, optionId: 'B' })).toBe(false)
+    expect(isCorrect('', { value: 0, optionId: 'B' })).toBe(false)
+  })
+
   it('算式路径不评估求值，纯文本算式也判错', () => {
     expect(isCorrect('二十四除以四', { value: 6, expression: '24÷4' })).toBe(false)
     expect(isCorrect('abc', { value: 6, expression: '24÷4' })).toBe(false)

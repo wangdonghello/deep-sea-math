@@ -3,6 +3,7 @@ import { computed } from 'vue'
 
 import { HINT_LAYER_LABELS } from '@/domain/hint/hintChainSelector'
 import type { Question } from '@/domain/model/types'
+import { answerText as formatAnswer } from '@/shared/choiceAnswer'
 
 /**
  * 「答案与讲解」面板——答错后「看答案」或答对后「看答案详解」时在题目下方展开。
@@ -14,10 +15,7 @@ import type { Question } from '@/domain/model/types'
  */
 const props = defineProps<{ question: Question }>()
 
-const answerText = computed(() => {
-  const { expression, value, unit } = props.question.answer
-  return expression ?? `${value}${unit ?? ''}`
-})
+const answerText = computed(() => formatAnswer(props.question))
 </script>
 
 <template>

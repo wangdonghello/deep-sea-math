@@ -4,6 +4,7 @@ import { MAX_HINT_LAYERS, revealHint, type RevealedHint } from '@/domain/hint/hi
 import { createEventId } from '@/domain/eventLog/ids'
 import { replayProjections } from '@/domain/eventLog/replay'
 import { isCorrect } from '@/domain/quiz/answerJudgement'
+import { answerText } from '@/shared/choiceAnswer'
 import type { AnswerSubmittedEvent, DomainEvent, Question } from '@/domain/model/types'
 import { grantRewards } from '@/domain/reward/rewardGrant'
 
@@ -323,7 +324,7 @@ export function useQuizSession(options: QuizSessionOptions) {
         ...baseEvent(occurredAt), type: 'answer-revealed', sessionId: options.sessionId,
         questionId: question.id, revealedAnswer: true,
       })
-      feedback.value = `答案是 ${question.answer.expression ?? `${question.answer.value}${question.answer.unit ?? ''}`}`
+      feedback.value = `答案是 ${answerText(question)}`
       heldQuestionId.value = question.id
       phase.value = 'revealed'
       explanationVisible.value = true

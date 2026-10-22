@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Question } from '@/domain/model/types'
+import ChoiceOptions from './ChoiceOptions.vue'
 import Numpad from './Numpad.vue'
 
 /**
@@ -22,7 +23,10 @@ const answer = defineModel<string>('answer', { default: '' })
 <template>
   <section class="quiz-stage" data-testid="quiz-stage">
     <p class="question-body">{{ question.story.body }}</p>
-    <div data-testid="direct-answer">
+    <div v-if="question.format === 'choice'" data-testid="choice-answer">
+      <ChoiceOptions v-model="answer" :options="question.options ?? []" />
+    </div>
+    <div v-else data-testid="direct-answer">
       <output data-testid="answer-value">{{ answer }}</output>
       <Numpad v-model="answer" />
     </div>
