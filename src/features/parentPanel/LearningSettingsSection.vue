@@ -14,6 +14,7 @@ import { onMounted } from 'vue'
 import ReportPanel from './ReportPanel.vue'
 import SettingsForm from './SettingsForm.vue'
 import AnalyticsConsent from './AnalyticsConsent.vue'
+import AnalyticsDashboard from './AnalyticsDashboard.vue'
 import ParentSectionShell from './ParentSectionShell.vue'
 import { useParentPanel } from './useParentPanel'
 import type { ParentSection, ParentStore } from './types'
@@ -90,6 +91,7 @@ onMounted(() => {
         @save="panel.saveSettings()"
       />
       <AnalyticsConsent />
+      <AnalyticsDashboard />
       <ReportPanel
         :report="panel.report.value"
         :period="panel.reportPeriod.value"
