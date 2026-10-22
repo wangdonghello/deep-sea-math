@@ -42,6 +42,7 @@
  */
 
 import { writeFileSync } from 'node:fs'
+import { applyRocoTheme } from './roco-theme.mjs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -871,7 +872,8 @@ for (const type of Object.keys(SCENARIOS)) {
 
 const linkCount = linkSimilar(questions)
 const linked = questions.filter((question) => question.similarQuestionIds.length > 0).length
-const choiceCount = applyChoiceVariants(questions, 72)
+const themeStats = applyRocoTheme(questions)
+const choiceCount = themeStats.choice
 
 /** 逐题单行 JSON，便于 diff 阅读（与既有题库风格一致）。 */
 const lines = questions.map((question) => `    ${JSON.stringify(question)}`)
@@ -894,4 +896,5 @@ for (const type of TYPES) {
   console.log(`  ${type.padEnd(18)} ${cells.join('  ')}`)
 }
 console.log(`相似题双向链接 ${linkCount} 组；有链接的题 ${linked} 道；空链接 ${questions.length - linked} 道`)
-console.log(`选择题 ${choiceCount} 道；提示层数固定 5；答案形态 expression ${questions.filter((question) => question.answer.expression).length} 道，unit ${questions.filter((question) => question.answer.unit).length} 道`)
+console.log(`洛克王国文字主题：选择题 ${themeStats.choice}、填空题 ${themeStats.fill}、应用题 ${themeStats.applied}、挑战标签 ${themeStats.challenge}`)
+console.log(`提示层数固定 5；答案形态 expression ${questions.filter((question) => question.answer.expression).length} 道，unit ${questions.filter((question) => question.answer.unit).length} 道`)
