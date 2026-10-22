@@ -139,7 +139,11 @@ export function useHomeQuest(options: HomeQuestOptions) {
    * 用于判断库里那条当日题组是否**还取得到题**（见 {@link readSnapshot}）：
    * 悬空题组要让位给“重新领取”，否则孩子会卡在“点开始下潜没反应”。
    */
-  const poolIds = new Set(options.pool.map((question) => question.id))
+  const activePool = computed(() => {
+    const grade = profile.value?.grade ?? 3
+    return options.poolByGrade?.[grade] ?? options.pool
+  })
+  const poolIds = computed(() => new Set(activePool.value.map((question) => question.id)))
 
   const session = useProfileSessionStore()
 
@@ -262,7 +266,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
   /** 该题组的 `questionIds` 里是否至少有一道存在于当前题池。 */
   function resolvesAtLeastOneQuestion(projections: Projections, sessionId: string): boolean {
     const ids = projections.questProgress[sessionId]?.questionIds ?? []
-    return ids.some((id) => poolIds.has(id))
+    return ids.some((id) => poolIds.value.has(id))
   }
 
   /**
@@ -363,13 +367,17 @@ export function useHomeQuest(options: HomeQuestOptions) {
         return
       }
 
+      const grade = current.grade ?? 3
+      const themeId = current.themeId ?? 'deep-sea'
       const quest = buildDailyQuest({
         profileId: current.profileId,
+        grade,
+        themeId,
         settings: snapshot.settings,
         // 难度历史喂**全量事件**而不是摘要：`computeCurrentDifficulty` 要的是
         // 事件流（见 `difficulty.ts` 对 `DifficultyHistory` 的说明）。
         history: { profileId: current.profileId, events: snapshot.events, now: clock() },
-        pool: options.pool,
+        pool: activePool.value,
         masteryByQuestion: snapshot.projections.masteryByQuestion,
         clock,
         idGenerator,

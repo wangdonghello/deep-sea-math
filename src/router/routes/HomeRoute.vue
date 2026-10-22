@@ -14,7 +14,7 @@ import { useRouter } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
 import { getProductionStores } from '@/app/productionStores'
-import { QUESTION_BANK } from '@/data/content'
+import { QUESTION_BANK, QUESTION_BANK_BY_GRADE } from '@/data/content'
 
 const router = useRouter()
 const stores = getProductionStores()
@@ -27,6 +27,13 @@ const stores = getProductionStores()
  * `/quest` 打回首页——正是早前“点开始下潜没反应”的成因。
  */
 const POOL = QUESTION_BANK.questions
+
+/** 按年级的正式题池：首页按当前档案年级取，避免把三年级题发给低年级。 */
+const POOL_BY_GRADE = {
+  1: QUESTION_BANK_BY_GRADE[1].questions,
+  2: QUESTION_BANK_BY_GRADE[2].questions,
+  3: QUESTION_BANK_BY_GRADE[3].questions,
+} as const
 
 /** 页签 id → 路由路径（`TabBar` 只认页签 id，见 `features/home/TabBar.vue`）。 */
 const TAB_PATHS: Readonly<Record<string, string>> = {
@@ -47,6 +54,7 @@ function onNavigate(tabId: string): void {
   <HomeView
     :store="stores.home"
     :pool="POOL"
+    :pool-by-grade="POOL_BY_GRADE"
     @start="(sessionId) => router.push(`/quest?session=${sessionId}`)"
     @navigate="onNavigate"
   />

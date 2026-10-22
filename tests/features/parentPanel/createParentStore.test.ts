@@ -7,8 +7,8 @@ import type { StorageFacade } from '@/data/db'
 import { deleteDatabase, installFakeIndexedDb } from '../../data/fakeIndexedDb'
 import { PROFILE_A, PROFILE_B, makeProfile, profileCreatedEvent } from '../../data/fixtures'
 
-/** 与 `SettingsRepo` 回落值同口径：没有记录时给默认 5/3/1/15。 */
-const DEFAULT_SETTINGS = { basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 15 }
+/** 与 `SettingsRepo` 回落值同口径：没有记录时给默认 4/4/1/15。 */
+const DEFAULT_SETTINGS = { basicCount: 4, appliedCount: 4, probeCount: 1, maxMinutes: 15 }
 
 /** 刻意与默认值不同：remove 后读回默认值才有鉴别力。 */
 const CUSTOM_SETTINGS = { basicCount: 9, appliedCount: 2, probeCount: 1, maxMinutes: 30 }

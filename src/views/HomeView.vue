@@ -40,6 +40,8 @@ const props = defineProps<{
    * 表现为“点开始下潜没有任何反应”。显式传入后，这类错误在编译期就会暴露。
    */
   pool: readonly Question[]
+  /** 按年级提供的题池；缺省用 `pool`（测试/第一版兼容）。 */
+  poolByGrade?: Partial<Record<1 | 2 | 3, readonly Question[]>>
   clock?: () => number
   idGenerator?: () => string
   logger?: (entry: Record<string, unknown>) => void
@@ -55,6 +57,7 @@ const emit = defineEmits<{
 const home = useHomeQuest({
   store: props.store,
   pool: props.pool,
+  poolByGrade: props.poolByGrade,
   clock: props.clock,
   idGenerator: props.idGenerator,
   logger: props.logger,

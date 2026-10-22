@@ -17,6 +17,10 @@ export interface ProfileSummary {
   nickname: string
   /** 头像素材键。 */
   avatarId: string
+  /** 年级；第一版旧档案缺省 3 年级。 */
+  grade?: 1 | 2 | 3
+  /** 主兴趣主题；第一版旧档案缺省深海。 */
+  themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
 
 /** 登录成功后载入的档案投影（当前档案的会话态）。 */
@@ -24,6 +28,8 @@ export interface ProfileProjection {
   profileId: string
   nickname: string
   avatarId: string
+  grade?: 1 | 2 | 3
+  themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
 
 /**

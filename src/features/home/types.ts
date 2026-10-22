@@ -14,6 +14,8 @@ export interface HomeProfile {
   profileId: string
   nickname: string
   avatarId: string
+  grade?: 1 | 2 | 3
+  themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
 
 /**
@@ -68,6 +70,8 @@ export interface HomeQuestOptions {
    * 而不是变成一次静默的、看不出原因的跳转失败。
    */
   pool: readonly Question[]
+  /** 按年级提供的题池；缺省回落到 `pool`（测试与第一版调用兼容）。 */
+  poolByGrade?: Partial<Record<1 | 2 | 3, readonly Question[]>>
   /**
    * 日志出口；发出的对象先经 `redact()` 脱敏。
    *

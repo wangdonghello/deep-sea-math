@@ -12,7 +12,7 @@ import { PROFILE_A, PROFILE_B, makeSettings } from '../fixtures'
  * 1 探测，且三类数量可由家长调整；spec `child-profiles` §时长上限）。
  *
  * 锁三件事：
- * 1. **缺省即可用**——从没写过设置的档案取到默认 5/3/1 档，组题（Task 4）
+ * 1. **缺省即可用**——从没写过设置的档案取到默认 4/4/1 档，组题（Task 4）
  *    因此不必自己再兜一份默认值；
  * 2. **按档案隔离**——两个档案各自持有设置，互不覆盖；
  * 3. **写后读回一致**——家长改完立刻能读回新值（ParentView 表单回显）。
@@ -37,8 +37,8 @@ describe('data/repositories/settingsRepo', () => {
 
     expect(await repo.get(PROFILE_A)).toEqual(DEFAULT_SETTINGS)
     expect(DEFAULT_SETTINGS).toEqual({
-      basicCount: 5,
-      appliedCount: 3,
+      basicCount: 4,
+      appliedCount: 4,
       probeCount: 1,
       maxMinutes: 15,
     })

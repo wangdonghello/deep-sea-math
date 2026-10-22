@@ -139,5 +139,5 @@ export function makeProfile(id: string = PROFILE_A): Profile {  return {
 
 /** 造一份家长设置。 */
 export function makeSettings(): Settings {
-  return { basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 15 }
+  return { basicCount: 4, appliedCount: 4, probeCount: 1, maxMinutes: 15 }
 }

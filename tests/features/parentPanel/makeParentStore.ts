@@ -46,7 +46,7 @@ export function makeParentStore(
       removeByProfile: async () => { removed.push('events') },
     },
     settings: {
-      get: async (id) => settings.get(id) ?? { basicCount: 5, appliedCount: 3, probeCount: 1, maxMinutes: 15 },
+      get: async (id) => settings.get(id) ?? { basicCount: 4, appliedCount: 4, probeCount: 1, maxMinutes: 15 },
       save: async (id, value) => { settings.set(id, value) },
       remove: async () => { removed.push('settings') },
     },

@@ -7,8 +7,8 @@
  * 事件才知道；把"本次导航的上下文"挂在本次导航上，缓存失效问题就不存在了。
  */
 
-import { QUESTION_BANK } from '../data/content'
-import type { Question } from '../domain/model/types'
+import { QUESTION_BANK_BY_GRADE } from '../data/content'
+import type { Grade, Question, ThemeId } from '../domain/model/types'
 import { replayProjections } from '../domain/eventLog/replay'
 import type { DomainEvent } from '../domain/model/types'
 import { deriveQuestTargets } from './questTargets'
@@ -36,12 +36,16 @@ export interface QuestRouteContext {
   creatureId?: string
   /** 本题组对应的下潜区域 id。 */
   zoneId?: string
+  /** 题组生成时的年级快照；旧题组缺省 3 年级。 */
+  grade?: Grade
+  /** 题组生成时的主题快照；旧题组缺省深海。 */
+  themeId?: ThemeId
 }
 
 /** 按 id 取题目；题库里没有对应条目时跳过（不渲染空槽）。 */
-function pickQuestions(ids: readonly string[]): Question[] {
+function pickQuestions(ids: readonly string[], pool: readonly Question[]): Question[] {
   return ids.flatMap((id) => {
-    const question = QUESTION_BANK.questions.find((candidate) => candidate.id === id)
+    const question = pool.find((candidate) => candidate.id === id)
     return question === undefined ? [] : [question]
   })
 }
@@ -72,7 +76,12 @@ export function buildQuestContext(
   profileId: string,
   events: readonly DomainEvent[],
   now: number,
-  options: { practiceIds?: readonly string[]; sessionId?: string | null } = {},
+  options: {
+    practiceIds?: readonly string[]
+    sessionId?: string | null
+    grade?: Grade
+    themeId?: ThemeId
+  } = {},
 ): QuestRouteContext {
   const practiceIds = options.practiceIds ?? []
   const projections = replayProjections(events, { profileId })
@@ -100,17 +109,17 @@ export function buildQuestContext(
     ? `practice-${practiceIds.join('-')}`
     : (linkedSessionId ?? dailySessionId)
 
-  const rawIds = isPractice
-    ? practiceIds
-    : (events.find(
-        (event) => event.type === 'session-started' && event.sessionId === sessionId,
-      ) as { questionIds?: string[] } | undefined)?.questionIds ?? []
-  const questions = pickQuestions(rawIds)
+  const startedForSession = events.find(
+    (event) => event.type === 'session-started' && event.sessionId === sessionId,
+  ) as { questionIds?: string[]; grade?: Grade; themeId?: ThemeId } | undefined
+  const rawIds = isPractice ? practiceIds : startedForSession?.questionIds ?? []
+  const grade = startedForSession?.grade ?? options.grade ?? 3
+  const themeId = startedForSession?.themeId ?? options.themeId ?? 'deep-sea'
+  const pool = QUESTION_BANK_BY_GRADE[grade].questions
+  const questions = pickQuestions(rawIds, pool)
 
   const similarIds = new Set(questions.flatMap((question) => question.similarQuestionIds))
-  const similarQuestionPool = QUESTION_BANK.questions.filter((question) =>
-    similarIds.has(question.id),
-  )
+  const similarQuestionPool = pool.filter((question) => similarIds.has(question.id))
 
   const unlockedZoneIds = new Set(
     Object.keys(projections.bestiaryUnlock)
@@ -122,6 +131,8 @@ export function buildQuestContext(
     sessionId,
     questions,
     similarQuestionPool,
+    grade,
+    themeId,
     ...deriveQuestTargets(questions, unlockedZoneIds),
   }
 }

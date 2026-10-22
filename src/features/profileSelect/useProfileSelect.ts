@@ -180,6 +180,8 @@ export function useProfileSelect(options: ProfileSelectOptions) {
           profileId: selectedId.value,
           nickname: selectedProfile.value?.nickname ?? '',
           avatarId: selectedProfile.value?.avatarId ?? '',
+          grade: selectedProfile.value?.grade,
+          themeId: selectedProfile.value?.themeId,
         })
         navigate(HOME_PATH)
         return

@@ -1,10 +1,12 @@
 import type {
   DifficultyFallbackEvent,
+  Grade,
   QuestCategory,
   Question,
   Session,
   SessionStartedEvent,
   Settings,
+  ThemeId,
 } from '../model/types'
 import {
   computeCurrentDifficulty,
@@ -58,6 +60,10 @@ const COUNT_BY_CATEGORY: Readonly<Record<QuestCategory, keyof Settings>> = {
 export interface DailyQuestInput {
   /** 档案 ID；事件过滤与难度自适应都按它隔离。 */
   profileId: string
+  /** 出题年级；缺省 3 年级（兼容第一版调用）。 */
+  grade?: Grade
+  /** 主主题；缺省深海（兼容第一版调用）。 */
+  themeId?: ThemeId
   /** 家长设置，决定三类槽位的题量与时长上限。 */
   settings: Settings
   /** 难度自适应的历史输入（近 7 天事件），见 {@link DifficultyHistory}。 */
@@ -150,6 +156,12 @@ function compareQuestions(left: Question, right: Question): number {
  */
 export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   const { profileId, settings, pool } = input
+  const grade = input.grade ?? 3
+  const themeId = input.themeId ?? 'deep-sea'
+  const gradePool = pool.filter((question) => question.grade === grade)
+  if (gradePool.length === 0) {
+    throw new Error(`No questions for grade ${grade}`)
+  }
   const clock = input.clock ?? defaultClock
   const idGenerator = input.idGenerator ?? defaultIdGenerator
   const generatedIds = new Set<string>()
@@ -173,7 +185,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     applied: [],
     probe: [],
   }
-  for (const question of pool) {
+  for (const question of gradePool) {
     if (!isMastered(question.id, input.masteryByQuestion)) {
       candidates[question.category].push(question)
     }
@@ -241,12 +253,39 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     difficultyTrace.push(effective.difficulty)
   }
 
+  // 主题题保障：默认题组至少 2 道带当前主题情境的题；不足时用同年级同槽位
+  // 的主题题替换中性题，绝不跨年级或跨主题。
+  const themedIds = new Set(
+    gradePool.filter((question) => question.themeStories?.[themeId] !== undefined).map((question) => question.id),
+  )
+  if (questionIds.filter((id) => themedIds.has(id)).length < 2) {
+    const selected = new Set(questionIds)
+    const byId = new Map(gradePool.map((question) => [question.id, question]))
+    for (let index = 0; index < questionIds.length; index += 1) {
+      if (questionIds.filter((id) => themedIds.has(id)).length >= 2) break
+      const current = byId.get(questionIds[index])
+      if (current === undefined || themedIds.has(current.id)) continue
+      const replacement = gradePool.find((question) =>
+        themedIds.has(question.id) &&
+        !selected.has(question.id) &&
+        question.category === current.category,
+      )
+      if (replacement !== undefined) {
+        selected.delete(questionIds[index])
+        selected.add(replacement.id)
+        questionIds[index] = replacement.id
+      }
+    }
+  }
+
   const session: Session = {
     id: sessionId,
     profileId,
     questionIds: [...questionIds],
     difficultyTrace,
     startedAt,
+    grade,
+    themeId,
   }
 
   const sessionStartedEvent: SessionStartedEvent = {
@@ -257,6 +296,8 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     sessionId,
     questionIds: [...questionIds],
     difficultyTrace: [...difficultyTrace],
+    grade,
+    themeId,
   }
 
   return {

@@ -127,6 +127,8 @@ router.beforeEach(async (to) => {
     const context = buildQuestContext(profileId!, events, Date.now(), {
       practiceIds,
       sessionId: requestedSessionId,
+      grade: session.projection?.grade,
+      themeId: session.projection?.themeId,
     })
 
     // 只有"当日题组不存在且不是重练"才打回首页：重练没有当日题组也做得成。

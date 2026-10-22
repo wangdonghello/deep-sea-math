@@ -5,15 +5,15 @@ import type { DeepSeaDb } from '../db'
 /**
  * `src/data/repositories/settingsRepo.ts` —— 家长设置的持久化读写。
  *
- * 语义（spec `daily-math-quest` §每日题组生成）：默认 5 基础 / 3 应用 / 1
+ * 语义（spec `daily-math-quest` §每日题组生成）：默认 4 基础 / 4 应用 / 1
  * 探测；家长改设置后**自下一次生成题组起生效**，因此这里存的是"最近一次
  * 生效值"，存量题组进度不会被追溯修改。
  */
 
-/** 默认设置：spec 的 5 基础 / 3 应用 / 1 探测，时长上限取 15 分钟。 */
+/** 默认设置：spec 的 4 基础 / 4 应用 / 1 探测，时长上限取 15 分钟。 */
 export const DEFAULT_SETTINGS: Settings = {
-  basicCount: 5,
-  appliedCount: 3,
+  basicCount: 4,
+  appliedCount: 4,
   probeCount: 1,
   maxMinutes: 15,
 }
