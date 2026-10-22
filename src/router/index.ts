@@ -53,6 +53,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('./routes/ObservationRoute.vue'),
   },
   { path: '/mistakes', name: 'mistakes', component: () => import('./routes/MistakesRoute.vue') },
+  { path: '/mistakes/print', name: 'mistakes-print', component: () => import('./routes/MistakesPrintRoute.vue') },
   /*
    * 家长区（P1 三区骨架）。
    *

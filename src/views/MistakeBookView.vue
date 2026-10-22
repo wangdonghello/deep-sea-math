@@ -15,6 +15,7 @@ const props = defineProps<{
 }>()
 const emit = defineEmits<{
   (event: 'practice', payload: { questionIds: string[]; similarQuestionIds: string[] }): void
+  (event: 'print', filter: { type: string; masteryLevel: string }): void
   (event: 'back-home'): void
 }>()
 
@@ -42,7 +43,14 @@ function practice(questionId: string): void {
       <p v-else-if="visibleItems.length === 0" data-testid="mistake-filter-empty">
         当前条件下没有错题，试试调整筛选吧。
       </p>
-      <MistakeList v-else :entries="visibleItems" @practice="practice" />
+      <template v-else>
+        <button
+          type="button"
+          data-testid="print-mistakes"
+          @click="emit('print', { type: filter.type, masteryLevel: filter.masteryLevel })"
+        >打印错题</button>
+        <MistakeList :entries="visibleItems" @practice="practice" />
+      </template>
     </template>
     <BottomReturnButton @back="emit('back-home')" />
   </main>

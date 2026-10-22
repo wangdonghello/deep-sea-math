@@ -78,6 +78,8 @@ export interface MistakeEntry {
   readonly questionId: string
   /** 答错次数（同题多次答错累计）。 */
   readonly wrongCount: number
+  /** 最近一次错误提交的原始答案；只看答案、没提交过时为 undefined。 */
+  readonly lastWrongAnswer?: string
   /** 是否直接看过答案。 */
   readonly revealed: boolean
   /** 最近一次答错时间（Unix 毫秒）；只因看答案入册时为 `null`。 */
@@ -268,6 +270,7 @@ function foldEvent(
         const mistake = mistakeOf(draft, event.questionId)
         mistake.wrongCount += 1
         mistake.lastWrongAt = event.occurredAt
+        mistake.lastWrongAnswer = event.submitted
         // 重新答错意味着之前的订正作废，错题重新开放。
         mistake.corrected = false
       }

@@ -1,10 +1,13 @@
-import type { DomainEvent, MasteryLevel, QuizType } from '@/domain/model/types'
+import type { Answer, ChoiceOption, DomainEvent, MasteryLevel, QuizType } from '@/domain/model/types'
 import type { MistakeEntry } from '@/domain/eventLog/replay'
 
 /** Question-bank fields consumed by the mistake book, independent of its storage format. */
 export interface MistakeQuestionMetadata {
   readonly type: QuizType
-  readonly story?: { readonly title: string }
+  readonly story?: { readonly title: string; readonly body?: string }
+  readonly options?: readonly ChoiceOption[]
+  readonly answer?: Answer
+  readonly hints?: readonly string[]
   readonly similarQuestionIds: readonly string[]
 }
 

@@ -12,13 +12,14 @@ export function useMistakeBook(
   store: MistakeBookStore,
   catalog: MistakeQuestionCatalog,
   logger?: (entry: Record<string, unknown>) => void,
+  initialFilter?: MistakeFilterState,
 ) {
   const activeProfileId = computed(() => toValue(profileId))
   const events = ref<readonly DomainEvent[]>([])
   const loading = ref(true)
   const loaded = ref(false)
   const errorMessage = ref('')
-  const filter = ref<MistakeFilterState>({ type: 'all', masteryLevel: 'all' })
+  const filter = ref<MistakeFilterState>(initialFilter ?? { type: 'all', masteryLevel: 'all' })
   const questionTypeById = computed(() => Object.fromEntries(
     Object.entries(catalog).flatMap(([id, question]) => question === undefined ? [] : [[id, question.type]]),
   ) as Record<string, QuizType>)

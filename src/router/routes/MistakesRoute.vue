@@ -19,6 +19,13 @@ import { HOME_PATH } from '@/router/nextRoute'
 const router = useRouter()
 const stores = getProductionStores()
 
+function onPrint(filter: { type: string; masteryLevel: string }): void {
+  void router.push({
+    path: '/mistakes/print',
+    query: { type: filter.type, mastery: filter.masteryLevel },
+  })
+}
+
 function onPractice(payload: { questionIds: string[]; similarQuestionIds: string[] }): void {
   void router.push({
     path: '/quest',
@@ -29,5 +36,5 @@ function onPractice(payload: { questionIds: string[]; similarQuestionIds: string
 
 <template>
   <MistakeBookView :store="stores.mistakes" :catalog="stores.mistakeCatalog"
-    @practice="onPractice" @back-home="router.push(HOME_PATH)" />
+    @practice="onPractice" @print="onPrint" @back-home="router.push(HOME_PATH)" />
 </template>

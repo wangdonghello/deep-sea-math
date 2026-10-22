@@ -1,0 +1,19 @@
+@page {
+  size: A4;
+  margin: 16mm 14mm;
+}
+
+@media print {
+  :root { color-scheme: light; }
+  body { background: #fff !important; color: #111 !important; }
+  .print-page { max-width: none !important; padding: 0 !important; color: #111 !important; }
+  .print-header p { color: #444 !important; }
+  .print-note { color: #7a4b00 !important; }
+  .print-question, .print-answer { border-color: #bbb !important; background: #fff !important; }
+  .print-actions { display: none !important; }
+  .print-questions { gap: 6mm; }
+  .print-question { padding: 0 0 4mm; border: 0; border-bottom: 1px solid #ccc; border-radius: 0; }
+  .print-question h2 { font-size: 11pt; }
+  .print-story { font-size: 11pt; }
+  .print-answers { break-before: page; }
+}

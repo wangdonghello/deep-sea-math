@@ -21,7 +21,7 @@
  */
 
 import { resolveStorage, type StorageFacade } from '@/data/db'
-import { QUESTION_BANK } from '@/data/content'
+import { QUESTION_BANK_BY_GRADE } from '@/data/content'
 import type { DomainEvent, QuizType } from '@/domain/model/types'
 
 import { createParentStore } from '@/features/parentPanel/createParentStore'
@@ -62,8 +62,12 @@ export interface ProductionStores {
  * 「题型掌握分布」与错题本的选题型筛选都只有这一份归属口径——两处各建一份
  * 必然漂移（家长看到"应用题 0 人"而错题本里排着三道理应用题）。
  */
+export const ALL_QUESTIONS = Object.freeze(
+  Object.values(QUESTION_BANK_BY_GRADE).flatMap((bank) => bank.questions),
+)
+
 export const QUESTION_TYPE_BY_ID: Readonly<Record<string, QuizType>> = Object.freeze(
-  Object.fromEntries(QUESTION_BANK.questions.map((question) => [question.id, question.type])),
+  Object.fromEntries(ALL_QUESTIONS.map((question) => [question.id, question.type])),
 )
 
 /**
@@ -74,10 +78,17 @@ export const QUESTION_TYPE_BY_ID: Readonly<Record<string, QuizType>> = Object.fr
  */
 export const MISTAKE_CATALOG: MistakeQuestionCatalog = Object.freeze(
   Object.fromEntries(
-    QUESTION_BANK.questions.map(
+    ALL_QUESTIONS.map(
       (question): [string, MistakeQuestionMetadata] => [
         question.id,
-        { type: question.type, story: { title: question.story.title }, similarQuestionIds: question.similarQuestionIds },
+        {
+          type: question.type,
+          story: { title: question.story.title, body: question.story.body },
+          options: question.options,
+          answer: question.answer,
+          hints: question.hints,
+          similarQuestionIds: question.similarQuestionIds,
+        },
       ],
     ),
   ),

@@ -212,6 +212,7 @@ type MutableMistake = {
   wrongCount: number
   revealed: boolean
   lastWrongAt: number | null
+  lastWrongAnswer?: string
   corrected: boolean
   correctedSimilarQuestionIds: string[]
 }
@@ -322,6 +323,7 @@ function incrementalProjections(
           })
           mistake.wrongCount += 1
           mistake.lastWrongAt = event.occurredAt
+          mistake.lastWrongAnswer = event.submitted
           mistake.corrected = false
         }
         break
@@ -480,6 +482,7 @@ describe('domain/eventLog: 六个投影的具体取值（design §2 投影表）
       wrongCount: 1,
       revealed: true,
       lastWrongAt: NOW + 5,
+      lastWrongAnswer: '9',
       corrected: true,
       correctedSimilarQuestionIds: ['q-3-sim'],
     })
