@@ -13,17 +13,28 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 import BestiaryView from '@/views/BestiaryView.vue'
+import ThemeCollectionView from '@/views/ThemeCollectionView.vue'
 import { getProductionStores } from '@/app/productionStores'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 import { HOME_PATH } from '@/router/nextRoute'
 
 const router = useRouter()
 const stores = getProductionStores()
-const profileId = computed(() => useProfileSessionStore().activeProfileId)
+const session = useProfileSessionStore()
+const profileId = computed(() => session.activeProfileId)
+const themeId = computed(() => session.projection?.themeId ?? 'deep-sea')
 </script>
 
 <template>
+  <ThemeCollectionView
+    v-if="themeId !== 'deep-sea'"
+    :profile-id="profileId"
+    :theme-id="themeId"
+    :store="stores.bestiary"
+    @back-home="router.push(HOME_PATH)"
+  />
   <BestiaryView
+    v-else
     :profile-id="profileId"
     :store="stores.bestiary"
     @observe="(creatureId) => router.push(`/observation/${creatureId}`)"

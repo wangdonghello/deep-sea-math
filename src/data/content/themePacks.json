@@ -1,0 +1,401 @@
+{
+  "version": "1.0.0",
+  "packs": [
+    {
+      "id": "deep-sea",
+      "name": "深海",
+      "stageNames": [
+        "暮光区",
+        "深海区",
+        "深渊区",
+        "海沟区"
+      ],
+      "entries": [
+        {
+          "id": "anglerfish",
+          "stage": 1,
+          "name": "约翰逊鮟鱇鱼",
+          "emoji": "🐟",
+          "summary": "头顶发光诱饵的小型捕食者，生活在光线很弱的暮光区。",
+          "knowledgeCards": [
+            "鮟鱇鱼的“灯笼”其实是背鳍演化来的。",
+            "它们用发光诱饵吸引小鱼。",
+            "雌鱼比雄鱼大很多。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "lanternfish",
+          "stage": 1,
+          "name": "灯笼鱼",
+          "emoji": "🐠",
+          "summary": "暮光区数量最多的鱼类之一，会进行昼夜垂直迁移。",
+          "knowledgeCards": [
+            "白天躲在深水，夜里上浮觅食。",
+            "身体侧面的发光器可以帮助同类识别。",
+            "它们是许多大型深海动物的重要食物。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "cusk-eel",
+          "stage": 2,
+          "name": "深海大鼬鳚",
+          "emoji": "🐍",
+          "summary": "身体细长、像鳗鱼一样的底栖鱼类，常在海底缓慢游动。",
+          "knowledgeCards": [
+            "它们喜欢躲在泥沙和岩石缝隙里。",
+            "靠嗅觉寻找小型甲壳类。",
+            "深海大鼬鳚的背鳍和臀鳍很长。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "lizardfish",
+          "stage": 2,
+          "name": "深海蜥鱼",
+          "emoji": "🦎",
+          "summary": "伏击型捕食者，常把身体埋在海底泥沙中等待猎物。",
+          "knowledgeCards": [
+            "嘴巴里有许多细小的牙齿。",
+            "它们能长时间保持不动。",
+            "深海蜥鱼的眼睛位置靠上，方便观察上方。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "jewel-squid",
+          "stage": 3,
+          "name": "宝石鱿鱼",
+          "emoji": "🦑",
+          "summary": "皮肤会反射光线的头足类，像一颗会游泳的宝石。",
+          "knowledgeCards": [
+            "皮肤里的发光细胞能改变颜色。",
+            "遇到危险时会喷出墨汁。",
+            "宝石鱿鱼用触手抓住小型鱼虾。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "tube-worm",
+          "stage": 3,
+          "name": "巨型管虫",
+          "emoji": "🪱",
+          "summary": "生活在热液喷口附近的管虫，靠体内细菌制造养分。",
+          "knowledgeCards": [
+            "它们没有嘴巴和消化系统。",
+            "体内的共生细菌把化学能变成养分。",
+            "热液喷口的水温很高，但管虫能适应。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "sea-star",
+          "stage": 4,
+          "name": "深海海星",
+          "emoji": "⭐",
+          "summary": "在深海海底缓慢移动的棘皮动物，靠管足抓握食物。",
+          "knowledgeCards": [
+            "海星可以再生失去的腕。",
+            "它们用管足移动和感知。",
+            "有些深海海星以腐殖质为食。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "vampire-squid",
+          "stage": 4,
+          "name": "幽灵蛸",
+          "emoji": "🐙",
+          "summary": "深海中颜色暗红、带膜状腕的头足类，常被叫作“吸血鬼鱿鱼”。",
+          "knowledgeCards": [
+            "遇到危险时会把腕翻过来保护身体。",
+            "它们并不吸血，主要吃“海洋雪”。",
+            "幽灵蛸生活在氧气很少的深水。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dinosaur",
+      "name": "恐龙",
+      "stageNames": [
+        "化石营地",
+        "蕨类森林",
+        "火山谷",
+        "恐龙乐园"
+      ],
+      "entries": [
+        {
+          "id": "triceratops",
+          "stage": 1,
+          "name": "三角龙",
+          "emoji": "🦕",
+          "summary": "头上有三只角和巨大颈盾的植食恐龙，生活在白垩纪晚期。",
+          "knowledgeCards": [
+            "三角龙的颈盾可能用于展示或保护。",
+            "它们用喙状嘴切断植物。",
+            "三角龙和霸王龙生活在同一时期。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "stegosaurus",
+          "stage": 1,
+          "name": "剑龙",
+          "emoji": "🦴",
+          "summary": "背上有两排大骨板的植食恐龙，尾巴末端有骨刺。",
+          "knowledgeCards": [
+            "骨板可能用于展示或调节体温。",
+            "剑龙的脑袋很小，身体很大。",
+            "尾巴上的骨刺可以防御捕食者。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "tyrannosaurus",
+          "stage": 2,
+          "name": "霸王龙",
+          "emoji": "🦖",
+          "summary": "大型肉食恐龙，有强壮的后肢和巨大的颌骨。",
+          "knowledgeCards": [
+            "霸王龙的牙齿像香蕉一样粗。",
+            "它的前肢很短，但很有力。",
+            "霸王龙可能既捕猎也吃腐肉。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "pteranodon",
+          "stage": 2,
+          "name": "无齿翼龙",
+          "emoji": "🪽",
+          "summary": "会飞的爬行动物，不是恐龙，但常和恐龙一起出现。",
+          "knowledgeCards": [
+            "它的翅膀由皮肤膜构成。",
+            "无齿翼龙没有牙齿，靠吞食小鱼为生。",
+            "它的头冠可能用于展示。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "ankylosaurus",
+          "stage": 3,
+          "name": "甲龙",
+          "emoji": "🛡️",
+          "summary": "身体覆盖骨甲、尾巴像锤子的植食恐龙。",
+          "knowledgeCards": [
+            "甲龙的尾锤可以击退捕食者。",
+            "它的背部布满骨板。",
+            "甲龙生活在白垩纪晚期。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "brachiosaurus",
+          "stage": 3,
+          "name": "腕龙",
+          "emoji": "🦒",
+          "summary": "脖子很长的植食恐龙，能吃到高处的树叶。",
+          "knowledgeCards": [
+            "腕龙的前肢比后肢长。",
+            "它的脖子由许多颈椎组成。",
+            "腕龙每天要吃大量植物。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "velociraptor",
+          "stage": 4,
+          "name": "迅猛龙",
+          "emoji": "🦎",
+          "summary": "小型、敏捷的肉食恐龙，可能长有羽毛。",
+          "knowledgeCards": [
+            "迅猛龙有镰刀状的脚爪。",
+            "化石证据显示它可能覆盖羽毛。",
+            "它们可能成群活动。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        },
+        {
+          "id": "parasaurolophus",
+          "stage": 4,
+          "name": "副栉龙",
+          "emoji": "🎺",
+          "summary": "头上有长管状头冠的植食恐龙，可能用头冠发出声音。",
+          "knowledgeCards": [
+            "头冠内部有复杂的通道。",
+            "副栉龙可以用两足或四足行走。",
+            "它们生活在白垩纪晚期。"
+          ],
+          "sources": [
+            "https://www.nhm.ac.uk/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "space",
+      "name": "太空",
+      "stageNames": [
+        "近地轨道",
+        "月球基地",
+        "深空航线",
+        "星系边缘"
+      ],
+      "entries": [
+        {
+          "id": "moon",
+          "stage": 1,
+          "name": "月球",
+          "emoji": "🌕",
+          "summary": "地球唯一的天然卫星，表面布满环形山。",
+          "knowledgeCards": [
+            "月球没有大气层，所以天空是黑的。",
+            "月球引力造成地球的潮汐。",
+            "宇航员在月球上留下过脚印。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "mars",
+          "stage": 1,
+          "name": "火星",
+          "emoji": "🔴",
+          "summary": "太阳系第四颗行星，表面富含氧化铁，看起来呈红色。",
+          "knowledgeCards": [
+            "火星有太阳系最高的火山。",
+            "火星两极有冰盖。",
+            "科学家正在寻找火星上的水痕迹。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "jupiter",
+          "stage": 2,
+          "name": "木星",
+          "emoji": "🪐",
+          "summary": "太阳系最大的行星，有著名的“大红斑”风暴。",
+          "knowledgeCards": [
+            "木星主要由氢和氦组成。",
+            "大红斑是一个持续很久的巨大风暴。",
+            "木星有很多颗卫星。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "saturn",
+          "stage": 2,
+          "name": "土星",
+          "emoji": "🪐",
+          "summary": "拥有壮观行星环的气态巨行星。",
+          "knowledgeCards": [
+            "土星环主要由冰粒和岩石组成。",
+            "土星的密度比水还小。",
+            "土星也有许多卫星。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "comet",
+          "stage": 3,
+          "name": "彗星",
+          "emoji": "☄️",
+          "summary": "由冰、尘埃和岩石组成的小天体，靠近太阳时会形成彗尾。",
+          "knowledgeCards": [
+            "彗尾总是背向太阳。",
+            "彗星来自太阳系边缘。",
+            "哈雷彗星大约每 76 年回归一次。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "satellite",
+          "stage": 3,
+          "name": "人造卫星",
+          "emoji": "🛰️",
+          "summary": "绕地球运行的人造航天器，用于通信、导航和观测。",
+          "knowledgeCards": [
+            "卫星可以帮助我们预报天气。",
+            "导航卫星帮助定位。",
+            "卫星需要能源和通信设备。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "rocket",
+          "stage": 4,
+          "name": "运载火箭",
+          "emoji": "🚀",
+          "summary": "把航天器送入太空的交通工具，靠向后喷出气体获得推力。",
+          "knowledgeCards": [
+            "火箭需要携带氧化剂。",
+            "多级火箭会逐级脱落。",
+            "火箭的速度要足够快才能进入轨道。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        },
+        {
+          "id": "galaxy",
+          "stage": 4,
+          "name": "星系",
+          "emoji": "🌌",
+          "summary": "由恒星、气体、尘埃和暗物质组成的巨大天体系统。",
+          "knowledgeCards": [
+            "太阳系位于银河系中。",
+            "银河系有数千亿颗恒星。",
+            "星系之间会相互吸引和碰撞。"
+          ],
+          "sources": [
+            "https://www.nasa.gov/"
+          ]
+        }
+      ]
+    }
+  ]
+}
