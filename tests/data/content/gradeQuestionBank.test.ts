@@ -30,6 +30,8 @@ describe('grade question bank validation', () => {
     const second = cloneBase()
     second.id = 'grade-2-copy'
     second.grade = 2
+    second.tags = second.tags.map((tag) => tag.replace('3.NBT.2', '2.NBT.5'))
+    second.sources = ['https://www.thecorestandards.org/Math/Content/2/NBT/']
     first.similarQuestionIds = [second.id]
     second.similarQuestionIds = [first.id]
     expect(() => assertValidQuestionBank(bankWith([first, second]), { allowPartial: true })).toThrow(/grade mismatch/)

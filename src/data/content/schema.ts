@@ -16,7 +16,7 @@ import { tokenizeExpression, unitAliases } from '../../domain/quiz/answerJudgeme
 /** Supported mathematical answer units, including curriculum counting units. */
 const QUESTION_UNITS = new Set([
   ...Object.values(unitAliases).flat(),
-  '份', '项', '格', '瓶', '节', '次', '轮',
+  '份', '项', '格', '瓶', '节', '次', '轮', '人', '毫升',
 ])
 
 /** 第二版首发的三个年级。 */
@@ -190,8 +190,31 @@ function requiredStandards(type: QuizType, tags: readonly string[]): string[] {
 }
 
 /** Requires standards evidence to match the subject domain, without claiming URL authority. */
-function validateQuestionSources(value: unknown, path: string, type: QuizType, tags: readonly string[]): void {
+function validateQuestionSources(
+  value: unknown,
+  path: string,
+  type: QuizType,
+  tags: readonly string[],
+  grade: Grade,
+): void {
   const sources = sourceList(value, path)
+  if (grade !== 3) {
+    // 1、2 年级使用该年级的 Common Core 领域页；只校验「年级 + 领域」，
+    // 不把三年级的具体标准编号强行套到低年级题目上。
+    const declared = tags.filter((tag) => tag.startsWith('standard:')).map((tag) => tag.slice('standard:'.length))
+    const prefix = `${grade}.`
+    if (!declared.some((standard) => standard.startsWith(prefix))) {
+      throw new Error(`${path}: missing grade ${grade} standard tag`)
+    }
+    for (const standard of declared) {
+      const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
+      const domainUrl = new RegExp(`^https?://www\.thecorestandards\.org/Math/Content/${grade}/${domain}/?$`, 'i')
+      if (!sources.some((source) => domainUrl.test(source))) {
+        throw new Error(`${path}: missing matching grade ${grade} standards domain URL`)
+      }
+    }
+    return
+  }
   const standards = requiredStandards(type, tags)
   const declaredStandards = tags.filter((tag) => tag.startsWith('standard:')).map((tag) => tag.slice('standard:'.length))
   if (declaredStandards.some((standard) => !standards.includes(standard))) throw new Error(`${path}: standard tag does not match question skill`)
@@ -390,7 +413,7 @@ function validateQuestion(value: unknown, path: string): Question {
       ? 'skill-addsub-unknown' : 'skill-muldiv-unknown'
     if (!tags.includes(expectedSkill)) throw new Error(`${path}.tags: expected ${expectedSkill} for unknown relation`)
   }
-  validateQuestionSources(question.sources, `${path}.sources`, question.type as QuizType, tags)
+  validateQuestionSources(question.sources, `${path}.sources`, question.type as QuizType, tags, grade)
   if (question.creatureRef !== undefined) nonEmptyString(question.creatureRef, `${path}.creatureRef`)
 
   if (!Array.isArray(question.similarQuestionIds)) throw new Error(`${path}.similarQuestionIds: expected an array`)
