@@ -9,12 +9,20 @@
  * 因此必须让家长先选择。
  */
 const CONSENT_KEY = 'dsm.analytics-consent'
+const DENIED = 'denied'
 const DEFAULT_ENDPOINT = 'https://abacus.jasoncameron.dev/hit/deep-sea-math-v2'
 
-/** 读取当前浏览器的统计同意状态；localStorage 不可用时视为未同意。 */
+/**
+ * 读取当前浏览器的统计同意状态。
+ *
+ * 产品选择“默认开启、可随时关闭”：没有存过值时返回 true；家长明确关闭后
+ * 写入 `denied`，之后一直保持关闭。localStorage 不可用时保守返回 false。
+ */
 export function hasAnalyticsConsent(): boolean {
   try {
-    return globalThis.localStorage?.getItem(CONSENT_KEY) === 'granted'
+    const stored = globalThis.localStorage?.getItem(CONSENT_KEY)
+    if (stored === DENIED) return false
+    return true
   } catch {
     return false
   }
@@ -24,7 +32,7 @@ export function hasAnalyticsConsent(): boolean {
 export function setAnalyticsConsent(granted: boolean): void {
   try {
     if (granted) globalThis.localStorage?.setItem(CONSENT_KEY, 'granted')
-    else globalThis.localStorage?.removeItem(CONSENT_KEY)
+    else globalThis.localStorage?.setItem(CONSENT_KEY, DENIED)
   } catch {
     // 隐私模式或禁用存储：静默失败，保持关闭。
   }

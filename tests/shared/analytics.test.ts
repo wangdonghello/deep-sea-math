@@ -16,10 +16,15 @@ afterEach(() => {
 })
 
 describe('anonymous analytics', () => {
-  it('sends nothing until the parent opts in', () => {
+  it('defaults to on, and can be explicitly turned off', () => {
+    expect(hasAnalyticsConsent()).toBe(true)
+    trackPage('home')
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    setAnalyticsConsent(false)
+    expect(hasAnalyticsConsent()).toBe(false)
+    fetchMock.mockClear()
     trackPage('home')
     expect(fetchMock).not.toHaveBeenCalled()
-    expect(hasAnalyticsConsent()).toBe(false)
   })
 
   it('sends only coarse counters after consent', () => {

@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "type-check": "vue-tsc -b --noEmit",
     "test:coverage": "vitest run --coverage",
-    "analytics:report": "node scripts/analytics-report.mjs"
+    "analytics:report": "node scripts/analytics-report.mjs",
+    "analytics:dashboard": "node scripts/analytics-dashboard.mjs"
   },
   "engines": {
     "node": ">=24"
