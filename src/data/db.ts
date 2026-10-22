@@ -32,8 +32,11 @@ import type { SettingsRepo } from './repositories/settingsRepo'
  * ·异步非阻塞）。
  */
 
-/** 本地库名。同一 origin 下唯一；换名等于丢历史进度，不可随意改。 */
-export const DB_NAME = 'deep-sea-math'
+/**
+ * 本地库名。默认与第一版一致；第二版构建通过 `VITE_DB_NAME` 指向独立库，
+ * 避免同一 origin 下两个版本互相读写对方的事件与档案。
+ */
+export const DB_NAME = import.meta.env.VITE_DB_NAME ?? 'deep-sea-math'
 
 /**
  * 六个对象库的名字。
