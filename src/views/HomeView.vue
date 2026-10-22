@@ -27,6 +27,7 @@ import NextZoneHint from '@/features/home/NextZoneHint.vue'
 import TabBar from '@/features/home/TabBar.vue'
 import { useHomeQuest } from '@/features/home/useHomeQuest'
 import { ZONES } from '@/features/home/zones'
+import { homeThemeById } from '@/features/home/homeThemes'
 import type { HomeStore } from '@/features/home/types'
 import type { Question } from '@/domain/model/types'
 
@@ -89,7 +90,23 @@ const completedQuests = computed(() => (card.value?.state === 'done' ? 1 : 0))
  * 的 `currentZoneIndex` 契约一致。**不**再用"今天这组题完成没完成"估 0/1：
  * 那会让孩子完成过不止一组题时，首页地图与地图 Tab 页给出互相矛盾的答案。
  */
-const currentZoneIndex = computed(() => home.zoneProgress.value.currentZoneIndex)
+const theme = computed(() => homeThemeById(home.profile.value?.themeId ?? 'deep-sea'))
+
+const currentZoneIndex = computed(() =>
+  theme.value.id === 'deep-sea'
+    ? home.zoneProgress.value.currentZoneIndex
+    : home.themeStage.value - 1,
+)
+
+const nextZoneId = computed(() =>
+  theme.value.id === 'deep-sea'
+    ? home.zoneProgress.value.nextZoneId
+    : theme.value.zones[home.themeStage.value]?.id,
+)
+
+const currentZoneForStatus = computed(() =>
+  currentZoneIndex.value < 0 ? 'base' : theme.value.zones[currentZoneIndex.value]?.id ?? 'base',
+)
 
 onMounted(async () => {
   await home.load()
@@ -106,10 +123,16 @@ onMounted(async () => {
     <template v-else>
       <HomeStatusBar
         :nickname="home.profile.value?.nickname ?? ''"
-        :current-zone-id="home.zoneProgress.value.currentZoneId"
+        :current-zone-id="currentZoneForStatus"
+        :theme="theme"
       />
-      <HomeProgressSummary :summary="home.progressSummary.value" :total-zones="ZONES.length" />
-      <NextZoneHint :next-zone-id="home.zoneProgress.value.nextZoneId" />
+      <HomeProgressSummary
+        :summary="home.progressSummary.value"
+        :total-zones="ZONES.length"
+        :theme="theme"
+        :stage="home.themeStage.value"
+      />
+      <NextZoneHint :next-zone-id="nextZoneId" :theme="theme" />
 
       <p v-if="home.loading.value" class="home__loading" data-testid="home-loading">正在打开今日任务…</p>
 
@@ -128,7 +151,7 @@ onMounted(async () => {
         {{ home.errorMessage.value }}
       </p>
 
-      <MapPanel :current-zone-index="currentZoneIndex" :completed-quests="completedQuests" />
+      <MapPanel :current-zone-index="currentZoneIndex" :completed-quests="completedQuests" :theme="theme" />
 
       <QuestCard
         v-if="card !== null"
@@ -137,13 +160,14 @@ onMounted(async () => {
         :answered="card.answered"
         :total="card.total"
         :estimated-minutes="card.estimatedMinutes"
-        :reward-label="card.rewardLabel"
+        :reward-label="theme.rewardLabel"
+        :done-label="theme.doneLabel"
         :claiming="home.claiming.value"
         @start="onStart"
         @claim="home.claimToday()"
       />
 
-      <TabBar active="home" @navigate="emit('navigate', $event)" />
+      <TabBar active="home" :theme-id="theme.id" @navigate="emit('navigate', $event)" />
     </template>
   </main>
 </template>

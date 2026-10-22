@@ -161,6 +161,8 @@ export function useHomeQuest(options: HomeQuestOptions) {
    * 会给出互相矛盾的"当前所在"。
    */
   const zoneProgress = ref<ZoneProgress>(resolveZoneProgress(new Set()))
+  /** 非深海主题的探索阶段（已完成题组数封顶 4）；深海仍用 zoneProgress。 */
+  const themeStage = ref(0)
 
   /**
    * 成就概览（徽章数 / 已解锁生物数 / 图鉴总数）。
@@ -297,6 +299,10 @@ export function useHomeQuest(options: HomeQuestOptions) {
         snapshot.events,
         snapshot.projections.bestiaryUnlock,
       )
+      themeStage.value = Math.min(
+        snapshot.events.filter((event) => event.type === 'session-completed').length,
+        4,
+      )
     } catch (error) {
       card.value = null
       errorMessage.value = '今日任务打不开，请稍后再试'
@@ -399,6 +405,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
     profile,
     card,
     zoneProgress,
+    themeStage,
     progressSummary,
     loading,
     claiming,

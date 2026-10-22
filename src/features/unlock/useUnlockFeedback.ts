@@ -17,14 +17,15 @@
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 
 import { redact } from '@/shared/redact'
-import type { DomainEvent, SessionCompletedEvent, UnlockGrantedEvent } from '@/domain/model/types'
+import type { DomainEvent, SessionCompletedEvent, ThemeId, UnlockGrantedEvent } from '@/domain/model/types'
+import { themePackById } from '@/data/content/themePacks'
 
 import { rewardLabel } from './rewardLabels'
 
 /** 一条待展示的奖励（标识 + 给孩子看的名字）。 */
 export interface UnlockReward {
-  /** 发放通道；徽章没有对应事件，仅用于选择展示文案。 */
-  readonly kind: 'badge' | 'creature' | 'zone'
+  /** 发放通道；主题条目没有对应事件，仅用于选择展示文案。 */
+  readonly kind: 'badge' | 'creature' | 'zone' | 'theme'
   /** 奖励标识（徽章 id / 生物 id / 区域 id）。 */
   readonly targetId: string
   /** 展示名。 */
@@ -42,6 +43,8 @@ export interface UnlockFeedbackOptions {
   store: UnlockFeedbackStore
   /** 当前档案 id；没有会话时不读存储也不弹反馈。 */
   profileId: MaybeRefOrGetter<string | null>
+  /** 当前主题；非深海时按主题阶段展示图鉴条目。 */
+  themeId?: MaybeRefOrGetter<ThemeId>
   /** 轮询间隔（毫秒）；测试注入小值或 0 + 手动 `check()`。 */
   pollIntervalMs?: number
   /** 日志出口；发出的对象先经 `redact()` 脱敏。 */
@@ -94,6 +97,19 @@ export function useUnlockFeedback(options: UnlockFeedbackOptions) {
       targetId,
       label: rewardLabel('badge', targetId),
     }))
+    const themeId = options.themeId === undefined ? 'deep-sea' : toValue(options.themeId)
+    if (themeId !== 'deep-sea') {
+      const completed = events.filter((event) => event.type === 'session-completed').length
+      const stage = Math.min(completed, 4)
+      const entries = themePackById(themeId).entries
+        .filter((entry) => entry.stage === stage)
+        .map((entry) => ({
+          kind: 'theme' as const,
+          targetId: entry.id,
+          label: `${entry.emoji} ${entry.name}`,
+        }))
+      return [...badges, ...entries]
+    }
     const unlocks: UnlockReward[] = events
       .filter(
         (event): event is UnlockGrantedEvent =>

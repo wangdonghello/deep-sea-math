@@ -44,7 +44,7 @@ const emit = defineEmits<{ (event: 'close'): void }>()
           data-testid="unlock-reward"
         >
           <span class="unlock-overlay__icon" aria-hidden="true">{{
-            reward.kind === 'badge' ? '🏅' : reward.kind === 'creature' ? '🐟' : '🌊'
+            reward.kind === 'badge' ? '🏅' : reward.kind === 'theme' ? '✨' : reward.kind === 'creature' ? '🐟' : '🌊'
           }}</span>
           <span class="unlock-overlay__label">{{ reward.label }}</span>
         </li>

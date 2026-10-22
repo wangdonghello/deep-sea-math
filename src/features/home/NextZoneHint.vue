@@ -12,19 +12,25 @@
  */
 import { computed } from 'vue'
 
-import { ZONES } from './zones'
+import { homeThemeById, type HomeTheme } from './homeThemes'
+import type { ThemeId } from '@/domain/model/types'
 
 const props = defineProps<{
-  /** 下一个待解锁区域 id；`undefined` 表示四区已全部解锁。 */
+  /** 下一个待解锁区域 id；`undefined` 表示四个阶段已全部解锁。 */
   nextZoneId: string | undefined
+  /** 当前主题；缺省深海（测试与第一版调用兼容）。 */
+  themeId?: ThemeId
+  /** 由 HomeView 直接传入的主题配置。 */
+  theme?: HomeTheme
 }>()
 
-const nextZone = computed(() => ZONES.find((zone) => zone.id === props.nextZoneId))
+const theme = computed(() => props.theme ?? homeThemeById(props.themeId ?? 'deep-sea'))
+const nextZone = computed(() => theme.value.zones.find((zone) => zone.id === props.nextZoneId))
 </script>
 
 <template>
   <p v-if="nextZone" class="next-zone-hint" data-testid="home-next-zone">
-    再完成一组题组，就能下潜到<strong>{{ nextZone.name }}</strong>（{{ nextZone.depthLabel }}）
+    再完成一组任务，就能到达<strong>{{ nextZone.name }}</strong>（{{ nextZone.depthLabel }}）
   </p>
 </template>
 

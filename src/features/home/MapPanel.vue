@@ -12,11 +12,16 @@
  * 本组件不含任何业务判断"该不该解锁某区"：解锁态由 props 传入（composable
  * 从 `bestiaryUnlock` 投影与已完成题组数推导），组件只按态渲染。
  */
+import { computed } from 'vue'
+
 import FishBackdrop from '@/features/theme/FishBackdrop.vue'
 import DepthScale from './DepthScale.vue'
-import { BASE_ZONE, ZONES } from './zones'
+import SpaceBackdrop from './SpaceBackdrop.vue'
+import DinoBackdrop from './DinoBackdrop.vue'
+import { homeThemeById, type HomeTheme } from './homeThemes'
+import type { ThemeId } from '@/domain/model/types'
 
-defineProps<{
+const props = defineProps<{
   /**
    * 当前所在区域在 {@link ZONES} 中的下标（0 基）。
    *
@@ -28,31 +33,50 @@ defineProps<{
   currentZoneIndex: number
   /** 已完成题组数量（深度刻度高亮与文案用）。 */
   completedQuests: number
+  /** 当前主题；缺省深海（测试与第一版调用兼容）。 */
+  themeId?: ThemeId
+  /** 由 HomeView 直接传入的主题配置。 */
+  theme?: HomeTheme
 }>()
+
+const theme = computed(() => props.theme ?? homeThemeById(props.themeId ?? 'deep-sea'))
+const zones = computed(() => theme.value.zones)
 </script>
 
 <template>
-  <section class="map-panel" data-testid="map-panel">
+  <section class="map-panel" :class="`map-panel--${theme.backdrop}`" :data-theme="theme.id" data-testid="map-panel">
     <!--
       鱼群背景：count 取有界值（10）。
       `FishBackdrop` 的 count 没有上限（RETRO R7 待办），调用方负责约束——
       地图是首屏第一视觉，鱼太多会与深度刻度争夺注意力，也拖累低端机合成。
     -->
-    <FishBackdrop :count="10" :size="72" class="map-panel__fish" />
+    <FishBackdrop v-if="theme.backdrop === 'sea'" :count="10" :size="72" class="map-panel__fish" />
+    <SpaceBackdrop v-else-if="theme.backdrop === 'space'" class="map-panel__fish" />
+    <DinoBackdrop v-else class="map-panel__fish" />
 
     <div class="map-panel__body">
-      <DepthScale :completed-quests="completedQuests" />
+      <DepthScale v-if="theme.id === 'deep-sea'" :completed-quests="completedQuests" />
+      <div v-else class="map-panel__stage-rail" data-testid="theme-stage-rail">
+        <span class="map-panel__stage-label">{{ theme.zoneLabel }}</span>
+        <ol>
+          <li
+            v-for="(zone, index) in zones"
+            :key="zone.id"
+            :class="{ 'is-current': index === currentZoneIndex, 'is-locked': index > currentZoneIndex }"
+          ><span>{{ index + 1 }}</span></li>
+        </ol>
+      </div>
 
       <!-- 起点：潜水艇基地（spec §起点为潜水艇基地） -->
       <div class="map-panel__base" data-testid="zone-base">
-        <span class="map-panel__base-icon" aria-hidden="true">⚓</span>
-        <span class="map-panel__base-name">{{ BASE_ZONE.name }}</span>
+        <span class="map-panel__base-icon" aria-hidden="true">{{ theme.baseIcon }}</span>
+        <span class="map-panel__base-name">{{ theme.baseName }}</span>
       </div>
 
       <!-- 四区：一条 v-for，不写死四个 div -->
       <ol class="map-panel__zones">
         <li
-          v-for="(zone, index) in ZONES"
+          v-for="(zone, index) in zones"
           :key="zone.id"
           class="map-panel__zone"
           :class="{
@@ -83,6 +107,25 @@ defineProps<{
   overflow: hidden;
   background: var(--ds-bg-gradient);
 }
+
+.map-panel--space { background: #060a1b; }
+.map-panel--dinosaur { background: #3b2a25; }
+
+.map-panel__stage-rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-sm);
+  width: 2.8rem;
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-caption);
+  text-align: center;
+}
+
+.map-panel__stage-rail ol { display: grid; gap: var(--ds-space-sm); margin: 0; padding: 0; list-style: none; }
+.map-panel__stage-rail li { display: grid; place-items: center; width: 1.6rem; height: 1.6rem; margin: 0 auto; border: 1px solid var(--ds-glass-border); border-radius: 50%; background: var(--ds-glass-surface); }
+.map-panel__stage-rail li.is-current { border-color: var(--ds-accent-500); color: var(--ds-accent-text); font-weight: 700; }
+.map-panel__stage-rail li.is-locked { opacity: .45; }
 
 /* 鱼群层贴在地图背后：absolute 覆盖整块地图 */
 .map-panel__fish {

@@ -15,12 +15,27 @@
 import { computed } from 'vue'
 
 import type { ProgressSummary } from './useHomeQuest'
+import { homeThemeById, type HomeTheme } from './homeThemes'
+import { themePackById } from '@/data/content/themePacks'
+import type { ThemeId } from '@/domain/model/types'
 
 const props = defineProps<{
   summary: ProgressSummary
   /** 区域总数（四区），由调用方给以保持与 `ZONES` 同源。 */
   totalZones: number
+  /** 当前主题；缺省深海。 */
+  themeId?: ThemeId
+  theme?: HomeTheme
+  /** 已完成阶段（0–4）。 */
+  stage?: number
 }>()
+
+const theme = computed(() => props.theme ?? homeThemeById(props.themeId ?? 'deep-sea'))
+const stage = computed(() => props.stage ?? 0)
+const themeBestiary = computed(() => {
+  const entries = themePackById(theme.value.id).entries
+  return { unlocked: entries.filter((entry) => entry.stage <= stage.value).length, total: entries.length }
+})
 
 /** 徽章文案：0 枚时说「还没有徽章」而不是「0 枚徽章」，前者是鼓励后者是判卷。 */
 const badgeText = computed(() =>
@@ -28,10 +43,20 @@ const badgeText = computed(() =>
 )
 
 const bestiaryText = computed(() =>
-  `${props.summary.unlockedCreatureCount} / ${props.summary.totalCreatures}`,
+  theme.value.id === 'deep-sea'
+    ? `${props.summary.unlockedCreatureCount} / ${props.summary.totalCreatures}`
+    : `${themeBestiary.value.unlocked} / ${themeBestiary.value.total}`,
 )
 
-const zoneText = computed(() => `${props.summary.unlockedZones} / ${props.totalZones}`)
+const zoneText = computed(() =>
+  theme.value.id === 'deep-sea'
+    ? `${props.summary.unlockedZones} / ${props.totalZones}`
+    : `${stage.value} / 4`,
+)
+
+const zoneLabel = computed(() => theme.value.zoneLabel)
+const bestiaryIcon = computed(() => theme.value.id === 'space' ? '🪐' : theme.value.id === 'dinosaur' ? '🦕' : '🐟')
+const zoneIcon = computed(() => theme.value.id === 'space' ? '🚀' : theme.value.id === 'dinosaur' ? '🌋' : '🌊')
 </script>
 
 <template>
@@ -42,14 +67,14 @@ const zoneText = computed(() => `${props.summary.unlockedZones} / ${props.totalZ
       <span class="home-progress__label">徽章</span>
     </div>
     <div class="home-progress__item">
-      <span class="home-progress__icon" aria-hidden="true">🐟</span>
+      <span class="home-progress__icon" aria-hidden="true">{{ bestiaryIcon }}</span>
       <span class="home-progress__value" data-testid="summary-bestiary">{{ bestiaryText }}</span>
       <span class="home-progress__label">图鉴</span>
     </div>
     <div class="home-progress__item">
-      <span class="home-progress__icon" aria-hidden="true">🌊</span>
+      <span class="home-progress__icon" aria-hidden="true">{{ zoneIcon }}</span>
       <span class="home-progress__value" data-testid="summary-zones">{{ zoneText }}</span>
-      <span class="home-progress__label">区域</span>
+      <span class="home-progress__label">{{ zoneLabel }}</span>
     </div>
   </section>
 </template>

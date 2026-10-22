@@ -31,6 +31,8 @@ const props = defineProps<{
   estimatedMinutes: number
   /** 目标奖励文案。 */
   rewardLabel: string
+  /** 完成态文案；缺省深海文案（测试与第一版调用兼容）。 */
+  doneLabel?: string
   /** 领取中：禁用按钮，防止同一小时组出两组题。 */
   claiming: boolean
 }>()
@@ -98,7 +100,7 @@ function onAction(): void {
       说明，明日入口与"开始新的一天"由 spec §开始新的一天 承载（Task 16）。
     -->
     <p v-if="state === 'done'" class="quest-card__done" data-testid="quest-done">
-      今天的题组已完成，明天再来探索更深的海域
+      {{ doneLabel ?? '今天的题组已完成，明天再来探索更深的海域' }}
     </p>
 
     <button

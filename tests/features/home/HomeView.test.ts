@@ -134,6 +134,7 @@ async function mountHome(options: {
   store?: HomeStore
   now?: number
   withSession?: boolean
+  themeId?: 'deep-sea' | 'dinosaur' | 'space'
   logger?: (entry: Record<string, unknown>) => void
 }): Promise<VueWrapper> {
   setActivePinia(createPinia())
@@ -142,6 +143,7 @@ async function mountHome(options: {
       profileId: PROFILE_ID,
       nickname: '小深',
       avatarId: 'angler',
+      themeId: options.themeId ?? 'deep-sea',
     })
   }
   const view = mount(HomeView, {
@@ -182,6 +184,15 @@ describe('views: HomeView', () => {
     expect(view.find('[data-testid="fish-backdrop"]').exists()).toBe(true)
     // 鱼群条数有界：首页不放大数量（RETRO R7：count 无上限，调用方负责约束）
     expect(view.findAll('[data-testid="fish-backdrop"] svg').length).toBeLessThanOrEqual(12)
+  })
+
+  it('太空主题的首页使用太空文案、太空背景与太空图鉴入口', async () => {
+    const view = await mountHome({ themeId: 'space' })
+    expect(view.get('[data-testid="map-panel"]').attributes('data-theme')).toBe('space')
+    expect(view.text()).toContain('近地轨道')
+    expect(view.get('[data-testid="summary-zones"]').text()).toBe('0 / 4')
+    expect(view.text()).toContain('下一站太空图鉴')
+    expect(view.get('[data-testid="tab-bestiary"]').text()).toContain('🪐')
   })
 
   it('无当日题组时展示「领取今日任务」', async () => {

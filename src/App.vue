@@ -46,6 +46,7 @@ const feedback = useUnlockFeedback({
     listEvents: (profileId) => getProductionStores().quiz.listEvents(profileId),
   },
   profileId: () => session.activeProfileId,
+  themeId: () => session.projection?.themeId ?? 'deep-sea',
 })
 
 onMounted(async () => {

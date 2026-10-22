@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { useThemeCollection } from '@/features/bestiary/useThemeCollection'
@@ -15,6 +15,21 @@ const { pack, stage, items, loading, error, noProfile } = useThemeCollection({
   themeId: () => props.themeId,
 })
 const selected = ref<ThemeEntry | null>(null)
+const isSpace = computed(() => props.themeId === 'space')
+const ORBIT_RINGS = [36, 48, 60, 72]
+const ORBIT_RADII = [27, 35, 43, 51]
+
+/** 把 8 个条目均匀放在四条轨道上，形成一张可读的太阳系航线图。 */
+function planetStyle(index: number): Record<string, string> {
+  const radius = ORBIT_RADII[index % ORBIT_RADII.length]
+  const angle = ((index * 45 - 90) * Math.PI) / 180
+  return {
+    left: `${50 + radius * Math.cos(angle)}%`,
+    top: `${50 + radius * Math.sin(angle)}%`,
+    '--planet-delay': `${(index % 5) * 0.35}s`,
+    '--planet-size': `${index % 3 === 0 ? 2.6 : 2.1}rem`,
+  }
+}
 </script>
 
 <template>
@@ -30,6 +45,38 @@ const selected = ref<ThemeEntry | null>(null)
     <p v-if="loading" role="status">正在读取图鉴…</p>
     <p v-else-if="error" role="status">图鉴暂时打不开，请稍后再试</p>
     <p v-else-if="noProfile">请先选择学习档案。</p>
+    <section v-else-if="isSpace" class="space-map" data-testid="space-map" aria-label="太阳系航线图">
+      <div class="space-map__stars" aria-hidden="true" />
+      <div class="space-map__sun" aria-hidden="true"><span>☀️</span></div>
+      <span
+        v-for="ring in ORBIT_RINGS"
+        :key="ring"
+        class="space-map__orbit"
+        :style="{ width: `${ring}%`, height: `${ring}%` }"
+        aria-hidden="true"
+      />
+      <button
+        v-for="(item, index) in items"
+        :key="item.entry.id"
+        type="button"
+        class="space-item"
+        :class="{
+          'space-item--locked': !item.unlocked,
+          'space-item--selected': selected?.id === item.entry.id,
+          'space-item--unlocked': item.unlocked,
+        }"
+        :style="planetStyle(index)"
+        :disabled="!item.unlocked"
+        :data-testid="`theme-entry-${item.entry.id}`"
+        :aria-label="item.unlocked ? item.entry.name : '未解锁'"
+        @click="selected = item.entry"
+      >
+        <span class="space-item__art" aria-hidden="true">{{ item.unlocked ? item.entry.emoji : '？' }}</span>
+        <span class="space-item__name">{{ item.unlocked ? item.entry.name : '未解锁' }}</span>
+        <span v-if="item.unlocked" class="space-item__action">查看</span>
+      </button>
+    </section>
+
     <ul v-else class="theme-collection__list">
       <li v-for="item in items" :key="item.entry.id">
         <article
@@ -78,6 +125,86 @@ const selected = ref<ThemeEntry | null>(null)
 .theme-entry__art { font-size: 2.8rem; line-height: 1; }
 .theme-entry h2 { margin: 0; font-size: var(--ds-font-size-title); }
 .theme-entry p { margin: 0; color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); line-height: 1.5; }
+
+.space-map {
+  position: relative;
+  height: min(62vw, 26rem);
+  min-height: 20rem;
+  overflow: hidden;
+  border: 1px solid rgb(120 160 255 / 28%);
+  border-radius: var(--ds-radius-lg);
+  background:
+    radial-gradient(circle at 18% 22%, rgb(76 110 255 / 28%), transparent 28%),
+    radial-gradient(circle at 82% 76%, rgb(180 76 255 / 22%), transparent 30%),
+    radial-gradient(circle at 50% 50%, #182451 0, #080d21 62%, #040612 100%);
+  box-shadow: inset 0 0 4rem rgb(20 40 110 / 60%);
+}
+.space-map__stars {
+  position: absolute;
+  inset: 0;
+  opacity: .9;
+  background-image:
+    radial-gradient(2px 2px at 12% 18%, #fff, transparent),
+    radial-gradient(1px 1px at 72% 12%, #cfe0ff, transparent),
+    radial-gradient(2px 2px at 84% 44%, #fff, transparent),
+    radial-gradient(1px 1px at 28% 72%, #d8e6ff, transparent),
+    radial-gradient(1.5px 1.5px at 58% 88%, #fff, transparent),
+    radial-gradient(1px 1px at 44% 34%, #bcd2ff, transparent);
+  animation: star-field 7s ease-in-out infinite alternate;
+}
+.space-map__sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe8a3, #ffb347 55%, #ff7a2f);
+  box-shadow: 0 0 2.5rem 1.2rem rgb(255 166 60 / 55%);
+  transform: translate(-50%, -50%);
+  animation: sun-breathe 5s ease-in-out infinite;
+  font-size: 2rem;
+}
+.space-map__orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px dashed rgb(150 180 255 / 22%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.space-item {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: .1rem;
+  width: 4.4rem;
+  margin: 0;
+  padding: .2rem;
+  border: 0;
+  background: none;
+  color: var(--ds-text-primary);
+  font: inherit;
+  transform: translate(-50%, -50%) translateY(0);
+  animation: planet-float 4.5s ease-in-out infinite;
+  animation-delay: var(--planet-delay);
+  cursor: pointer;
+}
+.space-item:disabled { cursor: default; }
+.space-item__art { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%; font-size: var(--planet-size); line-height: 1; }
+.space-item--unlocked .space-item__art { background: radial-gradient(circle, rgb(120 180 255 / 35%), transparent 68%); box-shadow: 0 0 1.4rem rgb(102 170 255 / 55%); }
+.space-item--selected .space-item__art { box-shadow: 0 0 0 2px #9fd6ff, 0 0 2rem rgb(120 200 255 / 85%); }
+.space-item--locked { opacity: .38; }
+.space-item--locked .space-item__art { border: 1px dashed rgb(190 210 255 / 50%); color: #cfe0ff; font-size: 1.2rem; }
+.space-item__name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--ds-font-size-caption); text-shadow: 0 1px 4px #000; }
+.space-item__action { color: #a9d8ff; font-size: .68rem; }
+@keyframes planet-float { 0%, 100% { transform: translate(-50%, -50%) translateY(-3px); } 50% { transform: translate(-50%, -50%) translateY(5px); } }
+@keyframes sun-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.06); } }
+@keyframes star-field { from { opacity: .55; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .space-item, .space-map__sun, .space-map__stars { animation: none; } }
 .theme-detail { display: grid; gap: .6rem; margin-top: var(--ds-space-lg); padding: var(--ds-space-md); border: 1px solid var(--ds-accent-500); border-radius: var(--ds-radius-lg); background: var(--ds-glass-surface); }
 .theme-detail h2, .theme-detail p { margin: 0; }
 .theme-detail ul { margin: 0; padding-left: 1.2rem; }

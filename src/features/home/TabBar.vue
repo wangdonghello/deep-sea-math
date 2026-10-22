@@ -13,19 +13,39 @@
  * 因此唯一入口是档案选择页页脚那一行小字（`routes/ProfilesRoute.vue`）——
  * 找得到，但不出现在孩子的常驻导航里。
  */
+import { computed } from 'vue'
+
+import type { ThemeId } from '@/domain/model/types'
+
 /** 孩子可自主到达的页签 id（家长区不在其中，见上方说明）。 */
 export type ChildTabId = 'home' | 'bestiary' | 'mistake'
 
-const TABS: readonly { readonly id: ChildTabId; readonly label: string; readonly icon: string }[] = [
-  { id: 'home', label: '首页', icon: '⚓' },
-  { id: 'bestiary', label: '图鉴', icon: '🐟' },
-  { id: 'mistake', label: '错题本', icon: '📖' },
-]
+const TABS_BY_THEME = {
+  'deep-sea': [
+    { id: 'home', label: '首页', icon: '⚓' },
+    { id: 'bestiary', label: '图鉴', icon: '🐟' },
+    { id: 'mistake', label: '错题本', icon: '📖' },
+  ],
+  dinosaur: [
+    { id: 'home', label: '首页', icon: '🦴' },
+    { id: 'bestiary', label: '图鉴', icon: '🦕' },
+    { id: 'mistake', label: '错题本', icon: '📖' },
+  ],
+  space: [
+    { id: 'home', label: '首页', icon: '🚀' },
+    { id: 'bestiary', label: '图鉴', icon: '🪐' },
+    { id: 'mistake', label: '错题本', icon: '📖' },
+  ],
+} as const satisfies Record<ThemeId, readonly { id: ChildTabId; label: string; icon: string }[]>
 
-defineProps<{
+const props = defineProps<{
   /** 当前所在页签 id；仅用于高亮。 */
   active: ChildTabId
+  /** 当前主题；缺省深海（测试与第一版调用兼容）。 */
+  themeId?: ThemeId
 }>()
+
+const tabs = computed(() => TABS_BY_THEME[props.themeId ?? 'deep-sea'])
 
 const emit = defineEmits<{
   /** 点按某页签；载荷为页签 id（Task 17 的守卫据此放行或打回档案选择）。 */
@@ -36,7 +56,7 @@ const emit = defineEmits<{
 <template>
   <nav class="tab-bar" data-testid="tab-bar" aria-label="主导航">
     <button
-      v-for="tab in TABS"
+      v-for="tab in tabs"
       :key="tab.id"
       type="button"
       class="tab-bar__item"

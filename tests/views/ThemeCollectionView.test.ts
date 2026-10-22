@@ -25,6 +25,20 @@ describe('ThemeCollectionView', () => {
     expect(view.text()).toContain('三角龙')
   })
 
+  it('renders space entries on an animated solar-system map', async () => {
+    const view = mount(ThemeCollectionView, {
+      props: {
+        profileId,
+        themeId: 'space',
+        store: { listEvents: async () => events },
+      },
+    })
+    await flushPromises()
+    expect(view.find('[data-testid="space-map"]').exists()).toBe(true)
+    expect(view.findAll('[data-testid^="theme-entry-"]')).toHaveLength(8)
+    expect(view.text()).toContain('月球')
+  })
+
   it('opens knowledge cards for an unlocked entry', async () => {
     const view = mount(ThemeCollectionView, {
       props: {

@@ -11,35 +11,45 @@
  */
 import { computed } from 'vue'
 
-import { BASE_ZONE, ZONES } from './zones'
+import { BASE_ZONE } from './zones'
+import { homeThemeById, type HomeTheme } from './homeThemes'
+import type { ThemeId } from '@/domain/model/types'
 
 const props = defineProps<{
   /** 当前档案昵称。 */
   nickname: string
-  /** 当前所在区域 id；`base` 表示还在潜水艇基地。 */
+  /** 当前所在区域 id；`base` 表示还在起点。 */
   currentZoneId: string
+  /** 当前主题；缺省深海（测试与第一版调用兼容）。 */
+  themeId?: ThemeId
+  /** 由 HomeView 直接传入的主题配置。 */
+  theme?: HomeTheme
 }>()
+
+const theme = computed(() => props.theme ?? homeThemeById(props.themeId ?? 'deep-sea'))
+const avatarIcon = computed(() => theme.value.backdrop === 'space' ? '🚀' : theme.value.backdrop === 'dinosaur' ? '🦴' : '🤿')
 
 /** 当前所在区域的展示名；未知 id 回退为起点名（绝不渲染空白）。 */
 const zoneName = computed(() =>
   props.currentZoneId === BASE_ZONE.id
-    ? BASE_ZONE.name
-    : ZONES.find((zone) => zone.id === props.currentZoneId)?.name ?? BASE_ZONE.name,
+    ? theme.value.baseName
+    : theme.value.zones.find((zone) => zone.id === props.currentZoneId)?.name ?? theme.value.baseName,
 )
 
 /** 当前所在区域的深度文案；在基地时用起点的「海面 · 0 米」。 */
-const zoneDepth = computed(() =>
-  props.currentZoneId === BASE_ZONE.id
-    ? BASE_ZONE.depthLabel
-    : ZONES.find((zone) => zone.id === props.currentZoneId)?.depthLabel ?? BASE_ZONE.depthLabel,
-)
+const zoneDepth = computed(() => {
+  if (props.currentZoneId === BASE_ZONE.id) {
+    return theme.value.id === 'deep-sea' ? BASE_ZONE.depthLabel : '准备出发'
+  }
+  return theme.value.zones.find((zone) => zone.id === props.currentZoneId)?.depthLabel ?? ''
+})
 
 </script>
 
 <template>
   <header class="home-status" data-testid="home-status">
     <div class="home-status__profile">
-      <span class="home-status__avatar" aria-hidden="true">🤿</span>
+      <span class="home-status__avatar" aria-hidden="true">{{ avatarIcon }}</span>
       <span class="home-status__nickname">{{ nickname }}</span>
     </div>
     <div class="home-status__zone">
