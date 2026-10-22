@@ -54,7 +54,7 @@ function readQuestionBank(): RawBank {
 }
 
 /** 六个题型 × 三档难度的全部组合。 */
-const CELLS = QUIZ_TYPES.flatMap((type) => [1, 2, 3].map((difficulty) => ({ type, difficulty })))
+const CELLS = QUIZ_TYPES.filter((type) => type !== 'number-sense').flatMap((type) => [1, 2, 3].map((difficulty) => ({ type, difficulty })))
 
 /** 提取文本里的整数 token。 */
 function numbers(text: string): number[] {
@@ -119,7 +119,7 @@ describe('question bank content', () => {
     for (const category of QUEST_CATEGORIES) {
       expect(QUESTION_INDEX.byCategory[category]).toEqual(QUESTION_BANK.questions.filter((question) => question.category === category))
     }
-    for (const type of QUIZ_TYPES) {
+    for (const type of QUIZ_TYPES.filter((candidate) => candidate !== 'number-sense')) {
       expect(QUESTION_INDEX.byType[type]).toEqual(QUESTION_BANK.questions.filter((question) => question.type === type))
       for (const difficulty of [1, 2, 3]) {
         const bucket = QUESTION_INDEX.byType[type].filter((question) => question.difficulty === difficulty)
@@ -296,7 +296,7 @@ describe('question bank content', () => {
       expect(titles.size, `${type} difficulty ${difficulty} story variety`).toBeGreaterThanOrEqual(6)
     }
     // 每个题型整体至少准备了 8 个不同的故事模板（避免"换数字换物品名"）。
-    for (const type of QUIZ_TYPES) {
+    for (const type of QUIZ_TYPES.filter((candidate) => candidate !== 'number-sense')) {
       const titles = new Set(bank.questions.filter((question) => question.type === type).map((question) => question.story.title))
       expect(titles.size, `${type} story templates`).toBeGreaterThanOrEqual(8)
     }

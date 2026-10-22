@@ -16,7 +16,7 @@ describe('parent panel components', () => {
 
   it('shows report metrics and emits the requested date range', async () => {
     const report: ParentReport = { completedQuestions: 3, averageMs: 1500, hintCount: 2, masteryByTopic: {
-      'add-sub': { independent: 2 }, 'mul-div': {}, 'two-step-app': {}, 'unknown-relation': {}, 'unit-time-route': {}, 'pattern-data': {},
+      'add-sub': { independent: 2 }, 'number-sense': {}, 'mul-div': {}, 'two-step-app': {}, 'unknown-relation': {}, 'unit-time-route': {}, 'pattern-data': {},
     } }
     const wrapper = mount(ReportPanel, { props: { report, period: '7days' } })
     expect(wrapper.get('[data-testid="report-completed"]').text()).toBe('3')
@@ -39,7 +39,7 @@ describe('parent panel components', () => {
   it('shows a placeholder instead of silent zeros when the question type table is unavailable', async () => {
     const report: ParentReport = {
       completedQuestions: 0, averageMs: 0, hintCount: 0, topicMasteryAvailable: false,
-      masteryByTopic: { 'add-sub': {}, 'mul-div': {}, 'two-step-app': {}, 'unknown-relation': {}, 'unit-time-route': {}, 'pattern-data': {} },
+      masteryByTopic: { 'add-sub': {}, 'number-sense': {}, 'mul-div': {}, 'two-step-app': {}, 'unknown-relation': {}, 'unit-time-route': {}, 'pattern-data': {} },
     }
     const wrapper = mount(ReportPanel, { props: { report, period: '7days' } })
     expect(wrapper.get('[data-testid="topic-mastery-unavailable"]').text()).toBe('题型掌握分布暂不可用')

@@ -1,5 +1,6 @@
 import rawQuestionBank from './questionBank.grade3.json'
 import rawGrade2QuestionBank from './questionBank.grade2.json'
+import rawGrade1QuestionBank from './questionBank.grade1.json'
 import rawCreatureBank from './creatures.json'
 import { normalizeQuestion } from '../../domain/model/normalize'
 import {
@@ -12,6 +13,7 @@ import {
 
 assertValidQuestionBank(rawQuestionBank)
 assertValidQuestionBank(rawGrade2QuestionBank)
+assertValidQuestionBank(rawGrade1QuestionBank)
 assertValidCreatures(rawCreatureBank)
 
 /** 三年级题库（第一版既有组题路径继续使用）。 */
@@ -26,8 +28,15 @@ export const GRADE2_BANK: QuestionBank = {
   questions: (rawGrade2QuestionBank as QuestionBank).questions.map(normalizeQuestion),
 }
 
+/** 一年级题库；不包含乘除法。 */
+export const GRADE1_BANK: QuestionBank = {
+  version: (rawGrade1QuestionBank as QuestionBank).version,
+  questions: (rawGrade1QuestionBank as QuestionBank).questions.map(normalizeQuestion),
+}
+
 /** 按年级取题库；第二版组题与错题本按档案年级选择。 */
-export const QUESTION_BANK_BY_GRADE: Partial<Record<1 | 2 | 3, QuestionBank>> = {
+export const QUESTION_BANK_BY_GRADE: Record<1 | 2 | 3, QuestionBank> = {
+  1: GRADE1_BANK,
   2: GRADE2_BANK,
   3: QUESTION_BANK,
 }
@@ -40,6 +49,7 @@ export const QUESTION_INDEX = createQuestionIndexes(QUESTION_BANK.questions)
 
 /** 按年级预建的索引；第二版组题按档案年级取对应索引。 */
 export const QUESTION_INDEX_BY_GRADE = {
+  1: createQuestionIndexes(GRADE1_BANK.questions),
   2: createQuestionIndexes(GRADE2_BANK.questions),
   3: QUESTION_INDEX,
 } as const

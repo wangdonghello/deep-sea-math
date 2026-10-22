@@ -8,7 +8,7 @@ import {
 } from '@/shared/quizTypeLabel'
 
 describe('quizTypeLabel', () => {
-  it('为六类题型各提供中文名，且不把内部键名漏到界面', () => {
+  it('为七类题型各提供中文名，且不把内部键名漏到界面', () => {
     for (const type of QUIZ_TYPES) {
       const label = quizTypeLabel(type)
       expect(label).not.toBe(type)
@@ -17,9 +17,10 @@ describe('quizTypeLabel', () => {
     }
   })
 
-  it('中文名与规格里的六类题型逐项对齐', () => {
+  it('中文名与年级适用题型逐项对齐', () => {
     expect(QUIZ_TYPE_LABELS).toEqual({
       'add-sub': '加减法',
+      'number-sense': '数的认识',
       'mul-div': '乘除法',
       'two-step-app': '两步应用题',
       'unknown-relation': '未知数关系',

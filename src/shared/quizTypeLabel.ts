@@ -1,7 +1,7 @@
 import type { QuizType } from '@/domain/model/types'
 
 /**
- * `src/shared/quizTypeLabel.ts` —— 六类题型的界面中文名。
+ * `src/shared/quizTypeLabel.ts` —— 年级适用题型的界面中文名。
  *
  * 内部标识（`add-sub` / `mul-div` …）是事件日志、题库与投影里的稳定键，
  * **不能**直接展示给家长和孩子：`ReportPanel` 的「题型掌握分布」与错题详情
@@ -12,6 +12,7 @@ import type { QuizType } from '@/domain/model/types'
  */
 export const QUIZ_TYPE_LABELS: Readonly<Record<QuizType, string>> = {
   'add-sub': '加减法',
+  'number-sense': '数的认识',
   'mul-div': '乘除法',
   'two-step-app': '两步应用题',
   'unknown-relation': '未知数关系',

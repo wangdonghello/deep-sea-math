@@ -23,6 +23,7 @@ import {
  */
 const ALL_QUIZ_TYPES = {
   'add-sub': true,
+  'number-sense': true,
   'mul-div': true,
   'two-step-app': true,
   'unknown-relation': true,
@@ -165,13 +166,13 @@ describe('domain/model: 事件 union', () => {
 })
 
 describe('domain/model: QuizType', () => {
-  it('覆盖规格要求的六类题型', () => {
-    expect(QUIZ_TYPES).toHaveLength(6)
+  it('覆盖规格要求的七类题型', () => {
+    expect(QUIZ_TYPES).toHaveLength(7)
     expect(QUIZ_TYPES).toEqual(Object.keys(ALL_QUIZ_TYPES))
   })
 
-  it('六个取值互不重复', () => {
-    expect(new Set(QUIZ_TYPES).size).toBe(6)
+  it('七个取值互不重复', () => {
+    expect(new Set(QUIZ_TYPES).size).toBe(7)
   })
 })
 

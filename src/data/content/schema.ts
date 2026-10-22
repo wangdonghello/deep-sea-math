@@ -467,7 +467,9 @@ export function assertValidQuestionBank(
           const cell = gradeQuestions.filter((question) => question.type === type && question.difficulty === difficulty)
           // 该题型在该年级不适用（如 1 年级的乘除法）时允许为 0；其余题型/
           // 难度格必须达到下限，整格缺失同样失败。
-          const applicable = !(grade === 1 && type === 'mul-div')
+          const applicable = grade === 1
+            ? type !== 'mul-div'
+            : type !== 'number-sense'
           if (applicable && cell.length < minPerCell) {
             throw new Error(
               `questionBank.questions: grade ${grade} ${type} difficulty ${difficulty} needs at least ${minPerCell} questions`,
