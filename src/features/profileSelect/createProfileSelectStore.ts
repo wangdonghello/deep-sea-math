@@ -65,8 +65,14 @@ export function createProfileSelectStore(
   return {
     async list() {
       const rows = await repo.list()
-      // 就地投影：下面三个字段之外的一律不带出去（含 pinHash / salt）。
-      return rows.map((row) => ({ id: row.id, nickname: row.nickname, avatarId: row.avatarId }))
+      // 就地投影：只带展示所需字段，pinHash / salt 一律不出去。
+      return rows.map((row) => ({
+        id: row.id,
+        nickname: row.nickname,
+        avatarId: row.avatarId,
+        ...(row.grade === undefined ? {} : { grade: row.grade }),
+        ...(row.themeId === undefined ? {} : { themeId: row.themeId }),
+      }))
     },
 
     async verify(profileId, pin) {
