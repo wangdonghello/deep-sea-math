@@ -43,7 +43,10 @@ export type Difficulty = 1 | 2 | 3
 export type Grade = 1 | 2 | 3
 
 /** 主兴趣主题标识；首发三个主题包与内容库中的 id 一一对应。 */
-export type ThemeId = 'deep-sea' | 'dinosaur' | 'space'
+export const THEME_IDS = ['deep-sea', 'dinosaur', 'space'] as const
+
+/** 主兴趣主题标识。 */
+export type ThemeId = (typeof THEME_IDS)[number]
 
 /** 题目作答形态：开放输入或四选一。 */
 export type QuestionFormat = 'open' | 'choice'

@@ -1,10 +1,14 @@
 import {
   QUEST_CATEGORIES,
   QUIZ_TYPES,
+  THEME_IDS,
   type BestiaryEntry,
+  type ChoiceId,
   type Difficulty,
+  type Grade,
   type QuestCategory,
   type Question,
+  type QuestionFormat,
   type QuizType,
 } from '../../domain/model/types'
 import { tokenizeExpression, unitAliases } from '../../domain/quiz/answerJudgement'
@@ -15,6 +19,12 @@ const QUESTION_UNITS = new Set([
   '份', '项', '格', '瓶', '节', '次', '轮',
 ])
 
+/** 第二版首发的三个年级。 */
+const GRADES: readonly Grade[] = [1, 2, 3]
+
+/** 选择题固定四个选项。 */
+const CHOICE_IDS: readonly ChoiceId[] = ['A', 'B', 'C', 'D']
+
 /**
  * 题库规模与覆盖下限（spec `daily-math-quest` §题型与难度覆盖）。
  *
@@ -23,7 +33,8 @@ const QUESTION_UNITS = new Set([
  */
 export const QUESTION_BANK_LIMITS = {
   minQuestions: 200,
-  maxQuestions: 400,
+  maxQuestions: 648,
+  perGrade: 216,
   minPerCell: 8,
 } as const
 
@@ -107,6 +118,8 @@ export interface QuestionIndexes {
   byCategory: Record<QuestCategory, Question[]>
   byType: Record<QuizType, Question[]>
   byDifficulty: Record<Difficulty, Question[]>
+  /** 按年级索引；组题时先查这里，禁止跨年级。 */
+  byGrade: Record<Grade, Question[]>
 }
 
 /** Throws a path-aware content error when an unknown value is not an object. */
@@ -289,6 +302,45 @@ function validateWorkedExampleHint(hints: unknown, answer: Record<string, unknow
   }
 }
 
+/** 校验年级：只允许 1–3。 */
+function validateGrade(value: unknown, path: string): Grade {
+  if (!GRADES.includes(value as Grade)) throw new Error(`${path}: expected grade 1, 2, or 3`)
+  return value as Grade
+}
+
+/** 校验作答形态：只允许 open / choice。 */
+function validateFormat(value: unknown, path: string): QuestionFormat {
+  if (value !== 'open' && value !== 'choice') throw new Error(`${path}: expected open or choice`)
+  return value
+}
+
+/** 校验选择题选项：四个、A–D 各一次、文本非空且不重复。 */
+function validateChoiceOptions(value: unknown, path: string): void {
+  if (!Array.isArray(value) || value.length !== 4) throw new Error(`${path}: choice requires exactly four options`)
+  const seen = new Set<string>()
+  for (const [index, item] of value.entries()) {
+    const option = record(item, `${path}[${index}]`)
+    const id = nonEmptyString(option.id, `${path}[${index}].id`)
+    if (!CHOICE_IDS.includes(id as ChoiceId)) throw new Error(`${path}[${index}].id: expected A, B, C, or D`)
+    if (seen.has(id)) throw new Error(`${path}[${index}].id: duplicate ${id}`)
+    seen.add(id)
+    nonEmptyString(option.label, `${path}[${index}].label`)
+  }
+}
+
+/** 校验按主题覆盖的题干：键只能是已发布主题。 */
+function validateThemeStories(value: unknown, path: string): void {
+  const stories = record(value, path)
+  for (const [themeId, storyValue] of Object.entries(stories)) {
+    if (!(THEME_IDS as readonly string[]).includes(themeId)) {
+      throw new Error(`${path}.${themeId}: unknown theme id`)
+    }
+    const story = record(storyValue, `${path}.${themeId}`)
+    nonEmptyString(story.title, `${path}.${themeId}.title`)
+    nonEmptyString(story.body, `${path}.${themeId}.body`)
+  }
+}
+
 /** Validates every required model field and returns the narrowed question. */
 function validateQuestion(value: unknown, path: string): Question {
   const question = record(value, path)
@@ -296,6 +348,11 @@ function validateQuestion(value: unknown, path: string): Question {
   if (!(QUIZ_TYPES as readonly unknown[]).includes(question.type)) throw new Error(`${path}.type: unknown quiz type`)
   if (!(QUEST_CATEGORIES as readonly unknown[]).includes(question.category)) throw new Error(`${path}.category: unknown category`)
   if (![1, 2, 3].includes(question.difficulty as number)) throw new Error(`${path}.difficulty: expected 1, 2, or 3`)
+  const grade = validateGrade(question.grade ?? 3, `${path}.grade`)
+  const format = validateFormat(question.format ?? 'open', `${path}.format`)
+  if (grade === 1 && question.type === 'mul-div') {
+    throw new Error(`${path}.type: grade 1 must not contain mul-div questions`)
+  }
   const story = record(question.story, `${path}.story`)
   nonEmptyString(story.title, `${path}.story.title`)
   nonEmptyString(story.body, `${path}.story.body`)
@@ -310,7 +367,23 @@ function validateQuestion(value: unknown, path: string): Question {
   if (!Array.isArray(hints) || hints.length !== 5) throw new Error(`${path}.hints: exactly five levels are required`)
   hints.forEach((hint, index) => nonEmptyString(hint, `${path}.hints[${index}]`))
   validateAnswer(question.answer, `${path}.answer`)
-  validateWorkedExampleHint(hints, record(question.answer, `${path}.answer`), path)
+  const answerRecord = record(question.answer, `${path}.answer`)
+  if (format === 'choice') {
+    validateChoiceOptions(question.options, `${path}.options`)
+    const optionId = answerRecord.optionId
+    if (typeof optionId !== 'string' || !CHOICE_IDS.includes(optionId as ChoiceId)) {
+      throw new Error(`${path}.answer.optionId: expected A, B, C, or D`)
+    }
+    if (!(question.options as Array<{ id: string }>).some((option) => option.id === optionId)) {
+      throw new Error(`${path}.answer.optionId: correct option is not in options`)
+    }
+    if (answerRecord.value !== 0) throw new Error(`${path}.answer.value: choice answer must use 0 placeholder`)
+  } else {
+    if (question.options !== undefined) throw new Error(`${path}.options: open question must not declare options`)
+    if (answerRecord.optionId !== undefined) throw new Error(`${path}.answer.optionId: open question must not declare optionId`)
+  }
+  if (question.themeStories !== undefined) validateThemeStories(question.themeStories, `${path}.themeStories`)
+  validateWorkedExampleHint(hints, answerRecord, path)
   const tags = stringList(question.tags, `${path}.tags`)
   validateLengthOperands(question, path, tags)
   if (question.type === 'unknown-relation') {
@@ -327,7 +400,7 @@ function validateQuestion(value: unknown, path: string): Question {
     throw new Error(`${path}.similarQuestionIds: duplicate references are forbidden`)
   }
   // 五步字段已在上面一律拒绝，这里不再需要按 `requiresFiveStep` 分叉校验步骤。
-  return question as unknown as Question
+  return { ...(question as unknown as Question), grade, format }
 }
 
 /**
@@ -339,13 +412,19 @@ function validateQuestion(value: unknown, path: string): Question {
  * @param value 不可信的解析后 JSON 内容。
  * @throws {Error} 任一内容规则不满足时抛出，消息带出错的字段路径。
  */
-export function assertValidQuestionBank(value: unknown): asserts value is QuestionBank {
+export interface QuestionBankValidationOptions {
+  /** 单元测试构造小样本时跳过总量/每格下限；生产加载 MUST 保持 false。 */
+  allowPartial?: boolean
+}
+
+export function assertValidQuestionBank(
+  value: unknown,
+  options: QuestionBankValidationOptions = {},
+): asserts value is QuestionBank {
   const bank = record(value, 'questionBank')
   nonEmptyString(bank.version, 'questionBank.version')
-  const { minQuestions, maxQuestions, minPerCell } = QUESTION_BANK_LIMITS
-  if (!Array.isArray(bank.questions) || bank.questions.length < minQuestions || bank.questions.length > maxQuestions) {
-    throw new Error(`questionBank.questions: expected ${minQuestions}–${maxQuestions} questions`)
-  }
+  const { minQuestions, maxQuestions, perGrade, minPerCell } = QUESTION_BANK_LIMITS
+  if (!Array.isArray(bank.questions)) throw new Error('questionBank.questions: expected an array')
   const ids = new Set<string>()
   const questions = bank.questions.map((question, index) => {
     const validated = validateQuestion(question, `questionBank.questions[${index}]`)
@@ -353,25 +432,44 @@ export function assertValidQuestionBank(value: unknown): asserts value is Questi
     ids.add(validated.id)
     return validated
   })
-  for (const type of QUIZ_TYPES) {
-    for (const difficulty of [1, 2, 3]) {
-      // 每格下限 8：任一题型 × 难度组合都要取得到题，组题时不会突然落空。
-      const cell = questions.filter((question) => question.type === type && question.difficulty === difficulty)
-      if (cell.length < minPerCell) {
-        throw new Error(
-          `questionBank.questions: ${type} difficulty ${difficulty} needs at least ${minPerCell} questions`,
-        )
+
+  if (!options.allowPartial) {
+    if (questions.length < minQuestions || questions.length > maxQuestions) {
+      throw new Error(`questionBank.questions: expected ${minQuestions}–${maxQuestions} questions`)
+    }
+    const grades = [...new Set(questions.map((question) => question.grade))].sort()
+    for (const grade of grades) {
+      const gradeQuestions = questions.filter((question) => question.grade === grade)
+      for (const type of QUIZ_TYPES) {
+        for (const difficulty of [1, 2, 3]) {
+          const cell = gradeQuestions.filter((question) => question.type === type && question.difficulty === difficulty)
+          // 该题型在该年级不适用（如 1 年级的乘除法）时允许为 0；其余题型/
+          // 难度格必须达到下限，整格缺失同样失败。
+          const applicable = !(grade === 1 && type === 'mul-div')
+          if (applicable && cell.length < minPerCell) {
+            throw new Error(
+              `questionBank.questions: grade ${grade} ${type} difficulty ${difficulty} needs at least ${minPerCell} questions`,
+            )
+          }
+        }
+      }
+      if (gradeQuestions.length !== perGrade) {
+        throw new Error(`questionBank.questions: grade ${grade} needs exactly ${perGrade} questions`)
       }
     }
   }
+
   // 相似题引用是可选的：空数组合法（订正流程遇到空相似题时自动跳过，
-  // 见 `useQuizSession` 的 queue）；一旦声明就必须指向同题型、共享技能、
-  // 且答案表示（单位 / 算式形状）一致的题目。
+  // 见 `useQuizSession` 的 queue）；一旦声明就必须指向同年级、同题型、
+  // 共享技能、且答案表示（单位 / 算式形状）一致的题目。
   for (const [index, question] of questions.entries()) {
     for (const similarId of question.similarQuestionIds) {
       const target = questions.find((candidate) => candidate.id === similarId)
       if (target === undefined || similarId === question.id) {
         throw new Error(`questionBank.questions[${index}].similarQuestionIds: missing or self reference ${similarId}`)
+      }
+      if (target.grade !== question.grade) {
+        throw new Error(`questionBank.questions[${index}].similarQuestionIds: grade mismatch ${similarId}`)
       }
       if (target.type !== question.type) throw new Error(`questionBank.questions[${index}].similarQuestionIds: type mismatch ${similarId}`)
       const skills = question.tags.filter((tag) => tag.startsWith('skill-') && target.tags.includes(tag))
@@ -397,12 +495,14 @@ export function createQuestionIndexes(questions: readonly Question[]): QuestionI
   const byCategory = Object.fromEntries(QUEST_CATEGORIES.map((category) => [category, []])) as unknown as QuestionIndexes['byCategory']
   const byType = Object.fromEntries(QUIZ_TYPES.map((type) => [type, []])) as unknown as QuestionIndexes['byType']
   const byDifficulty: QuestionIndexes['byDifficulty'] = { 1: [], 2: [], 3: [] }
+  const byGrade: QuestionIndexes['byGrade'] = { 1: [], 2: [], 3: [] }
   for (const question of questions) {
     byCategory[question.category].push(question)
     byType[question.type].push(question)
     byDifficulty[question.difficulty].push(question)
+    byGrade[question.grade].push(question)
   }
-  return { byCategory, byType, byDifficulty }
+  return { byCategory, byType, byDifficulty, byGrade }
 }
 
 /**

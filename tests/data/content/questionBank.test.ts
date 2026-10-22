@@ -116,23 +116,25 @@ describe('question bank content', () => {
   })
 
   it('keeps every index bucket in lockstep with the bank', () => {
-    const bank = readQuestionBank()
     for (const category of QUEST_CATEGORIES) {
-      expect(QUESTION_INDEX.byCategory[category]).toEqual(bank.questions.filter((question) => question.category === category))
+      expect(QUESTION_INDEX.byCategory[category]).toEqual(QUESTION_BANK.questions.filter((question) => question.category === category))
     }
     for (const type of QUIZ_TYPES) {
-      expect(QUESTION_INDEX.byType[type]).toEqual(bank.questions.filter((question) => question.type === type))
+      expect(QUESTION_INDEX.byType[type]).toEqual(QUESTION_BANK.questions.filter((question) => question.type === type))
       for (const difficulty of [1, 2, 3]) {
         const bucket = QUESTION_INDEX.byType[type].filter((question) => question.difficulty === difficulty)
-        expect(bucket).toEqual(bank.questions.filter((question) => question.type === type && question.difficulty === difficulty))
+        expect(bucket).toEqual(QUESTION_BANK.questions.filter((question) => question.type === type && question.difficulty === difficulty))
         for (const category of QUEST_CATEGORIES) {
           const indexed = QUESTION_INDEX.byCategory[category].filter((question) => question.type === type && question.difficulty === difficulty)
-          expect(indexed).toEqual(bank.questions.filter((question) => question.type === type && question.difficulty === difficulty && question.category === category))
+          expect(indexed).toEqual(QUESTION_BANK.questions.filter((question) => question.type === type && question.difficulty === difficulty && question.category === category))
         }
       }
     }
     for (const difficulty of [1, 2, 3] as const) {
-      expect(QUESTION_INDEX.byDifficulty[difficulty]).toEqual(bank.questions.filter((question) => question.difficulty === difficulty))
+      expect(QUESTION_INDEX.byDifficulty[difficulty]).toEqual(QUESTION_BANK.questions.filter((question) => question.difficulty === difficulty))
+    }
+    for (const grade of [1, 2, 3] as const) {
+      expect(QUESTION_INDEX.byGrade[grade]).toEqual(QUESTION_BANK.questions.filter((question) => question.grade === grade))
     }
   })
 
@@ -300,14 +302,13 @@ describe('question bank content', () => {
     }
   })
 
-  it('enforces the 200–400 question range', () => {
-    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)))).toThrow(/expected 200–400 questions/)
-    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(401)))).toThrow(/expected 200–400 questions/)
+  it('enforces the 200–648 question range', () => {
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(199)))).toThrow(/expected 200–648 questions/)
+    expect(() => assertValidQuestionBank(syntheticBank(evenCounts(649)))).toThrow(/expected 200–648 questions/)
   })
 
   it('rejects a bank with a type/difficulty cell below the eight-question floor', () => {
-    const counts = evenCounts(200)
-    counts[0] += 6
+    const counts = evenCounts(216)
     // pattern-data × difficulty 3 是第 18 格（5 * 3 + 2）
     counts[17] = 7
     expect(() => assertValidQuestionBank(syntheticBank(counts))).toThrow(/pattern-data difficulty 3 needs at least 8 questions/)
