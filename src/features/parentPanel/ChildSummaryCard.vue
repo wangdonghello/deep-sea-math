@@ -39,6 +39,7 @@ function seconds(ms: number): string {
     <span class="child-card__avatar" :data-avatar="child.avatarId" aria-hidden="true" />
     <span class="child-card__body">
       <span class="child-card__nickname parent-wrap">{{ child.nickname }}</span>
+      <span class="child-card__meta" data-testid="child-meta">{{ child.grade }} 年级 · {{ child.themeName }} · 第 {{ child.stage }} 阶段</span>
       <span class="child-card__stats">
         本周学习 <b data-testid="child-days">{{ child.daysStudied }}</b> 天 ·
         完成 <b data-testid="child-completed">{{ child.completedQuestions }}</b> 题 ·
@@ -96,6 +97,10 @@ function seconds(ms: number): string {
   font-weight: 600;
 }
 
+.child-card__meta {
+  color: var(--ds-accent-text);
+  font-size: var(--ds-font-size-caption);
+}
 .child-card__stats {
   color: var(--ds-text-secondary);
 }

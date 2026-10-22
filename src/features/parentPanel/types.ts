@@ -58,6 +58,12 @@ export interface ChildOverview {
   averageMs: number
   /** 取自题型掌握最弱项的一句"需要关注"提示。 */
   focusHint: string
+  /** 当前年级；旧档案缺省 3。 */
+  grade: 1 | 2 | 3
+  /** 当前主主题中文名。 */
+  themeName: string
+  /** 已到达的探索阶段（0–4）。 */
+  stage: number
 }
 
 /** 家长区三个功能区（底部导航的页签 id）。 */

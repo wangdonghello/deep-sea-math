@@ -54,6 +54,7 @@ describe('parent panel components', () => {
     const empty: ChildOverview = {
       profileId: 'a', nickname: '海星', avatarId: 'avatar-1',
       daysStudied: 0, completedQuestions: 0, averageMs: 0, focusHint: '近 7 天还没有足够的学习记录',
+      grade: 3, themeName: '深海', stage: 0,
     }
     const withoutRecord = mount(ChildSummaryCard, { props: { child: empty } })
     expect(withoutRecord.get('[data-testid="child-average"]').text()).toBe('—')

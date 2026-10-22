@@ -34,6 +34,21 @@ describe('useFamilyOverview', () => {
     expect(childB.focusHint).toContain('两步应用题')
   })
 
+  it('shows grade, theme and completed-stage progress for each child', async () => {
+    const withPrefs: Profile[] = [
+      { ...profiles[0], grade: 1, themeId: 'dinosaur' },
+      { ...profiles[1], grade: 2, themeId: 'space' },
+    ]
+    const completed: DomainEvent[] = [
+      ...events,
+      { type: 'session-completed', eventId: 'done-a', profileId: 'a', occurredAt: 4500, sessionId: 'q-a', rewards: [] },
+    ]
+    const overview = useFamilyOverview({ store: makeParentStore({ profiles: withPrefs, events: completed }).store, clock: () => 5000, questionTypeById })
+    await overview.load()
+    expect(overview.children.value[0]).toMatchObject({ grade: 1, themeName: '恐龙', stage: 1 })
+    expect(overview.children.value[1]).toMatchObject({ grade: 2, themeName: '太空', stage: 0 })
+  })
+
   it('counts only events from the last seven days', async () => {
     const old: DomainEvent = { type: 'answer-submitted', eventId: 'old', profileId: 'a', occurredAt: 5000 - 8 * DAY, sessionId: 'q-old', questionId: 'a9', submitted: '1', correct: true, usedHintLevel: 0, retryCount: 0, ms: 9000 }
     const fake = makeParentStore({ profiles, events: [...events, old] })
