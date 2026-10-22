@@ -38,6 +38,7 @@ function endpointFor(key: string): string {
 /** 发送一个匿名计数；未同意、Do Not Track 或网络失败时静默跳过。 */
 export function trackAnonymous(key: string): void {
   if (!hasAnalyticsConsent()) return
+  if (typeof globalThis.fetch !== 'function') return
   const nav = globalThis.navigator
   if (nav?.doNotTrack === '1' || (nav as { globalPrivacyControl?: boolean } | undefined)?.globalPrivacyControl === true) return
   void fetch(endpointFor(key), { method: 'GET', mode: 'cors', keepalive: true }).catch(() => {
