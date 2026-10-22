@@ -377,7 +377,6 @@ function validateQuestion(value: unknown, path: string): Question {
     if (!(question.options as Array<{ id: string }>).some((option) => option.id === optionId)) {
       throw new Error(`${path}.answer.optionId: correct option is not in options`)
     }
-    if (answerRecord.value !== 0) throw new Error(`${path}.answer.value: choice answer must use 0 placeholder`)
   } else {
     if (question.options !== undefined) throw new Error(`${path}.options: open question must not declare options`)
     if (answerRecord.optionId !== undefined) throw new Error(`${path}.answer.optionId: open question must not declare optionId`)

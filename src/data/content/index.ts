@@ -1,4 +1,4 @@
-import rawQuestionBank from './questionBank.json'
+import rawQuestionBank from './questionBank.grade3.json'
 import rawCreatureBank from './creatures.json'
 import { normalizeQuestion } from '../../domain/model/normalize'
 import {

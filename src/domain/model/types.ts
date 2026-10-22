@@ -116,7 +116,7 @@ export interface FiveStep {
 
 /** 题干答案的三种等价形态之一，判等规则见 `quiz/answerJudgement`。 */
 export interface Answer {
-  /** 数值答案，取整后比对；选择题固定为 0，判题只看 optionId。 */
+  /** 数值答案，取整后比对；选择题保留正确选项的展示值，判题只看 optionId。 */
   value: number
   /** 带单位答案的单位（如「颗」），归一化后比对。 */
   unit?: string

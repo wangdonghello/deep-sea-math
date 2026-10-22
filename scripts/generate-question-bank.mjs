@@ -8,7 +8,7 @@
  *
  *     node scripts/generate-question-bank.mjs
  *
- * 产物写入 `src/data/content/questionBank.json`（顶层结构
+ * 产物写入 `src/data/content/questionBank.grade3.json`（顶层结构
  * `{ version, questions }`，本版本 `version` 为 `3.0.0`）。
  *
  * ── 量级口径（三年级） ────────────────────────────────────────────────
@@ -744,6 +744,8 @@ function buildQuestion({ id, type, difficulty, category, scenario, problem, slot
   const answer = form === 'expression' ? { value, expression } : { value, unit }
   return {
     id,
+    grade: 3,
+    format: 'open',
     type,
     difficulty,
     category,
@@ -773,8 +775,42 @@ function buildQuestion({ id, type, difficulty, category, scenario, problem, slot
 
 // ── 主流程：生成 → 建相似题双向链接 → 落盘 ─────────────────────────────
 
-/** 题库版本号（三年级量级重标定后升到 3.0.0）。 */
-const VERSION = '3.0.0'
+/** 题库版本号（第二版增加年级/选择题字段后升到 4.0.0）。 */
+const VERSION = '4.0.0'
+
+/**
+ * 把一部分无相似链接的数值题改成四选一。
+ *
+ * 保留原 answer.value/unit 作为正确选项的展示值；选择题判题只看
+ * answer.optionId。这样第一版的量级、单位、相似题校验仍然成立，不需要重写
+ * 全部题目，也不会让选择题的正确答案变成一个无意义的 0。
+ */
+function applyChoiceVariants(list, target) {
+  const candidates = list.filter((question) =>
+    question.similarQuestionIds.length === 0 && question.answer.expression === undefined)
+  const optionIds = ['A', 'B', 'C', 'D']
+  let converted = 0
+  for (const question of candidates) {
+    if (converted >= target) break
+    const correct = question.answer.value
+    const unit = question.answer.unit ?? ''
+    const distractors = [correct + 1, correct + 2, correct + 10, correct - 1]
+      .filter((value, index, values) => value > 0 && value !== correct && values.indexOf(value) === index)
+      .slice(0, 3)
+    if (distractors.length < 3) continue
+    const labels = [correct, ...distractors].map((value) => `${value}${unit}`)
+    const correctIndex = Number(question.id.slice(1)) % 4
+    const options = optionIds.map((id, index) => ({
+      id,
+      label: labels[index === correctIndex ? 0 : 1 + (index < correctIndex ? index : index - 1)],
+    }))
+    question.format = 'choice'
+    question.options = options
+    question.answer.optionId = optionIds[correctIndex]
+    converted += 1
+  }
+  return converted
+}
 
 /** 给同格内"同技能 + 同答案形态 + 答案值不同"的相邻两题建双向相似链接。 */
 function linkSimilar(list) {
@@ -835,13 +871,14 @@ for (const type of Object.keys(SCENARIOS)) {
 
 const linkCount = linkSimilar(questions)
 const linked = questions.filter((question) => question.similarQuestionIds.length > 0).length
+const choiceCount = applyChoiceVariants(questions, 72)
 
 /** 逐题单行 JSON，便于 diff 阅读（与既有题库风格一致）。 */
 const lines = questions.map((question) => `    ${JSON.stringify(question)}`)
 const output = `{\n  "version": "${VERSION}",\n  "questions": [\n${lines.join(',\n')}\n  ]\n}\n`
 
 const here = dirname(fileURLToPath(import.meta.url))
-const target = resolve(here, '..', 'src/data/content/questionBank.json')
+const target = resolve(here, '..', 'src/data/content/questionBank.grade3.json')
 writeFileSync(target, output)
 
 // 生成摘要（type × difficulty × category 分布 + 相似题链接统计）。
@@ -857,4 +894,4 @@ for (const type of TYPES) {
   console.log(`  ${type.padEnd(18)} ${cells.join('  ')}`)
 }
 console.log(`相似题双向链接 ${linkCount} 组；有链接的题 ${linked} 道；空链接 ${questions.length - linked} 道`)
-console.log(`提示层数固定 5；答案形态 expression ${questions.filter((question) => question.answer.expression).length} 道，unit ${questions.filter((question) => question.answer.unit).length} 道`)
+console.log(`选择题 ${choiceCount} 道；提示层数固定 5；答案形态 expression ${questions.filter((question) => question.answer.expression).length} 道，unit ${questions.filter((question) => question.answer.unit).length} 道`)

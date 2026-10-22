@@ -50,7 +50,7 @@ interface RawBank { version: string; questions: RawQuestion[] }
 
 /** Loads the checked-in question bank as JSON so tests exercise shipped content. */
 function readQuestionBank(): RawBank {
-  return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.json'), 'utf8')) as RawBank
+  return JSON.parse(readFileSync(resolve(process.cwd(), 'src/data/content/questionBank.grade3.json'), 'utf8')) as RawBank
 }
 
 /** 六个题型 × 三档难度的全部组合。 */
