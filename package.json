@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "type-check": "vue-tsc -b --noEmit",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "analytics:report": "node scripts/analytics-report.mjs"
   },
   "engines": {
     "node": ">=24"

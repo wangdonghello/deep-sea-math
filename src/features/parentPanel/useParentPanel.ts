@@ -4,6 +4,7 @@ import { hashPin } from '@/domain/crypto/hashPin'
 import { createEventId } from '@/domain/eventLog/ids'
 import { replayProjections } from '@/domain/eventLog/replay'
 import { QUIZ_TYPES, type DomainEvent, type Grade, type MasteryLevel, type Profile, type QuizType, type Settings, type ThemeId } from '@/domain/model/types'
+import { trackProfileCreated } from '@/shared/analytics'
 import { redact } from '@/shared/redact'
 
 import type { ParentPanelOptions, ParentReport } from './types'
@@ -136,6 +137,7 @@ export function useParentPanel(options: ParentPanelOptions) {
         id: profile.id, nickname: profile.nickname, avatarId: profile.avatarId,
         grade: profile.grade, themeId: profile.themeId,
       }]
+      trackProfileCreated(profile.grade ?? 3, profile.themeId ?? 'deep-sea')
       created.value = true
       successMessage.value = '孩子档案已创建，请返回档案选择页开始探索。'
     } catch (error) {

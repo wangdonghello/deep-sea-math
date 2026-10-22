@@ -5,6 +5,7 @@ import { initProductionStores } from '@/app/productionStores'
 import { buildQuestContext } from '@/app/questContext'
 import { findUnlockedCreature } from '@/app/unlockedCreature'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
+import { trackPage } from '@/shared/analytics'
 import { useParentSessionStore } from '@/features/parentPanel/parentSessionStore'
 import {
   HOME_PATH,
@@ -93,6 +94,10 @@ const router = createRouter({
  * 3. **最后装载路由专属上下文**（答题页题组 / 观察舱生物）——它们都依赖
  *    档案上下文，且都要读事件。
  */
+router.afterEach((to) => {
+  trackPage(typeof to.name === 'string' ? to.name : 'unknown')
+})
+
 router.beforeEach(async (to) => {
   const stores = await initProductionStores()
   const session = useProfileSessionStore()

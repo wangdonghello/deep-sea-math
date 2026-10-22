@@ -5,6 +5,7 @@ import { createEventId } from '@/domain/eventLog/ids'
 import { replayProjections } from '@/domain/eventLog/replay'
 import { isCorrect } from '@/domain/quiz/answerJudgement'
 import { answerText } from '@/shared/choiceAnswer'
+import { trackSessionCompleted } from '@/shared/analytics'
 import type { AnswerSubmittedEvent, DomainEvent, Question } from '@/domain/model/types'
 import { grantRewards } from '@/domain/reward/rewardGrant'
 
@@ -240,7 +241,10 @@ export function useQuizSession(options: QuizSessionOptions) {
       creatureId: options.creatureId, zoneId: options.zoneId,
       unlockEventIdFactory: () => idGenerator(),
     })
-    if (result.granted) await appendMany(result.events)
+    if (result.granted) {
+      await appendMany(result.events)
+      trackSessionCompleted(started.grade, started.themeId)
+    }
   }
 
   async function useHint(): Promise<void> {
