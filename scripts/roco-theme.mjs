@@ -7,9 +7,48 @@
 
 const SCENES = ['魔法学院', '宠物园', '天空城', '彩虹湿地', '咕噜球工坊', '星辉广场', '魔法图书馆', '云朵农场']
 const ACTIONS = ['整理魔法书', '收集咕噜球', '照顾宠物', '点亮魔法灯', '搬运魔法果', '布置比赛场地', '清点星星徽章', '修补彩虹桥']
+
+/** 让场景/动作跟道具语义一致，避免“宠物园里整理魔法书”这类错位。 */
+const SCENES_BY_ITEM = {
+  魔法书: ['魔法学院', '魔法图书馆'],
+  咕噜球: ['宠物园', '咕噜球工坊'],
+  魔法果: ['云朵农场', '彩虹湿地'],
+  卡片: ['星辉广场', '魔法学院'],
+  星星徽章: ['星辉广场', '魔法学院'],
+  宠物: ['宠物园', '云朵农场'],
+  魔法绳: ['天空城', '彩虹湿地'],
+  魔法药水: ['咕噜球工坊', '魔法学院'],
+  魔法花: ['彩虹湿地', '云朵农场'],
+  魔法电池: ['魔法学院', '天空城'],
+  记录: ['魔法学院', '天空城'],
+  任务: ['魔法学院', '星辉广场'],
+  金币: ['星辉广场', '咕噜球工坊'],
+  魔法石: ['云朵农场', '彩虹湿地'],
+  魔法粉: ['咕噜球工坊', '魔法学院'],
+  星星糖: ['云朵农场', '星辉广场'],
+}
+const PLACE_BY_ITEM = {
+  魔法书: '书架', 咕噜球: '咕噜球盒', 魔法果: '篮子', 卡片: '卡片盒',
+  星星徽章: '徽章盒', 宠物: '区域', 魔法绳: '工具箱', 魔法药水: '药水架',
+  魔法花: '花坛', 魔法电池: '电池盒', 记录: '记录本', 任务: '任务板',
+  金币: '钱袋', 魔法石: '石箱', 魔法粉: '粉盒', 星星糖: '糖罐',
+}
+
+const ACTIONS_BY_ITEM = {
+  魔法书: ['整理魔法书', '清点魔法书'],
+  咕噜球: ['收集咕噜球', '清点咕噜球'],
+  魔法果: ['搬运魔法果', '采摘魔法果'],
+  卡片: ['清点卡片', '整理卡片'],
+  星星徽章: ['清点星星徽章', '整理星星徽章'],
+  宠物: ['照顾宠物', '布置宠物窝'],
+  魔法绳: ['修补彩虹桥', '整理魔法绳'],
+  魔法药水: ['配制魔法药水', '搬运魔法药水'],
+  魔法花: ['照顾魔法花', '给魔法花浇水'],
+  记录: ['整理魔法记录', '核对魔法记录'],
+}
 const ITEM_BY_UNIT = {
   个: '魔法果', 份: '魔法书', 枚: '星星徽章', 张: '卡片', 本: '魔法书', 条: '魔法绳',
-  节: '魔法电池', 次: '魔法记录', 项: '任务', 米: '小路', 厘米: '彩带', 分钟: '分钟',
+  节: '魔法电池', 次: '记录', 项: '任务', 米: '小路', 厘米: '彩带', 分钟: '分钟',
   元: '金币', 千克: '魔法石', 克: '魔法粉', 只: '宠物', 人: '小魔法师', 颗: '星星糖',
   盒: '咕噜球', 瓶: '魔法药水', 袋: '魔法种子', 朵: '魔法花', 块: '魔法砖', 台: '魔法装置',
 }
@@ -32,11 +71,14 @@ function parseExpression(expression) {
   return { operands, ops }
 }
 
-function pickIndices(id) {
-  const n = numberFromId(id)
+function pickContext(question) {
+  const n = numberFromId(question.id)
+  const item = itemFor(question)
+  const scenes = SCENES_BY_ITEM[item] ?? SCENES
+  const actions = ACTIONS_BY_ITEM[item] ?? ACTIONS
   return {
-    scene: SCENES[n % SCENES.length],
-    action: ACTIONS[Math.floor(n / SCENES.length) % ACTIONS.length],
+    scene: scenes[n % scenes.length],
+    action: actions[Math.floor(n / scenes.length) % actions.length],
   }
 }
 
@@ -46,6 +88,7 @@ function itemFor(question) {
 
 function resultSentence(question, expression, operands, ops, scene, action, item) {
   const unit = question.answer.unit ?? ''
+  const place = PLACE_BY_ITEM[item] ?? '区域'
   const asksExpression = question.answer.expression !== undefined
   const finish = (text) => asksExpression ? `${text} 请写出表示这个数量的算式。` : text
   if (ops.length === 0) return finish('算一算结果是多少。')
@@ -55,7 +98,7 @@ function resultSentence(question, expression, operands, ops, scene, action, item
     if (ops[0] === '+') return finish(`${scene}里，洛贝克${action}，先有 ${a} ${unit}${item}，又得到 ${b} ${unit}${item}。现在一共有多少${unit}？`)
     if (ops[0] === '-') return finish(`${scene}里原来有 ${a} ${unit}${item}，洛贝克${action}用去 ${b} ${unit}。还剩多少${unit}？`)
     if (ops[0] === '×') return finish(`${scene}里有 ${a} 组${item}，每组 ${b} ${unit}。一共有多少${unit}？`)
-    return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个区域，每个区域分到多少${unit}？`)
+    return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个${place}，每个${place}分到多少${unit}？`)
   }
 
   if (ops.length === 2) {
@@ -69,8 +112,8 @@ function resultSentence(question, expression, operands, ops, scene, action, item
     if (pair === '× -') return finish(`${scene}里有 ${a} 组${item}，每组 ${b} ${unit}，后来用去 ${c} ${unit}。还剩多少${unit}？`)
     if (pair === '- ×') return finish(`${scene}里原来有 ${a} ${unit}${item}，每组有 ${b} ${unit}，一共 ${c} 组；洛贝克${action}把这些全部用去。还剩多少${unit}？`)
     if (pair === '+ ×') return finish(`${scene}里原来有 ${a} ${unit}${item}，每组有 ${b} ${unit}，又增加 ${c} 组。现在一共有多少${unit}？`)
-    if (pair === '÷ +') return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个区域，每个区域分到一些，后来又增加 ${c} ${unit}。现在一共有多少${unit}？`)
-    if (pair === '÷ -') return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个区域，每个区域分到一些，后来用去 ${c} ${unit}。还剩多少${unit}？`)
+    if (pair === '÷ +') return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个${place}，每个${place}分到一些，后来又增加 ${c} ${unit}。现在一共有多少${unit}？`)
+    if (pair === '÷ -') return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个${place}，每个${place}分到一些，后来用去 ${c} ${unit}。还剩多少${unit}？`)
   }
 
   return finish(`${scene}里，洛贝克遇到一道魔法算式：${expression}。算一算结果是多少？`)
@@ -130,8 +173,8 @@ export function applyRocoTheme(questions) {
   }
 
   for (const question of questions) {
-    const { scene, action } = pickIndices(question.id)
     const item = itemFor(question)
+    const { scene, action } = pickContext(question)
     const expression = expressionOf(question)
     const { operands, ops } = parseExpression(expression)
     question.story = {
