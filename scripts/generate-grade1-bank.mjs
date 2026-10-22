@@ -40,11 +40,11 @@ const CONTEXTS = {
   ],
   'number-sense': [
     ['比大小', '{a} 和 {b}，哪个数更大？'],
-    ['数位', '{a} 里面有几个十和几个一？'],
+    ['数的组成', '一个数由 {tens} 个十和 {ones} 个一组成，这个数是多少？'],
     ['排序', '把 {a}、{b}、{c} 从大到小排一排，最大的数是多少？'],
     ['接近整十', '{a} 最接近哪个整十数？'],
-    ['单双数', '{a} 是单数还是双数？'],
-    ['组成', '一个数由 {tens} 个十和 {ones} 个一组成，这个数是多少？'],
+    ['多一', '比 {a} 大 1 的数是几？'],
+    ['少一', '比 {a} 小 1 的数是几？'],
   ],
   'two-step-app': [
     ['班级', '班里有 {a} 人，来了 {b} 人，又走了 {c} 人，现在有多少人？'],
@@ -91,9 +91,15 @@ function makeProblem(type, difficulty, slot) {
     const a = 11 + slot * 3 + d
     const b = 9 + slot
     const c = 20 + slot
-    const tens = 1 + (slot % 8)
+    const tens = 1 + (slot % 5)
     const ones = slot % 10
-    return { a, b, c, tens, ones, value: Math.max(a, b, c), unit: '' }
+    const which = slot % 6
+    if (which === 0) return { a, b, c, tens, ones, value: Math.max(a, b), unit: '' }
+    if (which === 1) return { a, b, c, tens, ones, value: tens * 10 + ones, unit: '' }
+    if (which === 2) return { a, b, c, tens, ones, value: Math.max(a, b, c), unit: '' }
+    if (which === 3) return { a, b, c, tens, ones, value: Math.round(a / 10) * 10, unit: '' }
+    if (which === 4) return { a, b, c, tens, ones, value: a + 1, unit: '' }
+    return { a, b, c, tens, ones, value: a - 1, unit: '' }
   }
   if (type === 'two-step-app') {
     const a = 8 + slot + d

@@ -1947,7 +1947,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 20,
+        "value": 12,
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -1963,19 +1963,19 @@
       "options": [
         {
           "id": "A",
-          "label": "21"
+          "label": "13"
         },
         {
           "id": "B",
-          "label": "20"
+          "label": "12"
         },
         {
           "id": "C",
-          "label": "22"
+          "label": "14"
         },
         {
           "id": "D",
-          "label": "30"
+          "label": "22"
         }
       ]
     },
@@ -1987,8 +1987,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "数位",
-        "body": "15 里面有几个十和几个一？"
+        "title": "数的组成",
+        "body": "一个数由 2 个十和 1 个一组成，这个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2104,7 +2104,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 23,
+        "value": 20,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -2121,19 +2121,19 @@
       "options": [
         {
           "id": "A",
-          "label": "23"
+          "label": "20"
         },
         {
           "id": "B",
-          "label": "24"
+          "label": "21"
         },
         {
           "id": "C",
-          "label": "25"
+          "label": "22"
         },
         {
           "id": "D",
-          "label": "33"
+          "label": "30"
         }
       ]
     },
@@ -2145,8 +2145,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "单双数",
-        "body": "24 是单数还是双数？"
+        "title": "多一",
+        "body": "比 24 大 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2157,7 +2157,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
+        "value": 25,
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -2173,19 +2173,19 @@
       "options": [
         {
           "id": "A",
-          "label": "25"
-        },
-        {
-          "id": "B",
-          "label": "24"
-        },
-        {
-          "id": "C",
           "label": "26"
         },
         {
+          "id": "B",
+          "label": "25"
+        },
+        {
+          "id": "C",
+          "label": "27"
+        },
+        {
           "id": "D",
-          "label": "34"
+          "label": "35"
         }
       ]
     },
@@ -2197,8 +2197,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "组成",
-        "body": "一个数由 6 个十和 5 个一组成，这个数是多少？"
+        "title": "少一",
+        "body": "比 27 小 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2209,7 +2209,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 27,
+        "value": 26,
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -2226,19 +2226,19 @@
       "options": [
         {
           "id": "A",
-          "label": "28"
-        },
-        {
-          "id": "B",
-          "label": "29"
-        },
-        {
-          "id": "C",
           "label": "27"
         },
         {
+          "id": "B",
+          "label": "28"
+        },
+        {
+          "id": "C",
+          "label": "26"
+        },
+        {
           "id": "D",
-          "label": "37"
+          "label": "36"
         }
       ]
     },
@@ -2302,8 +2302,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "数位",
-        "body": "33 里面有几个十和几个一？"
+        "title": "数的组成",
+        "body": "一个数由 3 个十和 7 个一组成，这个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2314,7 +2314,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 33,
+        "value": 37,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -2331,19 +2331,19 @@
       "options": [
         {
           "id": "A",
-          "label": "33"
+          "label": "37"
         },
         {
           "id": "B",
-          "label": "34"
+          "label": "38"
         },
         {
           "id": "C",
-          "label": "35"
+          "label": "39"
         },
         {
           "id": "D",
-          "label": "43"
+          "label": "47"
         }
       ]
     },
@@ -2419,7 +2419,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 39,
+        "value": 40,
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -2436,19 +2436,19 @@
       "options": [
         {
           "id": "A",
-          "label": "40"
-        },
-        {
-          "id": "B",
           "label": "41"
         },
         {
+          "id": "B",
+          "label": "42"
+        },
+        {
           "id": "C",
-          "label": "39"
+          "label": "40"
         },
         {
           "id": "D",
-          "label": "49"
+          "label": "50"
         }
       ]
     },
@@ -2460,8 +2460,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "单双数",
-        "body": "42 是单数还是双数？"
+        "title": "多一",
+        "body": "比 42 大 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2472,7 +2472,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 42,
+        "value": 43,
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -2488,19 +2488,19 @@
       "options": [
         {
           "id": "A",
-          "label": "43"
-        },
-        {
-          "id": "B",
           "label": "44"
         },
         {
+          "id": "B",
+          "label": "45"
+        },
+        {
           "id": "C",
-          "label": "52"
+          "label": "53"
         },
         {
           "id": "D",
-          "label": "42"
+          "label": "43"
         }
       ]
     },
@@ -2512,8 +2512,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "组成",
-        "body": "一个数由 4 个十和 1 个一组成，这个数是多少？"
+        "title": "少一",
+        "body": "比 45 小 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2524,7 +2524,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 45,
+        "value": 44,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -2541,19 +2541,19 @@
       "options": [
         {
           "id": "A",
-          "label": "45"
+          "label": "44"
         },
         {
           "id": "B",
-          "label": "46"
+          "label": "45"
         },
         {
           "id": "C",
-          "label": "47"
+          "label": "46"
         },
         {
           "id": "D",
-          "label": "55"
+          "label": "54"
         }
       ]
     },
@@ -2577,7 +2577,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 20,
+        "value": 13,
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -2593,19 +2593,19 @@
       "options": [
         {
           "id": "A",
-          "label": "21"
+          "label": "14"
         },
         {
           "id": "B",
-          "label": "20"
+          "label": "13"
         },
         {
           "id": "C",
-          "label": "22"
+          "label": "15"
         },
         {
           "id": "D",
-          "label": "30"
+          "label": "23"
         }
       ]
     },
@@ -2617,8 +2617,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "数位",
-        "body": "16 里面有几个十和几个一？"
+        "title": "数的组成",
+        "body": "一个数由 2 个十和 1 个一组成，这个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2734,7 +2734,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 23,
+        "value": 20,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -2751,19 +2751,19 @@
       "options": [
         {
           "id": "A",
-          "label": "23"
+          "label": "20"
         },
         {
           "id": "B",
-          "label": "24"
+          "label": "21"
         },
         {
           "id": "C",
-          "label": "25"
+          "label": "22"
         },
         {
           "id": "D",
-          "label": "33"
+          "label": "30"
         }
       ]
     },
@@ -2775,8 +2775,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "单双数",
-        "body": "25 是单数还是双数？"
+        "title": "多一",
+        "body": "比 25 大 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2787,7 +2787,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 25,
+        "value": 26,
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -2803,19 +2803,19 @@
       "options": [
         {
           "id": "A",
-          "label": "26"
-        },
-        {
-          "id": "B",
-          "label": "25"
-        },
-        {
-          "id": "C",
           "label": "27"
         },
         {
+          "id": "B",
+          "label": "26"
+        },
+        {
+          "id": "C",
+          "label": "28"
+        },
+        {
           "id": "D",
-          "label": "35"
+          "label": "36"
         }
       ]
     },
@@ -2827,8 +2827,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "组成",
-        "body": "一个数由 6 个十和 5 个一组成，这个数是多少？"
+        "title": "少一",
+        "body": "比 28 小 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2839,7 +2839,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
+        "value": 27,
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -2856,19 +2856,19 @@
       "options": [
         {
           "id": "A",
-          "label": "29"
-        },
-        {
-          "id": "B",
-          "label": "30"
-        },
-        {
-          "id": "C",
           "label": "28"
         },
         {
+          "id": "B",
+          "label": "29"
+        },
+        {
+          "id": "C",
+          "label": "27"
+        },
+        {
           "id": "D",
-          "label": "38"
+          "label": "37"
         }
       ]
     },
@@ -2932,8 +2932,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "数位",
-        "body": "34 里面有几个十和几个一？"
+        "title": "数的组成",
+        "body": "一个数由 3 个十和 7 个一组成，这个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2944,7 +2944,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 34,
+        "value": 37,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -2961,19 +2961,19 @@
       "options": [
         {
           "id": "A",
-          "label": "34"
+          "label": "37"
         },
         {
           "id": "B",
-          "label": "35"
+          "label": "38"
         },
         {
           "id": "C",
-          "label": "36"
+          "label": "39"
         },
         {
           "id": "D",
-          "label": "44"
+          "label": "47"
         }
       ]
     },
@@ -3090,8 +3090,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "单双数",
-        "body": "43 是单数还是双数？"
+        "title": "多一",
+        "body": "比 43 大 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3102,7 +3102,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 43,
+        "value": 44,
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -3118,19 +3118,19 @@
       "options": [
         {
           "id": "A",
-          "label": "44"
-        },
-        {
-          "id": "B",
           "label": "45"
         },
         {
+          "id": "B",
+          "label": "46"
+        },
+        {
           "id": "C",
-          "label": "53"
+          "label": "54"
         },
         {
           "id": "D",
-          "label": "43"
+          "label": "44"
         }
       ]
     },
@@ -3142,8 +3142,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "组成",
-        "body": "一个数由 4 个十和 1 个一组成，这个数是多少？"
+        "title": "少一",
+        "body": "比 46 小 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3154,7 +3154,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 46,
+        "value": 45,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -3171,19 +3171,19 @@
       "options": [
         {
           "id": "A",
-          "label": "46"
+          "label": "45"
         },
         {
           "id": "B",
-          "label": "47"
+          "label": "46"
         },
         {
           "id": "C",
-          "label": "48"
+          "label": "47"
         },
         {
           "id": "D",
-          "label": "56"
+          "label": "55"
         }
       ]
     },
@@ -3207,7 +3207,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 20,
+        "value": 14,
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -3223,19 +3223,19 @@
       "options": [
         {
           "id": "A",
-          "label": "21"
+          "label": "15"
         },
         {
           "id": "B",
-          "label": "20"
+          "label": "14"
         },
         {
           "id": "C",
-          "label": "22"
+          "label": "16"
         },
         {
           "id": "D",
-          "label": "30"
+          "label": "24"
         }
       ]
     },
@@ -3247,8 +3247,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "数位",
-        "body": "17 里面有几个十和几个一？"
+        "title": "数的组成",
+        "body": "一个数由 2 个十和 1 个一组成，这个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3364,7 +3364,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 23,
+        "value": 20,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -3381,19 +3381,19 @@
       "options": [
         {
           "id": "A",
-          "label": "23"
+          "label": "20"
         },
         {
           "id": "B",
-          "label": "24"
+          "label": "21"
         },
         {
           "id": "C",
-          "label": "25"
+          "label": "22"
         },
         {
           "id": "D",
-          "label": "33"
+          "label": "30"
         }
       ]
     },
@@ -3405,8 +3405,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "单双数",
-        "body": "26 是单数还是双数？"
+        "title": "多一",
+        "body": "比 26 大 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3417,7 +3417,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 26,
+        "value": 27,
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -3433,19 +3433,19 @@
       "options": [
         {
           "id": "A",
-          "label": "27"
-        },
-        {
-          "id": "B",
-          "label": "26"
-        },
-        {
-          "id": "C",
           "label": "28"
         },
         {
+          "id": "B",
+          "label": "27"
+        },
+        {
+          "id": "C",
+          "label": "29"
+        },
+        {
           "id": "D",
-          "label": "36"
+          "label": "37"
         }
       ]
     },
@@ -3457,8 +3457,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "组成",
-        "body": "一个数由 6 个十和 5 个一组成，这个数是多少？"
+        "title": "少一",
+        "body": "比 29 小 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3469,7 +3469,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 29,
+        "value": 28,
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -3486,19 +3486,19 @@
       "options": [
         {
           "id": "A",
-          "label": "30"
-        },
-        {
-          "id": "B",
-          "label": "31"
-        },
-        {
-          "id": "C",
           "label": "29"
         },
         {
+          "id": "B",
+          "label": "30"
+        },
+        {
+          "id": "C",
+          "label": "28"
+        },
+        {
           "id": "D",
-          "label": "39"
+          "label": "38"
         }
       ]
     },
@@ -3562,8 +3562,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "数位",
-        "body": "35 里面有几个十和几个一？"
+        "title": "数的组成",
+        "body": "一个数由 3 个十和 7 个一组成，这个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3574,7 +3574,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 35,
+        "value": 37,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -3591,19 +3591,19 @@
       "options": [
         {
           "id": "A",
-          "label": "35"
-        },
-        {
-          "id": "B",
-          "label": "36"
-        },
-        {
-          "id": "C",
           "label": "37"
         },
         {
+          "id": "B",
+          "label": "38"
+        },
+        {
+          "id": "C",
+          "label": "39"
+        },
+        {
           "id": "D",
-          "label": "45"
+          "label": "47"
         }
       ]
     },
@@ -3679,7 +3679,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 41,
+        "value": 40,
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -3696,19 +3696,19 @@
       "options": [
         {
           "id": "A",
-          "label": "42"
-        },
-        {
-          "id": "B",
-          "label": "43"
-        },
-        {
-          "id": "C",
           "label": "41"
         },
         {
+          "id": "B",
+          "label": "42"
+        },
+        {
+          "id": "C",
+          "label": "40"
+        },
+        {
           "id": "D",
-          "label": "51"
+          "label": "50"
         }
       ]
     },
@@ -3720,8 +3720,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "单双数",
-        "body": "44 是单数还是双数？"
+        "title": "多一",
+        "body": "比 44 大 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3732,7 +3732,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 44,
+        "value": 45,
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -3748,19 +3748,19 @@
       "options": [
         {
           "id": "A",
-          "label": "45"
-        },
-        {
-          "id": "B",
           "label": "46"
         },
         {
+          "id": "B",
+          "label": "47"
+        },
+        {
           "id": "C",
-          "label": "54"
+          "label": "55"
         },
         {
           "id": "D",
-          "label": "44"
+          "label": "45"
         }
       ]
     },
@@ -3772,8 +3772,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "组成",
-        "body": "一个数由 4 个十和 1 个一组成，这个数是多少？"
+        "title": "少一",
+        "body": "比 47 小 1 的数是几？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3784,7 +3784,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 47,
+        "value": 46,
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -3801,19 +3801,19 @@
       "options": [
         {
           "id": "A",
-          "label": "47"
+          "label": "46"
         },
         {
           "id": "B",
-          "label": "48"
+          "label": "47"
         },
         {
           "id": "C",
-          "label": "49"
+          "label": "48"
         },
         {
           "id": "D",
-          "label": "57"
+          "label": "56"
         }
       ]
     },

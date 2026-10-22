@@ -95,8 +95,8 @@ function makeProblem(type, difficulty, slot) {
     const a = 2 + ((slot + difficulty) % 8)
     const b = 2 + ((slot * 2 + difficulty) % 8)
     const total = a * b
-    if (slot >= 8) return { a, b, total, value: total % a === 0 ? total / a : b, unit: '人' }
-    return { a, b, value: total, unit: '个' }
+    if (slot >= 8) return { a, b, total, value: b, unit: '人', mode: 'division' }
+    return { a, b, value: total, unit: '个', mode: 'multiplication' }
   }
   if (type === 'two-step-app') {
     const a = 20 + slot * 2
@@ -148,7 +148,9 @@ function hintsFor(type, problem) {
     '把题目里的数量写下来，别急着算。',
     relation,
     type === 'mul-div'
-      ? `列式：${problem.a ?? ''} × ${problem.b ?? ''}。`
+      ? problem.mode === 'division'
+        ? `列式：${problem.total} ÷ ${problem.b}。`
+        : `列式：${problem.a} × ${problem.b}。`
       : type === 'pattern-data'
         ? `从 ${problem.start} 开始，每次加 ${problem.step}。`
         : '把已知数量和未知数量排成一道算式。',
