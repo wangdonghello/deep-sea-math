@@ -16,6 +16,11 @@ export interface ThemeEntry {
   modelSource?: string
   /** 模型许可证，例如 CC0。 */
   modelLicense?: string
+  /** 可选真实馆藏/化石照片（当前用于恐龙卡片和 3D 加载占位图）。 */
+  photoRef?: string
+  photoSource?: string
+  photoCredit?: string
+  photoLicense?: string
 }
 
 /** 一个兴趣主题包：4 个阶段、每阶段 2 个条目。 */

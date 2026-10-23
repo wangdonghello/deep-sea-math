@@ -1,209 +1,117 @@
 /**
- * 三年级题库的“洛克王国文字主题”转换。
+ * 给二年级/三年级题库加“洛克王国”文字背景。
  *
- * 只替换题干/提示与展示标签，不改数学结构、答案、相似题链接与来源。
- * 不使用官方图片、角色立绘、3D 模型或剧情原文；这里的名称/词仅作为文字背景。
+ * 只替换场景词与提示词，不重写数学结构；因此原题库里的等差、时间、
+ * 距离、乘除题仍然保持原来的题型和难度。只借文字名称/词，不使用官方
+ * 图片、角色立绘、3D 模型或剧情原文。
  */
 
+const REPLACEMENTS = [
+  [/潜水艇基地/g, '近地轨道'],
+  [/潜水艇/g, '洛贝克'],
+  [/观察舱|观察窗|操作台/g, '魔法观察台'],
+  [/采样队|探险队/g, '魔法小队'],
+  [/小潜水员|潜水员|研究员/g, '小魔法师'],
+  [/深海|海底|海域|海沟|暮光区|深渊区/g, '洛克王国'],
+  [/海水样本/g, '魔法水样本'],
+  [/海水/g, '魔法水'],
+  [/诱饵灯/g, '魔法灯'],
+  [/声呐/g, '魔法回声'],
+  [/鳞片标本|标本|鳞片/g, '魔法样本'],
+  [/采样/g, '采集'],
+  [/下潜/g, '探索'],
+  [/小海星|小鲸/g, '洛贝克'],
+  [/沙滩/g, '彩虹湿地'],
+  [/贝壳/g, '星星徽章'],
+  [/深海大鼬鳚|约翰逊鮟鱇鱼|深海蜥鱼|宝石鱿鱼/g, '魔法宠物'],
+]
+
 const SCENES = ['魔法学院', '宠物园', '天空城', '彩虹湿地', '咕噜球工坊', '星辉广场', '魔法图书馆', '云朵农场']
-const ACTIONS = ['整理魔法书', '收集咕噜球', '照顾宠物', '点亮魔法灯', '搬运魔法果', '布置比赛场地', '清点星星徽章', '修补彩虹桥']
 
-/** 让场景/动作跟道具语义一致，避免“宠物园里整理魔法书”这类错位。 */
-const SCENES_BY_ITEM = {
-  魔法书: ['魔法学院', '魔法图书馆'],
-  咕噜球: ['宠物园', '咕噜球工坊'],
-  魔法果: ['云朵农场', '彩虹湿地'],
-  卡片: ['星辉广场', '魔法学院'],
-  星星徽章: ['星辉广场', '魔法学院'],
-  宠物: ['宠物园', '云朵农场'],
-  魔法绳: ['天空城', '彩虹湿地'],
-  魔法药水: ['咕噜球工坊', '魔法学院'],
-  魔法花: ['彩虹湿地', '云朵农场'],
-  魔法电池: ['魔法学院', '天空城'],
-  记录: ['魔法学院', '天空城'],
-  任务: ['魔法学院', '星辉广场'],
-  金币: ['星辉广场', '咕噜球工坊'],
-  魔法石: ['云朵农场', '彩虹湿地'],
-  魔法粉: ['咕噜球工坊', '魔法学院'],
-  星星糖: ['云朵农场', '星辉广场'],
-}
-const PLACE_BY_ITEM = {
-  魔法书: '书架', 咕噜球: '咕噜球盒', 魔法果: '篮子', 卡片: '卡片盒',
-  星星徽章: '徽章盒', 宠物: '区域', 魔法绳: '工具箱', 魔法药水: '药水架',
-  魔法花: '花坛', 魔法电池: '电池盒', 记录: '记录本', 任务: '任务板',
-  金币: '钱袋', 魔法石: '石箱', 魔法粉: '粉盒', 星星糖: '糖罐',
+function rocoText(text) {
+  let value = String(text)
+  for (const [pattern, replacement] of REPLACEMENTS) value = value.replace(pattern, replacement)
+  return value
 }
 
-const ACTIONS_BY_ITEM = {
-  魔法书: ['整理魔法书', '清点魔法书'],
-  咕噜球: ['收集咕噜球', '清点咕噜球'],
-  魔法果: ['搬运魔法果', '采摘魔法果'],
-  卡片: ['清点卡片', '整理卡片'],
-  星星徽章: ['清点星星徽章', '整理星星徽章'],
-  宠物: ['照顾宠物', '布置宠物窝'],
-  魔法绳: ['修补彩虹桥', '整理魔法绳'],
-  魔法药水: ['配制魔法药水', '搬运魔法药水'],
-  魔法花: ['照顾魔法花', '给魔法花浇水'],
-  记录: ['整理魔法记录', '核对魔法记录'],
-}
-const ITEM_BY_UNIT = {
-  个: '魔法果', 份: '魔法书', 枚: '星星徽章', 张: '卡片', 本: '魔法书', 条: '魔法绳',
-  节: '魔法电池', 次: '记录', 项: '任务', 米: '小路', 厘米: '彩带', 分钟: '分钟',
-  元: '金币', 千克: '魔法石', 克: '魔法粉', 只: '宠物', 人: '小魔法师', 颗: '星星糖',
-  盒: '咕噜球', 瓶: '魔法药水', 袋: '魔法种子', 朵: '魔法花', 块: '魔法砖', 台: '魔法装置',
-}
-
-function numberFromId(id) {
-  const match = /(\d+)$/.exec(id)
-  return match === null ? 0 : Number(match[1])
-}
-
-function expressionOf(question) {
-  const hint = String(question.hints?.[3] ?? '')
-  const match = /列式：([^。]+)/.exec(hint)
-  return (match?.[1] ?? question.answer.expression ?? '').replace(/\s+/g, '').trim()
-}
-
-function parseExpression(expression) {
-  const parts = expression.split(/([+\-×÷])/).filter((part) => part !== '')
-  const operands = parts.filter((part) => /^\d+$/.test(part)).map(Number)
-  const ops = parts.filter((part) => ['+', '-', '×', '÷'].includes(part))
-  return { operands, ops }
-}
-
-function pickContext(question) {
-  const n = numberFromId(question.id)
-  const item = itemFor(question)
-  const scenes = SCENES_BY_ITEM[item] ?? SCENES
-  const actions = ACTIONS_BY_ITEM[item] ?? ACTIONS
-  return {
-    scene: scenes[n % scenes.length],
-    action: actions[Math.floor(n / scenes.length) % actions.length],
-  }
-}
-
-function itemFor(question) {
-  return ITEM_BY_UNIT[question.answer.unit ?? ''] ?? '魔法道具'
-}
-
-function resultSentence(question, expression, operands, ops, scene, action, item) {
-  const unit = question.answer.unit ?? ''
-  const place = PLACE_BY_ITEM[item] ?? '区域'
-  const asksExpression = question.answer.expression !== undefined
-  const finish = (text) => asksExpression ? `${text} 请写出表示这个数量的算式。` : text
-  if (ops.length === 0) return finish('算一算结果是多少。')
-
-  if (ops.length === 1) {
-    const [a, b] = operands
-    if (ops[0] === '+') return finish(`${scene}里，洛贝克${action}，先有 ${a} ${unit}${item}，又得到 ${b} ${unit}${item}。现在一共有多少${unit}？`)
-    if (ops[0] === '-') return finish(`${scene}里原来有 ${a} ${unit}${item}，洛贝克${action}用去 ${b} ${unit}。还剩多少${unit}？`)
-    if (ops[0] === '×') return finish(`${scene}里有 ${a} 组${item}，每组 ${b} ${unit}。一共有多少${unit}？`)
-    return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个${place}，每个${place}分到多少${unit}？`)
-  }
-
-  if (ops.length === 2) {
-    const [a, b, c] = operands
-    const pair = ops.join(' ')
-    if (pair === '+ +') return finish(`${scene}里原来有 ${a} ${unit}${item}，洛贝克先${action}得到 ${b} ${unit}，又得到 ${c} ${unit}。现在一共有多少${unit}？`)
-    if (pair === '+ -') return finish(`${scene}里原来有 ${a} ${unit}${item}，先增加 ${b} ${unit}，后来用去 ${c} ${unit}。现在有多少${unit}？`)
-    if (pair === '- -') return finish(`${scene}里原来有 ${a} ${unit}${item}，洛贝克先${action}用去 ${b} ${unit}，又用去 ${c} ${unit}。还剩多少${unit}？`)
-    if (pair === '- +') return finish(`${scene}里原来有 ${a} ${unit}${item}，用去 ${b} ${unit}，后来又得到 ${c} ${unit}。现在有多少${unit}？`)
-    if (pair === '× +') return finish(`${scene}里有 ${a} 组${item}，每组 ${b} ${unit}，又额外增加 ${c} ${unit}。一共有多少${unit}？`)
-    if (pair === '× -') return finish(`${scene}里有 ${a} 组${item}，每组 ${b} ${unit}，后来用去 ${c} ${unit}。还剩多少${unit}？`)
-    if (pair === '- ×') return finish(`${scene}里原来有 ${a} ${unit}${item}，每组有 ${b} ${unit}，一共 ${c} 组；洛贝克${action}把这些全部用去。还剩多少${unit}？`)
-    if (pair === '+ ×') return finish(`${scene}里原来有 ${a} ${unit}${item}，每组有 ${b} ${unit}，又增加 ${c} 组。现在一共有多少${unit}？`)
-    if (pair === '÷ +') return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个${place}，每个${place}分到一些，后来又增加 ${c} ${unit}。现在一共有多少${unit}？`)
-    if (pair === '÷ -') return finish(`${scene}里把 ${a} ${unit}${item}平均分到 ${b} 个${place}，每个${place}分到一些，后来用去 ${c} ${unit}。还剩多少${unit}？`)
-  }
-
-  return finish(`${scene}里，洛贝克遇到一道魔法算式：${expression}。算一算结果是多少？`)
-}
-
-function makeHints(question, expression, operands, ops, item) {
-  const relation = question.type === 'mul-div'
-    ? '想一想：每份有几个、有几份，用乘法；已知总数和份数，用除法。'
-    : question.type === 'unknown-relation'
-      ? '把不知道的数量看成一个空位，用逆运算把它求出来。'
-      : question.type === 'pattern-data'
-        ? '先看相邻两个数相差多少，再按同样的规律往下推。'
-        : question.type === 'unit-time-route'
-          ? '先统一单位，再算经过的时间或一共走的路。'
-          : '先看清数量之间的关系，再决定用加法还是减法。'
-  return [
-    '先读题，找出已知的魔法数量和要问的问题。',
-    '把题目里的数量写下来，别急着算。',
-    relation,
-    `列式：${expression}。`,
-    '先算出一部分，再合并或比较；方法对了，答案自然就出来了。',
-  ]
-}
-
-function chooseOptions(question) {
-  const optionIds = ['A', 'B', 'C', 'D']
-  const correct = question.answer.value
-  const unit = question.answer.unit ?? ''
-  const distractors = [correct + 1, correct + 2, correct + 10, correct - 1]
-    .filter((value, index, values) => value > 0 && value !== correct && values.indexOf(value) === index)
-    .slice(0, 3)
-  if (distractors.length < 3) return false
-  const labels = [correct, ...distractors].map((value) => `${value}${unit}`)
-  const correctIndex = numberFromId(question.id) % 4
-  question.options = optionIds.map((id, index) => ({
-    id,
-    label: labels[index === correctIndex ? 0 : 1 + (index < correctIndex ? index : index - 1)],
-  }))
-  question.answer.optionId = optionIds[correctIndex]
-  question.format = 'choice'
-  return true
-}
+const SCENE_PATTERN = /洛克王国|魔法学院|宠物园|天空城|彩虹湿地|咕噜球工坊|星辉广场|魔法图书馆|云朵农场|星际驿站|魔法班/
 
 function addTag(question, tag) {
+  if (!Array.isArray(question.tags)) question.tags = []
   if (!question.tags.includes(tag)) question.tags.push(tag)
 }
 
 /**
- * 就地转换题库。返回统计信息，便于生成脚本打印。
+ * 就地转换题库。保留 format/options/answer/similarQuestionIds 不动，
+ * 只改题干、提示、标题和展示标签。
  */
-export function applyRocoTheme(questions) {
-  for (const question of questions) {
-    question.story = { title: '', body: '' }
-    question.format = 'open'
-    delete question.options
-    delete question.answer.optionId
-  }
 
-  for (const question of questions) {
-    const item = itemFor(question)
-    const { scene, action } = pickContext(question)
-    const expression = expressionOf(question)
-    const { operands, ops } = parseExpression(expression)
-    question.story = {
-      title: `${scene}·${action}`,
-      body: resultSentence(question, expression, operands, ops, scene, action, item),
-    }
-    question.hints = makeHints(question, expression, operands, ops, item)
-  }
+const ORDER_SCENES = ['魔法学院', '宠物园', '天空城', '彩虹湿地', '咕噜球工坊', '星辉广场', '魔法图书馆', '云朵农场']
 
-  // 只从「非应用题、无相似链接、非算式答案」的题里选选择题，保证
-  // 选择题、填空题、应用题三类互不重叠。
+/**
+ * 在规律题里注入少量“排序/排第几”题，保持原题型和 216 题总数不变。
+ * 每题用三个明确的大小关系构造，答案可直接由排序得到。
+ */
+function injectOrdering(questions) {
   const candidates = questions.filter((question) =>
-    question.category !== 'applied' &&
-    question.similarQuestionIds.length === 0 &&
-    question.answer.expression === undefined,
+    question.type === 'pattern-data' &&
+    question.format === 'open' &&
+    question.answer?.expression === undefined,
   )
-  const chosen = candidates.slice(0, 72)
-  for (const question of questions) {
+  const injected = new Set()
+  for (const difficulty of [1, 2, 3]) {
+    const pool = candidates.filter((question) => question.difficulty === difficulty).slice(0, 3)
+    for (const [index, question] of pool.entries()) {
+      const base = Math.max(10, Math.round(Number(question.answer?.value ?? 10)))
+      const a = base
+      const b = base + 4
+      const c = base + 9
+      const scene = ORDER_SCENES[(difficulty * 3 + index) % ORDER_SCENES.length]
+      const ordinal = index === 2
+      question.story = {
+        title: `${scene}·排名次`,
+        body: ordinal
+          ? `${scene}里，洛贝克把 ${a}、${b}、${c} 三张魔法卡从大到小排。数字 ${b} 排第几？`
+          : `${scene}里，洛贝克把 ${a}、${b}、${c} 三张魔法卡从大到小排。${index === 0 ? '最大' : '第 2 名'}的卡上是多少？`,
+      }
+      question.hints = [
+        '先把三个数放在一起比一比。',
+        '从最大的数开始，依次往下排。',
+        '比较百位、十位和个位，数位多的不一定更大，要从高位看起。',
+        '把三个数按从大到小写成一排，再找题目问的位置。',
+        '按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。',
+      ]
+      question.answer = { value: ordinal ? 2 : index === 0 ? c : b }
+      question.similarQuestionIds = []
+      injected.add(question.id)
+      question.tags.push(ordinal ? 'ordinal' : 'ordering')
+    }
+  }
+  if (injected.size > 0) {
+    for (const question of questions) {
+      question.similarQuestionIds = question.similarQuestionIds.filter((id) => !injected.has(id))
+    }
+  }
+}
+
+export function applyRocoTheme(questions) {
+  for (const [index, question] of questions.entries()) {
+    const original = question.story ?? { title: '', body: '' }
+    const scene = SCENES[index % SCENES.length]
+    const themedTitle = rocoText(original.title || `${scene}的魔法任务`)
+    const themedBody = rocoText(original.body || '')
+    question.story = {
+      title: SCENE_PATTERN.test(themedTitle) ? themedTitle : `${scene}·${themedTitle}`,
+      body: SCENE_PATTERN.test(themedBody) ? themedBody : `${scene}里，${themedBody}`,
+    }
+    question.hints = (question.hints ?? []).map(rocoText)
     addTag(question, 'theme:roco')
-    if (question.category === 'applied') addTag(question, 'form:applied')
+    if (question.format === 'choice') addTag(question, 'form:choice')
+    else if (question.category === 'applied') addTag(question, 'form:applied')
+    else addTag(question, 'form:fill')
     if (question.difficulty === 3 && question.category === 'probe') addTag(question, 'challenge')
   }
-  for (const question of chosen) {
-    if (!chooseOptions(question)) continue
-    addTag(question, 'form:choice')
-  }
-  for (const question of questions) {
-    if (question.format !== 'choice' && question.category !== 'applied') addTag(question, 'form:fill')
-  }
+  injectOrdering(questions)
   return {
     total: questions.length,
     choice: questions.filter((question) => question.format === 'choice').length,

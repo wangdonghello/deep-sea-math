@@ -872,8 +872,8 @@ for (const type of Object.keys(SCENARIOS)) {
 
 const linkCount = linkSimilar(questions)
 const linked = questions.filter((question) => question.similarQuestionIds.length > 0).length
+const choiceCount = applyChoiceVariants(questions, 72)
 const themeStats = applyRocoTheme(questions)
-const choiceCount = themeStats.choice
 
 /** 逐题单行 JSON，便于 diff 阅读（与既有题库风格一致）。 */
 const lines = questions.map((question) => `    ${JSON.stringify(question)}`)

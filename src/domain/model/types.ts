@@ -31,7 +31,7 @@ export const QUIZ_TYPES = [
   'unknown-relation',
   /** 单位、时间与路线：长度、质量、金额、经过时间、下潜距离 */
   'unit-time-route',
-  /** 规律与数据：属性表比较、找规律和简单条件推理 */
+  /** 规律与排序：属性表比较、找规律、排序和简单条件推理 */
   'pattern-data',
 ] as const
 

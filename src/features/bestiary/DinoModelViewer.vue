@@ -14,6 +14,7 @@ const props = defineProps<{
   modelRef: string
   name: string
   emoji: string
+  previewSrc?: string
 }>()
 const emit = defineEmits<{ error: [] }>()
 
@@ -207,7 +208,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div ref="stage" class="dino-model" :class="{ 'dino-model--ready': ready }" data-testid="dino-model-viewer" :aria-label="`${name} 3D 模型`">
-    <div class="dino-model__placeholder" aria-hidden="true">{{ emoji }}</div>
+    <img v-if="previewSrc" class="dino-model__preview" :src="previewSrc" :alt="`${name} 化石照片`">
+    <div v-else class="dino-model__placeholder" aria-hidden="true">{{ emoji }}</div>
     <p class="dino-model__status" role="status" aria-live="polite">{{ status }}</p>
     <div class="dino-model__controls" aria-label="模型控制">
       <button type="button" :aria-pressed="autoRotate" @click="autoRotate = !autoRotate">{{ autoRotate ? '暂停旋转' : '自动旋转' }}</button>
@@ -222,7 +224,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .dino-model { position: relative; display: grid; place-items: center; height: 22rem; overflow: hidden; border-radius: var(--ds-radius-lg); background: radial-gradient(circle at 50% 45%, rgb(120 74 40 / 45%), rgb(24 15 10 / 92%)); }
 .dino-model__placeholder { font-size: 6rem; filter: drop-shadow(0 1rem 1.5rem rgb(0 0 0 / 40%)); opacity: 1; transition: opacity .3s ease; }
-.dino-model--ready .dino-model__placeholder { opacity: 0; }
+.dino-model__preview { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .3s ease; }
+.dino-model--ready .dino-model__placeholder, .dino-model--ready .dino-model__preview { opacity: 0; }
 .dino-model canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; opacity: 0; transition: opacity .35s ease; }
 .dino-model--ready canvas { opacity: 1; }
 .dino-model__status { position: absolute; bottom: .5rem; margin: 0; color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); }

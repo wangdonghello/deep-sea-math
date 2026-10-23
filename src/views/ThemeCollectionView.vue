@@ -17,17 +17,21 @@ const { pack, stage, items, loading, error, noProfile } = useThemeCollection({
 })
 const selected = ref<ThemeEntry | null>(null)
 const isSpace = computed(() => props.themeId === 'space')
+const baseUrl = import.meta.env.BASE_URL
+
+function photoUrl(entry: ThemeEntry): string | undefined {
+  return entry.photoRef === undefined ? undefined : `${baseUrl}photos/dino/${entry.photoRef}.jpg`
+}
 const ORBIT_RINGS = [36, 48, 60, 72]
-const ORBIT_RADII = [27, 35, 43, 51]
+const ORBIT_RADII = [13, 18, 23, 28]
 
 /** 把 8 个条目均匀放在四条轨道上，形成一张可读的太阳系航线图。 */
 function planetStyle(index: number): Record<string, string> {
   const radius = ORBIT_RADII[index % ORBIT_RADII.length]
-  const angle = ((index * 45 - 90) * Math.PI) / 180
   return {
-    left: `${50 + radius * Math.cos(angle)}%`,
-    top: `${50 + radius * Math.sin(angle)}%`,
-    '--planet-delay': `${(index % 5) * 0.35}s`,
+    '--orbit': `${radius}vmin`,
+    '--orbit-start': `${((index * 45 - 90 + 360) % 360) / 3.6}%`,
+    '--orbit-delay': `${-index * 4}s`,
     '--planet-size': `${index % 3 === 0 ? 2.6 : 2.1}rem`,
   }
 }
@@ -85,7 +89,8 @@ function planetStyle(index: number): Record<string, string> {
           :class="{ 'theme-entry--locked': !item.unlocked }"
           :data-testid="`theme-entry-${item.entry.id}`"
         >
-          <div class="theme-entry__art" aria-hidden="true">{{ item.unlocked ? item.entry.emoji : '？' }}</div>
+          <img v-if="item.unlocked && item.entry.photoRef" class="theme-entry__photo" :src="photoUrl(item.entry)" :alt="`${item.entry.name} 的博物馆化石照片`">
+          <div v-else class="theme-entry__art" aria-hidden="true">{{ item.unlocked ? item.entry.emoji : '？' }}</div>
           <h2>{{ item.unlocked ? item.entry.name : '未解锁' }}</h2>
           <p v-if="item.unlocked">{{ item.entry.summary }}</p>
           <p v-else>完成更多任务解锁</p>
@@ -105,6 +110,7 @@ function planetStyle(index: number): Record<string, string> {
         :model-ref="selected.modelRef"
         :name="selected.name"
         :emoji="selected.emoji"
+        :preview-src="photoUrl(selected)"
       />
       <h2>{{ selected.name }} {{ selected.emoji }}</h2>
       <p>{{ selected.summary }}</p>
@@ -114,6 +120,10 @@ function planetStyle(index: number): Record<string, string> {
       <p class="theme-detail__sources">
         知识来源：
         <a v-for="source in selected.sources" :key="source" :href="source" target="_blank" rel="noreferrer">{{ source }}</a>
+      </p>
+      <p v-if="selected.photoSource" class="theme-detail__sources">
+        照片：<a :href="selected.photoSource" target="_blank" rel="noreferrer">{{ selected.photoCredit }}</a>
+        （{{ selected.photoLicense }}）
       </p>
       <p v-if="selected.modelSource" class="theme-detail__sources">
         3D 模型：<a :href="selected.modelSource" target="_blank" rel="noreferrer">Poly Pizza</a>
@@ -133,13 +143,15 @@ function planetStyle(index: number): Record<string, string> {
 .theme-collection__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: var(--ds-space-md); margin: 0; padding: 0; list-style: none; }
 .theme-entry { display: grid; gap: .4rem; padding: var(--ds-space-md); border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-lg); background: var(--ds-glass-surface); }
 .theme-entry--locked { opacity: .65; }
-.theme-entry__art { font-size: 2.8rem; line-height: 1; }
+.theme-entry__art { display: grid; place-items: center; min-height: 6rem; font-size: 2.8rem; line-height: 1; }
+.theme-entry__photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--ds-radius-md); }
 .theme-entry h2 { margin: 0; font-size: var(--ds-font-size-title); }
 .theme-entry p { margin: 0; color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); line-height: 1.5; }
 
 .space-map {
   position: relative;
-  height: min(62vw, 26rem);
+  height: auto;
+  aspect-ratio: 1.15 / 1;
   min-height: 20rem;
   overflow: hidden;
   border: 1px solid rgb(120 160 255 / 28%);
@@ -185,9 +197,12 @@ function planetStyle(index: number): Record<string, string> {
   border: 1px dashed rgb(150 180 255 / 22%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  animation: ring-spin 90s linear infinite;
 }
 .space-item {
   position: absolute;
+  top: 0;
+  left: 0;
   z-index: 2;
   display: grid;
   justify-items: center;
@@ -199,9 +214,14 @@ function planetStyle(index: number): Record<string, string> {
   background: none;
   color: var(--ds-text-primary);
   font: inherit;
-  transform: translate(-50%, -50%) translateY(0);
-  animation: planet-float 4.5s ease-in-out infinite;
-  animation-delay: var(--planet-delay);
+  /* 沿圆形轨道公转；offset-rotate: 0 让星球和文字始终正向朝向孩子。 */
+  offset-path: circle(var(--orbit) at 50% 50%);
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  transform: translate(-50%, -50%);
+  animation: planet-orbit 32s linear infinite;
+  animation-delay: var(--orbit-delay);
+  will-change: offset-distance;
   cursor: pointer;
 }
 .space-item:disabled { cursor: default; }
@@ -212,10 +232,14 @@ function planetStyle(index: number): Record<string, string> {
 .space-item--locked .space-item__art { border: 1px dashed rgb(190 210 255 / 50%); color: #cfe0ff; font-size: 1.2rem; }
 .space-item__name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--ds-font-size-caption); text-shadow: 0 1px 4px #000; }
 .space-item__action { color: #a9d8ff; font-size: .68rem; }
-@keyframes planet-float { 0%, 100% { transform: translate(-50%, -50%) translateY(-3px); } 50% { transform: translate(-50%, -50%) translateY(5px); } }
+@keyframes planet-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@keyframes ring-spin { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 @keyframes sun-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.06); } }
 @keyframes star-field { from { opacity: .55; } to { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .space-item, .space-map__sun, .space-map__stars { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .space-item, .space-map__sun, .space-map__stars, .space-map__orbit { animation: none; }
+  .space-item { offset-distance: var(--orbit-start); }
+}
 .theme-detail { display: grid; gap: .6rem; margin-top: var(--ds-space-lg); padding: var(--ds-space-md); border: 1px solid var(--ds-accent-500); border-radius: var(--ds-radius-lg); background: var(--ds-glass-surface); }
 .theme-detail h2, .theme-detail p { margin: 0; }
 .theme-detail ul { margin: 0; padding-left: 1.2rem; }

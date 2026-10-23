@@ -9,8 +9,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "图书角",
-        "body": "图书角原来有 14 本书，又放进 9 本，现在一共有多少本？"
+        "title": "魔法图书馆",
+        "body": "洛贝克在魔法图书馆整理 14 本魔法书，又找到 9 本，现在一共有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -29,7 +29,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-1",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -61,8 +63,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "贴纸",
-        "body": "小海星有 17 张贴纸，小鲸又送给他 11 张，现在一共有多少张？"
+        "title": "咕噜球工坊",
+        "body": "咕噜球工坊有 17 张七彩咕噜球贴纸，又送来 11 张，一共有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -82,7 +84,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -114,8 +118,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "贝壳",
-        "body": "沙滩上捡到 20 枚贝壳，又捡到 13 枚，一共捡到多少枚？"
+        "title": "彩虹湿地",
+        "body": "洛贝克在彩虹湿地找到 20 枚星星徽章，又找到 13 枚，一共找到多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -134,7 +138,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-1",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -166,8 +172,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "跳绳",
-        "body": "课间跳了 23 下，下午又跳了 15 下，一共跳了多少下？"
+        "title": "魔法学院",
+        "body": "魔法学院课间跳了 23 下魔法跳绳，下午又跳了 15 下，一共跳了多少下？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -187,7 +193,9 @@
         "skill-addition",
         "difficulty-1",
         "probe",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -219,8 +227,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "水果",
-        "body": "篮子里有 26 个苹果，又放入 17 个，篮子里现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场收了 26 个魔法果，又摘下 17 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -239,7 +247,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-1",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -271,8 +281,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "积木",
-        "body": "积木塔用了 29 块积木，又加上 19 块，一共用了多少块？"
+        "title": "天空城",
+        "body": "星辉广场里，洛贝克用 29 块魔法砖搭台，又加上 19 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -292,7 +302,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -324,8 +336,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "图书角",
-        "body": "图书角原来有 32 本书，又放进 21 本，现在一共有多少本？"
+        "title": "魔法图书馆",
+        "body": "洛贝克在魔法图书馆整理 32 本魔法书，又找到 21 本，现在一共有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -344,7 +356,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-1",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -376,8 +390,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "贴纸",
-        "body": "小海星有 35 张贴纸，小鲸又送给他 23 张，现在一共有多少张？"
+        "title": "咕噜球工坊",
+        "body": "咕噜球工坊有 35 张七彩咕噜球贴纸，又送来 23 张，一共有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -397,7 +411,9 @@
         "skill-addition",
         "difficulty-1",
         "probe",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -429,8 +445,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "贝壳",
-        "body": "沙滩上捡到 38 枚贝壳，又捡到 25 枚，一共捡到多少枚？"
+        "title": "彩虹湿地",
+        "body": "洛贝克在彩虹湿地找到 38 枚星星徽章，又找到 25 枚，一共找到多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -449,7 +465,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-1",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -481,8 +499,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "跳绳",
-        "body": "课间跳了 41 下，下午又跳了 27 下，一共跳了多少下？"
+        "title": "魔法学院",
+        "body": "魔法学院课间跳了 41 下魔法跳绳，下午又跳了 27 下，一共跳了多少下？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -502,7 +520,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -534,8 +554,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "水果",
-        "body": "篮子里有 44 个苹果，又放入 29 个，篮子里现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场收了 44 个魔法果，又摘下 29 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -554,7 +574,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-1",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -586,8 +608,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "积木",
-        "body": "积木塔用了 47 块积木，又加上 31 块，一共用了多少块？"
+        "title": "天空城",
+        "body": "彩虹湿地里，洛贝克用 47 块魔法砖搭台，又加上 31 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -607,7 +629,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -639,8 +663,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "图书角",
-        "body": "图书角原来有 18 本书，又放进 9 本，现在一共有多少本？"
+        "title": "魔法图书馆",
+        "body": "洛贝克在魔法图书馆整理 18 本魔法书，又找到 9 本，现在一共有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -659,7 +683,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-2",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -691,8 +717,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "贴纸",
-        "body": "小海星有 21 张贴纸，小鲸又送给他 11 张，现在一共有多少张？"
+        "title": "咕噜球工坊",
+        "body": "咕噜球工坊有 21 张七彩咕噜球贴纸，又送来 11 张，一共有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -712,7 +738,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -744,8 +772,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "贝壳",
-        "body": "沙滩上捡到 24 枚贝壳，又捡到 13 枚，一共捡到多少枚？"
+        "title": "彩虹湿地",
+        "body": "洛贝克在彩虹湿地找到 24 枚星星徽章，又找到 13 枚，一共找到多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -764,7 +792,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-2",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -796,8 +826,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "跳绳",
-        "body": "课间跳了 27 下，下午又跳了 15 下，一共跳了多少下？"
+        "title": "魔法学院",
+        "body": "魔法学院课间跳了 27 下魔法跳绳，下午又跳了 15 下，一共跳了多少下？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -817,7 +847,9 @@
         "skill-addition",
         "difficulty-2",
         "probe",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -849,8 +881,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "水果",
-        "body": "篮子里有 30 个苹果，又放入 17 个，篮子里现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场收了 30 个魔法果，又摘下 17 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -869,7 +901,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-2",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -901,8 +935,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "积木",
-        "body": "积木塔用了 33 块积木，又加上 19 块，一共用了多少块？"
+        "title": "天空城",
+        "body": "宠物园里，洛贝克用 33 块魔法砖搭台，又加上 19 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -922,7 +956,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -954,8 +990,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "图书角",
-        "body": "图书角原来有 36 本书，又放进 21 本，现在一共有多少本？"
+        "title": "魔法图书馆",
+        "body": "洛贝克在魔法图书馆整理 36 本魔法书，又找到 21 本，现在一共有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -974,7 +1010,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-2",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1006,8 +1044,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "贴纸",
-        "body": "小海星有 39 张贴纸，小鲸又送给他 23 张，现在一共有多少张？"
+        "title": "咕噜球工坊",
+        "body": "咕噜球工坊有 39 张七彩咕噜球贴纸，又送来 23 张，一共有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1027,7 +1065,9 @@
         "skill-addition",
         "difficulty-2",
         "probe",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1059,8 +1099,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "贝壳",
-        "body": "沙滩上捡到 42 枚贝壳，又捡到 25 枚，一共捡到多少枚？"
+        "title": "彩虹湿地",
+        "body": "洛贝克在彩虹湿地找到 42 枚星星徽章，又找到 25 枚，一共找到多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1079,7 +1119,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-2",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1111,8 +1153,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "跳绳",
-        "body": "课间跳了 45 下，下午又跳了 27 下，一共跳了多少下？"
+        "title": "魔法学院",
+        "body": "魔法学院课间跳了 45 下魔法跳绳，下午又跳了 27 下，一共跳了多少下？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1132,7 +1174,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1164,8 +1208,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "水果",
-        "body": "篮子里有 48 个苹果，又放入 29 个，篮子里现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场收了 48 个魔法果，又摘下 29 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1184,7 +1228,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-2",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1216,8 +1262,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "积木",
-        "body": "积木塔用了 51 块积木，又加上 31 块，一共用了多少块？"
+        "title": "天空城",
+        "body": "云朵农场里，洛贝克用 51 块魔法砖搭台，又加上 31 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1237,7 +1283,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1269,8 +1317,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "图书角",
-        "body": "图书角原来有 22 本书，又放进 9 本，现在一共有多少本？"
+        "title": "魔法图书馆",
+        "body": "洛贝克在魔法图书馆整理 22 本魔法书，又找到 9 本，现在一共有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1289,7 +1337,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-3",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1321,8 +1371,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "贴纸",
-        "body": "小海星有 25 张贴纸，小鲸又送给他 11 张，现在一共有多少张？"
+        "title": "咕噜球工坊",
+        "body": "咕噜球工坊有 25 张七彩咕噜球贴纸，又送来 11 张，一共有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1342,7 +1392,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1374,8 +1426,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "贝壳",
-        "body": "沙滩上捡到 28 枚贝壳，又捡到 13 枚，一共捡到多少枚？"
+        "title": "彩虹湿地",
+        "body": "洛贝克在彩虹湿地找到 28 枚星星徽章，又找到 13 枚，一共找到多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1394,7 +1446,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-3",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1426,8 +1480,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "跳绳",
-        "body": "课间跳了 31 下，下午又跳了 15 下，一共跳了多少下？"
+        "title": "魔法学院",
+        "body": "魔法学院课间跳了 31 下魔法跳绳，下午又跳了 15 下，一共跳了多少下？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1447,7 +1501,10 @@
         "skill-addition",
         "difficulty-3",
         "probe",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1479,8 +1536,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "水果",
-        "body": "篮子里有 34 个苹果，又放入 17 个，篮子里现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场收了 34 个魔法果，又摘下 17 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1499,7 +1556,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-3",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1531,8 +1590,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "积木",
-        "body": "积木塔用了 37 块积木，又加上 19 块，一共用了多少块？"
+        "title": "天空城",
+        "body": "星辉广场里，洛贝克用 37 块魔法砖搭台，又加上 19 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1552,7 +1611,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1584,8 +1645,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "图书角",
-        "body": "图书角原来有 40 本书，又放进 21 本，现在一共有多少本？"
+        "title": "魔法图书馆",
+        "body": "洛贝克在魔法图书馆整理 40 本魔法书，又找到 21 本，现在一共有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1604,7 +1665,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-3",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1636,8 +1699,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "贴纸",
-        "body": "小海星有 43 张贴纸，小鲸又送给他 23 张，现在一共有多少张？"
+        "title": "咕噜球工坊",
+        "body": "咕噜球工坊有 43 张七彩咕噜球贴纸，又送来 23 张，一共有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1657,7 +1720,10 @@
         "skill-addition",
         "difficulty-3",
         "probe",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1689,8 +1755,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "贝壳",
-        "body": "沙滩上捡到 46 枚贝壳，又捡到 25 枚，一共捡到多少枚？"
+        "title": "彩虹湿地",
+        "body": "洛贝克在彩虹湿地找到 46 枚星星徽章，又找到 25 枚，一共找到多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1709,7 +1775,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-3",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1741,8 +1809,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "跳绳",
-        "body": "课间跳了 49 下，下午又跳了 27 下，一共跳了多少下？"
+        "title": "魔法学院",
+        "body": "魔法学院课间跳了 49 下魔法跳绳，下午又跳了 27 下，一共跳了多少下？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1762,7 +1830,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1794,8 +1864,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "水果",
-        "body": "篮子里有 52 个苹果，又放入 29 个，篮子里现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场收了 52 个魔法果，又摘下 29 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1814,7 +1884,9 @@
         "add-sub",
         "skill-addition",
         "difficulty-3",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1846,8 +1918,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "积木",
-        "body": "积木塔用了 55 块积木，又加上 31 块，一共用了多少块？"
+        "title": "天空城",
+        "body": "彩虹湿地里，洛贝克用 55 块魔法砖搭台，又加上 31 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1867,7 +1939,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.NBT.5"
+        "standard:2.NBT.5",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/NBT/"
@@ -1899,8 +1973,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "小组",
-        "body": "每个小组有 3 人，3 个小组一共有多少人？"
+        "title": "宠物园",
+        "body": "宠物园每组有 3 只宠物，3 个小组一共有多少只宠物？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1920,7 +1994,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -1952,8 +2028,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "铅笔",
-        "body": "每盒有 4 支铅笔，5 盒一共有多少支？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，每盒放 4 个七彩咕噜球，5 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1974,7 +2050,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2006,8 +2084,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "座位",
-        "body": "每排有 5 个座位，7 排一共有多少个座位？"
+        "title": "天空城看台",
+        "body": "魔法图书馆里，每排有 5 个座位，7 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2027,7 +2105,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2059,8 +2139,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "贴画",
-        "body": "每张贴纸有 6 个小图案，9 张一共有多少个小图案？"
+        "title": "魔法学院",
+        "body": "云朵农场里，每张魔法卡画 6 个图案，9 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2081,7 +2161,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-1",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2113,8 +2195,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "分糖",
-        "body": "21 颗糖平均分给 3 个小朋友，每人分到几颗？"
+        "title": "星辉广场",
+        "body": "魔法学院里，21 颗魔法糖平均分给 3 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2134,7 +2216,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2166,8 +2250,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "装袋",
-        "body": "40 个苹果，每袋装 8 个，可以装几袋？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，40 个咕噜球，每盒装 8 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2188,7 +2272,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2220,8 +2306,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "小组",
-        "body": "每个小组有 9 人，7 个小组一共有多少人？"
+        "title": "宠物园",
+        "body": "宠物园每组有 9 只宠物，7 个小组一共有多少只宠物？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2241,7 +2327,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2273,8 +2361,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "铅笔",
-        "body": "每盒有 2 支铅笔，9 盒一共有多少支？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，每盒放 2 个七彩咕噜球，9 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2295,7 +2383,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-1",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2327,8 +2417,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "座位",
-        "body": "每排有 3 个座位，3 排一共有多少个座位？"
+        "title": "天空城看台",
+        "body": "咕噜球工坊里，每排有 3 个座位，3 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2348,7 +2438,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2380,8 +2472,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "贴画",
-        "body": "每张贴纸有 4 个小图案，5 张一共有多少个小图案？"
+        "title": "魔法学院",
+        "body": "星辉广场里，每张魔法卡画 4 个图案，5 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2402,7 +2494,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2434,8 +2528,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "分糖",
-        "body": "35 颗糖平均分给 7 个小朋友，每人分到几颗？"
+        "title": "星辉广场",
+        "body": "魔法图书馆里，35 颗魔法糖平均分给 7 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2455,7 +2549,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2487,8 +2583,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "装袋",
-        "body": "54 个苹果，每袋装 6 个，可以装几袋？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，54 个咕噜球，每盒装 6 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2509,7 +2605,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2541,8 +2639,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "小组",
-        "body": "每个小组有 4 人，4 个小组一共有多少人？"
+        "title": "宠物园",
+        "body": "宠物园每组有 4 只宠物，4 个小组一共有多少只宠物？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2562,7 +2660,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2594,8 +2694,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "铅笔",
-        "body": "每盒有 5 支铅笔，6 盒一共有多少支？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，每盒放 5 个七彩咕噜球，6 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2616,7 +2716,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2648,8 +2750,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "座位",
-        "body": "每排有 6 个座位，8 排一共有多少个座位？"
+        "title": "天空城看台",
+        "body": "天空城里，每排有 6 个座位，8 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2669,7 +2771,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2701,8 +2805,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "贴画",
-        "body": "每张贴纸有 7 个小图案，2 张一共有多少个小图案？"
+        "title": "魔法学院",
+        "body": "彩虹湿地里，每张魔法卡画 7 个图案，2 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2723,7 +2827,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-2",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2755,8 +2861,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "分糖",
-        "body": "32 颗糖平均分给 4 个小朋友，每人分到几颗？"
+        "title": "星辉广场",
+        "body": "咕噜球工坊里，32 颗魔法糖平均分给 4 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2776,7 +2882,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2808,8 +2916,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "装袋",
-        "body": "54 个苹果，每袋装 9 个，可以装几袋？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，54 个咕噜球，每盒装 9 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2830,7 +2938,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2862,8 +2972,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "小组",
-        "body": "每个小组有 2 人，8 个小组一共有多少人？"
+        "title": "宠物园",
+        "body": "宠物园每组有 2 只宠物，8 个小组一共有多少只宠物？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2883,7 +2993,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2915,8 +3027,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "铅笔",
-        "body": "每盒有 3 支铅笔，2 盒一共有多少支？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，每盒放 3 个七彩咕噜球，2 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2937,7 +3049,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-2",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -2969,8 +3083,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "座位",
-        "body": "每排有 4 个座位，4 排一共有多少个座位？"
+        "title": "天空城看台",
+        "body": "魔法学院里，每排有 4 个座位，4 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2990,7 +3104,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3022,8 +3138,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "贴画",
-        "body": "每张贴纸有 5 个小图案，6 张一共有多少个小图案？"
+        "title": "魔法学院",
+        "body": "宠物园里，每张魔法卡画 5 个图案，6 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3044,7 +3160,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3076,8 +3194,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "分糖",
-        "body": "48 颗糖平均分给 8 个小朋友，每人分到几颗？"
+        "title": "星辉广场",
+        "body": "天空城里，48 颗魔法糖平均分给 8 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3097,7 +3215,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3129,8 +3249,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "装袋",
-        "body": "14 个苹果，每袋装 7 个，可以装几袋？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，14 个咕噜球，每盒装 7 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3151,7 +3271,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3183,8 +3305,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "小组",
-        "body": "每个小组有 5 人，5 个小组一共有多少人？"
+        "title": "宠物园",
+        "body": "宠物园每组有 5 只宠物，5 个小组一共有多少只宠物？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3204,7 +3326,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3236,8 +3360,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "铅笔",
-        "body": "每盒有 6 支铅笔，7 盒一共有多少支？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，每盒放 6 个七彩咕噜球，7 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3258,7 +3382,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3290,8 +3416,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "座位",
-        "body": "每排有 7 个座位，9 排一共有多少个座位？"
+        "title": "天空城看台",
+        "body": "魔法图书馆里，每排有 7 个座位，9 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3311,7 +3437,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3343,8 +3471,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "贴画",
-        "body": "每张贴纸有 8 个小图案，3 张一共有多少个小图案？"
+        "title": "魔法学院",
+        "body": "云朵农场里，每张魔法卡画 8 个图案，3 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3365,7 +3493,10 @@
         "skill-equal-groups-multiplication",
         "difficulty-3",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3397,8 +3528,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "分糖",
-        "body": "45 颗糖平均分给 5 个小朋友，每人分到几颗？"
+        "title": "星辉广场",
+        "body": "魔法学院里，45 颗魔法糖平均分给 5 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3418,7 +3549,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3450,8 +3583,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "装袋",
-        "body": "14 个苹果，每袋装 2 个，可以装几袋？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，14 个咕噜球，每盒装 2 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3472,7 +3605,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3504,8 +3639,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "小组",
-        "body": "每个小组有 3 人，9 个小组一共有多少人？"
+        "title": "宠物园",
+        "body": "宠物园每组有 3 只宠物，9 个小组一共有多少只宠物？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3525,7 +3660,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3557,8 +3694,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "铅笔",
-        "body": "每盒有 4 支铅笔，3 盒一共有多少支？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，每盒放 4 个七彩咕噜球，3 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3579,7 +3716,10 @@
         "skill-equal-groups-multiplication",
         "difficulty-3",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3611,8 +3751,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "座位",
-        "body": "每排有 5 个座位，5 排一共有多少个座位？"
+        "title": "天空城看台",
+        "body": "咕噜球工坊里，每排有 5 个座位，5 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3632,7 +3772,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3664,8 +3806,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "贴画",
-        "body": "每张贴纸有 6 个小图案，7 张一共有多少个小图案？"
+        "title": "魔法学院",
+        "body": "星辉广场里，每张魔法卡画 6 个图案，7 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3686,7 +3828,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3718,8 +3862,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "分糖",
-        "body": "63 颗糖平均分给 9 个小朋友，每人分到几颗？"
+        "title": "星辉广场",
+        "body": "魔法图书馆里，63 颗魔法糖平均分给 9 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3739,7 +3883,9 @@
         "mul-div",
         "skill-equal-groups-multiplication",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3771,8 +3917,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "装袋",
-        "body": "24 个苹果，每袋装 8 个，可以装几袋？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，24 个咕噜球，每盒装 8 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3793,7 +3939,9 @@
         "skill-equal-groups-multiplication",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:choice"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3825,8 +3973,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "班级",
-        "body": "班里有 20 名同学，又来了 5 名，后来走了 3 名，现在有多少名？"
+        "title": "魔法学院",
+        "body": "魔法学院原有 20 名小洛克，又来了 5 名，后来离开 3 名。现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3845,7 +3993,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-1",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3859,8 +4009,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "书架",
-        "body": "书架上有 22 本书，借走 6 本，又还回 4 本，现在有多少本？"
+        "title": "魔法图书馆",
+        "body": "宠物园里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3880,7 +4030,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3894,8 +4046,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "游戏",
-        "body": "操场上有 24 人，来了 7 人，又走了 5 人，现在有多少人？"
+        "title": "宠物园",
+        "body": "宠物园里有 24 只宠物，来了 7 只，又转移走 5 只，现在有多少只？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3914,7 +4066,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-1",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3928,8 +4082,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "水果",
-        "body": "水果店有 26 个橙子，卖出 8 个，又进货 6 个，现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场有 26 个魔法果，送出 8 个，又收获 6 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3949,7 +4103,9 @@
         "skill-addition",
         "difficulty-1",
         "probe",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3963,8 +4119,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "公交",
-        "body": "公交车上有 28 人，到站下去 9 人，又上来 7 人，现在有多少人？"
+        "title": "咕噜球工坊·魔法列车",
+        "body": "咕噜球工坊里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3983,7 +4139,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-1",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -3997,8 +4155,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "卡片",
-        "body": "小海星有 30 张卡片，送给小鲸 10 张，又买到 8 张，现在有多少张？"
+        "title": "星辉广场",
+        "body": "星辉广场里，洛贝克有 30 张魔法卡，送给小洛克 10 张，又得到 8 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4018,7 +4176,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4032,8 +4192,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "班级",
-        "body": "班里有 32 名同学，又来了 11 名，后来走了 9 名，现在有多少名？"
+        "title": "魔法学院",
+        "body": "魔法学院原有 32 名小洛克，又来了 11 名，后来离开 9 名。现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4052,7 +4212,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-1",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4066,8 +4228,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "书架",
-        "body": "书架上有 34 本书，借走 12 本，又还回 10 本，现在有多少本？"
+        "title": "魔法图书馆",
+        "body": "云朵农场里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4087,7 +4249,9 @@
         "skill-addition",
         "difficulty-1",
         "probe",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4101,8 +4265,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "游戏",
-        "body": "操场上有 36 人，来了 13 人，又走了 11 人，现在有多少人？"
+        "title": "宠物园",
+        "body": "宠物园里有 36 只宠物，来了 13 只，又转移走 11 只，现在有多少只？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4121,7 +4285,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-1",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4135,8 +4301,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "水果",
-        "body": "水果店有 38 个橙子，卖出 14 个，又进货 12 个，现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场有 38 个魔法果，送出 14 个，又收获 12 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4156,7 +4322,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4170,8 +4338,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "公交",
-        "body": "公交车上有 40 人，到站下去 15 人，又上来 13 人，现在有多少人？"
+        "title": "天空城·魔法列车",
+        "body": "天空城里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4190,7 +4358,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-1",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4204,8 +4374,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "卡片",
-        "body": "小海星有 42 张卡片，送给小鲸 16 张，又买到 14 张，现在有多少张？"
+        "title": "星辉广场",
+        "body": "彩虹湿地里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4225,7 +4395,9 @@
         "skill-addition",
         "difficulty-1",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4239,8 +4411,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "班级",
-        "body": "班里有 20 名同学，又来了 5 名，后来走了 3 名，现在有多少名？"
+        "title": "魔法学院",
+        "body": "魔法学院原有 20 名小洛克，又来了 5 名，后来离开 3 名。现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4259,7 +4431,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-2",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4273,8 +4447,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "书架",
-        "body": "书架上有 22 本书，借走 6 本，又还回 4 本，现在有多少本？"
+        "title": "魔法图书馆",
+        "body": "星辉广场里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4294,7 +4468,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4308,8 +4484,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "游戏",
-        "body": "操场上有 24 人，来了 7 人，又走了 5 人，现在有多少人？"
+        "title": "宠物园",
+        "body": "宠物园里有 24 只宠物，来了 7 只，又转移走 5 只，现在有多少只？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4328,7 +4504,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-2",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4342,8 +4520,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "水果",
-        "body": "水果店有 26 个橙子，卖出 8 个，又进货 6 个，现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场有 26 个魔法果，送出 8 个，又收获 6 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4363,7 +4541,9 @@
         "skill-addition",
         "difficulty-2",
         "probe",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4377,8 +4557,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "公交",
-        "body": "公交车上有 28 人，到站下去 9 人，又上来 7 人，现在有多少人？"
+        "title": "魔法学院·魔法列车",
+        "body": "魔法学院里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4397,7 +4577,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-2",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4411,8 +4593,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "卡片",
-        "body": "小海星有 30 张卡片，送给小鲸 10 张，又买到 8 张，现在有多少张？"
+        "title": "星辉广场",
+        "body": "宠物园里，洛贝克有 30 张魔法卡，送给小洛克 10 张，又得到 8 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4432,7 +4614,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4446,8 +4630,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "班级",
-        "body": "班里有 32 名同学，又来了 11 名，后来走了 9 名，现在有多少名？"
+        "title": "魔法学院",
+        "body": "魔法学院原有 32 名小洛克，又来了 11 名，后来离开 9 名。现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4466,7 +4650,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-2",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4480,8 +4666,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "书架",
-        "body": "书架上有 34 本书，借走 12 本，又还回 10 本，现在有多少本？"
+        "title": "魔法图书馆",
+        "body": "彩虹湿地里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4501,7 +4687,9 @@
         "skill-addition",
         "difficulty-2",
         "probe",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4515,8 +4703,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "游戏",
-        "body": "操场上有 36 人，来了 13 人，又走了 11 人，现在有多少人？"
+        "title": "宠物园",
+        "body": "宠物园里有 36 只宠物，来了 13 只，又转移走 11 只，现在有多少只？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4535,7 +4723,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-2",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4549,8 +4739,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "水果",
-        "body": "水果店有 38 个橙子，卖出 14 个，又进货 12 个，现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场有 38 个魔法果，送出 14 个，又收获 12 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4570,7 +4760,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4584,8 +4776,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "公交",
-        "body": "公交车上有 40 人，到站下去 15 人，又上来 13 人，现在有多少人？"
+        "title": "魔法图书馆·魔法列车",
+        "body": "魔法图书馆里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4604,7 +4796,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-2",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4618,8 +4812,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "卡片",
-        "body": "小海星有 42 张卡片，送给小鲸 16 张，又买到 14 张，现在有多少张？"
+        "title": "星辉广场",
+        "body": "云朵农场里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4639,7 +4833,9 @@
         "skill-addition",
         "difficulty-2",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4653,8 +4849,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "班级",
-        "body": "班里有 20 名同学，又来了 5 名，后来走了 3 名，现在有多少名？"
+        "title": "魔法学院",
+        "body": "魔法学院原有 20 名小洛克，又来了 5 名，后来离开 3 名。现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4673,7 +4869,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-3",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4687,8 +4885,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "书架",
-        "body": "书架上有 22 本书，借走 6 本，又还回 4 本，现在有多少本？"
+        "title": "魔法图书馆",
+        "body": "宠物园里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4708,7 +4906,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4722,8 +4922,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "游戏",
-        "body": "操场上有 24 人，来了 7 人，又走了 5 人，现在有多少人？"
+        "title": "宠物园",
+        "body": "宠物园里有 24 只宠物，来了 7 只，又转移走 5 只，现在有多少只？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4742,7 +4942,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-3",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4756,8 +4958,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "水果",
-        "body": "水果店有 26 个橙子，卖出 8 个，又进货 6 个，现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场有 26 个魔法果，送出 8 个，又收获 6 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4777,7 +4979,10 @@
         "skill-addition",
         "difficulty-3",
         "probe",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4791,8 +4996,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "公交",
-        "body": "公交车上有 28 人，到站下去 9 人，又上来 7 人，现在有多少人？"
+        "title": "咕噜球工坊·魔法列车",
+        "body": "咕噜球工坊里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4811,7 +5016,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-3",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4825,8 +5032,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "卡片",
-        "body": "小海星有 30 张卡片，送给小鲸 10 张，又买到 8 张，现在有多少张？"
+        "title": "星辉广场",
+        "body": "星辉广场里，洛贝克有 30 张魔法卡，送给小洛克 10 张，又得到 8 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4846,7 +5053,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4860,8 +5069,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "班级",
-        "body": "班里有 32 名同学，又来了 11 名，后来走了 9 名，现在有多少名？"
+        "title": "魔法学院",
+        "body": "魔法学院原有 32 名小洛克，又来了 11 名，后来离开 9 名。现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4880,7 +5089,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-3",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4894,8 +5105,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "书架",
-        "body": "书架上有 34 本书，借走 12 本，又还回 10 本，现在有多少本？"
+        "title": "魔法图书馆",
+        "body": "云朵农场里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4915,7 +5126,10 @@
         "skill-addition",
         "difficulty-3",
         "probe",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4929,8 +5143,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "游戏",
-        "body": "操场上有 36 人，来了 13 人，又走了 11 人，现在有多少人？"
+        "title": "宠物园",
+        "body": "宠物园里有 36 只宠物，来了 13 只，又转移走 11 只，现在有多少只？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4949,7 +5163,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-3",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4963,8 +5179,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "水果",
-        "body": "水果店有 38 个橙子，卖出 14 个，又进货 12 个，现在有多少个？"
+        "title": "云朵农场",
+        "body": "云朵农场有 38 个魔法果，送出 14 个，又收获 12 个，现在有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4984,7 +5200,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -4998,8 +5216,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "公交",
-        "body": "公交车上有 40 人，到站下去 15 人，又上来 13 人，现在有多少人？"
+        "title": "天空城·魔法列车",
+        "body": "天空城里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5018,7 +5236,9 @@
         "two-step-app",
         "skill-addition",
         "difficulty-3",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5032,8 +5252,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "卡片",
-        "body": "小海星有 42 张卡片，送给小鲸 16 张，又买到 14 张，现在有多少张？"
+        "title": "星辉广场",
+        "body": "彩虹湿地里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5053,7 +5273,9 @@
         "skill-addition",
         "difficulty-3",
         "application",
-        "standard:2.OA.1"
+        "standard:2.OA.1",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5067,8 +5289,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "未知加数",
-        "body": "一个数加上 5 等于 7，这个数是多少？"
+        "title": "魔法学院",
+        "body": "咕噜球工坊里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5087,7 +5309,9 @@
         "skill-addsub-unknown",
         "difficulty-1",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5101,8 +5325,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "未知减数",
-        "body": "9 减去一个数等于 6，这个数是多少？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5122,7 +5346,9 @@
         "difficulty-1",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5136,8 +5362,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "未知份数",
-        "body": "每份 7 个，一共有 11 个，共有几份？"
+        "title": "宠物园",
+        "body": "魔法图书馆里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5156,7 +5382,9 @@
         "skill-addsub-unknown",
         "difficulty-1",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5170,8 +5398,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "未知每份",
-        "body": "13 个平均分成 5 份，每份几个？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5191,7 +5419,9 @@
         "difficulty-1",
         "probe",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5205,8 +5435,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "补全算式",
-        "body": "已知 9 和 15，求另一个加数。"
+        "title": "魔法图书馆",
+        "body": "魔法学院里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5225,7 +5455,9 @@
         "skill-addsub-unknown",
         "difficulty-1",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5239,8 +5471,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "找回",
-        "body": "原来有 17 元，花掉一些后还剩 10 元，花掉多少元？"
+        "title": "天空城",
+        "body": "宠物园里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5260,7 +5492,9 @@
         "difficulty-1",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5274,8 +5508,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "未知加数",
-        "body": "一个数加上 11 等于 13，这个数是多少？"
+        "title": "魔法学院",
+        "body": "天空城里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5294,7 +5528,9 @@
         "skill-addsub-unknown",
         "difficulty-1",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5308,8 +5544,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "未知减数",
-        "body": "15 减去一个数等于 12，这个数是多少？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5329,7 +5565,9 @@
         "difficulty-1",
         "probe",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5343,8 +5581,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "未知份数",
-        "body": "每份 13 个，一共有 17 个，共有几份？"
+        "title": "宠物园",
+        "body": "咕噜球工坊里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5363,7 +5601,9 @@
         "skill-addsub-unknown",
         "difficulty-1",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5377,8 +5617,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "未知每份",
-        "body": "19 个平均分成 5 份，每份几个？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5398,7 +5638,9 @@
         "difficulty-1",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5412,8 +5654,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "补全算式",
-        "body": "已知 15 和 21，求另一个加数。"
+        "title": "魔法图书馆",
+        "body": "魔法图书馆里，洛贝克读完 15 本书后，还差一些才能读到 21 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5432,7 +5674,9 @@
         "skill-addsub-unknown",
         "difficulty-1",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5446,8 +5690,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "找回",
-        "body": "原来有 23 元，花掉一些后还剩 16 元，花掉多少元？"
+        "title": "天空城",
+        "body": "云朵农场里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5467,7 +5711,9 @@
         "difficulty-1",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5481,8 +5727,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "未知加数",
-        "body": "一个数加上 5 等于 7，这个数是多少？"
+        "title": "魔法学院",
+        "body": "魔法学院里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5501,7 +5747,9 @@
         "skill-addsub-unknown",
         "difficulty-2",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5515,8 +5763,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "未知减数",
-        "body": "9 减去一个数等于 6，这个数是多少？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5536,7 +5784,9 @@
         "difficulty-2",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5550,8 +5800,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "未知份数",
-        "body": "每份 7 个，一共有 11 个，共有几份？"
+        "title": "宠物园",
+        "body": "天空城里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5570,7 +5820,9 @@
         "skill-addsub-unknown",
         "difficulty-2",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5584,8 +5836,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "未知每份",
-        "body": "13 个平均分成 5 份，每份几个？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5605,7 +5857,9 @@
         "difficulty-2",
         "probe",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5619,8 +5873,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "补全算式",
-        "body": "已知 9 和 15，求另一个加数。"
+        "title": "魔法图书馆",
+        "body": "咕噜球工坊里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5639,7 +5893,9 @@
         "skill-addsub-unknown",
         "difficulty-2",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5653,8 +5909,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "找回",
-        "body": "原来有 17 元，花掉一些后还剩 10 元，花掉多少元？"
+        "title": "天空城",
+        "body": "星辉广场里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5674,7 +5930,9 @@
         "difficulty-2",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5688,8 +5946,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "未知加数",
-        "body": "一个数加上 11 等于 13，这个数是多少？"
+        "title": "魔法学院",
+        "body": "魔法图书馆里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5708,7 +5966,9 @@
         "skill-addsub-unknown",
         "difficulty-2",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5722,8 +5982,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "未知减数",
-        "body": "15 减去一个数等于 12，这个数是多少？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5743,7 +6003,9 @@
         "difficulty-2",
         "probe",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5757,8 +6019,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "未知份数",
-        "body": "每份 13 个，一共有 17 个，共有几份？"
+        "title": "宠物园",
+        "body": "魔法学院里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5777,7 +6039,9 @@
         "skill-addsub-unknown",
         "difficulty-2",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5791,8 +6055,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "未知每份",
-        "body": "19 个平均分成 5 份，每份几个？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5812,7 +6076,9 @@
         "difficulty-2",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5826,8 +6092,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "补全算式",
-        "body": "已知 15 和 21，求另一个加数。"
+        "title": "魔法图书馆",
+        "body": "天空城里，洛贝克读完 15 本书后，还差一些才能读到 21 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5846,7 +6112,9 @@
         "skill-addsub-unknown",
         "difficulty-2",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5860,8 +6128,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "找回",
-        "body": "原来有 23 元，花掉一些后还剩 16 元，花掉多少元？"
+        "title": "天空城",
+        "body": "彩虹湿地里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5881,7 +6149,9 @@
         "difficulty-2",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5895,8 +6165,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "未知加数",
-        "body": "一个数加上 5 等于 7，这个数是多少？"
+        "title": "魔法学院",
+        "body": "咕噜球工坊里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5915,7 +6185,9 @@
         "skill-addsub-unknown",
         "difficulty-3",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5929,8 +6201,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "未知减数",
-        "body": "9 减去一个数等于 6，这个数是多少？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5950,7 +6222,9 @@
         "difficulty-3",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5964,8 +6238,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "未知份数",
-        "body": "每份 7 个，一共有 11 个，共有几份？"
+        "title": "宠物园",
+        "body": "魔法图书馆里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5984,7 +6258,9 @@
         "skill-addsub-unknown",
         "difficulty-3",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -5998,8 +6274,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "未知每份",
-        "body": "13 个平均分成 5 份，每份几个？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6019,7 +6295,10 @@
         "difficulty-3",
         "probe",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6033,8 +6312,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "补全算式",
-        "body": "已知 9 和 15，求另一个加数。"
+        "title": "魔法图书馆",
+        "body": "魔法学院里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6053,7 +6332,9 @@
         "skill-addsub-unknown",
         "difficulty-3",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6067,8 +6348,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "找回",
-        "body": "原来有 17 元，花掉一些后还剩 10 元，花掉多少元？"
+        "title": "天空城",
+        "body": "宠物园里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6088,7 +6369,9 @@
         "difficulty-3",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6102,8 +6385,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "未知加数",
-        "body": "一个数加上 11 等于 13，这个数是多少？"
+        "title": "魔法学院",
+        "body": "天空城里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6122,7 +6405,9 @@
         "skill-addsub-unknown",
         "difficulty-3",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6136,8 +6421,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "未知减数",
-        "body": "15 减去一个数等于 12，这个数是多少？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6157,7 +6442,10 @@
         "difficulty-3",
         "probe",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6171,8 +6459,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "未知份数",
-        "body": "每份 13 个，一共有 17 个，共有几份？"
+        "title": "宠物园",
+        "body": "咕噜球工坊里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6191,7 +6479,9 @@
         "skill-addsub-unknown",
         "difficulty-3",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6205,8 +6495,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "未知每份",
-        "body": "19 个平均分成 5 份，每份几个？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6226,7 +6516,9 @@
         "difficulty-3",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6240,8 +6532,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "补全算式",
-        "body": "已知 15 和 21，求另一个加数。"
+        "title": "魔法图书馆",
+        "body": "魔法图书馆里，洛贝克读完 15 本书后，还差一些才能读到 21 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6260,7 +6552,9 @@
         "skill-addsub-unknown",
         "difficulty-3",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6274,8 +6568,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "找回",
-        "body": "原来有 23 元，花掉一些后还剩 16 元，花掉多少元？"
+        "title": "天空城",
+        "body": "云朵农场里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6295,7 +6589,9 @@
         "difficulty-3",
         "application",
         "missing-part",
-        "standard:2.OA.2"
+        "standard:2.OA.2",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -6309,8 +6605,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "长度",
-        "body": "一条彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
+        "title": "魔法学院",
+        "body": "魔法学院里，一条魔法彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6329,7 +6625,9 @@
         "unit-time-route",
         "skill-add-length",
         "difficulty-1",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6343,8 +6641,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "时间",
-        "body": "做作业用了 13 分钟，读书用了 9 分钟，一共用了多少分钟？"
+        "title": "魔法学院",
+        "body": "宠物园里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6364,7 +6662,9 @@
         "skill-add-length",
         "difficulty-1",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6378,8 +6678,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "购物",
-        "body": "一支笔 14 元，一本本子 10 元，一共要多少元？"
+        "title": "星际驿站",
+        "body": "魔法学院到天空城有 14 米，到宠物园有 10 米。去天空城比去宠物园远多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6390,15 +6690,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-1",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6412,8 +6714,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "路线",
-        "body": "从家到学校走 15 米，从学校到公园走 11 米，一共走多少米？"
+        "title": "星际驿站",
+        "body": "从魔法学院到宠物园走 15 米，再到天空城走 11 米，一共走多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6425,7 +6727,7 @@
       ],
       "answer": {
         "value": 26,
-        "unit": "分钟"
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6433,7 +6735,9 @@
         "skill-add-length",
         "difficulty-1",
         "probe",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6447,8 +6751,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "身高",
-        "body": "小海星身高 16 厘米，小鲸比他高 12 厘米，小鲸多高？"
+        "title": "宠物园",
+        "body": "咕噜球工坊里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6459,15 +6763,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "分钟"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-1",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6481,8 +6787,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "容量",
-        "body": "一瓶水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6494,7 +6800,7 @@
       ],
       "answer": {
         "value": 30,
-        "unit": "分钟"
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6502,7 +6808,9 @@
         "skill-add-length",
         "difficulty-1",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6516,8 +6824,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "长度",
-        "body": "一条彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
+        "title": "魔法学院",
+        "body": "魔法图书馆里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6536,7 +6844,9 @@
         "unit-time-route",
         "skill-add-length",
         "difficulty-1",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6550,8 +6860,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "时间",
-        "body": "做作业用了 19 分钟，读书用了 15 分钟，一共用了多少分钟？"
+        "title": "魔法学院",
+        "body": "云朵农场里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6571,7 +6881,9 @@
         "skill-add-length",
         "difficulty-1",
         "probe",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6585,8 +6897,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "购物",
-        "body": "一支笔 20 元，一本本子 16 元，一共要多少元？"
+        "title": "星际驿站",
+        "body": "魔法学院到天空城有 20 米，到宠物园有 16 米。去天空城比去宠物园远多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6597,15 +6909,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 36,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-1",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6619,8 +6933,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "路线",
-        "body": "从家到学校走 21 米，从学校到公园走 17 米，一共走多少米？"
+        "title": "星际驿站",
+        "body": "从魔法学院到宠物园走 21 米，再到天空城走 17 米，一共走多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6632,7 +6946,7 @@
       ],
       "answer": {
         "value": 38,
-        "unit": "分钟"
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6640,7 +6954,9 @@
         "skill-add-length",
         "difficulty-1",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6654,8 +6970,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "身高",
-        "body": "小海星身高 22 厘米，小鲸比他高 18 厘米，小鲸多高？"
+        "title": "宠物园",
+        "body": "天空城里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6666,15 +6982,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 40,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "分钟"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-1",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6688,8 +7006,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "容量",
-        "body": "一瓶水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6701,7 +7019,7 @@
       ],
       "answer": {
         "value": 42,
-        "unit": "分钟"
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6709,7 +7027,9 @@
         "skill-add-length",
         "difficulty-1",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6723,8 +7043,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "长度",
-        "body": "一条彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
+        "title": "魔法学院",
+        "body": "咕噜球工坊里，一条魔法彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6743,7 +7063,9 @@
         "unit-time-route",
         "skill-add-length",
         "difficulty-2",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6757,8 +7079,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "时间",
-        "body": "做作业用了 13 分钟，读书用了 9 分钟，一共用了多少分钟？"
+        "title": "魔法学院",
+        "body": "星辉广场里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6778,7 +7100,9 @@
         "skill-add-length",
         "difficulty-2",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6792,8 +7116,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "购物",
-        "body": "一支笔 14 元，一本本子 10 元，一共要多少元？"
+        "title": "星际驿站",
+        "body": "魔法学院到天空城有 14 米，到宠物园有 10 米。去天空城比去宠物园远多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6804,15 +7128,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-2",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6826,8 +7152,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "路线",
-        "body": "从家到学校走 15 米，从学校到公园走 11 米，一共走多少米？"
+        "title": "星际驿站",
+        "body": "从魔法学院到宠物园走 15 米，再到天空城走 11 米，一共走多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6839,7 +7165,7 @@
       ],
       "answer": {
         "value": 26,
-        "unit": "分钟"
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6847,7 +7173,9 @@
         "skill-add-length",
         "difficulty-2",
         "probe",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6861,8 +7189,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "身高",
-        "body": "小海星身高 16 厘米，小鲸比他高 12 厘米，小鲸多高？"
+        "title": "宠物园",
+        "body": "魔法学院里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6873,15 +7201,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "分钟"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-2",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6895,8 +7225,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "容量",
-        "body": "一瓶水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6908,7 +7238,7 @@
       ],
       "answer": {
         "value": 30,
-        "unit": "分钟"
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6916,7 +7246,9 @@
         "skill-add-length",
         "difficulty-2",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6930,8 +7262,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "长度",
-        "body": "一条彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
+        "title": "魔法学院",
+        "body": "天空城里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6950,7 +7282,9 @@
         "unit-time-route",
         "skill-add-length",
         "difficulty-2",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6964,8 +7298,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "时间",
-        "body": "做作业用了 19 分钟，读书用了 15 分钟，一共用了多少分钟？"
+        "title": "魔法学院",
+        "body": "彩虹湿地里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6985,7 +7319,9 @@
         "skill-add-length",
         "difficulty-2",
         "probe",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -6999,8 +7335,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "购物",
-        "body": "一支笔 20 元，一本本子 16 元，一共要多少元？"
+        "title": "星际驿站",
+        "body": "魔法学院到天空城有 20 米，到宠物园有 16 米。去天空城比去宠物园远多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7011,15 +7347,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 36,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-2",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7033,8 +7371,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "路线",
-        "body": "从家到学校走 21 米，从学校到公园走 17 米，一共走多少米？"
+        "title": "星际驿站",
+        "body": "从魔法学院到宠物园走 21 米，再到天空城走 17 米，一共走多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7046,7 +7384,7 @@
       ],
       "answer": {
         "value": 38,
-        "unit": "分钟"
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7054,7 +7392,9 @@
         "skill-add-length",
         "difficulty-2",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7068,8 +7408,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "身高",
-        "body": "小海星身高 22 厘米，小鲸比他高 18 厘米，小鲸多高？"
+        "title": "宠物园",
+        "body": "魔法图书馆里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7080,15 +7420,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 40,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "分钟"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-2",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7102,8 +7444,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "容量",
-        "body": "一瓶水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7115,7 +7457,7 @@
       ],
       "answer": {
         "value": 42,
-        "unit": "分钟"
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7123,7 +7465,9 @@
         "skill-add-length",
         "difficulty-2",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7137,8 +7481,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "长度",
-        "body": "一条彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
+        "title": "魔法学院",
+        "body": "魔法学院里，一条魔法彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7157,7 +7501,9 @@
         "unit-time-route",
         "skill-add-length",
         "difficulty-3",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7171,8 +7517,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "时间",
-        "body": "做作业用了 13 分钟，读书用了 9 分钟，一共用了多少分钟？"
+        "title": "魔法学院",
+        "body": "宠物园里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7192,7 +7538,9 @@
         "skill-add-length",
         "difficulty-3",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7206,8 +7554,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "购物",
-        "body": "一支笔 14 元，一本本子 10 元，一共要多少元？"
+        "title": "星际驿站",
+        "body": "魔法学院到天空城有 14 米，到宠物园有 10 米。去天空城比去宠物园远多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7218,15 +7566,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-3",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7240,8 +7590,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "路线",
-        "body": "从家到学校走 15 米，从学校到公园走 11 米，一共走多少米？"
+        "title": "星际驿站",
+        "body": "从魔法学院到宠物园走 15 米，再到天空城走 11 米，一共走多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7253,7 +7603,7 @@
       ],
       "answer": {
         "value": 26,
-        "unit": "分钟"
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7261,7 +7611,10 @@
         "skill-add-length",
         "difficulty-3",
         "probe",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7275,8 +7628,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "身高",
-        "body": "小海星身高 16 厘米，小鲸比他高 12 厘米，小鲸多高？"
+        "title": "宠物园",
+        "body": "咕噜球工坊里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7287,15 +7640,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "分钟"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-3",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7309,8 +7664,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "容量",
-        "body": "一瓶水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7322,7 +7677,7 @@
       ],
       "answer": {
         "value": 30,
-        "unit": "分钟"
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7330,7 +7685,9 @@
         "skill-add-length",
         "difficulty-3",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7344,8 +7701,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "长度",
-        "body": "一条彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
+        "title": "魔法学院",
+        "body": "魔法图书馆里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7364,7 +7721,9 @@
         "unit-time-route",
         "skill-add-length",
         "difficulty-3",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7378,8 +7737,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "时间",
-        "body": "做作业用了 19 分钟，读书用了 15 分钟，一共用了多少分钟？"
+        "title": "魔法学院",
+        "body": "云朵农场里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7399,7 +7758,10 @@
         "skill-add-length",
         "difficulty-3",
         "probe",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7413,8 +7775,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "购物",
-        "body": "一支笔 20 元，一本本子 16 元，一共要多少元？"
+        "title": "星际驿站",
+        "body": "魔法学院到天空城有 20 米，到宠物园有 16 米。去天空城比去宠物园远多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7425,15 +7787,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 36,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-3",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7447,8 +7811,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "路线",
-        "body": "从家到学校走 21 米，从学校到公园走 17 米，一共走多少米？"
+        "title": "星际驿站",
+        "body": "从魔法学院到宠物园走 21 米，再到天空城走 17 米，一共走多少米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7460,7 +7824,7 @@
       ],
       "answer": {
         "value": 38,
-        "unit": "分钟"
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7468,7 +7832,9 @@
         "skill-add-length",
         "difficulty-3",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7482,8 +7848,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "身高",
-        "body": "小海星身高 22 厘米，小鲸比他高 18 厘米，小鲸多高？"
+        "title": "宠物园",
+        "body": "天空城里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7494,15 +7860,17 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 40,
-        "unit": "厘米"
+        "value": 4,
+        "unit": "分钟"
       },
       "similarQuestionIds": [],
       "tags": [
         "unit-time-route",
         "skill-add-length",
         "difficulty-3",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7516,8 +7884,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "容量",
-        "body": "一瓶水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7529,7 +7897,7 @@
       ],
       "answer": {
         "value": 42,
-        "unit": "分钟"
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7537,7 +7905,9 @@
         "skill-add-length",
         "difficulty-3",
         "application",
-        "standard:2.MD.5"
+        "standard:2.MD.5",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/MD/"
@@ -7551,26 +7921,29 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "数列",
-        "body": "数列 2、5、8、11，下一个数是多少？"
+        "title": "彩虹湿地·排名次",
+        "body": "彩虹湿地里，洛贝克把 11、15、20 三张魔法卡从大到小排。最大的卡上是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 2 开始，每次加 3。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 11
+        "value": 20
       },
       "similarQuestionIds": [],
       "tags": [
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "ordering"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7584,19 +7957,19 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "摆花",
-        "body": "第 1 行摆 3 盆，以后每行多 3 盆，第 4 行摆多少盆？"
+        "title": "咕噜球工坊·排名次",
+        "body": "咕噜球工坊里，洛贝克把 12、16、21 三张魔法卡从大到小排。第 2 名的卡上是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 3 开始，每次加 3。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 12
+        "value": 16
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7604,7 +7977,10 @@
         "skill-constant-difference-sequence",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied",
+        "ordering"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7618,26 +7994,29 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "台阶",
-        "body": "从 4 开始，每次加 3，第 4 个数是多少？"
+        "title": "星辉广场·排名次",
+        "body": "星辉广场里，洛贝克把 13、17、22 三张魔法卡从大到小排。数字 17 排第几？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 4 开始，每次加 3。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 13
+        "value": 2
       },
       "similarQuestionIds": [],
       "tags": [
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "ordinal"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7651,8 +8030,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "座位",
-        "body": "第一排 5 个座位，每排多 3 个，第 4 排有多少个？"
+        "title": "天空城看台",
+        "body": "云朵农场里，第一排有 5 个座位，每排多 3 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7671,7 +8050,9 @@
         "skill-constant-difference-sequence",
         "difficulty-1",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7685,8 +8066,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "存钱",
-        "body": "第一天存 6 元，以后每天多存 3 元，第 4 天存多少元？"
+        "title": "星辉广场",
+        "body": "魔法学院里，洛贝克第一天收集 6 枚星星币，以后每天多收集 3 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7704,7 +8085,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7718,8 +8101,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "珠子",
-        "body": "按每次多 3 颗的规律穿珠子，从 7 颗开始，第 4 组多少颗？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，按每组多 3 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7738,7 +8121,9 @@
         "skill-constant-difference-sequence",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7752,8 +8137,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "数列",
-        "body": "数列 8、11、14、17，下一个数是多少？"
+        "title": "天空城·魔法灯",
+        "body": "天空城里，魔法灯的亮点数是 8、11、14、17，下一个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7771,7 +8156,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7785,8 +8172,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "摆花",
-        "body": "第 1 行摆 9 盆，以后每行多 3 盆，第 4 行摆多少盆？"
+        "title": "彩虹湿地·蕨类森林",
+        "body": "彩虹湿地里，蕨类森林每排种 9 盆魔法花，以后每排多 3 盆，第 4 排有多少盆？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7805,7 +8192,9 @@
         "skill-constant-difference-sequence",
         "difficulty-1",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7819,8 +8208,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "台阶",
-        "body": "从 10 开始，每次加 3，第 4 个数是多少？"
+        "title": "咕噜球工坊·魔法台阶",
+        "body": "咕噜球工坊里，洛贝克从第 10 级开始，每次跳过 3 级。照规律数，第 4 个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7838,7 +8227,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7852,8 +8243,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "座位",
-        "body": "第一排 11 个座位，每排多 3 个，第 4 排有多少个？"
+        "title": "天空城看台",
+        "body": "星辉广场里，第一排有 11 个座位，每排多 3 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7872,7 +8263,9 @@
         "skill-constant-difference-sequence",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7886,8 +8279,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "存钱",
-        "body": "第一天存 12 元，以后每天多存 3 元，第 4 天存多少元？"
+        "title": "星辉广场",
+        "body": "魔法图书馆里，洛贝克第一天收集 12 枚星星币，以后每天多收集 3 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7905,7 +8298,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-1",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7919,8 +8314,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "珠子",
-        "body": "按每次多 3 颗的规律穿珠子，从 13 颗开始，第 4 组多少颗？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，按每组多 3 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7939,7 +8334,9 @@
         "skill-constant-difference-sequence",
         "difficulty-1",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7953,26 +8350,29 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "数列",
-        "body": "数列 2、6、10、14，下一个数是多少？"
+        "title": "魔法图书馆·排名次",
+        "body": "魔法图书馆里，洛贝克把 14、18、23 三张魔法卡从大到小排。最大的卡上是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 2 开始，每次加 4。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 14
+        "value": 23
       },
       "similarQuestionIds": [],
       "tags": [
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "ordering"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -7986,19 +8386,19 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "摆花",
-        "body": "第 1 行摆 3 盆，以后每行多 4 盆，第 4 行摆多少盆？"
+        "title": "云朵农场·排名次",
+        "body": "云朵农场里，洛贝克把 15、19、24 三张魔法卡从大到小排。第 2 名的卡上是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 3 开始，每次加 4。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 15
+        "value": 19
       },
       "similarQuestionIds": [],
       "tags": [
@@ -8006,7 +8406,10 @@
         "skill-constant-difference-sequence",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied",
+        "ordering"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8020,26 +8423,29 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "台阶",
-        "body": "从 4 开始，每次加 4，第 4 个数是多少？"
+        "title": "魔法学院·排名次",
+        "body": "魔法学院里，洛贝克把 16、20、25 三张魔法卡从大到小排。数字 20 排第几？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 4 开始，每次加 4。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 16
+        "value": 2
       },
       "similarQuestionIds": [],
       "tags": [
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "ordinal"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8053,8 +8459,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "座位",
-        "body": "第一排 5 个座位，每排多 4 个，第 4 排有多少个？"
+        "title": "天空城看台",
+        "body": "彩虹湿地里，第一排有 5 个座位，每排多 4 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8073,7 +8479,9 @@
         "skill-constant-difference-sequence",
         "difficulty-2",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8087,8 +8495,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "存钱",
-        "body": "第一天存 6 元，以后每天多存 4 元，第 4 天存多少元？"
+        "title": "星辉广场",
+        "body": "咕噜球工坊里，洛贝克第一天收集 6 枚星星币，以后每天多收集 4 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8106,7 +8514,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8120,8 +8530,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "珠子",
-        "body": "按每次多 4 颗的规律穿珠子，从 7 颗开始，第 4 组多少颗？"
+        "title": "咕噜球工坊",
+        "body": "星辉广场里，按每组多 4 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8140,7 +8550,9 @@
         "skill-constant-difference-sequence",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8154,8 +8566,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "数列",
-        "body": "数列 8、12、16、20，下一个数是多少？"
+        "title": "魔法图书馆·魔法灯",
+        "body": "魔法图书馆里，魔法灯的亮点数是 8、12、16、20，下一个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8173,7 +8585,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8187,8 +8601,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "摆花",
-        "body": "第 1 行摆 9 盆，以后每行多 4 盆，第 4 行摆多少盆？"
+        "title": "云朵农场·蕨类森林",
+        "body": "云朵农场里，蕨类森林每排种 9 盆魔法花，以后每排多 4 盆，第 4 排有多少盆？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8207,7 +8621,9 @@
         "skill-constant-difference-sequence",
         "difficulty-2",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8221,8 +8637,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "台阶",
-        "body": "从 10 开始，每次加 4，第 4 个数是多少？"
+        "title": "魔法学院·魔法台阶",
+        "body": "魔法学院里，洛贝克从第 10 级开始，每次跳过 4 级。照规律数，第 4 个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8240,7 +8656,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8254,8 +8672,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "座位",
-        "body": "第一排 11 个座位，每排多 4 个，第 4 排有多少个？"
+        "title": "天空城看台",
+        "body": "宠物园里，第一排有 11 个座位，每排多 4 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8274,7 +8692,9 @@
         "skill-constant-difference-sequence",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8288,8 +8708,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "存钱",
-        "body": "第一天存 12 元，以后每天多存 4 元，第 4 天存多少元？"
+        "title": "星辉广场",
+        "body": "天空城里，洛贝克第一天收集 12 枚星星币，以后每天多收集 4 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8307,7 +8727,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-2",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8321,8 +8743,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "珠子",
-        "body": "按每次多 4 颗的规律穿珠子，从 13 颗开始，第 4 组多少颗？"
+        "title": "咕噜球工坊",
+        "body": "彩虹湿地里，按每组多 4 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8341,7 +8763,9 @@
         "skill-constant-difference-sequence",
         "difficulty-2",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8355,26 +8779,29 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "数列",
-        "body": "数列 2、7、12、17，下一个数是多少？"
+        "title": "宠物园·排名次",
+        "body": "宠物园里，洛贝克把 17、21、26 三张魔法卡从大到小排。最大的卡上是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 2 开始，每次加 5。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 17
+        "value": 26
       },
       "similarQuestionIds": [],
       "tags": [
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "ordering"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8388,19 +8815,19 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "摆花",
-        "body": "第 1 行摆 3 盆，以后每行多 5 盆，第 4 行摆多少盆？"
+        "title": "天空城·排名次",
+        "body": "天空城里，洛贝克把 18、22、27 三张魔法卡从大到小排。第 2 名的卡上是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 3 开始，每次加 5。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 18
+        "value": 22
       },
       "similarQuestionIds": [],
       "tags": [
@@ -8408,7 +8835,10 @@
         "skill-constant-difference-sequence",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied",
+        "ordering"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8422,26 +8852,29 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "台阶",
-        "body": "从 4 开始，每次加 5，第 4 个数是多少？"
+        "title": "彩虹湿地·排名次",
+        "body": "彩虹湿地里，洛贝克把 19、23、28 三张魔法卡从大到小排。数字 23 排第几？"
       },
       "requiresFiveStep": false,
       "hints": [
-        "先读题，找出已知的数量和要问的问题。",
-        "把题目里的数量写下来，别急着算。",
-        "先看相邻两个数相差多少，再按同样的差往下推。",
-        "从 4 开始，每次加 5。",
-        "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
+        "先把三个数放在一起比一比。",
+        "从最大的数开始，依次往下排。",
+        "比较百位、十位和个位，数位多的不一定更大，要从高位看起。",
+        "把三个数按从大到小写成一排，再找题目问的位置。",
+        "按顺序数一数，就能找到答案；别把“第几”和“数字本身”弄混。"
       ],
       "answer": {
-        "value": 19
+        "value": 2
       },
       "similarQuestionIds": [],
       "tags": [
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "ordinal"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8455,8 +8888,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "座位",
-        "body": "第一排 5 个座位，每排多 5 个，第 4 排有多少个？"
+        "title": "天空城看台",
+        "body": "云朵农场里，第一排有 5 个座位，每排多 5 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8475,7 +8908,10 @@
         "skill-constant-difference-sequence",
         "difficulty-3",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8489,8 +8925,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "存钱",
-        "body": "第一天存 6 元，以后每天多存 5 元，第 4 天存多少元？"
+        "title": "星辉广场",
+        "body": "魔法学院里，洛贝克第一天收集 6 枚星星币，以后每天多收集 5 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8508,7 +8944,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8522,8 +8960,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "珠子",
-        "body": "按每次多 5 颗的规律穿珠子，从 7 颗开始，第 4 组多少颗？"
+        "title": "咕噜球工坊",
+        "body": "宠物园里，按每组多 5 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8542,7 +8980,9 @@
         "skill-constant-difference-sequence",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8556,8 +8996,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "数列",
-        "body": "数列 8、13、18、23，下一个数是多少？"
+        "title": "天空城·魔法灯",
+        "body": "天空城里，魔法灯的亮点数是 8、13、18、23，下一个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8575,7 +9015,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8589,8 +9031,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "摆花",
-        "body": "第 1 行摆 9 盆，以后每行多 5 盆，第 4 行摆多少盆？"
+        "title": "彩虹湿地·蕨类森林",
+        "body": "彩虹湿地里，蕨类森林每排种 9 盆魔法花，以后每排多 5 盆，第 4 排有多少盆？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8609,7 +9051,10 @@
         "skill-constant-difference-sequence",
         "difficulty-3",
         "probe",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill",
+        "challenge"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8623,8 +9068,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "台阶",
-        "body": "从 10 开始，每次加 5，第 4 个数是多少？"
+        "title": "咕噜球工坊·魔法台阶",
+        "body": "咕噜球工坊里，洛贝克从第 10 级开始，每次跳过 5 级。照规律数，第 4 个数是多少？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8642,7 +9087,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8656,8 +9103,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "座位",
-        "body": "第一排 11 个座位，每排多 5 个，第 4 排有多少个？"
+        "title": "天空城看台",
+        "body": "星辉广场里，第一排有 11 个座位，每排多 5 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8676,7 +9123,9 @@
         "skill-constant-difference-sequence",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8690,8 +9139,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "存钱",
-        "body": "第一天存 12 元，以后每天多存 5 元，第 4 天存多少元？"
+        "title": "星辉广场",
+        "body": "魔法图书馆里，洛贝克第一天收集 12 枚星星币，以后每天多收集 5 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8709,7 +9158,9 @@
         "pattern-data",
         "skill-constant-difference-sequence",
         "difficulty-3",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:fill"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"
@@ -8723,8 +9174,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "珠子",
-        "body": "按每次多 5 颗的规律穿珠子，从 13 颗开始，第 4 组多少颗？"
+        "title": "咕噜球工坊",
+        "body": "云朵农场里，按每组多 5 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8743,7 +9194,9 @@
         "skill-constant-difference-sequence",
         "difficulty-3",
         "application",
-        "standard:2.OA.3"
+        "standard:2.OA.3",
+        "theme:roco",
+        "form:applied"
       ],
       "sources": [
         "https://www.thecorestandards.org/Math/Content/2/OA/"

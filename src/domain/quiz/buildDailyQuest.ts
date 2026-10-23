@@ -37,7 +37,7 @@ import {
  *
  * design §3 写「探测题从 `type='probe'` 池取」，但 Task 2 的领域模型已确立
  * **`'probe'` 不是 `QuizType` 的取值**——六类题型（加减法/乘除法/两步应用题/
- * 未知数关系/单位时间路线/规律与数据）里没有探测题；探测题是**题组槽位**
+ * 未知数关系/单位时间路线/规律与排序）里没有探测题；探测题是**题组槽位**
  * 概念，由 `Question.category`（`'basic' | 'applied' | 'probe'`）表达。
  *
  * 因此本模块按 `category` 切池。若按 design 原文的 `type='probe'` 实现，探测
@@ -154,6 +154,83 @@ function compareQuestions(left: Question, right: Question): number {
  *   `session.questionIds` 又是它的一份拷贝：调用方事后再改题序，不会反写到
  *   已生成的会话上（刷新后重放得到的结果必须仍与本次一致）。
  */
+/**
+ * 在同一难度档内按题型轮流取题。
+ *
+ * 旧实现只按 (difficulty, id) 排序后取前 N 道；题库按题型分块生成，
+ * 于是 4 个基础槽位会连续落在 add-sub 上，孩子连续几天都只做加减法。
+ * 这里每轮从不同题型各取一道，保证一组题至少覆盖多个考点。
+ *
+ * 题型顺序按题库中的首次出现顺序固定；再用日期做一次轮转，避免每天
+ * 都从同一个题型开始。全组题必须确定性可重放，因此不使用随机数。
+ */
+function pickBalanced(
+  available: readonly Question[],
+  effectiveDifficulty: number,
+  needed: number,
+  dayIndex: number,
+  categoryIndex: number,
+): { picked: Question[]; repeats: number } {
+  const tier = available.filter((question) => question.difficulty === effectiveDifficulty)
+  const pool = tier.length === 0 ? [...available] : tier
+  const groups = new Map<string, Question[]>()
+  for (const question of pool) {
+    const bucket = groups.get(question.type)
+    if (bucket === undefined) groups.set(question.type, [question])
+    else bucket.push(question)
+  }
+  const typeOrder = [...groups.keys()]
+  if (typeOrder.length === 0) return { picked: [], repeats: 0 }
+  const start = (((dayIndex + categoryIndex * 2) % typeOrder.length) + typeOrder.length) % typeOrder.length
+  const rotated = [...typeOrder.slice(start), ...typeOrder.slice(0, start)]
+  // 只要题池包含多个类型，每天也从各类型的不同题目位置开始轮转；
+  // 单类型 fixture/小池维持原排序，兼容既有确定性契约。
+  if (typeOrder.length > 1) {
+    for (const [typeIndex, type] of rotated.entries()) {
+      const bucket = groups.get(type) ?? []
+      if (bucket.length < 2) continue
+      const offset = (dayIndex + typeIndex + categoryIndex) % bucket.length
+      groups.set(type, [...bucket.slice(offset), ...bucket.slice(0, offset)])
+    }
+  }
+
+  const picked: Question[] = []
+  const selected = new Set<string>()
+  const cursors = new Map<string, number>()
+  let progressed = true
+  while (picked.length < needed && progressed) {
+    progressed = false
+    for (const type of rotated) {
+      if (picked.length >= needed) break
+      const bucket = groups.get(type) ?? []
+      const cursor = cursors.get(type) ?? 0
+      if (cursor >= bucket.length) continue
+      cursors.set(type, cursor + 1)
+      const question = bucket[cursor]
+      if (question === undefined || selected.has(question.id)) continue
+      selected.add(question.id)
+      picked.push(question)
+      progressed = true
+    }
+  }
+
+  // 题型不足一整个档位时，用同档其余题补齐；仍未满则复用已选题目。
+  if (picked.length < needed) {
+    for (const question of pool) {
+      if (picked.length >= needed) break
+      if (selected.has(question.id)) continue
+      selected.add(question.id)
+      picked.push(question)
+    }
+  }
+  let repeats = 0
+  while (picked.length < needed && picked.length > 0) {
+    picked.push(picked[repeats % picked.length])
+    repeats += 1
+  }
+  return { picked, repeats }
+}
+
 export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   const { profileId, settings, pool } = input
   const grade = input.grade ?? 3
@@ -204,7 +281,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   const startedAt = clock()
   const difficultyTrace: number[] = []
 
-  for (const category of QUEST_SLOT_ORDER) {
+  for (const [categoryIndex, category] of QUEST_SLOT_ORDER.entries()) {
     const available = candidates[category]
     const needed = settings[COUNT_BY_CATEGORY[category]]
     const counts: DifficultyCounts = {
@@ -241,14 +318,10 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
       continue
     }
 
-    for (let index = 0; index < needed; index += 1) {
-      const picked = atEffectiveTier[index % atEffectiveTier.length]
-      questionIds.push(picked.id)
-      // 循环取用的第二次及以后都算重复（index >= 池长即进入第二轮）。
-      if (index >= atEffectiveTier.length) {
-        repeatCount += 1
-      }
-    }
+    const dayIndex = Math.floor(startedAt / 86_400_000)
+    const balanced = pickBalanced(atEffectiveTier, effective.difficulty, needed, dayIndex, categoryIndex)
+    questionIds.push(...balanced.picked.map((question) => question.id))
+    repeatCount += balanced.repeats
 
     difficultyTrace.push(effective.difficulty)
   }
@@ -268,7 +341,8 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
       const replacement = gradePool.find((question) =>
         themedIds.has(question.id) &&
         !selected.has(question.id) &&
-        question.category === current.category,
+        question.category === current.category &&
+        question.type === current.type,
       )
       if (replacement !== undefined) {
         selected.delete(questionIds[index])

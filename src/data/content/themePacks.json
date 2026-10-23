@@ -159,7 +159,11 @@
           ],
           "modelRef": "triceratops",
           "modelSource": "https://poly.pizza/m/IGvrUqGrRM",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "triceratops",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Triceratops_Skeleton_-_National_Museum_of_Natural_History_(14611729991)a.jpg",
+          "photoCredit": "Gareth Milner; derivative by MathKnight",
+          "photoLicense": "CC BY 4.0"
         },
         {
           "id": "stegosaurus",
@@ -177,7 +181,11 @@
           ],
           "modelRef": "stegosaurus",
           "modelSource": "https://poly.pizza/m/eFcNbOlpvl",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "stegosaurus",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Stegosaurus_Skeleton_(36094963090).jpg",
+          "photoCredit": "Gary Todd",
+          "photoLicense": "CC0"
         },
         {
           "id": "tyrannosaurus",
@@ -195,7 +203,11 @@
           ],
           "modelRef": "tyrannosaurus",
           "modelSource": "https://poly.pizza/m/UYtneO5FpF",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "tyrannosaurus",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Tyrannosaurus_Rex_skeleton_is_on_display_in_the_Dinosaurs_hall_at_the_Smithsonian's_National_Museum_of_Natural_History_in_Washington,_D.C..jpg",
+          "photoCredit": "USDAgov",
+          "photoLicense": "Public domain"
         },
         {
           "id": "pteranodon",
@@ -213,7 +225,11 @@
           ],
           "modelRef": "pteranodon",
           "modelSource": "https://poly.pizza/m/1tuiNTr4-MX",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "pteranodon",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Paläontologisches_Museum_München_-_Pteranodon_back_side.jpg",
+          "photoCredit": "ArticCynda",
+          "photoLicense": "CC0"
         },
         {
           "id": "apatosaurus",
@@ -231,7 +247,11 @@
           ],
           "modelRef": "apatosaurus",
           "modelSource": "https://poly.pizza/m/fvo0x8Zk3z",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "apatosaurus",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Apatosaurus_skeleton_Field_Columbian_Museum_1.jpg",
+          "photoCredit": "The Field Museum Library",
+          "photoLicense": "No restrictions"
         },
         {
           "id": "diplodocus",
@@ -249,7 +269,11 @@
           ],
           "modelRef": "diplodocus",
           "modelSource": "https://poly.pizza/m/12n6ICAVpYB",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "diplodocus",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Diplodocus_Carnegii_skeleton_in_Museum_für_Naturkunde_Berlin_0829.jpg",
+          "photoCredit": "Dosseman",
+          "photoLicense": "CC BY-SA 4.0"
         },
         {
           "id": "velociraptor",
@@ -267,7 +291,11 @@
           ],
           "modelRef": "velociraptor",
           "modelSource": "https://poly.pizza/m/cnlGH2UcDd",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "velociraptor",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Velociraptor_fruita_2.jpg",
+          "photoCredit": "Jens Lallensack",
+          "photoLicense": "CC BY-SA 4.0"
         },
         {
           "id": "parasaurolophus",
@@ -285,7 +313,11 @@
           ],
           "modelRef": "parasaurolophus",
           "modelSource": "https://poly.pizza/m/KeeQrrouRK",
-          "modelLicense": "CC0"
+          "modelLicense": "CC0",
+          "photoRef": "parasaurolophus",
+          "photoSource": "https://commons.wikimedia.org/wiki/File:Parasaurolophus_cyrtocristatus.jpg",
+          "photoCredit": "Lisa Andres",
+          "photoLicense": "CC BY 2.0"
         }
       ]
     },

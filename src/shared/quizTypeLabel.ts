@@ -17,7 +17,7 @@ export const QUIZ_TYPE_LABELS: Readonly<Record<QuizType, string>> = {
   'two-step-app': '两步应用题',
   'unknown-relation': '未知数关系',
   'unit-time-route': '单位·时间·路线',
-  'pattern-data': '规律与数据',
+  'pattern-data': '规律与排序',
 }
 
 /** 题型未知或缺失时的中性占位；MUST NOT 退回内部键名。 */

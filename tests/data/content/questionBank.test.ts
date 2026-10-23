@@ -272,6 +272,7 @@ describe('question bank content', () => {
 
   it('never uses one-digit-only arithmetic in any cell', () => {
     for (const question of readQuestionBank().questions) {
+      if (question.tags.includes('ordering') || question.tags.includes('ordinal')) continue
       const operands = expressionOperands(question)
       expect(Math.max(...operands), `${question.id} magnitude`).toBeGreaterThanOrEqual(12)
     }
