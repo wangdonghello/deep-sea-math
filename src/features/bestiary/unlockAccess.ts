@@ -1,6 +1,5 @@
 import { CREATURE_BANK } from '@/data/content'
-import { ZONES } from '@/features/home/zones'
-import { overlapsZone } from './zoneFilter'
+import { zonesForCreature } from './zoneFilter'
 
 /**
  * 图鉴可见性：显式解锁的鱼 + 已解锁区域内的鱼。
@@ -19,7 +18,7 @@ export function unlockedCreatureIdSet(
   }
   if (zones.size === 0) return unlocked
   for (const creature of CREATURE_BANK.creatures) {
-    if (ZONES.some((zone) => zones.has(zone.id) && overlapsZone(creature, zone))) {
+    if (zonesForCreature(creature).some((zone) => zones.has(zone.id))) {
       unlocked.add(creature.id)
     }
   }

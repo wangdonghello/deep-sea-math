@@ -538,8 +538,8 @@ export function createQuestionIndexes(questions: readonly Question[]): QuestionI
 export function assertValidCreatures(value: unknown): asserts value is CreatureBank {
   const bank = record(value, 'creatures')
   nonEmptyString(bank.version, 'creatures.version')
-  if (!Array.isArray(bank.creatures) || bank.creatures.length !== 4) {
-    throw new Error('creatures.creatures: exactly four entries are required')
+  if (!Array.isArray(bank.creatures) || bank.creatures.length < 4 || bank.creatures.length > 8) {
+    throw new Error('creatures.creatures: expected four to eight entries')
   }
   const ids = new Set<string>()
   bank.creatures.forEach((item, index) => {
@@ -574,7 +574,7 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
       throw new Error(`${path}.sources: expected a species-scoped or species-specific source`)
     }
     const photo = record(creature.photo, `${path}.photo`)
-    if (typeof photo.ref !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(photo.ref)) {
+    if (typeof photo.ref !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)?$/.test(photo.ref)) {
       throw new Error(`${path}.photo.ref: expected a safe lowercase asset key`)
     }
     const creditSummary = nonEmptyString(photo.creditSummary, `${path}.photo.creditSummary`)

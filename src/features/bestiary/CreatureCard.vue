@@ -2,8 +2,7 @@
 import { computed } from 'vue'
 import CreatureCanvas from './CreatureCanvas.vue'
 import type { CreatureContent } from '@/data/content/schema'
-import { overlapsZone } from './zoneFilter'
-import { ZONES } from '@/features/home/zones'
+import { zonesForCreature } from './zoneFilter'
 
 const props = defineProps<{
   creature: CreatureContent
@@ -14,9 +13,8 @@ const props = defineProps<{
 const emit = defineEmits<{ (event: 'observe', creatureId: string): void }>()
 const teachingZones = computed(() => {
   const allowed = props.unlockedZoneIds === undefined ? undefined : new Set(props.unlockedZoneIds)
-  return ZONES.filter((zone) =>
-    overlapsZone(props.creature, zone) && (allowed === undefined || allowed.has(zone.id)),
-  )
+  return zonesForCreature(props.creature)
+    .filter((zone) => allowed === undefined || allowed.has(zone.id))
 })
 </script>
 

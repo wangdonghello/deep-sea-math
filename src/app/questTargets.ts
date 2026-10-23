@@ -21,7 +21,7 @@ import { CREATURE_BANK } from '@/data/content'
 
 import type { ZoneConfig } from '@/features/home/zones'
 import { ZONES } from '@/features/home/zones'
-import { overlapsZone } from '@/features/bestiary/zoneFilter'
+import { zonesForCreature } from '@/features/bestiary/zoneFilter'
 
 /** 当日题组的奖励目标；缺省表示该通道本次不发奖励。 */
 export interface QuestTargets {
@@ -45,7 +45,7 @@ export function deriveCreatureTarget(
 ): string | undefined {
   const refs = questions.flatMap((question) => question.creatureRef === undefined ? [] : [question.creatureRef])
   if (zone !== undefined) {
-    const zoneCreatures = CREATURE_BANK.creatures.filter((creature) => overlapsZone(creature, zone))
+    const zoneCreatures = CREATURE_BANK.creatures.filter((creature) => zonesForCreature(creature).some((candidate) => candidate.id === zone.id))
     const fromQuestions = zoneCreatures.find((creature) =>
       refs.includes(creature.id) && !(unlockedCreatureIds?.has(creature.id) ?? false),
     )

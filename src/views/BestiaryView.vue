@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import CreatureCard from '@/features/bestiary/CreatureCard.vue'
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
-import { overlapsZone } from '@/features/bestiary/zoneFilter'
+import { belongsToZone, zonesForCreature } from '@/features/bestiary/zoneFilter'
 import { useBestiary } from '@/features/bestiary/useBestiary'
 import type { BestiaryStore } from '@/features/bestiary/types'
 import { ZONES } from '@/features/home/zones'
@@ -45,13 +45,13 @@ const visibleItems = computed(() => {
   const items = bestiary.items.value
   const selected = ZONES.find((zone) => zone.id === activeZoneId.value)
   if (selected !== undefined) {
-    return items.filter(({ creature }) => overlapsZone(creature, selected))
+    return items.filter(({ creature }) => belongsToZone(creature, selected))
   }
   // 「全部」= 所有已解锁区域的并集；新档案还没有解锁时展示全量剪影，
   // 让孩子知道图鉴里还有哪些目标。
   if (unlockedZoneIds.value.size === 0) return items
   return items.filter(({ creature }) =>
-    unlockedZones.value.some((zone) => overlapsZone(creature, zone)),
+    zonesForCreature(creature).some((zone) => unlockedZoneIds.value.has(zone.id)),
   )
 })
 </script>

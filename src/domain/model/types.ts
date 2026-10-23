@@ -312,6 +312,8 @@ export interface BestiaryEntry {
   knowledgeCards: string[]
   /** 可追溯的来源链接，MUST NOT 为空。 */
   sources: string[]
+  /** 图鉴区域归属；用于区域解锁后的鱼种可见性（不是深度重叠）。 */
+  primaryZone?: string
 }
 
 /**

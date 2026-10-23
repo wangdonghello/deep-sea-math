@@ -29,7 +29,7 @@ import { CREATURE_BANK } from '@/data/content'
 import type { DomainEvent } from '@/domain/model/types'
 import type { BestiaryStore } from '@/features/bestiary/types'
 import { ZONES } from '@/features/home/zones'
-import { overlapsZone } from '@/features/bestiary/zoneFilter'
+import { overlapsZone, zonesForCreature } from '@/features/bestiary/zoneFilter'
 import { depthRangeLabel } from '@/features/bestiary/depthRangeLabel'
 
 const creature = CREATURE_BANK.creatures[0]
@@ -89,7 +89,7 @@ describe('BestiaryView', () => {
     for (const zone of ZONES) {
       await view.get(`button[aria-label="筛选${zone.name}"]`).trigger('click')
       const expectedIds = CREATURE_BANK.creatures
-        .filter((entry) => entry.depthRange.min <= (zone.max ?? Infinity) && entry.depthRange.max >= (zone.min ?? 0))
+        .filter((entry) => zonesForCreature(entry).some((candidate) => candidate.id === zone.id))
         .map((entry) => entry.id)
       const shownIds = view.findAll('[data-testid^="creature-card-"]')
         .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
@@ -122,13 +122,14 @@ describe('BestiaryView', () => {
     expect(view.find('img').exists()).toBe(false)
   })
 
-  it('shows the empty-state message when the hadal zone has no creature records', async () => {
+  it('shows hadal fish when the hadal zone is selected', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store(ALL_ZONE_EVENTS) } })
     await flushPromises()
     await view.get(`button[aria-label="筛选${ZONES[3].name}"]`).trigger('click')
 
-    expect(view.text()).toContain('这个教学区域暂无对应记录')
-    expect(view.findAll('[data-testid^="creature-card-"]')).toHaveLength(0)
+    const shown = view.findAll('[data-testid^="creature-card-"]')
+      .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
+    expect(shown).toEqual(['mariana-snailfish', 'abyssobrotula-galatheae'])
   })
 
   it('shows unlocked content by replaying only the requested profile events', async () => {
@@ -144,8 +145,8 @@ describe('BestiaryView', () => {
     expect(card.find('[data-testid="model-attribution"]').text()).toContain('CC BY 4.0')
     // 跨区物种不该被误读成"当前就在深渊区"：卡片明确列出所有重叠的教学区
     expect(card.get('[data-testid="creature-zones"]').text()).toContain('暮光区')
-    expect(card.get('[data-testid="creature-zones"]').text()).toContain('深海区')
-    expect(card.get('[data-testid="creature-zones"]').text()).toContain('深渊区')
+    expect(card.get('[data-testid="creature-zones"]').text()).not.toContain('深海区')
+    expect(card.get('[data-testid="creature-zones"]').text()).not.toContain('深渊区')
   })
 
   it('does not expose an unlock belonging to a different profile', async () => {
@@ -267,7 +268,7 @@ describe('BestiaryView 默认教学区', () => {
     expect(press(view, '筛选暮光区')).toBe('false')
     expect(view.get('[data-testid="bestiary-unlocked-zones"]').text()).toContain('暮光区')
     expect(shownIds(view)).toEqual(CREATURE_BANK.creatures
-      .filter((entry) => overlapsZone(entry, ZONES[0]))
+      .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === ZONES[0].id))
       .map((entry) => entry.id))
   })
 
@@ -282,11 +283,11 @@ describe('BestiaryView 默认教学区', () => {
     await flushPromises()
 
     expect(press(deepSea, '筛选全部区域')).toBe('true')
-    // 深海大鼬鳚的记录深度（约 2,000–4,300 米）不进入暮光区，所以只在解锁深海区后出现
-    expect(shownIds(deepSea)).toContain('giant-cusk-eel')
-    expect(shownIds(twilight)).not.toContain('giant-cusk-eel')
+    // 深海蜥鱼归在深海区；暮光区只显示鮟鱇鱼
+    expect(shownIds(deepSea)).toContain('deep-sea-lizardfish')
+    expect(shownIds(twilight)).not.toContain('deep-sea-lizardfish')
     expect(shownIds(deepSea)).toEqual(CREATURE_BANK.creatures
-      .filter((entry) => overlapsZone(entry, ZONES[0]) || overlapsZone(entry, ZONES[1]))
+      .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === ZONES[0].id || zone.id === ZONES[1].id))
       .map((entry) => entry.id))
   })
 
@@ -303,7 +304,7 @@ describe('BestiaryView 默认教学区', () => {
     await view.get('button[aria-label="筛选暮光区"]').trigger('click')
     const shown = view.findAll('[data-testid^="creature-card-"]')
       .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
-    expect(shown).toEqual(['johnson-anglerfish', 'deep-sea-lizardfish', 'jewel-squid'])
+    expect(shown).toEqual(['johnson-anglerfish'])
   })
 
   it('未解锁的区域不能筛选，避免把其他海域误认为已解锁', async () => {
@@ -328,7 +329,7 @@ describe('BestiaryView 默认教学区', () => {
 
     expect(press(view, '筛选全部区域')).toBe('true')
     expect(shownIds(view)).toEqual(CREATURE_BANK.creatures
-      .filter((entry) => overlapsZone(entry, ZONES[0]))
+      .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === ZONES[0].id))
       .map((entry) => entry.id))
   })
 

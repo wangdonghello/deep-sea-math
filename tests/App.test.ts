@@ -544,8 +544,8 @@ describe('App: 整体装配', () => {
         question.answer.expression === undefined &&
         question.creatureRef !== undefined,
     )!
-    const creatureId = target.creatureRef!
-    const creature = CREATURE_BANK.creatures.find((entry) => entry.id === creatureId)!
+    const questionCreatureId = target.creatureRef!
+    expect(questionCreatureId).toBeDefined()
     await seed([sessionStartedFor([target.id])])
     await bootApp({ signedIn: true })
     await router.push('/quest')
@@ -567,9 +567,12 @@ describe('App: 整体装配', () => {
     const unlocked = events.filter(
       (event) => event.type === 'unlock-granted' && event.kind === 'creature',
     )
-    // 解锁的生物就是这道题包装里的主角（题目内容即权威映射）
-    expect(target.creatureRef).toBeDefined()
-    expect(unlocked.map((event) => (event as { targetId: string }).targetId)).toEqual([target.creatureRef])
+    // 第一次完成解锁的是暮光区，因此奖励鱼也必须属于暮光区；题目包装里的
+    // 主角可能是更深海域的鱼，不能拿它冒充暮光区的奖励。
+    expect(unlocked).toHaveLength(1)
+    const creatureId = (unlocked[0] as { targetId: string }).targetId
+    const creature = CREATURE_BANK.creatures.find((entry) => entry.id === creatureId)!
+    expect(creature.primaryZone).toBe('twilight')
 
     // 解锁反馈展示奖励名（含物种名，而不是标识）
     expect(await waitForOverlay()).toBe(true)

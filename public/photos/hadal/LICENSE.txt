@@ -1,0 +1,13 @@
+Hadal fish photos used in the deep-sea bestiary.
+
+- snailfish.jpg — Pseudoliparis swirei — Gerringer M. E., Linley T. D.,
+  Jamieson A. J., Goetze E., Drazen J. C. — CC BY 3.0.
+  Source: https://commons.wikimedia.org/wiki/File:Pseudoliparis_swirei.png
+  Changes: converted from PNG to JPEG for delivery.
+
+- abyssobrotula.jpg — Abyssobrotula galatheae — California Academy of
+  Sciences — CC0. Source:
+  https://commons.wikimedia.org/wiki/File:Abyssobrotula_galatheae.jpg
+
+These are real scientific specimen/photographic records, not illustrations.
+Attribution and licence are also displayed on each bestiary card.

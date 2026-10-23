@@ -38,7 +38,8 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55",
         "note": "这是深海鮟鱇鱼的授权示意模型，不代表约翰逊鮟鱇鱼的精确解剖复原。"
-      }
+      },
+      "primaryZone": "twilight"
     },
     {
       "id": "giant-cusk-eel",
@@ -77,7 +78,8 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545",
         "note": "这是深海鼬鳚属（Bassozetus）的授权示意模型，不代表巨鼬鳚 Spectrunculus grandis 的精确解剖复原。"
-      }
+      },
+      "primaryZone": "abyss"
     },
     {
       "id": "deep-sea-lizardfish",
@@ -116,7 +118,8 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7",
         "note": "这是蜥鱼科鱼类的授权示意模型，不代表深海蜥鱼 Bathysaurus ferox 的精确解剖复原。"
-      }
+      },
+      "primaryZone": "midnight"
     },
     {
       "id": "jewel-squid",
@@ -155,6 +158,71 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://sketchfab.com/3d-models/squid-2e211c13614b433ab6191a814364dacd",
         "note": "这是头足类的授权示意模型，不代表宝石鱿鱼 Histioteuthis bonnellii 的精确解剖复原。"
+      },
+      "primaryZone": "abyss"
+    },
+    {
+      "id": "mariana-snailfish",
+      "name": "深渊狮子鱼",
+      "scientificName": "Pseudoliparis swirei",
+      "bodySize": "最大标准体长约 23.8 厘米（SL，标准体长）",
+      "depthRange": {
+        "min": 6898,
+        "max": 8076
+      },
+      "primaryZone": "hadal",
+      "habitat": "马里亚纳海沟等海沟深处，约 6,898–8,076米；高压、低温、完全无光。",
+      "knowledgeCards": [
+        "深渊狮子鱼生活在马里亚纳海沟等海沟深处。",
+        "它身体呈半透明、皮肤柔软，骨骼较轻。",
+        "科学家在 8,000 米以下记录到它，是已知栖息最深的鱼类之一。",
+        "它主要捕食小型甲壳类等底栖生物。"
+      ],
+      "sources": [
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E9%87%8C%E4%BA%9E%E7%B4%8D%E7%8D%85%E5%AD%90%E9%AD%9A",
+        "https://www.fishbase.se/summary/Pseudoliparis-swirei.html",
+        "https://www.cas.cn/cm/202505/t20250523_5069752.shtml"
+      ],
+      "photo": {
+        "ref": "hadal/snailfish",
+        "creditSummary": "Gerringer et al. · CC BY 3.0",
+        "attribution": "Pseudoliparis swirei by Gerringer M. E., Linley T. D., Jamieson A. J., Goetze E., Drazen J. C. (https://commons.wikimedia.org/wiki/File:Pseudoliparis_swirei.png), licensed under CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). Changes: converted to JPEG for delivery.",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pseudoliparis_swirei.png",
+        "note": "真实影像：深渊狮子鱼（Pseudoliparis swirei）的科研照片拼图，不是卡通示意图。"
+      }
+    },
+    {
+      "id": "abyssobrotula-galatheae",
+      "name": "神女底鼬鳚",
+      "scientificName": "Abyssobrotula galatheae",
+      "bodySize": "最大标准体长约 16.5 厘米（SL，标准体长）",
+      "depthRange": {
+        "min": 3110,
+        "max": 8370
+      },
+      "primaryZone": "hadal",
+      "habitat": "全球热带、亚热带深海的底层，已知记录约 3,110–8,370米。",
+      "knowledgeCards": [
+        "神女底鼬鳚生活在深海海底附近。",
+        "它属于鼬鳚目，身体细长、眼睛退化。",
+        "1970 年曾在波多黎各海沟约 8,370 米处捕获标本。",
+        "它主要取食海底的小型无脊椎动物。"
+      ],
+      "sources": [
+        "https://zh.wikipedia.org/wiki/%E7%A5%9E%E5%A5%B3%E5%BA%95%E9%BC%AC%E9%B3%9A",
+        "https://www.fishbase.se/summary/Abyssobrotula-galatheae.html",
+        "https://www.mbari.org/animal/abyssobrotula-galatheae/"
+      ],
+      "photo": {
+        "ref": "hadal/abyssobrotula",
+        "creditSummary": "California Academy of Sciences · CC0",
+        "attribution": "Abyssobrotula galatheae by California Academy of Sciences (https://commons.wikimedia.org/wiki/File:Abyssobrotula_galatheae.jpg), dedicated to the public domain under CC0 (https://creativecommons.org/publicdomain/zero/1.0/).",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abyssobrotula_galatheae.jpg",
+        "note": "真实影像：加利福尼亚科学院收藏的神女底鼬鳚标本。"
       }
     }
   ]
