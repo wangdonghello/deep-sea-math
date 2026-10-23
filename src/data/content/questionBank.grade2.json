@@ -282,7 +282,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "星辉广场里，洛贝克用 29 块魔法砖搭台，又加上 19 块，一共用了多少块？"
+        "body": "天空城里，洛贝克用 29 块魔法砖搭台，又加上 19 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -609,7 +609,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "彩虹湿地里，洛贝克用 47 块魔法砖搭台，又加上 31 块，一共用了多少块？"
+        "body": "天空城里，洛贝克用 47 块魔法砖搭台，又加上 31 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -936,7 +936,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "宠物园里，洛贝克用 33 块魔法砖搭台，又加上 19 块，一共用了多少块？"
+        "body": "天空城里，洛贝克用 33 块魔法砖搭台，又加上 19 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1263,7 +1263,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "云朵农场里，洛贝克用 51 块魔法砖搭台，又加上 31 块，一共用了多少块？"
+        "body": "天空城里，洛贝克用 51 块魔法砖搭台，又加上 31 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1591,7 +1591,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "星辉广场里，洛贝克用 37 块魔法砖搭台，又加上 19 块，一共用了多少块？"
+        "body": "天空城里，洛贝克用 37 块魔法砖搭台，又加上 19 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -1919,7 +1919,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "彩虹湿地里，洛贝克用 55 块魔法砖搭台，又加上 31 块，一共用了多少块？"
+        "body": "天空城里，洛贝克用 55 块魔法砖搭台，又加上 31 块，一共用了多少块？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2029,7 +2029,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，每盒放 4 个七彩咕噜球，5 盒一共有多少个？"
+        "body": "咕噜球工坊里，每盒放 4 个七彩咕噜球，5 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2085,7 +2085,7 @@
       "category": "basic",
       "story": {
         "title": "天空城看台",
-        "body": "魔法图书馆里，每排有 5 个座位，7 排看台一共有多少个座位？"
+        "body": "天空城看台里，每排有 5 个座位，7 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2140,7 +2140,7 @@
       "category": "probe",
       "story": {
         "title": "魔法学院",
-        "body": "云朵农场里，每张魔法卡画 6 个图案，9 张卡一共有多少个图案？"
+        "body": "魔法学院里，每张魔法卡画 6 个图案，9 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2196,7 +2196,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法学院里，21 颗魔法糖平均分给 3 个小洛克，每人分到几颗？"
+        "body": "星辉广场里，21 颗魔法糖平均分给 3 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2251,7 +2251,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，40 个咕噜球，每盒装 8 个，可以装几盒？"
+        "body": "咕噜球工坊里，40 个咕噜球，每盒装 8 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2362,7 +2362,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，每盒放 2 个七彩咕噜球，9 盒一共有多少个？"
+        "body": "咕噜球工坊里，每盒放 2 个七彩咕噜球，9 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2418,7 +2418,7 @@
       "category": "basic",
       "story": {
         "title": "天空城看台",
-        "body": "咕噜球工坊里，每排有 3 个座位，3 排看台一共有多少个座位？"
+        "body": "天空城看台里，每排有 3 个座位，3 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2473,7 +2473,7 @@
       "category": "applied",
       "story": {
         "title": "魔法学院",
-        "body": "星辉广场里，每张魔法卡画 4 个图案，5 张卡一共有多少个图案？"
+        "body": "魔法学院里，每张魔法卡画 4 个图案，5 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2529,7 +2529,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法图书馆里，35 颗魔法糖平均分给 7 个小洛克，每人分到几颗？"
+        "body": "星辉广场里，35 颗魔法糖平均分给 7 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2584,7 +2584,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，54 个咕噜球，每盒装 6 个，可以装几盒？"
+        "body": "咕噜球工坊里，54 个咕噜球，每盒装 6 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2695,7 +2695,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，每盒放 5 个七彩咕噜球，6 盒一共有多少个？"
+        "body": "咕噜球工坊里，每盒放 5 个七彩咕噜球，6 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2751,7 +2751,7 @@
       "category": "basic",
       "story": {
         "title": "天空城看台",
-        "body": "天空城里，每排有 6 个座位，8 排看台一共有多少个座位？"
+        "body": "天空城看台里，每排有 6 个座位，8 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2806,7 +2806,7 @@
       "category": "probe",
       "story": {
         "title": "魔法学院",
-        "body": "彩虹湿地里，每张魔法卡画 7 个图案，2 张卡一共有多少个图案？"
+        "body": "魔法学院里，每张魔法卡画 7 个图案，2 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2862,7 +2862,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "咕噜球工坊里，32 颗魔法糖平均分给 4 个小洛克，每人分到几颗？"
+        "body": "星辉广场里，32 颗魔法糖平均分给 4 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -2917,7 +2917,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，54 个咕噜球，每盒装 9 个，可以装几盒？"
+        "body": "咕噜球工坊里，54 个咕噜球，每盒装 9 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3028,7 +3028,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，每盒放 3 个七彩咕噜球，2 盒一共有多少个？"
+        "body": "咕噜球工坊里，每盒放 3 个七彩咕噜球，2 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3084,7 +3084,7 @@
       "category": "basic",
       "story": {
         "title": "天空城看台",
-        "body": "魔法学院里，每排有 4 个座位，4 排看台一共有多少个座位？"
+        "body": "天空城看台里，每排有 4 个座位，4 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3139,7 +3139,7 @@
       "category": "applied",
       "story": {
         "title": "魔法学院",
-        "body": "宠物园里，每张魔法卡画 5 个图案，6 张卡一共有多少个图案？"
+        "body": "魔法学院里，每张魔法卡画 5 个图案，6 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3195,7 +3195,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "天空城里，48 颗魔法糖平均分给 8 个小洛克，每人分到几颗？"
+        "body": "星辉广场里，48 颗魔法糖平均分给 8 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3250,7 +3250,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，14 个咕噜球，每盒装 7 个，可以装几盒？"
+        "body": "咕噜球工坊里，14 个咕噜球，每盒装 7 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3361,7 +3361,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，每盒放 6 个七彩咕噜球，7 盒一共有多少个？"
+        "body": "咕噜球工坊里，每盒放 6 个七彩咕噜球，7 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3417,7 +3417,7 @@
       "category": "basic",
       "story": {
         "title": "天空城看台",
-        "body": "魔法图书馆里，每排有 7 个座位，9 排看台一共有多少个座位？"
+        "body": "天空城看台里，每排有 7 个座位，9 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3472,7 +3472,7 @@
       "category": "probe",
       "story": {
         "title": "魔法学院",
-        "body": "云朵农场里，每张魔法卡画 8 个图案，3 张卡一共有多少个图案？"
+        "body": "魔法学院里，每张魔法卡画 8 个图案，3 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3529,7 +3529,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法学院里，45 颗魔法糖平均分给 5 个小洛克，每人分到几颗？"
+        "body": "星辉广场里，45 颗魔法糖平均分给 5 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3584,7 +3584,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，14 个咕噜球，每盒装 2 个，可以装几盒？"
+        "body": "咕噜球工坊里，14 个咕噜球，每盒装 2 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3695,7 +3695,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，每盒放 4 个七彩咕噜球，3 盒一共有多少个？"
+        "body": "咕噜球工坊里，每盒放 4 个七彩咕噜球，3 盒一共有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3752,7 +3752,7 @@
       "category": "basic",
       "story": {
         "title": "天空城看台",
-        "body": "咕噜球工坊里，每排有 5 个座位，5 排看台一共有多少个座位？"
+        "body": "天空城看台里，每排有 5 个座位，5 排看台一共有多少个座位？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3807,7 +3807,7 @@
       "category": "applied",
       "story": {
         "title": "魔法学院",
-        "body": "星辉广场里，每张魔法卡画 6 个图案，7 张卡一共有多少个图案？"
+        "body": "魔法学院里，每张魔法卡画 6 个图案，7 张卡一共有多少个图案？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3863,7 +3863,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法图书馆里，63 颗魔法糖平均分给 9 个小洛克，每人分到几颗？"
+        "body": "星辉广场里，63 颗魔法糖平均分给 9 个小洛克，每人分到几颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -3918,7 +3918,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，24 个咕噜球，每盒装 8 个，可以装几盒？"
+        "body": "咕噜球工坊里，24 个咕噜球，每盒装 8 个，可以装几盒？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4010,7 +4010,7 @@
       "category": "applied",
       "story": {
         "title": "魔法图书馆",
-        "body": "宠物园里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
+        "body": "魔法图书馆里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4021,8 +4021,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
-        "unit": "人"
+        "value": 20,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4059,7 +4059,7 @@
       ],
       "answer": {
         "value": 26,
-        "unit": "人"
+        "unit": "只"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4094,8 +4094,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
-        "unit": "人"
+        "value": 24,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4119,8 +4119,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "咕噜球工坊·魔法列车",
-        "body": "咕噜球工坊里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
+        "title": "魔法列车",
+        "body": "魔法列车里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4131,7 +4131,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 30,
+        "value": 26,
         "unit": "人"
       },
       "similarQuestionIds": [],
@@ -4167,8 +4167,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 32,
-        "unit": "人"
+        "value": 28,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4229,7 +4229,7 @@
       "category": "probe",
       "story": {
         "title": "魔法图书馆",
-        "body": "云朵农场里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
+        "body": "魔法图书馆里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4240,8 +4240,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 36,
-        "unit": "人"
+        "value": 32,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4278,7 +4278,7 @@
       ],
       "answer": {
         "value": 38,
-        "unit": "人"
+        "unit": "只"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4313,8 +4313,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 40,
-        "unit": "人"
+        "value": 36,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4338,8 +4338,8 @@
       "difficulty": 1,
       "category": "basic",
       "story": {
-        "title": "天空城·魔法列车",
-        "body": "天空城里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
+        "title": "魔法列车",
+        "body": "魔法列车里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4350,7 +4350,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 42,
+        "value": 38,
         "unit": "人"
       },
       "similarQuestionIds": [],
@@ -4375,7 +4375,7 @@
       "category": "applied",
       "story": {
         "title": "星辉广场",
-        "body": "彩虹湿地里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
+        "body": "星辉广场里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4386,8 +4386,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 44,
-        "unit": "人"
+        "value": 40,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4448,7 +4448,7 @@
       "category": "applied",
       "story": {
         "title": "魔法图书馆",
-        "body": "星辉广场里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
+        "body": "魔法图书馆里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4459,8 +4459,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
-        "unit": "人"
+        "value": 20,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4497,7 +4497,7 @@
       ],
       "answer": {
         "value": 26,
-        "unit": "人"
+        "unit": "只"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4532,8 +4532,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
-        "unit": "人"
+        "value": 24,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4557,8 +4557,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "魔法学院·魔法列车",
-        "body": "魔法学院里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
+        "title": "魔法列车",
+        "body": "魔法列车里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4569,7 +4569,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 30,
+        "value": 26,
         "unit": "人"
       },
       "similarQuestionIds": [],
@@ -4594,7 +4594,7 @@
       "category": "applied",
       "story": {
         "title": "星辉广场",
-        "body": "宠物园里，洛贝克有 30 张魔法卡，送给小洛克 10 张，又得到 8 张，现在有多少张？"
+        "body": "星辉广场里，洛贝克有 30 张魔法卡，送给小洛克 10 张，又得到 8 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4605,8 +4605,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 32,
-        "unit": "人"
+        "value": 28,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4667,7 +4667,7 @@
       "category": "probe",
       "story": {
         "title": "魔法图书馆",
-        "body": "彩虹湿地里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
+        "body": "魔法图书馆里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4678,8 +4678,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 36,
-        "unit": "人"
+        "value": 32,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4716,7 +4716,7 @@
       ],
       "answer": {
         "value": 38,
-        "unit": "人"
+        "unit": "只"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4751,8 +4751,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 40,
-        "unit": "人"
+        "value": 36,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4776,8 +4776,8 @@
       "difficulty": 2,
       "category": "basic",
       "story": {
-        "title": "魔法图书馆·魔法列车",
-        "body": "魔法图书馆里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
+        "title": "魔法列车",
+        "body": "魔法列车里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4788,7 +4788,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 42,
+        "value": 38,
         "unit": "人"
       },
       "similarQuestionIds": [],
@@ -4813,7 +4813,7 @@
       "category": "applied",
       "story": {
         "title": "星辉广场",
-        "body": "云朵农场里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
+        "body": "星辉广场里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4824,8 +4824,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 44,
-        "unit": "人"
+        "value": 40,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4886,7 +4886,7 @@
       "category": "applied",
       "story": {
         "title": "魔法图书馆",
-        "body": "宠物园里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
+        "body": "魔法图书馆里，书架上有 22 本魔法书，借走 6 本，又还回 4 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -4897,8 +4897,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 24,
-        "unit": "人"
+        "value": 20,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4935,7 +4935,7 @@
       ],
       "answer": {
         "value": 26,
-        "unit": "人"
+        "unit": "只"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4970,8 +4970,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 28,
-        "unit": "人"
+        "value": 24,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4996,8 +4996,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "咕噜球工坊·魔法列车",
-        "body": "咕噜球工坊里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
+        "title": "魔法列车",
+        "body": "魔法列车里，车上有 28 名小洛克，到站下去 9 名，又上来 7 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5008,7 +5008,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 30,
+        "value": 26,
         "unit": "人"
       },
       "similarQuestionIds": [],
@@ -5044,8 +5044,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 32,
-        "unit": "人"
+        "value": 28,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5106,7 +5106,7 @@
       "category": "probe",
       "story": {
         "title": "魔法图书馆",
-        "body": "云朵农场里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
+        "body": "魔法图书馆里，书架上有 34 本魔法书，借走 12 本，又还回 10 本，现在有多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5117,8 +5117,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 36,
-        "unit": "人"
+        "value": 32,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5156,7 +5156,7 @@
       ],
       "answer": {
         "value": 38,
-        "unit": "人"
+        "unit": "只"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5191,8 +5191,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 40,
-        "unit": "人"
+        "value": 36,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5216,8 +5216,8 @@
       "difficulty": 3,
       "category": "basic",
       "story": {
-        "title": "天空城·魔法列车",
-        "body": "天空城里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
+        "title": "魔法列车",
+        "body": "魔法列车里，车上有 40 名小洛克，到站下去 15 名，又上来 13 名，现在有多少名？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5228,7 +5228,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 42,
+        "value": 38,
         "unit": "人"
       },
       "similarQuestionIds": [],
@@ -5253,7 +5253,7 @@
       "category": "applied",
       "story": {
         "title": "星辉广场",
-        "body": "彩虹湿地里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
+        "body": "星辉广场里，洛贝克有 42 张魔法卡，送给小洛克 16 张，又得到 14 张，现在有多少张？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5264,8 +5264,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 44,
-        "unit": "人"
+        "value": 40,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5290,7 +5290,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "咕噜球工坊里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
+        "body": "魔法学院里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5326,7 +5326,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
+        "body": "咕噜球工坊里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5363,7 +5363,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "魔法图书馆里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
+        "body": "宠物园里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5399,7 +5399,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
+        "body": "咕噜球工坊里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5436,7 +5436,7 @@
       "category": "basic",
       "story": {
         "title": "魔法图书馆",
-        "body": "魔法学院里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
+        "body": "魔法图书馆里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5472,7 +5472,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "宠物园里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
+        "body": "天空城里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5509,7 +5509,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "天空城里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
+        "body": "魔法学院里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5545,7 +5545,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
+        "body": "咕噜球工坊里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5582,7 +5582,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "咕噜球工坊里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
+        "body": "宠物园里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5618,7 +5618,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
+        "body": "咕噜球工坊里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5691,7 +5691,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "云朵农场里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
+        "body": "天空城里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5764,7 +5764,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
+        "body": "咕噜球工坊里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5801,7 +5801,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "天空城里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
+        "body": "宠物园里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5837,7 +5837,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
+        "body": "咕噜球工坊里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5874,7 +5874,7 @@
       "category": "basic",
       "story": {
         "title": "魔法图书馆",
-        "body": "咕噜球工坊里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
+        "body": "魔法图书馆里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5910,7 +5910,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "星辉广场里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
+        "body": "天空城里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5947,7 +5947,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "魔法图书馆里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
+        "body": "魔法学院里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5983,7 +5983,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
+        "body": "咕噜球工坊里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6020,7 +6020,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "魔法学院里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
+        "body": "宠物园里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6056,7 +6056,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
+        "body": "咕噜球工坊里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6093,7 +6093,7 @@
       "category": "basic",
       "story": {
         "title": "魔法图书馆",
-        "body": "天空城里，洛贝克读完 15 本书后，还差一些才能读到 21 本。还差多少本？"
+        "body": "魔法图书馆里，洛贝克读完 15 本书后，还差一些才能读到 21 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6129,7 +6129,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "彩虹湿地里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
+        "body": "天空城里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6166,7 +6166,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "咕噜球工坊里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
+        "body": "魔法学院里，洛贝克有一些星星徽章，又得到 5 枚后共有 7 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6202,7 +6202,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
+        "body": "咕噜球工坊里，工坊有 9 个七彩咕噜球，送出一些后还剩 6 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6239,7 +6239,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "魔法图书馆里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
+        "body": "宠物园里，每个宠物小组有 7 只宠物，一共有 11 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6275,7 +6275,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
+        "body": "咕噜球工坊里，13 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6313,7 +6313,7 @@
       "category": "basic",
       "story": {
         "title": "魔法图书馆",
-        "body": "魔法学院里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
+        "body": "魔法图书馆里，洛贝克读完 9 本书后，还差一些才能读到 15 本。还差多少本？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6349,7 +6349,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "宠物园里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
+        "body": "天空城里，洛贝克有 17 枚星星币，买东西后还剩 10 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6386,7 +6386,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "天空城里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
+        "body": "魔法学院里，洛贝克有一些星星徽章，又得到 11 枚后共有 13 枚。原来有多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6422,7 +6422,7 @@
       "category": "probe",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
+        "body": "咕噜球工坊里，工坊有 15 个七彩咕噜球，送出一些后还剩 12 个。送出了多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6460,7 +6460,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "咕噜球工坊里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
+        "body": "宠物园里，每个宠物小组有 13 只宠物，一共有 17 只。可以分成几个小组？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6496,7 +6496,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
+        "body": "咕噜球工坊里，19 个咕噜球平均放进 5 个盒子，每盒几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6569,7 +6569,7 @@
       "category": "applied",
       "story": {
         "title": "天空城",
-        "body": "云朵农场里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
+        "body": "天空城里，洛贝克有 23 枚星星币，买东西后还剩 16 枚。他花掉多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6642,7 +6642,7 @@
       "category": "applied",
       "story": {
         "title": "魔法学院",
-        "body": "宠物园里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
+        "body": "魔法学院里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6752,7 +6752,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "咕噜球工坊里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
+        "body": "宠物园里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6788,7 +6788,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
+        "body": "咕噜球工坊里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6825,7 +6825,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "魔法图书馆里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
+        "body": "魔法学院里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6861,7 +6861,7 @@
       "category": "probe",
       "story": {
         "title": "魔法学院",
-        "body": "云朵农场里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
+        "body": "魔法学院里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6971,7 +6971,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "天空城里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
+        "body": "宠物园里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7007,7 +7007,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
+        "body": "咕噜球工坊里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7044,7 +7044,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "咕噜球工坊里，一条魔法彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
+        "body": "魔法学院里，一条魔法彩带长 12 厘米，另一条长 8 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7080,7 +7080,7 @@
       "category": "applied",
       "story": {
         "title": "魔法学院",
-        "body": "星辉广场里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
+        "body": "魔法学院里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7190,7 +7190,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "魔法学院里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
+        "body": "宠物园里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7226,7 +7226,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
+        "body": "咕噜球工坊里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7263,7 +7263,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "天空城里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
+        "body": "魔法学院里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7299,7 +7299,7 @@
       "category": "probe",
       "story": {
         "title": "魔法学院",
-        "body": "彩虹湿地里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
+        "body": "魔法学院里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7409,7 +7409,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "魔法图书馆里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
+        "body": "宠物园里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7445,7 +7445,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
+        "body": "咕噜球工坊里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7518,7 +7518,7 @@
       "category": "applied",
       "story": {
         "title": "魔法学院",
-        "body": "宠物园里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
+        "body": "魔法学院里，洛贝克练习魔法用了 13 分钟，整理咕噜球用了 9 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7629,7 +7629,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "咕噜球工坊里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
+        "body": "宠物园里，洛贝克练习魔法用了 16 分钟，照顾宠物用了 12 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7665,7 +7665,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
+        "body": "咕噜球工坊里，一瓶魔法药水有 17 毫升，另一瓶有 13 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7702,7 +7702,7 @@
       "category": "basic",
       "story": {
         "title": "魔法学院",
-        "body": "魔法图书馆里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
+        "body": "魔法学院里，一条魔法彩带长 18 厘米，另一条长 14 厘米，两条一共长多少厘米？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7738,7 +7738,7 @@
       "category": "probe",
       "story": {
         "title": "魔法学院",
-        "body": "云朵农场里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
+        "body": "魔法学院里，洛贝克练习魔法用了 19 分钟，整理咕噜球用了 15 分钟，一共用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7849,7 +7849,7 @@
       "category": "basic",
       "story": {
         "title": "宠物园",
-        "body": "天空城里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
+        "body": "宠物园里，洛贝克练习魔法用了 22 分钟，照顾宠物用了 18 分钟。练习比照顾多用了多少分钟？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -7885,7 +7885,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
+        "body": "咕噜球工坊里，一瓶魔法药水有 23 毫升，另一瓶有 19 毫升，两瓶一共多少毫升？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8031,7 +8031,7 @@
       "category": "probe",
       "story": {
         "title": "天空城看台",
-        "body": "云朵农场里，第一排有 5 个座位，每排多 3 个，第 4 排有多少个？"
+        "body": "天空城看台里，第一排有 5 个座位，每排多 3 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8067,7 +8067,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法学院里，洛贝克第一天收集 6 枚星星币，以后每天多收集 3 枚，第 4 天收集多少枚？"
+        "body": "星辉广场里，洛贝克第一天收集 6 枚星星币，以后每天多收集 3 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8102,7 +8102,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，按每组多 3 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
+        "body": "咕噜球工坊里，按每组多 3 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8244,7 +8244,7 @@
       "category": "applied",
       "story": {
         "title": "天空城看台",
-        "body": "星辉广场里，第一排有 11 个座位，每排多 3 个，第 4 排有多少个？"
+        "body": "天空城看台里，第一排有 11 个座位，每排多 3 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8280,7 +8280,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法图书馆里，洛贝克第一天收集 12 枚星星币，以后每天多收集 3 枚，第 4 天收集多少枚？"
+        "body": "星辉广场里，洛贝克第一天收集 12 枚星星币，以后每天多收集 3 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8315,7 +8315,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，按每组多 3 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
+        "body": "咕噜球工坊里，按每组多 3 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8460,7 +8460,7 @@
       "category": "probe",
       "story": {
         "title": "天空城看台",
-        "body": "彩虹湿地里，第一排有 5 个座位，每排多 4 个，第 4 排有多少个？"
+        "body": "天空城看台里，第一排有 5 个座位，每排多 4 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8496,7 +8496,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "咕噜球工坊里，洛贝克第一天收集 6 枚星星币，以后每天多收集 4 枚，第 4 天收集多少枚？"
+        "body": "星辉广场里，洛贝克第一天收集 6 枚星星币，以后每天多收集 4 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8531,7 +8531,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "星辉广场里，按每组多 4 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
+        "body": "咕噜球工坊里，按每组多 4 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8673,7 +8673,7 @@
       "category": "applied",
       "story": {
         "title": "天空城看台",
-        "body": "宠物园里，第一排有 11 个座位，每排多 4 个，第 4 排有多少个？"
+        "body": "天空城看台里，第一排有 11 个座位，每排多 4 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8709,7 +8709,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "天空城里，洛贝克第一天收集 12 枚星星币，以后每天多收集 4 枚，第 4 天收集多少枚？"
+        "body": "星辉广场里，洛贝克第一天收集 12 枚星星币，以后每天多收集 4 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8744,7 +8744,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "彩虹湿地里，按每组多 4 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
+        "body": "咕噜球工坊里，按每组多 4 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8889,7 +8889,7 @@
       "category": "probe",
       "story": {
         "title": "天空城看台",
-        "body": "云朵农场里，第一排有 5 个座位，每排多 5 个，第 4 排有多少个？"
+        "body": "天空城看台里，第一排有 5 个座位，每排多 5 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8926,7 +8926,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法学院里，洛贝克第一天收集 6 枚星星币，以后每天多收集 5 枚，第 4 天收集多少枚？"
+        "body": "星辉广场里，洛贝克第一天收集 6 枚星星币，以后每天多收集 5 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -8961,7 +8961,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "宠物园里，按每组多 5 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
+        "body": "咕噜球工坊里，按每组多 5 颗的规律摆放魔法珠，从 7 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -9104,7 +9104,7 @@
       "category": "applied",
       "story": {
         "title": "天空城看台",
-        "body": "星辉广场里，第一排有 11 个座位，每排多 5 个，第 4 排有多少个？"
+        "body": "天空城看台里，第一排有 11 个座位，每排多 5 个，第 4 排有多少个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -9140,7 +9140,7 @@
       "category": "basic",
       "story": {
         "title": "星辉广场",
-        "body": "魔法图书馆里，洛贝克第一天收集 12 枚星星币，以后每天多收集 5 枚，第 4 天收集多少枚？"
+        "body": "星辉广场里，洛贝克第一天收集 12 枚星星币，以后每天多收集 5 枚，第 4 天收集多少枚？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -9175,7 +9175,7 @@
       "category": "applied",
       "story": {
         "title": "咕噜球工坊",
-        "body": "云朵农场里，按每组多 5 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
+        "body": "咕噜球工坊里，按每组多 5 颗的规律摆放魔法珠，从 13 颗开始，第 4 组有多少颗？"
       },
       "requiresFiveStep": false,
       "hints": [

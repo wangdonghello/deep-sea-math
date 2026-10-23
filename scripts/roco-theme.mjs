@@ -34,7 +34,7 @@ function rocoText(text) {
   return value
 }
 
-const SCENE_PATTERN = /洛克王国|魔法学院|宠物园|天空城|彩虹湿地|咕噜球工坊|星辉广场|魔法图书馆|云朵农场|星际驿站|魔法班/
+const SCENE_PATTERN = /洛克王国|魔法学院|宠物园|天空城|彩虹湿地|咕噜球工坊|星辉广场|魔法图书馆|云朵农场|星际驿站|魔法班|魔法列车|列车/
 
 function addTag(question, tag) {
   if (!Array.isArray(question.tags)) question.tags = []
@@ -100,9 +100,14 @@ export function applyRocoTheme(questions) {
     const scene = SCENES[index % SCENES.length]
     const themedTitle = rocoText(original.title || `${scene}的魔法任务`)
     const themedBody = rocoText(original.body || '')
+    const titleHasScene = SCENE_PATTERN.test(themedTitle)
+    const bodyHasScene = SCENE_PATTERN.test(themedBody)
+    // 题干出现“书架”“列车”等场景物件时，场景应取标题里的地点，
+    // 不能另抽一个地点拼成“宠物园里，书架上有……”。
+    const bodyScene = titleHasScene ? themedTitle : scene
     question.story = {
-      title: SCENE_PATTERN.test(themedTitle) ? themedTitle : `${scene}·${themedTitle}`,
-      body: SCENE_PATTERN.test(themedBody) ? themedBody : `${scene}里，${themedBody}`,
+      title: titleHasScene ? themedTitle : `${scene}·${themedTitle}`,
+      body: bodyHasScene ? themedBody : `${bodyScene}里，${themedBody}`,
     }
     question.hints = (question.hints ?? []).map(rocoText)
     addTag(question, 'theme:roco')

@@ -103,7 +103,13 @@ function makeProblem(type, difficulty, slot) {
     const a = 20 + slot * 2
     const b = 5 + slot
     const c = 3 + slot
-    return { a, b, c, value: a + b - c, unit: '人' }
+    const mode = slot % 6
+    // CONTEXTS 的六个场景操作顺序不同：0/2 是先增加后减少，其余是
+    // 先送出/借走，再还回/收到。答案必须跟场景一致，不能一律 a+b-c。
+    const increaseThenDecrease = mode === 0 || mode === 2
+    const value = increaseThenDecrease ? a + b - c : a - b + c
+    const unit = mode === 0 ? '人' : mode === 1 ? '本' : mode === 2 ? '只' : mode === 3 ? '个' : mode === 4 ? '人' : '张'
+    return { a, b, c, value, unit, mode: increaseThenDecrease ? 'add-then-subtract' : 'subtract-then-add' }
   }
   if (type === 'unknown-relation') {
     const a = 5 + slot

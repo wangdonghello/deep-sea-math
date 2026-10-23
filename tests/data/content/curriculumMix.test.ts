@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { QUESTION_BANK_BY_GRADE } from '@/data/content'
 
-const scene = /洛克王国|魔法学院|宠物园|天空城|彩虹湿地|咕噜球工坊|星辉广场|魔法图书馆|云朵农场|星际驿站/
+const scene = /洛克王国|魔法学院|宠物园|天空城|彩虹湿地|咕噜球工坊|星辉广场|魔法图书馆|云朵农场|星际驿站|魔法列车/
 
 describe('grade 2/3 curriculum mix', () => {
   for (const grade of [2, 3] as const) {
