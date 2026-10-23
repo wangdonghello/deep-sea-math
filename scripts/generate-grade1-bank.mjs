@@ -131,7 +131,10 @@ function makeProblem(type, difficulty, slot) {
   }
   const start = 1 + slot
   const step = 1 + d
-  return { start, step, value: start + step * 3, unit: '' }
+  // 上下文 0 已经列出 start/next1/next2/next3 四个数，问“下一个”是第 5 个；
+  // 其余上下文问“第 4 个/第 4 行/第 4 天”，都用 start + 3×step。
+  const value = start + step * (slot % 6 === 0 ? 4 : 3)
+  return { start, step, value, unit: '' }
 }
 
 function storyFor(type, slot, problem) {

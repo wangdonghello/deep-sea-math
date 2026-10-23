@@ -16,7 +16,7 @@ import { tokenizeExpression, unitAliases } from '../../domain/quiz/answerJudgeme
 /** Supported mathematical answer units, including curriculum counting units. */
 const QUESTION_UNITS = new Set([
   ...Object.values(unitAliases).flat(),
-  '份', '项', '格', '瓶', '节', '次', '轮', '人', '毫升',
+  '份', '项', '格', '瓶', '节', '次', '轮', '人', '毫升', '组',
 ])
 
 /** 第二版首发的三个年级。 */

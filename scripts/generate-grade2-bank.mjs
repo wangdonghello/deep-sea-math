@@ -96,8 +96,14 @@ function makeProblem(type, difficulty, slot) {
     const a = 2 + ((slot + difficulty) % 8)
     const b = 2 + ((slot * 2 + difficulty) % 8)
     const total = a * b
-    if (slot >= 8) return { a, b, total, value: b, unit: '人', mode: 'division' }
-    return { a, b, value: total, unit: '个', mode: 'multiplication' }
+    const mode = slot % 6
+    if (mode >= 4) {
+      // 上下文 4 是“总数平均分给 b 人”，求每份 a；上下文 5 是“每盒 a 个”，求盒数 b。
+      return mode === 4
+        ? { a, b, total, value: a, unit: '颗', divisor: b, mode: 'division' }
+        : { a, b, total, value: b, unit: '盒', divisor: a, mode: 'division' }
+    }
+    return { a, b, value: total, unit: mode === 0 ? '只' : '个', mode: 'multiplication' }
   }
   if (type === 'two-step-app') {
     const a = 20 + slot * 2
@@ -114,8 +120,12 @@ function makeProblem(type, difficulty, slot) {
   if (type === 'unknown-relation') {
     const a = 5 + slot
     const b = 2 + (slot % 6)
-    const total = a + b
-    return { a, b, total, value: b, unit: '' }
+    const mode = slot % 6
+    // 上下文 2 是“每份 a 个，共 total 个，求份数”；3 是“total 个平均分成 b 份，求每份”。
+    // 这两种必须用 a×b 作为总数，不能拿 a+b 硬套。
+    if (mode === 2) return { a, b, total: a * b, value: b, unit: '组' }
+    if (mode === 3) return { a, b, total: a * b, value: a, unit: '个' }
+    return { a, b, total: a + b, value: b, unit: mode === 5 ? '元' : '' }
   }
   if (type === 'unit-time-route') {
     const mode = slot % 6
@@ -127,7 +137,10 @@ function makeProblem(type, difficulty, slot) {
   }
   const start = 2 + slot
   const step = 2 + difficulty
-  return { start, step, value: start + step * 3, unit: '' }
+  // 上下文 0 已经列出 start/next1/next2/next3 四个数，问“下一个”是第 5 个；
+  // 其余上下文问“第 4 个/第 4 行/第 4 天”，都用 start + 3×step。
+  const value = start + step * (slot % 6 === 0 ? 4 : 3)
+  return { start, step, value, unit: '' }
 }
 
 function storyFor(type, slot, problem) {
@@ -159,7 +172,7 @@ function hintsFor(type, problem) {
     relation,
     type === 'mul-div'
       ? problem.mode === 'division'
-        ? `列式：${problem.total} ÷ ${problem.b}。`
+        ? `列式：${problem.total} ÷ ${problem.divisor ?? problem.b}。`
         : `列式：${problem.a} × ${problem.b}。`
       : type === 'pattern-data'
         ? `从 ${problem.start} 开始，每次加 ${problem.step}。`
