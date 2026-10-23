@@ -22,7 +22,7 @@
       ],
       "answer": {
         "value": 11,
-        "unit": "个",
+        "unit": "条",
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -38,19 +38,19 @@
       "options": [
         {
           "id": "A",
-          "label": "12个"
+          "label": "12条"
         },
         {
           "id": "B",
-          "label": "11个"
+          "label": "11条"
         },
         {
           "id": "C",
-          "label": "13个"
+          "label": "13条"
         },
         {
           "id": "D",
-          "label": "21个"
+          "label": "21条"
         }
       ]
     },
@@ -182,7 +182,7 @@
       ],
       "answer": {
         "value": 23,
-        "unit": "个",
+        "unit": "块",
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -199,19 +199,19 @@
       "options": [
         {
           "id": "A",
-          "label": "23个"
+          "label": "23块"
         },
         {
           "id": "B",
-          "label": "24个"
+          "label": "24块"
         },
         {
           "id": "C",
-          "label": "25个"
+          "label": "25块"
         },
         {
           "id": "D",
-          "label": "33个"
+          "label": "33块"
         }
       ]
     },
@@ -236,7 +236,7 @@
       ],
       "answer": {
         "value": 27,
-        "unit": "个",
+        "unit": "朵",
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -252,19 +252,19 @@
       "options": [
         {
           "id": "A",
-          "label": "28个"
+          "label": "28朵"
         },
         {
           "id": "B",
-          "label": "27个"
+          "label": "27朵"
         },
         {
           "id": "C",
-          "label": "29个"
+          "label": "29朵"
         },
         {
           "id": "D",
-          "label": "37个"
+          "label": "37朵"
         }
       ]
     },
@@ -289,7 +289,7 @@
       ],
       "answer": {
         "value": 31,
-        "unit": "个",
+        "unit": "把",
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -306,19 +306,19 @@
       "options": [
         {
           "id": "A",
-          "label": "32个"
+          "label": "32把"
         },
         {
           "id": "B",
-          "label": "33个"
+          "label": "33把"
         },
         {
           "id": "C",
-          "label": "31个"
+          "label": "31把"
         },
         {
           "id": "D",
-          "label": "41个"
+          "label": "41把"
         }
       ]
     },
@@ -343,7 +343,7 @@
       ],
       "answer": {
         "value": 35,
-        "unit": "个",
+        "unit": "条",
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -359,19 +359,19 @@
       "options": [
         {
           "id": "A",
-          "label": "36个"
+          "label": "36条"
         },
         {
           "id": "B",
-          "label": "37个"
+          "label": "37条"
         },
         {
           "id": "C",
-          "label": "45个"
+          "label": "45条"
         },
         {
           "id": "D",
-          "label": "35个"
+          "label": "35条"
         }
       ]
     },
@@ -503,7 +503,7 @@
       ],
       "answer": {
         "value": 45,
-        "unit": "个",
+        "unit": "块",
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -520,19 +520,19 @@
       "options": [
         {
           "id": "A",
-          "label": "46个"
+          "label": "46块"
         },
         {
           "id": "B",
-          "label": "47个"
+          "label": "47块"
         },
         {
           "id": "C",
-          "label": "45个"
+          "label": "45块"
         },
         {
           "id": "D",
-          "label": "55个"
+          "label": "55块"
         }
       ]
     },
@@ -557,7 +557,7 @@
       ],
       "answer": {
         "value": 48,
-        "unit": "个",
+        "unit": "朵",
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -573,19 +573,19 @@
       "options": [
         {
           "id": "A",
-          "label": "49个"
+          "label": "49朵"
         },
         {
           "id": "B",
-          "label": "50个"
+          "label": "50朵"
         },
         {
           "id": "C",
-          "label": "58个"
+          "label": "58朵"
         },
         {
           "id": "D",
-          "label": "48个"
+          "label": "48朵"
         }
       ]
     },
@@ -610,7 +610,7 @@
       ],
       "answer": {
         "value": 51,
-        "unit": "个",
+        "unit": "把",
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -627,19 +627,19 @@
       "options": [
         {
           "id": "A",
-          "label": "51个"
+          "label": "51把"
         },
         {
           "id": "B",
-          "label": "52个"
+          "label": "52把"
         },
         {
           "id": "C",
-          "label": "53个"
+          "label": "53把"
         },
         {
           "id": "D",
-          "label": "61个"
+          "label": "61把"
         }
       ]
     },
@@ -664,7 +664,7 @@
       ],
       "answer": {
         "value": 16,
-        "unit": "个",
+        "unit": "条",
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -680,19 +680,19 @@
       "options": [
         {
           "id": "A",
-          "label": "17个"
+          "label": "17条"
         },
         {
           "id": "B",
-          "label": "16个"
+          "label": "16条"
         },
         {
           "id": "C",
-          "label": "18个"
+          "label": "18条"
         },
         {
           "id": "D",
-          "label": "26个"
+          "label": "26条"
         }
       ]
     },
@@ -824,7 +824,7 @@
       ],
       "answer": {
         "value": 28,
-        "unit": "个",
+        "unit": "块",
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -841,19 +841,19 @@
       "options": [
         {
           "id": "A",
-          "label": "28个"
+          "label": "28块"
         },
         {
           "id": "B",
-          "label": "29个"
+          "label": "29块"
         },
         {
           "id": "C",
-          "label": "30个"
+          "label": "30块"
         },
         {
           "id": "D",
-          "label": "38个"
+          "label": "38块"
         }
       ]
     },
@@ -878,7 +878,7 @@
       ],
       "answer": {
         "value": 32,
-        "unit": "个",
+        "unit": "朵",
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -894,19 +894,19 @@
       "options": [
         {
           "id": "A",
-          "label": "33个"
+          "label": "33朵"
         },
         {
           "id": "B",
-          "label": "32个"
+          "label": "32朵"
         },
         {
           "id": "C",
-          "label": "34个"
+          "label": "34朵"
         },
         {
           "id": "D",
-          "label": "42个"
+          "label": "42朵"
         }
       ]
     },
@@ -931,7 +931,7 @@
       ],
       "answer": {
         "value": 36,
-        "unit": "个",
+        "unit": "把",
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -948,19 +948,19 @@
       "options": [
         {
           "id": "A",
-          "label": "37个"
+          "label": "37把"
         },
         {
           "id": "B",
-          "label": "38个"
+          "label": "38把"
         },
         {
           "id": "C",
-          "label": "36个"
+          "label": "36把"
         },
         {
           "id": "D",
-          "label": "46个"
+          "label": "46把"
         }
       ]
     },
@@ -985,7 +985,7 @@
       ],
       "answer": {
         "value": 40,
-        "unit": "个",
+        "unit": "条",
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -1001,19 +1001,19 @@
       "options": [
         {
           "id": "A",
-          "label": "41个"
+          "label": "41条"
         },
         {
           "id": "B",
-          "label": "42个"
+          "label": "42条"
         },
         {
           "id": "C",
-          "label": "50个"
+          "label": "50条"
         },
         {
           "id": "D",
-          "label": "40个"
+          "label": "40条"
         }
       ]
     },
@@ -1145,7 +1145,7 @@
       ],
       "answer": {
         "value": 49,
-        "unit": "个",
+        "unit": "块",
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -1162,19 +1162,19 @@
       "options": [
         {
           "id": "A",
-          "label": "50个"
+          "label": "50块"
         },
         {
           "id": "B",
-          "label": "51个"
+          "label": "51块"
         },
         {
           "id": "C",
-          "label": "49个"
+          "label": "49块"
         },
         {
           "id": "D",
-          "label": "59个"
+          "label": "59块"
         }
       ]
     },
@@ -1199,7 +1199,7 @@
       ],
       "answer": {
         "value": 52,
-        "unit": "个",
+        "unit": "朵",
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -1215,19 +1215,19 @@
       "options": [
         {
           "id": "A",
-          "label": "53个"
+          "label": "53朵"
         },
         {
           "id": "B",
-          "label": "54个"
+          "label": "54朵"
         },
         {
           "id": "C",
-          "label": "62个"
+          "label": "62朵"
         },
         {
           "id": "D",
-          "label": "52个"
+          "label": "52朵"
         }
       ]
     },
@@ -1252,7 +1252,7 @@
       ],
       "answer": {
         "value": 55,
-        "unit": "个",
+        "unit": "把",
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -1269,19 +1269,19 @@
       "options": [
         {
           "id": "A",
-          "label": "55个"
+          "label": "55把"
         },
         {
           "id": "B",
-          "label": "56个"
+          "label": "56把"
         },
         {
           "id": "C",
-          "label": "57个"
+          "label": "57把"
         },
         {
           "id": "D",
-          "label": "65个"
+          "label": "65把"
         }
       ]
     },
@@ -1306,7 +1306,7 @@
       ],
       "answer": {
         "value": 21,
-        "unit": "个",
+        "unit": "条",
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -1322,19 +1322,19 @@
       "options": [
         {
           "id": "A",
-          "label": "22个"
+          "label": "22条"
         },
         {
           "id": "B",
-          "label": "21个"
+          "label": "21条"
         },
         {
           "id": "C",
-          "label": "23个"
+          "label": "23条"
         },
         {
           "id": "D",
-          "label": "31个"
+          "label": "31条"
         }
       ]
     },
@@ -1466,7 +1466,7 @@
       ],
       "answer": {
         "value": 33,
-        "unit": "个",
+        "unit": "块",
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -1483,19 +1483,19 @@
       "options": [
         {
           "id": "A",
-          "label": "33个"
+          "label": "33块"
         },
         {
           "id": "B",
-          "label": "34个"
+          "label": "34块"
         },
         {
           "id": "C",
-          "label": "35个"
+          "label": "35块"
         },
         {
           "id": "D",
-          "label": "43个"
+          "label": "43块"
         }
       ]
     },
@@ -1520,7 +1520,7 @@
       ],
       "answer": {
         "value": 37,
-        "unit": "个",
+        "unit": "朵",
         "optionId": "B"
       },
       "similarQuestionIds": [],
@@ -1536,19 +1536,19 @@
       "options": [
         {
           "id": "A",
-          "label": "38个"
+          "label": "38朵"
         },
         {
           "id": "B",
-          "label": "37个"
+          "label": "37朵"
         },
         {
           "id": "C",
-          "label": "39个"
+          "label": "39朵"
         },
         {
           "id": "D",
-          "label": "47个"
+          "label": "47朵"
         }
       ]
     },
@@ -1573,7 +1573,7 @@
       ],
       "answer": {
         "value": 41,
-        "unit": "个",
+        "unit": "把",
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -1590,19 +1590,19 @@
       "options": [
         {
           "id": "A",
-          "label": "42个"
+          "label": "42把"
         },
         {
           "id": "B",
-          "label": "43个"
+          "label": "43把"
         },
         {
           "id": "C",
-          "label": "41个"
+          "label": "41把"
         },
         {
           "id": "D",
-          "label": "51个"
+          "label": "51把"
         }
       ]
     },
@@ -1627,7 +1627,7 @@
       ],
       "answer": {
         "value": 44,
-        "unit": "个",
+        "unit": "条",
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -1643,19 +1643,19 @@
       "options": [
         {
           "id": "A",
-          "label": "45个"
+          "label": "45条"
         },
         {
           "id": "B",
-          "label": "46个"
+          "label": "46条"
         },
         {
           "id": "C",
-          "label": "54个"
+          "label": "54条"
         },
         {
           "id": "D",
-          "label": "44个"
+          "label": "44条"
         }
       ]
     },
@@ -1787,7 +1787,7 @@
       ],
       "answer": {
         "value": 53,
-        "unit": "个",
+        "unit": "块",
         "optionId": "C"
       },
       "similarQuestionIds": [],
@@ -1804,19 +1804,19 @@
       "options": [
         {
           "id": "A",
-          "label": "54个"
+          "label": "54块"
         },
         {
           "id": "B",
-          "label": "55个"
+          "label": "55块"
         },
         {
           "id": "C",
-          "label": "53个"
+          "label": "53块"
         },
         {
           "id": "D",
-          "label": "63个"
+          "label": "63块"
         }
       ]
     },
@@ -1841,7 +1841,7 @@
       ],
       "answer": {
         "value": 56,
-        "unit": "个",
+        "unit": "朵",
         "optionId": "D"
       },
       "similarQuestionIds": [],
@@ -1857,19 +1857,19 @@
       "options": [
         {
           "id": "A",
-          "label": "57个"
+          "label": "57朵"
         },
         {
           "id": "B",
-          "label": "58个"
+          "label": "58朵"
         },
         {
           "id": "C",
-          "label": "66个"
+          "label": "66朵"
         },
         {
           "id": "D",
-          "label": "56个"
+          "label": "56朵"
         }
       ]
     },
@@ -1894,7 +1894,7 @@
       ],
       "answer": {
         "value": 59,
-        "unit": "个",
+        "unit": "把",
         "optionId": "A"
       },
       "similarQuestionIds": [],
@@ -1911,19 +1911,19 @@
       "options": [
         {
           "id": "A",
-          "label": "59个"
+          "label": "59把"
         },
         {
           "id": "B",
-          "label": "60个"
+          "label": "60把"
         },
         {
           "id": "C",
-          "label": "61个"
+          "label": "61把"
         },
         {
           "id": "D",
-          "label": "69个"
+          "label": "69把"
         }
       ]
     },
@@ -3871,8 +3871,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "人"
+        "value": 9,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -3906,8 +3906,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 12,
-        "unit": "人"
+        "value": 10,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -3975,8 +3975,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 18,
-        "unit": "人"
+        "value": 8,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4010,7 +4010,7 @@
       ],
       "answer": {
         "value": 14,
-        "unit": "人"
+        "unit": "颗"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4079,7 +4079,7 @@
       ],
       "answer": {
         "value": 16,
-        "unit": "人"
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4113,8 +4113,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 21,
-        "unit": "人"
+        "value": 13,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4182,8 +4182,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 18,
-        "unit": "人"
+        "value": 20,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4216,8 +4216,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 19,
-        "unit": "人"
+        "value": 21,
+        "unit": "颗"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4285,8 +4285,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 12,
-        "unit": "人"
+        "value": 10,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4320,8 +4320,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 13,
-        "unit": "人"
+        "value": 11,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4389,8 +4389,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 19,
-        "unit": "人"
+        "value": 9,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4424,7 +4424,7 @@
       ],
       "answer": {
         "value": 15,
-        "unit": "人"
+        "unit": "颗"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4493,7 +4493,7 @@
       ],
       "answer": {
         "value": 17,
-        "unit": "人"
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4527,8 +4527,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 22,
-        "unit": "人"
+        "value": 14,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4596,8 +4596,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 19,
-        "unit": "人"
+        "value": 21,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4630,8 +4630,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 20,
-        "unit": "人"
+        "value": 22,
+        "unit": "颗"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4699,8 +4699,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 13,
-        "unit": "人"
+        "value": 11,
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4734,8 +4734,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 14,
-        "unit": "人"
+        "value": 12,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4803,8 +4803,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 20,
-        "unit": "人"
+        "value": 10,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4838,7 +4838,7 @@
       ],
       "answer": {
         "value": 16,
-        "unit": "人"
+        "unit": "颗"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4907,7 +4907,7 @@
       ],
       "answer": {
         "value": 18,
-        "unit": "人"
+        "unit": "个"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -4941,8 +4941,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 23,
-        "unit": "人"
+        "value": 15,
+        "unit": "本"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5010,8 +5010,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 20,
-        "unit": "人"
+        "value": 22,
+        "unit": "张"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5044,8 +5044,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 21,
-        "unit": "人"
+        "value": 23,
+        "unit": "颗"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5170,8 +5170,8 @@
       "difficulty": 1,
       "category": "probe",
       "story": {
-        "title": "分一分",
-        "body": "把 11 个平均分成 5 份，每份几个？"
+        "title": "拿走一部分",
+        "body": "一共有 11 个，拿走 6 个，还剩几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5217,7 +5217,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 6
+        "value": 13
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5377,8 +5377,8 @@
       "difficulty": 1,
       "category": "applied",
       "story": {
-        "title": "分一分",
-        "body": "把 17 个平均分成 5 份，每份几个？"
+        "title": "拿走一部分",
+        "body": "一共有 17 个，拿走 12 个，还剩几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5424,7 +5424,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 6
+        "value": 19
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5584,8 +5584,8 @@
       "difficulty": 2,
       "category": "probe",
       "story": {
-        "title": "分一分",
-        "body": "把 11 个平均分成 5 份，每份几个？"
+        "title": "拿走一部分",
+        "body": "一共有 11 个，拿走 6 个，还剩几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5631,7 +5631,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 6
+        "value": 13
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5791,8 +5791,8 @@
       "difficulty": 2,
       "category": "applied",
       "story": {
-        "title": "分一分",
-        "body": "把 17 个平均分成 5 份，每份几个？"
+        "title": "拿走一部分",
+        "body": "一共有 17 个，拿走 12 个，还剩几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -5838,7 +5838,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 6
+        "value": 19
       },
       "similarQuestionIds": [],
       "tags": [
@@ -5998,8 +5998,8 @@
       "difficulty": 3,
       "category": "probe",
       "story": {
-        "title": "分一分",
-        "body": "把 11 个平均分成 5 份，每份几个？"
+        "title": "拿走一部分",
+        "body": "一共有 11 个，拿走 6 个，还剩几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6045,7 +6045,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 6
+        "value": 13
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6205,8 +6205,8 @@
       "difficulty": 3,
       "category": "applied",
       "story": {
-        "title": "分一分",
-        "body": "把 17 个平均分成 5 份，每份几个？"
+        "title": "拿走一部分",
+        "body": "一共有 17 个，拿走 12 个，还剩几个？"
       },
       "requiresFiveStep": false,
       "hints": [
@@ -6252,7 +6252,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 6
+        "value": 19
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6355,7 +6355,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
+        "value": 11,
         "unit": "分钟"
       },
       "similarQuestionIds": [],
@@ -6391,7 +6391,7 @@
       ],
       "answer": {
         "value": 13,
-        "unit": "厘米"
+        "unit": "元"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6424,8 +6424,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
-        "unit": "分钟"
+        "value": 15,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6459,7 +6459,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 17,
+        "value": 3,
         "unit": "厘米"
       },
       "similarQuestionIds": [],
@@ -6493,8 +6493,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
-        "unit": "分钟"
+        "value": 19,
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6562,7 +6562,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
+        "value": 23,
         "unit": "分钟"
       },
       "similarQuestionIds": [],
@@ -6598,7 +6598,7 @@
       ],
       "answer": {
         "value": 17,
-        "unit": "厘米"
+        "unit": "元"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6631,8 +6631,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "分钟"
+        "value": 19,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6666,7 +6666,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 21,
+        "value": 11,
         "unit": "厘米"
       },
       "similarQuestionIds": [],
@@ -6700,8 +6700,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "分钟"
+        "value": 23,
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6769,7 +6769,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
+        "value": 11,
         "unit": "分钟"
       },
       "similarQuestionIds": [],
@@ -6805,7 +6805,7 @@
       ],
       "answer": {
         "value": 13,
-        "unit": "厘米"
+        "unit": "元"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6838,8 +6838,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
-        "unit": "分钟"
+        "value": 15,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6873,7 +6873,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 17,
+        "value": 3,
         "unit": "厘米"
       },
       "similarQuestionIds": [],
@@ -6907,8 +6907,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
-        "unit": "分钟"
+        "value": 19,
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -6976,7 +6976,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
+        "value": 23,
         "unit": "分钟"
       },
       "similarQuestionIds": [],
@@ -7012,7 +7012,7 @@
       ],
       "answer": {
         "value": 17,
-        "unit": "厘米"
+        "unit": "元"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7045,8 +7045,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "分钟"
+        "value": 19,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7080,7 +7080,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 21,
+        "value": 11,
         "unit": "厘米"
       },
       "similarQuestionIds": [],
@@ -7114,8 +7114,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "分钟"
+        "value": 23,
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7183,7 +7183,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
+        "value": 11,
         "unit": "分钟"
       },
       "similarQuestionIds": [],
@@ -7219,7 +7219,7 @@
       ],
       "answer": {
         "value": 13,
-        "unit": "厘米"
+        "unit": "元"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7252,8 +7252,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
-        "unit": "分钟"
+        "value": 15,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7287,7 +7287,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 17,
+        "value": 3,
         "unit": "厘米"
       },
       "similarQuestionIds": [],
@@ -7321,8 +7321,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
-        "unit": "分钟"
+        "value": 19,
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7390,7 +7390,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 3,
+        "value": 23,
         "unit": "分钟"
       },
       "similarQuestionIds": [],
@@ -7426,7 +7426,7 @@
       ],
       "answer": {
         "value": 17,
-        "unit": "厘米"
+        "unit": "元"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7459,8 +7459,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "分钟"
+        "value": 19,
+        "unit": "米"
       },
       "similarQuestionIds": [],
       "tags": [
@@ -7494,7 +7494,7 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 21,
+        "value": 11,
         "unit": "厘米"
       },
       "similarQuestionIds": [],
@@ -7528,8 +7528,8 @@
         "先算出一部分，再合并或比较；方法对了，答案自然就出来了。"
       ],
       "answer": {
-        "value": 11,
-        "unit": "分钟"
+        "value": 23,
+        "unit": "毫升"
       },
       "similarQuestionIds": [],
       "tags": [

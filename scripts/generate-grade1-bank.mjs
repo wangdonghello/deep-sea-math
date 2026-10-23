@@ -58,7 +58,7 @@ const CONTEXTS = {
     ['补加数', '{a} 加上几等于 {total}？'],
     ['补减数', '{total} 减去几等于 {a}？'],
     ['缺失部分', '一共有 {total} 个，其中 {a} 个是红色的，其余几个？'],
-    ['分一分', '把 {total} 个平均分成 {b} 份，每份几个？'],
+    ['拿走一部分', '一共有 {total} 个，拿走 {a} 个，还剩几个？'],
     ['找原数', '一个数减去 {a} 后是 {b}，这个数是多少？'],
     ['找另一个数', '{a} 和几合起来是 {total}？'],
   ],
@@ -85,7 +85,8 @@ function makeProblem(type, difficulty, slot) {
   if (type === 'add-sub') {
     const a = Math.min(90, 5 + slot * 3 + d * 4)
     const b = Math.min(9, 1 + slot + d)
-    return { a, b, value: a + b, unit: '个' }
+    const unit = ['条', '个', '个', '块', '朵', '把'][slot % 6]
+    return { a, b, value: a + b, unit }
   }
   if (type === 'number-sense') {
     const a = 11 + slot * 3 + d
@@ -105,20 +106,28 @@ function makeProblem(type, difficulty, slot) {
     const a = 8 + slot + d
     const b = 2 + (slot % 5)
     const c = 1 + (slot % 4)
-    return { a, b, c, value: a + b - c, unit: '人' }
+    const mode = slot % 6
+    const increaseThenDecrease = mode === 0 || mode === 3
+    const value = increaseThenDecrease ? a + b - c : a - b + c
+    const unit = mode === 0 || mode === 3 ? '人' : mode === 1 ? '个' : mode === 2 ? '本' : mode === 4 ? '张' : '颗'
+    return { a, b, c, value, unit, mode: increaseThenDecrease ? 'add-then-subtract' : 'subtract-then-add' }
   }
   if (type === 'unknown-relation') {
     const a = 3 + slot
     const b = 2 + (slot % 6)
     const total = a + b
-    const value = slot % 3 === 0 ? b : slot % 3 === 1 ? b : total - a
+    // 前三种、拿走一部分、补另一个加数都求 b；找原数求 a+b。
+    const mode = slot % 6
+    const value = mode === 4 ? total : b
     return { a, b, total, value, unit: '' }
   }
   if (type === 'unit-time-route') {
     const a = 6 + slot
     const b = 3 + (slot % 8)
-    const value = slot % 2 === 0 ? a + b : Math.abs(a - b)
-    return { a, b, value, unit: slot % 2 === 0 ? '厘米' : '分钟' }
+    const mode = slot % 6
+    const value = mode === 4 ? Math.abs(a - b) : a + b
+    const unit = ['厘米', '分钟', '元', '米', '厘米', '毫升'][mode]
+    return { a, b, value, unit, mode: mode === 4 ? 'difference' : 'total' }
   }
   const start = 1 + slot
   const step = 1 + d
