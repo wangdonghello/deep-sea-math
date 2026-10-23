@@ -28,11 +28,15 @@ const ORBIT_RADII = [13, 18, 23, 28]
 /** 把 8 个条目均匀放在四条轨道上，形成一张可读的太阳系航线图。 */
 function planetStyle(index: number): Record<string, string> {
   const radius = ORBIT_RADII[index % ORBIT_RADII.length]
+  const angle = ((index * 45 - 90) * Math.PI) / 180
+  const fallbackRadius = 24 + (index % 4) * 8
   return {
     '--orbit': `${radius}vmin`,
     '--orbit-start': `${((index * 45 - 90 + 360) % 360) / 3.6}%`,
     '--orbit-delay': `${-index * 4}s`,
     '--planet-size': `${index % 3 === 0 ? 2.6 : 2.1}rem`,
+    '--fallback-left': `${50 + fallbackRadius * Math.cos(angle)}%`,
+    '--fallback-top': `${50 + fallbackRadius * Math.sin(angle)}%`,
   }
 }
 </script>
@@ -201,8 +205,8 @@ function planetStyle(index: number): Record<string, string> {
 }
 .space-item {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: var(--fallback-top, 50%);
+  left: var(--fallback-left, 50%);
   z-index: 2;
   display: grid;
   justify-items: center;
@@ -236,6 +240,9 @@ function planetStyle(index: number): Record<string, string> {
 @keyframes ring-spin { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(360deg); } }
 @keyframes sun-breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.06); } }
 @keyframes star-field { from { opacity: .55; } to { opacity: 1; } }
+@supports (offset-path: circle(10px at 50% 50%)) {
+  .space-item { top: 0; left: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
   .space-item, .space-map__sun, .space-map__stars, .space-map__orbit { animation: none; }
   .space-item { offset-distance: var(--orbit-start); }
