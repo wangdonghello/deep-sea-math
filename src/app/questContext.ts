@@ -126,6 +126,11 @@ export function buildQuestContext(
       .filter((key) => key.startsWith('zone:'))
       .map((key) => key.slice('zone:'.length)),
   )
+  const unlockedCreatureIds = new Set(
+    Object.keys(projections.bestiaryUnlock)
+      .filter((key) => key.startsWith('creature:'))
+      .map((key) => key.slice('creature:'.length)),
+  )
 
   return {
     sessionId,
@@ -133,6 +138,6 @@ export function buildQuestContext(
     similarQuestionPool,
     grade,
     themeId,
-    ...deriveQuestTargets(questions, unlockedZoneIds),
+    ...deriveQuestTargets(questions, unlockedZoneIds, unlockedCreatureIds),
   }
 }

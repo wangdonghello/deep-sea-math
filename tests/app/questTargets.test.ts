@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { buildQuestContext } from '@/app/questContext'
 import { deriveCreatureTarget, deriveQuestTargets, deriveZoneTarget } from '@/app/questTargets'
-import { QUESTION_BANK } from '@/data/content'
+import { CREATURE_BANK, QUESTION_BANK } from '@/data/content'
 import type { Question } from '@/domain/model/types'
 import type { DomainEvent, SessionStartedEvent } from '@/domain/model/types'
 
@@ -67,6 +67,27 @@ describe('app: questTargets', () => {
     expect(deriveZoneTarget(new Set(['twilight', 'midnight', 'abyss', 'hadal']))).toBeUndefined()
     expect(deriveQuestTargets([], new Set(['twilight', 'midnight', 'abyss', 'hadal'])).zoneId)
       .toBeUndefined()
+  })
+
+  it('目标区域与题目主角不一致时，改发该区域里未解锁的鱼', () => {
+    const deepSeaQuestion = QUESTION_BANK.questions.find((question) => question.creatureRef === 'giant-cusk-eel')
+    expect(deepSeaQuestion).toBeDefined()
+    const target = deriveQuestTargets([deepSeaQuestion!], new Set(), new Set())
+    expect(target.zoneId).toBe('twilight')
+    const targetCreature = CREATURE_BANK.creatures.find((creature) => creature.id === target.creatureId)
+    expect(targetCreature).toBeDefined()
+    expect(targetCreature!.depthRange.min).toBeLessThanOrEqual(1000)
+    expect(target.creatureId).not.toBe('giant-cusk-eel')
+  })
+
+  it('当前区域里所有鱼都已解锁时不重复发同一张卡', () => {
+    const allZoneCreatureIds = new Set(
+      CREATURE_BANK.creatures
+        .filter((creature) => creature.depthRange.min <= 1000 && creature.depthRange.max >= 200)
+        .map((creature) => creature.id),
+    )
+    const target = deriveQuestTargets([], new Set(), allZoneCreatureIds)
+    expect(target.creatureId).toBeUndefined()
   })
 
   it('纯函数：同一输入重复推导结果一致', () => {

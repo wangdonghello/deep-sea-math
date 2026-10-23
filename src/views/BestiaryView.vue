@@ -5,7 +5,7 @@ import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { overlapsZone } from '@/features/bestiary/zoneFilter'
 import { useBestiary } from '@/features/bestiary/useBestiary'
 import type { BestiaryStore } from '@/features/bestiary/types'
-import { BASE_ZONE, ZONES } from '@/features/home/zones'
+import { ZONES } from '@/features/home/zones'
 
 const props = defineProps<{ profileId: string | null; store: BestiaryStore }>()
 const emit = defineEmits<{
@@ -23,31 +23,37 @@ const bestiary = useBestiary({ profileId: computed(() => props.profileId), store
  */
 const activeZoneId = ref<string | null>(null)
 
-/**
- * 默认只应用**一次**（每个档案一次）。
- *
- * 孩子手动点「全部」之后，解锁事件再变化也不该把他踢回某个区——筛选是孩子的
- * 显式选择，默认只是"他还没选时的起点"。档案一换就重新允许应用一次。
- */
-let zoneDefaultApplied = false
+/** 当前已解锁的区域 id；区域按钮只有解锁后才可筛选。 */
+const unlockedZoneIds = computed(() => new Set(
+  bestiary.zones.value.filter((zone) => zone.unlocked).map((zone) => zone.id),
+))
+const unlockedZones = computed(() => ZONES.filter((zone) => unlockedZoneIds.value.has(zone.id)))
+const unlockedZoneNames = computed(() => unlockedZones.value.map((zone) => zone.name).join('、'))
 
 watch(() => props.profileId, () => {
-  zoneDefaultApplied = false
   activeZoneId.value = null
 })
 
-watch(() => bestiary.currentZoneId.value, (zoneId) => {
-  if (zoneDefaultApplied || zoneId === null) return
-  zoneDefaultApplied = true
-  // 还没有任何区域解锁（停在潜水艇基地）时退回「全部」：让新档案看到完整的
-  // 待解锁剪影，而不是一个空列表。
-  activeZoneId.value = zoneId === BASE_ZONE.id ? null : zoneId
-})
+// 已选区域若因事件变化变为未解锁，回到「全部已解锁」而不是显示空列表。
+watch(() => bestiary.zones.value, () => {
+  if (activeZoneId.value !== null && !unlockedZoneIds.value.has(activeZoneId.value)) {
+    activeZoneId.value = null
+  }
+}, { deep: true })
 
-const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) => {
-  const zone = ZONES.find((entry) => entry.id === activeZoneId.value)
-  return zone === undefined || overlapsZone(creature, zone)
-}))
+const visibleItems = computed(() => {
+  const items = bestiary.items.value
+  const selected = ZONES.find((zone) => zone.id === activeZoneId.value)
+  if (selected !== undefined) {
+    return items.filter(({ creature }) => overlapsZone(creature, selected))
+  }
+  // 「全部」= 所有已解锁区域的并集；新档案还没有解锁时展示全量剪影，
+  // 让孩子知道图鉴里还有哪些目标。
+  if (unlockedZoneIds.value.size === 0) return items
+  return items.filter(({ creature }) =>
+    unlockedZones.value.some((zone) => overlapsZone(creature, zone)),
+  )
+})
 </script>
 
 <template>
@@ -58,8 +64,13 @@ const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) =
         @click="activeZoneId = null">全部</button>
       <button v-for="zone in ZONES" :key="zone.id" type="button"
         :aria-pressed="activeZoneId === zone.id" :aria-label="`筛选${zone.name}`"
+        :disabled="!unlockedZoneIds.has(zone.id)"
         @click="activeZoneId = zone.id">{{ zone.name }}</button>
     </nav>
+    <p v-if="unlockedZones.length > 0" class="bestiary-view__unlocked" data-testid="bestiary-unlocked-zones">
+      已解锁：{{ unlockedZoneNames }}
+    </p>
+    <p v-else class="bestiary-view__note">还没有解锁区域，完成一组题后就能看到更多海域。</p>
     <p class="bestiary-view__note">教学区域筛选，不代表唯一栖息区归属；物种可能跨区。</p>
     <p v-if="bestiary.loading.value" role="status">正在读取图鉴…</p>
     <p v-else-if="bestiary.error.value" data-testid="bestiary-error" role="status">图鉴暂时打不开，请稍后再试</p>
@@ -67,7 +78,8 @@ const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) =
     <p v-else-if="visibleItems.length === 0">这个教学区域暂无对应记录</p>
     <ul v-else class="bestiary-view__list">
       <li v-for="item in visibleItems" :key="item.creature.id">
-        <CreatureCard :creature="item.creature" :unlocked="item.unlocked" @observe="emit('observe', $event)" />
+        <CreatureCard :creature="item.creature" :unlocked="item.unlocked"
+          :unlocked-zone-ids="unlockedZoneIds.size === 0 ? undefined : [...unlockedZoneIds]" @observe="emit('observe', $event)" />
       </li>
     </ul>
     <BottomReturnButton @back="emit('back-home')" />
@@ -78,6 +90,8 @@ const visibleItems = computed(() => bestiary.items.value.filter(({ creature }) =
 .bestiary-view { min-height: 100dvh; padding: var(--ds-space-lg) var(--ds-space-lg) calc(5rem + env(safe-area-inset-bottom)); color: var(--ds-text-primary); }
 .bestiary-view__filters { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); }
 .bestiary-view__filters button { min-height: 2.75rem; }
+.bestiary-view__unlocked { color: var(--ds-accent-text); font-weight: 600; }
 .bestiary-view__note { color: var(--ds-text-secondary); }
+.bestiary-view__filters button:disabled { opacity: .42; cursor: not-allowed; }
 .bestiary-view__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--ds-space-md); padding: 0; list-style: none; }
 </style>

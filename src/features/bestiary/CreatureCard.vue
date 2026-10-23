@@ -5,9 +5,19 @@ import type { CreatureContent } from '@/data/content/schema'
 import { overlapsZone } from './zoneFilter'
 import { ZONES } from '@/features/home/zones'
 
-const props = defineProps<{ creature: CreatureContent; unlocked: boolean }>()
+const props = defineProps<{
+  creature: CreatureContent
+  unlocked: boolean
+  /** 已解锁区域；提供时只展示这些区域，避免卡片把未解锁海域也列出来。 */
+  unlockedZoneIds?: readonly string[]
+}>()
 const emit = defineEmits<{ (event: 'observe', creatureId: string): void }>()
-const teachingZones = computed(() => ZONES.filter((zone) => overlapsZone(props.creature, zone)))
+const teachingZones = computed(() => {
+  const allowed = props.unlockedZoneIds === undefined ? undefined : new Set(props.unlockedZoneIds)
+  return ZONES.filter((zone) =>
+    overlapsZone(props.creature, zone) && (allowed === undefined || allowed.has(zone.id)),
+  )
+})
 </script>
 
 <template>

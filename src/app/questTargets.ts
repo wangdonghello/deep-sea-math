@@ -17,9 +17,11 @@
  */
 
 import type { Question } from '@/domain/model/types'
+import { CREATURE_BANK } from '@/data/content'
 
 import type { ZoneConfig } from '@/features/home/zones'
 import { ZONES } from '@/features/home/zones'
+import { overlapsZone } from '@/features/bestiary/zoneFilter'
 
 /** 当日题组的奖励目标；缺省表示该通道本次不发奖励。 */
 export interface QuestTargets {
@@ -29,9 +31,29 @@ export interface QuestTargets {
   readonly zoneId?: string
 }
 
-/** 题组内第一道带 `creatureRef` 的题目所引的生物（题目包装里的主角）。 */
-export function deriveCreatureTarget(questions: readonly Question[]): string | undefined {
-  return questions.find((question) => question.creatureRef !== undefined)?.creatureRef
+/**
+ * 题组对应的图鉴生物。
+ *
+ * 默认取题组内第一道带 `creatureRef` 的题目；若同时给了目标区域，优先选
+ * 该区域里尚未解锁的物种，避免“解锁暮光区却发了一条深海鱼”这种区域与
+ * 卡片错位。所有区域物种都已解锁时退回题目主角。
+ */
+export function deriveCreatureTarget(
+  questions: readonly Question[],
+  zone?: ZoneConfig,
+  unlockedCreatureIds?: ReadonlySet<string>,
+): string | undefined {
+  const refs = questions.flatMap((question) => question.creatureRef === undefined ? [] : [question.creatureRef])
+  if (zone !== undefined) {
+    const zoneCreatures = CREATURE_BANK.creatures.filter((creature) => overlapsZone(creature, zone))
+    const fromQuestions = zoneCreatures.find((creature) =>
+      refs.includes(creature.id) && !(unlockedCreatureIds?.has(creature.id) ?? false),
+    )
+    if (fromQuestions !== undefined) return fromQuestions.id
+    const fallback = zoneCreatures.find((creature) => !(unlockedCreatureIds?.has(creature.id) ?? false))
+    if (fallback !== undefined) return fallback.id
+  }
+  return refs[0]
 }
 
 /** 深度顺序上第一个尚未解锁的区域。 */
@@ -48,9 +70,11 @@ export function deriveZoneTarget(unlockedZoneIds: ReadonlySet<string>): ZoneConf
 export function deriveQuestTargets(
   questions: readonly Question[],
   unlockedZoneIds: ReadonlySet<string>,
+  unlockedCreatureIds?: ReadonlySet<string>,
 ): QuestTargets {
+  const zone = deriveZoneTarget(unlockedZoneIds)
   return {
-    creatureId: deriveCreatureTarget(questions),
-    zoneId: deriveZoneTarget(unlockedZoneIds)?.id,
+    creatureId: deriveCreatureTarget(questions, zone, unlockedCreatureIds),
+    zoneId: zone?.id,
   }
 }

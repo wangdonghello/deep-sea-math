@@ -13,6 +13,7 @@
 import { CREATURE_BANK } from '@/data/content'
 import type { CreatureContent } from '@/data/content/schema'
 import { replayProjections } from '@/domain/eventLog/replay'
+import { unlockedCreatureIdSet } from '@/features/bestiary/unlockAccess'
 
 import type { ProductionStores } from './productionStores'
 
@@ -32,6 +33,6 @@ export async function findUnlockedCreature(
 ): Promise<CreatureContent | null> {
   const events = await stores.quiz.listEvents(profileId)
   const unlocked = replayProjections(events, { profileId }).bestiaryUnlock
-  if (unlocked[`creature:${creatureId}`] === undefined) return null
+  if (!unlockedCreatureIdSet(unlocked).has(creatureId)) return null
   return CREATURE_BANK.creatures.find((creature) => creature.id === creatureId) ?? null
 }

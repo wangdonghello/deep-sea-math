@@ -29,6 +29,7 @@ import type { DomainEvent, Settings } from '@/domain/model/types'
 
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 import { resolveZoneProgress, zoneIdsFromUnlockKeys, type ZoneProgress } from '@/features/bestiary/zoneProgress'
+import { unlockedCreatureIdSet } from '@/features/bestiary/unlockAccess'
 import type { HomeProfile, HomeQuestOptions, HomeStore } from './types'
 
 /** 默认时钟：宿主当前时间（仅"今天是哪一天"需要它）。 */
@@ -112,7 +113,7 @@ function summarizeProgress(
   const keys = Object.keys(unlocks)
   return {
     badgeCount,
-    unlockedCreatureCount: keys.filter((key) => key.startsWith('creature:')).length,
+    unlockedCreatureCount: unlockedCreatureIdSet(unlocks).size,
     totalCreatures: CREATURE_BANK.creatures.length,
     unlockedZones: keys.filter((key) => key.startsWith('zone:')).length,
   }

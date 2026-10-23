@@ -63,6 +63,12 @@ function store(events: readonly DomainEvent[]): BestiaryStore {
   return { async listEvents(profileId) { return events.filter((event) => event.profileId === profileId) } }
 }
 
+/** 四个区域全部解锁；用于测试可点击的区域筛选。 */
+const ALL_ZONE_EVENTS: readonly DomainEvent[] = ZONES.map((zone, index) => ({
+  eventId: `all-zone-${zone.id}`, profileId: 'profile-a', occurredAt: index + 1,
+  type: 'unlock-granted', kind: 'zone', targetId: zone.id, reason: 'quest-all',
+}))
+
 describe('BestiaryView', () => {
   it('图鉴页提供底部固定的返回首页按钮并向路由层发出事件', async () => {
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
@@ -76,7 +82,7 @@ describe('BestiaryView', () => {
   })
 
   it('filters by each teaching zone using overlapping depth ranges', async () => {
-    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store(ALL_ZONE_EVENTS) } })
     await flushPromises()
     expect(view.text()).toContain('教学区域筛选，不代表唯一栖息区归属')
 
@@ -92,7 +98,7 @@ describe('BestiaryView', () => {
   })
 
   it('restores the complete creature list when the all-regions filter is selected', async () => {
-    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store(ALL_ZONE_EVENTS) } })
     await flushPromises()
 
     const allCreatureIds = CREATURE_BANK.creatures.map((entry) => entry.id)
@@ -117,7 +123,7 @@ describe('BestiaryView', () => {
   })
 
   it('shows the empty-state message when the hadal zone has no creature records', async () => {
-    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store([]) } })
+    const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: store(ALL_ZONE_EVENTS) } })
     await flushPromises()
     await view.get(`button[aria-label="筛选${ZONES[3].name}"]`).trigger('click')
 
@@ -251,20 +257,21 @@ describe('BestiaryView 默认教学区', () => {
     expect(shownIds(view)).toEqual(CREATURE_BANK.creatures.map((entry) => entry.id))
   })
 
-  it('默认定位到当前所在区，并把该区的筛选按钮置为按下', async () => {
+  it('默认显示所有已解锁区域，并提示已解锁的暮光区', async () => {
     const view = mount(BestiaryView, {
       props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
     })
     await flushPromises()
 
-    expect(press(view, '筛选暮光区')).toBe('true')
-    expect(press(view, '筛选全部区域')).toBe('false')
+    expect(press(view, '筛选全部区域')).toBe('true')
+    expect(press(view, '筛选暮光区')).toBe('false')
+    expect(view.get('[data-testid="bestiary-unlocked-zones"]').text()).toContain('暮光区')
     expect(shownIds(view)).toEqual(CREATURE_BANK.creatures
       .filter((entry) => overlapsZone(entry, ZONES[0]))
       .map((entry) => entry.id))
   })
 
-  it('解锁更深区域后默认跟着下潜，列表新增该区物种（两区不再一模一样）', async () => {
+  it('解锁深海区后同时保留暮光区与深海区的鱼', async () => {
     const twilight = mount(BestiaryView, {
       props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
     })
@@ -274,24 +281,55 @@ describe('BestiaryView 默认教学区', () => {
     })
     await flushPromises()
 
-    expect(press(deepSea, '筛选深海区')).toBe('true')
-    // 深海大鼬鳚的记录深度（约 2,000–4,300 米）不进入暮光区，所以只在深海区出现
+    expect(press(deepSea, '筛选全部区域')).toBe('true')
+    // 深海大鼬鳚的记录深度（约 2,000–4,300 米）不进入暮光区，所以只在解锁深海区后出现
     expect(shownIds(deepSea)).toContain('giant-cusk-eel')
     expect(shownIds(twilight)).not.toContain('giant-cusk-eel')
-    expect(shownIds(deepSea)).not.toEqual(shownIds(twilight))
+    expect(shownIds(deepSea)).toEqual(CREATURE_BANK.creatures
+      .filter((entry) => overlapsZone(entry, ZONES[0]) || overlapsZone(entry, ZONES[1]))
+      .map((entry) => entry.id))
   })
 
-  it('手动选择「全部」后不会被自动默认覆盖', async () => {
+  it('解锁暮光区后，暮光区里的鱼一起可见，深海大鼬鳚仍保持剪影', async () => {
     const view = mount(BestiaryView, {
       props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
     })
     await flushPromises()
 
+    const angler = view.get('[data-testid="creature-card-johnson-anglerfish"]')
+    expect(angler.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
+    expect(view.find('[data-testid="creature-card-giant-cusk-eel"]').exists()).toBe(false)
+
+    await view.get('button[aria-label="筛选暮光区"]').trigger('click')
+    const shown = view.findAll('[data-testid^="creature-card-"]')
+      .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
+    expect(shown).toEqual(['johnson-anglerfish', 'deep-sea-lizardfish', 'jewel-squid'])
+  })
+
+  it('未解锁的区域不能筛选，避免把其他海域误认为已解锁', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
+    })
+    await flushPromises()
+    expect(view.get('button[aria-label="筛选暮光区"]').attributes('disabled')).toBeUndefined()
+    expect(view.get('button[aria-label="筛选深海区"]').attributes('disabled')).toBeDefined()
+  })
+
+  it('手动切换区域后，再点全部恢复已解锁区域的并集', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
+    })
+    await flushPromises()
+
+    await view.get('button[aria-label="筛选暮光区"]').trigger('click')
+    expect(press(view, '筛选暮光区')).toBe('true')
     await view.get('button[aria-label="筛选全部区域"]').trigger('click')
     await flushPromises()
 
     expect(press(view, '筛选全部区域')).toBe('true')
-    expect(shownIds(view)).toEqual(CREATURE_BANK.creatures.map((entry) => entry.id))
+    expect(shownIds(view)).toEqual(CREATURE_BANK.creatures
+      .filter((entry) => overlapsZone(entry, ZONES[0]))
+      .map((entry) => entry.id))
   })
 
   it('切换档案后按新档案的区域重新应用默认', async () => {
@@ -299,13 +337,15 @@ describe('BestiaryView 默认教学区', () => {
       props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
     })
     await flushPromises()
-    expect(press(view, '筛选暮光区')).toBe('true')
+    expect(press(view, '筛选全部区域')).toBe('true')
+    expect(view.get('[data-testid="bestiary-unlocked-zones"]').text()).toContain('暮光区')
 
     await view.setProps({ profileId: 'profile-b' })
     await flushPromises()
 
-    // profile-b 没有任何解锁 → 回到「全部」，而不是停在上一档案的暮光区
+    // profile-b 没有任何解锁 → 仍是「全部」，而不是停在上一档案的暮光区
     expect(press(view, '筛选全部区域')).toBe('true')
+    expect(view.find('[data-testid="bestiary-unlocked-zones"]').exists()).toBe(false)
   })
 })
 
