@@ -74,6 +74,18 @@ describe('useQuizSession', () => {
     expect(session.practiceFixedQuestionIds.value).toEqual([])
   })
 
+  it('自定义错题的作答也会更新题型掌握度', async () => {
+    const question = makeQuestion('custom-q1')
+    const { session, events } = setupPractice([question])
+    await session.submitAnswer('7')
+    const projections = replayProjections(events, {
+      profileId: 'profile-1',
+      questionTypeById: { 'custom-q1': 'add-sub' },
+    })
+    expect(projections.masteryByTopic['add-sub']).toBeDefined()
+    expect(projections.masteryByQuestion['custom-q1']).toBeDefined()
+  })
+
   it('同一道题累计两次独立答对后计入本次修复', async () => {
     const seed: DomainEvent[] = [{
       eventId: 'old-practice', profileId: 'profile-1', occurredAt: 1, type: 'answer-submitted',

@@ -96,7 +96,13 @@ export function useQuizSession(options: QuizSessionOptions) {
     (event): event is AnswerSubmittedEvent =>
       event.type === 'answer-submitted' && event.sessionId === options.sessionId,
   ))
-  const projections = computed(() => replayProjections(events.value, { profileId: options.profileId }))
+  // 自定义错题的题型不在静态题库里；把本题池的题型一并交给重放，
+  // 否则题目掌握度会更新、题型掌握度不会，家长报告里会凭空少一块。
+  const questionTypeById = Object.fromEntries(questionPool.map((question) => [question.id, question.type]))
+  const projections = computed(() => replayProjections(events.value, {
+    profileId: options.profileId,
+    questionTypeById,
+  }))
   // Reveal advances the learning queue only; T7's grantRewards still requires submitted answers.
   const resolvedIds = computed(() => new Set([
     ...(projections.value.questProgress[options.sessionId]?.correctQuestionIds ?? []),
