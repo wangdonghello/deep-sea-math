@@ -47,7 +47,7 @@ describe('readme: 根 README 结构', () => {
 
   it('含七个必备章节', () => {
     const titles = sections(readme)
-    for (const required of ['项目简介', '快速开始', '目录分层', '配置说明', '使用示例', '阶段一', '测试']) {
+    for (const required of ['项目简介', '快速开始', '目录分层', '使用示例', '配置说明', '版本说明', '测试']) {
       expect(titles).toContain(required)
     }
   })

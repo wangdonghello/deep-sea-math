@@ -1,7 +1,8 @@
 # 接入深海生物的实拍影像
 
 本文说明如何把一个**许可明确**的真实影像接入图鉴与观察舱。家长已经明确否掉
-"原创示意插画"，四个图鉴条目都必须有真实照片。
+"原创示意插画"：深海图鉴现在有 6 个条目（含 2 种海沟鱼），每条都必须有真实影像；
+恐龙主题另有一套真实博物馆化石照片，见 `public/photos/dino/LICENSE.txt`。
 
 ## 1. 确认许可
 
@@ -17,13 +18,14 @@
 ## 2. 文件落位
 
 ```
-public/photos/<ref>.jpg          # 影像本体（ref 与条目 photo.ref 一致）
+public/photos/<ref>.jpg          # 影像本体（ref 与条目 photo.ref 一致；可带子目录，如 hadal/snailfish）
 public/photos/ATTRIBUTION.txt    # 逐张署名与许可（原文照抄）
 docs/photo-assets.md             # 本文件：接入口径与来源清单
 ```
 
-- `<ref>` 用小写 kebab-case（如 `jewel-squid`）。schema 用
-  `^[a-z0-9]+(?:-[a-z0-9]+)*$` 校验，同时挡住 `../` 之类的路径穿越。
+- `<ref>` 用小写 kebab-case（如 `jewel-squid`），或用一层子目录（如
+  `hadal/snailfish`）。schema 允许 `^[a-z0-9]+(?:-[a-z0-9]+)*(?:/[a-z0-9]+(?:-[a-z0-9]+)*)?$`，
+  仍然挡住 `../` 之类的路径穿越。
 - 构图规则按内容定，不强行统一比例（`object-fit: contain` 会处理）：
   - 横向贯穿整幅的（蜥鱼）保留 16:9 `960×540`，裁 3:2 会切掉头部或尾尖；
   - 竖构图的（鱿鱼）就保持竖构图 `721×982`，**不要补边凑成 3:2**——补出来的
@@ -31,7 +33,7 @@ docs/photo-assets.md             # 本文件：接入口径与来源清单
     补边后还会变成两条竖线。裁掉那两列即可。
 - 长边 ≥ 900、短边 ≥ 480（卡片最大约 320×224 CSS px，2 倍屏够用）。
 - 单张 **≤ 250 KB**（`tests/features/bestiary/photoArtwork.test.ts` 锁死）。
-  四张实拍合计 236 KB，比一个 3D 模型小一个数量级。
+  深海 6 张实拍合计约 700 KB，仍比三个深海 3D 模型小。
 
 重编码用 `Pillow`（尺寸按上面的构图规则定，示例取 3:2）：
 
@@ -91,8 +93,17 @@ im.resize((960, 640), Image.LANCZOS).save(
 | 深海大鼬鳚 | Davidson Seamount 3,288 m 水下实拍 | NOAA / MBARI / Wikimedia Commons | 公有领域（PD-USGov-NOAA） |
 | 深海蜥鱼 | NOAA 海床实拍（属级鉴定） | NOAA Photo Library / Wikimedia Commons | 公有领域（PD-NOAA） |
 | 宝石鱿鱼 | NOAA 实拍（属级鉴定） | NOAA / Wikimedia Commons | CC0 1.0 |
+| 深渊狮子鱼 | *Pseudoliparis swirei* 科研照片拼图 | Gerringer et al. / Wikimedia Commons | CC BY 3.0 |
+| 神女底鼬鳚 | 加利福尼亚科学院馆藏标本照 | California Academy of Sciences / Wikimedia Commons | CC0 1.0 |
 
 上表与 `public/photos/ATTRIBUTION.txt` 必须同步更新。
+
+### 5.1 恐龙主题照片
+
+`public/photos/dino/` 放恐龙知识卡用的博物馆骨架/化石照片（三角龙、剑龙、霸王龙、
+无齿翼龙、阿普吐龙、梁龙、迅猛龙、副栉龙），许可包含 CC0、公有领域、CC BY 2.0/4.0
+与 CC BY-SA 4.0；逐张署名见 `public/photos/dino/LICENSE.txt`，并在卡片详情里显示。
+这些是**真实馆藏照片**，不是活体恐龙照片（非鸟恐龙已灭绝）。
 
 ## 6. 接入后要跑
 

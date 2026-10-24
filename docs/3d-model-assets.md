@@ -103,9 +103,11 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 - 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回真实
   影像并撤掉切换按钮；模型署名与许可链接只要模型在屏就显示
   （CC BY 要求署名不因降级而消失，看到什么就署什么名）。
-- 当前 4 个物种各有一个模型，图鉴列表最多同时加载 4 个 GLB（合计约 2.6 MB）
-  并创建 4 个 WebGL context。中端手机可接受；低端机或模型继续增加时，列表页
-  需要重估成本（懒初始化 / 可见时才挂载）。
+- 深海图鉴当前 **4 个物种**有模型，列表最多同时加载 4 个 GLB（合计约 2.6 MB）
+  并创建 4 个 WebGL context；海沟区的深渊狮子鱼、神女底鼬鳚目前只有真实影像，
+  没有 3D 模型，观察舱按“无模型”分支直接展示影像。
+- 恐龙主题有独立的 8 个 CC0 模型，走 `DinoModelViewer.vue`（恐龙知识卡），
+  与深海 `CreatureModelViewer` 不共用资产目录。
 
 ## 5.1 当前已接入模型
 
@@ -119,6 +121,14 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 后三个模型均由 `@gltf-transform/cli optimize` 处理：合并网格、几何简化、
 贴图压到 1024px WebP、meshopt 压缩；原始 `license.txt` 原文保存在
 `public/models/<ref>-license.txt`。
+
+### 5.2 恐龙主题模型
+
+恐龙图鉴使用 `public/models/dino/*.glb` 共 8 个模型（霸王龙、迅猛龙、三角龙、
+梁龙、副栉龙、剑龙、阿普吐龙、无齿翼龙），全部来自 Poly Pizza，许可为 **CC0**。
+来源与许可原文见 `public/models/dino/LICENSE.txt`；恐龙卡片还配真实博物馆
+化石照片，授权见 `public/photos/dino/LICENSE.txt`。模型加载失败或设备不支持
+WebGL 时，卡片回退到化石照片。
 
 ## 6. 接入后要跑
 
