@@ -22,6 +22,7 @@
 
 import { resolveStorage, type StorageFacade } from '@/data/db'
 import { QUESTION_BANK_BY_GRADE } from '@/data/content'
+import type { CustomQuestionRepo } from '@/data/repositories/customQuestionRepo'
 import type { DomainEvent, QuizType } from '@/domain/model/types'
 
 import { createParentStore } from '@/features/parentPanel/createParentStore'
@@ -49,6 +50,8 @@ export interface ProductionStores {
   readonly mistakes: MistakeBookStore
   /** 错题本展示用的题库元数据目录。 */
   readonly mistakeCatalog: MistakeQuestionCatalog
+  /** 家长导入的自定义错题仓储（按档案隔离）。 */
+  readonly customQuestions: CustomQuestionRepo
   /** 家长区（T16）。 */
   readonly parent: ParentStore
   /** 家长区门禁的 PIN 仓储（P1：`/parent` 门禁页用）。 */
@@ -120,6 +123,7 @@ function assemble(storage: StorageFacade): ProductionStores {
     bestiary: { listEvents: eventAccess.listEvents },
     mistakes: { listEvents: eventAccess.listEvents },
     mistakeCatalog: MISTAKE_CATALOG,
+    customQuestions: storage.customQuestions,
     parent: createParentStore(storage),
     // 门禁只要"读/写一条家长 PIN"两个成员；GuardRepo 结构上满足这个窄接口。
     parentGate: storage.guard,

@@ -51,6 +51,7 @@ function onNavigate(section: ParentSection): void {
   <LearningSettingsSection
     :store="stores.parent"
     :default-profile-id="defaultProfileId"
+    :custom-question-store="stores.customQuestions"
     :question-type-by-id="QUESTION_TYPE_BY_ID"
     @navigate="onNavigate"
     @back="() => router.push(PROFILES_PATH)"

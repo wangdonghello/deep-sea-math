@@ -9,15 +9,17 @@
  * 切换孩子后 `SettingsForm` / `ReportPanel` 跟着换人：`selectProfile` 会重读
  * 该孩子的设置与事件，因此两个子组件拿到的都是新孩子的数据（不会串台）。
  */
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 
 import ReportPanel from './ReportPanel.vue'
 import SettingsForm from './SettingsForm.vue'
 import AnalyticsConsent from './AnalyticsConsent.vue'
+import MistakeImportSection from './MistakeImportSection.vue'
 import ParentSectionShell from './ParentSectionShell.vue'
 import { useParentPanel } from './useParentPanel'
 import type { ParentSection, ParentStore } from './types'
-import type { QuizType } from '@/domain/model/types'
+import type { CustomQuestionRepo } from '@/data/repositories/customQuestionRepo'
+import type { Grade, QuizType } from '@/domain/model/types'
 
 const props = defineProps<{
   store: ParentStore
@@ -26,6 +28,8 @@ const props = defineProps<{
   clock?: () => number
   questionTypeById?: Readonly<Record<string, QuizType>>
   logger?: (entry: Record<string, unknown>) => void
+  /** 家长导入的错题仓储；缺省时不渲染导入卡片（旧测试可继续只测设置/报告）。 */
+  customQuestionStore?: CustomQuestionRepo
 }>()
 const emit = defineEmits<{
   (event: 'navigate', section: ParentSection): void
@@ -48,6 +52,16 @@ function onPeriod(value: 'today' | '7days'): void {
   panel.reportPeriod.value = value
   void panel.refreshReport()
 }
+
+/** 导入卡片里换孩子 = 切换当前报告/设置对象，保持两块数据同一个人。 */
+function onImportProfile(profileId: string | null): void {
+  if (profileId !== null) void panel.selectProfile(profileId)
+}
+
+const importGrade = computed<Grade>(() => {
+  const selected = panel.profiles.value.find((profile) => profile.id === panel.selectedProfileId.value)
+  return selected?.grade ?? 2
+})
 
 onMounted(() => {
   void panel.load()
@@ -90,6 +104,20 @@ onMounted(() => {
         @save="panel.saveSettings()"
       />
       <AnalyticsConsent />
+      <MistakeImportSection
+        v-if="customQuestionStore !== undefined"
+        :key="panel.selectedProfileId.value ?? 'none'"
+        :store="customQuestionStore"
+        :default-grade="importGrade"
+        :profile-id="panel.selectedProfileId.value"
+        @update:profile-id="onImportProfile"
+      >
+        <template #profile-options>
+          <option v-for="profile in panel.profiles.value" :key="profile.id" :value="profile.id">
+            {{ profile.nickname }}
+          </option>
+        </template>
+      </MistakeImportSection>
       <ReportPanel
         :report="panel.report.value"
         :period="panel.reportPeriod.value"

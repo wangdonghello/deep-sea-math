@@ -100,6 +100,26 @@ export interface UnlockEntry {
   readonly unlockedAt: number
 }
 
+/**
+ * 错题练习奖励进度（`practiceProgress` 投影）。
+ *
+ * 练习会话没有 `session-started` / `session-completed`（题号来自 query），
+ * 因此这里直接从 `answer-submitted` 派生：`practice-` 前缀的会话里，首次
+ * 独立答对才算星；同一道题累计 2 次独立答对视为“已修复”。
+ */
+export interface PracticeProgress {
+  /** 错题星总数。 */
+  readonly stars: number
+  /** 已修复（累计独立答对 ≥ 2 次）的题目 id。 */
+  readonly fixedQuestionIds: readonly string[]
+  /** 每道题累计的独立答对次数。 */
+  readonly independentCorrectByQuestion: Readonly<Record<string, number>>
+  /** 按累计修复数量解锁的修复徽章。 */
+  readonly badgeIds: readonly string[]
+  /** 按错题星数量解锁的图鉴装饰。 */
+  readonly decorationIds: readonly string[]
+}
+
 /** 全部投影（design §2 投影表的类型化）。 */
 export interface Projections {
   readonly questProgress: Readonly<Record<string, QuestProgress>>
@@ -109,6 +129,8 @@ export interface Projections {
   readonly bestiaryUnlock: Readonly<Record<string, UnlockEntry>>
   /** UTC 日期键（`YYYY-MM-DD`）→ 当日题组的 `sessionId`。 */
   readonly dailyQuestIndex: Readonly<Record<string, string>>
+  /** 错题练习奖励进度（错题星 / 修复徽章 / 图鉴装饰）。 */
+  readonly practiceProgress: PracticeProgress
 }
 
 /**
@@ -126,6 +148,11 @@ interface Draft {
   mistakeBook: Record<string, Mutable<MistakeEntry>>
   bestiaryUnlock: Record<string, UnlockEntry>
   dailyQuestIndex: Record<string, string>
+  practiceProgress: {
+    stars: number
+    independentCorrectByQuestion: Record<string, number>
+    fixed: Set<string>
+  }
 }
 
 /** 把 {@link QuestProgress} / {@link MistakeEntry} 的只读数组翻成可写数组。 */
@@ -262,6 +289,18 @@ function foldEvent(
   switch (event.type) {
     case 'answer-submitted': {
       advanceMastery(draft, event, questionTypeById)
+      // 错题重练：只有“首次、未用提示、独立答对”才计错题星；答错不扣。
+      if (
+        event.sessionId.startsWith('practice-') &&
+        event.correct &&
+        event.usedHintLevel === 0 &&
+        event.retryCount === 0
+      ) {
+        draft.practiceProgress.stars += 1
+        const count = (draft.practiceProgress.independentCorrectByQuestion[event.questionId] ?? 0) + 1
+        draft.practiceProgress.independentCorrectByQuestion[event.questionId] = count
+        if (count >= 2) draft.practiceProgress.fixed.add(event.questionId)
+      }
       pushUnique(progress.answeredQuestionIds, event.questionId)
       if (event.correct) {
         pushUnique(progress.correctQuestionIds, event.questionId)
@@ -375,6 +414,7 @@ export function replayProjections(
     mistakeBook: {},
     bestiaryUnlock: {},
     dailyQuestIndex: {},
+    practiceProgress: { stars: 0, independentCorrectByQuestion: {}, fixed: new Set<string>() },
   }
 
   const scoped =
@@ -382,5 +422,17 @@ export function replayProjections(
       ? events
       : events.filter((event) => event.profileId === options.profileId)
 
-  return scoped.reduce((accumulator, event) => foldEvent(accumulator, event, questionTypeById), draft)
+  const folded = scoped.reduce((accumulator, event) => foldEvent(accumulator, event, questionTypeById), draft)
+  const fixedQuestionIds = [...folded.practiceProgress.fixed].sort()
+  const stars = folded.practiceProgress.stars
+  return {
+    ...folded,
+    practiceProgress: {
+      stars,
+      fixedQuestionIds,
+      independentCorrectByQuestion: folded.practiceProgress.independentCorrectByQuestion,
+      badgeIds: [5, 10, 20].filter((threshold) => fixedQuestionIds.length >= threshold).map((threshold) => `mistake-fix-${threshold}`),
+      decorationIds: [5, 10, 15, 20].filter((threshold) => stars >= threshold).map((threshold) => `mistake-star-${threshold}`),
+    },
+  }
 }

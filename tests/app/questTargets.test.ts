@@ -136,4 +136,30 @@ describe('app: questContext', () => {
     expect(context.sessionId).toBe(`practice-${target.id}`)
     expect(context.questions.map((question) => question.id)).toEqual([target.id])
   })
+
+  it('家长导入的自定义错题也能被重练题号取到', () => {
+    const custom: Question = {
+      id: 'custom-a',
+      grade: 2,
+      format: 'open',
+      type: 'add-sub',
+      difficulty: 1,
+      category: 'basic',
+      story: { title: '家长导入错题', body: '3+4=?' },
+      requiresFiveStep: false,
+      hints: ['读题'],
+      answer: { value: 7 },
+      similarQuestionIds: [],
+      tags: ['imported'],
+      sources: ['local-parent-import'],
+    }
+    const context = buildQuestContext(PROFILE_ID, [], NOW, {
+      practiceIds: ['custom-a'],
+      customQuestions: [custom],
+      grade: 2,
+    })
+
+    expect(context.sessionId).toBe('practice-custom-a')
+    expect(context.questions.map((question) => question.id)).toEqual(['custom-a'])
+  })
 })

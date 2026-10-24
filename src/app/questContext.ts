@@ -81,6 +81,8 @@ export function buildQuestContext(
     sessionId?: string | null
     grade?: Grade
     themeId?: ThemeId
+    /** 家长导入的自定义错题；错题重练的题号可能指向它们。 */
+    customQuestions?: readonly Question[]
   } = {},
 ): QuestRouteContext {
   const practiceIds = options.practiceIds ?? []
@@ -115,7 +117,9 @@ export function buildQuestContext(
   const rawIds = isPractice ? practiceIds : startedForSession?.questionIds ?? []
   const grade = startedForSession?.grade ?? options.grade ?? 3
   const themeId = startedForSession?.themeId ?? options.themeId ?? 'deep-sea'
-  const pool = QUESTION_BANK_BY_GRADE[grade].questions
+  // 自定义题只参与“按题号取题”，不参与每日组题；把 grade 的题库放前面，
+  // 同名 id 以内置题库为准（正常不会重名，自定义 id 带 custom- 前缀）。
+  const pool = [...QUESTION_BANK_BY_GRADE[grade].questions, ...(options.customQuestions ?? [])]
   const questions = pickQuestions(rawIds, pool)
 
   const similarIds = new Set(questions.flatMap((question) => question.similarQuestionIds))

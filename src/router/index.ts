@@ -130,11 +130,16 @@ router.beforeEach(async (to) => {
     const requestedSessionId = typeof sessionParam === 'string' && sessionParam !== ''
       ? sessionParam
       : null
+    // 只有重练才需要读自定义题：每日题组永远来自内置题库，没必要时多读一次库。
+    const customQuestions = practiceIds.length === 0
+      ? []
+      : await stores.customQuestions.listByProfile(profileId!)
     const context = buildQuestContext(profileId!, events, Date.now(), {
       practiceIds,
       sessionId: requestedSessionId,
       grade: session.projection?.grade,
       themeId: session.projection?.themeId,
+      customQuestions,
     })
 
     // 只有"当日题组不存在且不是重练"才打回首页：重练没有当日题组也做得成。

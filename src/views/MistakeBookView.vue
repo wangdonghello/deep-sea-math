@@ -21,7 +21,7 @@ const emit = defineEmits<{
 
 const session = useProfileSessionStore()
 const profileId = computed(() => session.activeProfileId)
-const { activeProfileId, loading, loaded, errorMessage, filter, items, visibleItems, practicePayload } =
+const { activeProfileId, loading, loaded, errorMessage, filter, items, visibleItems, practiceProgress, practicePayload } =
   useMistakeBook(profileId, props.store, props.catalog, props.logger)
 
 function practice(questionId: string): void {
@@ -36,6 +36,10 @@ function practice(questionId: string): void {
     <p v-else-if="loading" data-testid="mistake-loading" role="status">正在整理错题…</p>
     <p v-else-if="errorMessage" data-testid="mistake-error" role="status">{{ errorMessage }}</p>
     <template v-else-if="loaded">
+      <p class="mistake-book__reward" data-testid="mistake-reward">
+        错题星：{{ practiceProgress.stars }} · 已修复：{{ practiceProgress.fixedQuestionIds.length }} 道
+        <span v-if="practiceProgress.badgeIds.length > 0"> · 徽章 {{ practiceProgress.badgeIds.length }} 枚</span>
+      </p>
       <MistakeFilter v-model="filter" />
       <p v-if="items.length === 0" data-testid="mistake-empty">
         这里还没有错题，继续探索时遇到的题目会收集在这里。
@@ -61,4 +65,5 @@ function practice(questionId: string): void {
 .mistake-list, ul { margin: 0; padding: 0; list-style: none; }
 .mistake-book article { padding: 1rem; border-radius: 1rem; background: rgb(255 255 255 / 8%); }
 .mistake-book button, select { min-height: 2.75rem; }
+.mistake-book__reward { color: var(--ds-accent-text); font-weight: 600; }
 </style>

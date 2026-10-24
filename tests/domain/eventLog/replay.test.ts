@@ -272,6 +272,9 @@ function incrementalProjections(
   const mistakeBook: Record<string, MutableMistake> = {}
   const bestiaryUnlock: Record<string, MutableUnlock> = {}
   const dailyQuestIndex: Record<string, string> = {}
+  let practiceStars = 0
+  const independentCorrectByQuestion: Record<string, number> = {}
+  const fixed = new Set<string>()
 
   for (const event of events) {
     if (event.type === 'session-started') {
@@ -302,6 +305,17 @@ function incrementalProjections(
     switch (event.type) {
       case 'answer-submitted': {
         advanceMastery(event, masteryByQuestion, masteryByTopic, questionTypeById)
+        if (
+          event.sessionId.startsWith('practice-') &&
+          event.correct &&
+          event.usedHintLevel === 0 &&
+          event.retryCount === 0
+        ) {
+          practiceStars += 1
+          const count = (independentCorrectByQuestion[event.questionId] ?? 0) + 1
+          independentCorrectByQuestion[event.questionId] = count
+          if (count >= 2) fixed.add(event.questionId)
+        }
         if (!progress.answeredQuestionIds.includes(event.questionId)) {
           progress.answeredQuestionIds.push(event.questionId)
         }
@@ -384,7 +398,22 @@ function incrementalProjections(
     }
   }
 
-  return { questProgress, masteryByQuestion, masteryByTopic, mistakeBook, bestiaryUnlock, dailyQuestIndex }
+  const fixedQuestionIds = [...fixed].sort()
+  return {
+    questProgress,
+    masteryByQuestion,
+    masteryByTopic,
+    mistakeBook,
+    bestiaryUnlock,
+    dailyQuestIndex,
+    practiceProgress: {
+      stars: practiceStars,
+      fixedQuestionIds,
+      independentCorrectByQuestion,
+      badgeIds: [5, 10, 20].filter((threshold) => fixedQuestionIds.length >= threshold).map((threshold) => `mistake-fix-${threshold}`),
+      decorationIds: [5, 10, 15, 20].filter((threshold) => practiceStars >= threshold).map((threshold) => `mistake-star-${threshold}`),
+    },
+  }
 
   /** 追加型解锁：同一个 kind+targetId 只记第一次（先到者胜），绝不回退。 */
   function grantUnlock(targetId: string, kind: 'creature' | 'zone', reason: string, at: number): void {
@@ -616,7 +645,7 @@ describe('domain/eventLog: 重放的纯函数契约', () => {
     expect(progress.questionIds).toEqual(started?.questionIds)
   })
 
-  it('空事件流产出六张空投影', () => {
+  it('空事件流产出七张空投影', () => {
     expect(replayProjections([])).toEqual({
       questProgress: {},
       masteryByQuestion: {},
@@ -624,6 +653,13 @@ describe('domain/eventLog: 重放的纯函数契约', () => {
       mistakeBook: {},
       bestiaryUnlock: {},
       dailyQuestIndex: {},
+      practiceProgress: {
+        stars: 0,
+        fixedQuestionIds: [],
+        independentCorrectByQuestion: {},
+        badgeIds: [],
+        decorationIds: [],
+      },
     })
   })
 })

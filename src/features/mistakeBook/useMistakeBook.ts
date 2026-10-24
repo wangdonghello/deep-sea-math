@@ -28,16 +28,18 @@ export function useMistakeBook(
     questionTypeById: questionTypeById.value,
   }))
 
-  const items = computed<MistakeBookItem[]>(() => Object.values(projections.value.mistakeBook).map((entry) => {
+  const items = computed<MistakeBookItem[]>(() => Object.values(projections.value.mistakeBook)
+    .filter((entry) => !projections.value.practiceProgress.fixedQuestionIds.includes(entry.questionId))
+    .map((entry) => {
     const question = catalog[entry.questionId]
-    return {
-      ...entry,
-      type: question?.type ?? null,
-      questionMasteryLevel: projections.value.masteryByQuestion[entry.questionId]?.level ?? 'unmastered',
-      topicMasteryLevel: question === undefined ? null : projections.value.masteryByTopic[question.type]?.level ?? 'unmastered',
-      ...(question?.story === undefined ? {} : { title: question.story.title }),
-    }
-  }))
+      return {
+        ...entry,
+        type: question?.type ?? null,
+        questionMasteryLevel: projections.value.masteryByQuestion[entry.questionId]?.level ?? 'unmastered',
+        topicMasteryLevel: question === undefined ? null : projections.value.masteryByTopic[question.type]?.level ?? 'unmastered',
+        ...(question?.story === undefined ? {} : { title: question.story.title }),
+      }
+    }))
   const visibleItems = computed(() => filterMistakes(items.value, filter.value))
 
   async function load(id: string | null): Promise<void> {
@@ -66,6 +68,9 @@ export function useMistakeBook(
     }
   }
 
+  /** 错题练习奖励进度（错题星 / 修复数 / 徽章 / 装饰）。 */
+  const practiceProgress = computed(() => projections.value.practiceProgress)
+
   function practicePayload(questionId: string): { questionIds: string[]; similarQuestionIds: string[] } {
     return {
       questionIds: [questionId],
@@ -74,5 +79,5 @@ export function useMistakeBook(
   }
 
   watch(activeProfileId, (id) => { void load(id) }, { immediate: true })
-  return { activeProfileId, loading, loaded, errorMessage, filter, items, visibleItems, practicePayload }
+  return { activeProfileId, loading, loaded, errorMessage, filter, items, visibleItems, practiceProgress, practicePayload }
 }

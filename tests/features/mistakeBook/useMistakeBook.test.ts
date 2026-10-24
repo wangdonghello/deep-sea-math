@@ -53,6 +53,20 @@ describe('useMistakeBook', () => {
     wrapper.unmount()
   })
 
+  it('连续独立答对两次的错题会移出错题本并计入修复进度', async () => {
+    const events: DomainEvent[] = [
+      { eventId: 'wrong-1', profileId, occurredAt: 1, type: 'answer-submitted', sessionId: 's-1', questionId: 'q1', submitted: 'wrong', correct: false, usedHintLevel: 0, retryCount: 0, ms: 10 },
+      { eventId: 'p1', profileId, occurredAt: 2, type: 'answer-submitted', sessionId: 'practice-q1-a', questionId: 'q1', submitted: '7', correct: true, usedHintLevel: 0, retryCount: 0, ms: 10 },
+      { eventId: 'p2', profileId, occurredAt: 3, type: 'answer-submitted', sessionId: 'practice-q1-b', questionId: 'q1', submitted: '7', correct: true, usedHintLevel: 0, retryCount: 0, ms: 10 },
+    ]
+    const { book, wrapper } = harness(events)
+    await flushPromises()
+
+    expect(book.items.value).toEqual([])
+    expect(book.practiceProgress.value).toMatchObject({ stars: 2, fixedQuestionIds: ['q1'] })
+    wrapper.unmount()
+  })
+
   it('logs a fixed failure category without error message or credentials', async () => {
     const logs: Record<string, unknown>[] = []
     let book!: ReturnType<typeof useMistakeBook>
