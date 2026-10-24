@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import CreatureCard from '@/features/bestiary/CreatureCard.vue'
+import MistakeRewardStrip from '@/features/mistakeBook/MistakeRewardStrip.vue'
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import { belongsToZone, zonesForCreature } from '@/features/bestiary/zoneFilter'
 import { useBestiary } from '@/features/bestiary/useBestiary'
@@ -59,6 +60,7 @@ const visibleItems = computed(() => {
 <template>
   <main class="bestiary-view" data-testid="bestiary-view">
     <h1>深海生物图鉴</h1>
+    <MistakeRewardStrip :profile-id="profileId" :store="store" />
     <nav class="bestiary-view__filters" aria-label="按教学区域筛选">
       <button type="button" :aria-pressed="activeZoneId === null" aria-label="筛选全部区域"
         @click="activeZoneId = null">全部</button>

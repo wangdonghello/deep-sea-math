@@ -13,6 +13,7 @@ import {
   buildImportedQuestions,
   parseMistakeImportText,
 } from '@/features/mistakeImport/parseMistakeImport'
+import { canRecognizeImage, recognizeMistakeImage } from '@/features/mistakeImport/ocr'
 import type { MistakeImportIssue, MistakeImportRow } from '@/features/mistakeImport/types'
 
 const props = defineProps<{
@@ -20,6 +21,8 @@ const props = defineProps<{
   store?: CustomQuestionRepo
   /** 默认年级：由所选孩子决定。 */
   defaultGrade?: Grade
+  /** OCR 实现；测试可注入假识别，生产默认用 tesseract.js。 */
+  recognize?: typeof recognizeMistakeImage
 }>()
 
 const text = ref('')
@@ -31,6 +34,10 @@ const issues = ref<readonly MistakeImportIssue[]>([])
 const savedCount = ref<number | null>(null)
 const savedMessage = ref('')
 const busy = ref(false)
+const photoName = ref('')
+const photoUrl = ref('')
+const ocrStatus = ref('')
+const ocrError = ref('')
 
 const TYPE_OPTIONS: ReadonlyArray<{ id: QuizType; label: string }> = [
   { id: 'add-sub', label: '加减法' },
@@ -50,6 +57,32 @@ function parse(): void {
   const result = parseMistakeImportText(text.value)
   rows.value = result.rows
   issues.value = result.issues
+}
+
+async function onPhoto(event: Event): Promise<void> {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (file === undefined) return
+  photoName.value = file.name
+  if (photoUrl.value !== '') URL.revokeObjectURL(photoUrl.value)
+  photoUrl.value = URL.createObjectURL(file)
+  ocrError.value = ''
+  ocrStatus.value = ''
+  try {
+    const recognize = props.recognize ?? recognizeMistakeImage
+    const recognized = await recognize(file, (progress) => {
+      ocrStatus.value = `${progress.status}${progress.progress > 0 ? ` ${Math.round(progress.progress * 100)}%` : ''}`
+    })
+    // OCR 结果只覆盖文本框，让家长先校对再解析入库。
+    text.value = recognized
+    ocrStatus.value = '识别完成，请校对后再点“解析预览”'
+    parse()
+  } catch (error) {
+    ocrError.value = error instanceof Error ? error.message : '识别失败，请改用手动输入'
+    ocrStatus.value = ''
+  } finally {
+    input.value = ''
+  }
 }
 
 async function onFile(event: Event): Promise<void> {
@@ -148,6 +181,10 @@ defineExpose({ parse, save })
         上传 CSV
         <input type="file" accept=".csv,text/csv,text/plain" data-testid="mistake-import-file" @change="onFile">
       </label>
+      <label v-if="canRecognizeImage()" class="parent-button mistake-import__file">
+        拍照 / 选图片识别
+        <input type="file" accept="image/*" capture="environment" data-testid="mistake-import-photo" @change="onPhoto">
+      </label>
       <button
         type="button"
         class="parent-button"
@@ -158,6 +195,12 @@ defineExpose({ parse, save })
     </div>
 
     <p v-if="savedMessage" role="status" data-testid="mistake-import-message">{{ savedMessage }}</p>
+    <figure v-if="photoUrl !== ''" class="mistake-import__photo">
+      <img :src="photoUrl" :alt="photoName" data-testid="mistake-import-photo-preview">
+      <figcaption>{{ photoName }}</figcaption>
+    </figure>
+    <p v-if="ocrStatus" role="status" data-testid="mistake-import-ocr-status">{{ ocrStatus }}</p>
+    <p v-if="ocrError" role="alert" data-testid="mistake-import-ocr-error">{{ ocrError }}</p>
 
     <ul v-if="preview.length > 0" class="mistake-import__preview" data-testid="mistake-import-preview">
       <li v-for="(row, index) in preview" :key="`${index}-${row.body}`">
@@ -183,4 +226,7 @@ defineExpose({ parse, save })
 .mistake-import__preview, .mistake-import__issues { display: grid; gap: 4px; margin: 0; padding-left: 1.25rem; font-size: var(--ds-font-size-caption); }
 .mistake-import__preview li { display: flex; justify-content: space-between; gap: var(--ds-space-sm); }
 .mistake-import__issues { color: var(--ds-accent-text); }
+.mistake-import__photo { margin: 0; display: grid; gap: 4px; }
+.mistake-import__photo img { max-width: 100%; max-height: 12rem; object-fit: contain; border-radius: var(--ds-radius-md); }
+.mistake-import__photo figcaption { color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); }
 </style>

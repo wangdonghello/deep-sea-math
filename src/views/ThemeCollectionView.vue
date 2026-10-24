@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import DinoModelViewer from '@/features/bestiary/DinoModelViewer.vue'
+import MistakeRewardStrip from '@/features/mistakeBook/MistakeRewardStrip.vue'
 import { useThemeCollection } from '@/features/bestiary/useThemeCollection'
 import type { ThemeCollectionStore } from '@/features/bestiary/useThemeCollection'
 import type { ThemeId } from '@/domain/model/types'
@@ -49,6 +50,7 @@ function planetStyle(index: number): Record<string, string> {
         探索第 {{ stage }} 阶段 · {{ pack.stageNames[Math.min(stage, 4) - 1] ?? '尚未出发' }}
       </p>
       <p class="theme-collection__hint">完成每日任务推进阶段，解锁更多{{ pack.name }}收藏。</p>
+      <MistakeRewardStrip :profile-id="profileId" :store="store" />
     </header>
 
     <p v-if="loading" role="status">正在读取图鉴…</p>

@@ -47,7 +47,45 @@ function setup(
   return { session, events, store }
 }
 
+function setupPractice(questions: Question[], seed: DomainEvent[] = []) {
+  const events: DomainEvent[] = [...seed]
+  let id = 0
+  const store = {
+    async listEvents() { return [...events] },
+    async appendEvents(incoming: readonly DomainEvent[]) {
+      events.push(...incoming)
+      return [...events]
+    },
+  }
+  const session = useQuizSession({
+    sessionId: 'practice-q1', profileId: 'profile-1', questions,
+    store, clock: () => 1000 + events.length, idGenerator: () => `practice-event-${++id}`,
+  })
+  return { session, events }
+}
+
 describe('useQuizSession', () => {
+  it('错题练习答对后给出错题星并在整组完成时标记完成', async () => {
+    const { session } = setupPractice([makeQuestion('q1')])
+    await session.submitAnswer('7')
+    expect(session.isPracticeSession.value).toBe(true)
+    expect(session.practiceStars.value).toBe(1)
+    expect(session.practiceCompleted.value).toBe(true)
+    expect(session.practiceFixedQuestionIds.value).toEqual([])
+  })
+
+  it('同一道题累计两次独立答对后计入本次修复', async () => {
+    const seed: DomainEvent[] = [{
+      eventId: 'old-practice', profileId: 'profile-1', occurredAt: 1, type: 'answer-submitted',
+      sessionId: 'practice-q1-old', questionId: 'q1', submitted: '7', correct: true,
+      usedHintLevel: 0, retryCount: 0, ms: 10,
+    }]
+    const { session } = setupPractice([makeQuestion('q1')], seed)
+    await session.submitAnswer('7')
+    expect(session.practiceStars.value).toBe(1)
+    expect(session.practiceFixedQuestionIds.value).toEqual(['q1'])
+  })
+
   it('每次提交都追加 answer-submitted，答错保持正向反馈', async () => {
     const { session, events } = setup([makeQuestion('q1')])
     await session.submitAnswer('6')

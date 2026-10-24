@@ -127,7 +127,10 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
     </div>
 
     <p v-if="errorMessage" role="status">{{ errorMessage }}</p>
-    <p v-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
+    <p v-if="!question && !errorMessage && session.practiceCompleted.value" data-testid="practice-completed">
+      错题练习完成：本次获得 {{ session.practiceStars.value }} 颗错题星<template v-if="session.practiceFixedQuestionIds.value.length > 0">，{{ session.practiceFixedQuestionIds.value.length }} 道题已修复并移出错题本</template>。
+    </p>
+    <p v-else-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
       这一组完成啦，继续探索深海吧！
     </p>
     <template v-else-if="!question && !errorMessage">

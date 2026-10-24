@@ -152,6 +152,40 @@ export function useQuizSession(options: QuizSessionOptions) {
     (event) => event.type === 'session-completed' && event.sessionId === options.sessionId &&
       event.profileId === options.profileId,
   ))
+  /** 错题重练会话（题号来自 query，没有 session-started）。 */
+  const isPracticeSession = computed(() => options.sessionId.startsWith('practice-'))
+  /**
+   * 本次练习挣到的错题星：首次、未用提示、独立答对，按题目去重。
+   */
+  const practiceStars = computed(() => new Set(
+    answerEvents.value
+      .filter((event) => event.correct && event.usedHintLevel === 0 && event.retryCount === 0)
+      .map((event) => event.questionId),
+  ).size)
+  /** 本次练习的题目是否全部答对或看过答案。 */
+  const practiceCompleted = computed(() =>
+    isPracticeSession.value &&
+    rootQuestions.length > 0 &&
+    rootQuestions.every((question) => resolvedIds.value.has(question.id)),
+  )
+  /** 本次练习后累计独立答对 ≥2 次、应当移出错题本的题目。 */
+  const practiceFixedQuestionIds = computed(() => {
+    if (!isPracticeSession.value) return []
+    const counts: Record<string, number> = {}
+    for (const event of events.value) {
+      if (
+        event.type === 'answer-submitted' &&
+        event.sessionId.startsWith('practice-') &&
+        event.correct &&
+        event.usedHintLevel === 0 &&
+        event.retryCount === 0
+      ) {
+        counts[event.questionId] = (counts[event.questionId] ?? 0) + 1
+      }
+    }
+    return [...new Set(answerEvents.value.map((event) => event.questionId))]
+      .filter((questionId) => (counts[questionId] ?? 0) >= 2)
+  })
   const currentPosition = computed(() => {
     const index = queue.value.findIndex((question) => question.id === displayedQuestion.value?.id)
     return index < 0 ? queue.value.length : index + 1
@@ -344,6 +378,7 @@ export function useQuizSession(options: QuizSessionOptions) {
     currentPosition, totalQuestions, feedback, submitting,
     phase: computed(() => phase.value), explanationVisible: computed(() => explanationVisible.value),
     sessionCompleted, practiceQuestionAvailable, continuePractice, nextQuestion, showExplanation,
+    isPracticeSession, practiceStars, practiceCompleted, practiceFixedQuestionIds,
     duplicateSlotCount, revealedHints, usedHintLevel, refreshEvents, useHint, submitAnswer,
     revealAnswer,
   }

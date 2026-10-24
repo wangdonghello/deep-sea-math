@@ -47,6 +47,43 @@ describe('MistakeImportSection', () => {
     expect(repo.saved).toHaveLength(0)
   })
 
+  it('拍照识别结果只填入文本框，家长校对后才解析入库', async () => {
+    const repo = fakeRepo()
+    const recognize = async (_file: Blob, onProgress?: (progress: { status: string; progress: number }) => void) => {
+      onProgress?.({ status: '识别中', progress: 0.5 })
+      return '题目：3+4=？\n答案：7'
+    }
+    const view = mount(MistakeImportSection, {
+      props: { store: repo, profileId: 'profile-a', recognize },
+    })
+    const input = view.get('[data-testid="mistake-import-photo"]')
+    const file = new File(['fake'], 'photo.png', { type: 'image/png' })
+    Object.defineProperty(input.element, 'files', { value: [file] })
+    await input.trigger('change')
+    await flushPromises()
+
+    expect((view.get('[data-testid="mistake-import-text"]').element as HTMLTextAreaElement).value).toContain('3+4=？')
+    expect(repo.saved).toHaveLength(0)
+    expect(view.find('[data-testid="mistake-import-preview"]').text()).toContain('3+4=？')
+  })
+
+  it('OCR 失败时提示家长改用手动输入，不阻断导入', async () => {
+    const view = mount(MistakeImportSection, {
+      props: {
+        store: fakeRepo(),
+        profileId: 'profile-a',
+        recognize: async () => { throw new Error('引擎加载失败') },
+      },
+    })
+    const input = view.get('[data-testid="mistake-import-photo"]')
+    Object.defineProperty(input.element, 'files', { value: [new File(['x'], 'x.png', { type: 'image/png' })] })
+    await input.trigger('change')
+    await flushPromises()
+
+    expect(view.find('[data-testid="mistake-import-ocr-error"]').text()).toContain('引擎加载失败')
+    expect(view.find('[data-testid="mistake-import-text"]').exists()).toBe(true)
+  })
+
   it('解析失败的行进入 issues，不静默丢弃', async () => {
     const view = mount(MistakeImportSection, {
       props: { store: fakeRepo(), profileId: 'profile-a' },
