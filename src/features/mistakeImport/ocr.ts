@@ -20,9 +20,15 @@ export interface OcrProgress {
 /** 语言：中文简体 + 英文/数字，覆盖小学数学题干。 */
 const LANGUAGES = 'chi_sim+eng'
 
-/** 资源走公开 CDN；worker/core 不进入应用构建产物。 */
+/**
+ * 资源走公开 CDN；worker/core 不进入应用构建产物。
+ *
+ * 用 unpkg 而不是 jsdelivr：实测国内网络对 jsdelivr 可能直接 reset，
+ * unpkg 与 tessdata 站点可访问。core 是独立 npm 包，版本要与 worker 对齐。
+ */
 const TESSERACT_VERSION = '7.0.0'
-const CDN_BASE = `https://cdn.jsdelivr.net/npm/tesseract.js@${TESSERACT_VERSION}`
+const WORKER_BASE = `https://unpkg.com/tesseract.js@${TESSERACT_VERSION}/dist`
+const CORE_BASE = `https://unpkg.com/tesseract.js-core@${TESSERACT_VERSION}/`
 
 type Worker = {
   recognize: (image: Blob | string) => Promise<{ data: { text: string } }>
@@ -36,8 +42,8 @@ async function getWorker(onProgress: (progress: OcrProgress) => void): Promise<W
   workerPromise = (async () => {
     const { createWorker } = await import('tesseract.js')
     const worker = await createWorker(LANGUAGES, 1, {
-      workerPath: `${CDN_BASE}/dist/worker.min.js`,
-      corePath: `${CDN_BASE}/dist/`,
+      workerPath: `${WORKER_BASE}/worker.min.js`,
+      corePath: CORE_BASE,
       langPath: 'https://tessdata.projectnaptha.com/4.0.0',
       logger: (message: { status?: string; progress?: number }) => {
         onProgress({ status: message.status ?? '识别中', progress: message.progress ?? 0 })
@@ -75,5 +81,18 @@ export async function recognizeMistakeImage(
   onProgress({ status: '正在识别图片…', progress: 0.1 })
   const result = await worker.recognize(file)
   onProgress({ status: '识别完成', progress: 1 })
-  return result.data.text.trim()
+  return cleanOcrText(result.data.text)
+}
+
+/**
+ * 中文 OCR 常在汉字之间插空格（"小 明 有 3 个"）。这里只去掉汉字之间的
+ * 空白，数字、英文与算式里的空格保持原样，避免把 "3 + 4" 粘成 "3+4"。
+ */
+export function cleanOcrText(text: string): string {
+  return text
+    .replace(/([\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])/g, '$1')
+    .replace(/\s*([，。！？；：])\s*/g, '$1')
+    .replace(/\s*,\s*/g, '，')
+    .replace(/\s*、\s*/g, '、')
+    .trim()
 }
