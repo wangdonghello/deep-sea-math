@@ -36,7 +36,7 @@ function track(opening: Promise<DeepSeaDb>): Promise<DeepSeaDb> {
 }
 
 /** 对象库名（供 `idb` 的高层方法做 StoreNames 形参）。 */
-type StoreName = 'events' | 'profiles' | 'settings' | 'projections' | 'eventOrder' | 'guard'
+type StoreName = 'events' | 'profiles' | 'settings' | 'projections' | 'eventOrder' | 'guard' | 'customQuestions'
 
 /** 用 `idb` 高层方法写一条记录。 */
 function putIn(db: DeepSeaDb, store: StoreName, value: never): Promise<void> {
@@ -88,10 +88,11 @@ describe('data/db: openDb — v1 schema', () => {
     restore()
   })
 
-  it('一次建齐 events / profiles / settings / projections / eventOrder / guard 六个对象库', async () => {
+  it('一次建齐 events / profiles / settings / projections / eventOrder / guard / customQuestions 七个对象库', async () => {
     const db = await track(openDb())
 
     expect([...db.objectStoreNames].sort()).toEqual([
+      'customQuestions',
       'eventOrder',
       'events',
       'guard',
@@ -109,13 +110,15 @@ describe('data/db: openDb — v1 schema', () => {
     expect([...tx.store.indexNames]).toContain('by_profile')
   })
 
-  it('profiles / settings / projections / guard 的主键分别是 id / profileId / profileId / id', async () => {
+  it('profiles / settings / projections / guard / customQuestions 的主键符合各自契约', async () => {
     const db = await track(openDb())
 
     expect(db.transaction('profiles', 'readonly').store.keyPath).toBe('id')
     expect(db.transaction('settings', 'readonly').store.keyPath).toBe('profileId')
     expect(db.transaction('projections', 'readonly').store.keyPath).toBe('profileId')
     expect(db.transaction('guard', 'readonly').store.keyPath).toBe('id')
+    expect(db.transaction('customQuestions', 'readonly').store.keyPath).toBe('id')
+    expect([...db.transaction('customQuestions', 'readonly').store.indexNames]).toContain('by_profile')
   })
 
   it('打开后的实际版本与导出的 DB_VERSION 一致（版本号常量不会悄悄漂移）', async () => {
@@ -164,6 +167,7 @@ describe('data/db: openDb — 版本迁移', () => {
     )
     // 迁移同时补齐了其余库、台账、档案索引与 guard 库，否则升级后仓储依然不可用。
     expect([...db.objectStoreNames].sort()).toEqual([
+      'customQuestions',
       'eventOrder',
       'events',
       'guard',

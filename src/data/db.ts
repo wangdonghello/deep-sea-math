@@ -3,13 +3,15 @@ import type { DBSchema, IDBPDatabase, IDBPTransaction } from 'idb'
 
 import type { Profile, Settings, DomainEvent } from '../domain/model/types'
 
-import { createMemoryBestiaryRepo, createMemoryEventRepo, createMemoryGuardRepo, createMemoryProfileRepo, createMemorySettingsRepo } from './memoryFallback'
+import { createMemoryBestiaryRepo, createMemoryCustomQuestionRepo, createMemoryEventRepo, createMemoryGuardRepo, createMemoryProfileRepo, createMemorySettingsRepo } from './memoryFallback'
 import { createBestiaryRepo } from './repositories/bestiaryRepo'
+import { createCustomQuestionRepo } from './repositories/customQuestionRepo'
 import { createEventRepo } from './repositories/eventRepo'
 import { createGuardRepo } from './repositories/guardRepo'
 import { createProfileRepo } from './repositories/profileRepo'
 import { createSettingsRepo } from './repositories/settingsRepo'
 import type { BestiaryRepo } from './repositories/bestiaryRepo'
+import type { CustomQuestionRepo } from './repositories/customQuestionRepo'
 import type { EventRepo } from './repositories/eventRepo'
 import type { GuardRepo } from './repositories/guardRepo'
 import type { ProfileRepo } from './repositories/profileRepo'
@@ -71,6 +73,8 @@ export const STORE_NAMES = {
    * 可被稳定还原（见 `repositories/eventRepo.ts` 的双键排序）。
    */
   eventOrder: 'eventOrder',
+  /** 家长导入的自定义错题（按档案隔离）。 */
+  customQuestions: 'customQuestions',
 } as const
 
 /**
@@ -143,6 +147,13 @@ export interface GuardRecord {
   salt: string
 }
 
+/** 自定义错题记录：`id` 为主键，`profileId` 建索引。 */
+export interface CustomQuestionRecord {
+  id: string
+  profileId: string
+  question: import('../domain/model/types').Question
+}
+
 /** 本应用的 IndexedDB schema（供 `idb` 的泛型推断出强类型仓储调用）。 */
 export interface DeepSeaSchema extends DBSchema {
   events: {
@@ -171,6 +182,11 @@ export interface DeepSeaSchema extends DBSchema {
     key: string
     value: GuardRecord
   }
+  customQuestions: {
+    key: string
+    value: CustomQuestionRecord
+    indexes: { by_profile: string }
+  }
 }
 
 /** 打开后的强类型数据库句柄。 */
@@ -192,12 +208,14 @@ export type DeepSeaDb = IDBPDatabase<DeepSeaSchema>
  * - **3 → 4**：新增 `guard` 库（家长 PIN，全场唯一一条）。同样是"新增对象库
  *   必须跳版本"——旧库里没有 `guard`，不跳版本的话门禁读不到、也写不进，
  *   表现为"家长 PIN 永远设置不上"。
+ * - **4 → 5**：新增 `customQuestions` 库（家长导入的错题，按档案隔离）。
+ *   自定义题目必须与内置内容分开存，否则"删档要清干净"会误伤内置题库。
  *
  * 若把当前 schema 停在任何早于"旧库实际版本"的数字上，`upgradeneeded` 不会
  * 触发，缺库/缺索引的状态会被永久保留，而它只在用户"装过旧版又升级"时出现，
  * 本地开发永远碰不到。
  */
-export const DB_VERSION = 4
+export const DB_VERSION = 5
 
 /**
  * 把库升级到当前 schema。
@@ -221,7 +239,7 @@ function applyMigrations(
   db: DeepSeaDb,
   transaction: IDBPTransaction<
     DeepSeaSchema,
-    ArrayLike<'events' | 'profiles' | 'projections' | 'settings' | 'eventOrder' | 'guard'>,
+    ArrayLike<'events' | 'profiles' | 'projections' | 'settings' | 'eventOrder' | 'guard' | 'customQuestions'>,
     'versionchange'
   >,
 ): void {
@@ -254,6 +272,12 @@ function applyMigrations(
   // 家长 PIN：keyPath 取 `id`（固定 `'parent'`），全场唯一一条，`put` 天然覆盖。
   if (!db.objectStoreNames.contains(STORE_NAMES.guard)) {
     db.createObjectStore(STORE_NAMES.guard, { keyPath: 'id' })
+  }
+
+  // 自定义错题：keyPath 取 `id`；`by_profile` 索引让"某档案全部导入题"一次取回。
+  if (!db.objectStoreNames.contains(STORE_NAMES.customQuestions)) {
+    const customQuestions = db.createObjectStore(STORE_NAMES.customQuestions, { keyPath: 'id' })
+    customQuestions.createIndex('by_profile', 'profileId', { unique: false })
   }
 }
 
@@ -348,6 +372,8 @@ export interface StorageFacade {
   readonly bestiary: BestiaryRepo
   /** 家长 PIN 仓储（家长区门禁）。 */
   readonly guard: GuardRepo
+  /** 家长导入的自定义错题仓储。 */
+  readonly customQuestions: CustomQuestionRepo
   /** 释放底层资源（IndexedDB 连接 / 无操作）。 */
   close(): Promise<void>
 }
@@ -385,6 +411,7 @@ export async function resolveStorage(): Promise<StorageFacade> {
       settings: createSettingsRepo(db),
       bestiary: createBestiaryRepo(db),
       guard: createGuardRepo(db),
+      customQuestions: createCustomQuestionRepo(db),
       close: async () => {
         db.close()
       },
@@ -399,6 +426,7 @@ export async function resolveStorage(): Promise<StorageFacade> {
       settings: createMemorySettingsRepo(),
       bestiary: createMemoryBestiaryRepo(),
       guard: createMemoryGuardRepo(),
+      customQuestions: createMemoryCustomQuestionRepo(),
       close: async () => undefined,
     }
   }

@@ -1,7 +1,8 @@
 import { appendEvents } from '../domain/eventLog/appendEvents'
-import type { DomainEvent, Profile, Settings } from '../domain/model/types'
+import type { DomainEvent, Profile, Question, Settings } from '../domain/model/types'
 import type { GuardRecord } from './db'
 import type { BestiaryCache, BestiaryRepo } from './repositories/bestiaryRepo'
+import type { CustomQuestionRepo } from './repositories/customQuestionRepo'
 import type { EventRepo } from './repositories/eventRepo'
 import type { GuardRepo } from './repositories/guardRepo'
 import type { ProfileRepo } from './repositories/profileRepo'
@@ -99,6 +100,34 @@ export function createMemorySettingsRepo(): SettingsRepo {
     },
     async remove(profileId) {
       records.delete(profileId)
+    },
+  }
+}
+
+/**
+ * 内存态自定义错题仓储（`Map<profileId, Map<id, Question>>`）。
+ *
+ * 与 IndexedDB 态的键序不同（这里按档案再按题目），因为内存态没有索引，
+ * 按档案分桶是最省的实现；接口契约才是两边必须一致的。
+ */
+export function createMemoryCustomQuestionRepo(): CustomQuestionRepo {
+  const byProfile = new Map<string, Map<string, Question>>()
+
+  return {
+    async listByProfile(profileId) {
+      const bucket = byProfile.get(profileId)
+      return bucket === undefined ? [] : [...bucket.values()].map((question) => clone(question))
+    },
+    async save(profileId, questions) {
+      const bucket = byProfile.get(profileId) ?? new Map<string, Question>()
+      for (const question of questions) bucket.set(question.id, clone(question))
+      byProfile.set(profileId, bucket)
+    },
+    async remove(profileId, questionId) {
+      byProfile.get(profileId)?.delete(questionId)
+    },
+    async removeByProfile(profileId) {
+      byProfile.delete(profileId)
     },
   }
 }
