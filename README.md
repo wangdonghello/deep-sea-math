@@ -78,7 +78,7 @@ npm run test:coverage  # 覆盖率报告
 
 - 题库生成脚本：`scripts/generate-grade1-bank.mjs`、`generate-grade2-bank.mjs`、`generate-question-bank.mjs`（三年级）；
 - 题库文件：`src/data/content/questionBank.grade{1,2,3}.json`，每年级 216 题；
-- 深海图鉴：`src/data/content/creatures.json`（6 条，含海沟区狮子鱼与神女底鼬鳚）；
+- 深海图鉴：`src/data/content/creatures.json`（30 条，按 10 关分组）；
 - 主题图鉴：`src/data/content/themePacks.json`（深海 / 恐龙 / 太空，各 4 阶段 × 2 条目）；
 - 影像与模型接入规范：`docs/photo-assets.md`、`docs/3d-model-assets.md`；
 - 错题导入格式：见家长区“导入错题”说明，支持 `题目 | 答案 | 单位`、分块文本与 CSV 表头。
@@ -121,7 +121,7 @@ npm run preview
 npm run test
 ```
 
-当前基线：**85 个测试文件 / 867 条用例**。覆盖率门槛见 `vitest.config.ts`（总体 ≥ 80%，`src/domain/` 分支 ≥ 90%）。
+当前基线：**89 个测试文件 / 976 条用例**。覆盖率门槛见 `vitest.config.ts`（总体 ≥ 80%，`src/domain/` 分支 ≥ 90%）。
 
 ## 文档
 
