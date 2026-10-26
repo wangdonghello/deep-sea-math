@@ -292,40 +292,37 @@ describe('views: HomeView', () => {
     expect(store.appended).toEqual([])
   })
 
-  it('地图高亮区域来自事件投影：只解锁暮光区时只有暮光区是当前所在', async () => {
-    // 事件里只有 zone:twilight 一条解锁：地图必须只把暮光区标为当前，
-    // 而不是（曾经的错误口径）按"今天这组题完成没完成"给 0/1。
+  it('完成一组题推进一关：第 1 关已通关、第 2 关为当前关', async () => {
     const store = createStore([
       { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
         targetId: 'twilight', kind: 'zone', reason: 's-1' },
+      { eventId: 'done-1', profileId: PROFILE_ID, occurredAt: 2, type: 'session-completed',
+        sessionId: 's-1', rewards: ['quest-complete'] },
     ])
     const view = await mountHome({ store })
 
-    expect(view.find('[data-testid="zone-twilight"]').classes()).toContain('map-panel__zone--current')
-    expect(view.find('[data-testid="zone-midnight"]').classes()).not.toContain('map-panel__zone--current')
-    expect(view.find('[data-testid="zone-abyss"]').classes()).not.toContain('map-panel__zone--current')
+    expect(view.find('[data-testid="stage-1"]').classes()).toContain('map-panel__stage--done')
+    expect(view.find('[data-testid="stage-2"]').classes()).toContain('map-panel__stage--current')
+    expect(view.find('[data-testid="stage-10"]').classes()).toContain('map-panel__stage--locked')
   })
 
-  it('地图高亮区域跟随已解锁的最深区域（与地图 Tab 页同一口径）', async () => {
-    const store = createStore([
-      { eventId: 'z-1', profileId: PROFILE_ID, occurredAt: 1, type: 'unlock-granted',
-        targetId: 'twilight', kind: 'zone', reason: 's-1' },
-      { eventId: 'z-2', profileId: PROFILE_ID, occurredAt: 2, type: 'unlock-granted',
-        targetId: 'abyss', kind: 'zone', reason: 's-2' },
-    ])
-    const view = await mountHome({ store })
+  it('完成六组题后推进到第七关，前十关不再全部锁定', async () => {
+    const events = Array.from({ length: 6 }, (_, index) => ({
+      eventId: `done-${index}`, profileId: PROFILE_ID, occurredAt: index + 1,
+      type: 'session-completed' as const, sessionId: `s-${index}`, rewards: ['quest-complete'],
+    }))
+    const view = await mountHome({ store: createStore(events) })
 
-    // 暮光与深渊都已解锁 → 当前所在是最深的那个（与 MapView/useBestiary 同源）
-    expect(view.find('[data-testid="zone-abyss"]').classes()).toContain('map-panel__zone--current')
-    expect(view.find('[data-testid="zone-twilight"]').classes()).not.toContain('map-panel__zone--current')
+    expect(view.find('[data-testid="stage-6"]').classes()).toContain('map-panel__stage--done')
+    expect(view.find('[data-testid="stage-7"]').classes()).toContain('map-panel__stage--current')
+    expect(view.text()).toContain('深海通关 6 / 10')
   })
 
-  it('未解锁区域显示为锁定态而不是当前态', async () => {
+  it('未开始下潜时第 1 关是当前关，后面关卡锁定', async () => {
     const view = await mountHome({ store: createStore([]) })
 
-    for (const zone of ['twilight', 'midnight', 'abyss', 'hadal']) {
-      expect(view.find(`[data-testid="zone-${zone}"]`).classes()).not.toContain('map-panel__zone--current')
-    }
+    expect(view.find('[data-testid="stage-1"]').classes()).toContain('map-panel__stage--current')
+    expect(view.find('[data-testid="stage-2"]').classes()).toContain('map-panel__stage--locked')
   })
 
   it('首页展示档案状态条：昵称、当前所在区与深度', async () => {
@@ -389,17 +386,16 @@ describe('views: HomeView', () => {
     expect(view.find('[data-testid="home-next-zone"]').exists()).toBe(false)
   })
 
-  it('渲染深度刻度：潜水艇基地起点与四区深度范围', async () => {
+  it('渲染深度刻度与 10 关地图：起点、四区深度范围与 10 个关卡', async () => {
     const view = await mountHome({})
 
     const scale = view.find('[data-testid="depth-scale"]')
     expect(scale.exists()).toBe(true)
-    // 起点 + 四区：spec §深海地图与深度进度 的 frozen 配置
     expect(view.find('[data-testid="zone-base"]').exists()).toBe(true)
-    for (const zoneId of ['twilight', 'midnight', 'abyss', 'hadal']) {
-      expect(view.find(`[data-testid="zone-${zoneId}"]`).exists()).toBe(true)
+    for (let stage = 1; stage <= 10; stage += 1) {
+      expect(view.find(`[data-testid="stage-${stage}"]`).exists()).toBe(true)
     }
-    // 深度范围用区间表述， MUST NOT 写成唯一定点深度（spec §深度为范围而非定点）
+    // 深度范围用区间表述， MUST NOT 写成唯一定点深度
     expect(view.text()).toContain('约 200–1,000 米')
     expect(view.text()).toContain('约 6,000 米以下')
   })

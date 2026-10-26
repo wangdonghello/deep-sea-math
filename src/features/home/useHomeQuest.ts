@@ -92,6 +92,8 @@ export interface ProgressSummary {
   readonly totalCreatures: number
   /** 已解锁的区域数。 */
   readonly unlockedZones: number
+  /** 已完成每日题组数（按 sessionId 去重；v3 十关进度用）。 */
+  readonly completedSessions: number
 }
 
 /**
@@ -107,8 +109,12 @@ function summarizeProgress(
   unlocks: Readonly<Record<string, unknown>>,
 ): ProgressSummary {
   let badgeCount = 0
+  const completedSessionIds = new Set<string>()
   for (const event of events) {
-    if (event.type === 'session-completed') badgeCount += event.rewards.length
+    if (event.type === 'session-completed') {
+      badgeCount += event.rewards.length
+      completedSessionIds.add(event.sessionId)
+    }
   }
   const keys = Object.keys(unlocks)
   return {
@@ -116,6 +122,7 @@ function summarizeProgress(
     unlockedCreatureCount: unlockedCreatureIdSet(unlocks).size,
     totalCreatures: CREATURE_BANK.creatures.length,
     unlockedZones: keys.filter((key) => key.startsWith('zone:')).length,
+    completedSessions: completedSessionIds.size,
   }
 }
 
@@ -177,6 +184,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
     unlockedCreatureCount: 0,
     totalCreatures: CREATURE_BANK.creatures.length,
     unlockedZones: 0,
+    completedSessions: 0,
   })
   /** 首次加载中。 */
   const loading = ref(false)

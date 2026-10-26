@@ -28,6 +28,7 @@ import TabBar from '@/features/home/TabBar.vue'
 import { useHomeQuest } from '@/features/home/useHomeQuest'
 import { ZONES } from '@/features/home/zones'
 import { homeThemeById } from '@/features/home/homeThemes'
+import { resolveDeepSeaProgress } from '@/features/bestiary/deepSeaProgress'
 import type { HomeStore } from '@/features/home/types'
 import type { Question } from '@/domain/model/types'
 
@@ -92,6 +93,9 @@ const completedQuests = computed(() => (card.value?.state === 'done' ? 1 : 0))
  */
 const theme = computed(() => homeThemeById(home.profile.value?.themeId ?? 'deep-sea'))
 
+/** v3 十关进度：完成组数直接映射到关卡；非深海主题不展示。 */
+const stageProgress = computed(() => resolveDeepSeaProgress(home.progressSummary.value.completedSessions))
+
 const currentZoneIndex = computed(() =>
   theme.value.id === 'deep-sea'
     ? home.zoneProgress.value.currentZoneIndex
@@ -151,7 +155,12 @@ onMounted(async () => {
         {{ home.errorMessage.value }}
       </p>
 
-      <MapPanel :current-zone-index="currentZoneIndex" :completed-quests="completedQuests" :theme="theme" />
+      <MapPanel
+        :current-zone-index="currentZoneIndex"
+        :completed-quests="completedQuests"
+        :theme="theme"
+        :stage-progress="stageProgress"
+      />
 
       <QuestCard
         v-if="card !== null"

@@ -20,6 +20,8 @@ import SpaceBackdrop from './SpaceBackdrop.vue'
 import DinoBackdrop from './DinoBackdrop.vue'
 import { homeThemeById, type HomeTheme } from './homeThemes'
 import type { ThemeId } from '@/domain/model/types'
+import { DEEP_SEA_STAGES, DEEP_SEA_ZONES, deepSeaStagesByZone } from '@/data/content/deepSeaStages'
+import type { DeepSeaProgress } from '@/features/bestiary/deepSeaProgress'
 
 const props = defineProps<{
   /**
@@ -37,6 +39,8 @@ const props = defineProps<{
   themeId?: ThemeId
   /** 由 HomeView 直接传入的主题配置。 */
   theme?: HomeTheme
+  /** v3 十关进度；传入时深海地图改为 10 关关卡图（其他主题忽略）。 */
+  stageProgress?: DeepSeaProgress
 }>()
 
 const theme = computed(() => props.theme ?? homeThemeById(props.themeId ?? 'deep-sea'))
@@ -73,8 +77,40 @@ const zones = computed(() => theme.value.zones)
         <span class="map-panel__base-name">{{ theme.baseName }}</span>
       </div>
 
+      <!-- v3 十关：按四个深度区分段，每关 3 条图鉴 -->
+      <section
+        v-if="theme.id === 'deep-sea' && stageProgress"
+        class="map-panel__stages"
+        data-testid="deep-sea-stages"
+      >
+        <p class="map-panel__stage-summary">深海通关 {{ stageProgress.completedStages }} / {{ DEEP_SEA_STAGES.length }}</p>
+        <div v-for="zone in DEEP_SEA_ZONES" :key="zone.id" class="map-panel__stage-zone">
+          <h3>
+            {{ zone.name }}
+            <span>{{ zone.depthLabel }}</span>
+          </h3>
+          <ol>
+            <li
+              v-for="stage in deepSeaStagesByZone(zone.id)"
+              :key="stage.stage"
+              class="map-panel__stage"
+              :class="{
+                'map-panel__stage--done': stage.stage <= stageProgress.completedStages,
+                'map-panel__stage--current': stage.stage === stageProgress.currentStage && stage.stage > stageProgress.completedStages,
+                'map-panel__stage--locked': stage.stage > stageProgress.completedStages,
+              }"
+              :data-testid="`stage-${stage.stage}`"
+            >
+              <span class="map-panel__stage-number">{{ stage.stage }}</span>
+              <span class="map-panel__stage-name">{{ stage.name }}</span>
+              <span class="map-panel__stage-count">3 条图鉴</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
       <!-- 四区：一条 v-for，不写死四个 div -->
-      <ol class="map-panel__zones">
+      <ol v-else class="map-panel__zones">
         <li
           v-for="(zone, index) in zones"
           :key="zone.id"
@@ -140,6 +176,26 @@ const zones = computed(() => theme.value.zones)
   height: 100%;
   padding: var(--ds-space-lg);
 }
+
+.map-panel__stages {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  gap: var(--ds-space-sm);
+  min-width: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.map-panel__stage-summary { margin: 0; color: var(--ds-accent-text); font-size: var(--ds-font-size-caption); font-weight: 600; }
+.map-panel__stage-zone h3 { display: flex; justify-content: space-between; gap: var(--ds-space-sm); margin: 4px 0; color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); }
+.map-panel__stage-zone ol { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.map-panel__stage { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; align-items: center; gap: var(--ds-space-sm); padding: 4px var(--ds-space-sm); border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-sm); background: var(--ds-glass-surface); color: var(--ds-text-secondary); }
+.map-panel__stage--done { border-color: var(--ds-accent-500); color: var(--ds-text-primary); }
+.map-panel__stage--current { border-color: var(--ds-accent-500); color: var(--ds-accent-text); font-weight: 600; }
+.map-panel__stage--locked { opacity: .45; }
+.map-panel__stage-number { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ds-glass-surface); font-size: var(--ds-font-size-caption); }
+.map-panel__stage-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.map-panel__stage-count { font-size: var(--ds-font-size-caption); }
 
 .map-panel__zones {
   display: flex;
