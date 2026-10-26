@@ -66,145 +66,151 @@
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA ROV 在深海拍摄的狮子鱼活体。
 
-8. v3/golden-trevally.jpg —— 黄金鲹（Gnathanodon speciosus）
+8. v3/hadal-cusk-eel.jpg —— 海沟鼬鳚（Abyssobrotula galatheae）
+   素材页:   https://oceanexplorer.noaa.gov/multimedia/cusk-eel-2/
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Ocean Exploration · 公有领域
+   说明:     真实影像：NOAA ROV 在深海拍摄的活体影像。
+
+9. v3/golden-trevally.jpg —— 黄金鲹（Gnathanodon speciosus）
    素材页:   https://www.inaturalist.org/observations/187603154
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Belinda Forbes, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-9. v3/seahorse.jpg —— 大腹海马（Hippocampus abdominalis）
+10. v3/seahorse.jpg —— 大腹海马（Hippocampus abdominalis）
    素材页:   https://www.inaturalist.org/observations/200640664
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Emily Roberts, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-10. v3/leafy-seadragon.jpg —— 叶海龙（Phycodurus eques）
+11. v3/leafy-seadragon.jpg —— 叶海龙（Phycodurus eques）
    素材页:   https://www.inaturalist.org/observations/279389471
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) ttsquid, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-11. v3/lanternfish.jpg —— 灯笼鱼（Myctophum punctatum）
+12. v3/lanternfish.jpg —— 灯笼鱼（Myctophum punctatum）
    素材页:   https://www.inaturalist.org/observations/351054997
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     Julien Savoie · CC BY 4.0
    说明:     真实影像：iNaturalist 深水观察记录，非捕捞摆拍。
 
-12. v3/viperfish.jpg —— 蝰鱼（Chauliodus sloani）
+13. v3/viperfish.jpg —— 蝰鱼（Chauliodus sloani）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA ROV 在深海拍摄的蝰鱼活体。
 
-13. v3/humpback-whale.jpg —— 座头鲸（Megaptera novaeangliae）
+14. v3/humpback-whale.jpg —— 座头鲸（Megaptera novaeangliae）
    素材页:   https://www.inaturalist.org/observations/2306249
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Ken-ichi Ueda, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-14. v3/whale-shark.jpg —— 鲸鲨（Rhincodon typus）
+15. v3/whale-shark.jpg —— 鲸鲨（Rhincodon typus）
    素材页:   https://www.inaturalist.org/observations/387354316
    许可:     CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
    署名:     iNaturalist 观察者（CC0） · CC0 1.0
    说明:     真实影像：iNaturalist 水下观察记录，鲸鲨在自然海域游动。
 
-15. v3/manta-ray.jpg —— 蝠鲼（Mobula birostris）
+16. v3/manta-ray.jpg —— 蝠鲼（Mobula birostris）
    素材页:   https://www.inaturalist.org/observations/328321068
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Victor E. Chocho, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-16. v3/blue-whale.jpg —— 蓝鲸（Balaenoptera musculus）
+17. v3/blue-whale.jpg —— 蓝鲸（Balaenoptera musculus）
    素材页:   https://www.inaturalist.org/observations/338634606
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Tomás Tamagno, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-17. v3/great-white-shark.jpg —— 大白鲨（Carcharodon carcharias）
+18. v3/great-white-shark.jpg —— 大白鲨（Carcharodon carcharias）
    素材页:   https://www.inaturalist.org/observations/4403807
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Adam J. Searcy, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-18. v3/hammerhead-shark.jpg —— 锤头双髻鲨（Sphyrna lewini）
+19. v3/hammerhead-shark.jpg —— 锤头双髻鲨（Sphyrna lewini）
    素材页:   https://www.inaturalist.org/observations/336038410
    许可:     CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
    署名:     Andy Mann（CC0） · CC0 1.0
    说明:     真实影像：iNaturalist 水下观察记录，锤头鲨在自然海域游动。
 
-19. v3/tiger-shark.jpg —— 虎鲨（Galeocerdo cuvier）
+20. v3/tiger-shark.jpg —— 虎鲨（Galeocerdo cuvier）
    素材页:   https://www.inaturalist.org/observations/324601662
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Jay Brasher, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-20. v3/shortfin-mako.jpg —— 灰鲭鲨（Isurus oxyrinchus）
+21. v3/shortfin-mako.jpg —— 灰鲭鲨（Isurus oxyrinchus）
    素材页:   https://www.inaturalist.org/observations/390405636
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     Vsevolod Rudyi · CC BY 4.0
    说明:     真实影像：iNaturalist 水下观察记录。
 
-21. v3/giant-squid.jpg —— 大王乌贼（Architeuthis dux）
+22. v3/giant-squid.jpg —— 大王乌贼（Architeuthis dux）
    素材页:   https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA 深海探测拍摄的大王乌贼活体影像。
 
-22. v3/giant-tube-worm.jpg —— 巨型管虫（Riftia pachyptila）
+23. v3/giant-tube-worm.jpg —— 巨型管虫（Riftia pachyptila）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA 在深海热泉拍摄的巨型管虫群落。
 
-23. v3/squat-lobster.jpg —— 深海蹲龙虾（Munidopsis）
+24. v3/squat-lobster.jpg —— 深海蹲龙虾（Munidopsis）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-dailyupdates-nov17-media-squat-lobster/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。
 
-24. v3/giant-isopod.jpg —— 大王具足虫（Bathynomus giganteus）
+25. v3/giant-isopod.jpg —— 大王具足虫（Bathynomus giganteus）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive09-isopod/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA ROV 在 984 米海底拍摄的大王具足虫活体。
 
-25. v3/vampire-squid.jpg —— 幽灵蛸（Vampyroteuthis infernalis）
+26. v3/vampire-squid.jpg —— 幽灵蛸（Vampyroteuthis infernalis）
    素材页:   https://www.inaturalist.org/observations/519660742
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) TonyT, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-26. v3/dumbo-octopus.jpg —— 小飞象章鱼（Grimpoteuthis）
+27. v3/dumbo-octopus.jpg —— 小飞象章鱼（Grimpoteuthis）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。
 
-27. v3/oarfish.jpg —— 皇带鱼（Regalecus glesne）
-   素材页:   https://www.inaturalist.org/observations/1590102
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     (c) John Barkla, some rights reserved (CC BY) · CC BY 4.0
-   说明:     真实影像：iNaturalist 研究级观测照片。
-
-28. v3/gulper-eel.jpg —— 宽咽鱼（Eurypharynx pelecanoides）
-   素材页:   https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/
+28. v3/deep-sea-octopus.jpg —— 深海章鱼（Graneledone pacifica）
+   素材页:   https://oceanexplorer.noaa.gov/multimedia/casper-octopus/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
-   说明:     真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。
+   说明:     真实影像：NOAA ROV 在深海拍摄的活体影像。
 
-29. v3/hadal-amphipod.jpg —— 海沟钩虾（Hirondellea gigas）
+29. v3/hadal-anemone.jpg —— 海沟海葵（Galatheanthemum）
+   素材页:   https://oceanexplorer.noaa.gov/multimedia/anemone-5/
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Ocean Exploration · 公有领域
+   说明:     真实影像：NOAA ROV 在深海拍摄的活体影像。
+
+30. v3/hadal-amphipod.jpg —— 海沟钩虾（Hirondellea gigas）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/barnacles-and-amphipods/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
    说明:     真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。
 
-30. v3/hadal-jellyfish.jpg —— 头盔水母（Periphylla periphylla）
+31. v3/hadal-jellyfish.jpg —— 头盔水母（Periphylla periphylla）
    素材页:   https://www.inaturalist.org/observations/135766176
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
    署名:     (c) Vsevolod Rudyi, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-31. v3/hadal-sea-cucumber.jpg —— 海沟海参（Oneirophanta）
+32. v3/hadal-sea-cucumber.jpg —— 海沟海参（Oneirophanta）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/sea-cucumber-5/
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域

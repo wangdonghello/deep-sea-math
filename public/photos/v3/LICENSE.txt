@@ -1,8 +1,7 @@
 深海 v3 图鉴影像授权记录
 
-共 25 张，逐张来源见 ATTRIBUTION.txt。
-
 - v3/mariana-snailfish.jpg — 深渊狮子鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/deep-sea-snailfish-2/
+- v3/hadal-cusk-eel.jpg — 海沟鼬鳚 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/cusk-eel-2/
 - v3/golden-trevally.jpg — 黄金鲹 — CC BY 4.0 — https://www.inaturalist.org/observations/187603154
 - v3/seahorse.jpg — 大腹海马 — CC BY 4.0 — https://www.inaturalist.org/observations/200640664
 - v3/leafy-seadragon.jpg — 叶海龙 — CC BY 4.0 — https://www.inaturalist.org/observations/279389471
@@ -22,8 +21,8 @@
 - v3/giant-isopod.jpg — 大王具足虫 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive09-isopod/
 - v3/vampire-squid.jpg — 幽灵蛸 — CC BY 4.0 — https://www.inaturalist.org/observations/519660742
 - v3/dumbo-octopus.jpg — 小飞象章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/
-- v3/oarfish.jpg — 皇带鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/1590102
-- v3/gulper-eel.jpg — 宽咽鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/
+- v3/deep-sea-octopus.jpg — 深海章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/casper-octopus/
+- v3/hadal-anemone.jpg — 海沟海葵 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/anemone-5/
 - v3/hadal-amphipod.jpg — 海沟钩虾 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/barnacles-and-amphipods/
 - v3/hadal-jellyfish.jpg — 头盔水母 — CC BY 4.0 — https://www.inaturalist.org/observations/135766176
 - v3/hadal-sea-cucumber.jpg — 海沟海参 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/sea-cucumber-5/

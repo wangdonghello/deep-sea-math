@@ -67,7 +67,7 @@ export const DEEP_SEA_STAGES: readonly DeepSeaStage[] = [
   },
   {
     stage: 7, name: '幽灵水层', zoneId: 'abyss', depthLabel: '约 3,000–5,000 米',
-    creatureIds: ['vampire-squid', 'dumbo-octopus', 'oarfish'],
+    creatureIds: ['vampire-squid', 'dumbo-octopus', 'deep-sea-octopus'],
   },
   {
     stage: 8, name: '深渊巨影', zoneId: 'abyss', depthLabel: '约 4,000–6,000 米',
@@ -75,7 +75,7 @@ export const DEEP_SEA_STAGES: readonly DeepSeaStage[] = [
   },
   {
     stage: 9, name: '海沟边缘', zoneId: 'hadal', depthLabel: '约 6,000–8,000 米',
-    creatureIds: ['mariana-snailfish', 'abyssobrotula-galatheae', 'gulper-eel'],
+    creatureIds: ['mariana-snailfish', 'hadal-cusk-eel', 'hadal-anemone'],
   },
   {
     stage: 10, name: '海沟最深处', zoneId: 'hadal', depthLabel: '约 8,000 米以下',

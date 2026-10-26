@@ -197,37 +197,34 @@
       "stage": 9
     },
     {
-      "id": "abyssobrotula-galatheae",
-      "name": "神女底鼬鳚",
+      "id": "hadal-cusk-eel",
+      "name": "海沟鼬鳚",
       "scientificName": "Abyssobrotula galatheae",
-      "bodySize": "最大标准体长约 16.5 厘米（SL，标准体长）",
+      "bodySize": "最大体长约 30 厘米（TL，总长）",
       "depthRange": {
-        "min": 3110,
-        "max": 8370
+        "min": 6000,
+        "max": 8000
       },
       "primaryZone": "hadal",
-      "habitat": "全球热带、亚热带深海的底层，已知记录约 3,110–8,370米。",
+      "stage": 9,
+      "habitat": "活动深度约 6000–8000米；具体栖息环境以来源页为准。",
       "knowledgeCards": [
-        "神女底鼬鳚生活在深海海底附近。",
-        "它属于鼬鳚目，身体细长、眼睛退化。",
-        "1970 年曾在波多黎各海沟约 8,370 米处捕获标本。",
-        "它主要取食海底的小型无脊椎动物。"
+        "身体细长，像鳗鱼一样在海底附近活动。",
+        "生活在极深的海沟，能承受巨大水压。",
+        "以海底附近的小型生物和有机碎屑为食。"
       ],
       "sources": [
-        "https://zh.wikipedia.org/wiki/%E7%A5%9E%E5%A5%B3%E5%BA%95%E9%BC%AC%E9%B3%9A",
-        "https://www.fishbase.se/summary/Abyssobrotula-galatheae.html",
-        "https://www.mbari.org/animal/abyssobrotula-galatheae/"
+        "https://oceanexplorer.noaa.gov/multimedia/cusk-eel-2/"
       ],
       "photo": {
-        "ref": "hadal/abyssobrotula",
-        "creditSummary": "California Academy of Sciences · CC0",
-        "attribution": "Abyssobrotula galatheae by California Academy of Sciences (https://commons.wikimedia.org/wiki/File:Abyssobrotula_galatheae.jpg), dedicated to the public domain under CC0 (https://creativecommons.org/publicdomain/zero/1.0/).",
-        "license": "CC0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abyssobrotula_galatheae.jpg",
-        "note": "真实影像：加利福尼亚科学院收藏的神女底鼬鳚标本。"
-      },
-      "stage": 9
+        "ref": "v3/hadal-cusk-eel",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/cusk-eel-2/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的活体影像。"
+      }
     },
     {
       "id": "golden-trevally",
@@ -899,64 +896,63 @@
       }
     },
     {
-      "id": "oarfish",
-      "name": "皇带鱼",
-      "scientificName": "Regalecus glesne",
-      "bodySize": "最大体长约 8 米（TL，总长）",
+      "id": "deep-sea-octopus",
+      "name": "深海章鱼",
+      "scientificName": "Graneledone pacifica",
+      "bodySize": "最大体长约 30 厘米（TL，总长）",
       "depthRange": {
-        "min": 20,
-        "max": 1000
+        "min": 1000,
+        "max": 4000
       },
       "primaryZone": "abyss",
       "stage": 7,
-      "habitat": "活动深度约 20–1000米；具体栖息环境以来源页为准。",
+      "habitat": "活动深度约 1000–4000米；具体栖息环境以来源页为准。",
       "knowledgeCards": [
-        "身体细长如带，背鳍呈红色。",
-        "是已知最长的硬骨鱼之一。",
-        "偶尔会被冲到浅海或海滩。"
+        "身体呈浅色，皮肤质感柔软，适合在深海低温环境生活。",
+        "靠腕足在海底缓慢爬行，也会短距离游动。",
+        "是遥控潜水器镜头里的常客，被昵称为“Casper”。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/1590102",
-        "https://www.inaturalist.org/taxa/196745"
+        "https://oceanexplorer.noaa.gov/multimedia/casper-octopus/"
       ],
       "photo": {
-        "ref": "v3/oarfish",
-        "creditSummary": "(c) John Barkla, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) John Barkla, some rights reserved (CC BY) (https://www.inaturalist.org/observations/1590102)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/1590102",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "ref": "v3/deep-sea-octopus",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/casper-octopus/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的活体影像。"
       }
     },
     {
-      "id": "gulper-eel",
-      "name": "宽咽鱼",
-      "scientificName": "Eurypharynx pelecanoides",
-      "bodySize": "最大体长约 1 米（TL，总长）",
+      "id": "hadal-anemone",
+      "name": "海沟海葵",
+      "scientificName": "Galatheanthemum",
+      "bodySize": "最大体长约 20 厘米（TL，总长）",
       "depthRange": {
-        "min": 500,
-        "max": 3000
+        "min": 6000,
+        "max": 8000
       },
       "primaryZone": "hadal",
       "stage": 9,
-      "habitat": "活动深度约 500–3000米；具体栖息环境以来源页为准。",
+      "habitat": "活动深度约 6000–8000米；具体栖息环境以来源页为准。",
       "knowledgeCards": [
-        "嘴巴能张得很大，像鹈鹕的喉囊。",
-        "尾部有发光器官。",
-        "以小型甲壳类和鱼类为食。"
+        "身体固定在海底，触手随水流摆动捕捉食物。",
+        "生活在海沟深处的软泥和岩石上。",
+        "与深海细菌和甲壳类共同组成海底小群落。"
       ],
       "sources": [
-        "https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/"
+        "https://oceanexplorer.noaa.gov/multimedia/anemone-5/"
       ],
       "photo": {
-        "ref": "v3/gulper-eel",
+        "ref": "v3/hadal-anemone",
         "creditSummary": "NOAA Ocean Exploration · 公有领域",
-        "attribution": "NOAA Ocean Exploration (NOAA), public domain (https://www.noaa.gov).",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
         "license": "公有领域",
         "licenseUrl": "https://www.noaa.gov/",
-        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/",
-        "note": "真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。"
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/anemone-5/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的活体影像。"
       }
     },
     {
