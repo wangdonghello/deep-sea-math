@@ -183,18 +183,16 @@
         "它主要捕食小型甲壳类等底栖生物。"
       ],
       "sources": [
-        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E9%87%8C%E4%BA%9E%E7%B4%8D%E7%8D%85%E5%AD%90%E9%AD%9A",
-        "https://www.fishbase.se/summary/Pseudoliparis-swirei.html",
-        "https://www.cas.cn/cm/202505/t20250523_5069752.shtml"
+        "https://oceanexplorer.noaa.gov/multimedia/deep-sea-snailfish-2/"
       ],
       "photo": {
-        "ref": "hadal/snailfish",
-        "creditSummary": "Gerringer et al. · CC BY 3.0",
-        "attribution": "Pseudoliparis swirei by Gerringer M. E., Linley T. D., Jamieson A. J., Goetze E., Drazen J. C. (https://commons.wikimedia.org/wiki/File:Pseudoliparis_swirei.png), licensed under CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/). Changes: converted to JPEG for delivery.",
-        "license": "CC BY 3.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pseudoliparis_swirei.png",
-        "note": "真实影像：深渊狮子鱼（Pseudoliparis swirei）的科研照片拼图，不是卡通示意图。"
+        "ref": "v3/mariana-snailfish",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/deep-sea-snailfish-2/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的狮子鱼活体。"
       },
       "stage": 9
     },
@@ -369,17 +367,16 @@
         "它们是海洋中层数量最多的鱼类类群之一。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/263897980",
-        "https://www.inaturalist.org/taxa/225372"
+        "https://www.inaturalist.org/observations/351054997"
       ],
       "photo": {
         "ref": "v3/lanternfish",
-        "creditSummary": "(c) Leïla Brunner, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Leïla Brunner, some rights reserved (CC BY) (https://www.inaturalist.org/observations/263897980)",
+        "creditSummary": "Julien Savoie · CC BY 4.0",
+        "attribution": "Julien Savoie (CC BY 4.0; https://www.inaturalist.org/observations/351054997)",
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/263897980",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "sourceUrl": "https://www.inaturalist.org/observations/351054997",
+        "note": "真实影像：iNaturalist 深水观察记录，非捕捞摆拍。"
       },
       "model": {
         "ref": "v3-lanternfish",
@@ -409,17 +406,16 @@
         "生活在黑暗的海洋中层和深海。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/298508879",
-        "https://www.inaturalist.org/taxa/120645"
+        "https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/"
       ],
       "photo": {
         "ref": "v3/viperfish",
-        "creditSummary": "(c) Julien Savoie, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Julien Savoie, some rights reserved (CC BY) (https://www.inaturalist.org/observations/298508879)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/298508879",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的蝰鱼活体。"
       }
     },
     {
@@ -480,17 +476,16 @@
         "性情温和，常被潜水员观察到。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/56620656",
-        "https://www.inaturalist.org/taxa/52188"
+        "https://www.inaturalist.org/observations/387354316"
       ],
       "photo": {
         "ref": "v3/whale-shark",
-        "creditSummary": "(c) Shaunak Modi, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Shaunak Modi, some rights reserved (CC BY) (https://www.inaturalist.org/observations/56620656)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/56620656",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "iNaturalist 观察者（CC0） · CC0 1.0",
+        "attribution": "iNaturalist 观察者（CC0） (CC0 1.0; https://www.inaturalist.org/observations/387354316)",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/387354316",
+        "note": "真实影像：iNaturalist 水下观察记录，鲸鲨在自然海域游动。"
       },
       "model": {
         "ref": "v3-whale-shark",
@@ -640,17 +635,16 @@
         "有时成群活动。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/147543063",
-        "https://www.inaturalist.org/taxa/56764"
+        "https://www.inaturalist.org/observations/336038410"
       ],
       "photo": {
         "ref": "v3/hammerhead-shark",
-        "creditSummary": "(c) ecovore, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) ecovore, some rights reserved (CC BY) (https://www.inaturalist.org/observations/147543063)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/147543063",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "Andy Mann（CC0） · CC0 1.0",
+        "attribution": "Andy Mann（CC0） (CC0 1.0; https://www.inaturalist.org/observations/336038410)",
+        "license": "CC0 1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/336038410",
+        "note": "真实影像：iNaturalist 水下观察记录，锤头鲨在自然海域游动。"
       }
     },
     {
@@ -702,17 +696,16 @@
         "常跃出水面。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/47062579",
-        "https://www.inaturalist.org/taxa/69677"
+        "https://www.inaturalist.org/observations/390405636"
       ],
       "photo": {
         "ref": "v3/shortfin-mako",
-        "creditSummary": "(c) Fábio Olmos, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Fábio Olmos, some rights reserved (CC BY) (https://www.inaturalist.org/observations/47062579)",
+        "creditSummary": "Vsevolod Rudyi · CC BY 4.0",
+        "attribution": "Vsevolod Rudyi (CC BY 4.0; https://www.inaturalist.org/observations/390405636)",
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/47062579",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "sourceUrl": "https://www.inaturalist.org/observations/390405636",
+        "note": "真实影像：iNaturalist 水下观察记录。"
       }
     },
     {
@@ -733,17 +726,16 @@
         "活体很难被观察到，多通过搁浅标本和抹香鲸胃内容物研究。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/42917670",
-        "https://www.inaturalist.org/taxa/253698"
+        "https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/"
       ],
       "photo": {
         "ref": "v3/giant-squid",
-        "creditSummary": "(c) Auckland War Memorial Museum, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Auckland War Memorial Museum, some rights reserved (CC BY) (https://www.inaturalist.org/observations/42917670)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/42917670",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/",
+        "note": "真实影像：NOAA 深海探测拍摄的大王乌贼活体影像。"
       },
       "model": {
         "ref": "v3-giant-squid",
@@ -773,17 +765,16 @@
         "红色羽状鳃帮助吸收氧气和硫化物。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/62101748",
-        "https://www.inaturalist.org/taxa/58405"
+        "https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/"
       ],
       "photo": {
         "ref": "v3/giant-tube-worm",
-        "creditSummary": "(c) Георгий Виноградов (Georgy Vinogradov), some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Георгий Виноградов (Georgy Vinogradov), some rights reserved (CC BY) (https://www.inaturalist.org/observations/62101748)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/62101748",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/",
+        "note": "真实影像：NOAA 在深海热泉拍摄的巨型管虫群落。"
       }
     },
     {
@@ -834,17 +825,16 @@
         "能长时间不进食。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/103104210",
-        "https://www.inaturalist.org/taxa/571229"
+        "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive09-isopod/"
       ],
       "photo": {
         "ref": "v3/giant-isopod",
-        "creditSummary": "(c) Tom Kennedy, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Tom Kennedy, some rights reserved (CC BY) (https://www.inaturalist.org/observations/103104210)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/103104210",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive09-isopod/",
+        "note": "真实影像：NOAA ROV 在 984 米海底拍摄的大王具足虫活体。"
       }
     },
     {

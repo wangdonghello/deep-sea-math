@@ -181,7 +181,7 @@ function hasSpeciesScopedSource(sources: readonly string[]): boolean {
     const noaaRecord = (host === 'noaa.gov' || host.endsWith('.noaa.gov')) && /\/(?:observation|species)\/[^/]+\/?$/i.test(url.pathname)
     const inatTaxonOrObservation = host === 'www.inaturalist.org' &&
       (/^\/taxa\/\d+$/i.test(url.pathname) || /^\/observations\/\d+$/i.test(url.pathname))
-    const noaaMultimedia = host === 'oceanexplorer.noaa.gov' && /^\/multimedia\/[^/]+\/?$/i.test(url.pathname)
+    const noaaMultimedia = host === 'oceanexplorer.noaa.gov' && /^\/(?:multimedia|expedition-feature)\/[^/]+\/?$/i.test(url.pathname)
     return fishBasePage || seaLifeBasePage || mbariPage || obisId || noaaRecord || inatTaxonOrObservation || noaaMultimedia
   })
 }
