@@ -81,11 +81,7 @@ describe('app: questTargets', () => {
   })
 
   it('当前区域里所有鱼都已解锁时不重复发同一张卡', () => {
-    const allZoneCreatureIds = new Set(
-      CREATURE_BANK.creatures
-        .filter((creature) => creature.depthRange.min <= 1000 && creature.depthRange.max >= 200)
-        .map((creature) => creature.id),
-    )
+    const allZoneCreatureIds = new Set(CREATURE_BANK.creatures.map((creature) => creature.id))
     const target = deriveQuestTargets([], new Set(), allZoneCreatureIds)
     expect(target.creatureId).toBeUndefined()
   })

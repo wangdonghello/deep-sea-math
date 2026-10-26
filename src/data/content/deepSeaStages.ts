@@ -63,7 +63,7 @@ export const DEEP_SEA_STAGES: readonly DeepSeaStage[] = [
   },
   {
     stage: 6, name: '热泉花园', zoneId: 'abyss', depthLabel: '约 2,000–4,000 米',
-    creatureIds: ['giant-tube-worm', 'yeti-crab', 'giant-isopod'],
+    creatureIds: ['giant-tube-worm', 'squat-lobster', 'giant-isopod'],
   },
   {
     stage: 7, name: '幽灵水层', zoneId: 'abyss', depthLabel: '约 3,000–5,000 米',

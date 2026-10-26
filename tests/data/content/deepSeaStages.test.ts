@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import { CREATURE_BANK } from '@/data/content'
 import {
   DEEP_SEA_STAGES,
   DEEP_SEA_ZONES,
@@ -23,6 +24,18 @@ describe('deep-sea ten-stage config', () => {
     expect(deepSeaStagesByZone('abyss').map((stage) => stage.stage)).toEqual([6, 7, 8])
     expect(deepSeaStagesByZone('hadal').map((stage) => stage.stage)).toEqual([9, 10])
     expect(DEEP_SEA_ZONES.map((zone) => zone.unlockAtStage)).toEqual([1, 3, 6, 9])
+  })
+
+  it('every stage id exists in the creature bank with matching stage and zone', () => {
+    const byId = new Map(CREATURE_BANK.creatures.map((creature) => [creature.id, creature]))
+    for (const stage of DEEP_SEA_STAGES) {
+      for (const id of stage.creatureIds) {
+        const creature = byId.get(id)
+        expect(creature, `${stage.stage} 关缺少 ${id}`).toBeDefined()
+        expect(creature?.stage, id).toBe(stage.stage)
+        expect(creature?.primaryZone, id).toBe(stage.zoneId)
+      }
+    }
   })
 
   it('looks up a stage and a creature stage', () => {

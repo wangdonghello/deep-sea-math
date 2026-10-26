@@ -1,0 +1,28 @@
+深海 v3 图鉴影像授权记录
+
+共 24 张，逐张来源见 ATTRIBUTION.txt。
+
+- v3/golden-trevally.jpg — 黄金鲹 — CC BY 4.0 — https://www.inaturalist.org/observations/187603154
+- v3/seahorse.jpg — 大腹海马 — CC BY 4.0 — https://www.inaturalist.org/observations/200640664
+- v3/leafy-seadragon.jpg — 叶海龙 — CC BY 4.0 — https://www.inaturalist.org/observations/279389471
+- v3/lanternfish.jpg — 灯笼鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/263897980
+- v3/viperfish.jpg — 蝰鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/298508879
+- v3/humpback-whale.jpg — 座头鲸 — CC BY 4.0 — https://www.inaturalist.org/observations/2306249
+- v3/whale-shark.jpg — 鲸鲨 — CC BY 4.0 — https://www.inaturalist.org/observations/56620656
+- v3/manta-ray.jpg — 蝠鲼 — CC BY 4.0 — https://www.inaturalist.org/observations/328321068
+- v3/blue-whale.jpg — 蓝鲸 — CC BY 4.0 — https://www.inaturalist.org/observations/338634606
+- v3/great-white-shark.jpg — 大白鲨 — CC BY 4.0 — https://www.inaturalist.org/observations/4403807
+- v3/hammerhead-shark.jpg — 锤头双髻鲨 — CC BY 4.0 — https://www.inaturalist.org/observations/147543063
+- v3/tiger-shark.jpg — 虎鲨 — CC BY 4.0 — https://www.inaturalist.org/observations/324601662
+- v3/shortfin-mako.jpg — 灰鲭鲨 — CC BY 4.0 — https://www.inaturalist.org/observations/47062579
+- v3/giant-squid.jpg — 大王乌贼 — CC BY 4.0 — https://www.inaturalist.org/observations/42917670
+- v3/giant-tube-worm.jpg — 巨型管虫 — CC BY 4.0 — https://www.inaturalist.org/observations/62101748
+- v3/squat-lobster.jpg — 深海蹲龙虾 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-dailyupdates-nov17-media-squat-lobster/
+- v3/giant-isopod.jpg — 大王具足虫 — CC BY 4.0 — https://www.inaturalist.org/observations/103104210
+- v3/vampire-squid.jpg — 幽灵蛸 — CC BY 4.0 — https://www.inaturalist.org/observations/519660742
+- v3/dumbo-octopus.jpg — 小飞象章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/
+- v3/oarfish.jpg — 皇带鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/1590102
+- v3/gulper-eel.jpg — 宽咽鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/
+- v3/hadal-amphipod.jpg — 海沟钩虾 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/barnacles-and-amphipods/
+- v3/hadal-jellyfish.jpg — 头盔水母 — CC BY 4.0 — https://www.inaturalist.org/observations/135766176
+- v3/hadal-sea-cucumber.jpg — 海沟海参 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/sea-cucumber-5/

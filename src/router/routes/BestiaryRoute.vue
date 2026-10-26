@@ -37,6 +37,7 @@ const themeId = computed(() => session.projection?.themeId ?? 'deep-sea')
     v-else
     :profile-id="profileId"
     :store="stores.bestiary"
+    :show-stages="true"
     @observe="(creatureId) => router.push(`/observation/${creatureId}`)"
     @back-home="router.push(HOME_PATH)"
   />

@@ -1,15 +1,15 @@
-name: Deploy v1 and v2 to GitHub Pages
+name: Deploy v1, v2 and v3 to GitHub Pages
 
 # 同一站点同时保留：
 # - 根路径：第一版（tag v1.0.0），家长和孩子原来收藏的地址继续可用；
-# - /v2/：第二版（v2 分支），独立构建、独立 IndexedDB 库。
+# - /v2/：第二版（v2 分支），独立构建、独立 IndexedDB 库；
+# - /v3/：第三版预览（v3 分支），独立数据库，不影响 v2。
 #
-# 任一分支更新都会重新组装“v1 根路径 + v2 子路径”的完整产物，
-# 避免两个部署互相覆盖。
+# 任一分支更新都会重新组装三个版本的完整产物，避免互相覆盖。
 
 on:
   push:
-    branches: [main, v2]
+    branches: [main, v2, v3]
   workflow_dispatch:
 
 permissions:
@@ -37,6 +37,12 @@ jobs:
           ref: v2
           path: v2
 
+      - name: Checkout third version
+        uses: actions/checkout@v4
+        with:
+          ref: v3
+          path: v3
+
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -44,6 +50,7 @@ jobs:
           cache-dependency-path: |
             v1/package-lock.json
             v2/package-lock.json
+            v3/package-lock.json
 
       - name: Install and test first version
         working-directory: v1
@@ -72,11 +79,25 @@ jobs:
           # 第二版新增事件与档案字段，第一版不认识，混用会互相污染。
           VITE_DB_NAME: deep-sea-math-v2
 
-      - name: Assemble both versions
+      - name: Install and test third version
+        working-directory: v3
         run: |
-          mkdir -p site/v2
+          npm ci
+          npm run test
+
+      - name: Build third version under /v3/
+        working-directory: v3
+        run: npm run build
+        env:
+          VITE_BASE: /deep-sea-math/v3/
+          VITE_DB_NAME: deep-sea-math-v3
+
+      - name: Assemble all versions
+        run: |
+          mkdir -p site/v2 site/v3
           cp -R v1/dist/. site/
           cp -R v2/dist/. site/v2/
+          cp -R v3/dist/. site/v3/
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -179,7 +179,10 @@ function hasSpeciesScopedSource(sources: readonly string[]): boolean {
     const mbariPage = host === 'www.mbari.org' && /^\/animal\/[^/]+\/?$/i.test(url.pathname) && !/deep-sea-anglerfish/i.test(url.pathname)
     const obisId = host === 'api.obis.org' && (/^\/v3\/taxon\/\d+$/.test(url.pathname) || url.searchParams.has('taxonid') && /^\d+$/.test(url.searchParams.get('taxonid') ?? ''))
     const noaaRecord = (host === 'noaa.gov' || host.endsWith('.noaa.gov')) && /\/(?:observation|species)\/[^/]+\/?$/i.test(url.pathname)
-    return fishBasePage || seaLifeBasePage || mbariPage || obisId || noaaRecord
+    const inatTaxonOrObservation = host === 'www.inaturalist.org' &&
+      (/^\/taxa\/\d+$/i.test(url.pathname) || /^\/observations\/\d+$/i.test(url.pathname))
+    const noaaMultimedia = host === 'oceanexplorer.noaa.gov' && /^\/multimedia\/[^/]+\/?$/i.test(url.pathname)
+    return fishBasePage || seaLifeBasePage || mbariPage || obisId || noaaRecord || inatTaxonOrObservation || noaaMultimedia
   })
 }
 
@@ -538,7 +541,7 @@ export function createQuestionIndexes(questions: readonly Question[]): QuestionI
 export function assertValidCreatures(value: unknown): asserts value is CreatureBank {
   const bank = record(value, 'creatures')
   nonEmptyString(bank.version, 'creatures.version')
-  if (!Array.isArray(bank.creatures) || bank.creatures.length < 4 || bank.creatures.length > 8) {
+  if (!Array.isArray(bank.creatures) || bank.creatures.length < 4 || bank.creatures.length > 40) {
     throw new Error('creatures.creatures: expected four to eight entries')
   }
   const ids = new Set<string>()

@@ -12,7 +12,7 @@ function readCreatures(): unknown {
 describe('creature content', () => {
   it('contains four sourced entries with interval depths and 3–5 knowledge cards', () => {
     const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
-    expect(bestiary.creatures).toHaveLength(6)
+    expect(bestiary.creatures).toHaveLength(30)
     assertValidCreatures(bestiary)
 
     for (const creature of bestiary.creatures) {

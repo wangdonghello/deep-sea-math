@@ -314,6 +314,8 @@ export interface BestiaryEntry {
   sources: string[]
   /** 图鉴区域归属；用于区域解锁后的鱼种可见性（不是深度重叠）。 */
   primaryZone?: string
+  /** 深海关卡归属（1–10）；v3 十关图鉴用。 */
+  stage?: number
 }
 
 /**

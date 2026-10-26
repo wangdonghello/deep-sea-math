@@ -39,7 +39,8 @@
         "sourceUrl": "https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55",
         "note": "这是深海鮟鱇鱼的授权示意模型，不代表约翰逊鮟鱇鱼的精确解剖复原。"
       },
-      "primaryZone": "twilight"
+      "primaryZone": "twilight",
+      "stage": 2
     },
     {
       "id": "giant-cusk-eel",
@@ -79,7 +80,8 @@
         "sourceUrl": "https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545",
         "note": "这是深海鼬鳚属（Bassozetus）的授权示意模型，不代表巨鼬鳚 Spectrunculus grandis 的精确解剖复原。"
       },
-      "primaryZone": "abyss"
+      "primaryZone": "abyss",
+      "stage": 8
     },
     {
       "id": "deep-sea-lizardfish",
@@ -119,7 +121,8 @@
         "sourceUrl": "https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7",
         "note": "这是蜥鱼科鱼类的授权示意模型，不代表深海蜥鱼 Bathysaurus ferox 的精确解剖复原。"
       },
-      "primaryZone": "midnight"
+      "primaryZone": "abyss",
+      "stage": 8
     },
     {
       "id": "jewel-squid",
@@ -159,7 +162,8 @@
         "sourceUrl": "https://sketchfab.com/3d-models/squid-2e211c13614b433ab6191a814364dacd",
         "note": "这是头足类的授权示意模型，不代表宝石鱿鱼 Histioteuthis bonnellii 的精确解剖复原。"
       },
-      "primaryZone": "abyss"
+      "primaryZone": "abyss",
+      "stage": 8
     },
     {
       "id": "mariana-snailfish",
@@ -191,7 +195,8 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pseudoliparis_swirei.png",
         "note": "真实影像：深渊狮子鱼（Pseudoliparis swirei）的科研照片拼图，不是卡通示意图。"
-      }
+      },
+      "stage": 9
     },
     {
       "id": "abyssobrotula-galatheae",
@@ -223,6 +228,746 @@
         "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abyssobrotula_galatheae.jpg",
         "note": "真实影像：加利福尼亚科学院收藏的神女底鼬鳚标本。"
+      },
+      "stage": 9
+    },
+    {
+      "id": "golden-trevally",
+      "name": "黄金鲹",
+      "scientificName": "Gnathanodon speciosus",
+      "bodySize": "最大体长约 120 厘米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 100
+      },
+      "primaryZone": "twilight",
+      "stage": 1,
+      "habitat": "活动深度约 0–100米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "鱼体金黄，身上有数条黑色纵纹，成鱼颜色更偏银灰。",
+        "常成群活动在珊瑚礁、潟湖和沿岸浅水。",
+        "幼鱼有时跟随大型鱼类或水母一起游动。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/187603154",
+        "https://www.inaturalist.org/taxa/194896"
+      ],
+      "photo": {
+        "ref": "v3/golden-trevally",
+        "creditSummary": "(c) Belinda Forbes, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Belinda Forbes, some rights reserved (CC BY) (https://www.inaturalist.org/observations/187603154)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/187603154",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "seahorse",
+      "name": "大腹海马",
+      "scientificName": "Hippocampus abdominalis",
+      "bodySize": "最大体长约 35 厘米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 50
+      },
+      "primaryZone": "twilight",
+      "stage": 1,
+      "habitat": "活动深度约 0–50米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "海马用卷曲的尾巴缠住海草或珊瑚，避免被水流冲走。",
+        "雄性海马有育儿袋，负责孵化受精卵。",
+        "它们靠背鳍快速扇动缓慢游动。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/200640664",
+        "https://www.inaturalist.org/taxa/69837"
+      ],
+      "photo": {
+        "ref": "v3/seahorse",
+        "creditSummary": "(c) Emily Roberts, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Emily Roberts, some rights reserved (CC BY) (https://www.inaturalist.org/observations/200640664)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/200640664",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "leafy-seadragon",
+      "name": "叶海龙",
+      "scientificName": "Phycodurus eques",
+      "bodySize": "最大体长约 35 厘米（TL，总长）",
+      "depthRange": {
+        "min": 3,
+        "max": 50
+      },
+      "primaryZone": "twilight",
+      "stage": 1,
+      "habitat": "活动深度约 3–50米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "身体长满叶状附肢，看起来像漂浮的海藻。",
+        "主要生活在澳大利亚南部的海草床和岩礁。",
+        "雄性负责携带并孵化卵。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/279389471",
+        "https://www.inaturalist.org/taxa/49105"
+      ],
+      "photo": {
+        "ref": "v3/leafy-seadragon",
+        "creditSummary": "(c) ttsquid, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) ttsquid, some rights reserved (CC BY) (https://www.inaturalist.org/observations/279389471)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/279389471",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "lanternfish",
+      "name": "灯笼鱼",
+      "scientificName": "Myctophum punctatum",
+      "bodySize": "最大体长约 10 厘米（TL，总长）",
+      "depthRange": {
+        "min": 200,
+        "max": 1000
+      },
+      "primaryZone": "twilight",
+      "stage": 2,
+      "habitat": "活动深度约 200–1000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "腹部有发光器，可在黑暗中发出蓝光。",
+        "许多灯笼鱼白天在深水，夜间上浮觅食，称为垂直迁移。",
+        "它们是海洋中层数量最多的鱼类类群之一。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/263897980",
+        "https://www.inaturalist.org/taxa/225372"
+      ],
+      "photo": {
+        "ref": "v3/lanternfish",
+        "creditSummary": "(c) Leïla Brunner, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Leïla Brunner, some rights reserved (CC BY) (https://www.inaturalist.org/observations/263897980)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/263897980",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "viperfish",
+      "name": "蝰鱼",
+      "scientificName": "Chauliodus sloani",
+      "bodySize": "最大体长约 30 厘米（TL，总长）",
+      "depthRange": {
+        "min": 500,
+        "max": 2500
+      },
+      "primaryZone": "twilight",
+      "stage": 2,
+      "habitat": "活动深度约 500–2500米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "牙齿细长，像针一样交错，帮助抓住滑溜的猎物。",
+        "背鳍第一根鳍条延长成发光诱饵。",
+        "生活在黑暗的海洋中层和深海。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/298508879",
+        "https://www.inaturalist.org/taxa/120645"
+      ],
+      "photo": {
+        "ref": "v3/viperfish",
+        "creditSummary": "(c) Julien Savoie, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Julien Savoie, some rights reserved (CC BY) (https://www.inaturalist.org/observations/298508879)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/298508879",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "humpback-whale",
+      "name": "座头鲸",
+      "scientificName": "Megaptera novaeangliae",
+      "bodySize": "最大体长约 16 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 200
+      },
+      "primaryZone": "midnight",
+      "stage": 3,
+      "habitat": "活动深度约 0–200米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "胸鳍特别长，跃出水面时很显眼。",
+        "雄性会唱复杂的歌，歌声能传播很远。",
+        "每年在觅食海域和繁殖海域之间长距离迁徙。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/2306249",
+        "https://www.inaturalist.org/taxa/41566"
+      ],
+      "photo": {
+        "ref": "v3/humpback-whale",
+        "creditSummary": "(c) Ken-ichi Ueda, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Ken-ichi Ueda, some rights reserved (CC BY) (https://www.inaturalist.org/observations/2306249)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/2306249",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "whale-shark",
+      "name": "鲸鲨",
+      "scientificName": "Rhincodon typus",
+      "bodySize": "最大体长约 18 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 700
+      },
+      "primaryZone": "midnight",
+      "stage": 3,
+      "habitat": "活动深度约 0–700米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "是现存最大的鱼类，靠滤食浮游生物和小鱼为生。",
+        "身体上有独特的白色斑点，像星空。",
+        "性情温和，常被潜水员观察到。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/56620656",
+        "https://www.inaturalist.org/taxa/52188"
+      ],
+      "photo": {
+        "ref": "v3/whale-shark",
+        "creditSummary": "(c) Shaunak Modi, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Shaunak Modi, some rights reserved (CC BY) (https://www.inaturalist.org/observations/56620656)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/56620656",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "manta-ray",
+      "name": "蝠鲼",
+      "scientificName": "Mobula birostris",
+      "bodySize": "最大体长约 7 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 1000
+      },
+      "primaryZone": "midnight",
+      "stage": 3,
+      "habitat": "活动深度约 0–1000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "头前的两只头鳍帮助把浮游生物送入口中。",
+        "翼展可达数米，像在水下飞翔。",
+        "会清洁身体，也常与清洁鱼一起出现。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/328321068",
+        "https://www.inaturalist.org/taxa/623966"
+      ],
+      "photo": {
+        "ref": "v3/manta-ray",
+        "creditSummary": "(c) Victor E. Chocho, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Victor E. Chocho, some rights reserved (CC BY) (https://www.inaturalist.org/observations/328321068)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/328321068",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "blue-whale",
+      "name": "蓝鲸",
+      "scientificName": "Balaenoptera musculus",
+      "bodySize": "最大体长约 30 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 500
+      },
+      "primaryZone": "midnight",
+      "stage": 4,
+      "habitat": "活动深度约 0–500米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "是已知体型最大的动物，以磷虾为主要食物。",
+        "喷气孔喷出的水柱又高又直。",
+        "叫声低沉，能穿过很远的海洋。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/338634606",
+        "https://www.inaturalist.org/taxa/41553"
+      ],
+      "photo": {
+        "ref": "v3/blue-whale",
+        "creditSummary": "(c) Tomás Tamagno, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Tomás Tamagno, some rights reserved (CC BY) (https://www.inaturalist.org/observations/338634606)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/338634606",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "great-white-shark",
+      "name": "大白鲨",
+      "scientificName": "Carcharodon carcharias",
+      "bodySize": "最大体长约 6 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 1200
+      },
+      "primaryZone": "midnight",
+      "stage": 4,
+      "habitat": "活动深度约 0–1200米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "嗅觉和电感受器能发现远处的猎物。",
+        "背部灰褐、腹部白色，是典型的反荫蔽。",
+        "是海洋顶级捕食者之一。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/4403807",
+        "https://www.inaturalist.org/taxa/50873"
+      ],
+      "photo": {
+        "ref": "v3/great-white-shark",
+        "creditSummary": "(c) Adam J. Searcy, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Adam J. Searcy, some rights reserved (CC BY) (https://www.inaturalist.org/observations/4403807)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/4403807",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "hammerhead-shark",
+      "name": "锤头双髻鲨",
+      "scientificName": "Sphyrna lewini",
+      "bodySize": "最大体长约 4 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 275
+      },
+      "primaryZone": "midnight",
+      "stage": 4,
+      "habitat": "活动深度约 0–275米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "头部向两侧延伸成锤状，眼睛位于两端。",
+        "电感受器分布在头部，帮助寻找藏在地下的猎物。",
+        "有时成群活动。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/147543063",
+        "https://www.inaturalist.org/taxa/56764"
+      ],
+      "photo": {
+        "ref": "v3/hammerhead-shark",
+        "creditSummary": "(c) ecovore, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) ecovore, some rights reserved (CC BY) (https://www.inaturalist.org/observations/147543063)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/147543063",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "tiger-shark",
+      "name": "虎鲨",
+      "scientificName": "Galeocerdo cuvier",
+      "bodySize": "最大体长约 5.5 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 350
+      },
+      "primaryZone": "midnight",
+      "stage": 5,
+      "habitat": "活动深度约 0–350米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "幼鱼身上有深色条纹，成鱼条纹会变淡。",
+        "食物很广，包括鱼类、海龟和甲壳类。",
+        "是大型近海和远洋鲨鱼。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/324601662",
+        "https://www.inaturalist.org/taxa/52299"
+      ],
+      "photo": {
+        "ref": "v3/tiger-shark",
+        "creditSummary": "(c) Jay Brasher, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Jay Brasher, some rights reserved (CC BY) (https://www.inaturalist.org/observations/324601662)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/324601662",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "shortfin-mako",
+      "name": "灰鲭鲨",
+      "scientificName": "Isurus oxyrinchus",
+      "bodySize": "最大体长约 4 米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 500
+      },
+      "primaryZone": "midnight",
+      "stage": 5,
+      "habitat": "活动深度约 0–500米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "游泳速度快，身体呈流线型。",
+        "能维持体温高于海水，属于部分温血鲨鱼。",
+        "常跃出水面。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/47062579",
+        "https://www.inaturalist.org/taxa/69677"
+      ],
+      "photo": {
+        "ref": "v3/shortfin-mako",
+        "creditSummary": "(c) Fábio Olmos, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Fábio Olmos, some rights reserved (CC BY) (https://www.inaturalist.org/observations/47062579)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/47062579",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "giant-squid",
+      "name": "大王乌贼",
+      "scientificName": "Architeuthis dux",
+      "bodySize": "最大体长约 13 米（TL，总长）",
+      "depthRange": {
+        "min": 200,
+        "max": 1000
+      },
+      "primaryZone": "midnight",
+      "stage": 5,
+      "habitat": "活动深度约 200–1000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "是体型最大的无脊椎动物之一。",
+        "触腕上有吸盘和钩状结构。",
+        "活体很难被观察到，多通过搁浅标本和抹香鲸胃内容物研究。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/42917670",
+        "https://www.inaturalist.org/taxa/253698"
+      ],
+      "photo": {
+        "ref": "v3/giant-squid",
+        "creditSummary": "(c) Auckland War Memorial Museum, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Auckland War Memorial Museum, some rights reserved (CC BY) (https://www.inaturalist.org/observations/42917670)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/42917670",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "giant-tube-worm",
+      "name": "巨型管虫",
+      "scientificName": "Riftia pachyptila",
+      "bodySize": "最大体长约 2.4 米（TL，总长）",
+      "depthRange": {
+        "min": 1500,
+        "max": 2500
+      },
+      "primaryZone": "abyss",
+      "stage": 6,
+      "habitat": "活动深度约 1500–2500米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "生活在深海热泉附近，没有口和消化道。",
+        "体内共生细菌利用硫化物制造养分。",
+        "红色羽状鳃帮助吸收氧气和硫化物。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/62101748",
+        "https://www.inaturalist.org/taxa/58405"
+      ],
+      "photo": {
+        "ref": "v3/giant-tube-worm",
+        "creditSummary": "(c) Георгий Виноградов (Georgy Vinogradov), some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Георгий Виноградов (Georgy Vinogradov), some rights reserved (CC BY) (https://www.inaturalist.org/observations/62101748)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/62101748",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "squat-lobster",
+      "name": "深海蹲龙虾",
+      "scientificName": "Munidopsis",
+      "bodySize": "最大体长约 10 厘米（TL，总长）",
+      "depthRange": {
+        "min": 500,
+        "max": 3000
+      },
+      "primaryZone": "abyss",
+      "stage": 6,
+      "habitat": "活动深度约 500–3000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "深海蹲龙虾常在热泉、冷泉和海底岩石附近活动。",
+        "它们用螯足取食有机碎屑和小型生物。",
+        "外形像小龙虾，但属于甲壳类。"
+      ],
+      "sources": [
+        "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-dailyupdates-nov17-media-squat-lobster/"
+      ],
+      "photo": {
+        "ref": "v3/squat-lobster",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain (https://www.noaa.gov).",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-dailyupdates-nov17-media-squat-lobster/",
+        "note": "真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。"
+      }
+    },
+    {
+      "id": "giant-isopod",
+      "name": "大王具足虫",
+      "scientificName": "Bathynomus giganteus",
+      "bodySize": "最大体长约 50 厘米（TL，总长）",
+      "depthRange": {
+        "min": 170,
+        "max": 2500
+      },
+      "primaryZone": "abyss",
+      "stage": 6,
+      "habitat": "活动深度约 170–2500米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "是体型最大的等足类之一。",
+        "可在海底取食动物尸体和有机碎屑。",
+        "能长时间不进食。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/103104210",
+        "https://www.inaturalist.org/taxa/571229"
+      ],
+      "photo": {
+        "ref": "v3/giant-isopod",
+        "creditSummary": "(c) Tom Kennedy, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Tom Kennedy, some rights reserved (CC BY) (https://www.inaturalist.org/observations/103104210)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/103104210",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "vampire-squid",
+      "name": "幽灵蛸",
+      "scientificName": "Vampyroteuthis infernalis",
+      "bodySize": "最大体长约 30 厘米（TL，总长）",
+      "depthRange": {
+        "min": 600,
+        "max": 1200
+      },
+      "primaryZone": "abyss",
+      "stage": 7,
+      "habitat": "活动深度约 600–1200米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "身体呈暗红色，鳍像斗篷。",
+        "受惊时能喷出发光黏液。",
+        "以海洋雪和有机碎屑为食，不是吸血动物。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/taxa/253737",
+        "https://www.inaturalist.org/observations/519660742"
+      ],
+      "photo": {
+        "ref": "v3/vampire-squid",
+        "creditSummary": "(c) TonyT, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) TonyT, some rights reserved (CC BY) (https://www.inaturalist.org/observations/519660742)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/519660742",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "dumbo-octopus",
+      "name": "小飞象章鱼",
+      "scientificName": "Grimpoteuthis",
+      "bodySize": "最大体长约 30 厘米（TL，总长）",
+      "depthRange": {
+        "min": 1000,
+        "max": 4000
+      },
+      "primaryZone": "abyss",
+      "stage": 7,
+      "habitat": "活动深度约 1000–4000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "头部两侧有耳状鳍，游动时像小飞象。",
+        "生活在深海海底附近。",
+        "会用腕足在海底爬行。"
+      ],
+      "sources": [
+        "https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/"
+      ],
+      "photo": {
+        "ref": "v3/dumbo-octopus",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain (https://www.noaa.gov).",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/",
+        "note": "真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。"
+      }
+    },
+    {
+      "id": "oarfish",
+      "name": "皇带鱼",
+      "scientificName": "Regalecus glesne",
+      "bodySize": "最大体长约 8 米（TL，总长）",
+      "depthRange": {
+        "min": 20,
+        "max": 1000
+      },
+      "primaryZone": "abyss",
+      "stage": 7,
+      "habitat": "活动深度约 20–1000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "身体细长如带，背鳍呈红色。",
+        "是已知最长的硬骨鱼之一。",
+        "偶尔会被冲到浅海或海滩。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/1590102",
+        "https://www.inaturalist.org/taxa/196745"
+      ],
+      "photo": {
+        "ref": "v3/oarfish",
+        "creditSummary": "(c) John Barkla, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) John Barkla, some rights reserved (CC BY) (https://www.inaturalist.org/observations/1590102)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/1590102",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "gulper-eel",
+      "name": "宽咽鱼",
+      "scientificName": "Eurypharynx pelecanoides",
+      "bodySize": "最大体长约 1 米（TL，总长）",
+      "depthRange": {
+        "min": 500,
+        "max": 3000
+      },
+      "primaryZone": "hadal",
+      "stage": 9,
+      "habitat": "活动深度约 500–3000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "嘴巴能张得很大，像鹈鹕的喉囊。",
+        "尾部有发光器官。",
+        "以小型甲壳类和鱼类为食。"
+      ],
+      "sources": [
+        "https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/"
+      ],
+      "photo": {
+        "ref": "v3/gulper-eel",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain (https://www.noaa.gov).",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-logs-jun18-media-eel/",
+        "note": "真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。"
+      }
+    },
+    {
+      "id": "hadal-amphipod",
+      "name": "海沟钩虾",
+      "scientificName": "Hirondellea gigas",
+      "bodySize": "最大体长约 5 厘米（TL，总长）",
+      "depthRange": {
+        "min": 6000,
+        "max": 11000
+      },
+      "primaryZone": "hadal",
+      "stage": 10,
+      "habitat": "活动深度约 6000–11000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "生活在海沟最深处，能承受极高水压。",
+        "以沉降到海底的有机碎屑为食。",
+        "属于端足类甲壳动物。"
+      ],
+      "sources": [
+        "https://oceanexplorer.noaa.gov/multimedia/barnacles-and-amphipods/"
+      ],
+      "photo": {
+        "ref": "v3/hadal-amphipod",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain (https://www.noaa.gov).",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/barnacles-and-amphipods/",
+        "note": "真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。"
+      }
+    },
+    {
+      "id": "hadal-jellyfish",
+      "name": "头盔水母",
+      "scientificName": "Periphylla periphylla",
+      "bodySize": "最大体长约 20 厘米（TL，总长）",
+      "depthRange": {
+        "min": 0,
+        "max": 7000
+      },
+      "primaryZone": "hadal",
+      "stage": 10,
+      "habitat": "活动深度约 0–7000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "身体呈钟形，像一顶头盔。",
+        "能发出蓝光。",
+        "在深水进行垂直迁移。"
+      ],
+      "sources": [
+        "https://www.inaturalist.org/observations/135766176",
+        "https://www.inaturalist.org/taxa/247212"
+      ],
+      "photo": {
+        "ref": "v3/hadal-jellyfish",
+        "creditSummary": "(c) Vsevolod Rudyi, some rights reserved (CC BY) · CC BY 4.0",
+        "attribution": "(c) Vsevolod Rudyi, some rights reserved (CC BY) (https://www.inaturalist.org/observations/135766176)",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/135766176",
+        "note": "真实影像：iNaturalist 研究级观测照片。"
+      }
+    },
+    {
+      "id": "hadal-sea-cucumber",
+      "name": "海沟海参",
+      "scientificName": "Oneirophanta",
+      "bodySize": "最大体长约 15 厘米（TL，总长）",
+      "depthRange": {
+        "min": 1000,
+        "max": 6000
+      },
+      "primaryZone": "hadal",
+      "stage": 10,
+      "habitat": "活动深度约 1000–6000米；具体栖息环境以来源页为准。",
+      "knowledgeCards": [
+        "在海底缓慢爬行，取食沉积物中的有机质。",
+        "身体柔软，能适应高压环境。",
+        "是深海海底常见的清道夫。"
+      ],
+      "sources": [
+        "https://oceanexplorer.noaa.gov/multimedia/sea-cucumber-5/"
+      ],
+      "photo": {
+        "ref": "v3/hadal-sea-cucumber",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain (https://www.noaa.gov).",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/sea-cucumber-5/",
+        "note": "真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。"
       }
     }
   ]

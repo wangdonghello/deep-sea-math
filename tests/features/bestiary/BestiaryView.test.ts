@@ -129,7 +129,9 @@ describe('BestiaryView', () => {
 
     const shown = view.findAll('[data-testid^="creature-card-"]')
       .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
-    expect(shown).toEqual(['mariana-snailfish', 'abyssobrotula-galatheae'])
+    expect(shown).toEqual(CREATURE_BANK.creatures
+      .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === 'hadal'))
+      .map((entry) => entry.id))
   })
 
   it('shows unlocked content by replaying only the requested profile events', async () => {
@@ -283,9 +285,9 @@ describe('BestiaryView 默认教学区', () => {
     await flushPromises()
 
     expect(press(deepSea, '筛选全部区域')).toBe('true')
-    // 深海蜥鱼归在深海区；暮光区只显示鮟鱇鱼
-    expect(shownIds(deepSea)).toContain('deep-sea-lizardfish')
-    expect(shownIds(twilight)).not.toContain('deep-sea-lizardfish')
+    // 座头鲸归在深海区；暮光区不显示它
+    expect(shownIds(deepSea)).toContain('humpback-whale')
+    expect(shownIds(twilight)).not.toContain('humpback-whale')
     expect(shownIds(deepSea)).toEqual(CREATURE_BANK.creatures
       .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === ZONES[0].id || zone.id === ZONES[1].id))
       .map((entry) => entry.id))
@@ -304,7 +306,9 @@ describe('BestiaryView 默认教学区', () => {
     await view.get('button[aria-label="筛选暮光区"]').trigger('click')
     const shown = view.findAll('[data-testid^="creature-card-"]')
       .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
-    expect(shown).toEqual(['johnson-anglerfish'])
+    expect(shown).toEqual(CREATURE_BANK.creatures
+      .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === 'twilight'))
+      .map((entry) => entry.id))
   })
 
   it('未解锁的区域不能筛选，避免把其他海域误认为已解锁', async () => {
@@ -349,6 +353,42 @@ describe('BestiaryView 默认教学区', () => {
     expect(view.find('[data-testid="bestiary-unlocked-zones"]').exists()).toBe(false)
   })
 })
+
+describe('BestiaryView v3 stage filter', () => {
+  const completed = (sessionId: string, at = 1): DomainEvent => ({
+    eventId: `done-${sessionId}`, profileId: 'profile-a', occurredAt: at,
+    type: 'session-completed', sessionId, rewards: ['quest-complete'],
+  })
+
+  it('默认定位已解锁的最新关卡，并按关卡显示 3 条图鉴', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([completed('s1'), completed('s2', 2)]), showStages: true },
+    })
+    await flushPromises()
+
+    expect(view.get('[data-testid="stage-tab-2"]').attributes('aria-pressed')).toBe('true')
+    expect(view.get('[data-testid="stage-tab-3"]').attributes('disabled')).toBeDefined()
+    expect(view.get('[data-testid="active-stage"]').text()).toContain('第 2 关')
+    expect(shownIdsFor(view)).toEqual(['johnson-anglerfish', 'lanternfish', 'viperfish'])
+  })
+
+  it('切到第 1 关只显示浅海 3 条，全部按钮恢复已解锁区域', async () => {
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([completed('s1'), completed('s2', 2)]), showStages: true },
+    })
+    await flushPromises()
+    await view.get('[data-testid="stage-tab-1"]').trigger('click')
+    expect(shownIdsFor(view)).toEqual(['golden-trevally', 'seahorse', 'leafy-seadragon'])
+
+    await view.get('button[aria-label="筛选全部区域"]').trigger('click')
+    expect(shownIdsFor(view)).toHaveLength(6)
+  })
+})
+
+function shownIdsFor(view: VueWrapper): (string | undefined)[] {
+  return view.findAll('[data-testid^="creature-card-"]')
+    .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
+}
 
 describe('ObservationView', () => {
   it('观察舱有固定的返回首页出口', () => {
