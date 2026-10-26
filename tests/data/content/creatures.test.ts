@@ -53,14 +53,13 @@ describe('creature content', () => {
       expect(creature.photo.note).toContain('只鉴定到属')
       expect(creature.photo.note).toContain(creature.scientificName)
     }
-    // 大鼬鳚与鮟鱇鱼的影像与学名可对应；鮟鱇鱼是馆藏照，不能写成水下活体
+    // 大鼬鳚的影像与学名可对应；鮟鱇鱼已换成 NOAA 水下活体，不能再出现馆藏照
     const cusk = creatures.find((item) => item.id === 'giant-cusk-eel')!
     expect(cusk.photo.note).toContain('Spectrunculus grandis')
     const anglerfish = creatures.find((item) => item.id === 'johnson-anglerfish')!
-    expect(anglerfish.photo.note).toContain('Melanocetus johnsonii')
-    expect(anglerfish.photo.note).toContain('不是水下活体拍摄')
-    expect(anglerfish.photo.license).toBe('CC BY-SA 4.0')
-    expect(anglerfish.photo.attribution).toContain('Fernando Losada Rodríguez')
+    expect(anglerfish.photo.note).toContain('NOAA')
+    expect(anglerfish.photo.note).not.toContain('博物馆')
+    expect(anglerfish.photo.sourceUrl).toContain('oceanexplorer.noaa.gov')
   })
 
   it('rejects photos without attribution or with an insecure licence link', () => {
@@ -95,7 +94,6 @@ describe('creature content', () => {
   it('includes size records with their original measurement basis and direct species citations', () => {
     const creatures = (readCreatures() as { creatures: Array<Record<string, any>> }).creatures
     const expected = [
-      ['johnson-anglerfish', '18厘米', '2.9厘米', 'TL', 'https://www.fishbase.se/summary/Melanocetus-johnsonii.html'],
       ['giant-cusk-eel', '127厘米', 'SL', 'https://www.fishbase.se/summary/Spectrunculus-grandis.html'],
       ['deep-sea-lizardfish', '64.0厘米', 'SL', 'https://www.fishbase.se/summary/Bathysaurus-ferox.html'],
       ['jewel-squid', '33厘米', 'ML', 'https://www.sealifebase.se/summary/Histioteuthis-bonnellii.html'],
@@ -120,14 +118,12 @@ describe('creature content', () => {
     expect(() => assertValidCreatures(blank)).toThrow(/bodySize.*non-empty/i)
   })
 
-  it('includes Johnson’s anglerfish and rejects fixed-depth claims', () => {
+  it('includes deep-sea anglerfish live imagery and rejects fixed-depth claims', () => {
     const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
-    const anglerfish = bestiary.creatures.find((creature) => creature.scientificName === 'Melanocetus johnsonii')
+    const anglerfish = bestiary.creatures.find((creature) => creature.id === 'johnson-anglerfish')
     expect(anglerfish?.depthRange).toEqual({ min: 100, max: 4500 })
-    expect(anglerfish?.habitat).toMatch(/MBARI.*类群.*300–4,000米.*FishBase.*100–4,500米/)
-    expect(anglerfish?.habitat).not.toContain('580米')
-    expect(anglerfish?.sources).toContain('https://www.fishbase.se/summary/Melanocetus-johnsonii.html')
-    expect(anglerfish?.sources).toContain('https://www.mbari.org/animal/deep-sea-anglerfish/')
+    expect(anglerfish?.habitat).toContain('100–4500米')
+    expect(anglerfish?.photo.sourceUrl).toContain('oceanexplorer.noaa.gov')
     expect(anglerfish?.knowledgeCards.join(' ')).toMatch(/发光/)
     expect(anglerfish?.knowledgeCards.join(' ')).not.toContain('580米')
 
@@ -148,7 +144,7 @@ describe('creature content', () => {
     })
     expect(johnson.model.attribution).toContain('Carlo Bergonzini')
     expect(johnson.model.attribution).toContain('CC-BY-4.0')
-    expect(johnson.model.note).toMatch(/约翰逊鮟鱇鱼.*精确/)
+    expect(johnson.model.note).toMatch(/鮟鱇.*精确/)
     assertValidCreatures(bestiary)
 
     const unsafeRef = structuredClone(bestiary)

@@ -1,8 +1,9 @@
 深海 v3 图鉴影像授权记录
 
+- v3/johnson-anglerfish.jpg — 深海鮟鱇 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-logs-nov1-media-anglerfish/
 - v3/mariana-snailfish.jpg — 深渊狮子鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/deep-sea-snailfish-2/
 - v3/hadal-cusk-eel.jpg — 海沟鼬鳚 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/cusk-eel-2/
-- v3/golden-trevally.jpg — 黄金鲹 — CC BY 4.0 — https://www.inaturalist.org/observations/187603154
+- v3/golden-trevally.jpg — 黄金鲹 — CC BY 4.0 — https://www.inaturalist.org/observations/340228678
 - v3/seahorse.jpg — 大腹海马 — CC BY 4.0 — https://www.inaturalist.org/observations/200640664
 - v3/leafy-seadragon.jpg — 叶海龙 — CC BY 4.0 — https://www.inaturalist.org/observations/279389471
 - v3/lanternfish.jpg — 灯笼鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/351054997
@@ -19,7 +20,7 @@
 - v3/giant-tube-worm.jpg — 巨型管虫 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/
 - v3/squat-lobster.jpg — 深海蹲龙虾 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-dailyupdates-nov17-media-squat-lobster/
 - v3/giant-isopod.jpg — 大王具足虫 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive09-isopod/
-- v3/vampire-squid.jpg — 幽灵蛸 — CC BY 4.0 — https://www.inaturalist.org/observations/519660742
+- v3/vampire-squid.jpg — 幽灵蛸 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-background-cephalopods-media-vampire-squid/
 - v3/dumbo-octopus.jpg — 小飞象章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/
 - v3/deep-sea-octopus.jpg — 深海章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/casper-octopus/
 - v3/hadal-anemone.jpg — 海沟海葵 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/anemone-5/

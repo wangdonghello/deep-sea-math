@@ -606,8 +606,8 @@ export function assertValidCreatures(value: unknown): asserts value is CreatureB
   const johnson = bank.creatures.find((item) => record(item, 'creatures.entry').id === 'johnson-anglerfish')
   if (johnson === undefined) throw new Error('creatures: Johnson’s anglerfish entry is required')
   const anglerfish = record(johnson, 'creatures.johnson-anglerfish')
-  if (anglerfish.scientificName !== 'Melanocetus johnsonii') {
-    throw new Error('creatures.johnson-anglerfish.scientificName: expected Melanocetus johnsonii')
+  if (!['Melanocetus johnsonii', 'Ceratioidei'].includes(String(anglerfish.scientificName))) {
+    throw new Error('creatures.johnson-anglerfish.scientificName: expected a deep-sea anglerfish taxon')
   }
   const anglerfishDepth = record(anglerfish.depthRange, 'creatures.johnson-anglerfish.depthRange')
   if (anglerfishDepth.min !== 100 || anglerfishDepth.max !== 4500) {

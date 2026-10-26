@@ -3,32 +3,30 @@
   "creatures": [
     {
       "id": "johnson-anglerfish",
-      "name": "约翰逊鮟鱇鱼",
-      "scientificName": "Melanocetus johnsonii",
+      "name": "深海鮟鱇",
+      "scientificName": "Ceratioidei",
       "bodySize": "最大体长约18厘米（雌鱼；雄鱼或未定性记录约2.9厘米；TL，总长）",
       "depthRange": {
         "min": 100,
         "max": 4500
       },
-      "habitat": "MBARI深海鮟鱇鱼类群页面概述类群水深300–4,000米；FishBase物种专页记录100–4,500米（通常100–1,500米）。来源口径不同，均不代表完整分布。",
+      "habitat": "活动深度约 100–4500米；深海鮟鱇类分布范围广，具体深度因种类而异。",
       "knowledgeCards": [
-        "学名为 Melanocetus johnsonii。",
-        "FishBase物种专页记录的水深范围为100–4,500米，通常100–1,500米。",
-        "MBARI概述的300–4,000米是深海鮟鱇鱼类群页面范围，不是该物种专属范围。",
-        "鮟鱇鱼类群可用带发光诱饵的鳍条吸引猎物。"
+        "深海鮟鱇是鮟鱇目的深海类群，很多种类生活在阳光照不到的水层。",
+        "部分雌鱼头顶有发光诱饵，用来吸引猎物。",
+        "雄鱼体型通常比雌鱼小很多。"
       ],
       "sources": [
-        "https://www.mbari.org/animal/deep-sea-anglerfish/",
-        "https://www.fishbase.se/summary/Melanocetus-johnsonii.html"
+        "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-logs-nov1-media-anglerfish/"
       ],
       "photo": {
-        "ref": "johnson-anglerfish",
-        "creditSummary": "伦敦自然历史博物馆藏品 · Fernando Losada Rodríguez · CC BY-SA 4.0",
-        "attribution": "\"Melanocetus johnsonii (Black seadevil) in the Natural History Museum of London\" by Fernando Losada Rodríguez (https://commons.wikimedia.org/wiki/File:Melanocetus_johnsonii.001_-_Natural_History_Museum_of_London.JPG), licensed under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). 本站版本仅做裁剪与缩放；该裁剪版本按同一许可 CC BY-SA 4.0 提供。",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Melanocetus_johnsonii.001_-_Natural_History_Museum_of_London.JPG",
-        "note": "真实影像：伦敦自然历史博物馆（Natural History Museum, London）馆藏展示的约翰逊鮟鱇鱼（Melanocetus johnsonii）。这是博物馆藏品照，不是水下活体拍摄。"
+        "ref": "v3/johnson-anglerfish",
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-logs-nov1-media-anglerfish/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的鮟鱇类活体；鉴定到类群而非单一物种。"
       },
       "model": {
         "ref": "deep-sea-fish-3dsm4",
@@ -37,7 +35,7 @@
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55",
-        "note": "这是深海鮟鱇鱼的授权示意模型，不代表约翰逊鮟鱇鱼的精确解剖复原。"
+        "note": "3D 示意模型：鮟鱇类通用低模，不代表单一物种的精确复原。"
       },
       "primaryZone": "twilight",
       "stage": 2
@@ -244,17 +242,16 @@
         "幼鱼有时跟随大型鱼类或水母一起游动。"
       ],
       "sources": [
-        "https://www.inaturalist.org/observations/187603154",
-        "https://www.inaturalist.org/taxa/194896"
+        "https://www.inaturalist.org/observations/340228678"
       ],
       "photo": {
         "ref": "v3/golden-trevally",
-        "creditSummary": "(c) Belinda Forbes, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Belinda Forbes, some rights reserved (CC BY) (https://www.inaturalist.org/observations/187603154)",
+        "creditSummary": "Debra Baker · CC BY 4.0",
+        "attribution": "(c) Debra Baker, some rights reserved (CC BY) (https://www.inaturalist.org/observations/340228678)",
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/187603154",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "sourceUrl": "https://www.inaturalist.org/observations/340228678",
+        "note": "真实影像：斐济 20 米珊瑚礁潜水拍摄，黄金鲹在自然海域游动。"
       },
       "model": {
         "ref": "v3-golden-trevally",
@@ -852,17 +849,16 @@
         "以海洋雪和有机碎屑为食，不是吸血动物。"
       ],
       "sources": [
-        "https://www.inaturalist.org/taxa/253737",
-        "https://www.inaturalist.org/observations/519660742"
+        "https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-background-cephalopods-media-vampire-squid/"
       ],
       "photo": {
         "ref": "v3/vampire-squid",
-        "creditSummary": "(c) TonyT, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) TonyT, some rights reserved (CC BY) (https://www.inaturalist.org/observations/519660742)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/519660742",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-background-cephalopods-media-vampire-squid/",
+        "note": "真实影像：NOAA ROV 在深海拍摄的幽灵蛸活体。"
       }
     },
     {

@@ -26,7 +26,7 @@ describe('unlock: rewardLabels', () => {
   })
 
   it('生物与区域文案走内容库，不写死名字', () => {
-    expect(creatureLabel('johnson-anglerfish')).toBe('约翰逊鮟鱇鱼')
+    expect(creatureLabel('johnson-anglerfish')).toBe('深海鮟鱇')
     expect(zoneLabel('twilight')).toBe('暮光区')
   })
 

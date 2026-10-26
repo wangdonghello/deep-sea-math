@@ -391,7 +391,7 @@ describe('App: 整体装配', () => {
 
     expect(router.currentRoute.value.path).toBe('/bestiary')
     // 名称/学名 MUST NOT 出现在任何地方（守卫在渲染前就拦下了）
-    expect(app!.text()).not.toContain('约翰逊鮟鱇鱼')
+    expect(app!.text()).not.toContain('深海鮟鱇')
     expect(app!.text()).not.toContain('Melanocetus')
     expect(app!.find('[data-testid="observation-view"]').exists()).toBe(false)
   })
@@ -409,7 +409,7 @@ describe('App: 整体装配', () => {
     expect(router.currentRoute.value.path).toBe(`/observation/${CREATURE_ID}`)
     const view = app!.find('[data-testid="observation-view"]')
     expect(view.exists()).toBe(true)
-    expect(view.text()).toContain('约翰逊鮟鱇鱼')
+    expect(view.text()).toContain('深海鮟鱇')
   })
 
   it('整组完成后 UnlockOverlay 出现并展示奖励名', async () => {
@@ -431,7 +431,7 @@ describe('App: 整体装配', () => {
     // 奖励名逐条可指认：两枚徽章 + 图鉴卡物种名
     expect(overlay.text()).toContain('整组完成徽章')
     expect(overlay.text()).toContain('独立掌握徽章')
-    expect(overlay.text()).toContain('约翰逊鮟鱇鱼')
+    expect(overlay.text()).toContain('深海鮟鱇')
 
     // 显式关闭后消失（反馈不是自动消失的装饰）
     await app!.get('[data-testid="unlock-overlay-close"]').trigger('click')
