@@ -6,7 +6,9 @@ import { replayProjections } from '@/domain/eventLog/replay'
 import { isCorrect } from '@/domain/quiz/answerJudgement'
 import { answerText } from '@/shared/choiceAnswer'
 import { trackSessionCompleted } from '@/shared/analytics'
-import type { AnswerSubmittedEvent, DomainEvent, Question } from '@/domain/model/types'
+import type { AnswerSubmittedEvent, DomainEvent, Question, ThemeId } from '@/domain/model/types'
+import { resolveDeepSeaProgress } from '@/features/bestiary/deepSeaProgress'
+import { DEEP_SEA_ZONES } from '@/data/content/deepSeaStages'
 import { grantRewards } from '@/domain/reward/rewardGrant'
 
 /**
@@ -45,6 +47,8 @@ export interface QuizSessionOptions {
   /** Optional target metadata consumed by T7's reward rules. */
   creatureId?: string
   zoneId?: string
+  /** 当前主题；深海主题在完成时显示十关进度与新区提示。 */
+  themeId?: ThemeId
   store: QuizSessionStore
   clock?: () => number
   idGenerator?: () => string
@@ -150,6 +154,20 @@ export function useQuizSession(options: QuizSessionOptions) {
       if (held !== undefined) return held
     }
     return currentQuestion.value
+  })
+  /** 已完成的每日题组数（按 sessionId 去重，含本次刚完成的一组）。 */
+  const completedSessionCount = computed(() => new Set(events.value.flatMap((event) =>
+    event.type === 'session-completed' && event.profileId === options.profileId ? [event.sessionId] : [],
+  )).size)
+  /** 深海十关：完成后显示“第 N 关完成”。 */
+  const stageCompletion = computed(() => {
+    if (options.themeId !== 'deep-sea' || completedSessionCount.value === 0) return null
+    const progress = resolveDeepSeaProgress(completedSessionCount.value)
+    const zone = DEEP_SEA_ZONES.find((entry) => entry.unlockAtStage === progress.completedStages)
+    return {
+      stage: progress.completedStages,
+      zoneName: zone?.name ?? null,
+    }
   })
   const practiceQuestionAvailable = computed(() => queue.value.some(
     (question) => !correctlyAnsweredIds.value.has(question.id),
@@ -384,7 +402,7 @@ export function useQuizSession(options: QuizSessionOptions) {
     currentPosition, totalQuestions, feedback, submitting,
     phase: computed(() => phase.value), explanationVisible: computed(() => explanationVisible.value),
     sessionCompleted, practiceQuestionAvailable, continuePractice, nextQuestion, showExplanation,
-    isPracticeSession, practiceStars, practiceCompleted, practiceFixedQuestionIds,
+    isPracticeSession, practiceStars, practiceCompleted, practiceFixedQuestionIds, stageCompletion,
     duplicateSlotCount, revealedHints, usedHintLevel, refreshEvents, useHint, submitAnswer,
     revealAnswer,
   }

@@ -1,0 +1,20 @@
+深海 v3 明星物种 3D 模型
+
+全部来自 Poly Pizza，许可为 CC0 或 CC-BY；逐条署名如下：
+
+- deep-sea-fish-3dsm4.glb — 约翰逊鮟鱇鱼 — Deep Sea Fish #3DSM4 · Carlo Bergonzini · CC BY 4.0 — https://sketchfab.com/3d-models/deep-sea-fish-3dsm4-6ee4e67640794f7b8cecd10295ab2f55
+- bassozetus-cusk.glb — 深海大鼬鳚 — Bassozetus Cusk · paumarti · CC BY 4.0 — https://sketchfab.com/3d-models/bassozetus-cusk-74fa424f9f6d4c9580a29279a2a36545
+- lizardfish-v3.glb — 深海蜥鱼 — LizardfishV3 · aloxr · CC BY 4.0 — https://sketchfab.com/3d-models/lizardfishv3-5786feb347e147d0ae6316ac38b655c7
+- squid-morphin.glb — 宝石鱿鱼 — Squid · Morphin · CC BY 4.0 — https://sketchfab.com/3d-models/squid-2e211c13614b433ab6191a814364dacd
+- v3/golden-trevally.glb — 黄金鲹 — Fish · Quaternius · CC0 — https://poly.pizza/m/7V4gaDMQV8
+- v3/seahorse.glb — 大腹海马 — Seahorse · Poly by Google · CC-BY — https://poly.pizza/m/d_36p3CahYa
+- v3/leafy-seadragon.glb — 叶海龙 — Lionfish · Quaternius · CC0 — https://poly.pizza/m/czsz9Baw86
+- v3/lanternfish.glb — 灯笼鱼 — Fish · Quaternius · CC0 — https://poly.pizza/m/7V4gaDMQV8
+- v3/humpback-whale.glb — 座头鲸 — Whale · Poly by Google · CC-BY — https://poly.pizza/m/7-TgeTuwbzw
+- v3/whale-shark.glb — 鲸鲨 — Shark · Poly by Google · CC-BY — https://poly.pizza/m/8Ke5qCnWxsZ
+- v3/manta-ray.glb — 蝠鲼 — Manta ray · Quaternius · CC0 — https://poly.pizza/m/yzD8b7ZHZm
+- v3/blue-whale.glb — 蓝鲸 — Whale · Quaternius · CC0 — https://poly.pizza/m/JGFwp6xWgk
+- v3/great-white-shark.glb — 大白鲨 — Great white shark · Remy Tauziac · CC-BY — https://poly.pizza/m/2xYwaBltA2c
+- v3/giant-squid.glb — 大王乌贼 — Squid · Poly by Google · CC-BY — https://poly.pizza/m/aOY1Ae28E9k
+
+注意：其中部分模型是通用低模示意，不代表物种级精确复原。

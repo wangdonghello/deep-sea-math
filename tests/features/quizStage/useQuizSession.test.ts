@@ -65,6 +65,24 @@ function setupPractice(questions: Question[], seed: DomainEvent[] = []) {
 }
 
 describe('useQuizSession', () => {
+  it('深海题组完成后给出第 N 关与进入新区提示', async () => {
+    const events: DomainEvent[] = [
+      { eventId: 'start', profileId: 'profile-1', occurredAt: 1, type: 'session-started', sessionId: 'session-1', questionIds: ['q1'], difficultyTrace: [1] },
+      { eventId: 'prior', profileId: 'profile-1', occurredAt: 2, type: 'session-completed', sessionId: 'old', rewards: [] },
+    ]
+    let id = 0
+    const store = {
+      async listEvents() { return [...events] },
+      async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return [...events] },
+    }
+    const session = useQuizSession({
+      sessionId: 'session-1', profileId: 'profile-1', questions: [makeQuestion('q1')],
+      themeId: 'deep-sea', store, clock: () => 1000 + events.length, idGenerator: () => `e-${++id}`,
+    })
+    await session.submitAnswer('7')
+    expect(session.stageCompletion.value).toEqual({ stage: 2, zoneName: null })
+  })
+
   it('错题练习答对后给出错题星并在整组完成时标记完成', async () => {
     const { session } = setupPractice([makeQuestion('q1')])
     await session.submitAnswer('7')

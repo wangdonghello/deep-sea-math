@@ -46,6 +46,7 @@ const ready = computed(() => context.value !== undefined && context.value.sessio
     :similar-question-pool="context.similarQuestionPool"
     :creature-id="context.creatureId"
     :zone-id="context.zoneId"
+    :theme-id="context.themeId"
     :store="stores.quiz"
     @go-home="router.push(HOME_PATH)"
   />

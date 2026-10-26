@@ -2,7 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 
 import { redact } from '@/shared/redact'
-import type { Question } from '@/domain/model/types'
+import type { Question, ThemeId } from '@/domain/model/types'
 import AnswerExplanation from '@/features/quizStage/AnswerExplanation.vue'
 import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
 import HintStack from '@/features/quizStage/HintStack.vue'
@@ -19,6 +19,7 @@ const props = defineProps<{
   similarQuestionPool?: readonly Question[]
   creatureId?: string
   zoneId?: string
+  themeId?: ThemeId
   store: QuizSessionStore
   clock?: () => number
   idGenerator?: () => string
@@ -33,7 +34,7 @@ const emit = defineEmits<{
 const session = useQuizSession({
   sessionId: props.sessionId, profileId: props.profileId, questions: props.questions,
   similarQuestionPool: props.similarQuestionPool,
-  creatureId: props.creatureId, zoneId: props.zoneId,
+  creatureId: props.creatureId, zoneId: props.zoneId, themeId: props.themeId,
   store: props.store, clock: props.clock, idGenerator: props.idGenerator,
 })
 const errorMessage = ref('')
@@ -129,6 +130,9 @@ onMounted(() => { void run(session.refreshEvents, 'quiz-load-failed') })
     <p v-if="errorMessage" role="status">{{ errorMessage }}</p>
     <p v-if="!question && !errorMessage && session.practiceCompleted.value" data-testid="practice-completed">
       错题练习完成：本次获得 {{ session.practiceStars.value }} 颗错题星<template v-if="session.practiceFixedQuestionIds.value.length > 0">，{{ session.practiceFixedQuestionIds.value.length }} 道题已修复并移出错题本</template>。
+    </p>
+    <p v-else-if="!question && !errorMessage && session.stageCompletion.value" data-testid="stage-completed">
+      第 {{ session.stageCompletion.value.stage }} 关完成！3 条新图鉴已解锁<template v-if="session.stageCompletion.value.zoneName">，进入{{ session.stageCompletion.value.zoneName }}</template>。
     </p>
     <p v-else-if="!question && !errorMessage && session.sessionCompleted.value" data-testid="quest-completed">
       这一组完成啦，继续探索深海吧！

@@ -103,8 +103,9 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 - 失败即回退：WebGL 不可用、模型加载失败、`webglcontextlost` 都会退回真实
   影像并撤掉切换按钮；模型署名与许可链接只要模型在屏就显示
   （CC BY 要求署名不因降级而消失，看到什么就署什么名）。
-- 深海图鉴当前 30 条，其中 **4 个物种**有现成模型；其余先展示真实影像。
-  10 个明星物种的 3D 仍在接入中（CC0 优先，缺模型时用原创低模并标注）。
+- 深海图鉴当前 30 条，其中 **14 个物种**有模型：原有 4 个 + v3 新增 10 个明星物种。
+  v3 模型放在 `public/models/v3-*.glb`，逐条许可见同名 `-license.txt`。
+  其中叶海龙、灯笼鱼、黄金鲹使用通用低模示意，已在卡片 note 明确标注。
 - 恐龙主题有独立的 8 个 CC0 模型，走 `DinoModelViewer.vue`（恐龙知识卡），
   与深海 `CreatureModelViewer` 不共用资产目录。
 
@@ -120,6 +121,14 @@ npx @gltf-transform/cli optimize <模型.glb> public/models/<ref>.glb \
 后三个模型均由 `@gltf-transform/cli optimize` 处理：合并网格、几何简化、
 贴图压到 1024px WebP、meshopt 压缩；原始 `license.txt` 原文保存在
 `public/models/<ref>-license.txt`。
+
+### 5.1.1 v3 明星物种模型
+
+大白鲨、鲸鲨、蝠鲼、座头鲸、蓝鲸、黄金鲹、海马、叶海龙、灯笼鱼、大王乌贼
+已从 Poly Pizza 接入 CC0 / CC-BY 低模。模型只作为“可转动的示意收藏”，
+不宣称物种级解剖复原；找不到精确模型的物种使用通用鱼/鲸/带鳍鱼低模，
+并在 `model.note` 写明限制。许可原文与作者记在
+`public/models/v3-<id>-license.txt`。
 
 ### 5.2 恐龙主题模型
 
