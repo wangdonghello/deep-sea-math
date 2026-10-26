@@ -30,20 +30,23 @@
  *   `crypto.subtle.digest` 对 `ArrayBufferView<ArrayBuffer>` 的要求。
  *   同步或异步实现均可，返回即视为已完成。
  */
+import { sha256 } from './sha256'
+
 export type DigestFn = (algorithm: 'SHA-256', data: Uint8Array<ArrayBuffer>) => Promise<ArrayBuffer>
 
 /** `digest('SHA-256', …)` 的唯一合法算法名，供默认注入与测试对齐。 */
 const SHA256 = 'SHA-256' as const
 
 /**
- * 默认摘要注入：把 `pin + salt` 的 UTF-8 字节交给 Web Crypto。
- *
- * `globalThis.crypto` 与 `TextEncoder` 都在**调用时**才解析（而非模块顶层），
- * 因此本模块被 import 进不提供这两个全局的 Node/jsdom 环境时不会在加载期
- * 抛错 —— 只有在真的没注入 `digest` 又走到默认分支时才失败。
+ * 默认摘要注入：优先 Web Crypto；非安全上下文（HTTP 局域网地址）下浏览器
+ * 不提供 `crypto.subtle`，此时退回纯 JS SHA-256，否则家长 PIN 会每次保存/
+ * 校验都抛错，表现为“一直让重新输入”。
  */
-const webCryptoDigest: DigestFn = (algorithm, data) =>
-  globalThis.crypto.subtle.digest(algorithm, data)
+const defaultDigest: DigestFn = (algorithm, data) => {
+  const subtle = globalThis.crypto?.subtle
+  if (subtle !== undefined) return subtle.digest(algorithm, data)
+  return Promise.resolve(sha256(data).buffer as ArrayBuffer)
+}
 
 /**
  * 把摘要结果转成小写十六进制字符串。
@@ -80,7 +83,7 @@ function toHex(buffer: ArrayBuffer): string {
 export async function hashPin(
   pin: string,
   salt: string,
-  digest: DigestFn = webCryptoDigest,
+  digest: DigestFn = defaultDigest,
 ): Promise<string> {
   if (pin === '') {
     throw new Error('hashPin: PIN 不能为空')
@@ -117,7 +120,7 @@ export async function verifyPin(
   pin: string,
   salt: string,
   hash: string,
-  digest: DigestFn = webCryptoDigest,
+  digest: DigestFn = defaultDigest,
 ): Promise<boolean> {
   // 合法性校验复用 hashPin 的同一套规则，避免两份错误文案漂移后
   // 「什么算空输入」在两处变得不一致。
