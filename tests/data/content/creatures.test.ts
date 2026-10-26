@@ -167,7 +167,7 @@ describe('creature content', () => {
   it('ships every optimized model and its license notice as local assets', () => {
     const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
     const modeled = bestiary.creatures.filter((creature) => creature.model !== undefined)
-    expect(modeled).toHaveLength(4)
+    expect(modeled).toHaveLength(14)
 
     /** 鮟鱇鱼的历史文件名不符合 `<ref>-license.txt` 约定，单独映射。 */
     const licenseFileByRef: Record<string, string> = {
@@ -184,7 +184,7 @@ describe('creature content', () => {
       ), 'utf8')
 
       expect(asset.byteLength, `${creature.id} model size`).toBeLessThan(2 * 1024 * 1024)
-      expect(license, `${creature.id} license`).toContain('CC-BY-4.0')
+      expect(license, `${creature.id} license`).toMatch(/CC0|CC-BY/)
       // 许可原文里必须真的出现作者名，避免"拿到模型但署名不可复核"
       expect(license, `${creature.id} license author`).toContain(model.creditSummary.split(' · ')[1])
       expect(model.note, `${creature.id} model disclaimer`).toMatch(/示意模型/)

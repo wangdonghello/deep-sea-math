@@ -260,6 +260,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/187603154",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-golden-trevally",
+        "creditSummary": "Fish · Quaternius · CC0",
+        "attribution": "\"Fish\" by Quaternius (https://poly.pizza/m/7V4gaDMQV8), licensed under CC0 (https://creativecommons.org/publicdomain/zero/1.0/). Downloaded from Poly Pizza.",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://poly.pizza/m/7V4gaDMQV8",
+        "note": "3D 示意模型：通用鱼低模，不代表黄金鲹的体色与纵纹；不是物种级精确复原。"
       }
     },
     {
@@ -291,6 +300,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/200640664",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-seahorse",
+        "creditSummary": "Seahorse · Poly by Google · CC-BY",
+        "attribution": "\"Seahorse\" by Poly by Google (https://poly.pizza/m/d_36p3CahYa), licensed under CC-BY (https://creativecommons.org/licenses/by/3.0/). Downloaded from Poly Pizza.",
+        "license": "CC-BY",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "sourceUrl": "https://poly.pizza/m/d_36p3CahYa",
+        "note": "3D 示意模型：较接近海马的授权低模；不是物种级精确复原。"
       }
     },
     {
@@ -322,6 +340,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/279389471",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-leafy-seadragon",
+        "creditSummary": "Lionfish · Quaternius · CC0",
+        "attribution": "\"Lionfish\" by Quaternius (https://poly.pizza/m/czsz9Baw86), licensed under CC0 (https://creativecommons.org/publicdomain/zero/1.0/). Downloaded from Poly Pizza.",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://poly.pizza/m/czsz9Baw86",
+        "note": "3D 示意模型：通用带鳍鱼低模，不代表叶海龙的叶状附肢；不是物种级精确复原。"
       }
     },
     {
@@ -353,6 +380,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/263897980",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-lanternfish",
+        "creditSummary": "Fish · Quaternius · CC0",
+        "attribution": "\"Fish\" by Quaternius (https://poly.pizza/m/7V4gaDMQV8), licensed under CC0 (https://creativecommons.org/publicdomain/zero/1.0/). Downloaded from Poly Pizza.",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://poly.pizza/m/7V4gaDMQV8",
+        "note": "3D 示意模型：通用鱼低模，不代表灯笼鱼的发光器；不是物种级精确复原。"
       }
     },
     {
@@ -415,6 +451,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/2306249",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-humpback-whale",
+        "creditSummary": "Whale · Poly by Google · CC-BY",
+        "attribution": "\"Whale\" by Poly by Google (https://poly.pizza/m/7-TgeTuwbzw), licensed under CC-BY (https://creativecommons.org/licenses/by/3.0/). Downloaded from Poly Pizza.",
+        "license": "CC-BY",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "sourceUrl": "https://poly.pizza/m/7-TgeTuwbzw",
+        "note": "3D 示意模型：通用鲸类低模，不代表座头鲸的长胸鳍；不是物种级精确复原。"
       }
     },
     {
@@ -446,6 +491,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/56620656",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-whale-shark",
+        "creditSummary": "Shark · Poly by Google · CC-BY",
+        "attribution": "\"Shark\" by Poly by Google (https://poly.pizza/m/8Ke5qCnWxsZ), licensed under CC-BY (https://creativecommons.org/licenses/by/3.0/). Downloaded from Poly Pizza.",
+        "license": "CC-BY",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "sourceUrl": "https://poly.pizza/m/8Ke5qCnWxsZ",
+        "note": "3D 示意模型：通用鲨鱼低模，不代表鲸鲨的斑点与体型；不是物种级精确复原。"
       }
     },
     {
@@ -477,6 +531,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/328321068",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-manta-ray",
+        "creditSummary": "Manta ray · Quaternius · CC0",
+        "attribution": "\"Manta ray\" by Quaternius (https://poly.pizza/m/yzD8b7ZHZm), licensed under CC0 (https://creativecommons.org/publicdomain/zero/1.0/). Downloaded from Poly Pizza.",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://poly.pizza/m/yzD8b7ZHZm",
+        "note": "3D 示意模型：较接近蝠鲼的授权低模；不是物种级精确复原。"
       }
     },
     {
@@ -508,6 +571,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/338634606",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-blue-whale",
+        "creditSummary": "Whale · Quaternius · CC0",
+        "attribution": "\"Whale\" by Quaternius (https://poly.pizza/m/JGFwp6xWgk), licensed under CC0 (https://creativecommons.org/publicdomain/zero/1.0/). Downloaded from Poly Pizza.",
+        "license": "CC0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "sourceUrl": "https://poly.pizza/m/JGFwp6xWgk",
+        "note": "3D 示意模型：通用鲸类低模，不代表蓝鲸的精确比例；不是物种级精确复原。"
       }
     },
     {
@@ -539,6 +611,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/4403807",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-great-white-shark",
+        "creditSummary": "Great white shark · Remy Tauziac · CC-BY",
+        "attribution": "\"Great white shark\" by Remy Tauziac (https://poly.pizza/m/2xYwaBltA2c), licensed under CC-BY (https://creativecommons.org/licenses/by/3.0/). Downloaded from Poly Pizza.",
+        "license": "CC-BY",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "sourceUrl": "https://poly.pizza/m/2xYwaBltA2c",
+        "note": "3D 示意模型：较接近大白鲨的授权低模；不是物种级精确复原。"
       }
     },
     {
@@ -663,6 +744,15 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
         "sourceUrl": "https://www.inaturalist.org/observations/42917670",
         "note": "真实影像：iNaturalist 研究级观测照片。"
+      },
+      "model": {
+        "ref": "v3-giant-squid",
+        "creditSummary": "Squid · Poly by Google · CC-BY",
+        "attribution": "\"Squid\" by Poly by Google (https://poly.pizza/m/aOY1Ae28E9k), licensed under CC-BY (https://creativecommons.org/licenses/by/3.0/). Downloaded from Poly Pizza.",
+        "license": "CC-BY",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+        "sourceUrl": "https://poly.pizza/m/aOY1Ae28E9k",
+        "note": "3D 示意模型：较接近头足类的授权低模；不是物种级精确复原。"
       }
     },
     {
