@@ -6,21 +6,20 @@
  * 第一道闸门。
  *
  * 与 design §1 的四个注入点保持一致：`randomUUID` **可注入**。默认实现走
- * Web Crypto 的 `crypto.randomUUID()`，且在**调用时**才解析全局——与
- * `quiz/buildDailyQuest` 的 `defaultIdGenerator` 同一手法，这样 domain 模块
- * 被 import 进不提供该全局的环境（Node 单测）时不会在加载期炸掉。
+ * {@link randomUuid}：优先 Web Crypto 的 `crypto.randomUUID()`，HTTP 非安全
+ * 上下文则退回 `getRandomValues` 生成 v4 UUID。
  */
+
+import { randomUuid } from '@/domain/crypto/randomUuid'
 
 /** 可注入的 UUID 发生器签名。 */
 export type RandomUuid = () => string
 
 /**
- * 默认 UUID 发生器：Web Crypto 的 `crypto.randomUUID()`。
- *
- * 不在模块顶层取 `crypto`，是为了让「未注入又不支持 Web Crypto」的失败
- * 延后到真正生成 ID 的那一刻，而不是在 import 期就抛错。
+ * 默认 UUID 发生器：安全上下文走 `crypto.randomUUID()`，HTTP 预览地址退回
+ * `getRandomValues`，避免创建档案时因缺少 Web Crypto 而反复回到创建页。
  */
-export const defaultRandomUuid: RandomUuid = () => globalThis.crypto.randomUUID()
+export const defaultRandomUuid: RandomUuid = () => randomUuid()
 
 /**
  * 生成一个事件 ID。

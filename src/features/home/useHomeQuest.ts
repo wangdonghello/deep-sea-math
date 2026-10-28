@@ -18,6 +18,7 @@
  * 落库——MUST NOT 只在内存里摆一个题组，否则刷新即丢（spec §刷新页面不换题）。
  */
 
+import { randomUuid } from '@/domain/crypto/randomUuid'
 import { computed, ref } from 'vue'
 
 import { redact } from '@/shared/redact'
@@ -36,7 +37,7 @@ import type { HomeProfile, HomeQuestOptions, HomeStore } from './types'
 const systemClock: () => number = () => Date.now()
 
 /** 默认 ID 发生器：Web Crypto 随机 UUID（调用时才解析，见 `buildDailyQuest`）。 */
-const systemIdGenerator: () => string = () => globalThis.crypto.randomUUID()
+const systemIdGenerator: () => string = () => randomUuid()
 
 /** 任务卡所需的全部展示数据（组件按它渲染，不做任何推导）。 */
 export type QuestCardModel =

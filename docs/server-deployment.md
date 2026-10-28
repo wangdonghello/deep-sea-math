@@ -35,3 +35,6 @@ nginx 中 `/v3/` 的 location 指向该目录，SPA 回退到 `/v3/index.html`�
 服务器当前是 `http://IP:端口`，不属于浏览器安全上下文，`crypto.subtle` 不可用。
 家长 PIN 的哈希会自动退回纯 JS SHA-256（`src/domain/crypto/sha256.ts`），
 因此 HTTP 下也能设置/校验 PIN。后续若配置 HTTPS，会自动优先使用 Web Crypto。
+
+`crypto.randomUUID()` 同样只在安全上下文可用；创建档案/题组的 ID 会退回
+`getRandomValues` 生成 v4 UUID（`src/domain/crypto/randomUuid.ts`）。

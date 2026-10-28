@@ -1,3 +1,4 @@
+import { randomUuid } from '@/domain/crypto/randomUuid'
 import type {
   DifficultyFallbackEvent,
   Grade,
@@ -113,7 +114,7 @@ const defaultClock: () => number = () => Date.now()
  * 不提供该全局的环境时不会在加载期抛错——只在真的没注入又走到默认分支时
  * 才失败，与 Task 2 `hashPin` 的 `webCryptoDigest` 同一手法。
  */
-const defaultIdGenerator: () => string = () => globalThis.crypto.randomUUID()
+const defaultIdGenerator: () => string = () => randomUuid()
 
 /**
  * 题目排序键：`(difficulty, id)` 字典序。
