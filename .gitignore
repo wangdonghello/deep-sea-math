@@ -11,3 +11,6 @@ coverage/
 .superpowers/
 
 reports/
+
+# Local AI tooling configuration
+.opencode/
