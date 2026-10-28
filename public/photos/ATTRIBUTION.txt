@@ -127,22 +127,22 @@
    说明:     真实影像：NOAA 在花园区国家海洋保护区拍摄的蝠鲼腹面，头鳍与腹部斑纹清晰可见。
 
 18. v3/blue-whale.jpg —— 蓝鲸（Balaenoptera musculus）
-   素材页:   https://www.inaturalist.org/observations/338634606
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     (c) Tomás Tamagno, some rights reserved (CC BY) · CC BY 4.0
-   说明:     真实影像：iNaturalist 研究级观测照片。
+   素材页:   https://commons.wikimedia.org/wiki/File:CINMS_-_Two_Blue_Whales_Aerial_Photo_(27877575362).jpg
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Channel Islands National Marine Sanctuary · 公有领域
+   说明:     真实影像：NOAA 在海峡群岛国家海洋保护区航拍的两头蓝鲸，其中一头正在喷出水柱。
 
 19. v3/great-white-shark.jpg —— 大白鲨（Carcharodon carcharias）
-   素材页:   https://www.inaturalist.org/observations/4403807
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     (c) Adam J. Searcy, some rights reserved (CC BY) · CC BY 4.0
-   说明:     真实影像：iNaturalist 研究级观测照片。
+   素材页:   https://commons.wikimedia.org/wiki/File:White_shark.jpg
+   许可:     CC BY 2.5 (https://creativecommons.org/licenses/by/2.5/)
+   署名:     (c) Terry Goss (Pterantula) · CC BY 2.5
+   说明:     真实影像：大白鲨在蓝色海水中侧身游动，背景是成群的鱼。
 
 20. v3/hammerhead-shark.jpg —— 锤头双髻鲨（Sphyrna lewini）
-   素材页:   https://www.inaturalist.org/observations/336038410
-   许可:     CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-   署名:     Andy Mann（CC0） · CC0 1.0
-   说明:     真实影像：iNaturalist 水下观察记录，锤头鲨在自然海域游动。
+   素材页:   https://commons.wikimedia.org/wiki/File:Scalloped_hammerhead_shark_(Sphyrna_lewini)_Costa_Rica.jpg
+   许可:     CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/)
+   署名:     (c) Kris-Mikael Krister · CC BY 2.0
+   说明:     真实影像：哥斯达黎加海域的锤头双髻鲨，锤状头部轮廓清晰。
 
 21. v3/tiger-shark.jpg —— 虎鲨（Galeocerdo cuvier）
    素材页:   https://www.inaturalist.org/observations/324601662
@@ -151,16 +151,16 @@
    说明:     真实影像：iNaturalist 研究级观测照片。
 
 22. v3/shortfin-mako.jpg —— 灰鲭鲨（Isurus oxyrinchus）
-   素材页:   https://www.inaturalist.org/observations/390405636
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     Vsevolod Rudyi · CC BY 4.0
-   说明:     真实影像：iNaturalist 水下观察记录。
+   素材页:   https://commons.wikimedia.org/wiki/File:Kurzflossen-Mako.jpg
+   许可:     CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/)
+   署名:     (c) Patrick Doll · CC BY-SA 3.0
+   说明:     真实影像：灰鲭鲨在蓝色海水中侧身游动，尖吻与流线型身体清晰。
 
 23. v3/giant-squid.jpg —— 大王乌贼（Architeuthis dux）
-   素材页:   https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/
-   许可:     公有领域 (https://www.noaa.gov/)
-   署名:     NOAA Ocean Exploration · 公有领域
-   说明:     真实影像：NOAA 深海探测拍摄的大王乌贼活体影像。
+   素材页:   https://www.inaturalist.org/observations/327393268
+   许可:     CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/)
+   署名:     (c) marcm13 · CC BY-NC 4.0
+   说明:     真实影像：加那利群岛附近海面记录的大王乌贼，触腕与吸盘清晰可见；仅限非商业使用。
 
 24. v3/giant-tube-worm.jpg —— 巨型管虫（Riftia pachyptila）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/

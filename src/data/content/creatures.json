@@ -554,12 +554,12 @@
       ],
       "photo": {
         "ref": "v3/blue-whale",
-        "creditSummary": "(c) Tomás Tamagno, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Tomás Tamagno, some rights reserved (CC BY) (https://www.inaturalist.org/observations/338634606)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/338634606",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA 海峡群岛国家海洋保护区（CINMS） · 公有领域",
+        "attribution": "NOAA Channel Islands National Marine Sanctuary (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:CINMS_-_Two_Blue_Whales_Aerial_Photo_(27877575362).jpg",
+        "note": "真实影像：NOAA 在海峡群岛国家海洋保护区航拍的两头蓝鲸，其中一头正在喷出水柱。"
       },
       "model": {
         "ref": "v3-blue-whale",
@@ -594,12 +594,12 @@
       ],
       "photo": {
         "ref": "v3/great-white-shark",
-        "creditSummary": "(c) Adam J. Searcy, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Adam J. Searcy, some rights reserved (CC BY) (https://www.inaturalist.org/observations/4403807)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/4403807",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "(c) Terry Goss · CC BY 2.5",
+        "attribution": "(c) Terry Goss (Pterantula), CC BY 2.5 (https://commons.wikimedia.org/wiki/File:White_shark.jpg)",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:White_shark.jpg",
+        "note": "真实影像：大白鲨在蓝色海水中侧身游动，背景是成群的鱼。"
       },
       "model": {
         "ref": "v3-great-white-shark",
@@ -633,12 +633,12 @@
       ],
       "photo": {
         "ref": "v3/hammerhead-shark",
-        "creditSummary": "Andy Mann（CC0） · CC0 1.0",
-        "attribution": "Andy Mann（CC0） (CC0 1.0; https://www.inaturalist.org/observations/336038410)",
-        "license": "CC0 1.0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/336038410",
-        "note": "真实影像：iNaturalist 水下观察记录，锤头鲨在自然海域游动。"
+        "creditSummary": "(c) Kris-Mikael Krister · CC BY 2.0",
+        "attribution": "(c) Kris-Mikael Krister, CC BY 2.0 (https://commons.wikimedia.org/wiki/File:Scalloped_hammerhead_shark_(Sphyrna_lewini)_Costa_Rica.jpg)",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Scalloped_hammerhead_shark_(Sphyrna_lewini)_Costa_Rica.jpg",
+        "note": "真实影像：哥斯达黎加海域的锤头双髻鲨，锤状头部轮廓清晰。"
       }
     },
     {
@@ -694,12 +694,12 @@
       ],
       "photo": {
         "ref": "v3/shortfin-mako",
-        "creditSummary": "Vsevolod Rudyi · CC BY 4.0",
-        "attribution": "Vsevolod Rudyi (CC BY 4.0; https://www.inaturalist.org/observations/390405636)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/390405636",
-        "note": "真实影像：iNaturalist 水下观察记录。"
+        "creditSummary": "(c) Patrick Doll · CC BY-SA 3.0",
+        "attribution": "(c) Patrick Doll, CC BY-SA 3.0 (https://commons.wikimedia.org/wiki/File:Kurzflossen-Mako.jpg)",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kurzflossen-Mako.jpg",
+        "note": "真实影像：灰鲭鲨在蓝色海水中侧身游动，尖吻与流线型身体清晰。"
       }
     },
     {
@@ -724,12 +724,12 @@
       ],
       "photo": {
         "ref": "v3/giant-squid",
-        "creditSummary": "NOAA Ocean Exploration · 公有领域",
-        "attribution": "NOAA Ocean Exploration (NOAA), public domain.",
-        "license": "公有领域",
-        "licenseUrl": "https://www.noaa.gov/",
-        "sourceUrl": "https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/",
-        "note": "真实影像：NOAA 深海探测拍摄的大王乌贼活体影像。"
+        "creditSummary": "(c) marcm13 · CC BY-NC 4.0",
+        "attribution": "(c) marcm13, CC BY-NC 4.0 (https://www.inaturalist.org/observations/327393268)",
+        "license": "CC BY-NC 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
+        "sourceUrl": "https://www.inaturalist.org/observations/327393268",
+        "note": "真实影像：加那利群岛附近海面记录的大王乌贼，触腕与吸盘清晰可见；仅限非商业使用。"
       },
       "model": {
         "ref": "v3-giant-squid",
