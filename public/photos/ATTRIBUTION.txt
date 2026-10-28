@@ -109,22 +109,22 @@
    说明:     真实影像：NOAA ROV 在深海拍摄的蝰鱼活体。
 
 15. v3/humpback-whale.jpg —— 座头鲸（Megaptera novaeangliae）
-   素材页:   https://www.inaturalist.org/observations/2306249
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     (c) Ken-ichi Ueda, some rights reserved (CC BY) · CC BY 4.0
-   说明:     真实影像：iNaturalist 研究级观测照片。
+   素材页:   https://commons.wikimedia.org/wiki/File:HIHWNMS_-_humpback_whale_breaching_(31458927013).jpg
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Hawaiian Islands Humpback Whale National Marine Sanctuary · 公有领域
+   说明:     真实影像：NOAA 在夏威夷座头鲸国家海洋保护区拍摄的座头鲸跃身击浪，长胸鳍张开。
 
 16. v3/whale-shark.jpg —— 鲸鲨（Rhincodon typus）
-   素材页:   https://www.inaturalist.org/observations/387354316
-   许可:     CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-   署名:     iNaturalist 观察者（CC0） · CC0 1.0
-   说明:     真实影像：iNaturalist 水下观察记录，鲸鲨在自然海域游动。
+   素材页:   https://commons.wikimedia.org/wiki/File:Rhincodon_typus_fgbnms.jpg
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     FGBNMS/Eckert, NOAA Flower Garden Banks National Marine Sanctuary · 公有领域
+   说明:     真实影像：NOAA 在花园区国家海洋保护区拍摄的鲸鲨全身侧影，白色斑点清晰可辨。
 
 17. v3/manta-ray.jpg —— 蝠鲼（Mobula birostris）
-   素材页:   https://www.inaturalist.org/observations/328321068
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     (c) Victor E. Chocho, some rights reserved (CC BY) · CC BY 4.0
-   说明:     真实影像：iNaturalist 研究级观测照片。
+   素材页:   https://commons.wikimedia.org/wiki/File:FGBNMS_-_manta_ray_(27624985133).jpg
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Flower Garden Banks National Marine Sanctuary · 公有领域
+   说明:     真实影像：NOAA 在花园区国家海洋保护区拍摄的蝠鲼腹面，头鳍与腹部斑纹清晰可见。
 
 18. v3/blue-whale.jpg —— 蓝鲸（Balaenoptera musculus）
    素材页:   https://www.inaturalist.org/observations/338634606

@@ -435,12 +435,12 @@
       ],
       "photo": {
         "ref": "v3/humpback-whale",
-        "creditSummary": "(c) Ken-ichi Ueda, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Ken-ichi Ueda, some rights reserved (CC BY) (https://www.inaturalist.org/observations/2306249)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/2306249",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA 夏威夷座头鲸国家海洋保护区 · 公有领域",
+        "attribution": "NOAA Hawaiian Islands Humpback Whale National Marine Sanctuary (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:HIHWNMS_-_humpback_whale_breaching_(31458927013).jpg",
+        "note": "真实影像：NOAA 在夏威夷座头鲸国家海洋保护区拍摄的座头鲸跃身击浪，长胸鳍张开。"
       },
       "model": {
         "ref": "v3-humpback-whale",
@@ -474,12 +474,12 @@
       ],
       "photo": {
         "ref": "v3/whale-shark",
-        "creditSummary": "iNaturalist 观察者（CC0） · CC0 1.0",
-        "attribution": "iNaturalist 观察者（CC0） (CC0 1.0; https://www.inaturalist.org/observations/387354316)",
-        "license": "CC0 1.0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/387354316",
-        "note": "真实影像：iNaturalist 水下观察记录，鲸鲨在自然海域游动。"
+        "creditSummary": "NOAA 花园区国家海洋保护区（FGBNMS/Eckert） · 公有领域",
+        "attribution": "FGBNMS/Eckert, NOAA Flower Garden Banks National Marine Sanctuary, public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rhincodon_typus_fgbnms.jpg",
+        "note": "真实影像：NOAA 在花园区国家海洋保护区拍摄的鲸鲨全身侧影，白色斑点清晰可辨。"
       },
       "model": {
         "ref": "v3-whale-shark",
@@ -514,12 +514,12 @@
       ],
       "photo": {
         "ref": "v3/manta-ray",
-        "creditSummary": "(c) Victor E. Chocho, some rights reserved (CC BY) · CC BY 4.0",
-        "attribution": "(c) Victor E. Chocho, some rights reserved (CC BY) (https://www.inaturalist.org/observations/328321068)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/328321068",
-        "note": "真实影像：iNaturalist 研究级观测照片。"
+        "creditSummary": "NOAA 花园区国家海洋保护区 · 公有领域",
+        "attribution": "NOAA Flower Garden Banks National Marine Sanctuary (NOAA), public domain.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:FGBNMS_-_manta_ray_(27624985133).jpg",
+        "note": "真实影像：NOAA 在花园区国家海洋保护区拍摄的蝠鲼腹面，头鳍与腹部斑纹清晰可见。"
       },
       "model": {
         "ref": "v3-manta-ray",

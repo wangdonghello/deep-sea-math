@@ -8,9 +8,9 @@
 - v3/leafy-seadragon.jpg — 叶海龙 — CC BY 4.0 — https://www.inaturalist.org/observations/279389471
 - v3/lanternfish.jpg — 灯笼鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/351054997
 - v3/viperfish.jpg — 蝰鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/
-- v3/humpback-whale.jpg — 座头鲸 — CC BY 4.0 — https://www.inaturalist.org/observations/2306249
-- v3/whale-shark.jpg — 鲸鲨 — CC0 1.0 — https://www.inaturalist.org/observations/387354316
-- v3/manta-ray.jpg — 蝠鲼 — CC BY 4.0 — https://www.inaturalist.org/observations/328321068
+- v3/humpback-whale.jpg — 座头鲸 — 公有领域 — https://commons.wikimedia.org/wiki/File:HIHWNMS_-_humpback_whale_breaching_(31458927013).jpg
+- v3/whale-shark.jpg — 鲸鲨 — 公有领域 — https://commons.wikimedia.org/wiki/File:Rhincodon_typus_fgbnms.jpg
+- v3/manta-ray.jpg — 蝠鲼 — 公有领域 — https://commons.wikimedia.org/wiki/File:FGBNMS_-_manta_ray_(27624985133).jpg
 - v3/blue-whale.jpg — 蓝鲸 — CC BY 4.0 — https://www.inaturalist.org/observations/338634606
 - v3/great-white-shark.jpg — 大白鲨 — CC BY 4.0 — https://www.inaturalist.org/observations/4403807
 - v3/hammerhead-shark.jpg — 锤头双髻鲨 — CC0 1.0 — https://www.inaturalist.org/observations/336038410
