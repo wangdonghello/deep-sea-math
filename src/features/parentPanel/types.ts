@@ -1,4 +1,4 @@
-import type { DomainEvent, MasteryLevel, Profile, QuizType, Settings } from '@/domain/model/types'
+import type { DomainEvent, Grade, MasteryLevel, Profile, QuizType, Settings } from '@/domain/model/types'
 import type { DigestFn } from '@/domain/crypto/hashPin'
 import type { Clock } from '@/features/profileSelect/types'
 
@@ -59,7 +59,7 @@ export interface ChildOverview {
   /** 取自题型掌握最弱项的一句"需要关注"提示。 */
   focusHint: string
   /** 当前年级；旧档案缺省 3。 */
-  grade: 1 | 2 | 3
+  grade: Grade
   /** 当前主主题中文名。 */
   themeName: string
   /** 已到达的探索阶段（0–4）。 */

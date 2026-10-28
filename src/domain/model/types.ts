@@ -41,8 +41,8 @@ export type QuizType = (typeof QUIZ_TYPES)[number]
 /** 三档难度：1 见习训练师 / 2 深海训练师 / 3 探险大师。 */
 export type Difficulty = 1 | 2 | 3
 
-/** 小学低年级：第二版首发支持 1–3 年级。 */
-export type Grade = 1 | 2 | 3
+/** 小学年级：v3.0 支持 1–3，v3.1 扩展到 4–6。 */
+export type Grade = 1 | 2 | 3 | 4 | 5 | 6
 
 /** 主兴趣主题标识；首发三个主题包与内容库中的 id 一一对应。 */
 export const THEME_IDS = ['deep-sea', 'dinosaur', 'space'] as const

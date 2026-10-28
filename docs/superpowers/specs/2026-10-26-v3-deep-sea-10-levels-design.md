@@ -1,7 +1,7 @@
 # v3.0 设计：深海 10 关与 30 条图鉴
 
 - 日期：2026-10-26
-- 状态：设计已确认，待规格审查
+- 状态：v3.0 已实现并部署；2026-10-28 复审，偏差见 §12
 - 范围：v3.0；4–6 年级题库放 v3.1
 - 分支：`v3`（从 tag `v2.0.0` 开始）
 
@@ -77,8 +77,10 @@ interface DeepSeaStage {
 
 ### 5.3 进度投影
 
-- 新增只读派生 `deepSeaProgress`：`completedStages`、`unlockedStageIds`、`unlockedZoneIds`、`nextStage`。
-- 该投影由 `session-completed` 事件重放得出，不写入新事件类型。
+- 实现为只读派生 `deepSeaProgress`（`features/bestiary/deepSeaProgress.ts` +
+  `useDeepSeaProgress.ts`）：`completedStages`、`unlockedStages`、`unlockedZoneIds`、`nextStage`。
+- 由 `session-completed` 事件按 `sessionId` 去重后计数得出，不写入新事件类型；
+  没有新增 replay 投影字段（复审修正）。
 - 图鉴可见性 = `stage <= completedStages`，或显式 `unlock-granted`（兼容旧数据）。
 
 ## 6. 页面
@@ -110,7 +112,9 @@ interface DeepSeaStage {
   2. 无合适模型时，做原创低模（Three.js 基础几何 + 简单骨骼/摆动），界面标注“原创示意模型”；
   3. 不拿无授权模型，不用官方 IP 素材。
 - 现有 4 个深海模型继续复用。
-- 新增 `CreatureModelViewer` 的“程序化低模”分支，避免为占位模型伪造 GLB 文件。
+- 实际实现（复审修正）：10 个明星物种全部接入 Poly Pizza 的 CC0 / CC-BY GLB，
+  没有做程序化低模分支；鲸鲨、黄金鲹、叶海龙、灯笼鱼使用通用低模并在
+  `model.note` 明确标注“不是物种级精确复原”。
 - 图片长边 ≥ 900、单张 ≤ 250 KB；逐张进 `public/photos/ATTRIBUTION.txt`。
 
 ## 8. 部署与兼容
@@ -118,6 +122,8 @@ interface DeepSeaStage {
 - v3 独立路径 `/v3/`，独立 IndexedDB 库 `deep-sea-math-v3`；
 - v2 的 `/v2/` 保持不变；
 - 工作流增加 v3 构建；在 v3 验收前，仓库默认分支仍为 `v2`；
+- 额外部署到 `http://47.103.22.160:10010/v3/`；该地址是 HTTP 非安全上下文，
+  家长 PIN 哈希与事件 UUID 均有纯 JS 兜底（见 §12）；
 - v3 内容与 v2 数据不互写。
 
 ## 9. 测试与验收
@@ -146,3 +152,21 @@ v3.1 增加 4–6 年级：
 - 覆盖分数、小数、几何、比例、百分数等；
 - 与现有 1–3 年级题库隔离，不跨年级出题；
 - 家长报告、错题本、导入功能继续复用。
+
+
+## 12. 实现复审（2026-10-28）
+
+v3.0 已上线，以下偏差作为后续维护的事实基线：
+
+- **图片来源**：Wikimedia 在当前网络不可达，30 条改为 iNaturalist（CC0/CC BY）
+  与 NOAA Ocean Explorer（公有领域）的活体/ROV 影像；逐张记录在
+  `public/photos/ATTRIBUTION.txt`。雪人蟹、皇带鱼、宽咽鱼、神女底鼬鳚因没有
+  合规活体图，替换为深海蹲龙虾、深海章鱼、海沟鼬鳚、海沟海葵。
+- **3D**：10 个明星物种用 Poly Pizza CC0/CC-BY 低模，部分为通用低模；
+  不再承诺“全部原创程序化低模”。
+- **进度**：`deepSeaProgress` 是前端只读派生，未新增 replay 投影。
+- **HTTP 部署**：服务器地址不是安全上下文，`crypto.subtle` 与
+  `crypto.randomUUID` 缺失；家长 PIN 用纯 JS SHA-256 兜底，事件 ID 用
+  `getRandomValues` 生成 v4 UUID。HTTPS/localhost 下仍优先 Web Crypto。
+- **测试基线**：91 个测试文件 / 982 个用例（v3.1 开始前）。
+- **未完成**：4–6 年级题库按 §11 转入 v3.1。

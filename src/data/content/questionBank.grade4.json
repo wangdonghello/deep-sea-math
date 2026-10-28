@@ -1,0 +1,8633 @@
+{
+  "version": "4.0.0",
+  "questions": [
+    {
+      "id": "g4-001",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "把 3/4 化成分母是 8 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NF.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "6"
+        },
+        {
+          "id": "B",
+          "label": "7"
+        },
+        {
+          "id": "C",
+          "label": "5"
+        },
+        {
+          "id": "D",
+          "label": "16"
+        }
+      ]
+    },
+    {
+      "id": "g4-002",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "0.8 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NBT.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "10"
+        },
+        {
+          "id": "B",
+          "label": "8"
+        },
+        {
+          "id": "C",
+          "label": "6"
+        },
+        {
+          "id": "D",
+          "label": "28"
+        }
+      ]
+    },
+    {
+      "id": "g4-003",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "24 和 36 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.OA.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "15"
+        },
+        {
+          "id": "B",
+          "label": "9"
+        },
+        {
+          "id": "C",
+          "label": "12"
+        },
+        {
+          "id": "D",
+          "label": "42"
+        }
+      ]
+    },
+    {
+      "id": "g4-004",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "12 的 1/3 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 4,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NF.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "5"
+        },
+        {
+          "id": "B",
+          "label": "3"
+        },
+        {
+          "id": "C",
+          "label": "14"
+        },
+        {
+          "id": "D",
+          "label": "4"
+        }
+      ]
+    },
+    {
+      "id": "g4-005",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "把 3/4 化成分母是 12 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 9
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NF.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-006",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "0.4 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 4
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NBT.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-007",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "12 和 18 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.OA.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-008",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "20 的 1/3 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6.666666666666667
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NF.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-009",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "把 3/4 化成分母是 16 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NF.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-010",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "0.6 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NBT.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-011",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "16 和 24 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.OA.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-012",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "24 的 1/3 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:4.NF.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-013",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "把 3/5 化成分母是 10 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NF.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "6"
+        },
+        {
+          "id": "B",
+          "label": "7"
+        },
+        {
+          "id": "C",
+          "label": "5"
+        },
+        {
+          "id": "D",
+          "label": "16"
+        }
+      ]
+    },
+    {
+      "id": "g4-014",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "0.9 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 9,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NBT.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "11"
+        },
+        {
+          "id": "B",
+          "label": "9"
+        },
+        {
+          "id": "C",
+          "label": "7"
+        },
+        {
+          "id": "D",
+          "label": "29"
+        }
+      ]
+    },
+    {
+      "id": "g4-015",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "24 和 36 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.OA.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "15"
+        },
+        {
+          "id": "B",
+          "label": "9"
+        },
+        {
+          "id": "C",
+          "label": "12"
+        },
+        {
+          "id": "D",
+          "label": "42"
+        }
+      ]
+    },
+    {
+      "id": "g4-016",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "12 的 1/4 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 3,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NF.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "4"
+        },
+        {
+          "id": "B",
+          "label": "2"
+        },
+        {
+          "id": "C",
+          "label": "13"
+        },
+        {
+          "id": "D",
+          "label": "3"
+        }
+      ]
+    },
+    {
+      "id": "g4-017",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "把 3/5 化成分母是 15 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 9
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NF.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-018",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "0.5 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 5
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NBT.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-019",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "12 和 18 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.OA.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-020",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "20 的 1/4 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 5
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NF.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-021",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "把 3/5 化成分母是 20 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NF.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-022",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "0.7 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 7
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NBT.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-023",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "16 和 24 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.OA.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-024",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "24 的 1/4 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:4.NF.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-025",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "把 3/6 化成分母是 12 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NF.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "6"
+        },
+        {
+          "id": "B",
+          "label": "7"
+        },
+        {
+          "id": "C",
+          "label": "5"
+        },
+        {
+          "id": "D",
+          "label": "16"
+        }
+      ]
+    },
+    {
+      "id": "g4-026",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "1 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 10,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NBT.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12"
+        },
+        {
+          "id": "B",
+          "label": "10"
+        },
+        {
+          "id": "C",
+          "label": "8"
+        },
+        {
+          "id": "D",
+          "label": "30"
+        }
+      ]
+    },
+    {
+      "id": "g4-027",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "24 和 36 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.OA.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "15"
+        },
+        {
+          "id": "B",
+          "label": "9"
+        },
+        {
+          "id": "C",
+          "label": "12"
+        },
+        {
+          "id": "D",
+          "label": "42"
+        }
+      ]
+    },
+    {
+      "id": "g4-028",
+      "grade": 4,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "12 的 1/6 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 2,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NF.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "3"
+        },
+        {
+          "id": "B",
+          "label": "1"
+        },
+        {
+          "id": "C",
+          "label": "12"
+        },
+        {
+          "id": "D",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "id": "g4-029",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "把 3/6 化成分母是 18 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 9
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NF.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-030",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "0.6000000000000001 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NBT.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-031",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "12 和 18 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.OA.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-032",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "20 的 1/6 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 3.3333333333333335
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NF.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-033",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "把 3/6 化成分母是 24 的分数，分子是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NF.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-034",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "0.8 里面有多少个 0.1？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NBT.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-035",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "16 和 24 的最大公因数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.OA.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-036",
+      "grade": 4,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "24 的 1/6 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 4
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:4.NF.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NF/"
+      ]
+    },
+    {
+      "id": "g4-037",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "潜水器每箱装 22 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 88,
+        "unit": "份",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "88份"
+        },
+        {
+          "id": "B",
+          "label": "89份"
+        },
+        {
+          "id": "C",
+          "label": "87份"
+        },
+        {
+          "id": "D",
+          "label": "98份"
+        }
+      ]
+    },
+    {
+      "id": "g4-038",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "198 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 33,
+        "unit": "份",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "35份"
+        },
+        {
+          "id": "B",
+          "label": "33份"
+        },
+        {
+          "id": "C",
+          "label": "31份"
+        },
+        {
+          "id": "D",
+          "label": "53份"
+        }
+      ]
+    },
+    {
+      "id": "g4-039",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "44 乘多少等于 352？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "11"
+        },
+        {
+          "id": "B",
+          "label": "5"
+        },
+        {
+          "id": "C",
+          "label": "8"
+        },
+        {
+          "id": "D",
+          "label": "38"
+        }
+      ]
+    },
+    {
+      "id": "g4-040",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "潜水器每箱装 22 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 88,
+        "unit": "份",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "89份"
+        },
+        {
+          "id": "B",
+          "label": "87份"
+        },
+        {
+          "id": "C",
+          "label": "98份"
+        },
+        {
+          "id": "D",
+          "label": "88份"
+        }
+      ]
+    },
+    {
+      "id": "g4-041",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "198 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 33,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-042",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "44 乘多少等于 352？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-043",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "潜水器每箱装 22 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 88,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-044",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "198 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 33,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-045",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "44 乘多少等于 352？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-046",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "潜水器每箱装 22 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 88,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-047",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "198 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 33,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-048",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "44 乘多少等于 352？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-049",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "潜水器每箱装 32 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 128,
+        "unit": "份",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "128份"
+        },
+        {
+          "id": "B",
+          "label": "129份"
+        },
+        {
+          "id": "C",
+          "label": "127份"
+        },
+        {
+          "id": "D",
+          "label": "138份"
+        }
+      ]
+    },
+    {
+      "id": "g4-050",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "258 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 43,
+        "unit": "份",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "45份"
+        },
+        {
+          "id": "B",
+          "label": "43份"
+        },
+        {
+          "id": "C",
+          "label": "41份"
+        },
+        {
+          "id": "D",
+          "label": "63份"
+        }
+      ]
+    },
+    {
+      "id": "g4-051",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "54 乘多少等于 432？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "11"
+        },
+        {
+          "id": "B",
+          "label": "5"
+        },
+        {
+          "id": "C",
+          "label": "8"
+        },
+        {
+          "id": "D",
+          "label": "38"
+        }
+      ]
+    },
+    {
+      "id": "g4-052",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "潜水器每箱装 32 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 128,
+        "unit": "份",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "129份"
+        },
+        {
+          "id": "B",
+          "label": "127份"
+        },
+        {
+          "id": "C",
+          "label": "138份"
+        },
+        {
+          "id": "D",
+          "label": "128份"
+        }
+      ]
+    },
+    {
+      "id": "g4-053",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "258 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 43,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-054",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "54 乘多少等于 432？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-055",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "潜水器每箱装 32 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 128,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-056",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "258 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 43,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-057",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "54 乘多少等于 432？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-058",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "潜水器每箱装 32 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 128,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-059",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "258 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 43,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-060",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "54 乘多少等于 432？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-061",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "潜水器每箱装 42 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 168,
+        "unit": "份",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "168份"
+        },
+        {
+          "id": "B",
+          "label": "169份"
+        },
+        {
+          "id": "C",
+          "label": "167份"
+        },
+        {
+          "id": "D",
+          "label": "178份"
+        }
+      ]
+    },
+    {
+      "id": "g4-062",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "318 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 53,
+        "unit": "份",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "55份"
+        },
+        {
+          "id": "B",
+          "label": "53份"
+        },
+        {
+          "id": "C",
+          "label": "51份"
+        },
+        {
+          "id": "D",
+          "label": "73份"
+        }
+      ]
+    },
+    {
+      "id": "g4-063",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "64 乘多少等于 512？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "11"
+        },
+        {
+          "id": "B",
+          "label": "5"
+        },
+        {
+          "id": "C",
+          "label": "8"
+        },
+        {
+          "id": "D",
+          "label": "38"
+        }
+      ]
+    },
+    {
+      "id": "g4-064",
+      "grade": 4,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "潜水器每箱装 42 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 168,
+        "unit": "份",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "169份"
+        },
+        {
+          "id": "B",
+          "label": "167份"
+        },
+        {
+          "id": "C",
+          "label": "178份"
+        },
+        {
+          "id": "D",
+          "label": "168份"
+        }
+      ]
+    },
+    {
+      "id": "g4-065",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "318 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 53,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-066",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "64 乘多少等于 512？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-067",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "潜水器每箱装 42 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 168,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-068",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "318 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 53,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-069",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "64 乘多少等于 512？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-070",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "潜水器每箱装 42 份样本，4 箱一共有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 168,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-071",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "318 份样本平均装进 6 个箱子，每箱多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 53,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-072",
+      "grade": 4,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "64 乘多少等于 512？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:4.NBT.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/NBT/"
+      ]
+    },
+    {
+      "id": "g4-073",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "观测站原有 150 份记录，上午新增 40 份，下午整理掉 25 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 165,
+        "unit": "份",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "165份"
+        },
+        {
+          "id": "B",
+          "label": "166份"
+        },
+        {
+          "id": "C",
+          "label": "164份"
+        },
+        {
+          "id": "D",
+          "label": "175份"
+        }
+      ]
+    },
+    {
+      "id": "g4-074",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "每组有 41 个样本，3 组共有多少个？再拿走 27 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 96,
+        "unit": "个",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "98个"
+        },
+        {
+          "id": "B",
+          "label": "96个"
+        },
+        {
+          "id": "C",
+          "label": "94个"
+        },
+        {
+          "id": "D",
+          "label": "116个"
+        }
+      ]
+    },
+    {
+      "id": "g4-075",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "观测站原有 152 份记录，上午新增 42 份，下午整理掉 29 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 165,
+        "unit": "份",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "168份"
+        },
+        {
+          "id": "B",
+          "label": "162份"
+        },
+        {
+          "id": "C",
+          "label": "165份"
+        },
+        {
+          "id": "D",
+          "label": "195份"
+        }
+      ]
+    },
+    {
+      "id": "g4-076",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "每组有 43 个样本，3 组共有多少个？再拿走 31 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 98,
+        "unit": "个",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "99个"
+        },
+        {
+          "id": "B",
+          "label": "97个"
+        },
+        {
+          "id": "C",
+          "label": "108个"
+        },
+        {
+          "id": "D",
+          "label": "98个"
+        }
+      ]
+    },
+    {
+      "id": "g4-077",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "观测站原有 154 份记录，上午新增 44 份，下午整理掉 33 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 165,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-078",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "每组有 45 个样本，3 组共有多少个？再拿走 35 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 100,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-079",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "观测站原有 156 份记录，上午新增 46 份，下午整理掉 37 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 165,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-080",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "每组有 47 个样本，3 组共有多少个？再拿走 39 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 102,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-081",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "观测站原有 158 份记录，上午新增 48 份，下午整理掉 41 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 165,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-082",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "每组有 49 个样本，3 组共有多少个？再拿走 43 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 104,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-083",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "观测站原有 160 份记录，上午新增 50 份，下午整理掉 45 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 165,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-084",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "每组有 51 个样本，3 组共有多少个？再拿走 47 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 106,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-085",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "观测站原有 180 份记录，上午新增 40 份，下午整理掉 25 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 195,
+        "unit": "份",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "195份"
+        },
+        {
+          "id": "B",
+          "label": "196份"
+        },
+        {
+          "id": "C",
+          "label": "194份"
+        },
+        {
+          "id": "D",
+          "label": "205份"
+        }
+      ]
+    },
+    {
+      "id": "g4-086",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "每组有 41 个样本，4 组共有多少个？再拿走 27 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 137,
+        "unit": "个",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "139个"
+        },
+        {
+          "id": "B",
+          "label": "137个"
+        },
+        {
+          "id": "C",
+          "label": "135个"
+        },
+        {
+          "id": "D",
+          "label": "157个"
+        }
+      ]
+    },
+    {
+      "id": "g4-087",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "观测站原有 182 份记录，上午新增 42 份，下午整理掉 29 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 195,
+        "unit": "份",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "198份"
+        },
+        {
+          "id": "B",
+          "label": "192份"
+        },
+        {
+          "id": "C",
+          "label": "195份"
+        },
+        {
+          "id": "D",
+          "label": "225份"
+        }
+      ]
+    },
+    {
+      "id": "g4-088",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "每组有 43 个样本，4 组共有多少个？再拿走 31 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 141,
+        "unit": "个",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "142个"
+        },
+        {
+          "id": "B",
+          "label": "140个"
+        },
+        {
+          "id": "C",
+          "label": "151个"
+        },
+        {
+          "id": "D",
+          "label": "141个"
+        }
+      ]
+    },
+    {
+      "id": "g4-089",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "观测站原有 184 份记录，上午新增 44 份，下午整理掉 33 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 195,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-090",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "每组有 45 个样本，4 组共有多少个？再拿走 35 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 145,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-091",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "观测站原有 186 份记录，上午新增 46 份，下午整理掉 37 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 195,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-092",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "每组有 47 个样本，4 组共有多少个？再拿走 39 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 149,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-093",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "观测站原有 188 份记录，上午新增 48 份，下午整理掉 41 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 195,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-094",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "每组有 49 个样本，4 组共有多少个？再拿走 43 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 153,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-095",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "观测站原有 190 份记录，上午新增 50 份，下午整理掉 45 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 195,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-096",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "每组有 51 个样本，4 组共有多少个？再拿走 47 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 157,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-097",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "观测站原有 210 份记录，上午新增 40 份，下午整理掉 25 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 225,
+        "unit": "份",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "225份"
+        },
+        {
+          "id": "B",
+          "label": "226份"
+        },
+        {
+          "id": "C",
+          "label": "224份"
+        },
+        {
+          "id": "D",
+          "label": "235份"
+        }
+      ]
+    },
+    {
+      "id": "g4-098",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "每组有 41 个样本，5 组共有多少个？再拿走 27 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 178,
+        "unit": "个",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "180个"
+        },
+        {
+          "id": "B",
+          "label": "178个"
+        },
+        {
+          "id": "C",
+          "label": "176个"
+        },
+        {
+          "id": "D",
+          "label": "198个"
+        }
+      ]
+    },
+    {
+      "id": "g4-099",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "观测站原有 212 份记录，上午新增 42 份，下午整理掉 29 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 225,
+        "unit": "份",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "228份"
+        },
+        {
+          "id": "B",
+          "label": "222份"
+        },
+        {
+          "id": "C",
+          "label": "225份"
+        },
+        {
+          "id": "D",
+          "label": "255份"
+        }
+      ]
+    },
+    {
+      "id": "g4-100",
+      "grade": 4,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "每组有 43 个样本，5 组共有多少个？再拿走 31 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 184,
+        "unit": "个",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "185个"
+        },
+        {
+          "id": "B",
+          "label": "183个"
+        },
+        {
+          "id": "C",
+          "label": "194个"
+        },
+        {
+          "id": "D",
+          "label": "184个"
+        }
+      ]
+    },
+    {
+      "id": "g4-101",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "观测站原有 214 份记录，上午新增 44 份，下午整理掉 33 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 225,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-102",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "每组有 45 个样本，5 组共有多少个？再拿走 35 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 190,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-103",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "观测站原有 216 份记录，上午新增 46 份，下午整理掉 37 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 225,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-104",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "每组有 47 个样本，5 组共有多少个？再拿走 39 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 196,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-105",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "观测站原有 218 份记录，上午新增 48 份，下午整理掉 41 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 225,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-106",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "每组有 49 个样本，5 组共有多少个？再拿走 43 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 202,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-107",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "观测站原有 220 份记录，上午新增 50 份，下午整理掉 45 份。现在有多少份？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 225,
+        "unit": "份"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-108",
+      "grade": 4,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "每组有 51 个样本，5 组共有多少个？再拿走 47 个，还剩多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 208,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-109",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一个数加上 40 等于 85，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 45,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "45"
+        },
+        {
+          "id": "B",
+          "label": "46"
+        },
+        {
+          "id": "C",
+          "label": "44"
+        },
+        {
+          "id": "D",
+          "label": "55"
+        }
+      ]
+    },
+    {
+      "id": "g4-110",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "4 乘一个数等于 164，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 41,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "43"
+        },
+        {
+          "id": "B",
+          "label": "41"
+        },
+        {
+          "id": "C",
+          "label": "39"
+        },
+        {
+          "id": "D",
+          "label": "61"
+        }
+      ]
+    },
+    {
+      "id": "g4-111",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一个数加上 42 等于 89，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 47,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "50"
+        },
+        {
+          "id": "B",
+          "label": "44"
+        },
+        {
+          "id": "C",
+          "label": "47"
+        },
+        {
+          "id": "D",
+          "label": "77"
+        }
+      ]
+    },
+    {
+      "id": "g4-112",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "6 乘一个数等于 258，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 43,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "44"
+        },
+        {
+          "id": "B",
+          "label": "42"
+        },
+        {
+          "id": "C",
+          "label": "53"
+        },
+        {
+          "id": "D",
+          "label": "43"
+        }
+      ]
+    },
+    {
+      "id": "g4-113",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一个数加上 44 等于 93，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 49
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-114",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "3 乘一个数等于 135，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 45
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-115",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "一个数加上 46 等于 97，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 51
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-116",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "5 乘一个数等于 235，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 47
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-117",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一个数加上 48 等于 101，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 53
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-118",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "7 乘一个数等于 343，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 49
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-119",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一个数加上 50 等于 105，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 55
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-120",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "4 乘一个数等于 204，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 51
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-121",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一个数加上 50 等于 95，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 45,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "45"
+        },
+        {
+          "id": "B",
+          "label": "46"
+        },
+        {
+          "id": "C",
+          "label": "44"
+        },
+        {
+          "id": "D",
+          "label": "55"
+        }
+      ]
+    },
+    {
+      "id": "g4-122",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "4 乘一个数等于 204，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 51,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "53"
+        },
+        {
+          "id": "B",
+          "label": "51"
+        },
+        {
+          "id": "C",
+          "label": "49"
+        },
+        {
+          "id": "D",
+          "label": "71"
+        }
+      ]
+    },
+    {
+      "id": "g4-123",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一个数加上 52 等于 99，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 47,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "50"
+        },
+        {
+          "id": "B",
+          "label": "44"
+        },
+        {
+          "id": "C",
+          "label": "47"
+        },
+        {
+          "id": "D",
+          "label": "77"
+        }
+      ]
+    },
+    {
+      "id": "g4-124",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "6 乘一个数等于 318，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 53,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "54"
+        },
+        {
+          "id": "B",
+          "label": "52"
+        },
+        {
+          "id": "C",
+          "label": "63"
+        },
+        {
+          "id": "D",
+          "label": "53"
+        }
+      ]
+    },
+    {
+      "id": "g4-125",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "一个数加上 54 等于 103，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 49
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-126",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "3 乘一个数等于 165，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 55
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-127",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一个数加上 56 等于 107，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 51
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-128",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "5 乘一个数等于 285，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 57
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-129",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "一个数加上 58 等于 111，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 53
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-130",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "7 乘一个数等于 413，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 59
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-131",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "一个数加上 60 等于 115，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 55
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-132",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "4 乘一个数等于 244，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 61
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-133",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一个数加上 60 等于 105，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 45,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "45"
+        },
+        {
+          "id": "B",
+          "label": "46"
+        },
+        {
+          "id": "C",
+          "label": "44"
+        },
+        {
+          "id": "D",
+          "label": "55"
+        }
+      ]
+    },
+    {
+      "id": "g4-134",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "4 乘一个数等于 244，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 61,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "63"
+        },
+        {
+          "id": "B",
+          "label": "61"
+        },
+        {
+          "id": "C",
+          "label": "59"
+        },
+        {
+          "id": "D",
+          "label": "81"
+        }
+      ]
+    },
+    {
+      "id": "g4-135",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一个数加上 62 等于 109，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 47,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "50"
+        },
+        {
+          "id": "B",
+          "label": "44"
+        },
+        {
+          "id": "C",
+          "label": "47"
+        },
+        {
+          "id": "D",
+          "label": "77"
+        }
+      ]
+    },
+    {
+      "id": "g4-136",
+      "grade": 4,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "6 乘一个数等于 378，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 63,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "64"
+        },
+        {
+          "id": "B",
+          "label": "62"
+        },
+        {
+          "id": "C",
+          "label": "73"
+        },
+        {
+          "id": "D",
+          "label": "63"
+        }
+      ]
+    },
+    {
+      "id": "g4-137",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "一个数加上 64 等于 113，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 49
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-138",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "3 乘一个数等于 195，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 65
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-139",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一个数加上 66 等于 117，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 51
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-140",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "5 乘一个数等于 335，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 67
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-141",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一个数加上 68 等于 121，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 53
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-142",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "7 乘一个数等于 483，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 69
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-143",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一个数加上 70 等于 125，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 55
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-144",
+      "grade": 4,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "4 乘一个数等于 284，这个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 71
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:4.OA.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-145",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一块长方形观测台长 8 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 32,
+        "unit": "平方米",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "32平方米"
+        },
+        {
+          "id": "B",
+          "label": "33平方米"
+        },
+        {
+          "id": "C",
+          "label": "31平方米"
+        },
+        {
+          "id": "D",
+          "label": "42平方米"
+        }
+      ]
+    },
+    {
+      "id": "g4-146",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "长方形观测台长 9 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 28,
+        "unit": "米",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "30米"
+        },
+        {
+          "id": "B",
+          "label": "28米"
+        },
+        {
+          "id": "C",
+          "label": "26米"
+        },
+        {
+          "id": "D",
+          "label": "48米"
+        }
+      ]
+    },
+    {
+      "id": "g4-147",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一个角是 50 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 40,
+        "unit": "度",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "43度"
+        },
+        {
+          "id": "B",
+          "label": "37度"
+        },
+        {
+          "id": "C",
+          "label": "40度"
+        },
+        {
+          "id": "D",
+          "label": "70度"
+        }
+      ]
+    },
+    {
+      "id": "g4-148",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一块长方形观测台长 11 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 44,
+        "unit": "平方米",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "45平方米"
+        },
+        {
+          "id": "B",
+          "label": "43平方米"
+        },
+        {
+          "id": "C",
+          "label": "54平方米"
+        },
+        {
+          "id": "D",
+          "label": "44平方米"
+        }
+      ]
+    },
+    {
+      "id": "g4-149",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "长方形观测台长 8 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 26,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-150",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "一个角是 40 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 50,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-151",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "一块长方形观测台长 10 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 40,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-152",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "长方形观测台长 11 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 32,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-153",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一个角是 30 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 60,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-154",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "一块长方形观测台长 9 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 36,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-155",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "长方形观测台长 10 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 30,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-156",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "一个角是 60 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 30,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-157",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一块长方形观测台长 10 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 40,
+        "unit": "平方米",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "40平方米"
+        },
+        {
+          "id": "B",
+          "label": "41平方米"
+        },
+        {
+          "id": "C",
+          "label": "39平方米"
+        },
+        {
+          "id": "D",
+          "label": "50平方米"
+        }
+      ]
+    },
+    {
+      "id": "g4-158",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "长方形观测台长 11 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 32,
+        "unit": "米",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "34米"
+        },
+        {
+          "id": "B",
+          "label": "32米"
+        },
+        {
+          "id": "C",
+          "label": "30米"
+        },
+        {
+          "id": "D",
+          "label": "52米"
+        }
+      ]
+    },
+    {
+      "id": "g4-159",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一个角是 50 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 40,
+        "unit": "度",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "43度"
+        },
+        {
+          "id": "B",
+          "label": "37度"
+        },
+        {
+          "id": "C",
+          "label": "40度"
+        },
+        {
+          "id": "D",
+          "label": "70度"
+        }
+      ]
+    },
+    {
+      "id": "g4-160",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一块长方形观测台长 13 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 52,
+        "unit": "平方米",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "53平方米"
+        },
+        {
+          "id": "B",
+          "label": "51平方米"
+        },
+        {
+          "id": "C",
+          "label": "62平方米"
+        },
+        {
+          "id": "D",
+          "label": "52平方米"
+        }
+      ]
+    },
+    {
+      "id": "g4-161",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "长方形观测台长 10 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 30,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-162",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "一个角是 40 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 50,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-163",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一块长方形观测台长 12 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 48,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-164",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "长方形观测台长 13 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 36,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-165",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "一个角是 30 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 60,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-166",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一块长方形观测台长 11 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 44,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-167",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "长方形观测台长 12 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 34,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-168",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一个角是 60 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 30,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-169",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一块长方形观测台长 12 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 48,
+        "unit": "平方米",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "48平方米"
+        },
+        {
+          "id": "B",
+          "label": "49平方米"
+        },
+        {
+          "id": "C",
+          "label": "47平方米"
+        },
+        {
+          "id": "D",
+          "label": "58平方米"
+        }
+      ]
+    },
+    {
+      "id": "g4-170",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "长方形观测台长 13 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 36,
+        "unit": "米",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "38米"
+        },
+        {
+          "id": "B",
+          "label": "36米"
+        },
+        {
+          "id": "C",
+          "label": "34米"
+        },
+        {
+          "id": "D",
+          "label": "56米"
+        }
+      ]
+    },
+    {
+      "id": "g4-171",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一个角是 50 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 40,
+        "unit": "度",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "43度"
+        },
+        {
+          "id": "B",
+          "label": "37度"
+        },
+        {
+          "id": "C",
+          "label": "40度"
+        },
+        {
+          "id": "D",
+          "label": "70度"
+        }
+      ]
+    },
+    {
+      "id": "g4-172",
+      "grade": 4,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "一块长方形观测台长 15 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 60,
+        "unit": "平方米",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "61平方米"
+        },
+        {
+          "id": "B",
+          "label": "59平方米"
+        },
+        {
+          "id": "C",
+          "label": "70平方米"
+        },
+        {
+          "id": "D",
+          "label": "60平方米"
+        }
+      ]
+    },
+    {
+      "id": "g4-173",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "长方形观测台长 12 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 34,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-174",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一个角是 40 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 50,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-175",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一块长方形观测台长 14 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 56,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-176",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "长方形观测台长 15 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 40,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-177",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一个角是 30 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 60,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-178",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "一块长方形观测台长 13 米、宽 4 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 52,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-179",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "长方形观测台长 14 米、宽 5 米，周长是多少米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 38,
+        "unit": "米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.MD.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/MD/"
+      ]
+    },
+    {
+      "id": "g4-180",
+      "grade": 4,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一个角是 60 度，它的余角是多少度？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 30,
+        "unit": "度"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:4.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/G/"
+      ]
+    },
+    {
+      "id": "g4-181",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "数列从 7 开始，每次增加 2。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 15,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "15"
+        },
+        {
+          "id": "B",
+          "label": "16"
+        },
+        {
+          "id": "C",
+          "label": "14"
+        },
+        {
+          "id": "D",
+          "label": "25"
+        }
+      ]
+    },
+    {
+      "id": "g4-182",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "数列从 8 开始，每次增加 3。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 20,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "22"
+        },
+        {
+          "id": "B",
+          "label": "20"
+        },
+        {
+          "id": "C",
+          "label": "18"
+        },
+        {
+          "id": "D",
+          "label": "40"
+        }
+      ]
+    },
+    {
+      "id": "g4-183",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "数列从 9 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 25,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "28"
+        },
+        {
+          "id": "B",
+          "label": "22"
+        },
+        {
+          "id": "C",
+          "label": "25"
+        },
+        {
+          "id": "D",
+          "label": "55"
+        }
+      ]
+    },
+    {
+      "id": "g4-184",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "数列从 10 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 30,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "31"
+        },
+        {
+          "id": "B",
+          "label": "29"
+        },
+        {
+          "id": "C",
+          "label": "40"
+        },
+        {
+          "id": "D",
+          "label": "30"
+        }
+      ]
+    },
+    {
+      "id": "g4-185",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "数列从 11 开始，每次增加 2。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 19
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-186",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "数列从 12 开始，每次增加 3。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-187",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "数列从 13 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 29
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-188",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "数列从 14 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 34
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-189",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "数列从 15 开始，每次增加 2。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 23
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-190",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "数列从 16 开始，每次增加 3。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 28
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-191",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "数列从 17 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 33
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-192",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "数列从 18 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 38
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-193",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "数列从 9 开始，每次增加 3。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 21,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "21"
+        },
+        {
+          "id": "B",
+          "label": "22"
+        },
+        {
+          "id": "C",
+          "label": "20"
+        },
+        {
+          "id": "D",
+          "label": "31"
+        }
+      ]
+    },
+    {
+      "id": "g4-194",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "数列从 10 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 26,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "28"
+        },
+        {
+          "id": "B",
+          "label": "26"
+        },
+        {
+          "id": "C",
+          "label": "24"
+        },
+        {
+          "id": "D",
+          "label": "46"
+        }
+      ]
+    },
+    {
+      "id": "g4-195",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "数列从 11 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 31,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "34"
+        },
+        {
+          "id": "B",
+          "label": "28"
+        },
+        {
+          "id": "C",
+          "label": "31"
+        },
+        {
+          "id": "D",
+          "label": "61"
+        }
+      ]
+    },
+    {
+      "id": "g4-196",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "数列从 12 开始，每次增加 6。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 36,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "37"
+        },
+        {
+          "id": "B",
+          "label": "35"
+        },
+        {
+          "id": "C",
+          "label": "46"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g4-197",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "数列从 13 开始，每次增加 3。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 25
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-198",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "数列从 14 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 30
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-199",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "数列从 15 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 35
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-200",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "数列从 16 开始，每次增加 6。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 40
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-201",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "数列从 17 开始，每次增加 3。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 29
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-202",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "数列从 18 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 34
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-203",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "数列从 19 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 39
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-204",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "数列从 20 开始，每次增加 6。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 44
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-205",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "数列从 11 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 27,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "27"
+        },
+        {
+          "id": "B",
+          "label": "28"
+        },
+        {
+          "id": "C",
+          "label": "26"
+        },
+        {
+          "id": "D",
+          "label": "37"
+        }
+      ]
+    },
+    {
+      "id": "g4-206",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "数列从 12 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 32,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "34"
+        },
+        {
+          "id": "B",
+          "label": "32"
+        },
+        {
+          "id": "C",
+          "label": "30"
+        },
+        {
+          "id": "D",
+          "label": "52"
+        }
+      ]
+    },
+    {
+      "id": "g4-207",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "数列从 13 开始，每次增加 6。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 37,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "40"
+        },
+        {
+          "id": "B",
+          "label": "34"
+        },
+        {
+          "id": "C",
+          "label": "37"
+        },
+        {
+          "id": "D",
+          "label": "67"
+        }
+      ]
+    },
+    {
+      "id": "g4-208",
+      "grade": 4,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "数列从 14 开始，每次增加 7。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 42,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "43"
+        },
+        {
+          "id": "B",
+          "label": "41"
+        },
+        {
+          "id": "C",
+          "label": "52"
+        },
+        {
+          "id": "D",
+          "label": "42"
+        }
+      ]
+    },
+    {
+      "id": "g4-209",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "数列从 15 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 31
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-210",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "数列从 16 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 36
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-211",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "数列从 17 开始，每次增加 6。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 41
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-212",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "数列从 18 开始，每次增加 7。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 46
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-213",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "数列从 19 开始，每次增加 4。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 35
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-214",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "数列从 20 开始，每次增加 5。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 40
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-215",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "数列从 21 开始，每次增加 6。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 45
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    },
+    {
+      "id": "g4-216",
+      "grade": 4,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "数列从 22 开始，每次增加 7。第 5 个数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 50
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:4.OA.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/4/OA/"
+      ]
+    }
+  ]
+}

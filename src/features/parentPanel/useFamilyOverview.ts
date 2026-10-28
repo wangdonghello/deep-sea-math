@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 
 import { replayProjections } from '@/domain/eventLog/replay'
-import { QUIZ_TYPES, type DomainEvent, type MasteryLevel, type QuizType } from '@/domain/model/types'
+import { QUIZ_TYPES, type DomainEvent, type Grade, type MasteryLevel, type QuizType } from '@/domain/model/types'
 import { themePackById } from '@/data/content/themePacks'
 import { QUIZ_TYPE_LABELS } from '@/shared/quizTypeLabel'
 import { redact } from '@/shared/redact'
@@ -64,7 +64,7 @@ function focusHintOf(attentionByType: Partial<Record<QuizType, number>>): string
 
 /** 算出单个孩子的近 7 天摘要。 */
 function buildOverview(
-  profile: { id: string; nickname: string; avatarId: string; grade?: 1 | 2 | 3; themeId?: 'deep-sea' | 'dinosaur' | 'space' },
+  profile: { id: string; nickname: string; avatarId: string; grade?: Grade; themeId?: 'deep-sea' | 'dinosaur' | 'space' },
   events: readonly DomainEvent[],
   now: number,
   questionTypeById?: Readonly<Record<string, QuizType>>,

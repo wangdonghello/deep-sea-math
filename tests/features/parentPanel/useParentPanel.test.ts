@@ -60,6 +60,18 @@ describe('useParentPanel', () => {
     expect(panel.createForm.confirmPin.value).toBe('')
   })
 
+  it('accepts grade 4–6 when creating a profile', async () => {
+    const fake = makeStore()
+    const panel = useParentPanel({ store: fake.store, profileId: null, clock: () => 123, ...testOptions })
+    panel.createForm.nickname.value = '深海少年'
+    panel.createForm.grade.value = 6
+    panel.createForm.pin.value = '2468'
+    panel.createForm.confirmPin.value = '2468'
+    await panel.createProfile()
+    expect(fake.profiles.get('generated-id')).toMatchObject({ grade: 6 })
+    expect(fake.appended[0]).toMatchObject({ type: 'profile-created', grade: 6 })
+  })
+
   it('persists grade/theme on create and appends a preferences event on edit', async () => {
     const fake = makeStore()
     const panel = useParentPanel({ store: fake.store, profileId: null, clock: () => 123, ...testOptions })

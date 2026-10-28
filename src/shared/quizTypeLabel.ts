@@ -12,11 +12,11 @@ import type { QuizType } from '@/domain/model/types'
  */
 export const QUIZ_TYPE_LABELS: Readonly<Record<QuizType, string>> = {
   'add-sub': '加减法',
-  'number-sense': '数的认识',
+  'number-sense': '数与运算',
   'mul-div': '乘除法',
   'two-step-app': '两步应用题',
   'unknown-relation': '未知数关系',
-  'unit-time-route': '单位·时间·路线',
+  'unit-time-route': '测量与图形',
   'pattern-data': '规律与排序',
 }
 

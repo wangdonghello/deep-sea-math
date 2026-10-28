@@ -33,6 +33,9 @@ const POOL_BY_GRADE = {
   1: QUESTION_BANK_BY_GRADE[1].questions,
   2: QUESTION_BANK_BY_GRADE[2].questions,
   3: QUESTION_BANK_BY_GRADE[3].questions,
+  4: QUESTION_BANK_BY_GRADE[4].questions,
+  5: QUESTION_BANK_BY_GRADE[5].questions,
+  6: QUESTION_BANK_BY_GRADE[6].questions,
 } as const
 
 /** 页签 id → 路由路径（`TabBar` 只认页签 id，见 `features/home/TabBar.vue`）。 */

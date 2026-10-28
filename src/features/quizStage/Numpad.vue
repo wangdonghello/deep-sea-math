@@ -2,7 +2,7 @@
 const props = defineProps<{ modelValue: string }>()
 const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '−', '×', '÷']
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.', '+', '−', '×', '÷']
 
 function press(key: string): void {
   emit('update:modelValue', props.modelValue + key.replace('−', '-'))

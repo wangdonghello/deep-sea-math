@@ -46,7 +46,7 @@ const TYPE_OPTIONS: ReadonlyArray<{ id: QuizType; label: string }> = [
   { id: 'unknown-relation', label: '未知数' },
   { id: 'unit-time-route', label: '时间 / 长度 / 路线' },
   { id: 'pattern-data', label: '规律与排序' },
-  { id: 'number-sense', label: '数感（一年级）' },
+  { id: 'number-sense', label: '数与运算' },
 ]
 
 const preview = computed(() => rows.value.slice(0, 20))

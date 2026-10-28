@@ -18,6 +18,7 @@
  *   值以锁定"刷新不换题"。
  */
 import { computed, onMounted } from 'vue'
+import type { Grade } from '@/domain/model/types'
 
 import MapPanel from '@/features/home/MapPanel.vue'
 import QuestCard from '@/features/home/QuestCard.vue'
@@ -43,7 +44,7 @@ const props = defineProps<{
    */
   pool: readonly Question[]
   /** 按年级提供的题池；缺省用 `pool`（测试/第一版兼容）。 */
-  poolByGrade?: Partial<Record<1 | 2 | 3, readonly Question[]>>
+  poolByGrade?: Partial<Record<Grade, readonly Question[]>>
   clock?: () => number
   idGenerator?: () => string
   logger?: (entry: Record<string, unknown>) => void

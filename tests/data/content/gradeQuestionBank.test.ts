@@ -21,8 +21,8 @@ describe('grade question bank validation', () => {
 
   it('rejects an unknown grade', () => {
     const question = cloneBase()
-    ;(question as unknown as { grade: number }).grade = 4
-    expect(() => assertValidQuestionBank(bankWith([question]), { allowPartial: true })).toThrow(/grade 1, 2, or 3/)
+    ;(question as unknown as { grade: number }).grade = 7
+    expect(() => assertValidQuestionBank(bankWith([question]), { allowPartial: true })).toThrow(/grade 1–6/)
   })
 
   it('rejects a cross-grade similar question', () => {

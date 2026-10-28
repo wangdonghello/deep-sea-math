@@ -47,7 +47,7 @@ const AVATAR_OPTIONS = [
   { id: 'avatar-3', label: '水母' },
 ] as const
 
-const GRADE_OPTIONS = [1, 2, 3] as const
+const GRADE_OPTIONS = [1, 2, 3, 4, 5, 6] as const
 const THEME_OPTIONS = [
   { id: 'deep-sea', label: '深海' },
   { id: 'dinosaur', label: '恐龙' },

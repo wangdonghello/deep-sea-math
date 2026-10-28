@@ -7,14 +7,14 @@
  * Task 7），composable 只负责"什么时候调用、调用后怎么反应"。
  */
 
-import type { DomainEvent, Question, Settings } from '@/domain/model/types'
+import type { DomainEvent, Grade, Question, Settings } from '@/domain/model/types'
 
 /** 当前档案的只读快照（来自 T11 的 `profileSessionStore`）。 */
 export interface HomeProfile {
   profileId: string
   nickname: string
   avatarId: string
-  grade?: 1 | 2 | 3
+  grade?: Grade
   themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
 
@@ -71,7 +71,7 @@ export interface HomeQuestOptions {
    */
   pool: readonly Question[]
   /** 按年级提供的题池；缺省回落到 `pool`（测试与第一版调用兼容）。 */
-  poolByGrade?: Partial<Record<1 | 2 | 3, readonly Question[]>>
+  poolByGrade?: Partial<Record<Grade, readonly Question[]>>
   /**
    * 日志出口；发出的对象先经 `redact()` 脱敏。
    *

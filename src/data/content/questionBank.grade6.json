@@ -1,0 +1,8618 @@
+{
+  "version": "4.0.0",
+  "questions": [
+    {
+      "id": "g6-001",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "把 15 个样本按 2:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 6,
+        "unit": "个",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.RP.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "6个"
+        },
+        {
+          "id": "B",
+          "label": "7个"
+        },
+        {
+          "id": "C",
+          "label": "5个"
+        },
+        {
+          "id": "D",
+          "label": "16个"
+        }
+      ]
+    },
+    {
+      "id": "g6-002",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "60 的 25% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 15,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "17"
+        },
+        {
+          "id": "B",
+          "label": "15"
+        },
+        {
+          "id": "C",
+          "label": "13"
+        },
+        {
+          "id": "D",
+          "label": "35"
+        }
+      ]
+    },
+    {
+      "id": "g6-003",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "-8 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -3,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.NS.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "0"
+        },
+        {
+          "id": "B",
+          "label": "-6"
+        },
+        {
+          "id": "C",
+          "label": "-3"
+        },
+        {
+          "id": "D",
+          "label": "27"
+        }
+      ]
+    },
+    {
+      "id": "g6-004",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "12 和 18 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 36,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.NS.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "37"
+        },
+        {
+          "id": "B",
+          "label": "35"
+        },
+        {
+          "id": "C",
+          "label": "46"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g6-005",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "把 18 个样本按 3:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 9,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.RP.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-006",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "80 的 50% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 40
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-007",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "-6 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -1
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.NS.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-008",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "18 和 24 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.NS.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-009",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "把 21 个样本按 4:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 9,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.RP.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-010",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "40 的 20% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-011",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "-7 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -2
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.NS.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-012",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "24 和 36 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-1",
+        "standard:6.NS.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-013",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "把 20 个样本按 2:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8,
+        "unit": "个",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.RP.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "8个"
+        },
+        {
+          "id": "B",
+          "label": "9个"
+        },
+        {
+          "id": "C",
+          "label": "7个"
+        },
+        {
+          "id": "D",
+          "label": "18个"
+        }
+      ]
+    },
+    {
+      "id": "g6-014",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "60 的 25% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 15,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "17"
+        },
+        {
+          "id": "B",
+          "label": "15"
+        },
+        {
+          "id": "C",
+          "label": "13"
+        },
+        {
+          "id": "D",
+          "label": "35"
+        }
+      ]
+    },
+    {
+      "id": "g6-015",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "-9 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -4,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.NS.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "-1"
+        },
+        {
+          "id": "B",
+          "label": "-7"
+        },
+        {
+          "id": "C",
+          "label": "-4"
+        },
+        {
+          "id": "D",
+          "label": "26"
+        }
+      ]
+    },
+    {
+      "id": "g6-016",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "12 和 18 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 36,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.NS.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "37"
+        },
+        {
+          "id": "B",
+          "label": "35"
+        },
+        {
+          "id": "C",
+          "label": "46"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g6-017",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "把 24 个样本按 3:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.RP.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-018",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "80 的 50% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 40
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-019",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "-7 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -2
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.NS.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-020",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "18 和 24 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.NS.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-021",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "把 28 个样本按 4:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 12,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.RP.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-022",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "40 的 20% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-023",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "-8 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -3
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.NS.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-024",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "24 和 36 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-2",
+        "standard:6.NS.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-025",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "把 25 个样本按 2:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 10,
+        "unit": "个",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.RP.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "10个"
+        },
+        {
+          "id": "B",
+          "label": "11个"
+        },
+        {
+          "id": "C",
+          "label": "9个"
+        },
+        {
+          "id": "D",
+          "label": "20个"
+        }
+      ]
+    },
+    {
+      "id": "g6-026",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "60 的 25% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 15,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "17"
+        },
+        {
+          "id": "B",
+          "label": "15"
+        },
+        {
+          "id": "C",
+          "label": "13"
+        },
+        {
+          "id": "D",
+          "label": "35"
+        }
+      ]
+    },
+    {
+      "id": "g6-027",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "-10 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -5,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.NS.5",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "-2"
+        },
+        {
+          "id": "B",
+          "label": "-8"
+        },
+        {
+          "id": "C",
+          "label": "-5"
+        },
+        {
+          "id": "D",
+          "label": "25"
+        }
+      ]
+    },
+    {
+      "id": "g6-028",
+      "grade": 6,
+      "format": "choice",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "12 和 18 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 36,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.NS.4",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "37"
+        },
+        {
+          "id": "B",
+          "label": "35"
+        },
+        {
+          "id": "C",
+          "label": "46"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g6-029",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "把 30 个样本按 3:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 15,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.RP.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-030",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "80 的 50% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 40
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-031",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "-8 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -3
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.NS.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-032",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "18 和 24 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.NS.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-033",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "把 35 个样本按 4:3 分给两组，较少的一组分到多少个？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 15,
+        "unit": "个"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.RP.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-034",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "40 的 20% 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 8
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-035",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "-9 + 5 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": -4
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.NS.5",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-036",
+      "grade": 6,
+      "format": "open",
+      "type": "number-sense",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "24 和 36 的最小公倍数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看清数位、分母或百分号，再决定用哪一种表示。",
+        "把整数、分数、小数或百分数统一成同一种形式。",
+        "分数题先找分母，小数题先看小数点位置。",
+        "把已知量和未知量写成一道算式。",
+        "按算理一步步算，最后检查结果是否在合理范围内。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "number-sense",
+        "difficulty-3",
+        "standard:6.NS.4",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-037",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "4 里面有多少个 1/2？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 8,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "8"
+        },
+        {
+          "id": "B",
+          "label": "9"
+        },
+        {
+          "id": "C",
+          "label": "7"
+        },
+        {
+          "id": "D",
+          "label": "18"
+        }
+      ]
+    },
+    {
+      "id": "g6-038",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "7.199999999999999 ÷ 3 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 2.4,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "2.5"
+        },
+        {
+          "id": "B",
+          "label": "2.4"
+        },
+        {
+          "id": "C",
+          "label": "2.3"
+        },
+        {
+          "id": "D",
+          "label": "3.4"
+        }
+      ]
+    },
+    {
+      "id": "g6-039",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "20 里面有多少个 1/5？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 100,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "103"
+        },
+        {
+          "id": "B",
+          "label": "97"
+        },
+        {
+          "id": "C",
+          "label": "100"
+        },
+        {
+          "id": "D",
+          "label": "130"
+        }
+      ]
+    },
+    {
+      "id": "g6-040",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "2.4 ÷ 2 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 1.2,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "1.3"
+        },
+        {
+          "id": "B",
+          "label": "1.1"
+        },
+        {
+          "id": "C",
+          "label": "2.2"
+        },
+        {
+          "id": "D",
+          "label": "1.2"
+        }
+      ]
+    },
+    {
+      "id": "g6-041",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "8 里面有多少个 1/4？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 32
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-042",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "14.4 ÷ 4 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 3.6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-043",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "8 里面有多少个 1/2？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-044",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "7.199999999999999 ÷ 3 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 2.4
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-045",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "10 里面有多少个 1/5？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 50
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-046",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "2.4 ÷ 2 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 1.2
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-047",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "16 里面有多少个 1/4？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 64
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-048",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "14.4 ÷ 4 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 3.6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-1",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-049",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "6 里面有多少个 1/2？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12"
+        },
+        {
+          "id": "B",
+          "label": "13"
+        },
+        {
+          "id": "C",
+          "label": "11"
+        },
+        {
+          "id": "D",
+          "label": "22"
+        }
+      ]
+    },
+    {
+      "id": "g6-050",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "7.199999999999999 ÷ 3 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 2.4,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "2.5"
+        },
+        {
+          "id": "B",
+          "label": "2.4"
+        },
+        {
+          "id": "C",
+          "label": "2.3"
+        },
+        {
+          "id": "D",
+          "label": "3.4"
+        }
+      ]
+    },
+    {
+      "id": "g6-051",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "25 里面有多少个 1/5？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 125,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "128"
+        },
+        {
+          "id": "B",
+          "label": "122"
+        },
+        {
+          "id": "C",
+          "label": "125"
+        },
+        {
+          "id": "D",
+          "label": "155"
+        }
+      ]
+    },
+    {
+      "id": "g6-052",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "2.4 ÷ 2 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 1.2,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "1.3"
+        },
+        {
+          "id": "B",
+          "label": "1.1"
+        },
+        {
+          "id": "C",
+          "label": "2.2"
+        },
+        {
+          "id": "D",
+          "label": "1.2"
+        }
+      ]
+    },
+    {
+      "id": "g6-053",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "12 里面有多少个 1/4？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 48
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-054",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "14.4 ÷ 4 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 3.6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-055",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "10 里面有多少个 1/2？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-056",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "7.199999999999999 ÷ 3 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 2.4
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-057",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "15 里面有多少个 1/5？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 75
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-058",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "2.4 ÷ 2 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 1.2
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-059",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "20 里面有多少个 1/4？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 80
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-060",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "14.4 ÷ 4 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 3.6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-2",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-061",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "8 里面有多少个 1/2？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 16,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "16"
+        },
+        {
+          "id": "B",
+          "label": "17"
+        },
+        {
+          "id": "C",
+          "label": "15"
+        },
+        {
+          "id": "D",
+          "label": "26"
+        }
+      ]
+    },
+    {
+      "id": "g6-062",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "7.199999999999999 ÷ 3 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 2.4,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "2.5"
+        },
+        {
+          "id": "B",
+          "label": "2.4"
+        },
+        {
+          "id": "C",
+          "label": "2.3"
+        },
+        {
+          "id": "D",
+          "label": "3.4"
+        }
+      ]
+    },
+    {
+      "id": "g6-063",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "30 里面有多少个 1/5？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 150,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "153"
+        },
+        {
+          "id": "B",
+          "label": "147"
+        },
+        {
+          "id": "C",
+          "label": "150"
+        },
+        {
+          "id": "D",
+          "label": "180"
+        }
+      ]
+    },
+    {
+      "id": "g6-064",
+      "grade": 6,
+      "format": "choice",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "2.4 ÷ 2 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 1.2,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "1.3"
+        },
+        {
+          "id": "B",
+          "label": "1.1"
+        },
+        {
+          "id": "C",
+          "label": "2.2"
+        },
+        {
+          "id": "D",
+          "label": "1.2"
+        }
+      ]
+    },
+    {
+      "id": "g6-065",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "16 里面有多少个 1/4？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 64
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-066",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "14.4 ÷ 4 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 3.6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-067",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "12 里面有多少个 1/2？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-068",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "7.199999999999999 ÷ 3 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 2.4
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-069",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "20 里面有多少个 1/5？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 100
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-070",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "2.4 ÷ 2 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 1.2
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-071",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "24 里面有多少个 1/4？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 96
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-072",
+      "grade": 6,
+      "format": "open",
+      "type": "mul-div",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "14.4 ÷ 4 等于多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先判断题目是在求几个几，还是把总数平均分。",
+        "乘法找因数和积，除法找被除数、除数和商。",
+        "多位数可以拆成整十、整百再算。",
+        "列出乘法或除法算式，注意进位与余数。",
+        "用乘除互逆检查结果，看看商乘除数是否回到被除数。"
+      ],
+      "answer": {
+        "value": 3.6
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "mul-div",
+        "difficulty-3",
+        "standard:6.NS.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/NS/"
+      ]
+    },
+    {
+      "id": "g6-073",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "一套观测设备原价 100 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 10,
+        "unit": "元",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "10元"
+        },
+        {
+          "id": "B",
+          "label": "11元"
+        },
+        {
+          "id": "C",
+          "label": "9元"
+        },
+        {
+          "id": "D",
+          "label": "20元"
+        }
+      ]
+    },
+    {
+      "id": "g6-074",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一套观测设备原价 101 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 20.2,
+        "unit": "元",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "20.3元"
+        },
+        {
+          "id": "B",
+          "label": "20.2元"
+        },
+        {
+          "id": "C",
+          "label": "20.1元"
+        },
+        {
+          "id": "D",
+          "label": "21.2元"
+        }
+      ]
+    },
+    {
+      "id": "g6-075",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一套观测设备原价 102 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 25.5,
+        "unit": "元",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "25.6元"
+        },
+        {
+          "id": "B",
+          "label": "25.4元"
+        },
+        {
+          "id": "C",
+          "label": "25.5元"
+        },
+        {
+          "id": "D",
+          "label": "26.5元"
+        }
+      ]
+    },
+    {
+      "id": "g6-076",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "一套观测设备原价 103 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 10.3,
+        "unit": "元",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "10.4元"
+        },
+        {
+          "id": "B",
+          "label": "10.2元"
+        },
+        {
+          "id": "C",
+          "label": "11.3元"
+        },
+        {
+          "id": "D",
+          "label": "10.3元"
+        }
+      ]
+    },
+    {
+      "id": "g6-077",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一套观测设备原价 104 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 20.8,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-078",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "一套观测设备原价 105 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 26.25,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-079",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一套观测设备原价 106 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 10.6,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-080",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一套观测设备原价 107 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 21.4,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-081",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一套观测设备原价 108 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 27,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-082",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一套观测设备原价 109 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 10.9,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-083",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一套观测设备原价 110 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 22,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-084",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "一套观测设备原价 111 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 27.75,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-1",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-085",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一套观测设备原价 120 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 12,
+        "unit": "元",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12元"
+        },
+        {
+          "id": "B",
+          "label": "13元"
+        },
+        {
+          "id": "C",
+          "label": "11元"
+        },
+        {
+          "id": "D",
+          "label": "22元"
+        }
+      ]
+    },
+    {
+      "id": "g6-086",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一套观测设备原价 121 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 24.2,
+        "unit": "元",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "24.3元"
+        },
+        {
+          "id": "B",
+          "label": "24.2元"
+        },
+        {
+          "id": "C",
+          "label": "24.1元"
+        },
+        {
+          "id": "D",
+          "label": "25.2元"
+        }
+      ]
+    },
+    {
+      "id": "g6-087",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "一套观测设备原价 122 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 30.5,
+        "unit": "元",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "30.6元"
+        },
+        {
+          "id": "B",
+          "label": "30.4元"
+        },
+        {
+          "id": "C",
+          "label": "30.5元"
+        },
+        {
+          "id": "D",
+          "label": "31.5元"
+        }
+      ]
+    },
+    {
+      "id": "g6-088",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一套观测设备原价 123 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 12.3,
+        "unit": "元",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12.4元"
+        },
+        {
+          "id": "B",
+          "label": "12.2元"
+        },
+        {
+          "id": "C",
+          "label": "13.3元"
+        },
+        {
+          "id": "D",
+          "label": "12.3元"
+        }
+      ]
+    },
+    {
+      "id": "g6-089",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "一套观测设备原价 124 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 24.8,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-090",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一套观测设备原价 125 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 31.25,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-091",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一套观测设备原价 126 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 12.6,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-092",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一套观测设备原价 127 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 25.4,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-093",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一套观测设备原价 128 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 32,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-094",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一套观测设备原价 129 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 12.9,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-095",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "一套观测设备原价 130 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 26,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-096",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "一套观测设备原价 131 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 32.75,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-2",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-097",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一套观测设备原价 140 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 14,
+        "unit": "元",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "14元"
+        },
+        {
+          "id": "B",
+          "label": "15元"
+        },
+        {
+          "id": "C",
+          "label": "13元"
+        },
+        {
+          "id": "D",
+          "label": "24元"
+        }
+      ]
+    },
+    {
+      "id": "g6-098",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "一套观测设备原价 141 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 28.2,
+        "unit": "元",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "28.3元"
+        },
+        {
+          "id": "B",
+          "label": "28.2元"
+        },
+        {
+          "id": "C",
+          "label": "28.1元"
+        },
+        {
+          "id": "D",
+          "label": "29.2元"
+        }
+      ]
+    },
+    {
+      "id": "g6-099",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一套观测设备原价 142 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 35.5,
+        "unit": "元",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "35.6元"
+        },
+        {
+          "id": "B",
+          "label": "35.4元"
+        },
+        {
+          "id": "C",
+          "label": "35.5元"
+        },
+        {
+          "id": "D",
+          "label": "36.5元"
+        }
+      ]
+    },
+    {
+      "id": "g6-100",
+      "grade": 6,
+      "format": "choice",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "一套观测设备原价 143 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 14.3,
+        "unit": "元",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "14.4元"
+        },
+        {
+          "id": "B",
+          "label": "14.2元"
+        },
+        {
+          "id": "C",
+          "label": "15.3元"
+        },
+        {
+          "id": "D",
+          "label": "14.3元"
+        }
+      ]
+    },
+    {
+      "id": "g6-101",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一套观测设备原价 144 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 28.8,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-102",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一套观测设备原价 145 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 36.25,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-103",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一套观测设备原价 146 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 14.6,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-104",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一套观测设备原价 147 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 29.4,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-105",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一套观测设备原价 148 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 37,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-106",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "一套观测设备原价 149 元，降价 10% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 14.9,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-107",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "一套观测设备原价 150 元，降价 20% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 30,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-108",
+      "grade": 6,
+      "format": "open",
+      "type": "two-step-app",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一套观测设备原价 151 元，降价 25% 出售。便宜了多少元？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先读题，圈出已知条件和最后的问题。",
+        "想一想先求什么、再求什么。",
+        "把第一步的结果作为第二步的条件。",
+        "分步列式，必要时加上单位。",
+        "回头检查每一步是否都在回答题目，单位是否一致。"
+      ],
+      "answer": {
+        "value": 37.75,
+        "unit": "元"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "two-step-app",
+        "difficulty-3",
+        "standard:6.RP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/RP/"
+      ]
+    },
+    {
+      "id": "g6-109",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "3:3 = 12:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12"
+        },
+        {
+          "id": "B",
+          "label": "13"
+        },
+        {
+          "id": "C",
+          "label": "11"
+        },
+        {
+          "id": "D",
+          "label": "22"
+        }
+      ]
+    },
+    {
+      "id": "g6-110",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "4:4 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "18"
+        },
+        {
+          "id": "B",
+          "label": "16"
+        },
+        {
+          "id": "C",
+          "label": "14"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g6-111",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "5:5 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "23"
+        },
+        {
+          "id": "B",
+          "label": "17"
+        },
+        {
+          "id": "C",
+          "label": "20"
+        },
+        {
+          "id": "D",
+          "label": "50"
+        }
+      ]
+    },
+    {
+      "id": "g6-112",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "3:6 = 12:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "25"
+        },
+        {
+          "id": "B",
+          "label": "23"
+        },
+        {
+          "id": "C",
+          "label": "34"
+        },
+        {
+          "id": "D",
+          "label": "24"
+        }
+      ]
+    },
+    {
+      "id": "g6-113",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "4:3 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-114",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "5:4 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-115",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "3:5 = 12:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-116",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "4:6 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-117",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "5:3 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-118",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "3:4 = 12:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-119",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "4:5 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-120",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "5:6 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-1",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-121",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "4:3 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12"
+        },
+        {
+          "id": "B",
+          "label": "13"
+        },
+        {
+          "id": "C",
+          "label": "11"
+        },
+        {
+          "id": "D",
+          "label": "22"
+        }
+      ]
+    },
+    {
+      "id": "g6-122",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "5:4 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "18"
+        },
+        {
+          "id": "B",
+          "label": "16"
+        },
+        {
+          "id": "C",
+          "label": "14"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g6-123",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "6:5 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "23"
+        },
+        {
+          "id": "B",
+          "label": "17"
+        },
+        {
+          "id": "C",
+          "label": "20"
+        },
+        {
+          "id": "D",
+          "label": "50"
+        }
+      ]
+    },
+    {
+      "id": "g6-124",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "4:6 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "25"
+        },
+        {
+          "id": "B",
+          "label": "23"
+        },
+        {
+          "id": "C",
+          "label": "34"
+        },
+        {
+          "id": "D",
+          "label": "24"
+        }
+      ]
+    },
+    {
+      "id": "g6-125",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "5:3 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-126",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "6:4 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-127",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "4:5 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-128",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "5:6 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-129",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "6:3 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-130",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "4:4 = 16:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-131",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "5:5 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-132",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "6:6 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-2",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-133",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "5:3 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "12"
+        },
+        {
+          "id": "B",
+          "label": "13"
+        },
+        {
+          "id": "C",
+          "label": "11"
+        },
+        {
+          "id": "D",
+          "label": "22"
+        }
+      ]
+    },
+    {
+      "id": "g6-134",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "6:4 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "18"
+        },
+        {
+          "id": "B",
+          "label": "16"
+        },
+        {
+          "id": "C",
+          "label": "14"
+        },
+        {
+          "id": "D",
+          "label": "36"
+        }
+      ]
+    },
+    {
+      "id": "g6-135",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "7:5 = 28:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "23"
+        },
+        {
+          "id": "B",
+          "label": "17"
+        },
+        {
+          "id": "C",
+          "label": "20"
+        },
+        {
+          "id": "D",
+          "label": "50"
+        }
+      ]
+    },
+    {
+      "id": "g6-136",
+      "grade": 6,
+      "format": "choice",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "5:6 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "25"
+        },
+        {
+          "id": "B",
+          "label": "23"
+        },
+        {
+          "id": "C",
+          "label": "34"
+        },
+        {
+          "id": "D",
+          "label": "24"
+        }
+      ]
+    },
+    {
+      "id": "g6-137",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "6:3 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-138",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "7:4 = 28:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-139",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "5:5 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-140",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "6:6 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-141",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "7:3 = 28:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 12
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-142",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "5:4 = 20:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 16
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-143",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "6:5 = 24:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 20
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-144",
+      "grade": 6,
+      "format": "open",
+      "type": "unknown-relation",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "7:6 = 28:x，x 是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "找出题目里未知的那个量。",
+        "把未知量看成一个可以参与运算的数。",
+        "根据等量关系列式，不要急着猜答案。",
+        "用逆运算把未知量单独留下来。",
+        "把算出的结果代回原题，检查等式是否成立。"
+      ],
+      "answer": {
+        "value": 24
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unknown-relation",
+        "skill-muldiv-unknown",
+        "difficulty-3",
+        "standard:6.EE.7",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/EE/"
+      ]
+    },
+    {
+      "id": "g6-145",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "一个长方体观测箱长 5 米、宽 6 米、高 3 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 90,
+        "unit": "立方米",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "90立方米"
+        },
+        {
+          "id": "B",
+          "label": "91立方米"
+        },
+        {
+          "id": "C",
+          "label": "89立方米"
+        },
+        {
+          "id": "D",
+          "label": "100立方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-146",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一块三角形观测板底 12 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 42,
+        "unit": "平方米",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "44平方米"
+        },
+        {
+          "id": "B",
+          "label": "42平方米"
+        },
+        {
+          "id": "C",
+          "label": "40平方米"
+        },
+        {
+          "id": "D",
+          "label": "62平方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-147",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一个长方体观测箱长 7 米、宽 8 米、高 5 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 280,
+        "unit": "立方米",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "283立方米"
+        },
+        {
+          "id": "B",
+          "label": "277立方米"
+        },
+        {
+          "id": "C",
+          "label": "280立方米"
+        },
+        {
+          "id": "D",
+          "label": "310立方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-148",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "一块三角形观测板底 10 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 45,
+        "unit": "平方米",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "46平方米"
+        },
+        {
+          "id": "B",
+          "label": "44平方米"
+        },
+        {
+          "id": "C",
+          "label": "55平方米"
+        },
+        {
+          "id": "D",
+          "label": "45平方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-149",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一个长方体观测箱长 6 米、宽 6 米、高 4 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 144,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-150",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "一块三角形观测板底 14 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 49,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-151",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一个长方体观测箱长 5 米、宽 8 米、高 3 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 120,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-152",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一块三角形观测板底 12 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 54,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-153",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一个长方体观测箱长 7 米、宽 6 米、高 5 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 210,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-154",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一块三角形观测板底 10 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 35,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-155",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一个长方体观测箱长 6 米、宽 8 米、高 4 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 192,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-156",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "一块三角形观测板底 14 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 63,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-1",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-157",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一个长方体观测箱长 6 米、宽 6 米、高 3 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 108,
+        "unit": "立方米",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "108立方米"
+        },
+        {
+          "id": "B",
+          "label": "109立方米"
+        },
+        {
+          "id": "C",
+          "label": "107立方米"
+        },
+        {
+          "id": "D",
+          "label": "118立方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-158",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一块三角形观测板底 14 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 49,
+        "unit": "平方米",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "51平方米"
+        },
+        {
+          "id": "B",
+          "label": "49平方米"
+        },
+        {
+          "id": "C",
+          "label": "47平方米"
+        },
+        {
+          "id": "D",
+          "label": "69平方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-159",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "一个长方体观测箱长 8 米、宽 8 米、高 5 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 320,
+        "unit": "立方米",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "323立方米"
+        },
+        {
+          "id": "B",
+          "label": "317立方米"
+        },
+        {
+          "id": "C",
+          "label": "320立方米"
+        },
+        {
+          "id": "D",
+          "label": "350立方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-160",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一块三角形观测板底 12 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 54,
+        "unit": "平方米",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "55平方米"
+        },
+        {
+          "id": "B",
+          "label": "53平方米"
+        },
+        {
+          "id": "C",
+          "label": "64平方米"
+        },
+        {
+          "id": "D",
+          "label": "54平方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-161",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "一个长方体观测箱长 7 米、宽 6 米、高 4 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 168,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-162",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一块三角形观测板底 16 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 56,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-163",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一个长方体观测箱长 6 米、宽 8 米、高 3 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 144,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-164",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一块三角形观测板底 14 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 63,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-165",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一个长方体观测箱长 8 米、宽 6 米、高 5 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 240,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-166",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一块三角形观测板底 12 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 42,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-167",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "一个长方体观测箱长 7 米、宽 8 米、高 4 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 224,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-168",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "一块三角形观测板底 16 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 72,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-2",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-169",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "一个长方体观测箱长 7 米、宽 6 米、高 3 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 126,
+        "unit": "立方米",
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "126立方米"
+        },
+        {
+          "id": "B",
+          "label": "127立方米"
+        },
+        {
+          "id": "C",
+          "label": "125立方米"
+        },
+        {
+          "id": "D",
+          "label": "136立方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-170",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "一块三角形观测板底 16 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 56,
+        "unit": "平方米",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "58平方米"
+        },
+        {
+          "id": "B",
+          "label": "56平方米"
+        },
+        {
+          "id": "C",
+          "label": "54平方米"
+        },
+        {
+          "id": "D",
+          "label": "76平方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-171",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "一个长方体观测箱长 9 米、宽 8 米、高 5 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 360,
+        "unit": "立方米",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.2",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "363立方米"
+        },
+        {
+          "id": "B",
+          "label": "357立方米"
+        },
+        {
+          "id": "C",
+          "label": "360立方米"
+        },
+        {
+          "id": "D",
+          "label": "390立方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-172",
+      "grade": 6,
+      "format": "choice",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "一块三角形观测板底 14 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 63,
+        "unit": "平方米",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.1",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "64平方米"
+        },
+        {
+          "id": "B",
+          "label": "62平方米"
+        },
+        {
+          "id": "C",
+          "label": "73平方米"
+        },
+        {
+          "id": "D",
+          "label": "63平方米"
+        }
+      ]
+    },
+    {
+      "id": "g6-173",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "一个长方体观测箱长 8 米、宽 6 米、高 4 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 192,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-174",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "一块三角形观测板底 18 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 63,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-175",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "一个长方体观测箱长 7 米、宽 8 米、高 3 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 168,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-176",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "一块三角形观测板底 16 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 72,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-177",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "一个长方体观测箱长 9 米、宽 6 米、高 5 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 270,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-178",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "一块三角形观测板底 14 米、高 7 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 49,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-179",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "一个长方体观测箱长 8 米、宽 8 米、高 4 米，体积是多少立方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 256,
+        "unit": "立方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.2",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-180",
+      "grade": 6,
+      "format": "open",
+      "type": "unit-time-route",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "一块三角形观测板底 18 米、高 9 米，面积是多少平方米？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先看题目求的是长度、面积、体积、角度还是时间。",
+        "把单位统一，再代入公式。",
+        "长方形、长方体、圆等图形先写对公式。",
+        "列式时把数字和单位一起写清楚。",
+        "算完检查单位：长度、面积、体积不能混用。"
+      ],
+      "answer": {
+        "value": 81,
+        "unit": "平方米"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "unit-time-route",
+        "difficulty-3",
+        "standard:6.G.1",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/G/"
+      ]
+    },
+    {
+      "id": "g6-181",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "深海机器人",
+        "body": "五次观测数据是 70、71、72、73、74，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 72,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "72"
+        },
+        {
+          "id": "B",
+          "label": "73"
+        },
+        {
+          "id": "C",
+          "label": "71"
+        },
+        {
+          "id": "D",
+          "label": "82"
+        }
+      ]
+    },
+    {
+      "id": "g6-182",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "海洋数据站",
+        "body": "五次观测数据是 70、72、74、76、78，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 74,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "76"
+        },
+        {
+          "id": "B",
+          "label": "74"
+        },
+        {
+          "id": "C",
+          "label": "72"
+        },
+        {
+          "id": "D",
+          "label": "94"
+        }
+      ]
+    },
+    {
+      "id": "g6-183",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "五次观测数据是 70、73、76、79、82，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 76,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "79"
+        },
+        {
+          "id": "B",
+          "label": "73"
+        },
+        {
+          "id": "C",
+          "label": "76"
+        },
+        {
+          "id": "D",
+          "label": "106"
+        }
+      ]
+    },
+    {
+      "id": "g6-184",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海底农场",
+        "body": "五次观测数据是 70、74、78、82、86，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 78,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "79"
+        },
+        {
+          "id": "B",
+          "label": "77"
+        },
+        {
+          "id": "C",
+          "label": "88"
+        },
+        {
+          "id": "D",
+          "label": "78"
+        }
+      ]
+    },
+    {
+      "id": "g6-185",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "五次观测数据是 70、75、80、85、90，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 80
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-186",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "深海观测站",
+        "body": "五次观测数据是 70、71、72、73、74，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-187",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "五次观测数据是 70、72、74、76、78，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 74
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-188",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "五次观测数据是 70、73、76、79、82，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 76
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-189",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "热泉探测船",
+        "body": "五次观测数据是 70、74、78、82、86，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 78
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-190",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "海沟研究站",
+        "body": "五次观测数据是 70、75、80、85、90，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 80
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-191",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "applied",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "五次观测数据是 70、71、72、73、74，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 72
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-192",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "probe",
+      "story": {
+        "title": "极地科考船",
+        "body": "五次观测数据是 70、72、74、76、78，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 74
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-193",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "海洋数据站",
+        "body": "五次观测数据是 80、81、82、83、84，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 82,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "82"
+        },
+        {
+          "id": "B",
+          "label": "83"
+        },
+        {
+          "id": "C",
+          "label": "81"
+        },
+        {
+          "id": "D",
+          "label": "92"
+        }
+      ]
+    },
+    {
+      "id": "g6-194",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "五次观测数据是 80、82、84、86、88，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 84,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "86"
+        },
+        {
+          "id": "B",
+          "label": "84"
+        },
+        {
+          "id": "C",
+          "label": "82"
+        },
+        {
+          "id": "D",
+          "label": "104"
+        }
+      ]
+    },
+    {
+      "id": "g6-195",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海底农场",
+        "body": "五次观测数据是 80、83、86、89、92，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 86,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "89"
+        },
+        {
+          "id": "B",
+          "label": "83"
+        },
+        {
+          "id": "C",
+          "label": "86"
+        },
+        {
+          "id": "D",
+          "label": "116"
+        }
+      ]
+    },
+    {
+      "id": "g6-196",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "五次观测数据是 80、84、88、92、96，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 88,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "89"
+        },
+        {
+          "id": "B",
+          "label": "87"
+        },
+        {
+          "id": "C",
+          "label": "98"
+        },
+        {
+          "id": "D",
+          "label": "88"
+        }
+      ]
+    },
+    {
+      "id": "g6-197",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "深海观测站",
+        "body": "五次观测数据是 80、85、90、95、100，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 90
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-198",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "五次观测数据是 80、81、82、83、84，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 82
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-199",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "五次观测数据是 80、82、84、86、88，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 84
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-200",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "热泉探测船",
+        "body": "五次观测数据是 80、83、86、89、92，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 86
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-201",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "海沟研究站",
+        "body": "五次观测数据是 80、84、88、92、96，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 88
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-202",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "basic",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "五次观测数据是 80、85、90、95、100，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 90
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-203",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "极地科考船",
+        "body": "五次观测数据是 80、81、82、83、84，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 82
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-204",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "probe",
+      "story": {
+        "title": "深海机器人",
+        "body": "五次观测数据是 80、82、84、86、88，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 84
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-205",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "潜水器驾驶舱",
+        "body": "五次观测数据是 90、91、92、93、94，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 92,
+        "optionId": "A"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "92"
+        },
+        {
+          "id": "B",
+          "label": "93"
+        },
+        {
+          "id": "C",
+          "label": "91"
+        },
+        {
+          "id": "D",
+          "label": "102"
+        }
+      ]
+    },
+    {
+      "id": "g6-206",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海底农场",
+        "body": "五次观测数据是 90、92、94、96、98，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 94,
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "96"
+        },
+        {
+          "id": "B",
+          "label": "94"
+        },
+        {
+          "id": "C",
+          "label": "92"
+        },
+        {
+          "id": "D",
+          "label": "114"
+        }
+      ]
+    },
+    {
+      "id": "g6-207",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "蓝色图书馆",
+        "body": "五次观测数据是 90、93、96、99、102，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 96,
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "99"
+        },
+        {
+          "id": "B",
+          "label": "93"
+        },
+        {
+          "id": "C",
+          "label": "96"
+        },
+        {
+          "id": "D",
+          "label": "126"
+        }
+      ]
+    },
+    {
+      "id": "g6-208",
+      "grade": 6,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "深海观测站",
+        "body": "五次观测数据是 90、94、98、102、106，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 98,
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "99"
+        },
+        {
+          "id": "B",
+          "label": "97"
+        },
+        {
+          "id": "C",
+          "label": "108"
+        },
+        {
+          "id": "D",
+          "label": "98"
+        }
+      ]
+    },
+    {
+      "id": "g6-209",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "珊瑚实验室",
+        "body": "五次观测数据是 90、95、100、105、110，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 100
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-210",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "鲸落考察队",
+        "body": "五次观测数据是 90、91、92、93、94，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 92
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-211",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "热泉探测船",
+        "body": "五次观测数据是 90、92、94、96、98，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 94
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-212",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "海沟研究站",
+        "body": "五次观测数据是 90、93、96、99、102，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 96
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-213",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "潮汐观测点",
+        "body": "五次观测数据是 90、94、98、102、106，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 98
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-214",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "basic",
+      "story": {
+        "title": "极地科考船",
+        "body": "五次观测数据是 90、95、100、105、110，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 100
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-215",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "applied",
+      "story": {
+        "title": "深海机器人",
+        "body": "五次观测数据是 90、91、92、93、94，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 92
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    },
+    {
+      "id": "g6-216",
+      "grade": 6,
+      "format": "open",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "海洋数据站",
+        "body": "五次观测数据是 90、92、94、96、98，平均数是多少？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先观察相邻两个数或两组数据的变化。",
+        "找出每次增加、减少或乘除的规律。",
+        "把规律写成算式，再推到要求的第几个。",
+        "数据题先排序或求总数、份数。",
+        "用后面的项验证规律，确认不是巧合。"
+      ],
+      "answer": {
+        "value": 94
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "standard:6.SP.3",
+        "form:fill"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/6/SP/"
+      ]
+    }
+  ]
+}

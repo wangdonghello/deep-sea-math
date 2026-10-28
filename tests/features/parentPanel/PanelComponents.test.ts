@@ -23,7 +23,7 @@ describe('parent panel components', () => {
     expect(wrapper.get('[data-testid="report-average"]').text()).toContain('1500')
     // 家长看到的是中文题型名，不是事件/投影里的内部键
     expect(wrapper.text()).toContain('加减法')
-    expect(wrapper.text()).toContain('单位·时间·路线')
+    expect(wrapper.text()).toContain('测量与图形')
     expect(wrapper.text()).not.toContain('add-sub')
     expect(wrapper.text()).not.toContain('mul-div')
     await wrapper.get('select').setValue('today')

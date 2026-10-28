@@ -17,10 +17,11 @@ import { tokenizeExpression, unitAliases } from '../../domain/quiz/answerJudgeme
 const QUESTION_UNITS = new Set([
   ...Object.values(unitAliases).flat(),
   '份', '项', '格', '瓶', '节', '次', '轮', '人', '毫升', '组',
+  '平方厘米', '平方分米', '平方米', '立方厘米', '立方分米', '立方米', '度', '厘米/秒', '千米/时',
 ])
 
 /** 第二版首发的三个年级。 */
-const GRADES: readonly Grade[] = [1, 2, 3]
+const GRADES: readonly Grade[] = [1, 2, 3, 4, 5, 6]
 
 /** 选择题固定四个选项。 */
 const CHOICE_IDS: readonly ChoiceId[] = ['A', 'B', 'C', 'D']
@@ -210,7 +211,9 @@ function validateQuestionSources(
       throw new Error(`${path}: missing grade ${grade} standard tag`)
     }
     for (const standard of declared) {
-      const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
+      const match = /^(\d+)\.([A-Z]+)\./.exec(standard)
+      const domain = match?.[2]
+      if (domain === undefined) throw new Error(`${path}: malformed standard ${standard}`)
       const domainUrl = new RegExp(`^https?://www\.thecorestandards\.org/Math/Content/${grade}/${domain}/?$`, 'i')
       if (!sources.some((source) => domainUrl.test(source))) {
         throw new Error(`${path}: missing matching grade ${grade} standards domain URL`)
@@ -328,9 +331,9 @@ function validateWorkedExampleHint(hints: unknown, answer: Record<string, unknow
   }
 }
 
-/** 校验年级：只允许 1–3。 */
+/** 校验年级：允许 1–6。 */
 function validateGrade(value: unknown, path: string): Grade {
-  if (!GRADES.includes(value as Grade)) throw new Error(`${path}: expected grade 1, 2, or 3`)
+  if (!GRADES.includes(value as Grade)) throw new Error(`${path}: expected grade 1–6`)
   return value as Grade
 }
 
@@ -472,7 +475,9 @@ export function assertValidQuestionBank(
           // 难度格必须达到下限，整格缺失同样失败。
           const applicable = grade === 1
             ? type !== 'mul-div'
-            : type !== 'number-sense'
+            : grade >= 4
+              ? type !== 'add-sub'
+              : type !== 'number-sense'
           if (applicable && cell.length < minPerCell) {
             throw new Error(
               `questionBank.questions: grade ${grade} ${type} difficulty ${difficulty} needs at least ${minPerCell} questions`,
@@ -522,7 +527,7 @@ export function createQuestionIndexes(questions: readonly Question[]): QuestionI
   const byCategory = Object.fromEntries(QUEST_CATEGORIES.map((category) => [category, []])) as unknown as QuestionIndexes['byCategory']
   const byType = Object.fromEntries(QUIZ_TYPES.map((type) => [type, []])) as unknown as QuestionIndexes['byType']
   const byDifficulty: QuestionIndexes['byDifficulty'] = { 1: [], 2: [], 3: [] }
-  const byGrade: QuestionIndexes['byGrade'] = { 1: [], 2: [], 3: [] }
+  const byGrade: QuestionIndexes['byGrade'] = { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] }
   for (const question of questions) {
     byCategory[question.category].push(question)
     byType[question.type].push(question)

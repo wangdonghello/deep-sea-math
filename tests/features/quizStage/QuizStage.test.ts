@@ -74,6 +74,18 @@ describe('Numpad', () => {
     await view.setProps({ modelValue: '24÷' })
     expect(view.emitted('update:modelValue')?.at(-1)).toEqual(['24÷'])
   })
+
+  it('支持小数点和负数输入', async () => {
+    const decimal = mount(Numpad, { props: { modelValue: '' } })
+    await decimal.get('[data-key="0"]').trigger('click')
+    await decimal.setProps({ modelValue: '0' })
+    await decimal.get('[data-key="."]').trigger('click')
+    expect(decimal.emitted('update:modelValue')?.at(-1)).toEqual(['0.'])
+
+    const negative = mount(Numpad, { props: { modelValue: '' } })
+    await negative.get('[data-key="−"]').trigger('click')
+    expect(negative.emitted('update:modelValue')?.at(-1)).toEqual(['-'])
+  })
 })
 
 describe('QuestView feedback', () => {

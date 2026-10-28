@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { buildQuestContext } from '@/app/questContext'
-import { QUESTION_BANK } from '@/data/content'
+import { QUESTION_BANK, QUESTION_BANK_BY_GRADE } from '@/data/content'
 import type { DomainEvent, SessionStartedEvent } from '@/domain/model/types'
 
 /**
@@ -89,6 +89,14 @@ describe('buildQuestContext: /quest?session= 深链参数', () => {
 
     expect(context.sessionId).toBeNull()
     expect(context.questions).toEqual([])
+  })
+
+  it('按档案年级装配 4 年级题池，不混入其他年级', () => {
+    const fourth = QUESTION_BANK_BY_GRADE[4].questions[0]
+    const context = buildQuestContext(PROFILE_ID, [sessionStarted('s-four', [fourth.id])], NOW, { grade: 4 })
+    expect(context.grade).toBe(4)
+    expect(context.questions.map((question) => question.id)).toEqual([fourth.id])
+    expect(context.questions.every((question) => question.grade === 4)).toBe(true)
   })
 
   it('重练优先于深链：错题本带题进来时忽略 session 参数', () => {

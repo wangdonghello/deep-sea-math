@@ -7,8 +7,9 @@
  *
  * 与实现分开文件（而不是塞进 `useProfileSelect.ts`）的理由：组件（`.vue`）
  * 与 composable 都要引用 `ProfileSummary` / `PIN_LENGTH`，若类型住在
- * composable 里，组件为了一个 import 就会把整个状态机拖进编译单元。
+ * composable 里，组件为了一个类型就要把整个状态机拖进编译单元。
  */
+import type { Grade } from '@/domain/model/types'
 
 /** 档案的**可展示**字段。 */
 export interface ProfileSummary {
@@ -18,7 +19,7 @@ export interface ProfileSummary {
   /** 头像素材键。 */
   avatarId: string
   /** 年级；第一版旧档案缺省 3 年级。 */
-  grade?: 1 | 2 | 3
+  grade?: Grade
   /** 主兴趣主题；第一版旧档案缺省深海。 */
   themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
@@ -28,7 +29,7 @@ export interface ProfileProjection {
   profileId: string
   nickname: string
   avatarId: string
-  grade?: 1 | 2 | 3
+  grade?: Grade
   themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
 
