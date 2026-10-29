@@ -26,14 +26,29 @@ describe('unlockedCreatureIdSetWithProgress', () => {
     }
   })
 
-  it('保留历史 unlock-granted 与区域解锁的旧口径', () => {
-    const unlocked = unlockedCreatureIdSetWithProgress(
-      { 'creature:golden-trevally': {}, 'zone:hadal': {} },
-      0,
-    )
+  it('保留历史 unlock-granted 的显式图鉴解锁', () => {
+    const unlocked = unlockedCreatureIdSetWithProgress({ 'creature:golden-trevally': {} }, 0)
     expect(unlocked.has('golden-trevally')).toBe(true)
-    // 区域解锁会带出该区域全部物种，这是 v2 沿用下来的规则。
-    expect(unlocked.has('hadal-amphipod')).toBe(true)
+  })
+
+  it('区域解锁不再直接发放整片海域的图鉴', () => {
+    // v2 的旧口径会把 hadal 区全部物种一起放出来；v3 只按关卡发放。
+    const unlocked = unlockedCreatureIdSetWithProgress({ 'zone:hadal': {} }, 0)
+    expect(unlocked.has('hadal-amphipod')).toBe(false)
+  })
+
+  it('解锁 3 个区（通关 3 关）只解锁 9 条，而不是整片海域的 24 条', () => {
+    // 三个区横跨 9 个关卡，但孩子只通关了前 3 关，因此只应拿到 3 × 3 = 9 条。
+    const unlocked = unlockedCreatureIdSetWithProgress({}, 3)
+    expect(unlocked.size).toBe(9)
+  })
+
+  it('通关 6 关解锁 18 条，不提前发放第 7、8 关的图鉴', () => {
+    const unlocked = unlockedCreatureIdSetWithProgress({}, 6)
+    expect(unlocked.size).toBe(18)
+    // 深渊区第 7、8 关的鱼仍应是剪影。
+    expect(unlocked.has('vampire-squid')).toBe(false)
+    expect(unlocked.has('giant-cusk-eel')).toBe(false)
   })
 
   it('通关封顶 10 关后解锁全部 30 条图鉴', () => {

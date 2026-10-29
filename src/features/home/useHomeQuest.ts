@@ -30,7 +30,8 @@ import type { DomainEvent, Settings } from '@/domain/model/types'
 
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 import { resolveZoneProgress, zoneIdsFromUnlockKeys, type ZoneProgress } from '@/features/bestiary/zoneProgress'
-import { unlockedCreatureIdSet } from '@/features/bestiary/unlockAccess'
+import { unlockedCreatureIdSetWithProgress } from '@/features/bestiary/unlockAccess'
+import { DEEP_SEA_STAGES } from '@/data/content/deepSeaStages'
 import type { HomeProfile, HomeQuestOptions, HomeStore } from './types'
 
 /** 默认时钟：宿主当前时间（仅"今天是哪一天"需要它）。 */
@@ -102,8 +103,10 @@ export interface ProgressSummary {
  *
  * 徽章口径：**数事件而不是去重** —— 徽章的语义是"获得过几次"，孩子今天拿了
  * 整组完成徽章、明天又拿一次，那是两次成就；去重会让进度永远停在 1。
- * 生物与区域去重：它们是解锁态，同一个 `kind:targetId` 只在投影里出现一次
- * （`replayProjections` 的追加型锁已保证），所以直接数键即可。
+ *
+ * 图鉴自 v3 起按**关卡进度**统计（完成 N 组 = 通关 N 关 = 3N 条图鉴），不再按
+ * `zone:*` 事件把整片海域的鱼算进来；旧口径在解锁 3 个区时会显示 24 条，
+ * 而正确值是已通关 3 关 × 3 = 9 条。
  */
 function summarizeProgress(
   events: readonly DomainEvent[],
@@ -117,12 +120,13 @@ function summarizeProgress(
       completedSessionIds.add(event.sessionId)
     }
   }
-  const keys = Object.keys(unlocks)
+  const completedStages = Math.min(completedSessionIds.size, DEEP_SEA_STAGES.length)
   return {
     badgeCount,
-    unlockedCreatureCount: unlockedCreatureIdSet(unlocks).size,
+    unlockedCreatureCount: unlockedCreatureIdSetWithProgress(unlocks, completedStages).size,
     totalCreatures: CREATURE_BANK.creatures.length,
-    unlockedZones: keys.filter((key) => key.startsWith('zone:')).length,
+    // 区域不回收：旧档案的 `zone:*` 记录继续算已解锁，避免孩子看到海域倒退。
+    unlockedZones: Object.keys(unlocks).filter((key) => key.startsWith('zone:')).length,
     completedSessions: completedSessionIds.size,
   }
 }

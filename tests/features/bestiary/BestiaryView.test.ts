@@ -314,18 +314,32 @@ describe('BestiaryView 默认教学区', () => {
       .map((entry) => entry.id))
   })
 
-  it('解锁暮光区后，暮光区里的鱼一起可见，深海大鼬鳚仍保持剪影', async () => {
-    const view = mount(BestiaryView, {
+  it('区域解锁只决定可见范围，图鉴卡仍按关卡发放', async () => {
+    const zoneOnly = mount(BestiaryView, {
       props: { profileId: 'profile-a', store: store([zoneUnlock('twilight')]) },
     })
     await flushPromises()
 
-    const angler = view.get('[data-testid="creature-card-johnson-anglerfish"]')
-    expect(angler.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
-    expect(view.find('[data-testid="creature-card-giant-cusk-eel"]').exists()).toBe(false)
+    // 只解锁区域、还没通关：区域筛选可用，但鱼仍是剪影。
+    const locked = zoneOnly.get('[data-testid="creature-card-johnson-anglerfish"]')
+    expect(locked.find('[data-testid="creature-silhouette"]').exists()).toBe(true)
 
-    await view.get('button[aria-label="筛选暮光区"]').trigger('click')
-    const shown = view.findAll('[data-testid^="creature-card-"]')
+    // 通关 2 关后，第 2 关的鮟鱇鱼才点亮；深海大鼬鳚仍不在暮光区可见范围里。
+    const completions: DomainEvent[] = Array.from({ length: 2 }, (_, index) => ({
+      eventId: `completed-${index}`, profileId: 'profile-a', occurredAt: index + 10,
+      type: 'session-completed', sessionId: `session-${index}`, rewards: [],
+    }))
+    const twoStages = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store([zoneUnlock('twilight'), ...completions]) },
+    })
+    await flushPromises()
+
+    const unlockedAngler = twoStages.get('[data-testid="creature-card-johnson-anglerfish"]')
+    expect(unlockedAngler.find('[data-testid="creature-silhouette"]').exists()).toBe(false)
+    expect(twoStages.find('[data-testid="creature-card-giant-cusk-eel"]').exists()).toBe(false)
+
+    await twoStages.get('button[aria-label="筛选暮光区"]').trigger('click')
+    const shown = twoStages.findAll('[data-testid^="creature-card-"]')
       .map((card) => card.attributes('data-testid')?.replace('creature-card-', ''))
     expect(shown).toEqual(CREATURE_BANK.creatures
       .filter((entry) => zonesForCreature(entry).some((zone) => zone.id === 'twilight'))
