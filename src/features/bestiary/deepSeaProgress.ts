@@ -5,6 +5,7 @@ import {
   type DeepSeaZone,
   type DeepSeaZoneId,
 } from '@/data/content/deepSeaStages'
+import type { DomainEvent } from '@/domain/model/types'
 
 /**
  * 深海关卡进度（v3.0）的**唯一推算口径**。
@@ -54,4 +55,25 @@ export function isStageUnlocked(progress: DeepSeaProgress, stage: number): boole
 /** 某区域的关卡是否已解锁（按区域阈值，而不是按单关）。 */
 export function isZoneUnlocked(progress: DeepSeaProgress, zoneId: DeepSeaZoneId): boolean {
   return progress.unlockedZoneIds.includes(zoneId)
+}
+
+/**
+ * 从事件日志数出已通关卡数（= 已完成的每日题组数，按 sessionId 去重）。
+ *
+ * 与 `useDeepSeaProgress` 共用同一套口径：只数 `session-completed`，历史数据里
+ * 重复的完成事件不会把进度算多。抽成纯函数是为了让图鉴投影与观察舱守卫在
+ * **同一份输入**上得出同一个关卡数，而不是各自实现一遍。
+ */
+export function completedStageCount(
+  events: readonly DomainEvent[],
+  profileId: string,
+): number {
+  const sessions = new Set(
+    events.flatMap((event) =>
+      event.type === 'session-completed' && event.profileId === profileId
+        ? [event.sessionId]
+        : [],
+    ),
+  )
+  return resolveDeepSeaProgress(sessions.size).completedStages
 }

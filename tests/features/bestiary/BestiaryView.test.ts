@@ -224,6 +224,27 @@ describe('BestiaryView', () => {
     expect(view.emitted('observe')).toEqual([[creature.id]])
   })
 
+  it('通关第 3 关后该关图鉴卡可以直接进入观察舱', async () => {
+    const completions: DomainEvent[] = Array.from({ length: 3 }, (_, index) => ({
+      eventId: `completed-${index}`, profileId: 'profile-a', occurredAt: index + 1,
+      type: 'session-completed', sessionId: `session-${index}`, rewards: [],
+    }))
+    const view = mount(BestiaryView, {
+      props: { profileId: 'profile-a', store: store(completions), showStages: true },
+    })
+    await flushPromises()
+    await view.get('[data-testid="stage-tab-3"]').trigger('click')
+    await flushPromises()
+
+    const card = view.get('[data-testid="creature-card-humpback-whale"]')
+    expect(card.text()).toContain('座头鲸')
+    await card.get('[data-testid="creature-observe"]').trigger('click')
+    expect(view.emitted('observe')).toEqual([['humpback-whale']])
+
+    // 第 4 关还没通关，关卡标签保持禁用，不能提前进入。
+    expect(view.get('[data-testid="stage-tab-4"]').attributes('disabled')).toBeDefined()
+  })
+
   it('shows a neutral error state when event history cannot be read', async () => {
     const broken: BestiaryStore = { async listEvents() { throw new Error('private storage path') } }
     const view = mount(BestiaryView, { props: { profileId: 'profile-a', store: broken } })

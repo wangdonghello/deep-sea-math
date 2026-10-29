@@ -4,7 +4,8 @@ import { CREATURE_BANK } from '@/data/content'
 import { replayProjections } from '@/domain/eventLog/replay'
 import { BASE_ZONE, ZONES } from '@/features/home/zones'
 import { resolveZoneProgress, zoneIdsFromUnlockKeys } from './zoneProgress'
-import { unlockedCreatureIdSet } from './unlockAccess'
+import { completedStageCount } from './deepSeaProgress'
+import { unlockedCreatureIdSetWithProgress } from './unlockAccess'
 import type { BestiaryItem, BestiaryStore, MapZoneItem } from './types'
 
 /** Loads event-authoritative creature and zone unlocks for one profile. */
@@ -43,7 +44,10 @@ export function useBestiary(options: { store: BestiaryStore; profileId: MaybeRef
       const events = await options.store.listEvents(profileId)
       if (request !== generation) return
       const unlocks = replayProjections(events, { profileId }).bestiaryUnlock
-      const unlockedCreatureIds = unlockedCreatureIdSet(unlocks)
+      const unlockedCreatureIds = unlockedCreatureIdSetWithProgress(
+        unlocks,
+        completedStageCount(events, profileId),
+      )
       items.value = CREATURE_BANK.creatures.map((creature) => ({
         creature,
         unlocked: unlockedCreatureIds.has(creature.id),
