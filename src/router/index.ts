@@ -48,6 +48,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('./routes/QuestRoute.vue'),
   },
   { path: '/bestiary', name: 'bestiary', component: () => import('./routes/BestiaryRoute.vue') },
+  { path: '/badges', name: 'badges', component: () => import('./routes/BadgesRoute.vue') },
   {
     path: '/observation/:id',
     name: 'observation',

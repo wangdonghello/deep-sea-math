@@ -55,6 +55,8 @@ const emit = defineEmits<{
   (event: 'start', sessionId: string): void
   /** TabBar 页签切换；载荷为页签 id。 */
   (event: 'navigate', tabId: string): void
+  /** 打开徽章墙（首页成就概览的徽章格）。 */
+  (event: 'open-badges'): void
 }>()
 
 const home = useHomeQuest({
@@ -136,6 +138,7 @@ onMounted(async () => {
         :total-zones="ZONES.length"
         :theme="theme"
         :stage="home.themeStage.value"
+        @open-badges="emit('open-badges')"
       />
       <NextZoneHint :next-zone-id="nextZoneId" :theme="theme" />
 

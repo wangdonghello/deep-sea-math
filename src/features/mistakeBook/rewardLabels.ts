@@ -5,6 +5,8 @@
  * 界面与家长报告都从这里取中文名，避免把 `mistake-fix-5` 这种 id 直接给孩子看。
  */
 export const REWARD_LABELS: Readonly<Record<string, string>> = {
+  'mistake-practice-1': '知错能改徽章',
+  'mistake-practice-10': '错题清道夫徽章',
   'mistake-fix-5': '修复徽章 I',
   'mistake-fix-10': '修复徽章 II',
   'mistake-fix-20': '修复徽章 III',

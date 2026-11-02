@@ -34,7 +34,8 @@ describe('practiceProgress projection', () => {
     expect(progress.stars).toBe(2)
     expect(progress.fixedQuestionIds).toEqual(['q1'])
     expect(progress.independentCorrectByQuestion.q1).toBe(2)
-    expect(progress.badgeIds).toEqual([])
+    expect(progress.practiceSessionCount).toBe(2)
+    expect(progress.badgeIds).toEqual(['mistake-practice-1'])
   })
 
   it('用了提示、重试过或答错的练习都不给星', () => {
@@ -58,7 +59,8 @@ describe('practiceProgress projection', () => {
     const progress = replayProjections(events).practiceProgress
     expect(progress.stars).toBe(10)
     expect(progress.fixedQuestionIds).toHaveLength(5)
-    expect(progress.badgeIds).toEqual(['mistake-fix-5'])
+    expect(progress.practiceSessionCount).toBe(10)
+    expect(progress.badgeIds).toEqual(['mistake-practice-1', 'mistake-practice-10', 'mistake-fix-5'])
     expect(progress.decorationIds).toEqual(['mistake-star-5', 'mistake-star-10'])
   })
 })

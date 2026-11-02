@@ -114,7 +114,9 @@ export interface PracticeProgress {
   readonly fixedQuestionIds: readonly string[]
   /** 每道题累计的独立答对次数。 */
   readonly independentCorrectByQuestion: Readonly<Record<string, number>>
-  /** 按累计修复数量解锁的修复徽章。 */
+  /** 完成过的错题练习次数（按练习会话去重；至少独立答对一题才算）。 */
+  readonly practiceSessionCount: number
+  /** 按练习次数与累计修复数量解锁的徽章。 */
   readonly badgeIds: readonly string[]
   /** 按错题星数量解锁的图鉴装饰。 */
   readonly decorationIds: readonly string[]
@@ -152,6 +154,7 @@ interface Draft {
     stars: number
     independentCorrectByQuestion: Record<string, number>
     fixed: Set<string>
+    sessions: Set<string>
   }
 }
 
@@ -297,6 +300,7 @@ function foldEvent(
         event.retryCount === 0
       ) {
         draft.practiceProgress.stars += 1
+        draft.practiceProgress.sessions.add(event.sessionId)
         const count = (draft.practiceProgress.independentCorrectByQuestion[event.questionId] ?? 0) + 1
         draft.practiceProgress.independentCorrectByQuestion[event.questionId] = count
         if (count >= 2) draft.practiceProgress.fixed.add(event.questionId)
@@ -414,7 +418,7 @@ export function replayProjections(
     mistakeBook: {},
     bestiaryUnlock: {},
     dailyQuestIndex: {},
-    practiceProgress: { stars: 0, independentCorrectByQuestion: {}, fixed: new Set<string>() },
+    practiceProgress: { stars: 0, independentCorrectByQuestion: {}, fixed: new Set<string>(), sessions: new Set<string>() },
   }
 
   const scoped =
@@ -425,13 +429,22 @@ export function replayProjections(
   const folded = scoped.reduce((accumulator, event) => foldEvent(accumulator, event, questionTypeById), draft)
   const fixedQuestionIds = [...folded.practiceProgress.fixed].sort()
   const stars = folded.practiceProgress.stars
+  const practiceSessionCount = folded.practiceProgress.sessions.size
   return {
     ...folded,
     practiceProgress: {
       stars,
       fixedQuestionIds,
       independentCorrectByQuestion: folded.practiceProgress.independentCorrectByQuestion,
-      badgeIds: [5, 10, 20].filter((threshold) => fixedQuestionIds.length >= threshold).map((threshold) => `mistake-fix-${threshold}`),
+      practiceSessionCount,
+      // 练习次数徽章在前、累计修复徽章在后：孩子先看到“我今天练了”，
+      // 再看长线修复成果。
+      badgeIds: [
+        ...[1, 10].filter((threshold) => practiceSessionCount >= threshold)
+          .map((threshold) => `mistake-practice-${threshold}`),
+        ...[5, 10, 20].filter((threshold) => fixedQuestionIds.length >= threshold)
+          .map((threshold) => `mistake-fix-${threshold}`),
+      ],
       decorationIds: [5, 10, 15, 20].filter((threshold) => stars >= threshold).map((threshold) => `mistake-star-${threshold}`),
     },
   }

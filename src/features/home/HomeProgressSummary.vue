@@ -30,6 +30,8 @@ const props = defineProps<{
   stage?: number
 }>()
 
+const emit = defineEmits<{ (event: 'open-badges'): void }>()
+
 const theme = computed(() => props.theme ?? homeThemeById(props.themeId ?? 'deep-sea'))
 const stage = computed(() => props.stage ?? 0)
 const themeBestiary = computed(() => {
@@ -61,11 +63,12 @@ const zoneIcon = computed(() => theme.value.id === 'space' ? '🚀' : theme.valu
 
 <template>
   <section class="home-progress" data-testid="home-progress-summary" aria-label="学习成就概览">
-    <div class="home-progress__item">
+    <button type="button" class="home-progress__item home-progress__item--link"
+      data-testid="summary-badges-link" @click="emit('open-badges')">
       <span class="home-progress__icon" aria-hidden="true">🏅</span>
       <span class="home-progress__value" data-testid="summary-badges">{{ badgeText }}</span>
       <span class="home-progress__label">徽章</span>
-    </div>
+    </button>
     <div class="home-progress__item">
       <span class="home-progress__icon" aria-hidden="true">{{ bestiaryIcon }}</span>
       <span class="home-progress__value" data-testid="summary-bestiary">{{ bestiaryText }}</span>
@@ -100,6 +103,22 @@ const zoneIcon = computed(() => theme.value.id === 'space' ? '🚀' : theme.valu
   gap: var(--ds-space-xs);
   min-width: 0;
   text-align: center;
+}
+
+/* 徽章格是可点的入口：去掉按钮默认外观，但保留键盘可见的焦点环。 */
+.home-progress__item--link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.home-progress__item--link:focus-visible {
+  outline: 2px solid var(--ds-accent-500);
+  outline-offset: 2px;
+  border-radius: var(--ds-radius-sm);
 }
 
 .home-progress__icon {

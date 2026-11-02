@@ -60,5 +60,6 @@ function onNavigate(tabId: string): void {
     :pool-by-grade="POOL_BY_GRADE"
     @start="(sessionId) => router.push(`/quest?session=${sessionId}`)"
     @navigate="onNavigate"
+    @open-badges="router.push('/badges')"
   />
 </template>

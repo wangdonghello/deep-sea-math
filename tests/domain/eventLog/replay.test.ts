@@ -275,6 +275,7 @@ function incrementalProjections(
   let practiceStars = 0
   const independentCorrectByQuestion: Record<string, number> = {}
   const fixed = new Set<string>()
+  const practiceSessions = new Set<string>()
 
   for (const event of events) {
     if (event.type === 'session-started') {
@@ -312,6 +313,7 @@ function incrementalProjections(
           event.retryCount === 0
         ) {
           practiceStars += 1
+          practiceSessions.add(event.sessionId)
           const count = (independentCorrectByQuestion[event.questionId] ?? 0) + 1
           independentCorrectByQuestion[event.questionId] = count
           if (count >= 2) fixed.add(event.questionId)
@@ -399,6 +401,7 @@ function incrementalProjections(
   }
 
   const fixedQuestionIds = [...fixed].sort()
+  const practiceSessionCount = practiceSessions.size
   return {
     questProgress,
     masteryByQuestion,
@@ -410,7 +413,13 @@ function incrementalProjections(
       stars: practiceStars,
       fixedQuestionIds,
       independentCorrectByQuestion,
-      badgeIds: [5, 10, 20].filter((threshold) => fixedQuestionIds.length >= threshold).map((threshold) => `mistake-fix-${threshold}`),
+      practiceSessionCount,
+      badgeIds: [
+        ...[1, 10].filter((threshold) => practiceSessionCount >= threshold)
+          .map((threshold) => `mistake-practice-${threshold}`),
+        ...[5, 10, 20].filter((threshold) => fixedQuestionIds.length >= threshold)
+          .map((threshold) => `mistake-fix-${threshold}`),
+      ],
       decorationIds: [5, 10, 15, 20].filter((threshold) => practiceStars >= threshold).map((threshold) => `mistake-star-${threshold}`),
     },
   }
@@ -657,6 +666,7 @@ describe('domain/eventLog: 重放的纯函数契约', () => {
         stars: 0,
         fixedQuestionIds: [],
         independentCorrectByQuestion: {},
+        practiceSessionCount: 0,
         badgeIds: [],
         decorationIds: [],
       },
