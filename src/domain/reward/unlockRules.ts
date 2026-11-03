@@ -34,7 +34,7 @@ export type RewardKind = (typeof REWARD_KINDS)[number]
  * 与 {@link REWARD_KINDS} 同一模式：`as const` 元组作为运行时真源，徽章 id
  * 只有一处定义，`rewardGrant` 装配 `rewards` 字段与测试断言都引用它。
  */
-export const BADGE_IDS = ['quest-complete', 'independent-mastery'] as const
+export const BADGE_IDS = ['quest-complete', 'independent-mastery', 'accuracy-perfect'] as const
 
 /** 徽章 id 字面量，与 {@link BADGE_IDS} 一一对应。 */
 export type BadgeId = (typeof BADGE_IDS)[number]
@@ -101,6 +101,9 @@ const QUEST_COMPLETE_LABEL = '整组完成徽章'
 /** 「独立掌握」徽章展示名。 */
 const INDEPENDENT_MASTERY_LABEL = '独立掌握徽章'
 
+/** 「百发百中」徽章展示名：一组题全部独立答对。 */
+const ACCURACY_PERFECT_LABEL = '百发百中徽章'
+
 /** 图鉴卡的通道级展示名（具体生物名由 UI 层按 `targetId` 查表补齐）。 */
 const CREATURE_LABEL = '生物图鉴卡'
 
@@ -153,6 +156,19 @@ export const REWARD_RULES: readonly RewardRule[] = [
       context.independentCorrect / context.totalQuestions >= INDEPENDENT_MASTERY_THRESHOLD,
     grant: () => [
       { kind: 'badge', targetId: 'independent-mastery', label: INDEPENDENT_MASTERY_LABEL },
+    ],
+  },
+  {
+    id: 'accuracy-perfect',
+    // 正确率奖励的顶点：一组题每一道都独立答对（未用提示、未看答案、未重试）。
+    // 与「独立掌握」是包含关系（100% 必然 ≥60%），两条会同时发放——这正是
+    // 想要的“基础达成 + 额外拔高”两层反馈。
+    when: (context) =>
+      context.questCompleted &&
+      context.totalQuestions > 0 &&
+      context.independentCorrect >= context.totalQuestions,
+    grant: () => [
+      { kind: 'badge', targetId: 'accuracy-perfect', label: ACCURACY_PERFECT_LABEL },
     ],
   },
 ]

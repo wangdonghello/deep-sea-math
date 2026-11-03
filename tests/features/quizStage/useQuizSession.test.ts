@@ -200,7 +200,7 @@ describe('useQuizSession', () => {
     expect(events.find((event) => event.type === 'session-completed'))
       .toMatchObject({
         type: 'session-completed', eventId: 'event-2',
-        rewards: ['quest-complete', 'independent-mastery'],
+        rewards: ['quest-complete', 'independent-mastery', 'accuracy-perfect'],
       })
     expect(replayProjections(events, { profileId: 'profile-1' }).masteryByQuestion.q1?.level).toBe('independent')
   })

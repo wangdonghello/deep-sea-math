@@ -61,6 +61,45 @@ describe('resolveBadgeSummary', () => {
     expect(summary.states.get('deep-sea-twilight')?.earned).toBe(false)
   })
 
+  it('正确率奖励：百发百中徽章按次数累计，可升到金级', () => {
+    const events = [0, 1, 2].flatMap((index) =>
+      completedSession(index, 'deep-sea', ['quest-complete', 'accuracy-perfect']),
+    )
+    const summary = resolveBadgeSummary(events, 'p1')
+
+    expect(summary.states.get('accuracy-perfect')).toMatchObject({ earned: true, count: 3 })
+  })
+
+  it('坚持奖励：连续 3 天点亮“连续下潜”，断一天则不续上', () => {
+    const day = 86_400_000
+    const completed = (index: number, dayOffset: number): DomainEvent => ({
+      eventId: `completed-${index}`, profileId: 'p1',
+      occurredAt: Date.UTC(2026, 0, 1) + dayOffset * day,
+      type: 'session-completed', sessionId: `s-${index}`, rewards: ['quest-complete'],
+    })
+
+    const threeDays = resolveBadgeSummary([
+      completed(0, 0), completed(1, 1), completed(2, 2),
+    ], 'p1')
+    expect(threeDays.streak).toBe(3)
+    expect(threeDays.states.get('streak-3')?.earned).toBe(true)
+    expect(threeDays.states.get('streak-7')?.earned).toBe(false)
+
+    const sevenDays = resolveBadgeSummary(
+      Array.from({ length: 7 }, (_, index) => completed(index, index)),
+      'p1',
+    )
+    expect(sevenDays.streak).toBe(7)
+    expect(sevenDays.states.get('streak-7')?.earned).toBe(true)
+    expect(sevenDays.states.get('streak-14')?.earned).toBe(false)
+
+    const broken = resolveBadgeSummary([
+      completed(0, 0), completed(1, 1), completed(2, 3),
+    ], 'p1')
+    expect(broken.streak).toBe(2)
+    expect(broken.states.get('streak-3')?.earned).toBe(false)
+  })
+
   it('做一次错题练习就能拿到“知错能改”徽章', () => {
     const summary = resolveBadgeSummary([practiceAnswer('a1', 'practice-q1', 'q1')], 'p1')
     expect(summary.states.get('mistake-practice-1')).toMatchObject({ earned: true, count: 1 })

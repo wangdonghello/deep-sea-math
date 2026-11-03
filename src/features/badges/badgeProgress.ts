@@ -25,6 +25,8 @@ export interface BadgeState {
 export interface BadgeSummary {
   readonly total: number
   readonly earned: number
+  /** 历史最长连续完成天数（坚持徽章的判定依据）。 */
+  readonly streak: number
   readonly states: ReadonlyMap<string, BadgeState>
 }
 
@@ -35,7 +37,27 @@ const THEME_STAGE_TARGETS: Readonly<Record<ThemeId, readonly number[]>> = {
   space: [1, 2, 3, 4],
 }
 
-const REPEATABLE_BADGES = new Set(['quest-complete', 'independent-mastery'])
+const REPEATABLE_BADGES = new Set(['quest-complete', 'independent-mastery', 'accuracy-perfect'])
+
+/** 事件时间 → UTC 日期键；跨设备时区不影响“连续几天”的口径。 */
+function utcDayKey(occurredAt: number): string {
+  return new Date(occurredAt).toISOString().slice(0, 10)
+}
+
+/** 最长连续天数。 */
+function longestStreak(days: readonly string[]): number {
+  const sorted = [...new Set(days)].sort()
+  let best = 0
+  let run = 0
+  let previous = 0
+  for (const day of sorted) {
+    const midnight = Date.parse(`${day}T00:00:00Z`)
+    run = previous !== 0 && midnight - previous === 86_400_000 ? run + 1 : 1
+    previous = midnight
+    if (run > best) best = run
+  }
+  return best
+}
 
 /** 累计修复类徽章：id 后缀即门槛。 */
 function fixThreshold(badgeId: string): number | null {
@@ -67,6 +89,7 @@ export function resolveBadgeSummary(
   const rewardCounts = new Map<string, number>()
   const themeBySession = new Map<string, ThemeId>()
   const themeStages = new Map<ThemeId, number>()
+  const completedDays: string[] = []
 
   for (const event of scoped) {
     if (event.type === 'session-started') {
@@ -80,10 +103,17 @@ export function resolveBadgeSummary(
     }
     const themeId = themeBySession.get(event.sessionId) ?? 'deep-sea'
     themeStages.set(themeId, (themeStages.get(themeId) ?? 0) + 1)
+    completedDays.push(utcDayKey(event.occurredAt))
   }
+  const streak = longestStreak(completedDays)
 
   function countFor(badge: BadgeDefinition): number {
     if (REPEATABLE_BADGES.has(badge.id)) return rewardCounts.get(badge.id) ?? 0
+
+    const streakThreshold = /^streak-(\d+)$/.exec(badge.id)
+    if (streakThreshold !== null) {
+      return streak >= Number(streakThreshold[1]) ? 1 : 0
+    }
 
     const threshold = fixThreshold(badge.id)
     if (threshold !== null) return practice.fixedQuestionIds.length >= threshold ? 1 : 0
@@ -106,5 +136,5 @@ export function resolveBadgeSummary(
     if (isEarned) earned += 1
     states.set(badge.id, { id: badge.id, earned: isEarned, count })
   }
-  return { total: BADGE_CATALOG.length, earned, states }
+  return { total: BADGE_CATALOG.length, earned, streak, states }
 }

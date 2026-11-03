@@ -12,7 +12,7 @@ import type { ThemeId } from '@/domain/model/types'
  * - `common`：与主题无关的学习徽章（整组完成、独立掌握）；
  * - `mistake`：错题练习相关（练习次数 + 累计修复）。
  */
-export type BadgeSectionId = 'theme' | 'common' | 'mistake'
+export type BadgeSectionId = 'theme' | 'common' | 'streak' | 'mistake'
 
 /** 一枚徽章的静态定义。 */
 export interface BadgeDefinition {
@@ -50,6 +50,12 @@ export const BADGE_CATALOG: readonly BadgeDefinition[] = [
   // 通用学习徽章（事件 `session-completed.rewards` 里发放）
   { id: 'quest-complete', name: '整组完成徽章', icon: '🏅', requirement: '完成任意一组每日题', section: 'common', themeId: null },
   { id: 'independent-mastery', name: '独立掌握徽章', icon: '🎯', requirement: '一组题中独立答对 60% 以上', section: 'common', themeId: null },
+  { id: 'accuracy-perfect', name: '百发百中徽章', icon: '💯', requirement: '一组题全部独立答对（正确率 100%）', section: 'common', themeId: null },
+
+  // 坚持徽章（按连续完成天数）
+  { id: 'streak-3', name: '连续下潜', icon: '🌊', requirement: '连续 3 天完成每日题', section: 'streak', themeId: null },
+  { id: 'streak-7', name: '一周船长', icon: '⛵', requirement: '连续 7 天完成每日题', section: 'streak', themeId: null },
+  { id: 'streak-14', name: '深海常客', icon: '🧭', requirement: '连续 14 天完成每日题', section: 'streak', themeId: null },
 
   // 错题徽章（练习次数为新增能力；修复徽章沿用旧规则）
   { id: 'mistake-practice-1', name: '知错能改徽章', icon: '🌱', requirement: '完成第一次错题练习', section: 'mistake', themeId: null },

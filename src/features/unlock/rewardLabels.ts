@@ -25,6 +25,7 @@ import { ZONES } from '@/features/home/zones'
 const BADGE_LABELS: Readonly<Record<string, string>> = {
   'quest-complete': '整组完成徽章',
   'independent-mastery': '独立掌握徽章',
+  'accuracy-perfect': '百发百中徽章',
 }
 
 /** 生物 id → 物种名（未收录的 id 回退为"图鉴卡"，绝不泄露未收录内容）。 */
