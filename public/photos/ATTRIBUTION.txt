@@ -181,16 +181,16 @@
    说明:     真实影像：NOAA ROV 在 984 米海底拍摄的大王具足虫活体。
 
 27. v3/vampire-squid.jpg —— 幽灵蛸（Vampyroteuthis infernalis）
-   素材页:   https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-background-cephalopods-media-vampire-squid/
+   素材页:   https://commons.wikimedia.org/wiki/File:MBNMS_juvenile_vampire_squid_(49041024167).jpg
    许可:     公有领域 (https://www.noaa.gov/)
-   署名:     NOAA Ocean Exploration · 公有领域
-   说明:     真实影像：NOAA ROV 在深海拍摄的幽灵蛸活体。
+   署名:     NOAA/MBARI · 公有领域
+   说明:     真实影像：NOAA/MBARI 在蒙特雷湾国家海洋保护区拍摄的幽灵蛸幼体。
 
 28. v3/dumbo-octopus.jpg —— 小飞象章鱼（Grimpoteuthis）
-   素材页:   https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/
+   素材页:   https://commons.wikimedia.org/wiki/File:Grimpoteuthis_bathynectes.jpg
    许可:     公有领域 (https://www.noaa.gov/)
    署名:     NOAA Ocean Exploration · 公有领域
-   说明:     真实影像：NOAA Ocean Exploration 在深海拍摄的活体影像。
+   说明:     真实影像：NOAA 深海 ROV 拍摄的小飞象章鱼（Grimpoteuthis bathynectes）。
 
 29. v3/deep-sea-octopus.jpg —— 深海章鱼（Graneledone pacifica）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/casper-octopus/

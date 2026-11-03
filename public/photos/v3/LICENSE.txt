@@ -20,8 +20,8 @@
 - v3/giant-tube-worm.jpg — 巨型管虫 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/
 - v3/squat-lobster.jpg — 深海蹲龙虾 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex1907-dailyupdates-nov17-media-squat-lobster/
 - v3/giant-isopod.jpg — 大王具足虫 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/okeanos-explorations-ex2107-gallery-media-dive09-isopod/
-- v3/vampire-squid.jpg — 幽灵蛸 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/explorations-19biolum-background-cephalopods-media-vampire-squid/
-- v3/dumbo-octopus.jpg — 小飞象章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/daily-image-media-20201106/
+- v3/vampire-squid.jpg — 幽灵蛸 — 公有领域 — https://commons.wikimedia.org/wiki/File:MBNMS_juvenile_vampire_squid_(49041024167).jpg
+- v3/dumbo-octopus.jpg — 小飞象章鱼 — 公有领域 — https://commons.wikimedia.org/wiki/File:Grimpoteuthis_bathynectes.jpg
 - v3/deep-sea-octopus.jpg — 深海章鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/casper-octopus/
 - v3/hadal-anemone.jpg — 海沟海葵 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/anemone-5/
 - v3/hadal-amphipod.jpg — 海沟钩虾 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/barnacles-and-amphipods/
