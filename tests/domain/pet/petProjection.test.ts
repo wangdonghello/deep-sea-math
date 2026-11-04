@@ -45,7 +45,7 @@ describe('replayPet', () => {
     expect(replayPet(events, 'p1', 20).xp).toBe(10)
   })
 
-  it('lastUpdatedAt 取最近事件时间，供展示层计算饱食度衰减', () => {
+  it('lastUpdatedAt 取最近宠物事件时间，供展示层计算饱食度衰减', () => {
     const fedAt = 2
     const events: DomainEvent[] = [
       { ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
@@ -57,6 +57,24 @@ describe('replayPet', () => {
     expect(pet.hunger).toBe(100)
     expect(pet.lastUpdatedAt).toBe(fedAt)
     expect(decayedHunger(pet.hunger, pet.lastUpdatedAt, now)).toBe(90)
+  })
+
+  it('答题、购买等非宠物事件不推进衰减锚点', () => {
+    const fedAt = 10
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { ...base, eventId: 'b', occurredAt: 9, type: 'item-purchased', itemId: 'seaweed-cookie', price: 5 },
+      { ...base, eventId: 'c', occurredAt: fedAt, type: 'pet-fed', itemId: 'seaweed-cookie' },
+      {
+        ...base, eventId: 'd', occurredAt: fedAt + 5 * hour, type: 'answer-submitted',
+        sessionId: 's1', questionId: 'q0', submitted: '1', correct: true,
+        usedHintLevel: 0, retryCount: 0, ms: 10,
+      },
+    ]
+    const now = fedAt + 10 * hour
+    const pet = replayPet(events, 'p1', now)
+    expect(pet.lastUpdatedAt).toBe(fedAt)
+    expect(decayedHunger(pet.hunger, pet.lastUpdatedAt, now)).toBe(80)
   })
 
   it('已拥有装饰也不能当玩具玩耍', () => {

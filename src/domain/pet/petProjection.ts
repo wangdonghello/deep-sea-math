@@ -27,15 +27,30 @@ export interface PetState {
   readonly hunger: number
   readonly mood: number
   /**
-   * 最近一条事件的发生时间；展示层用它与 `now` 计算饱食度衰减。
-   * 不带 `now`，否则重放时 `lastUpdatedAt === now`，衰减会恒为 0。
-   * 该档案没有任何事件时退回本次重放的 `now`。
+   * 最近一条**宠物状态事件**（领养/孵化/喂食/抚摸/玩耍）的发生时间；
+   * 展示层用它与 `now` 计算饱食度衰减。购买、答题、整组完成不推进锚点，
+   * 否则喂食后随便答一道题就会把衰减起点推后、少掉饱食度。
+   * 该档案没有任何宠物状态事件时退回本次重放的 `now`。
    */
   readonly lastUpdatedAt: number
 }
 
 const MAX_PET_PER_DAY = 5
 const MAX_PLAY_PER_DAY = 2
+
+/**
+ * 会改变宠物状态、因而推进饱食度衰减锚点的事件。
+ *
+ * 购买只是获得物品、答题/整组完成只涨分，都不改变「上一次喂/摸/玩」的时点，
+ * 因此不能推进 `lastUpdatedAt`，否则衰减会被少算。
+ */
+const PET_STATE_EVENT_TYPES: ReadonlySet<DomainEvent['type']> = new Set([
+  'pet-adopted',
+  'pet-hatched',
+  'pet-fed',
+  'pet-petted',
+  'pet-played',
+])
 
 function dayKey(at: number): string {
   return new Date(at).toISOString().slice(0, 10)
@@ -45,7 +60,7 @@ function dayKey(at: number): string {
  * 独立事件重放：不改 v3 的 projection，避免影响现有功能。
  *
  * `now` 不参与事件时间的推导（否则 `lastUpdatedAt` 恒等于 `now`，展示层的
- * 饱食度衰减会失效），只在该档案没有任何事件时作为衰减起点兜底。
+ * 饱食度衰减会失效），只在该档案没有任何宠物状态事件时作为衰减起点兜底。
  */
 export function replayPet(events: readonly DomainEvent[], profileId: string, now: number): PetState {
   const scoped = events.filter((event) => event.profileId === profileId)
@@ -65,7 +80,9 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   const completedDays = new Set<string>()
 
   for (const event of scoped) {
-    lastUpdatedAt = Math.max(lastUpdatedAt, event.occurredAt)
+    if (PET_STATE_EVENT_TYPES.has(event.type)) {
+      lastUpdatedAt = Math.max(lastUpdatedAt, event.occurredAt)
+    }
     if (event.type === 'pet-adopted') {
       adopted = true
       petId = event.petId
@@ -119,8 +136,8 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     }
   }
 
-  // 没有任何事件时没有衰减起点，退回 now；有事件时 lastUpdatedAt 只取事件时间。
-  if (scoped.length === 0) lastUpdatedAt = now
+  // 没有任何宠物状态事件时没有衰减起点，退回 now。
+  if (lastUpdatedAt === 0) lastUpdatedAt = now
 
   const level = levelFromXp(xp)
   return {
