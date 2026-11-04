@@ -99,7 +99,7 @@ export async function importV3Progress(options: V3ImportOptions = {}): Promise<V
       source.getAll(STORE_NAMES.settings) as Promise<{ profileId: string }[]>,
       source.getAll(STORE_NAMES.customQuestions) as Promise<{ id: string }[]>,
       source.getAll(STORE_NAMES.guard) as Promise<{ id: string }[]>,
-      source.getAll(STORE_NAMES.eventOrder) as Promise<string[]>,
+      source.getAll(STORE_NAMES.eventOrder) as Promise<{ profileId: string; eventId: string }[]>,
     ])
 
     const [profileKeys, eventKeys, settingKeys, customKeys, guardKeys] = await Promise.all([
@@ -142,8 +142,8 @@ export async function importV3Progress(options: V3ImportOptions = {}): Promise<V
 
     // 只沿用源库台账里“本次新导入事件”的先后，不覆盖目标库已有事件。
     const newlyImported = new Set(newEvents.map((event) => event.eventId))
-    for (const eventId of eventOrder) {
-      if (newlyImported.has(eventId)) tx.objectStore(STORE_NAMES.eventOrder).add(eventId)
+    for (const row of eventOrder) {
+      if (newlyImported.has(row.eventId)) tx.objectStore(STORE_NAMES.eventOrder).add(row)
     }
 
     await tx.done

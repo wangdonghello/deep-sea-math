@@ -24,7 +24,7 @@ async function createDb(name: string, profiles: unknown[] = [], events: unknown[
   for (const profile of profiles) await db.put('profiles', profile)
   for (const event of events) {
     await db.put('events', event)
-    await db.add('eventOrder', (event as { eventId: string }).eventId)
+    await db.add('eventOrder', { profileId: (event as { profileId: string }).profileId, eventId: (event as { eventId: string }).eventId })
   }
   db.close()
 }
@@ -52,7 +52,7 @@ describe('importV3Progress', () => {
     const target = await openDB(TARGET)
     expect(await target.getAll('profiles')).toHaveLength(1)
     expect(await target.getAll('events')).toHaveLength(1)
-    expect(await target.getAll('eventOrder')).toEqual(['e1'])
+    expect(await target.getAll('eventOrder')).toEqual([{ profileId: 'p1', eventId: 'e1' }])
     target.close()
 
     const second = await importV3Progress({ sourceName: SOURCE, targetName: TARGET })
