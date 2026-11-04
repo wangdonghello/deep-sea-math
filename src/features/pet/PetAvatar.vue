@@ -1,3 +1,15 @@
+<script lang="ts">
+/**
+ * 模块级实例序号。
+ *
+ * `<script setup>` 顶层代码会编译进每个实例的 `setup()`，在那里声明 `let`
+ * 每个实例都会从 0 开始；放到普通 `<script>` 才是真正的模块作用域。
+ * 它兜住「同一 document 挂多个根实例」时 `useId()` 各自从 v-0 起步的
+ * 情况，保证 `defs` 里的渐变/滤镜 id 仍不重复。
+ */
+let instanceSeq = 0
+</script>
+
 <script setup lang="ts">
 /**
  * 宠物形象：五个成长阶段共用一套 SVG 骨架，靠比例、配色与装饰区分。
@@ -9,9 +21,10 @@
  * - 所有动效交给 CSS，`prefers-reduced-motion` 下整体关闭；
  * - 图形一律用 `<defs>` 渐变/滤镜，emoji 不参与主体造型。
  *
- * 可访问性：按钮是唯一的交互元素，`aria-label` 交代阶段、心情与「点一下」
- * 的提示；`<svg>` 仍保留 `role="img"` 与自己的名称，方便在测试与辅助技术
- * 里把它当作有意义的图像而不是空白装饰。
+ * 可访问性：可访问名称只写一份。`<svg role="img">` 带阶段、心情与
+ * 「点我摸摸」的 `aria-label`；按钮本身**不**再挂 `aria-label`，否则读屏
+ * 会用它覆盖图像名称、把同一段话念两遍。按钮的名称由内容里的图像名称
+ * 组合而来，测试会同时锁住「按钮没有 aria-label」与「名称含阶段/心情」。
  */
 import { computed, onBeforeUnmount, ref, useId } from 'vue'
 
@@ -31,18 +44,41 @@ const SQUISH_MS = 220
 /** 进入「没精神」形态的心情阈值。 */
 const LOW_MOOD = 40
 
+const rootEl = ref<HTMLButtonElement | null>(null)
 const squish = ref(false)
 let squishTimer: number | undefined
 
 /**
- * 点击：立即挂上挤压类并通知父组件，220ms 后自动摘掉。
+ * 重新触发挤压动画。
+ *
+ * 只把 `squish` 置回 false 再置 true 是不够的：Vue 会把同一个 tick 内的
+ * 变更合并，DOM 上的 `is-squish` 根本没被摘掉，CSS 动画自然也不会重播。
+ * 所以这里直接操作 classList：先摘类 → 读一次 `offsetWidth` 强制 reflow
+ * → 再挂类，浏览器会把这次添加当成一次新动画。响应式状态仍然同步维护，
+ * 供模板、测试与卸载清理使用。
+ */
+function restartSquish(): void {
+  const el = rootEl.value
+  if (!el) return
+  el.classList.remove('is-squish')
+  void el.offsetWidth
+  el.classList.add('is-squish')
+}
+
+/**
+ * 点击：重播挤压动画并通知父组件，220ms 后自动摘掉。
  *
  * 重复点击时先清旧定时器再重开，避免第一次的定时器把第二次的挤压动画
  * 提前打断；组件卸载时也要清掉，防止在已卸载实例上改状态。
  */
 function tap(): void {
+  if (squishTimer !== undefined) {
+    window.clearTimeout(squishTimer)
+    squishTimer = undefined
+  }
+  squish.value = false
+  restartSquish()
   squish.value = true
-  if (squishTimer !== undefined) window.clearTimeout(squishTimer)
   squishTimer = window.setTimeout(() => {
     squish.value = false
     squishTimer = undefined
@@ -78,20 +114,28 @@ const moodWord = computed(() => {
   return mood.value >= 80 ? '很精神' : '还不错'
 })
 
-/** SVG 自身的可访问名称。 */
-const artLabel = computed(() => `${STAGE_NAMES[props.stage]}小海宠`)
+/** 当前阶段的展示名；未知阶段回退到幼体，保证 aria-label 不出现 undefined。 */
+const stageName = computed(() => STAGE_NAMES[props.stage] ?? STAGE_NAMES.baby)
 
-/** 按钮的可访问名称：比 SVG 多一句操作提示。 */
-const tapLabel = computed(
-  () => `${STAGE_NAMES[props.stage]}小海宠，${moodWord.value}（心情 ${mood.value}/100），点一下摸摸它`,
+/**
+ * SVG 的可访问名称，也是按钮名称的唯一来源。
+ *
+ * 把「点我摸摸」放在这里而不是按钮的 aria-label 上，读屏只会念一次；
+ * 文案同时包含阶段与心情，家长/孩子都能听出当前状态。
+ */
+const artLabel = computed(
+  () => `${stageName.value}小海宠，${moodWord.value}（心情 ${mood.value}/100），点我摸摸`,
 )
 
 /**
  * 同一页面可能同时挂多个宠物预览（商店/相册/房间），渐变与滤镜 id
- * 必须唯一，否则后挂载的 `<defs>` 会覆盖先挂载的配色。`useId()` 由 Vue
- * 保证实例内稳定、实例间不重复。
+ * 必须唯一，否则后挂载的 `<defs>` 会覆盖先挂载的配色。
+ *
+ * `useId()` 只保证同一个 Vue app 内不重复；再叠一个模块级序号，是为了
+ * 覆盖测试或微前端里「同一 document 挂多个根实例」的情况——那些实例
+ * 各自的 useId 都会从 v-0 开始。
  */
-const idBase = `pet-${useId()}`
+const idBase = `pet-${useId()}-${instanceSeq++}`
 
 const bodyGradientId = `${idBase}-body`
 const bellyGradientId = `${idBase}-belly`
@@ -187,7 +231,7 @@ const PALETTES: Record<PetStage, Palette> = {
   },
 }
 
-const palette = computed(() => PALETTES[props.stage])
+const palette = computed(() => PALETTES[props.stage] ?? PALETTES.baby)
 
 interface StageGeometry {
   bodyCx: number
@@ -281,7 +325,7 @@ const GEOMETRY: Record<PetStage, StageGeometry> = {
   },
 }
 
-const geometry = computed(() => GEOMETRY[props.stage])
+const geometry = computed(() => GEOMETRY[props.stage] ?? GEOMETRY.baby)
 const head = computed(() => geometry.value.head)
 
 /**
@@ -382,7 +426,7 @@ const BLINK_DELAYS: Record<PetStage, string> = {
   final: '4.6s',
 }
 
-const blinkDelay = computed(() => BLINK_DELAYS[props.stage])
+const blinkDelay = computed(() => BLINK_DELAYS[props.stage] ?? BLINK_DELAYS.baby)
 
 interface Bubble {
   cx: number
@@ -426,8 +470,8 @@ const STAR_PATH =
     type="button"
     class="pet-avatar"
     :class="[`pet-avatar--${stage}`, { 'is-squish': squish, 'is-low': lowMood }]"
+    ref="rootEl"
     data-testid="pet-tap"
-    :aria-label="tapLabel"
     @click="tap"
   >
     <svg
@@ -844,7 +888,6 @@ const STAR_PATH =
   -webkit-tap-highlight-color: transparent;
   transform-origin: 50% 88%;
   animation: pet-breathe 3s ease-in-out infinite;
-  will-change: transform;
 }
 
 .pet-avatar__art {
