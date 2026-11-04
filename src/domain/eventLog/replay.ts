@@ -280,6 +280,20 @@ function foldEvent(
     return draft
   }
 
+  // 宠物与经济事件不参与 design §2 的六张学习投影（它们由宠物/商店投影单独
+  // 消费）。放在这里显式短路，而不是塞进上面的配置分支：这些事件带业务语义、
+  // 不是配置。
+  if (
+    event.type === 'pet-adopted' ||
+    event.type === 'pet-hatched' ||
+    event.type === 'pet-fed' ||
+    event.type === 'pet-petted' ||
+    event.type === 'pet-played' ||
+    event.type === 'item-purchased'
+  ) {
+    return draft
+  }
+
   // `unlock-granted` 不带 `sessionId`（只带解锁原因 `reason`），因此不能挂到
   // 任何题组进度上，直接进追加型解锁表。
   if (event.type === 'unlock-granted') {

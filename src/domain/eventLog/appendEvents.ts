@@ -33,7 +33,9 @@ import type { DomainEvent } from '../model/types'
  * - `unlock-granted`：`kind + targetId`（解锁是追加型，同一目标不得发两次）；
  * - `profile-created`：`profileId`（一个档案只建档一次）；
  * - `settings-updated`：`null` —— 家长可以合法地多次修改设置，每次都是
- *   独立的一次配置操作，没有「同一逻辑操作」可言，只能靠 `eventId` 去重。
+ *   独立的一次配置操作，没有「同一逻辑操作」可言，只能靠 `eventId` 去重；
+ * - 宠物与经济事件（`pet-adopted` / `pet-hatched` / `pet-fed` / `pet-petted` /
+ *   `pet-played` / `item-purchased`）：`null` —— 只按 `eventId` 去重。
  *
  * 键统一带事件类型前缀：`hint-used`（level 1）与 `answer-submitted`
  * （usedHintLevel 1）对同一题是两类不同事件，去掉前缀会让它们互相吞掉。
@@ -64,6 +66,21 @@ export function logicalEventKey(event: DomainEvent): string | null {
     case 'settings-updated':
       return null
     case 'profile-preferences-updated':
+      return null
+    /*
+     * 宠物与经济事件只做 `eventId` 去重：
+     * - `pet-adopted` / `pet-hatched` 的「每个档案一次」唯一性由调用方的确定性
+     *   eventId（`adopt-${profileId}` / `hatch-${profileId}`）保证；日志层与投影层
+     *   都不重复校验；
+     * - `pet-fed` / `pet-petted` / `pet-played` / `item-purchased` 本身就是可重复
+     *   操作，没有「同一逻辑操作」可言（同一商品买两次是两笔购买）。
+     */
+    case 'pet-adopted':
+    case 'pet-hatched':
+    case 'pet-fed':
+    case 'pet-petted':
+    case 'pet-played':
+    case 'item-purchased':
       return null
   }
 }

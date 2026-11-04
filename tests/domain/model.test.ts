@@ -123,6 +123,13 @@ describe('domain/model: 事件 union', () => {
       // Task 4 登记的回落事件：这里与 EVENT_TYPES 同步增长，漏加则编译期
       // 就报错（Record 要求穷尽），不会等到重放层静默丢事件。
       'difficulty-fallback': true,
+      // v4.0 宠物与经济事件（Task 1）：只登记类型，投影由后续任务消费。
+      'pet-adopted': true,
+      'pet-hatched': true,
+      'pet-fed': true,
+      'pet-petted': true,
+      'pet-played': true,
+      'item-purchased': true,
     }
 
     expect(Object.keys(exhaustive).sort()).toEqual([...EVENT_TYPES].sort())

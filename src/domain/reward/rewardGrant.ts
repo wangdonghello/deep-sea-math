@@ -68,7 +68,8 @@ const NOTHING_GRANTED: RewardGrantResult = {
  * 带 `sessionId` 的事件子集。
  *
  * `DomainEvent` union 里 `profile-created` / `settings-updated` / `unlock-granted`
- * 没有 `sessionId` 字段，凡是要按会话过滤的地方都必须先把 union 收窄到这一子集，
+ * 没有 `sessionId` 字段，v4 的 `pet-*` 与 `item-purchased` 同样没有，凡是要按
+ * 会话过滤的地方都必须先把 union 收窄到这一子集，
  * 否则 `event.sessionId` 会因其中一类没有该字段而编译报错。
  */
 type SessionScopedEvent = Extract<DomainEvent, { sessionId: string }>

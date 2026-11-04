@@ -372,6 +372,12 @@ export const EVENT_TYPES = [
   'unlock-granted',
   'settings-updated',
   'difficulty-fallback',
+  'pet-adopted',
+  'pet-hatched',
+  'pet-fed',
+  'pet-petted',
+  'pet-played',
+  'item-purchased',
 ] as const
 
 /** 事件类型字面量，与 {@link EVENT_TYPES} 一一对应。 */
@@ -515,6 +521,44 @@ export interface SettingsUpdatedEvent extends EventBase {
   maxMinutes: number
 }
 
+/** 领养宠物蛋：孩子在 v4 首次进入时自动落一条。 */
+export interface PetAdoptedEvent extends EventBase {
+  type: 'pet-adopted'
+  /** 物种标识（v4.0 固定 `baby-whale`）。 */
+  petId: string
+  /** 孩子从候选里选的名字。 */
+  name: string
+}
+
+/** 蛋孵化：完成第一组每日题后落一条。 */
+export interface PetHatchedEvent extends EventBase {
+  type: 'pet-hatched'
+}
+
+/** 喂食：消耗一份食物。 */
+export interface PetFedEvent extends EventBase {
+  type: 'pet-fed'
+  itemId: string
+}
+
+/** 抚摸：每天有次数上限。 */
+export interface PetPettedEvent extends EventBase {
+  type: 'pet-petted'
+}
+
+/** 玩耍：需要已拥有的玩具。 */
+export interface PetPlayedEvent extends EventBase {
+  type: 'pet-played'
+  itemId: string
+}
+
+/** 购买：价格以事件为准，重放时不看当前目录价。 */
+export interface ItemPurchasedEvent extends EventBase {
+  type: 'item-purchased'
+  itemId: string
+  price: number
+}
+
 /**
  * 难度档位回落：目标档位题量不足，改从相邻档位取题并留痕。
  *
@@ -571,3 +615,9 @@ export type DomainEvent =
   | UnlockGrantedEvent
   | SettingsUpdatedEvent
   | DifficultyFallbackEvent
+  | PetAdoptedEvent
+  | PetHatchedEvent
+  | PetFedEvent
+  | PetPettedEvent
+  | PetPlayedEvent
+  | ItemPurchasedEvent
