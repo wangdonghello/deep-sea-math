@@ -53,6 +53,20 @@ export function usePet(options: {
   const error = ref('')
   const state = computed<PetState>(() => replayPet(events.value, toValue(options.profileId) ?? '', clock()))
 
+  /**
+   * 进行中的加载。
+   *
+   * `watch(..., { immediate: true })` 会在创建时立刻加载一次，调用方通常还会再
+   * `await load()`：两路并发读同一份事件，都判定「没有领养」，就会各补一条
+   * `pet-adopted`（孵化同理）。这里把同一实例的并发加载折叠成一次，
+   * 后来者直接等前一次的结果。
+   *
+   * 放在 `usePet` 内部而不是模块顶层：`pending` 是「这个实例正在加载」的
+   * 状态，不同实例（不同档案/不同页面）加载各自的档案，共享一个 pending 会
+   * 让后创建的实例直接跳过自己的读取。
+   */
+  let pending: Promise<void> | null = null
+
   function base(): { profileId: string; occurredAt: number } {
     const profileId = toValue(options.profileId)
     if (profileId === null) throw new Error('没有选择档案')
@@ -80,7 +94,7 @@ export function usePet(options: {
    * 孵化只认领养之后的 `session-completed`；没有领养记录时 `adoptedAt` 退回当前
    * 时钟，等价于「老档案今天才领养」，不会误判 v3 历史为已完成。
    */
-  async function load(): Promise<void> {
+  async function runLoad(): Promise<void> {
     const profileId = toValue(options.profileId)
     if (profileId === null) return
     loading.value = true
@@ -109,6 +123,14 @@ export function usePet(options: {
     } finally {
       loading.value = false
     }
+  }
+
+  /** 加载入口：并发调用折叠到同一个进行中的加载，结束后清空。 */
+  async function load(): Promise<void> {
+    if (pending !== null) return pending
+    if (toValue(options.profileId) === null) return
+    pending = runLoad().finally(() => { pending = null })
+    return pending
   }
 
   /** 购买：食物进背包、玩具/装饰进拥有列表；余额不足或已拥有非食物商品时拦截。 */
@@ -140,8 +162,9 @@ export function usePet(options: {
     await append([{ ...base(), eventId: `pet-${clock()}-${events.value.length}`, type: 'pet-petted' }])
   }
 
-  /** 玩耍：必须已拥有该玩具，且每天最多 2 次。 */
+  /** 玩耍：必须是已拥有的玩具（装饰也算 owned，但不能拿来玩），且每天最多 2 次。 */
   async function play(itemId: string): Promise<void> {
+    if (petItemById(itemId)?.kind !== 'toy') throw new Error('这不是玩具')
     if (!state.value.owned.includes(itemId)) throw new Error('还没有这个玩具')
     if (countToday('pet-played') >= 2) throw new Error('今天已经玩过 2 次了')
     await append([{
