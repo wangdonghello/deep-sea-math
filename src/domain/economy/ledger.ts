@@ -132,3 +132,24 @@ export function resolveLedger(events: readonly DomainEvent[], profileId: string)
 
   return { balance: earned - spent, earned, spent }
 }
+
+/**
+ * 单个题组的积分（答对题数 + 完成 + 正确率加成）。
+ *
+ * 与 {@link resolveLedger} 共用同一份正确率口径：分母取「声明题数」与「实际
+ * 作答去重题数」的较大者，缺少 `session-started` 时也能算出正确率。用于结算
+ * 反馈里展示“这一组赚了多少”，不参与余额累积。
+ */
+export function sessionPoints(
+  events: readonly DomainEvent[],
+  profileId: string,
+  sessionId: string,
+): number {
+  const scoped = events.filter((event) => event.profileId === profileId)
+  const stats = collectSessionAccuracy(scoped).get(sessionId)
+  if (stats === undefined) return 0
+  const total = Math.max(stats.declared, stats.attempted.size)
+  const correct = stats.independentCorrect.size
+  const bonus = total > 0 && correct / total >= ACCURACY_THRESHOLD ? ACCURACY_BONUS : 0
+  return correct * POINTS_PER_INDEPENDENT_CORRECT + POINTS_PER_COMPLETION + bonus
+}

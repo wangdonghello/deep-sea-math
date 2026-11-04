@@ -18,6 +18,8 @@ defineProps<{
   open: boolean
   /** 待展示的奖励清单（顺序即发放顺序）。 */
   rewards: readonly UnlockReward[]
+  /** 本次完成赚到的积分；0 表示不展示。 */
+  points?: number
 }>()
 
 const emit = defineEmits<{ (event: 'close'): void }>()
@@ -49,6 +51,9 @@ const emit = defineEmits<{ (event: 'close'): void }>()
           <span class="unlock-overlay__label">{{ reward.label }}</span>
         </li>
       </ul>
+      <p v-if="(points ?? 0) > 0" class="unlock-overlay__points" data-testid="unlock-points">
+        本轮获得 {{ points }} 积分
+      </p>
       <button
         type="button"
         class="unlock-overlay__close"

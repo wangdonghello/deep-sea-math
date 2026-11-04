@@ -16,6 +16,7 @@
 
 import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 
+import { sessionPoints } from '@/domain/economy/ledger'
 import { redact } from '@/shared/redact'
 import type { DomainEvent, SessionCompletedEvent, ThemeId, UnlockGrantedEvent } from '@/domain/model/types'
 import { themePackById } from '@/data/content/themePacks'
@@ -63,6 +64,8 @@ export function useUnlockFeedback(options: UnlockFeedbackOptions) {
   const pollIntervalMs = options.pollIntervalMs ?? DEFAULT_POLL_MS
   const visible = ref(false)
   const rewards = ref<readonly UnlockReward[]>([])
+  /** 本次完成赚到的积分（结算浮层展示用）。 */
+  const pointsEarned = ref(0)
   /**
    * 已经展示过的那次完成的 sessionId。
    *
@@ -140,6 +143,7 @@ export function useUnlockFeedback(options: UnlockFeedbackOptions) {
       // 退出登录/删档：立刻收起源反馈，并把基线重置（下次登录重新建基线）。
       seenSessionId = undefined
       visible.value = false
+      pointsEarned.value = 0
       return
     }
     if (checking) {
@@ -164,6 +168,7 @@ export function useUnlockFeedback(options: UnlockFeedbackOptions) {
         if (seenSessionId === undefined || fresh.sessionId !== seenSessionId) {
           seenSessionId = fresh.sessionId
           rewards.value = buildRewards(fresh, events)
+          pointsEarned.value = sessionPoints(events, profileId, fresh.sessionId)
           // 没有可展示奖励时不弹空壳（全部发过的重复完成走幂等，不会到这里）。
           visible.value = rewards.value.length > 0
         }
@@ -208,6 +213,7 @@ export function useUnlockFeedback(options: UnlockFeedbackOptions) {
   return {
     visible,
     rewards: computed(() => rewards.value),
+    pointsEarned: computed(() => pointsEarned.value),
     check,
     start,
     stop,

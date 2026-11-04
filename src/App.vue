@@ -64,7 +64,12 @@ watch(() => route.fullPath, () => void feedback.check())
   <div id="app">
     <RouterView v-if="fatalError === ''" />
     <p v-else class="app__fatal" role="alert" data-testid="app-fatal">{{ fatalError }}</p>
-    <UnlockOverlay :open="feedback.visible.value" :rewards="feedback.rewards.value" @close="feedback.dismiss()" />
+    <UnlockOverlay
+      :open="feedback.visible.value"
+      :rewards="feedback.rewards.value"
+      :points="feedback.pointsEarned.value"
+      @close="feedback.dismiss()"
+    />
   </div>
 </template>
 
