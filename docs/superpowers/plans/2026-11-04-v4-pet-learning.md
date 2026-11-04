@@ -168,12 +168,13 @@ git commit -m "feat(v4): add pet and economy events"
 ```ts
 import { describe, expect, it } from 'vitest'
 
-import { FOOD_ITEMS, PET_NAMES, SHOP_ITEMS, petItemById } from '@/data/content/petCatalog'
+import { DECOR_ITEMS, FOOD_ITEMS, PET_NAMES, SHOP_ITEMS, petItemById } from '@/data/content/petCatalog'
 
 describe('pet catalog', () => {
   it('食物按价格升序且效果递增', () => {
     expect(FOOD_ITEMS.map((item) => item.price)).toEqual([5, 10, 20])
-    expect(FOOD_ITEMS.map((item) => item.xp)).toEqual([8, 12, 18])
+    expect(FOOD_ITEMS.map((item) => item.xp)).toEqual([8, 18, 40])
+    expect(FOOD_ITEMS.map((item) => item.hunger)).toEqual([30, 45, 60])
   })
 
   it('商品 id 唯一，且能按 id 查到', () => {
@@ -186,6 +187,17 @@ describe('pet catalog', () => {
   it('名字候选为 5 个且不含空白', () => {
     expect(PET_NAMES).toHaveLength(5)
     for (const name of PET_NAMES) expect(name.trim()).not.toBe('')
+  })
+
+  it('共 9 件商品，kind 与所属分类一致', () => {
+    expect(SHOP_ITEMS).toHaveLength(9)
+    expect(SHOP_ITEMS.filter((item) => item.kind === 'food')).toHaveLength(3)
+    expect(SHOP_ITEMS.filter((item) => item.kind === 'toy')).toHaveLength(3)
+    expect(SHOP_ITEMS.filter((item) => item.kind === 'decor')).toHaveLength(3)
+  })
+
+  it('装饰带联合类型样式值', () => {
+    expect(DECOR_ITEMS.map((item) => item.decor)).toEqual(['nest', 'lamp', 'coral'])
   })
 })
 ```
@@ -200,6 +212,7 @@ describe('pet catalog', () => {
 ```ts
 /** 宠物目录：商品、价格、效果与名字候选的唯一真源。 */
 export type PetItemKind = 'food' | 'toy' | 'decor'
+export type DecorStyleId = 'nest' | 'lamp' | 'coral'
 
 export interface PetItem {
   readonly id: string
@@ -212,15 +225,15 @@ export interface PetItem {
   /** 食物：回复的饥饿值；其他品类为 0。 */
   readonly hunger: number
   /** 宠物房间里的装饰样式标识（decor 专用）。 */
-  readonly decor?: string
+  readonly decor?: DecorStyleId
 }
 
 export const PET_NAMES = ['小蓝', '泡泡', '阿潮', '星星', '豆豆'] as const
 
 export const FOOD_ITEMS: readonly PetItem[] = [
   { id: 'seaweed-cookie', kind: 'food', name: '海藻饼干', icon: '🍪', price: 5, xp: 8, hunger: 30 },
-  { id: 'krill-pudding', kind: 'food', name: '磷虾布丁', icon: '🍮', price: 10, xp: 12, hunger: 40 },
-  { id: 'deep-sea-cake', kind: 'food', name: '深海蛋糕', icon: '🎂', price: 20, xp: 18, hunger: 50 },
+  { id: 'krill-pudding', kind: 'food', name: '磷虾布丁', icon: '🍮', price: 10, xp: 18, hunger: 45 },
+  { id: 'deep-sea-cake', kind: 'food', name: '深海蛋糕', icon: '🎂', price: 20, xp: 40, hunger: 60 },
 ]
 
 export const TOY_ITEMS: readonly PetItem[] = [
