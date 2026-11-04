@@ -57,6 +57,8 @@ const emit = defineEmits<{
   (event: 'navigate', tabId: string): void
   /** 打开徽章墙（首页成就概览的徽章格）。 */
   (event: 'open-badges'): void
+  /** 打开错题本。 */
+  (event: 'open-mistakes'): void
 }>()
 
 const home = useHomeQuest({
@@ -180,6 +182,11 @@ onMounted(async () => {
         @claim="home.claimToday()"
       />
 
+      <button type="button" class="home__mistakes" data-testid="open-mistakes"
+        @click="emit('open-mistakes')">
+        📖 错题本
+      </button>
+
       <TabBar active="learn" :theme-id="theme.id" @navigate="emit('navigate', $event)" />
     </template>
   </main>
@@ -210,5 +217,18 @@ onMounted(async () => {
   color: var(--ds-text-secondary);
   font-size: var(--ds-font-size-caption);
   text-align: center;
+}
+
+.home__mistakes {
+  justify-self: center;
+  margin: 0 0 var(--ds-space-sm);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-pill);
+  background: rgb(8 30 52 / 72%);
+  color: var(--ds-text-secondary);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
 }
 </style>

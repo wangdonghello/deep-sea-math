@@ -62,5 +62,6 @@ function onNavigate(tabId: string): void {
     @start="(sessionId) => router.push(`/quest?session=${sessionId}`)"
     @navigate="onNavigate"
     @open-badges="router.push('/badges')"
+    @open-mistakes="router.push('/mistakes')"
   />
 </template>

@@ -10,7 +10,7 @@ const props = defineProps<{
   store: PetStore
   clock?: () => number
 }>()
-const emit = defineEmits<{ (event: 'back-home'): void }>()
+const emit = defineEmits<{ (event: 'back-home'): void; (event: 'navigate', tabId: string): void }>()
 
 const pet = usePet({ store: props.store, profileId: computed(() => props.profileId), clock: props.clock })
 const actionError = ref('')
@@ -76,6 +76,12 @@ async function buy(item: PetItem): Promise<void> {
         <span>{{ pet.state.value.points }} 积分</span>
       </div>
     </header>
+
+    <nav class="shop__nav" aria-label="快捷入口">
+      <button type="button" data-testid="nav-pet" @click="emit('navigate', 'pet')">宠物</button>
+      <button type="button" data-testid="nav-learn" @click="emit('navigate', 'learn')">学习</button>
+      <button type="button" data-testid="nav-bestiary" @click="emit('navigate', 'bestiary')">图鉴</button>
+    </nav>
 
     <p v-if="actionError !== ''" class="shop__error" role="alert" data-testid="shop-error">
       {{ actionError }}
@@ -339,4 +345,7 @@ async function buy(item: PetItem): Promise<void> {
     transform: none;
   }
 }
+
+.shop__nav { display: flex; gap: var(--ds-space-sm); justify-content: center; }
+.shop__nav button { padding: 0.3rem 0.8rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-pill); background: rgb(8 30 52 / 60%); color: var(--ds-text-secondary); font: inherit; font-size: 0.8rem; }
 </style>

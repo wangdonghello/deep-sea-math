@@ -340,6 +340,8 @@ describe('App: 整体装配', () => {
     await bootApp({ signedIn: true })
 
     for (const [path, testid] of [
+      ['/pet', 'pet-room'],
+      ['/shop', 'shop'],
       ['/bestiary', 'bestiary-view'],
       ['/mistakes', 'mistake-book'],
       // P1 起 `/parent` 是门禁页（不是旧的一体化家长页）

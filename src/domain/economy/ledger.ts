@@ -149,7 +149,22 @@ export function sessionPoints(
   const stats = collectSessionAccuracy(scoped).get(sessionId)
   if (stats === undefined) return 0
   const total = Math.max(stats.declared, stats.attempted.size)
-  const correct = stats.independentCorrect.size
-  const bonus = total > 0 && correct / total >= ACCURACY_THRESHOLD ? ACCURACY_BONUS : 0
+
+  // 与 resolveLedger 同口径：同一道题同一天只有第一次独立答对计分，
+  // 重练/练习组不重复算基础分（完成分与正确率加成仍按本组算）。
+  const ordered = [...scoped].sort(
+    (a, b) => a.occurredAt - b.occurredAt || a.eventId.localeCompare(b.eventId),
+  )
+  const seen = new Set<string>()
+  let correct = 0
+  for (const event of ordered) {
+    if (event.type !== 'answer-submitted' || !independentAnswer(event)) continue
+    const key = `${dayKey(event.occurredAt)}:${event.questionId}`
+    if (event.sessionId === sessionId && !seen.has(key)) correct += 1
+    seen.add(key)
+  }
+
+  const accuracyCorrect = stats.independentCorrect.size
+  const bonus = total > 0 && accuracyCorrect / total >= ACCURACY_THRESHOLD ? ACCURACY_BONUS : 0
   return correct * POINTS_PER_INDEPENDENT_CORRECT + POINTS_PER_COMPLETION + bonus
 }

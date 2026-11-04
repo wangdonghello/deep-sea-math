@@ -46,6 +46,7 @@ const emit = defineEmits<{
   (event: 'start-quest'): void
   (event: 'open-shop'): void
   (event: 'back-home'): void
+  (event: 'navigate', tabId: string): void
 }>()
 
 /** 统一取时：显式注入优先，缺省系统时钟。 */
@@ -334,6 +335,12 @@ onBeforeUnmount(() => {
           </div>
         </header>
 
+    <nav class="pet-room__nav" aria-label="快捷入口">
+      <button type="button" data-testid="nav-learn" @click="emit('navigate', 'learn')">学习</button>
+      <button type="button" data-testid="nav-shop" @click="emit('navigate', 'shop')">商店</button>
+      <button type="button" data-testid="nav-bestiary" @click="emit('navigate', 'bestiary')">图鉴</button>
+    </nav>
+
         <section v-if="state.adopted" class="pet-room__status" aria-label="宠物状态">
           <div class="pet-room__bar-row">
             <span class="pet-room__bar-label">心情</span>
@@ -488,7 +495,7 @@ onBeforeUnmount(() => {
         </section>
       </template>
 
-      <BottomReturnButton @back="emit('back-home')" />
+      <BottomReturnButton label="切换档案" @back="emit('back-home')" />
     </div>
   </main>
 </template>
@@ -1267,4 +1274,7 @@ onBeforeUnmount(() => {
     justify-self: end;
   }
 }
+
+.pet-room__nav { display: flex; gap: var(--ds-space-sm); justify-content: center; }
+.pet-room__nav button { padding: 0.3rem 0.8rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-pill); background: rgb(8 30 52 / 60%); color: var(--ds-text-secondary); font: inherit; font-size: 0.8rem; }
 </style>
