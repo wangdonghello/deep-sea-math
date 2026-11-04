@@ -1,14 +1,36 @@
+import { ref } from 'vue'
 import { describe, expect, it } from 'vitest'
 
 import { usePet } from '@/features/pet/usePet'
 import type { DomainEvent } from '@/domain/model/types'
 
+/**
+ * 内存态 store：按生产语义模拟事件仓储。
+ *
+ * - `listEvents` 只返回**该档案**的日志（生产按 `by_profile` 索引读）；
+ * - `appendEvents` 按 `eventId` 幂等去重，返回**合并后的全量日志**（生产
+ *   `EventRepo.append` 的返回值），调用方必须用它覆盖本地视角。
+ */
 function memoryStore(initial: DomainEvent[] = []) {
   const events = [...initial]
+  const calls: string[] = []
   return {
     events,
-    async listEvents() { return [...events] },
-    async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return incoming },
+    calls,
+    async listEvents(profileId: string) {
+      calls.push(profileId)
+      return events.filter((event) => event.profileId === profileId)
+    },
+    async appendEvents(incoming: readonly DomainEvent[]) {
+      const known = new Set(events.map((event) => event.eventId))
+      for (const event of incoming) {
+        if (known.has(event.eventId)) continue
+        known.add(event.eventId)
+        events.push(event)
+      }
+      const owners = new Set(incoming.map((event) => event.profileId))
+      return events.filter((event) => owners.has(event.profileId))
+    },
   }
 }
 
@@ -20,6 +42,13 @@ const adoption: DomainEvent = {
   type: 'pet-adopted',
   petId: 'baby-whale',
   name: '小蓝',
+}
+
+/** 手动放行的门闩：用来卡住某个档案的读取，制造「切换档案时上一次加载仍在途」。 */
+function deferred() {
+  let resolve!: () => void
+  const promise = new Promise<void>((done) => { resolve = done })
+  return { promise, resolve }
 }
 
 describe('usePet', () => {
@@ -48,6 +77,89 @@ describe('usePet', () => {
     const pet = usePet({ store, profileId: 'p1', clock: () => 10 })
     await Promise.all([pet.load(), pet.load()])
     expect(store.events.filter((event) => event.type === 'pet-adopted')).toHaveLength(1)
+  })
+
+  it('同一毫秒内的多次抚摸使用不同事件 id', async () => {
+    const store = memoryStore([adoption])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 2 })
+    await pet.load()
+    await Promise.all([pet.pet(), pet.pet()])
+    const ids = store.events.filter((event) => event.type === 'pet-petted').map((event) => event.eventId)
+    expect(ids).toHaveLength(2)
+    expect(new Set(ids).size).toBe(2)
+  })
+
+  it('并发购买不会透支余额', async () => {
+    // 8 个整组完成 = 40 分，够买一次 30 分的发光球，不够两次。
+    const earned = Array.from({ length: 8 }, (_, index): DomainEvent => ({
+      eventId: `session-${index}`,
+      profileId: 'p1',
+      occurredAt: 2 + index,
+      type: 'session-completed',
+      sessionId: `s${index}`,
+      rewards: [],
+    }))
+    const store = memoryStore([adoption, ...earned])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 20 })
+    await pet.load()
+    expect(pet.state.value.points).toBe(40)
+
+    const results = await Promise.allSettled([pet.buy('glow-ball'), pet.buy('glow-ball')])
+    expect(results.filter((result) => result.status === 'fulfilled')).toHaveLength(1)
+    // 串行化之后第二笔要么因「已经拥有」要么因「积分不足」被拦，不会两笔都成功。
+    expect(results.filter((result) => result.status === 'rejected')).toHaveLength(1)
+
+    expect(store.events.filter((event) => event.type === 'item-purchased')).toHaveLength(1)
+    expect(pet.state.value.points).toBe(10)
+    expect(pet.state.value.points).toBeGreaterThanOrEqual(0)
+  })
+
+  it('并发购买食物时第二笔因余额不足失败', async () => {
+    const store = memoryStore([
+      adoption,
+      // 1 个整组完成 = 5 分，刚好够买一份 5 分的海藻饼干，不够两份。
+      { eventId: 'session-0', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 's0', rewards: [] },
+    ])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 20 })
+    await pet.load()
+    expect(pet.state.value.points).toBe(5)
+
+    const results = await Promise.allSettled([pet.buy('seaweed-cookie'), pet.buy('seaweed-cookie')])
+    expect(results.filter((result) => result.status === 'fulfilled')).toHaveLength(1)
+    const rejected = results.filter((result) => result.status === 'rejected')
+    expect(rejected).toHaveLength(1)
+    expect(String(rejected[0].reason)).toContain('积分不足')
+
+    expect(store.events.filter((event) => event.type === 'item-purchased')).toHaveLength(1)
+    expect(pet.state.value.points).toBe(0)
+  })
+
+  it('切换档案后各自加载，不复用别人的 pending', async () => {
+    const gate = deferred()
+    const store = memoryStore([
+      { eventId: 'p1-adopt', profileId: 'p1', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { eventId: 'p2-adopt', profileId: 'p2', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '泡泡' },
+    ])
+    // 卡住 p1 的读取，确保切到 p2 时 p1 的加载仍在途。
+    const listEvents = store.listEvents
+    store.listEvents = async (profileId: string) => {
+      if (profileId === 'p1') await gate.promise
+      return listEvents(profileId)
+    }
+    const profileId = ref<string | null>('p1')
+    const pet = usePet({ store, profileId, clock: () => 2 })
+
+    const p1Load = pet.load()
+    profileId.value = 'p2'
+    const p2Load = pet.load()
+    gate.resolve()
+    await Promise.all([p1Load, p2Load])
+
+    // p2 不能被 p1 的进行中加载挡住，必须真正读过自己的日志。
+    expect(store.calls).toContain('p2')
+    expect(pet.state.value.name).toBe('泡泡')
+    // p1 的读取晚到，也不能覆盖已经切过去的档案状态。
+    expect(pet.state.value.name).toBe('泡泡')
   })
 
   it('迁移水位线：领养前的完成记录不触发孵化，领养后的才补 pet-hatched', async () => {

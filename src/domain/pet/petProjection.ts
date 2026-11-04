@@ -36,9 +36,12 @@ export interface PetState {
   readonly lastUpdatedAt: number
 }
 
-const MAX_FEED_PER_DAY = 3
-const MAX_PET_PER_DAY = 5
-const MAX_PLAY_PER_DAY = 2
+/** 每日喂食上限：与动作层（`usePet`）共用，避免两处各写一个 3。 */
+export const MAX_FEED_PER_DAY = 3
+/** 每日抚摸上限。 */
+export const MAX_PET_PER_DAY = 5
+/** 每日玩耍上限。 */
+export const MAX_PLAY_PER_DAY = 2
 
 function dayKey(at: number): string {
   return new Date(at).toISOString().slice(0, 10)
