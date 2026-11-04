@@ -1,6 +1,9 @@
 /** 宠物目录：商品、价格、效果与名字候选的唯一真源。 */
 export type PetItemKind = 'food' | 'toy' | 'decor'
 
+/** 宠物房间可切换的装饰样式标识（decor 专用）。 */
+export type DecorStyleId = 'nest' | 'lamp' | 'coral'
+
 export interface PetItem {
   readonly id: string
   readonly kind: PetItemKind
@@ -12,15 +15,22 @@ export interface PetItem {
   /** 食物：回复的饥饿值；其他品类为 0。 */
   readonly hunger: number
   /** 宠物房间里的装饰样式标识（decor 专用）。 */
-  readonly decor?: string
+  readonly decor?: DecorStyleId
 }
 
 export const PET_NAMES = ['小蓝', '泡泡', '阿潮', '星星', '豆豆'] as const
 
+/**
+ * 食物三档：入门 / 进阶 / 高效。
+ *
+ * 每分 XP 随价格递增（1.6 → 1.8 → 2.0），越贵效率越高；每分饥饿随价格递减
+ * （6.0 → 4.5 → 3.0），便宜档更适合补饥饿。因此三档互不严格支配。
+ * 饥饿上限 100 的溢出由 UI 提示处理，不在目录里做特殊逻辑。
+ */
 export const FOOD_ITEMS: readonly PetItem[] = [
   { id: 'seaweed-cookie', kind: 'food', name: '海藻饼干', icon: '🍪', price: 5, xp: 8, hunger: 30 },
-  { id: 'krill-pudding', kind: 'food', name: '磷虾布丁', icon: '🍮', price: 10, xp: 12, hunger: 40 },
-  { id: 'deep-sea-cake', kind: 'food', name: '深海蛋糕', icon: '🎂', price: 20, xp: 18, hunger: 50 },
+  { id: 'krill-pudding', kind: 'food', name: '磷虾布丁', icon: '🍮', price: 10, xp: 18, hunger: 45 },
+  { id: 'deep-sea-cake', kind: 'food', name: '深海蛋糕', icon: '🎂', price: 20, xp: 40, hunger: 60 },
 ]
 
 export const TOY_ITEMS: readonly PetItem[] = [
