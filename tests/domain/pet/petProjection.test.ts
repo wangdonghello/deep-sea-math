@@ -6,6 +6,7 @@ import type { DomainEvent } from '@/domain/model/types'
 
 const base = { profileId: 'p1' }
 const hour = 3_600_000
+const day = 86_400_000
 
 describe('replayPet', () => {
   it('领养 → 孵化 → 状态就绪', () => {
@@ -90,10 +91,171 @@ describe('replayPet', () => {
 
   it('购买未知商品既不进库存也不进拥有列表', () => {
     const events: DomainEvent[] = [
-      { ...base, eventId: 'a', occurredAt: 1, type: 'item-purchased', itemId: 'mystery-box', price: 10 },
+      { ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { ...base, eventId: 'b', occurredAt: 2, type: 'item-purchased', itemId: 'mystery-box', price: 10 },
     ]
-    const pet = replayPet(events, 'p1', 2)
+    const pet = replayPet(events, 'p1', 3)
     expect(pet.owned).toEqual([])
     expect(pet.inventory['mystery-box']).toBeUndefined()
+  })
+
+  it('喂食每天最多 3 次，跨天重置', () => {
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'adopt', occurredAt: 0, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      ...Array.from({ length: 5 }, (_, i) => ({
+        ...base, eventId: `buy-${i}`, occurredAt: 1, type: 'item-purchased' as const,
+        itemId: 'seaweed-cookie', price: 5,
+      })),
+      ...Array.from({ length: 4 }, (_, i) => ({
+        ...base, eventId: `feed-${i}`, occurredAt: 2 + i, type: 'pet-fed' as const,
+        itemId: 'seaweed-cookie',
+      })),
+    ]
+    const sameDay = replayPet(events, 'p1', 6)
+    expect(sameDay.xp).toBe(24)
+    expect(sameDay.inventory['seaweed-cookie']).toBe(2)
+    // 第 4 次喂食没有生效，锚点仍停在第 3 次。
+    expect(sameDay.lastUpdatedAt).toBe(4)
+
+    const nextDay = replayPet(
+      [...events, { ...base, eventId: 'feed-next', occurredAt: day + 1, type: 'pet-fed', itemId: 'seaweed-cookie' }],
+      'p1',
+      day + 2,
+    )
+    expect(nextDay.xp).toBe(32)
+    expect(nextDay.inventory['seaweed-cookie']).toBe(1)
+  })
+
+  it('缺货喂食不消耗、不加 XP，也不推进衰减锚点', () => {
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { ...base, eventId: 'b', occurredAt: 5, type: 'pet-fed', itemId: 'seaweed-cookie' },
+    ]
+    const pet = replayPet(events, 'p1', 10)
+    expect(pet.xp).toBe(0)
+    expect(pet.hunger).toBe(70)
+    expect(pet.lastUpdatedAt).toBe(1)
+  })
+
+  it('同一 UTC 日第二次 session-completed 不重复加 XP', () => {
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { ...base, eventId: 'b', occurredAt: 2, type: 'session-completed', sessionId: 's1', rewards: [] },
+      { ...base, eventId: 'c', occurredAt: 3, type: 'session-completed', sessionId: 's2', rewards: [] },
+    ]
+    expect(replayPet(events, 'p1', 4).xp).toBe(15)
+  })
+
+  it('抚摸与玩耍按 UTC 日重置次数', () => {
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'a', occurredAt: 0, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { ...base, eventId: 'toy', occurredAt: 1, type: 'item-purchased', itemId: 'glow-ball', price: 30 },
+      ...Array.from({ length: 6 }, (_, i) => ({
+        ...base, eventId: `pet-${i}`, occurredAt: 2 + i, type: 'pet-petted' as const,
+      })),
+      ...Array.from({ length: 3 }, (_, i) => ({
+        ...base, eventId: `play-${i}`, occurredAt: 10 + i, type: 'pet-played' as const,
+        itemId: 'glow-ball',
+      })),
+    ]
+    const firstDay = replayPet(events, 'p1', 13)
+    // 抚摸 5×2 + 玩耍 2×6；超出的次数不生效。
+    expect(firstDay.xp).toBe(22)
+    expect(firstDay.mood).toBe(100)
+
+    const secondDay = replayPet(
+      [
+        ...events,
+        { ...base, eventId: 'pet-next', occurredAt: day + 1, type: 'pet-petted' },
+        { ...base, eventId: 'play-next', occurredAt: day + 2, type: 'pet-played', itemId: 'glow-ball' },
+      ],
+      'p1',
+      day + 3,
+    )
+    // 次日各再计 1 次。
+    expect(secondDay.xp).toBe(30)
+  })
+
+  it('事件顺序不影响重放结果', () => {
+    const adoption: DomainEvent = {
+      ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝',
+    }
+    const purchase: DomainEvent = {
+      ...base, eventId: 'b', occurredAt: 2, type: 'item-purchased', itemId: 'seaweed-cookie', price: 5,
+    }
+    const feed: DomainEvent = { ...base, eventId: 'c', occurredAt: 3, type: 'pet-fed', itemId: 'seaweed-cookie' }
+
+    const forward = replayPet([adoption, purchase, feed], 'p1', 4)
+    const reversed = replayPet([feed, purchase, adoption], 'p1', 4)
+    expect(forward.xp).toBe(8)
+    expect(forward.inventory['seaweed-cookie']).toBe(0)
+    expect(reversed).toEqual(forward)
+  })
+
+  it('只结算领养之后的事件，v3 历史不补发奖励', () => {
+    const legacy: DomainEvent[] = Array.from({ length: 30 }, (_, i): DomainEvent[] => [
+      {
+        ...base, eventId: `ans-${i}`, occurredAt: (i + 1) * day, type: 'answer-submitted',
+        sessionId: `s${i}`, questionId: `q${i}`, submitted: '1', correct: true,
+        usedHintLevel: 0, retryCount: 0, ms: 10,
+      },
+      {
+        ...base, eventId: `done-${i}`, occurredAt: (i + 1) * day + 1, type: 'session-completed',
+        sessionId: `s${i}`, rewards: [],
+      },
+    ]).flat()
+
+    const adopted: DomainEvent = {
+      ...base, eventId: 'adopt', occurredAt: 31 * day, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝',
+    }
+    const afterAdoption: DomainEvent[] = [
+      {
+        ...base, eventId: 'ans-after', occurredAt: 31 * day + 1, type: 'answer-submitted',
+        sessionId: 's-after', questionId: 'q-after', submitted: '1', correct: true,
+        usedHintLevel: 0, retryCount: 0, ms: 10,
+      },
+      {
+        ...base, eventId: 'done-after', occurredAt: 31 * day + 2, type: 'session-completed',
+        sessionId: 's-after', rewards: [],
+      },
+    ]
+
+    const pet = replayPet([...legacy, adopted, ...afterAdoption], 'p1', 32 * day)
+    expect(pet.adopted).toBe(true)
+    // 30 天的历史完成不会补发 450 XP，只算领养后的首次完成 +15。
+    expect(pet.xp).toBe(15)
+    // 领养后：答对 +1、整组 +5、正确率 ≥80% +3。
+    expect(pet.points).toBe(9)
+  })
+
+  it('没有领养事件时积分与 XP 均为 0', () => {
+    const events: DomainEvent[] = [
+      {
+        ...base, eventId: 'ans', occurredAt: 1, type: 'answer-submitted',
+        sessionId: 's1', questionId: 'q1', submitted: '1', correct: true,
+        usedHintLevel: 0, retryCount: 0, ms: 10,
+      },
+      { ...base, eventId: 'done', occurredAt: 2, type: 'session-completed', sessionId: 's1', rewards: [] },
+    ]
+    const pet = replayPet(events, 'p1', 3)
+    expect(pet.adopted).toBe(false)
+    expect(pet.xp).toBe(0)
+    expect(pet.points).toBe(0)
+  })
+
+  it('领养发生在 0 时锚点保持 0，不被 now 兜底覆盖', () => {
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'a', occurredAt: 0, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+    ]
+    expect(replayPet(events, 'p1', 100).lastUpdatedAt).toBe(0)
+  })
+
+  it('owned 按字典序返回', () => {
+    const events: DomainEvent[] = [
+      { ...base, eventId: 'a', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { ...base, eventId: 'b', occurredAt: 2, type: 'item-purchased', itemId: 'glow-ball', price: 30 },
+      { ...base, eventId: 'c', occurredAt: 3, type: 'item-purchased', itemId: 'coral-rattle', price: 45 },
+    ]
+    expect(replayPet(events, 'p1', 4).owned).toEqual(['coral-rattle', 'glow-ball'])
   })
 })
