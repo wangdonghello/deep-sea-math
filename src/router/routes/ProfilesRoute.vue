@@ -11,14 +11,49 @@
  * 这里是 `/parent` 的**唯一页面入口**（另可直接输 URL）；进入后先输家长 PIN，
  * 再落到 `/parent/overview` 等三个子路径。
  */
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import ProfileSelectView from '@/views/ProfileSelectView.vue'
 import { getProductionStores } from '@/app/productionStores'
+import { importV3Progress } from '@/data/importV3Progress'
 import { PARENT_PATH } from '@/router/nextRoute'
 
 const router = useRouter()
 const stores = getProductionStores()
+const importing = ref(false)
+const importMessage = ref('')
+
+/**
+ * 一次性导入 v3 的档案与进度。
+ *
+ * 用 `confirm` 做二次确认：这是会写本机数据库的操作，误点不应该发生。
+ * 成功后刷新页面，让 `ProfileSelectView` 重新读档案列表；失败只显示文案，
+ * 不抛错。
+ */
+async function onImportV3(): Promise<void> {
+  if (importing.value) return
+  if (!globalThis.confirm('从第三版导入档案与学习进度？已有档案不会被覆盖。')) return
+  importing.value = true
+  importMessage.value = ''
+  try {
+    const result = await importV3Progress()
+    if (!result.sourceFound) {
+      importMessage.value = '没有找到第三版的进度数据。'
+      return
+    }
+    if (result.profiles === 0) {
+      importMessage.value = '没有新的档案可导入（可能已经导入过）。'
+      return
+    }
+    importMessage.value = `已导入 ${result.profiles} 个档案、${result.events} 条事件，正在刷新…`
+    globalThis.setTimeout(() => globalThis.location.reload(), 700)
+  } catch {
+    importMessage.value = '导入失败，请稍后再试。'
+  } finally {
+    importing.value = false
+  }
+}
 
 /**
  * 登录成功的落点由组件翻译成路由动作（视图自己不 import router）。
@@ -37,6 +72,18 @@ function onNavigate(path: string): void {
   <div class="profiles-route">
     <ProfileSelectView :store="stores.profileSelect" :navigate="onNavigate" />
     <footer class="profiles-route__footer">
+      <button
+        type="button"
+        class="profiles-route__import"
+        data-testid="import-v3"
+        :disabled="importing"
+        @click="onImportV3"
+      >
+        {{ importing ? '导入中…' : '从第三版导入进度' }}
+      </button>
+      <p v-if="importMessage !== ''" class="profiles-route__import-message" data-testid="import-v3-message">
+        {{ importMessage }}
+      </p>
       <button type="button" class="profiles-route__parent-card" data-testid="goto-parent" @click="router.push(PARENT_PATH)">
         <span class="profiles-route__parent-icon" aria-hidden="true">🛡️</span>
         <span class="profiles-route__parent-copy">
@@ -58,6 +105,23 @@ function onNavigate(path: string): void {
   margin-top: auto;
   padding: 0 0 max(var(--ds-space-lg), env(safe-area-inset-bottom));
 }
+
+.profiles-route__import {
+  width: 100%;
+  margin-bottom: var(--ds-space-sm);
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  border: 1px dashed var(--ds-glass-border);
+  border-radius: var(--ds-radius-md);
+  background: rgb(8 30 52 / 55%);
+  color: var(--ds-text-secondary);
+  font: inherit;
+  font-size: var(--ds-font-size-caption);
+  cursor: pointer;
+}
+
+.profiles-route__import:disabled { opacity: .6; cursor: progress; }
+.profiles-route__import:focus-visible { outline: 3px solid var(--ds-glow-primary); outline-offset: 2px; }
+.profiles-route__import-message { margin: 0 0 var(--ds-space-sm); color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); text-align: center; }
 
 .profiles-route__parent-card {
   display: flex;
