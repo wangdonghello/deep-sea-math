@@ -190,7 +190,7 @@ describe('views: ProfileSelectView', () => {
       nickname: '小澜',
       avatarId: 'jelly',
     })
-    expect(navigated).toEqual(['/home'])
+    expect(navigated).toEqual(['/pet'])
   })
 
   it('退格键删除最后一位', async () => {
@@ -312,7 +312,7 @@ describe('views: ProfileSelectView 掩码输入框', () => {
     await input.trigger('input')
     await submitPin(view)
 
-    expect(navigated).toEqual(['/home'])
+    expect(navigated).toEqual(['/pet'])
     expect(useProfileSessionStore().activeProfileId).toBe('p1')
   })
 })

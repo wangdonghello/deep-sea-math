@@ -18,23 +18,26 @@ import { computed } from 'vue'
 import type { ThemeId } from '@/domain/model/types'
 
 /** 孩子可自主到达的页签 id（家长区不在其中，见上方说明）。 */
-export type ChildTabId = 'home' | 'bestiary' | 'mistake'
+export type ChildTabId = 'pet' | 'learn' | 'shop' | 'bestiary'
 
 const TABS_BY_THEME = {
   'deep-sea': [
-    { id: 'home', label: '首页', icon: '⚓' },
+    { id: 'pet', label: '宠物', icon: '🐋' },
+    { id: 'learn', label: '学习', icon: '⚓' },
+    { id: 'shop', label: '商店', icon: '🛒' },
     { id: 'bestiary', label: '图鉴', icon: '🐟' },
-    { id: 'mistake', label: '错题本', icon: '📖' },
   ],
   dinosaur: [
-    { id: 'home', label: '首页', icon: '🦴' },
+    { id: 'pet', label: '宠物', icon: '🐋' },
+    { id: 'learn', label: '学习', icon: '🦴' },
+    { id: 'shop', label: '商店', icon: '🛒' },
     { id: 'bestiary', label: '图鉴', icon: '🦕' },
-    { id: 'mistake', label: '错题本', icon: '📖' },
   ],
   space: [
-    { id: 'home', label: '首页', icon: '🚀' },
+    { id: 'pet', label: '宠物', icon: '🐋' },
+    { id: 'learn', label: '学习', icon: '🚀' },
+    { id: 'shop', label: '商店', icon: '🛒' },
     { id: 'bestiary', label: '图鉴', icon: '🪐' },
-    { id: 'mistake', label: '错题本', icon: '📖' },
   ],
 } as const satisfies Record<ThemeId, readonly { id: ChildTabId; label: string; icon: string }[]>
 

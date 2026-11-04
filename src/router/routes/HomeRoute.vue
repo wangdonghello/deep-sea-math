@@ -40,9 +40,10 @@ const POOL_BY_GRADE = {
 
 /** 页签 id → 路由路径（`TabBar` 只认页签 id，见 `features/home/TabBar.vue`）。 */
 const TAB_PATHS: Readonly<Record<string, string>> = {
-  home: '/home',
+  pet: '/pet',
+  learn: '/home',
+  shop: '/shop',
   bestiary: '/bestiary',
-  mistake: '/mistakes',
 }
 
 function onNavigate(tabId: string): void {

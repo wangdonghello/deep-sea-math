@@ -89,7 +89,7 @@ export interface Clock {
 export type PinStatus = 'idle' | 'verifying' | 'success' | 'error' | 'locked'
 
 /** 指向 Home 的路由路径（Task 17 挂路由时保持一致）。 */
-export const HOME_PATH = '/home'
+export const HOME_PATH = '/pet'
 
 /** 锁定阈值：连续失败 5 次（spec `child-profiles` §PIN 错误）。 */
 export const MAX_PIN_FAILURES = 5

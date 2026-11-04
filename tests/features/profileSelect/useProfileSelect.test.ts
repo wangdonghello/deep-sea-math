@@ -65,7 +65,7 @@ describe('features/profileSelect: useProfileSelect', () => {
     select.pushDigit('4')
     await select.submit()
 
-    expect(navigated).toEqual(['/home'])
+    expect(navigated).toEqual(['/pet'])
     expect(session.activeProfileId).toBe('p1')
     expect(session.projection).toEqual({
       profileId: 'p1',
@@ -139,7 +139,7 @@ describe('features/profileSelect: useProfileSelect', () => {
     for (const digit of ['1', '2', '3', '4']) select.pushDigit(digit)
     await select.submit()
     expect(select.status.value).toBe('success')
-    expect(navigated).toEqual(['/home'])
+    expect(navigated).toEqual(['/pet'])
   })
 
   it('成功一次后错误计数归零（不跨成功累计）', async () => {

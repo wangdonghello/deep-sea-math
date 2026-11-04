@@ -27,7 +27,13 @@
 export const PROFILES_PATH = '/profiles'
 
 /** 首页路径（T11 的 `HOME_PATH` 同值；此处不 import 是为了让守卫不依赖 feature）。 */
-export const HOME_PATH = '/home'
+export const HOME_PATH = '/pet'
+
+/** 学习首页（v4 把首页让给宠物房间，原首页移到 /home）。 */
+export const LEARN_PATH = '/home'
+
+/** 商店。 */
+export const SHOP_PATH = '/shop'
 
 /**
  * 家长区**门禁页**路径。

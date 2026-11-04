@@ -404,7 +404,7 @@ describe('views: HomeView', () => {
     const view = await mountHome({})
 
     expect(view.find('[data-testid="tab-bar"]').exists()).toBe(true)
-    expect(view.find('[data-testid="tab-home"]').exists()).toBe(true)
+    expect(view.find('[data-testid="tab-learn"]').exists()).toBe(true)
     expect(view.emitted('navigate')).toBeUndefined()
   })
 

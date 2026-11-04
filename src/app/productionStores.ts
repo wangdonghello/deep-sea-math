@@ -32,6 +32,7 @@ import type { MistakeBookStore, MistakeQuestionCatalog, MistakeQuestionMetadata 
 import type { ParentGuardStore, ParentStore } from '@/features/parentPanel/types'
 import type { ProfileStore } from '@/features/profileSelect/types'
 import type { BestiaryStore } from '@/features/bestiary/types'
+import type { PetStore } from '@/features/pet/usePet'
 import type { QuizSessionStore } from '@/features/quizStage/useQuizSession'
 
 /** 各视图所需窄接口的装配结果。 */
@@ -46,6 +47,8 @@ export interface ProductionStores {
   readonly quiz: QuizSessionStore
   /** 图鉴 / 地图（T14）：只需读事件重放解锁投影。 */
   readonly bestiary: BestiaryStore
+  /** 宠物房间 / 商店（v4）：读写事件。 */
+  readonly pet: PetStore
   /** 错题本（T15）。 */
   readonly mistakes: MistakeBookStore
   /** 错题本展示用的题库元数据目录。 */
@@ -121,6 +124,7 @@ function assemble(storage: StorageFacade): ProductionStores {
     } as HomeStore,
     quiz: eventAccess as QuizSessionStore,
     bestiary: { listEvents: eventAccess.listEvents },
+    pet: eventAccess as PetStore,
     mistakes: { listEvents: eventAccess.listEvents },
     mistakeCatalog: MISTAKE_CATALOG,
     customQuestions: storage.customQuestions,

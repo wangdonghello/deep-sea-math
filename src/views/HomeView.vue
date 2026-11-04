@@ -180,7 +180,7 @@ onMounted(async () => {
         @claim="home.claimToday()"
       />
 
-      <TabBar active="home" :theme-id="theme.id" @navigate="emit('navigate', $event)" />
+      <TabBar active="learn" :theme-id="theme.id" @navigate="emit('navigate', $event)" />
     </template>
   </main>
 </template>

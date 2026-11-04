@@ -305,7 +305,7 @@ describe('App: 整体装配', () => {
     await router.push('/quest')
     await flushPromises()
 
-    expect(router.currentRoute.value.path).toBe('/home')
+    expect(router.currentRoute.value.path).toBe('/pet')
     expect(app!.find('[data-testid="quest-view"]').exists()).toBe(false)
   })
 
@@ -316,14 +316,15 @@ describe('App: 整体装配', () => {
     await flushPromises()
 
     // 常驻导航只剩三个孩子页签（家长区不在其中，见 TabBar.test.ts）
-    expect(app!.findAll('[data-testid="tab-bar"] .tab-bar__item')).toHaveLength(3)
+    expect(app!.findAll('[data-testid="tab-bar"] .tab-bar__item')).toHaveLength(4)
     expect(app!.find('[data-testid="tab-bar"]').text()).not.toContain('家长区')
 
     // 逐个点击：落点必须是孩子页面，绝不能是家长区
     for (const [tabId, path] of [
+      ['tab-pet', '/pet'],
+      ['tab-learn', '/home'],
+      ['tab-shop', '/shop'],
       ['tab-bestiary', '/bestiary'],
-      ['tab-mistake', '/mistakes'],
-      ['tab-home', '/home'],
     ] as const) {
       // 每次先回首页：TabBar 只在首页常驻（其他页面各有自己的布局）
       await router.push('/home')
@@ -364,7 +365,7 @@ describe('App: 整体装配', () => {
       expect(back.text()).toContain('返回首页')
       await back.trigger('click')
       await flushPromises()
-      expect(router.currentRoute.value.path).toBe('/home')
+      expect(router.currentRoute.value.path).toBe('/pet')
     }
 
     await router.push(`/quest?session=${SESSION_ID}`)
@@ -373,14 +374,14 @@ describe('App: 整体装配', () => {
     const questBack = app!.get('[data-testid="quest-back-home"]')
     await questBack.trigger('click')
     await flushPromises()
-    expect(router.currentRoute.value.path).toBe('/home')
+    expect(router.currentRoute.value.path).toBe('/pet')
 
     await router.push('/parent')
     await settle()
     await app!.get('[data-testid="parent-gate-back"]').trigger('click')
     await flushPromises()
     // 用户选择页是 root；如果已有会话，守卫会安全地回首页
-    expect(['/profiles', '/home']).toContain(router.currentRoute.value.path)
+    expect(['/profiles', '/home', '/pet']).toContain(router.currentRoute.value.path)
   })
 
   it('观察舱只接受已解锁生物：未解锁打回图鉴且不泄露名称', async () => {
@@ -528,7 +529,7 @@ describe('App: 整体装配', () => {
     await flushPromises()
 
     // 没有可练的题：宁可回首页，也不要渲染一个"题库暂时不够"的死胡同
-    expect(router.currentRoute.value.path).toBe('/home')
+    expect(router.currentRoute.value.path).toBe('/pet')
     expect(app!.find('[data-testid="quest-view"]').exists()).toBe(false)
   })
 
@@ -668,7 +669,7 @@ describe('App: 整体装配', () => {
     // 本用例是"已登录"状态，守卫规则 3 会把档案选择页再落到首页——这是全站
     // 一致的既有行为（已选档案却停在选档案是死路），不是本页特例。
     await app!.get('[data-testid="parent-back"]').trigger('click')
-    expect(await waitForPath('/home')).toBe(true)
+    expect(await waitForPath('/pet')).toBe(true)
   })
 
   it('家长区解锁态只存在于本次会话（新会话必须重新验证）', async () => {

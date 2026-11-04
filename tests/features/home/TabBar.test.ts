@@ -13,22 +13,22 @@ import TabBar from '@/features/home/TabBar.vue'
  */
 describe('TabBar', () => {
   it('只渲染孩子页签，家长区不在常驻导航里', () => {
-    const bar = mount(TabBar, { props: { active: 'home' } })
+    const bar = mount(TabBar, { props: { active: 'learn' } })
 
-    expect(bar.findAll('.tab-bar__item')).toHaveLength(3)
+    expect(bar.findAll('.tab-bar__item')).toHaveLength(4)
     expect(bar.text()).not.toContain('家长区')
     expect(bar.find('[data-testid="tab-parent"]').exists()).toBe(false)
-    for (const tabId of ['home', 'bestiary', 'mistake']) {
+    for (const tabId of ['pet', 'learn', 'shop', 'bestiary']) {
       expect(bar.find(`[data-testid="tab-${tabId}"]`).exists()).toBe(true)
     }
   })
 
   it('点按页签 emit 页签 id，载荷永远不会是家长区', async () => {
-    const bar = mount(TabBar, { props: { active: 'home' } })
+    const bar = mount(TabBar, { props: { active: 'learn' } })
 
+    await bar.get('[data-testid="tab-shop"]').trigger('click')
     await bar.get('[data-testid="tab-bestiary"]').trigger('click')
-    await bar.get('[data-testid="tab-mistake"]').trigger('click')
 
-    expect(bar.emitted('navigate')).toEqual([['bestiary'], ['mistake']])
+    expect(bar.emitted('navigate')).toEqual([['shop'], ['bestiary']])
   })
 })
