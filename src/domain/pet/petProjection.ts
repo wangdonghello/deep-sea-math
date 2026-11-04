@@ -20,8 +20,17 @@ export interface PetState {
   readonly points: number
   readonly inventory: Readonly<Record<string, number>>
   readonly owned: readonly string[]
+  /**
+   * 饱食度：**越高越饱、越低越饿**（不是饥饿值）。
+   * 展示「饥饿」进度时用 `100 - hunger`。
+   */
   readonly hunger: number
   readonly mood: number
+  /**
+   * 最近一条事件的发生时间；展示层用它与 `now` 计算饱食度衰减。
+   * 不带 `now`，否则重放时 `lastUpdatedAt === now`，衰减会恒为 0。
+   * 该档案没有任何事件时退回本次重放的 `now`。
+   */
   readonly lastUpdatedAt: number
 }
 
@@ -32,7 +41,12 @@ function dayKey(at: number): string {
   return new Date(at).toISOString().slice(0, 10)
 }
 
-/** 独立事件重放：不改 v3 的 projection，避免影响现有功能。 */
+/**
+ * 独立事件重放：不改 v3 的 projection，避免影响现有功能。
+ *
+ * `now` 不参与事件时间的推导（否则 `lastUpdatedAt` 恒等于 `now`，展示层的
+ * 饱食度衰减会失效），只在该档案没有任何事件时作为衰减起点兜底。
+ */
 export function replayPet(events: readonly DomainEvent[], profileId: string, now: number): PetState {
   const scoped = events.filter((event) => event.profileId === profileId)
   const ledger = resolveLedger(scoped, profileId)
@@ -43,7 +57,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   let xp = 0
   let hunger = 70
   let mood = 70
-  let lastUpdatedAt = now
+  let lastUpdatedAt = 0
   const inventory: Record<string, number> = {}
   const owned = new Set<string>()
   const petCount = new Map<string, number>()
@@ -60,8 +74,12 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     if (event.type === 'pet-hatched') hatched = true
     if (event.type === 'item-purchased') {
       const item = petItemById(event.itemId)
-      if (item?.kind === 'food') inventory[item.id] = (inventory[item.id] ?? 0) + 1
-      else owned.add(event.itemId)
+      if (item?.kind === 'food') {
+        inventory[item.id] = (inventory[item.id] ?? 0) + 1
+      } else if (item?.kind === 'toy' || item?.kind === 'decor') {
+        // 未知商品 id 直接忽略：既不入库存，也不进拥有列表。
+        owned.add(item.id)
+      }
     }
     if (event.type === 'pet-fed') {
       const item = petItemById(event.itemId)
@@ -84,7 +102,9 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     if (event.type === 'pet-played') {
       const day = dayKey(event.occurredAt)
       const used = playCount.get(day) ?? 0
-      if (owned.has(event.itemId) && used < MAX_PLAY_PER_DAY) {
+      // 必须已拥有**玩具**：装饰虽然也在 owned 里，但不能拿来玩耍。
+      const item = petItemById(event.itemId)
+      if (item?.kind === 'toy' && owned.has(item.id) && used < MAX_PLAY_PER_DAY) {
         playCount.set(day, used + 1)
         xp += 6
         mood = Math.min(100, mood + 20)
@@ -98,6 +118,9 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
       }
     }
   }
+
+  // 没有任何事件时没有衰减起点，退回 now；有事件时 lastUpdatedAt 只取事件时间。
+  if (scoped.length === 0) lastUpdatedAt = now
 
   const level = levelFromXp(xp)
   return {
