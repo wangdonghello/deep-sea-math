@@ -6,6 +6,8 @@
 
 **第三版预览（10 关深海，1–6 年级）：** <https://wangdonghello.github.io/deep-sea-math/v3/>
 
+**第四版预览（数学 + 宠物养成 + 积分商店）：** <https://wangdonghello.github.io/deep-sea-math/v4/>
+
 **服务器部署：** <http://47.103.22.160:10010/v3/>
 
 第一版保留在站点根路径（<https://wangdonghello.github.io/deep-sea-math/>），从 tag `v1.0.0` 构建，不会被第二版覆盖。
