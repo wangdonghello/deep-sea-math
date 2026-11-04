@@ -18,6 +18,7 @@
 import { computed, ref, toValue, watch, type MaybeRefOrGetter } from 'vue'
 
 import { petItemById } from '@/data/content/petCatalog'
+import { randomUuid } from '@/domain/crypto/randomUuid'
 import {
   MAX_FEED_PER_DAY,
   MAX_PET_PER_DAY,
@@ -51,9 +52,9 @@ const LOAD_FAILED = '宠物暂时打不开，请稍后再试'
 /**
  * 宠物动作的组合式逻辑。
  *
- * 事件 ID 全部由「事件类型 + 时钟 + 实例内单调序号」推导，不用随机数：
- * 同一毫秒内的连续操作也能区分开，测试结果可复现；重复写入由存储层按
- * `eventId` 幂等去重。
+ * 事件 ID：动作事件用 `randomUuid()`（全局唯一，同一毫秒内的连续操作也不会
+ * 撞 id）；`pet-adopted` / `pet-hatched` 保留确定性的 `<动作>-<profileId>`，
+ * 这样重复加载可以用同一 id 幂等去重。
  */
 export function usePet(options: {
   store: PetStore
@@ -91,35 +92,31 @@ export function usePet(options: {
    */
   let queue: Promise<unknown> = Promise.resolve()
 
-  /** 实例内单调序号：同一毫秒内的多次操作也能得到不同 `eventId`。 */
-  let seq = 0
-
-  function nextEventId(type: DomainEvent['type']): string {
-    seq += 1
-    return `${type}-${clock()}-${seq}`
+  /** 按捕获的档案重放本地日志：动作校验只看自己档案的状态。 */
+  function snapshot(profileId: string): PetState {
+    return replayPet(events.value, profileId, clock())
   }
 
-  function base(): { profileId: string; occurredAt: number } {
-    const profileId = toValue(options.profileId)
-    if (profileId === null) throw new Error('没有选择档案')
+  function base(profileId: string): { profileId: string; occurredAt: number } {
     return { profileId, occurredAt: clock() }
   }
 
-  function countToday(type: DomainEvent['type']): number {
-    const profileId = toValue(options.profileId)
-    if (profileId === null) return 0
+  function countToday(type: DomainEvent['type'], profileId: string): number {
     const day = utcDay(clock())
     return events.value.filter(
       (event) => event.profileId === profileId && event.type === type && utcDay(event.occurredAt) === day,
     ).length
   }
 
-  /** 追加事件：以 store 返回的合并去重日志为准，不做本地拼接。 */
-  async function append(incoming: readonly DomainEvent[]): Promise<void> {
+  /**
+   * 追加事件：以 store 返回的合并去重日志为准，不做本地拼接。
+   *
+   * `profileId` 是**动作入口捕获**的档案：写库永远写它；但只有当界面当前仍停在
+   * 这个档案时才刷新本地视角，否则旧档案的日志会盖住新档案的界面状态。
+   */
+  async function append(incoming: readonly DomainEvent[], profileId: string): Promise<void> {
     const merged = await options.store.appendEvents(incoming)
-    // 追加期间切换了档案：旧档案的合并日志不能覆盖新档案的状态。
-    const owner = incoming[0]?.profileId
-    if (owner !== undefined && toValue(options.profileId) !== owner) return
+    if (toValue(options.profileId) !== profileId) return
     events.value = merged
   }
 
@@ -137,6 +134,9 @@ export function usePet(options: {
    * 孵化只认领养之后的 `session-completed`；没有领养记录时 `adoptedAt` 退回当前
    * 时钟，等价于「老档案今天才领养」，不会误判 v3 历史为已完成。
    *
+   * 补写走写队列，避免和用户动作（购买/喂养）互相覆盖本地视角；入队后**再次**
+   * 确认档案没变，防止排队期间切档案把旧档案的领养/孵化事件写到新档案界面上。
+   *
    * 失败只写 `error` 文案，不向上抛：`watch` 里的调用是 `void load()`，抛出会
    * 变成未处理的 Promise rejection。
    */
@@ -149,10 +149,13 @@ export function usePet(options: {
       if (toValue(options.profileId) !== profileId) return
       events.value = loaded
       if (!loaded.some((event) => event.profileId === profileId && event.type === 'pet-adopted')) {
-        await append([{
-          eventId: `adopt-${profileId}`, profileId, occurredAt: clock(),
-          type: 'pet-adopted', petId: 'baby-whale', name: options.name ?? '小蓝',
-        }])
+        await enqueue(async () => {
+          if (toValue(options.profileId) !== profileId) return
+          await append([{
+            eventId: `adopt-${profileId}`, profileId, occurredAt: clock(),
+            type: 'pet-adopted', petId: 'baby-whale', name: options.name ?? '小蓝',
+          }], profileId)
+        })
         if (toValue(options.profileId) !== profileId) return
       }
       const adoption = events.value.find((event) => event.profileId === profileId && event.type === 'pet-adopted')
@@ -162,9 +165,12 @@ export function usePet(options: {
         (event) => event.profileId === profileId && event.type === 'session-completed' && event.occurredAt >= adoptedAt,
       )
       if (!hatched && learnedSinceAdoption) {
-        await append([{
-          eventId: `hatch-${profileId}`, profileId, occurredAt: clock(), type: 'pet-hatched',
-        }])
+        await enqueue(async () => {
+          if (toValue(options.profileId) !== profileId) return
+          await append([{
+            eventId: `hatch-${profileId}`, profileId, occurredAt: clock(), type: 'pet-hatched',
+          }], profileId)
+        })
       }
     } catch {
       error.value = LOAD_FAILED
@@ -187,50 +193,64 @@ export function usePet(options: {
   /**
    * 购买：食物进背包、玩具/装饰进拥有列表；余额不足或已拥有非食物商品时拦截。
    *
-   * 校验与追加都在队列里，避免两笔并发购买各自读到同一份旧余额。
+   * 档案在**入口**捕获并一路传给校验与写入：动作排队期间切换档案，也不会把
+   * 这次操作写到新档案上。
    */
   function buy(itemId: string): Promise<void> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
     return enqueue(async () => {
+      const current = snapshot(profileId)
       const item = petItemById(itemId)
       if (item === undefined) throw new Error('商品不存在')
-      if (!state.value.adopted) throw new Error('还没有宠物')
-      if (item.kind !== 'food' && state.value.owned.includes(itemId)) throw new Error('已经拥有')
-      if (state.value.points < item.price) throw new Error('积分不足')
+      if (!current.adopted) throw new Error('还没有宠物')
+      if (item.kind !== 'food' && current.owned.includes(itemId)) throw new Error('已经拥有')
+      if (current.points < item.price) throw new Error('积分不足')
       await append([{
-        ...base(), eventId: nextEventId('item-purchased'), type: 'item-purchased', itemId, price: item.price,
-      }])
+        ...base(profileId), eventId: randomUuid(), type: 'item-purchased', itemId, price: item.price,
+      }], profileId)
     })
   }
 
   /** 喂食：每天最多 `MAX_FEED_PER_DAY` 次，且背包里必须有该食物。 */
   function feed(itemId: string): Promise<void> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
     return enqueue(async () => {
-      if (countToday('pet-fed') >= MAX_FEED_PER_DAY) throw new Error('今天已经喂过 3 次了')
-      if ((state.value.inventory[itemId] ?? 0) <= 0) throw new Error('背包里没有这个食物')
+      if (countToday('pet-fed', profileId) >= MAX_FEED_PER_DAY) {
+        throw new Error(`今天已经喂过 ${MAX_FEED_PER_DAY} 次了`)
+      }
+      if ((snapshot(profileId).inventory[itemId] ?? 0) <= 0) throw new Error('背包里没有这个食物')
       await append([{
-        ...base(), eventId: nextEventId('pet-fed'), type: 'pet-fed', itemId,
-      }])
+        ...base(profileId), eventId: randomUuid(), type: 'pet-fed', itemId,
+      }], profileId)
     })
   }
 
   /** 抚摸：每天最多 `MAX_PET_PER_DAY` 次，且必须先有宠物。 */
   function pet(): Promise<void> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
     return enqueue(async () => {
-      if (!state.value.adopted) throw new Error('还没有宠物')
-      if (countToday('pet-petted') >= MAX_PET_PER_DAY) throw new Error('今天已经摸过很多次了')
-      await append([{ ...base(), eventId: nextEventId('pet-petted'), type: 'pet-petted' }])
+      if (!snapshot(profileId).adopted) throw new Error('还没有宠物')
+      if (countToday('pet-petted', profileId) >= MAX_PET_PER_DAY) throw new Error('今天已经摸过很多次了')
+      await append([{ ...base(profileId), eventId: randomUuid(), type: 'pet-petted' }], profileId)
     })
   }
 
   /** 玩耍：必须是已拥有的玩具（装饰也算 owned，但不能拿来玩），且每天最多 `MAX_PLAY_PER_DAY` 次。 */
   function play(itemId: string): Promise<void> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
     return enqueue(async () => {
       if (petItemById(itemId)?.kind !== 'toy') throw new Error('这不是玩具')
-      if (!state.value.owned.includes(itemId)) throw new Error('还没有这个玩具')
-      if (countToday('pet-played') >= MAX_PLAY_PER_DAY) throw new Error('今天已经玩过 2 次了')
+      if (!snapshot(profileId).owned.includes(itemId)) throw new Error('还没有这个玩具')
+      if (countToday('pet-played', profileId) >= MAX_PLAY_PER_DAY) {
+        throw new Error(`今天已经玩过 ${MAX_PLAY_PER_DAY} 次了`)
+      }
       await append([{
-        ...base(), eventId: nextEventId('pet-played'), type: 'pet-played', itemId,
-      }])
+        ...base(profileId), eventId: randomUuid(), type: 'pet-played', itemId,
+      }], profileId)
     })
   }
 

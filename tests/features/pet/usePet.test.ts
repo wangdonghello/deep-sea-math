@@ -162,6 +162,59 @@ describe('usePet', () => {
     expect(pet.state.value.name).toBe('泡泡')
   })
 
+  it('动作排队期间切换档案，仍写到入口捕获的档案', async () => {
+    const store = memoryStore([
+      { eventId: 'p1-adopt', profileId: 'p1', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { eventId: 'p2-adopt', profileId: 'p2', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '泡泡' },
+    ])
+    const profileId = ref<string | null>('p1')
+    const pet = usePet({ store, profileId, clock: () => 2 })
+    await pet.load()
+
+    const p1Action = pet.pet() // 入口捕获 p1；真正执行排在下一次微任务
+    profileId.value = 'p2' // 在它开始执行之前就切档
+    await p1Action
+
+    const petted = store.events.filter((event) => event.type === 'pet-petted')
+    expect(petted).toHaveLength(1)
+    expect(petted[0].profileId).toBe('p1')
+  })
+
+  it('挂起期间切换档案：两笔动作各自落在入口捕获的档案上', async () => {
+    const gate = deferred()
+    const store = memoryStore([
+      { eventId: 'p1-adopt', profileId: 'p1', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { eventId: 'p2-adopt', profileId: 'p2', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '泡泡' },
+    ])
+    const appendEvents = store.appendEvents
+    let blocked = false
+    store.appendEvents = async (incoming) => {
+      if (!blocked) {
+        blocked = true
+        await gate.promise
+      }
+      return appendEvents(incoming)
+    }
+    const profileId = ref<string | null>('p1')
+    const pet = usePet({ store, profileId, clock: () => 2 })
+    await pet.load()
+
+    const p1Action = pet.pet()
+    await Promise.resolve() // 让第一笔动作进入 append 并卡在门闩上
+    profileId.value = 'p2'
+    await pet.load()
+    const p2Action = pet.pet()
+    gate.resolve()
+    await Promise.all([p1Action, p2Action])
+
+    // 入口决定归属：第一笔 p1、第二笔 p2，不会出现 p1 的动作写到 p2。
+    const petted = store.events.filter((event) => event.type === 'pet-petted')
+    expect(petted).toHaveLength(2)
+    expect(petted.filter((event) => event.profileId === 'p1')).toHaveLength(1)
+    expect(petted.filter((event) => event.profileId === 'p2')).toHaveLength(1)
+    expect(pet.state.value.name).toBe('泡泡')
+  })
+
   it('迁移水位线：领养前的完成记录不触发孵化，领养后的才补 pet-hatched', async () => {
     const store = memoryStore([
       // v3 历史：这条 session-completed 发生在领养之前，不能算作「学会后的孵化条件」。
