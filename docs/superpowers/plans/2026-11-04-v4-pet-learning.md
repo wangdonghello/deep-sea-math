@@ -482,8 +482,9 @@ export function xpForNextLevel(level: number): number {
 export function levelFromXp(xp: number): number {
   let level = 0
   let remaining = Math.max(0, xp)
-  while (level < 15 && remaining >= xpForNextLevel(level + 1)) {
-    remaining -= xpForNextLevel(level + 1)
+  // `40 + 15N` 的 N 是当前等级：Lv0→Lv1 需要 40，Lv1→Lv2 需要 55。
+  while (level < 15 && remaining >= xpForNextLevel(level)) {
+    remaining -= xpForNextLevel(level)
     level += 1
   }
   return level
