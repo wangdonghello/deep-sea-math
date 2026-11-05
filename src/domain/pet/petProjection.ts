@@ -21,6 +21,10 @@ export interface PetState {
   readonly points: number
   readonly inventory: Readonly<Record<string, number>>
   readonly owned: readonly string[]
+  /** 盲盒券：完成过的天数减去已开盒次数。 */
+  readonly tickets: number
+  /** 已拥有的动物伙伴 id（每种唯一）。 */
+  readonly ownedAnimals: readonly string[]
   /**
    * 饱食度：**越高越饱、越低越饿**（不是饥饿值）。
    * 展示「饥饿」进度时用 `100 - hunger`。
@@ -85,6 +89,8 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   let hasPetStateEvent = false
   const inventory: Record<string, number> = {}
   const owned = new Set<string>()
+  const ownedAnimals = new Set<string>()
+  let openedBoxes = 0
   const feedCount = new Map<string, number>()
   const petCount = new Map<string, number>()
   const playCount = new Map<string, number>()
@@ -112,6 +118,15 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
       } else if (item?.kind === 'toy' || item?.kind === 'decor') {
         // 未知商品 id 直接忽略：既不入库存，也不进拥有列表。
         owned.add(item.id)
+      }
+    } else if (event.type === 'blind-box-opened') {
+      openedBoxes += 1
+      if (event.rewardKind === 'snack') {
+        inventory[event.rewardId] = (inventory[event.rewardId] ?? 0) + 1
+      } else if (event.rewardKind === 'xp') {
+        xp += 25
+      } else if (event.rewardKind === 'animal') {
+        ownedAnimals.add(event.rewardId)
       }
     } else if (event.type === 'pet-fed') {
       const item = petItemById(event.itemId)
@@ -169,6 +184,8 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     points: ledger.balance,
     inventory,
     owned: [...owned].sort(),
+    tickets: Math.max(0, completedDays.size - openedBoxes),
+    ownedAnimals: [...ownedAnimals].sort(),
     hunger,
     mood,
     lastUpdatedAt,

@@ -378,6 +378,7 @@ export const EVENT_TYPES = [
   'pet-petted',
   'pet-played',
   'item-purchased',
+  'blind-box-opened',
 ] as const
 
 /** 事件类型字面量，与 {@link EVENT_TYPES} 一一对应。 */
@@ -559,6 +560,17 @@ export interface ItemPurchasedEvent extends EventBase {
   price: number
 }
 
+/** 开盲盒：结果落在事件里，重放时不再随机。 */
+export interface BlindBoxOpenedEvent extends EventBase {
+  type: 'blind-box-opened'
+  /** 实际获得的奖励 id（动物重复时已由命令层换成零食）。 */
+  rewardId: string
+  /** 奖励类别，避免重放时反查目录。 */
+  rewardKind: 'snack' | 'xp' | 'animal'
+  /** 动物重复时记录原动物，供 UI 说明“已拥有 → 零食”。 */
+  convertedFrom?: string
+}
+
 /**
  * 难度档位回落：目标档位题量不足，改从相邻档位取题并留痕。
  *
@@ -621,3 +633,4 @@ export type DomainEvent =
   | PetPettedEvent
   | PetPlayedEvent
   | ItemPurchasedEvent
+  | BlindBoxOpenedEvent

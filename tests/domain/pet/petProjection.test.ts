@@ -259,3 +259,36 @@ describe('replayPet', () => {
     expect(replayPet(events, 'p1', 4).owned).toEqual(['coral-rattle', 'glow-ball'])
   })
 })
+
+describe('replayPet 盲盒', () => {
+  const day = 86_400_000
+  const adopted: DomainEvent = {
+    eventId: 'adopt', profileId: 'p1', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝',
+  }
+
+  it('每完成一天得一张券，开盒扣一张', () => {
+    const events: DomainEvent[] = [
+      adopted,
+      { eventId: 's1', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 'a', rewards: [] },
+      { eventId: 's2', profileId: 'p1', occurredAt: day + 2, type: 'session-completed', sessionId: 'b', rewards: [] },
+    ]
+    expect(replayPet(events, 'p1', day * 2).tickets).toBe(2)
+    events.push({ eventId: 'b1', profileId: 'p1', occurredAt: day * 2, type: 'blind-box-opened', rewardId: 'seaweed-cookie', rewardKind: 'snack' })
+    const pet = replayPet(events, 'p1', day * 2)
+    expect(pet.tickets).toBe(1)
+    expect(pet.inventory['seaweed-cookie']).toBe(1)
+  })
+
+  it('经验与动物奖励生效，动物不重复', () => {
+    const events: DomainEvent[] = [
+      adopted,
+      { eventId: 's1', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 'a', rewards: [] },
+      { eventId: 'b1', profileId: 'p1', occurredAt: 3, type: 'blind-box-opened', rewardId: 'xp-bonus', rewardKind: 'xp' },
+      { eventId: 'b2', profileId: 'p1', occurredAt: 4, type: 'blind-box-opened', rewardId: 'companion-cat', rewardKind: 'animal' },
+      { eventId: 'b3', profileId: 'p1', occurredAt: 5, type: 'blind-box-opened', rewardId: 'companion-cat', rewardKind: 'animal' },
+    ]
+    const pet = replayPet(events, 'p1', 10)
+    expect(pet.xp).toBe(15 + 25)
+    expect(pet.ownedAnimals).toEqual(['companion-cat'])
+  })
+})

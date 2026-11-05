@@ -23,6 +23,7 @@
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
+import { ANIMAL_REWARDS, type BlindBoxReward } from '@/data/content/blindBox'
 import { FOOD_ITEMS, TOY_ITEMS } from '@/data/content/petCatalog'
 import type { PetItem } from '@/data/content/petCatalog'
 import { decayedHunger } from '@/domain/pet/growth'
@@ -61,6 +62,7 @@ const {
   feed,
   pet: petAction,
   play,
+  openBlindBox,
 } = usePet({
   store: props.store,
   profileId: () => props.profileId,
@@ -75,6 +77,37 @@ const actionError = ref('')
 /** 动作成功后的即时反馈（+XP 浮字）；没有它，小数值变化很容易被忽略。 */
 const reaction = ref('')
 let reactionTimer: ReturnType<typeof setTimeout> | null = null
+
+const boxOpen = ref(false)
+const boxRolling = ref(false)
+const boxResult = ref<BlindBoxReward | null>(null)
+const boxConverted = ref('')
+const ownedAnimalIds = computed(() => state.value.ownedAnimals)
+const animalLabel = (id: string): string => ANIMAL_REWARDS.find((reward) => reward.id === id)?.name ?? id
+
+async function onOpenBox(): Promise<void> {
+  if (boxOpen.value) return
+  boxRolling.value = true
+  boxOpen.value = true
+  boxResult.value = null
+  boxConverted.value = ''
+  try {
+    const draw = await openBlindBox()
+    boxResult.value = draw.reward
+    boxConverted.value = draw.convertedFrom === undefined ? '' : animalLabel(draw.convertedFrom)
+  } catch (err) {
+    actionError.value = err instanceof Error ? err.message : '这次没打开，再试一次吧'
+    boxOpen.value = false
+  } finally {
+    boxRolling.value = false
+  }
+}
+
+function closeBox(): void {
+  boxOpen.value = false
+  boxResult.value = null
+  boxConverted.value = ''
+}
 /** 串行执行动作，避免连点造成两次写入与按钮状态闪烁。 */
 const busy = ref(false)
 
@@ -505,6 +538,41 @@ onBeforeUnmount(() => {
           </button>
         </section>
       </template>
+
+        <section class="pet-room__blindbox" aria-label="盲盒">
+          <header class="pet-room__blindbox-head">
+            <span>🎁 盲盒</span>
+            <span class="pet-room__blindbox-tickets" data-testid="blind-box-tickets">券 {{ state.tickets }}</span>
+          </header>
+          <div class="pet-room__collection" data-testid="animal-collection">
+            <span v-for="animal in ANIMAL_REWARDS" :key="animal.id"
+              class="pet-room__collection-item"
+              :class="{ 'is-owned': ownedAnimalIds.includes(animal.id) }"
+              :title="ownedAnimalIds.includes(animal.id) ? animal.name : '还没有遇到'">
+              <span aria-hidden="true">{{ ownedAnimalIds.includes(animal.id) ? animal.emoji : '❔' }}</span>
+              <small>{{ ownedAnimalIds.includes(animal.id) ? animal.name : '???' }}</small>
+            </span>
+          </div>
+          <button type="button" class="pet-room__blindbox-open" data-testid="open-blind-box"
+            :disabled="state.tickets <= 0 || boxRolling" @click="onOpenBox">
+            {{ state.tickets > 0 ? '开一个盲盒' : '完成今日题组得券' }}
+          </button>
+        </section>
+
+        <div v-if="boxOpen" class="pet-room__box-overlay" data-testid="blind-box-overlay" role="dialog" aria-modal="true" aria-label="盲盒结果">
+          <div class="pet-room__box-card" :class="{ 'is-rolling': boxRolling }">
+            <div class="pet-room__box-art" aria-hidden="true">{{ boxRolling ? '🎁' : (boxResult?.emoji ?? '🎁') }}</div>
+            <template v-if="boxRolling">
+              <p>盒子在晃动…</p>
+            </template>
+            <template v-else-if="boxResult">
+              <h2>{{ boxResult.name }}</h2>
+              <p v-if="boxConverted !== ''" class="pet-room__box-note">已经拥有 {{ boxConverted }}，这次变成零食</p>
+              <p v-else-if="boxResult.kind === 'animal'" class="pet-room__box-note">新伙伴加入收藏！</p>
+              <button type="button" class="pet-room__box-close" data-testid="blind-box-close" @click="closeBox">收下</button>
+            </template>
+          </div>
+        </div>
 
       <BottomReturnButton label="切换档案" @back="emit('back-home')" />
     </div>
@@ -1309,5 +1377,74 @@ onBeforeUnmount(() => {
 
 @media (prefers-reduced-motion: reduce) {
   .pet-room__reaction { animation: none; }
+}
+
+.pet-room__blindbox {
+  display: grid;
+  gap: var(--ds-space-sm);
+  padding: var(--ds-space-md);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-lg);
+  background: rgb(7 24 42 / 78%);
+}
+.pet-room__blindbox-head { display: flex; justify-content: space-between; color: var(--ds-text-primary); font-weight: 700; }
+.pet-room__blindbox-tickets { color: #ffd479; font-variant-numeric: tabular-nums; }
+.pet-room__collection { display: flex; gap: var(--ds-space-sm); overflow-x: auto; padding-bottom: 2px; }
+.pet-room__collection-item { display: grid; flex: 0 0 auto; justify-items: center; width: 3.2rem; opacity: .45; }
+.pet-room__collection-item.is-owned { opacity: 1; }
+.pet-room__collection-item span { font-size: 1.5rem; }
+.pet-room__collection-item small { color: var(--ds-text-secondary); font-size: .65rem; }
+.pet-room__blindbox-open {
+  min-height: 2.75rem;
+  border: 1px solid rgb(255 212 121 / 45%);
+  border-radius: var(--ds-radius-pill);
+  background: linear-gradient(120deg, rgb(74 58 20 / 85%), rgb(36 29 12 / 85%));
+  color: #ffe7b0;
+  font: inherit;
+  font-weight: 700;
+}
+.pet-room__blindbox-open:disabled { opacity: .5; }
+.pet-room__box-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: rgb(2 8 15 / 78%);
+  padding: var(--ds-space-lg);
+}
+.pet-room__box-card {
+  display: grid;
+  gap: var(--ds-space-md);
+  justify-items: center;
+  width: min(100%, 20rem);
+  padding: var(--ds-space-xl);
+  border: 1px solid var(--ds-glass-border);
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgb(19 49 78 / 98%), rgb(7 22 38 / 98%));
+  color: var(--ds-text-primary);
+  text-align: center;
+}
+.pet-room__box-art { font-size: 4.5rem; line-height: 1; }
+.pet-room__box-card.is-rolling .pet-room__box-art { animation: box-shake .5s ease-in-out infinite; }
+.pet-room__box-card h2 { margin: 0; font-size: 1.4rem; }
+.pet-room__box-note { margin: 0; color: var(--ds-text-secondary); font-size: .85rem; }
+.pet-room__box-close {
+  min-height: 2.75rem;
+  padding: 0 var(--ds-space-xl);
+  border: 1px solid var(--ds-glow-primary);
+  border-radius: var(--ds-radius-pill);
+  background: rgb(24 78 116 / 82%);
+  color: var(--ds-text-primary);
+  font: inherit;
+  font-weight: 700;
+}
+@keyframes box-shake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-9deg) scale(1.03); }
+  75% { transform: rotate(9deg) scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pet-room__box-card.is-rolling .pet-room__box-art { animation: none; }
 }
 </style>

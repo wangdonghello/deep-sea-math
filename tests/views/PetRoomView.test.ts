@@ -179,3 +179,21 @@ describe('PetRoomView', () => {
     expect(view.find('[data-testid="pet-name"]').exists()).toBe(false)
   })
 })
+
+describe('盲盒入口', () => {
+  it('有券时可开盒并关闭结果', async () => {
+    const seed = [
+      ...baseEvents,
+      { eventId: 'done', profileId: 'p1', occurredAt: 5, type: 'session-completed' as const, sessionId: 's1', rewards: [] },
+    ]
+    const view = mount(PetRoomView, { props: { profileId: 'p1', store: makeStore(seed), clock: () => 20 } })
+    await flushPromises()
+    expect(view.get('[data-testid="blind-box-tickets"]').text()).toContain('1')
+    await view.get('[data-testid="open-blind-box"]').trigger('click')
+    await flushPromises()
+    expect(view.find('[data-testid="blind-box-overlay"]').exists()).toBe(true)
+    const close = view.find('[data-testid="blind-box-close"]')
+    if (close.exists()) await close.trigger('click')
+    expect(view.find('[data-testid="blind-box-overlay"]').exists()).toBe(false)
+  })
+})

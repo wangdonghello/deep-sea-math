@@ -17,6 +17,7 @@
 
 import { computed, ref, toValue, watch, type MaybeRefOrGetter } from 'vue'
 
+import { drawBlindBox, type BlindBoxDraw } from '@/data/content/blindBox'
 import { petItemById } from '@/data/content/petCatalog'
 import { randomUuid } from '@/domain/crypto/randomUuid'
 import {
@@ -61,6 +62,8 @@ export function usePet(options: {
   profileId: MaybeRefOrGetter<string | null>
   clock?: () => number
   name?: string
+  /** 盲盒随机源；测试注入固定值。 */
+  random?: () => number
 }) {
   const clock = options.clock ?? (() => Date.now())
   const events = ref<readonly DomainEvent[]>([])
@@ -260,6 +263,24 @@ export function usePet(options: {
     })
   }
 
+  /** 开一次盲盒：扣一张券，随机结果由命令层决定并写入事件。 */
+  function openBlindBox(): Promise<BlindBoxDraw> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
+    return enqueue(async () => {
+      const current = snapshot(profileId)
+      if (!current.adopted) throw new Error('还没有宠物')
+      if (current.tickets <= 0) throw new Error('还没有盲盒券，先完成今天的题组吧')
+      const draw = drawBlindBox(options.random ?? Math.random, current.ownedAnimals)
+      await append([{
+        ...base(profileId), eventId: randomUuid(), type: 'blind-box-opened',
+        rewardId: draw.reward.id, rewardKind: draw.reward.kind,
+        ...(draw.convertedFrom === undefined ? {} : { convertedFrom: draw.convertedFrom }),
+      }], profileId)
+      return draw
+    })
+  }
+
   watch(() => toValue(options.profileId), () => { void load() }, { immediate: true })
-  return { events, state, loading, error, load, buy, feed, pet, play }
+  return { events, state, loading, error, load, buy, feed, pet, play, openBlindBox }
 }

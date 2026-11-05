@@ -271,3 +271,34 @@ describe('usePet', () => {
     expect(store.events.some((event) => event.type === 'pet-played')).toBe(false)
   })
 })
+
+describe('盲盒', () => {
+  const day = 86_400_000
+  it('完成两天得两张券；抽到重复动物转零食', async () => {
+    const store = memoryStore([
+      { ...adoption, occurredAt: 1 },
+      { eventId: 's1', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 'a', rewards: [] },
+      { eventId: 's2', profileId: 'p1', occurredAt: day + 2, type: 'session-completed', sessionId: 'b', rewards: [] },
+    ])
+    const pet = usePet({ store, profileId: 'p1', clock: () => day * 2, random: () => 0.65 })
+    await pet.load()
+    expect(pet.state.value.tickets).toBe(2)
+
+    const first = await pet.openBlindBox()
+    expect(first.reward.id).toBe('companion-cat')
+    expect(pet.state.value.ownedAnimals).toContain('companion-cat')
+    expect(pet.state.value.tickets).toBe(1)
+
+    const second = await pet.openBlindBox()
+    expect(second.reward.id).toBe('seaweed-cookie')
+    expect(second.convertedFrom).toBe('companion-cat')
+    expect(pet.state.value.tickets).toBe(0)
+  })
+
+  it('没有券时拒绝开盒', async () => {
+    const store = memoryStore([{ ...adoption, occurredAt: 1 }])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 2 })
+    await pet.load()
+    await expect(pet.openBlindBox()).rejects.toThrow('还没有盲盒券')
+  })
+})

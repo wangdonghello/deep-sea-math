@@ -289,7 +289,8 @@ function foldEvent(
     event.type === 'pet-fed' ||
     event.type === 'pet-petted' ||
     event.type === 'pet-played' ||
-    event.type === 'item-purchased'
+    event.type === 'item-purchased' ||
+    event.type === 'blind-box-opened'
   ) {
     return draft
   }
