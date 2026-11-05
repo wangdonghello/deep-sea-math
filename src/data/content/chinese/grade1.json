@@ -1,0 +1,1210 @@
+{
+  "questions": [
+    {
+      "id": "cn1-pinyin-001",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "pinyin",
+      "skill": "pinyin-tone",
+      "prompt": "“mā” 的声调是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "label": "第一声"
+        },
+        {
+          "id": "B",
+          "label": "第二声"
+        },
+        {
+          "id": "C",
+          "label": "第三声"
+        },
+        {
+          "id": "D",
+          "label": "第四声"
+        }
+      ],
+      "answer": {
+        "value": "第一声",
+        "optionId": "A"
+      },
+      "explanation": "ā 是阴平，读第一声。",
+      "hints": [
+        "看字母上的声调符号。",
+        "ā 是平平的。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-tone"
+      ]
+    },
+    {
+      "id": "cn1-pinyin-002",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-initial",
+      "prompt": "“bà” 的声母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "b"
+        },
+        {
+          "id": "B",
+          "label": "p"
+        },
+        {
+          "id": "C",
+          "label": "d"
+        },
+        {
+          "id": "D",
+          "label": "m"
+        }
+      ],
+      "answer": {
+        "value": "b",
+        "optionId": "A"
+      },
+      "explanation": "bà 的声母是 b，韵母是 a。",
+      "hints": [
+        "声母在韵母前面。",
+        "读一读 bà。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-initial"
+      ]
+    },
+    {
+      "id": "cn1-pinyin-003",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-final",
+      "prompt": "“huā” 的韵母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "ua"
+        },
+        {
+          "id": "B",
+          "label": "a"
+        },
+        {
+          "id": "C",
+          "label": "h"
+        },
+        {
+          "id": "D",
+          "label": "u"
+        }
+      ],
+      "answer": {
+        "value": "ua",
+        "optionId": "A"
+      },
+      "explanation": "huā 的声母是 h，韵母是 ua。",
+      "hints": [
+        "把声母 h 去掉。",
+        "剩下 ua。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-final"
+      ]
+    },
+    {
+      "id": "cn1-pinyin-004",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-tone",
+      "prompt": "“xiǎo” 的声调是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "label": "第一声"
+        },
+        {
+          "id": "B",
+          "label": "第二声"
+        },
+        {
+          "id": "C",
+          "label": "第三声"
+        },
+        {
+          "id": "D",
+          "label": "第四声"
+        }
+      ],
+      "answer": {
+        "value": "第三声",
+        "optionId": "C"
+      },
+      "explanation": "ǎ 是上声，读第三声。",
+      "hints": [
+        "看 a 上的符号。",
+        "第三声先降后升。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-tone"
+      ]
+    },
+    {
+      "id": "cn1-pinyin-005",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "pinyin",
+      "skill": "pinyin-tone",
+      "prompt": "“yú” 的声调是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "label": "第一声"
+        },
+        {
+          "id": "B",
+          "label": "第二声"
+        },
+        {
+          "id": "C",
+          "label": "第三声"
+        },
+        {
+          "id": "D",
+          "label": "第四声"
+        }
+      ],
+      "answer": {
+        "value": "第二声",
+        "optionId": "B"
+      },
+      "explanation": "ú 是阳平，读第二声。",
+      "hints": [
+        "看 u 上的符号。",
+        "第二声往上扬。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-tone"
+      ]
+    },
+    {
+      "id": "cn1-pinyin-006",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-initial",
+      "prompt": "“zì” 的声母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "z"
+        },
+        {
+          "id": "B",
+          "label": "c"
+        },
+        {
+          "id": "C",
+          "label": "s"
+        },
+        {
+          "id": "D",
+          "label": "zh"
+        }
+      ],
+      "answer": {
+        "value": "z",
+        "optionId": "A"
+      },
+      "explanation": "zì 的声母是 z，韵母是 i。",
+      "hints": [
+        "读一读 zì。",
+        "声母是前面的音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-initial"
+      ]
+    },
+    {
+      "id": "cn1-character-001",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“rì” 是哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "日"
+        },
+        {
+          "id": "B",
+          "label": "目"
+        },
+        {
+          "id": "C",
+          "label": "白"
+        },
+        {
+          "id": "D",
+          "label": "田"
+        }
+      ],
+      "answer": {
+        "value": "日",
+        "optionId": "A"
+      },
+      "explanation": "rì 对应汉字“日”，意思是太阳。",
+      "hints": [
+        "日字里面有一横。",
+        "和“目”比一比。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn1-character-002",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“shuǐ” 是哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "水"
+        },
+        {
+          "id": "B",
+          "label": "永"
+        },
+        {
+          "id": "C",
+          "label": "冰"
+        },
+        {
+          "id": "D",
+          "label": "木"
+        }
+      ],
+      "answer": {
+        "value": "水",
+        "optionId": "A"
+      },
+      "explanation": "shuǐ 对应汉字“水”。",
+      "hints": [
+        "水字中间是竖钩。",
+        "想想河里的水。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn1-character-003",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-pinyin",
+      "prompt": "“火” 的读音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "huǒ"
+        },
+        {
+          "id": "B",
+          "label": "huō"
+        },
+        {
+          "id": "C",
+          "label": "huó"
+        },
+        {
+          "id": "D",
+          "label": "huò"
+        }
+      ],
+      "answer": {
+        "value": "huǒ",
+        "optionId": "A"
+      },
+      "explanation": "“火” 读 huǒ，第三声。",
+      "hints": [
+        "看声调符号。",
+        "第三声先降后升。"
+      ],
+      "tags": [
+        "character",
+        "character-pinyin"
+      ]
+    },
+    {
+      "id": "cn1-character-004",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "character",
+      "skill": "character-pinyin",
+      "prompt": "“山” 的读音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "shān"
+        },
+        {
+          "id": "B",
+          "label": "sān"
+        },
+        {
+          "id": "C",
+          "label": "shàn"
+        },
+        {
+          "id": "D",
+          "label": "shǎn"
+        }
+      ],
+      "answer": {
+        "value": "shān",
+        "optionId": "A"
+      },
+      "explanation": "“山” 读 shān，第一声。",
+      "hints": [
+        "声母是 sh。",
+        "第一声是平的。"
+      ],
+      "tags": [
+        "character",
+        "character-pinyin"
+      ]
+    },
+    {
+      "id": "cn1-character-005",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“mù” 表示树木的字是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "木"
+        },
+        {
+          "id": "B",
+          "label": "目"
+        },
+        {
+          "id": "C",
+          "label": "幕"
+        },
+        {
+          "id": "D",
+          "label": "慕"
+        }
+      ],
+      "answer": {
+        "value": "木",
+        "optionId": "A"
+      },
+      "explanation": "“木” 表示树木，读 mù。",
+      "hints": [
+        "木字像一棵树。",
+        "目字表示眼睛。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn1-character-006",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“tiān” 是哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "天"
+        },
+        {
+          "id": "B",
+          "label": "夫"
+        },
+        {
+          "id": "C",
+          "label": "大"
+        },
+        {
+          "id": "D",
+          "label": "太"
+        }
+      ],
+      "answer": {
+        "value": "天",
+        "optionId": "A"
+      },
+      "explanation": "tiān 对应汉字“天”。",
+      "hints": [
+        "天字上面有一横。",
+        "和“大”比一比。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn1-word-001",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "word",
+      "skill": "measure-word",
+      "prompt": "一（ ）鱼，应该填哪个量词？",
+      "options": [
+        {
+          "id": "A",
+          "label": "条"
+        },
+        {
+          "id": "B",
+          "label": "朵"
+        },
+        {
+          "id": "C",
+          "label": "只"
+        },
+        {
+          "id": "D",
+          "label": "片"
+        }
+      ],
+      "answer": {
+        "value": "条",
+        "optionId": "A"
+      },
+      "explanation": "鱼用“条”作量词：一条鱼。",
+      "hints": [
+        "长长的东西常用“条”。",
+        "读一读“一条鱼”。"
+      ],
+      "tags": [
+        "word",
+        "measure-word"
+      ]
+    },
+    {
+      "id": "cn1-word-002",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "word",
+      "skill": "measure-word",
+      "prompt": "一（ ）花，应该填哪个量词？",
+      "options": [
+        {
+          "id": "A",
+          "label": "朵"
+        },
+        {
+          "id": "B",
+          "label": "条"
+        },
+        {
+          "id": "C",
+          "label": "只"
+        },
+        {
+          "id": "D",
+          "label": "座"
+        }
+      ],
+      "answer": {
+        "value": "朵",
+        "optionId": "A"
+      },
+      "explanation": "花用“朵”作量词：一朵花。",
+      "hints": [
+        "花一朵一朵地开。",
+        "读一读“一朵花”。"
+      ],
+      "tags": [
+        "word",
+        "measure-word"
+      ]
+    },
+    {
+      "id": "cn1-word-003",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“大” 的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "小"
+        },
+        {
+          "id": "B",
+          "label": "多"
+        },
+        {
+          "id": "C",
+          "label": "高"
+        },
+        {
+          "id": "D",
+          "label": "长"
+        }
+      ],
+      "answer": {
+        "value": "小",
+        "optionId": "A"
+      },
+      "explanation": "大和小是一对反义词。",
+      "hints": [
+        "想一想和“大”相反的意思。",
+        "大象大，蚂蚁小。"
+      ],
+      "tags": [
+        "word",
+        "antonym"
+      ]
+    },
+    {
+      "id": "cn1-word-004",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“上” 的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "下"
+        },
+        {
+          "id": "B",
+          "label": "左"
+        },
+        {
+          "id": "C",
+          "label": "前"
+        },
+        {
+          "id": "D",
+          "label": "里"
+        }
+      ],
+      "answer": {
+        "value": "下",
+        "optionId": "A"
+      },
+      "explanation": "上和下是一对反义词。",
+      "hints": [
+        "想一想和“上”相反的方向。",
+        "上楼的反面是下楼。"
+      ],
+      "tags": [
+        "word",
+        "antonym"
+      ]
+    },
+    {
+      "id": "cn1-word-005",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "word",
+      "skill": "word-usage",
+      "prompt": "“水” 可以组成下面哪个词语？",
+      "options": [
+        {
+          "id": "A",
+          "label": "水果"
+        },
+        {
+          "id": "B",
+          "label": "木果"
+        },
+        {
+          "id": "C",
+          "label": "火果"
+        },
+        {
+          "id": "D",
+          "label": "土果"
+        }
+      ],
+      "answer": {
+        "value": "水果",
+        "optionId": "A"
+      },
+      "explanation": "“水果” 是用“水”组成的常用词。",
+      "hints": [
+        "读一读哪个词我们平时会说。",
+        "水果是可以吃的。"
+      ],
+      "tags": [
+        "word",
+        "word-usage"
+      ]
+    },
+    {
+      "id": "cn1-word-006",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“白” 的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "黑"
+        },
+        {
+          "id": "B",
+          "label": "红"
+        },
+        {
+          "id": "C",
+          "label": "黄"
+        },
+        {
+          "id": "D",
+          "label": "蓝"
+        }
+      ],
+      "answer": {
+        "value": "黑",
+        "optionId": "A"
+      },
+      "explanation": "白和黑是一对反义词。",
+      "hints": [
+        "想一想夜晚的颜色。",
+        "白纸的反面是黑纸。"
+      ],
+      "tags": [
+        "word",
+        "antonym"
+      ]
+    },
+    {
+      "id": "cn1-reading-001",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小鱼住在哪里？",
+      "options": [
+        {
+          "id": "A",
+          "label": "小河里"
+        },
+        {
+          "id": "B",
+          "label": "大海里"
+        },
+        {
+          "id": "C",
+          "label": "池塘里"
+        },
+        {
+          "id": "D",
+          "label": "水杯里"
+        }
+      ],
+      "answer": {
+        "value": "小河里",
+        "optionId": "A"
+      },
+      "explanation": "短文第一句说“小鱼住在清清的小河里”。",
+      "hints": [
+        "读第一句。",
+        "找“住在”后面的地方。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn1-passage-001"
+    },
+    {
+      "id": "cn1-reading-002",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小鱼有时躲在哪里？",
+      "options": [
+        {
+          "id": "A",
+          "label": "荷叶下面"
+        },
+        {
+          "id": "B",
+          "label": "石头下面"
+        },
+        {
+          "id": "C",
+          "label": "桥下面"
+        },
+        {
+          "id": "D",
+          "label": "水草下面"
+        }
+      ],
+      "answer": {
+        "value": "荷叶下面",
+        "optionId": "A"
+      },
+      "explanation": "短文说“有时躲在荷叶下面”。",
+      "hints": [
+        "找“躲在”后面的词。",
+        "和荷叶有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn1-passage-001"
+    },
+    {
+      "id": "cn1-reading-003",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "月亮像什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "小船"
+        },
+        {
+          "id": "B",
+          "label": "圆盘"
+        },
+        {
+          "id": "C",
+          "label": "气球"
+        },
+        {
+          "id": "D",
+          "label": "风筝"
+        }
+      ],
+      "answer": {
+        "value": "小船",
+        "optionId": "A"
+      },
+      "explanation": "短文说月亮“像一只弯弯的小船”。",
+      "hints": [
+        "找“像”后面的词。",
+        "弯弯的，能在水上走。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn1-passage-002"
+    },
+    {
+      "id": "cn1-reading-004",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "星星在做什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "一闪一闪"
+        },
+        {
+          "id": "B",
+          "label": "唱歌"
+        },
+        {
+          "id": "C",
+          "label": "跳舞"
+        },
+        {
+          "id": "D",
+          "label": "睡觉"
+        }
+      ],
+      "answer": {
+        "value": "一闪一闪",
+        "optionId": "A"
+      },
+      "explanation": "短文说“星星一闪一闪”。",
+      "hints": [
+        "读第二句。",
+        "夜晚的星星会怎样？"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn1-passage-002"
+    },
+    {
+      "id": "cn1-reading-005",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小草从哪里钻出来？",
+      "options": [
+        {
+          "id": "A",
+          "label": "土里"
+        },
+        {
+          "id": "B",
+          "label": "水里"
+        },
+        {
+          "id": "C",
+          "label": "石头里"
+        },
+        {
+          "id": "D",
+          "label": "树洞里"
+        }
+      ],
+      "answer": {
+        "value": "土里",
+        "optionId": "A"
+      },
+      "explanation": "短文说“小草从土里钻出来”。",
+      "hints": [
+        "找“从”后面的词。",
+        "小草长在地上。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn1-passage-003"
+    },
+    {
+      "id": "cn1-reading-006",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "谁从南方飞回来了？",
+      "options": [
+        {
+          "id": "A",
+          "label": "燕子"
+        },
+        {
+          "id": "B",
+          "label": "大雁"
+        },
+        {
+          "id": "C",
+          "label": "麻雀"
+        },
+        {
+          "id": "D",
+          "label": "蝴蝶"
+        }
+      ],
+      "answer": {
+        "value": "燕子",
+        "optionId": "A"
+      },
+      "explanation": "短文说“燕子从南方飞回来了”。",
+      "hints": [
+        "读最后一句。",
+        "春天常见的鸟。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn1-passage-003"
+    },
+    {
+      "id": "cn1-poem-001",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“床前明月光，疑是地上（ ）。” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "霜"
+        },
+        {
+          "id": "B",
+          "label": "雪"
+        },
+        {
+          "id": "C",
+          "label": "水"
+        },
+        {
+          "id": "D",
+          "label": "光"
+        }
+      ],
+      "answer": {
+        "value": "霜",
+        "optionId": "A"
+      },
+      "explanation": "出自李白《静夜思》：“疑是地上霜。”",
+      "hints": [
+        "想一想月光像什么。",
+        "霜是白色的。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn1-poem-002",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“举头望明月，低头思（ ）。” 应该填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "故乡"
+        },
+        {
+          "id": "B",
+          "label": "朋友"
+        },
+        {
+          "id": "C",
+          "label": "老师"
+        },
+        {
+          "id": "D",
+          "label": "家乡菜"
+        }
+      ],
+      "answer": {
+        "value": "故乡",
+        "optionId": "A"
+      },
+      "explanation": "出自《静夜思》：“低头思故乡。”",
+      "hints": [
+        "诗人远离家乡。",
+        "思念的是哪里？"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn1-poem-003",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“春眠不觉晓，处处闻啼（ ）。” 应该填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "鸟"
+        },
+        {
+          "id": "B",
+          "label": "鸡"
+        },
+        {
+          "id": "C",
+          "label": "虫"
+        },
+        {
+          "id": "D",
+          "label": "风"
+        }
+      ],
+      "answer": {
+        "value": "鸟",
+        "optionId": "A"
+      },
+      "explanation": "出自孟浩然《春晓》：“处处闻啼鸟。”",
+      "hints": [
+        "春天早上能听到什么叫声？",
+        "啼是叫的意思。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn1-poem-004",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“夜来风雨声，花落知多（ ）。” 应该填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "少"
+        },
+        {
+          "id": "B",
+          "label": "小"
+        },
+        {
+          "id": "C",
+          "label": "早"
+        },
+        {
+          "id": "D",
+          "label": "好"
+        }
+      ],
+      "answer": {
+        "value": "少",
+        "optionId": "A"
+      },
+      "explanation": "出自《春晓》：“花落知多少。”",
+      "hints": [
+        "花被风吹落了多少？",
+        "和“多”相对。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn1-poem-005",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“鹅，鹅，鹅，曲项向天（ ）。” 应该填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "歌"
+        },
+        {
+          "id": "B",
+          "label": "飞"
+        },
+        {
+          "id": "C",
+          "label": "游"
+        },
+        {
+          "id": "D",
+          "label": "叫"
+        }
+      ],
+      "answer": {
+        "value": "歌",
+        "optionId": "A"
+      },
+      "explanation": "出自骆宾王《咏鹅》：“曲项向天歌。”",
+      "hints": [
+        "鹅伸长脖子在做什么？",
+        "和唱歌有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn1-poem-006",
+      "subject": "chinese",
+      "grade": 1,
+      "difficulty": 1,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“白毛浮绿水，红掌拨清（ ）。” 应该填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "波"
+        },
+        {
+          "id": "B",
+          "label": "水"
+        },
+        {
+          "id": "C",
+          "label": "风"
+        },
+        {
+          "id": "D",
+          "label": "船"
+        }
+      ],
+      "answer": {
+        "value": "波",
+        "optionId": "A"
+      },
+      "explanation": "出自《咏鹅》：“红掌拨清波。”",
+      "hints": [
+        "红掌拨动的是什么？",
+        "水面上一起一伏的。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    }
+  ]
+}
