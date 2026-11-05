@@ -1,0 +1,1612 @@
+{
+  "questions": [
+    {
+      "id": "cn3-pinyin-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“银行” 的“行”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "háng"
+        },
+        {
+          "id": "B",
+          "label": "xíng"
+        },
+        {
+          "id": "C",
+          "label": "hàng"
+        },
+        {
+          "id": "D",
+          "label": "xìng"
+        }
+      ],
+      "answer": {
+        "value": "háng",
+        "optionId": "A"
+      },
+      "explanation": "“银行” 的“行”读 háng。",
+      "hints": [
+        "和“行业”有关。",
+        "第二声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“行走” 的“行”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "xíng"
+        },
+        {
+          "id": "B",
+          "label": "háng"
+        },
+        {
+          "id": "C",
+          "label": "xìng"
+        },
+        {
+          "id": "D",
+          "label": "hàng"
+        }
+      ],
+      "answer": {
+        "value": "xíng",
+        "optionId": "A"
+      },
+      "explanation": "“行走” 的“行”读 xíng。",
+      "hints": [
+        "和“走路”有关。",
+        "第二声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“数学” 的“数”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "shù"
+        },
+        {
+          "id": "B",
+          "label": "shǔ"
+        },
+        {
+          "id": "C",
+          "label": "shuò"
+        },
+        {
+          "id": "D",
+          "label": "sù"
+        }
+      ],
+      "answer": {
+        "value": "shù",
+        "optionId": "A"
+      },
+      "explanation": "“数学” 的“数”读 shù，第四声。",
+      "hints": [
+        "和“数字”有关。",
+        "不是第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“数一数” 的“数”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "shǔ"
+        },
+        {
+          "id": "B",
+          "label": "shù"
+        },
+        {
+          "id": "C",
+          "label": "shuò"
+        },
+        {
+          "id": "D",
+          "label": "sù"
+        }
+      ],
+      "answer": {
+        "value": "shǔ",
+        "optionId": "A"
+      },
+      "explanation": "“数一数”表示清点，读 shǔ。",
+      "hints": [
+        "和“数东西”有关。",
+        "第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-005",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“重新” 的“重”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "chóng"
+        },
+        {
+          "id": "B",
+          "label": "zhòng"
+        },
+        {
+          "id": "C",
+          "label": "chōng"
+        },
+        {
+          "id": "D",
+          "label": "zhōng"
+        }
+      ],
+      "answer": {
+        "value": "chóng",
+        "optionId": "A"
+      },
+      "explanation": "“重新”表示再一次，读 chóng。",
+      "hints": [
+        "不是“重量”的重。",
+        "第二声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-006",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-tone",
+      "prompt": "“yǒng” 是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "label": "第三声"
+        },
+        {
+          "id": "B",
+          "label": "第二声"
+        },
+        {
+          "id": "C",
+          "label": "第四声"
+        },
+        {
+          "id": "D",
+          "label": "第一声"
+        }
+      ],
+      "answer": {
+        "value": "第三声",
+        "optionId": "A"
+      },
+      "explanation": "yǒng 的 ǒ 是第三声。",
+      "hints": [
+        "看 o 上的符号。",
+        "先降后升。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-tone"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-007",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-initial",
+      "prompt": "“zhēn” 的声母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zh"
+        },
+        {
+          "id": "B",
+          "label": "z"
+        },
+        {
+          "id": "C",
+          "label": "ch"
+        },
+        {
+          "id": "D",
+          "label": "j"
+        }
+      ],
+      "answer": {
+        "value": "zh",
+        "optionId": "A"
+      },
+      "explanation": "zhēn 的声母是翘舌音 zh。",
+      "hints": [
+        "读一读“真”。",
+        "不是平舌音 z。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-initial"
+      ]
+    },
+    {
+      "id": "cn3-pinyin-008",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-final",
+      "prompt": "“guāng” 的韵母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "uang"
+        },
+        {
+          "id": "B",
+          "label": "ang"
+        },
+        {
+          "id": "C",
+          "label": "u"
+        },
+        {
+          "id": "D",
+          "label": "g"
+        }
+      ],
+      "answer": {
+        "value": "uang",
+        "optionId": "A"
+      },
+      "explanation": "guāng 的声母是 g，韵母是 uang。",
+      "hints": [
+        "去掉声母 g。",
+        "后面是 uang。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-final"
+      ]
+    },
+    {
+      "id": "cn3-character-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-structure",
+      "prompt": "“森” 由几个“木”组成？",
+      "options": [
+        {
+          "id": "A",
+          "label": "三个"
+        },
+        {
+          "id": "B",
+          "label": "两个"
+        },
+        {
+          "id": "C",
+          "label": "一个"
+        },
+        {
+          "id": "D",
+          "label": "四个"
+        }
+      ],
+      "answer": {
+        "value": "三个",
+        "optionId": "A"
+      },
+      "explanation": "“森” 由三个木组成，表示树木很多。",
+      "hints": [
+        "看字形。",
+        "比“林”还多一个木。"
+      ],
+      "tags": [
+        "character",
+        "character-structure"
+      ]
+    },
+    {
+      "id": "cn3-character-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-radical",
+      "prompt": "“蜻” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "虫"
+        },
+        {
+          "id": "B",
+          "label": "青"
+        },
+        {
+          "id": "C",
+          "label": "月"
+        },
+        {
+          "id": "D",
+          "label": "日"
+        }
+      ],
+      "answer": {
+        "value": "虫",
+        "optionId": "A"
+      },
+      "explanation": "“蜻” 是虫字旁，和昆虫有关。",
+      "hints": [
+        "左边偏旁。",
+        "蜻蜓是昆虫。"
+      ],
+      "tags": [
+        "character",
+        "character-radical"
+      ]
+    },
+    {
+      "id": "cn3-character-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-radical",
+      "prompt": "“慌” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "忄"
+        },
+        {
+          "id": "B",
+          "label": "荒"
+        },
+        {
+          "id": "C",
+          "label": "亡"
+        },
+        {
+          "id": "D",
+          "label": "川"
+        }
+      ],
+      "answer": {
+        "value": "忄",
+        "optionId": "A"
+      },
+      "explanation": "“慌” 是竖心旁，和心情有关。",
+      "hints": [
+        "左边偏旁。",
+        "慌张是一种心情。"
+      ],
+      "tags": [
+        "character",
+        "character-radical"
+      ]
+    },
+    {
+      "id": "cn3-character-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-radical",
+      "prompt": "“镜” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "钅"
+        },
+        {
+          "id": "B",
+          "label": "竟"
+        },
+        {
+          "id": "C",
+          "label": "日"
+        },
+        {
+          "id": "D",
+          "label": "立"
+        }
+      ],
+      "answer": {
+        "value": "钅",
+        "optionId": "A"
+      },
+      "explanation": "“镜” 是金字旁，古代镜子用金属做。",
+      "hints": [
+        "左边偏旁。",
+        "和金属有关。"
+      ],
+      "tags": [
+        "character",
+        "character-radical"
+      ]
+    },
+    {
+      "id": "cn3-character-005",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-meaning",
+      "prompt": "“休” 表示什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "人靠在树旁休息"
+        },
+        {
+          "id": "B",
+          "label": "树木生长"
+        },
+        {
+          "id": "C",
+          "label": "水在流动"
+        },
+        {
+          "id": "D",
+          "label": "火在燃烧"
+        }
+      ],
+      "answer": {
+        "value": "人靠在树旁休息",
+        "optionId": "A"
+      },
+      "explanation": "“休” 左边是人，右边是木，像人靠着树休息。",
+      "hints": [
+        "看“亻”和“木”。",
+        "和休息有关。"
+      ],
+      "tags": [
+        "character",
+        "character-meaning"
+      ]
+    },
+    {
+      "id": "cn3-character-006",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-pinyin",
+      "prompt": "“碧” 的读音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "bì"
+        },
+        {
+          "id": "B",
+          "label": "bǐ"
+        },
+        {
+          "id": "C",
+          "label": "pì"
+        },
+        {
+          "id": "D",
+          "label": "bèi"
+        }
+      ],
+      "answer": {
+        "value": "bì",
+        "optionId": "A"
+      },
+      "explanation": "“碧” 读 bì，第四声，表示青绿色。",
+      "hints": [
+        "和“碧绿”有关。",
+        "第四声。"
+      ],
+      "tags": [
+        "character",
+        "character-pinyin"
+      ]
+    },
+    {
+      "id": "cn3-character-007",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-radical",
+      "prompt": "“鹅” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "鸟"
+        },
+        {
+          "id": "B",
+          "label": "我"
+        },
+        {
+          "id": "C",
+          "label": "戈"
+        },
+        {
+          "id": "D",
+          "label": "口"
+        }
+      ],
+      "answer": {
+        "value": "鸟",
+        "optionId": "A"
+      },
+      "explanation": "“鹅” 是鸟字旁，和鸟类有关。",
+      "hints": [
+        "右边是鸟。",
+        "鹅是一种家禽。"
+      ],
+      "tags": [
+        "character",
+        "character-radical"
+      ]
+    },
+    {
+      "id": "cn3-character-008",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“闻” 表示什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "听见"
+        },
+        {
+          "id": "B",
+          "label": "看见"
+        },
+        {
+          "id": "C",
+          "label": "闻到"
+        },
+        {
+          "id": "D",
+          "label": "说话"
+        }
+      ],
+      "answer": {
+        "value": "听见",
+        "optionId": "A"
+      },
+      "explanation": "“闻” 有听见的意思，如“闻声”。",
+      "hints": [
+        "和耳朵有关。",
+        "“百闻不如一见”。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn3-word-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“亡羊补牢” 告诉我们什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "出了问题及时补救"
+        },
+        {
+          "id": "B",
+          "label": "羊丢了就别管"
+        },
+        {
+          "id": "C",
+          "label": "把羊关起来"
+        },
+        {
+          "id": "D",
+          "label": "不要养羊"
+        }
+      ],
+      "answer": {
+        "value": "出了问题及时补救",
+        "optionId": "A"
+      },
+      "explanation": "羊丢了再修羊圈，比喻及时补救。",
+      "hints": [
+        "牢是羊圈。",
+        "重点在“补”。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn3-word-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“守株待兔” 讽刺什么样的人？",
+      "options": [
+        {
+          "id": "A",
+          "label": "不想努力、只想靠运气"
+        },
+        {
+          "id": "B",
+          "label": "勤劳耕作"
+        },
+        {
+          "id": "C",
+          "label": "善于观察"
+        },
+        {
+          "id": "D",
+          "label": "喜欢兔子"
+        }
+      ],
+      "answer": {
+        "value": "不想努力、只想靠运气",
+        "optionId": "A"
+      },
+      "explanation": "守着树桩等兔子，比喻不努力只想侥幸。",
+      "hints": [
+        "兔子不会再撞树。",
+        "要靠自己劳动。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn3-word-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“画蛇添足” 比喻什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "做了多余的事，反而不好"
+        },
+        {
+          "id": "B",
+          "label": "画画很好看"
+        },
+        {
+          "id": "C",
+          "label": "给蛇添脚"
+        },
+        {
+          "id": "D",
+          "label": "做事很认真"
+        }
+      ],
+      "answer": {
+        "value": "做了多余的事，反而不好",
+        "optionId": "A"
+      },
+      "explanation": "蛇本来没有脚，添脚反而多余。",
+      "hints": [
+        "蛇有脚吗？",
+        "多此一举。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn3-word-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“忽然” 的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "突然"
+        },
+        {
+          "id": "B",
+          "label": "慢慢"
+        },
+        {
+          "id": "C",
+          "label": "渐渐"
+        },
+        {
+          "id": "D",
+          "label": "经常"
+        }
+      ],
+      "answer": {
+        "value": "突然",
+        "optionId": "A"
+      },
+      "explanation": "忽然和突然都表示事情发生得快。",
+      "hints": [
+        "和“一下子”有关。",
+        "不是慢慢地。"
+      ],
+      "tags": [
+        "word",
+        "synonym"
+      ]
+    },
+    {
+      "id": "cn3-word-005",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“著名” 的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "有名"
+        },
+        {
+          "id": "B",
+          "label": "普通"
+        },
+        {
+          "id": "C",
+          "label": "奇怪"
+        },
+        {
+          "id": "D",
+          "label": "安静"
+        }
+      ],
+      "answer": {
+        "value": "有名",
+        "optionId": "A"
+      },
+      "explanation": "著名就是很有名。",
+      "hints": [
+        "很多人知道。",
+        "和“出名”接近。"
+      ],
+      "tags": [
+        "word",
+        "synonym"
+      ]
+    },
+    {
+      "id": "cn3-word-006",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“危险” 的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "安全"
+        },
+        {
+          "id": "B",
+          "label": "害怕"
+        },
+        {
+          "id": "C",
+          "label": "小心"
+        },
+        {
+          "id": "D",
+          "label": "困难"
+        }
+      ],
+      "answer": {
+        "value": "安全",
+        "optionId": "A"
+      },
+      "explanation": "危险和安全意思相反。",
+      "hints": [
+        "过马路要注意什么？",
+        "没有危险。"
+      ],
+      "tags": [
+        "word",
+        "antonym"
+      ]
+    },
+    {
+      "id": "cn3-word-007",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "collocation",
+      "prompt": "“灿烂的（ ）” 最合适的是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "阳光"
+        },
+        {
+          "id": "B",
+          "label": "声音"
+        },
+        {
+          "id": "C",
+          "label": "味道"
+        },
+        {
+          "id": "D",
+          "label": "脚步"
+        }
+      ],
+      "answer": {
+        "value": "阳光",
+        "optionId": "A"
+      },
+      "explanation": "阳光可以用“灿烂”形容。",
+      "hints": [
+        "灿烂和光有关。",
+        "晴天的时候。"
+      ],
+      "tags": [
+        "word",
+        "collocation"
+      ]
+    },
+    {
+      "id": "cn3-word-008",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“井底之蛙” 比喻什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "见识短浅的人"
+        },
+        {
+          "id": "B",
+          "label": "住在井里的青蛙"
+        },
+        {
+          "id": "C",
+          "label": "喜欢游泳的人"
+        },
+        {
+          "id": "D",
+          "label": "很会跳的人"
+        }
+      ],
+      "answer": {
+        "value": "见识短浅的人",
+        "optionId": "A"
+      },
+      "explanation": "井底之蛙只能看到井口大的天，比喻见识少。",
+      "hints": [
+        "青蛙在井底能看到多少？",
+        "和“见识”有关。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn3-reading-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "蜜蜂在花丛中忙着做什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "采蜜"
+        },
+        {
+          "id": "B",
+          "label": "唱歌"
+        },
+        {
+          "id": "C",
+          "label": "睡觉"
+        },
+        {
+          "id": "D",
+          "label": "筑巢"
+        }
+      ],
+      "answer": {
+        "value": "采蜜",
+        "optionId": "A"
+      },
+      "explanation": "短文说蜜蜂“忙着采蜜”。",
+      "hints": [
+        "找“忙着”后面的词。",
+        "和蜂蜜有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn3-passage-001"
+    },
+    {
+      "id": "cn3-reading-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "蜂蜜是怎么来的？",
+      "options": [
+        {
+          "id": "A",
+          "label": "蜜蜂采花蜜酿成的"
+        },
+        {
+          "id": "B",
+          "label": "从商店买来的"
+        },
+        {
+          "id": "C",
+          "label": "雨水变的"
+        },
+        {
+          "id": "D",
+          "label": "树叶做的"
+        }
+      ],
+      "answer": {
+        "value": "蜜蜂采花蜜酿成的",
+        "optionId": "A"
+      },
+      "explanation": "短文说蜜蜂把花蜜带回蜂巢，“酿成香甜的蜂蜜”。",
+      "hints": [
+        "看最后一句。",
+        "和花蜜有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn3-passage-001"
+    },
+    {
+      "id": "cn3-reading-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小溪流过哪些地方？",
+      "options": [
+        {
+          "id": "A",
+          "label": "山间、村庄、田野"
+        },
+        {
+          "id": "B",
+          "label": "城市、工厂、学校"
+        },
+        {
+          "id": "C",
+          "label": "森林、沙漠、大海"
+        },
+        {
+          "id": "D",
+          "label": "公园、马路、楼房"
+        }
+      ],
+      "answer": {
+        "value": "山间、村庄、田野",
+        "optionId": "A"
+      },
+      "explanation": "短文写小溪“从山间流下来，穿过村庄，流向田野”。",
+      "hints": [
+        "按短文顺序找地点。",
+        "从山间开始。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn3-passage-002"
+    },
+    {
+      "id": "cn3-reading-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "村民们为什么喜欢小溪？",
+      "options": [
+        {
+          "id": "A",
+          "label": "它浇灌庄稼，带来好处"
+        },
+        {
+          "id": "B",
+          "label": "它会说话"
+        },
+        {
+          "id": "C",
+          "label": "它很漂亮"
+        },
+        {
+          "id": "D",
+          "label": "它有很多鱼"
+        }
+      ],
+      "answer": {
+        "value": "它浇灌庄稼，带来好处",
+        "optionId": "A"
+      },
+      "explanation": "短文说小溪“浇灌着两岸的庄稼”。",
+      "hints": [
+        "看小溪的作用。",
+        "和农田有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn3-passage-002"
+    },
+    {
+      "id": "cn3-reading-005",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小乌龟遇到危险时怎么做？",
+      "options": [
+        {
+          "id": "A",
+          "label": "把头和脚缩进壳里"
+        },
+        {
+          "id": "B",
+          "label": "快速逃跑"
+        },
+        {
+          "id": "C",
+          "label": "大声呼救"
+        },
+        {
+          "id": "D",
+          "label": "躲进水里"
+        }
+      ],
+      "answer": {
+        "value": "把头和脚缩进壳里",
+        "optionId": "A"
+      },
+      "explanation": "短文说“它就把头和脚缩进壳里”。",
+      "hints": [
+        "找“遇到危险时”。",
+        "壳是它的保护伞。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn3-passage-003"
+    },
+    {
+      "id": "cn3-reading-006",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "为什么说壳像“保护伞”？",
+      "options": [
+        {
+          "id": "A",
+          "label": "壳能保护小乌龟不受伤害"
+        },
+        {
+          "id": "B",
+          "label": "壳能挡雨"
+        },
+        {
+          "id": "C",
+          "label": "壳很漂亮"
+        },
+        {
+          "id": "D",
+          "label": "壳能变出食物"
+        }
+      ],
+      "answer": {
+        "value": "壳能保护小乌龟不受伤害",
+        "optionId": "A"
+      },
+      "explanation": "壳让乌龟安全地躲过敌人，所以像保护伞。",
+      "hints": [
+        "保护伞是做什么的？",
+        "看最后一句。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn3-passage-003"
+    },
+    {
+      "id": "cn3-reading-007",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "秋天，大雁往哪里飞？",
+      "options": [
+        {
+          "id": "A",
+          "label": "南方"
+        },
+        {
+          "id": "B",
+          "label": "北方"
+        },
+        {
+          "id": "C",
+          "label": "东方"
+        },
+        {
+          "id": "D",
+          "label": "西方"
+        }
+      ],
+      "answer": {
+        "value": "南方",
+        "optionId": "A"
+      },
+      "explanation": "短文说大雁“向南方飞去”。",
+      "hints": [
+        "找“大雁”后面的方向。",
+        "冬天南方暖和。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn3-passage-004"
+    },
+    {
+      "id": "cn3-reading-008",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "从短文中可以看出秋天是什么季节？",
+      "options": [
+        {
+          "id": "A",
+          "label": "收获的季节"
+        },
+        {
+          "id": "B",
+          "label": "播种的季节"
+        },
+        {
+          "id": "C",
+          "label": "下雪的季节"
+        },
+        {
+          "id": "D",
+          "label": "开花的季节"
+        }
+      ],
+      "answer": {
+        "value": "收获的季节",
+        "optionId": "A"
+      },
+      "explanation": "短文写稻子熟了，农民忙着收割。",
+      "hints": [
+        "看“稻子熟了”。",
+        "农民在收割。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn3-passage-004"
+    },
+    {
+      "id": "cn3-poem-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“飞流直下三千尺，疑是银河落（ ）天。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "九"
+        },
+        {
+          "id": "B",
+          "label": "八"
+        },
+        {
+          "id": "C",
+          "label": "七"
+        },
+        {
+          "id": "D",
+          "label": "十"
+        }
+      ],
+      "answer": {
+        "value": "九",
+        "optionId": "A"
+      },
+      "explanation": "出自李白《望庐山瀑布》：“疑是银河落九天。”",
+      "hints": [
+        "古诗中“九天”指高空。",
+        "数字是九。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn3-poem-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "《望庐山瀑布》写的是哪里的景色？",
+      "options": [
+        {
+          "id": "A",
+          "label": "庐山瀑布"
+        },
+        {
+          "id": "B",
+          "label": "黄鹤楼"
+        },
+        {
+          "id": "C",
+          "label": "西湖"
+        },
+        {
+          "id": "D",
+          "label": "泰山"
+        }
+      ],
+      "answer": {
+        "value": "庐山瀑布",
+        "optionId": "A"
+      },
+      "explanation": "题目点明写庐山瀑布。",
+      "hints": [
+        "看题目。",
+        "李白写瀑布的名句。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn3-poem-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“两个黄鹂鸣翠柳，一行白鹭上（ ）天。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "青"
+        },
+        {
+          "id": "B",
+          "label": "蓝"
+        },
+        {
+          "id": "C",
+          "label": "晴"
+        },
+        {
+          "id": "D",
+          "label": "高"
+        }
+      ],
+      "answer": {
+        "value": "青",
+        "optionId": "A"
+      },
+      "explanation": "出自杜甫《绝句》：“一行白鹭上青天。”",
+      "hints": [
+        "和白鹭飞的方向有关。",
+        "颜色是青。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn3-poem-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-detail",
+      "prompt": "“两个黄鹂鸣翠柳” 中，黄鹂在哪里叫？",
+      "options": [
+        {
+          "id": "A",
+          "label": "翠柳上"
+        },
+        {
+          "id": "B",
+          "label": "青天上"
+        },
+        {
+          "id": "C",
+          "label": "西岭上"
+        },
+        {
+          "id": "D",
+          "label": "船里"
+        }
+      ],
+      "answer": {
+        "value": "翠柳上",
+        "optionId": "A"
+      },
+      "explanation": "诗句写黄鹂在翠柳上鸣叫。",
+      "hints": [
+        "看“鸣翠柳”。",
+        "和柳树有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-detail"
+      ]
+    },
+    {
+      "id": "cn3-poem-005",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“停车坐爱枫林晚，霜叶红于（ ）月花。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "二"
+        },
+        {
+          "id": "B",
+          "label": "三"
+        },
+        {
+          "id": "C",
+          "label": "一"
+        },
+        {
+          "id": "D",
+          "label": "四"
+        }
+      ],
+      "answer": {
+        "value": "二",
+        "optionId": "A"
+      },
+      "explanation": "出自杜牧《山行》：“霜叶红于二月花。”",
+      "hints": [
+        "和春天的花比。",
+        "数字是二。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn3-poem-006",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "《山行》写的是哪个季节的景色？",
+      "options": [
+        {
+          "id": "A",
+          "label": "秋天"
+        },
+        {
+          "id": "B",
+          "label": "春天"
+        },
+        {
+          "id": "C",
+          "label": "夏天"
+        },
+        {
+          "id": "D",
+          "label": "冬天"
+        }
+      ],
+      "answer": {
+        "value": "秋天",
+        "optionId": "A"
+      },
+      "explanation": "诗写枫林、霜叶，是秋天景色。",
+      "hints": [
+        "枫叶什么时候红？",
+        "有“霜”字。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn3-poem-007",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“独在异乡为异客，每逢佳节倍思（ ）。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "亲"
+        },
+        {
+          "id": "B",
+          "label": "乡"
+        },
+        {
+          "id": "C",
+          "label": "友"
+        },
+        {
+          "id": "D",
+          "label": "家"
+        }
+      ],
+      "answer": {
+        "value": "亲",
+        "optionId": "A"
+      },
+      "explanation": "出自王维《九月九日忆山东兄弟》：“每逢佳节倍思亲。”",
+      "hints": [
+        "思念亲人。",
+        "和“亲人”有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn3-poem-008",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“每逢佳节倍思亲” 表达什么感情？",
+      "options": [
+        {
+          "id": "A",
+          "label": "思念家乡和亲人"
+        },
+        {
+          "id": "B",
+          "label": "喜欢过节"
+        },
+        {
+          "id": "C",
+          "label": "想去游玩"
+        },
+        {
+          "id": "D",
+          "label": "害怕孤独"
+        }
+      ],
+      "answer": {
+        "value": "思念家乡和亲人",
+        "optionId": "A"
+      },
+      "explanation": "佳节时更加思念亲人。",
+      "hints": [
+        "“倍思亲”是什么意思？",
+        "诗人独自在外。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ export function validateChineseContent(input: {
     if (ids.has(question.id)) fail(`${path}: duplicate id`)
     ids.add(question.id)
     if (question.subject !== 'chinese') fail(`${path}.subject`)
-    if (question.grade !== 1 && question.grade !== 2) fail(`${path}.grade`)
+    if (![1, 2, 3].includes(question.grade)) fail(`${path}.grade`)
     if (![1, 2, 3].includes(question.difficulty)) fail(`${path}.difficulty`)
     if (!KINDS.has(question.kind)) fail(`${path}.kind`)
     if (question.skill.trim() === '') fail(`${path}.skill`)
@@ -45,7 +45,7 @@ export function validateChineseContent(input: {
     }
   }
   for (const passage of input.passages) {
-    if (passage.grade !== 1 && passage.grade !== 2) fail(`chinese.passages[${passage.id}].grade`)
+    if (![1, 2, 3].includes(passage.grade)) fail(`chinese.passages[${passage.id}].grade`)
     if (passage.body.trim() === '') fail(`chinese.passages[${passage.id}].body`)
   }
 }
