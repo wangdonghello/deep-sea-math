@@ -1,15 +1,15 @@
-name: Deploy v1, v2, v3 and v4 to GitHub Pages
+name: Deploy v3 and v4 to GitHub Pages
 
-# 同一站点同时保留：
-# - 根路径：第一版（tag v1.0.0），家长和孩子原来收藏的地址继续可用；
-# - /v2/：第二版（v2 分支），独立构建、独立 IndexedDB 库；
-# - /v3/：第三版预览（v3 分支），独立数据库，不影响 v2。
+# v1（根路径）与 v2（/v2/）已停用，不再构建或发布。
+# 当前只保留：
+# - /v3/：第三版，独立数据库 deep-sea-math-v3；
+# - /v4/：第四版，独立数据库 deep-sea-math-v4。
 #
-# 任一分支更新都会重新组装三个版本的完整产物，避免互相覆盖。
+# 旧地址 / 与 /v2/ 不再有入口文件，访问时走本站 404 页面。
 
 on:
   push:
-    branches: [main, v2, v3, v4]
+    branches: [v3, v4]
   workflow_dispatch:
 
 permissions:
@@ -25,18 +25,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout first version
-        uses: actions/checkout@v4
-        with:
-          ref: v1.0.0
-          path: v1
-
-      - name: Checkout second version
-        uses: actions/checkout@v4
-        with:
-          ref: v2
-          path: v2
-
       - name: Checkout third version
         uses: actions/checkout@v4
         with:
@@ -54,37 +42,8 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: |
-            v1/package-lock.json
-            v2/package-lock.json
             v3/package-lock.json
             v4/package-lock.json
-
-      - name: Install and test first version
-        working-directory: v1
-        run: |
-          npm ci
-          npm run test
-
-      - name: Build first version at site root
-        working-directory: v1
-        run: npm run build
-        env:
-          VITE_BASE: /deep-sea-math/
-
-      - name: Install and test second version
-        working-directory: v2
-        run: |
-          npm ci
-          npm run test
-
-      - name: Build second version under /v2/
-        working-directory: v2
-        run: npm run build
-        env:
-          VITE_BASE: /deep-sea-math/v2/
-          # 两个版本共享同一个 GitHub Pages origin，但绝不能共享 IndexedDB：
-          # 第二版新增事件与档案字段，第一版不认识，混用会互相污染。
-          VITE_DB_NAME: deep-sea-math-v2
 
       - name: Install and test third version
         working-directory: v3
@@ -112,13 +71,36 @@ jobs:
           VITE_BASE: /deep-sea-math/v4/
           VITE_DB_NAME: deep-sea-math-v4
 
-      - name: Assemble all versions
+      - name: Assemble v3 and v4
         run: |
-          mkdir -p site/v2 site/v3 site/v4
-          cp -R v1/dist/. site/
-          cp -R v2/dist/. site/v2/
+          mkdir -p site/v3 site/v4
           cp -R v3/dist/. site/v3/
           cp -R v4/dist/. site/v4/
+          cat > site/404.html <<'HTML'
+          <!doctype html>
+          <html lang="zh-CN">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>页面已停用 · 深海数学探险</title>
+              <style>
+                body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #071a2e; color: #eaf6ff; font-family: system-ui, sans-serif; }
+                main { max-width: 32rem; padding: 2rem; text-align: center; }
+                h1 { font-size: 1.5rem; }
+                p { color: #a9c6d8; line-height: 1.7; }
+                a { display: inline-block; margin: .5rem; padding: .8rem 1.2rem; border-radius: .6rem; background: #2b7a9b; color: white; text-decoration: none; }
+              </style>
+            </head>
+            <body>
+              <main>
+                <h1>这个旧地址已停用</h1>
+                <p>v1 与 v2 已下线，请使用当前版本。孩子的进度保存在各自版本的本地数据库中。</p>
+                <a href="/deep-sea-math/v4/">进入 v4</a>
+                <a href="/deep-sea-math/v3/">进入 v3</a>
+              </main>
+            </body>
+          </html>
+          HTML
 
       - uses: actions/upload-pages-artifact@v3
         with:
