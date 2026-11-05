@@ -12,7 +12,7 @@
  * 该出现的场景），根组件放一份会在档案选择页也出现——那里要的是安静。
  */
 import { onErrorCaptured, onMounted, onUnmounted, ref, watch } from 'vue'
-import { RouterView, useRoute } from 'vue-router'
+import { RouterView, useRoute, useRouter } from 'vue-router'
 
 import UnlockOverlay from '@/features/unlock/UnlockOverlay.vue'
 import { useUnlockFeedback } from '@/features/unlock/useUnlockFeedback'
@@ -21,12 +21,19 @@ import { redact } from '@/shared/redact'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 
 const route = useRoute()
+const router = useRouter()
 const session = useProfileSessionStore()
 
 /** 渲染期兜底错误：视图炸掉时给孩子一句话，而不是白屏。 */
 const fatalError = ref('')
 /** 给家长的定位信息：只保留错误消息，不含堆栈与本机路径。 */
 const fatalDetail = ref('')
+
+function recoverFromError(): void {
+  fatalError.value = ''
+  fatalDetail.value = ''
+  void router.push('/pet')
+}
 
 onErrorCaptured((error) => {
   fatalError.value = '页面出了点问题，请回到首页再试'
@@ -69,6 +76,7 @@ watch(() => route.fullPath, () => void feedback.check())
     <div v-else class="app__fatal" role="alert" data-testid="app-fatal">
       <p>{{ fatalError }}</p>
       <small v-if="fatalDetail !== ''" class="app__fatal-detail" data-testid="app-fatal-detail">错误信息：{{ fatalDetail }}</small>
+      <button type="button" class="app__fatal-recover" data-testid="app-fatal-recover" @click="recoverFromError">回到宠物房间</button>
     </div>
     <UnlockOverlay
       :open="feedback.visible.value"
@@ -90,6 +98,15 @@ watch(() => route.fullPath, () => void feedback.check())
   padding: var(--ds-space-xl);
   color: var(--ds-text-secondary);
   text-align: center;
+}
+.app__fatal-recover {
+  margin-top: 6px;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--ds-glow-primary);
+  border-radius: var(--ds-radius-pill);
+  background: rgb(24 78 116 / 82%);
+  color: var(--ds-text-primary);
+  font: inherit;
 }
 .app__fatal-detail { color: var(--ds-text-secondary); font-size: .75rem; word-break: break-word; }
 </style>
