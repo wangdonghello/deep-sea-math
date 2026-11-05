@@ -53,6 +53,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   /** 开始下潜；载荷为当日题组 sessionId（Task 17 据此路由到答题页）。 */
   (event: 'start', sessionId: string): void
+  /** 进入语文每日 6 题。 */
+  (event: 'start-chinese'): void
   /** TabBar 页签切换；载荷为页签 id。 */
   (event: 'navigate', tabId: string): void
   /** 打开徽章墙（首页成就概览的徽章格）。 */
@@ -182,6 +184,10 @@ onMounted(async () => {
         @claim="home.claimToday()"
       />
 
+      <button type="button" class="home__chinese" data-testid="start-chinese" @click="emit('start-chinese')">
+        🀄 语文探险 <small>每天 6 题</small>
+      </button>
+
       <button type="button" class="home__mistakes" data-testid="open-mistakes"
         @click="emit('open-mistakes')">
         📖 错题本
@@ -231,4 +237,12 @@ onMounted(async () => {
   font-size: 0.8rem;
   cursor: pointer;
 }
+
+.home__chinese {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: 3rem; padding: 0 var(--ds-space-md);
+  border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-lg);
+  background: rgb(8 30 52 / 72%); color: var(--ds-text-primary); font: inherit; font-weight: 700;
+}
+.home__chinese small { color: var(--ds-text-secondary); font-size: .72rem; font-weight: 400; }
 </style>

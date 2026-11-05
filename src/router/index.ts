@@ -39,6 +39,7 @@ const routes: RouteRecordRaw[] = [
 
   { path: PROFILES_PATH, name: 'profiles', component: () => import('./routes/ProfilesRoute.vue') },
   { path: HOME_PATH, name: 'pet', component: () => import('./routes/PetRoute.vue') },
+  { path: '/chinese-quest', name: 'chinese-quest', component: () => import('./routes/ChineseQuestRoute.vue') },
   { path: '/home', name: 'home', component: () => import('./routes/HomeRoute.vue') },
   { path: '/shop', name: 'shop', component: () => import('./routes/ShopRoute.vue') },
   {

@@ -46,6 +46,10 @@ const TAB_PATHS: Readonly<Record<string, string>> = {
   bestiary: '/bestiary',
 }
 
+function onStartChinese(): void {
+  void router.push('/chinese-quest')
+}
+
 function onNavigate(tabId: string): void {
   const path = TAB_PATHS[tabId]
   // 表里没有的页签 id 一律忽略：把一个未知 id 当路径 push 会得到 404 空屏。
@@ -60,6 +64,7 @@ function onNavigate(tabId: string): void {
     :pool="POOL"
     :pool-by-grade="POOL_BY_GRADE"
     @start="(sessionId) => router.push(`/quest?session=${sessionId}`)"
+    @start-chinese="onStartChinese"
     @navigate="onNavigate"
     @open-badges="router.push('/badges')"
     @open-mistakes="router.push('/mistakes')"
