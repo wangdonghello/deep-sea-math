@@ -25,9 +25,12 @@ const session = useProfileSessionStore()
 
 /** 渲染期兜底错误：视图炸掉时给孩子一句话，而不是白屏。 */
 const fatalError = ref('')
+/** 给家长的定位信息：只保留错误消息，不含堆栈与本机路径。 */
+const fatalDetail = ref('')
 
 onErrorCaptured((error) => {
   fatalError.value = '页面出了点问题，请回到首页再试'
+  fatalDetail.value = error instanceof Error ? error.message : String(error)
   // 错误对象可能带本机路径与库名：经 `redact()` 脱敏后才允许离开本模块。
   console.error('[deep-sea-math] 视图渲染失败', redact({ error }))
   // 返回 false 阻止继续向上冒泡（父级只有 #app，冒泡没有意义）。
@@ -63,7 +66,10 @@ watch(() => route.fullPath, () => void feedback.check())
 <template>
   <div id="app">
     <RouterView v-if="fatalError === ''" />
-    <p v-else class="app__fatal" role="alert" data-testid="app-fatal">{{ fatalError }}</p>
+    <div v-else class="app__fatal" role="alert" data-testid="app-fatal">
+      <p>{{ fatalError }}</p>
+      <small v-if="fatalDetail !== ''" class="app__fatal-detail" data-testid="app-fatal-detail">错误信息：{{ fatalDetail }}</small>
+    </div>
     <UnlockOverlay
       :open="feedback.visible.value"
       :rewards="feedback.rewards.value"
@@ -75,9 +81,15 @@ watch(() => route.fullPath, () => void feedback.check())
 
 <style scoped>
 .app__fatal {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
   margin: auto;
+  padding: 0 var(--ds-space-lg);
+  text-align: center;
   padding: var(--ds-space-xl);
   color: var(--ds-text-secondary);
   text-align: center;
 }
+.app__fatal-detail { color: var(--ds-text-secondary); font-size: .75rem; word-break: break-word; }
 </style>

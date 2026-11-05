@@ -86,7 +86,8 @@ describe('replayPet', () => {
     ]
     const pet = replayPet(events, 'p1', 4)
     expect(pet.owned).toContain('seaweed-nest')
-    expect(pet.xp).toBe(0)
+    // 买装饰给 20 XP；装饰不能当玩具玩，所以没有额外的玩耍成长。
+    expect(pet.xp).toBe(20)
   })
 
   it('购买未知商品既不进库存也不进拥有列表', () => {
@@ -159,8 +160,8 @@ describe('replayPet', () => {
       })),
     ]
     const firstDay = replayPet(events, 'p1', 13)
-    // 抚摸 5×2 + 玩耍 2×6；超出的次数不生效。
-    expect(firstDay.xp).toBe(22)
+    // 买玩具 +10、抚摸 5×2 + 玩耍 2×6；超出的次数不生效。
+    expect(firstDay.xp).toBe(32)
     expect(firstDay.mood).toBe(100)
 
     const secondDay = replayPet(
@@ -173,7 +174,7 @@ describe('replayPet', () => {
       day + 3,
     )
     // 次日各再计 1 次。
-    expect(secondDay.xp).toBe(30)
+    expect(secondDay.xp).toBe(40)
   })
 
   it('事件顺序不影响重放结果', () => {
@@ -290,5 +291,25 @@ describe('replayPet 盲盒', () => {
     const pet = replayPet(events, 'p1', 10)
     expect(pet.xp).toBe(15 + 25)
     expect(pet.ownedAnimals).toEqual(['companion-cat'])
+  })
+})
+
+describe('replayPet 成长来源', () => {
+  const adopted: DomainEvent = {
+    eventId: 'adopt', profileId: 'p1', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝',
+  }
+
+  it('买玩具/装饰、订正错题都会增加 XP', () => {
+    const events: DomainEvent[] = [
+      adopted,
+      { eventId: 'buy-toy', profileId: 'p1', occurredAt: 2, type: 'item-purchased', itemId: 'glow-ball', price: 30 },
+      { eventId: 'buy-decor', profileId: 'p1', occurredAt: 3, type: 'item-purchased', itemId: 'seaweed-nest', price: 40 },
+      ...Array.from({ length: 7 }, (_, i) => ({
+        eventId: `fix-${i}`, profileId: 'p1', occurredAt: 4 + i, type: 'correction-done' as const,
+        sessionId: 's1', questionId: `q${i}`, similarQuestionId: `s${i}`,
+      })),
+    ]
+    // 玩具 +10、装饰 +20、订正每天最多 5 次 × 5 = 25。
+    expect(replayPet(events, 'p1', 100).xp).toBe(10 + 20 + 25)
   })
 })

@@ -560,7 +560,10 @@ onBeforeUnmount(() => {
         </section>
 
         <div v-if="boxOpen" class="pet-room__box-overlay" data-testid="blind-box-overlay" role="dialog" aria-modal="true" aria-label="盲盒结果">
-          <div class="pet-room__box-card" :class="{ 'is-rolling': boxRolling }">
+          <div class="pet-room__box-rays" aria-hidden="true"></div>
+          <div class="pet-room__box-card"
+            :class="{ 'is-rolling': boxRolling, 'is-revealed': !boxRolling && boxResult !== null, 'is-dragon': boxResult?.id === 'companion-dragon' }">
+            <span v-for="spark in 6" :key="spark" class="pet-room__box-spark" :class="`pet-room__box-spark--${spark}`" aria-hidden="true">✦</span>
             <div class="pet-room__box-art" aria-hidden="true">{{ boxRolling ? '🎁' : (boxResult?.emoji ?? '🎁') }}</div>
             <template v-if="boxRolling">
               <p>盒子在晃动…</p>
@@ -1414,6 +1417,7 @@ onBeforeUnmount(() => {
   padding: var(--ds-space-lg);
 }
 .pet-room__box-card {
+  position: relative;
   display: grid;
   gap: var(--ds-space-md);
   justify-items: center;
@@ -1446,5 +1450,81 @@ onBeforeUnmount(() => {
 }
 @media (prefers-reduced-motion: reduce) {
   .pet-room__box-card.is-rolling .pet-room__box-art { animation: none; }
+}
+
+.pet-room__box-rays {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 26rem;
+  height: 26rem;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 12deg, rgb(126 220 255 / 18%) 12deg 18deg, transparent 18deg 30deg);
+  animation: box-rays-spin 14s linear infinite;
+  pointer-events: none;
+}
+.pet-room__box-spark {
+  position: absolute;
+  color: #ffe7a8;
+  font-size: 1rem;
+  opacity: 0;
+  animation: box-spark 1.8s ease-out infinite;
+}
+.pet-room__box-spark--1 { top: 12%; left: 12%; animation-delay: .1s; }
+.pet-room__box-spark--2 { top: 18%; right: 10%; animation-delay: .45s; }
+.pet-room__box-spark--3 { bottom: 20%; left: 8%; animation-delay: .8s; }
+.pet-room__box-spark--4 { bottom: 12%; right: 14%; animation-delay: 1.1s; }
+.pet-room__box-spark--5 { top: 6%; left: 48%; animation-delay: 1.4s; }
+.pet-room__box-spark--6 { bottom: 6%; right: 44%; animation-delay: 1.7s; }
+.pet-room__box-card.is-revealed { animation: box-card-reveal .5s cubic-bezier(.2, 1.5, .4, 1) both; }
+.pet-room__box-card.is-dragon { border-color: #ffd479; box-shadow: 0 0 42px rgb(255 202 92 / 45%); }
+.pet-room .pet-room__box-card h2 { font-size: 1.6rem; }
+@keyframes box-rays-spin { to { transform: rotate(360deg); } }
+@keyframes box-spark {
+  0% { opacity: 0; transform: scale(.4) translateY(6px); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.2) translateY(-16px); }
+}
+@keyframes box-card-reveal {
+  from { transform: scale(.6) rotate(-6deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pet-room__box-rays, .pet-room__box-spark, .pet-room__box-card.is-revealed { animation: none; }
+}
+
+.pet-room::before {
+  content: '';
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    conic-gradient(from 200deg at 50% 0%, transparent 0 8deg, rgb(126 220 255 / 7%) 8deg 12deg, transparent 12deg 22deg),
+    radial-gradient(ellipse at 50% -10%, rgb(74 178 220 / 18%), transparent 55%);
+  animation: pet-room-rays 24s ease-in-out infinite alternate;
+}
+.pet-room::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 12% 22%, rgb(190 240 255 / 55%) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 78% 14%, rgb(190 240 255 / 40%) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 64% 72%, rgb(190 240 255 / 35%) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 28% 84%, rgb(190 240 255 / 45%) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 88% 58%, rgb(190 240 255 / 30%) 0 1px, transparent 1.5px);
+  background-size: 100% 100%;
+  opacity: .8;
+  animation: pet-room-plankton 18s linear infinite;
+}
+@keyframes pet-room-rays { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+@keyframes pet-room-plankton {
+  0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 0 -60px, 10px -90px, -8px -70px, 6px -110px, -4px -80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pet-room::before, .pet-room::after { animation: none; }
 }
 </style>

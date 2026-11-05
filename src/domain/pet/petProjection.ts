@@ -95,6 +95,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   const petCount = new Map<string, number>()
   const playCount = new Map<string, number>()
   const completedDays = new Set<string>()
+  const correctionDays = new Map<string, number>()
 
   /** 只有真正改变了宠物状态的操作才推进衰减锚点。 */
   const markPetEvent = (at: number): void => {
@@ -117,7 +118,12 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
         inventory[item.id] = (inventory[item.id] ?? 0) + 1
       } else if (item?.kind === 'toy' || item?.kind === 'decor') {
         // 未知商品 id 直接忽略：既不入库存，也不进拥有列表。
-        owned.add(item.id)
+        if (!owned.has(item.id)) {
+          // 第一次买下玩具/装饰也算“布置新家”，给一笔成长值。
+          owned.add(item.id)
+          xp += item.kind === 'toy' ? 10 : 20
+          mood = Math.min(100, mood + (item.kind === 'toy' ? 15 : 10))
+        }
       }
     } else if (event.type === 'blind-box-opened') {
       openedBoxes += 1
@@ -148,6 +154,13 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
         xp += 2
         mood = Math.min(100, mood + 8)
         markPetEvent(event.occurredAt)
+      }
+    } else if (event.type === 'correction-done') {
+      const day = dayKey(event.occurredAt)
+      const used = correctionDays.get(day) ?? 0
+      if (used < 5) {
+        correctionDays.set(day, used + 1)
+        xp += 5
       }
     } else if (event.type === 'pet-played') {
       const day = dayKey(event.occurredAt)
