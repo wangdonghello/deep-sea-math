@@ -10,6 +10,12 @@ import type { DomainEvent } from '@/domain/model/types'
  * `xp` 与 `points` 只结算领养之后的事件：v3 历史里的答题/整组完成是旧版本
  * 的奖励，迁移时不能因为补上宠物再补发一遍。
  */
+/** 单只宠物的成长状态：每只宠物各自升级、各自破壳。 */
+export interface PetProgress {
+  readonly xp: number
+  readonly hatched: boolean
+}
+
 export interface PetState {
   readonly adopted: boolean
   readonly hatched: boolean
@@ -27,6 +33,8 @@ export interface PetState {
   readonly ownedAnimals: readonly string[]
   /** 主宠物 id：进入房间时默认展示。 */
   readonly mainPetId: string
+  /** 每只宠物的独立成长状态（小鲸鱼 + 盲盒动物）。 */
+  readonly pets: Readonly<Record<string, PetProgress>>
   /**
    * 饱食度：**越高越饱、越低越饿**（不是饥饿值）。
    * 展示「饥饿」进度时用 `100 - hunger`。
@@ -106,25 +114,31 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     hasPetStateEvent = true
   }
 
+  const pets: Record<string, { xp: number; hatched: boolean }> = {}
+  const ensurePet = (id: string): { xp: number; hatched: boolean } => {
+    if (pets[id] === undefined) pets[id] = { xp: 0, hatched: false }
+    return pets[id]
+  }
+  const addPetXp = (id: string, amount: number): void => { ensurePet(id).xp += amount }
+
   for (const event of scoped) {
     if (event.type === 'pet-adopted') {
       adopted = true
       petId = event.petId
       name = event.name
+      ensurePet(event.petId)
       markPetEvent(event.occurredAt)
     } else if (event.type === 'pet-hatched') {
-      hatched = true
+      ensurePet(event.petId ?? 'baby-whale').hatched = true
       markPetEvent(event.occurredAt)
     } else if (event.type === 'item-purchased') {
       const item = petItemById(event.itemId)
       if (item?.kind === 'food') {
         inventory[item.id] = (inventory[item.id] ?? 0) + 1
       } else if (item?.kind === 'toy' || item?.kind === 'decor') {
-        // 未知商品 id 直接忽略：既不入库存，也不进拥有列表。
         if (!owned.has(item.id)) {
-          // 第一次买下玩具/装饰也算“布置新家”，给一笔成长值。
           owned.add(item.id)
-          xp += item.kind === 'toy' ? 10 : 20
+          addPetXp(mainPetId, item.kind === 'toy' ? 10 : 20)
           mood = Math.min(100, mood + (item.kind === 'toy' ? 15 : 10))
         }
       }
@@ -135,18 +149,21 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
       if (event.rewardKind === 'snack') {
         inventory[event.rewardId] = (inventory[event.rewardId] ?? 0) + 1
       } else if (event.rewardKind === 'xp') {
-        xp += 25
+        addPetXp(mainPetId, 25)
       } else if (event.rewardKind === 'animal') {
         ownedAnimals.add(event.rewardId)
+        // 新动物从 Lv1 开始（40 XP），并且可以直接互动。
+        if (pets[event.rewardId] === undefined) pets[event.rewardId] = { xp: 40, hatched: true }
       }
     } else if (event.type === 'pet-fed') {
       const item = petItemById(event.itemId)
       const day = dayKey(event.occurredAt)
       const used = feedCount.get(day) ?? 0
-      if (item?.kind === 'food' && used < MAX_FEED_PER_DAY && (inventory[item.id] ?? 0) > 0) {
+      const target = event.petId ?? 'baby-whale'
+      if (item?.kind === 'food' && used < MAX_FEED_PER_DAY && (inventory[item.id] ?? 0) > 0 && pets[target] !== undefined) {
         inventory[item.id] = (inventory[item.id] ?? 0) - 1
         feedCount.set(day, used + 1)
-        xp += item.xp
+        addPetXp(target, item.xp)
         hunger = Math.min(100, hunger + item.hunger)
         mood = Math.min(100, mood + 10)
         markPetEvent(event.occurredAt)
@@ -154,9 +171,10 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     } else if (event.type === 'pet-petted') {
       const day = dayKey(event.occurredAt)
       const used = petCount.get(day) ?? 0
-      if (used < MAX_PET_PER_DAY) {
+      const target = event.petId ?? 'baby-whale'
+      if (used < MAX_PET_PER_DAY && pets[target] !== undefined) {
         petCount.set(day, used + 1)
-        xp += 2
+        addPetXp(target, 2)
         mood = Math.min(100, mood + 8)
         markPetEvent(event.occurredAt)
       }
@@ -165,16 +183,16 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
       const used = correctionDays.get(day) ?? 0
       if (used < 5) {
         correctionDays.set(day, used + 1)
-        xp += 5
+        addPetXp(mainPetId, 5)
       }
     } else if (event.type === 'pet-played') {
       const day = dayKey(event.occurredAt)
       const used = playCount.get(day) ?? 0
-      // 必须已拥有**玩具**：装饰虽然也在 owned 里，但不能拿来玩耍。
       const item = petItemById(event.itemId)
-      if (item?.kind === 'toy' && owned.has(item.id) && used < MAX_PLAY_PER_DAY) {
+      const target = event.petId ?? 'baby-whale'
+      if (item?.kind === 'toy' && owned.has(item.id) && used < MAX_PLAY_PER_DAY && pets[target] !== undefined) {
         playCount.set(day, used + 1)
-        xp += 6
+        addPetXp(target, 6)
         mood = Math.min(100, mood + 20)
         markPetEvent(event.occurredAt)
       }
@@ -182,10 +200,14 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
       const day = dayKey(event.occurredAt)
       if (!completedDays.has(day)) {
         completedDays.add(day)
-        xp += 15
+        addPetXp(mainPetId, 15)
       }
     }
   }
+
+  const mainProgress = pets[mainPetId] ?? { xp: 0, hatched: false }
+  hatched = mainProgress.hatched
+  xp = mainProgress.xp
 
   // 没有任何宠物状态事件时没有衰减起点，退回 now。
   if (!hasPetStateEvent) lastUpdatedAt = now
@@ -205,6 +227,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     tickets: Math.max(0, completedDays.size - openedBoxes),
     ownedAnimals: [...ownedAnimals].sort(),
     mainPetId,
+    pets,
     hunger,
     mood,
     lastUpdatedAt,

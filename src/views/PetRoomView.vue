@@ -26,7 +26,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { ANIMAL_REWARDS, type BlindBoxReward } from '@/data/content/blindBox'
 import { FOOD_ITEMS, TOY_ITEMS } from '@/data/content/petCatalog'
 import type { PetItem } from '@/data/content/petCatalog'
-import { decayedHunger } from '@/domain/pet/growth'
+import { decayedHunger, levelFromXp, stageFromLevel } from '@/domain/pet/growth'
 import { MAX_FEED_PER_DAY, MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
@@ -87,6 +87,11 @@ const ownedAnimalIds = computed(() => state.value.ownedAnimals)
 const activePetId = ref('baby-whale')
 watch(() => state.value.mainPetId, (id) => { activePetId.value = id }, { immediate: true })
 const activeAnimal = computed(() => ANIMAL_REWARDS.find((animal) => animal.id === activePetId.value))
+const activeProgress = computed(() => state.value.pets[activePetId.value] ?? { xp: 0, hatched: false })
+const activeXp = computed(() => activeProgress.value.xp)
+const activeLevel = computed(() => levelFromXp(activeXp.value))
+const activeStage = computed(() => stageFromLevel(activeLevel.value))
+const activeHatched = computed(() => activeProgress.value.hatched)
 const isWhale = computed(() => activePetId.value === 'baby-whale')
 const activePetName = computed(() => activeAnimal.value?.name ?? (state.value.name.trim() === '' ? '小海宠' : state.value.name))
 const petOptions = computed(() => [
@@ -143,8 +148,8 @@ const displayName = computed(() => {
  * 提成幼体，让画面与「已经破壳」的事实一致；未孵化则始终显示蛋。
  */
 const avatarStage = computed(() => {
-  if (!state.value.hatched) return 'egg'
-  return state.value.stage === 'egg' ? 'baby' : state.value.stage
+  if (!activeHatched.value) return 'egg'
+  return activeStage.value === 'egg' ? 'baby' : activeStage.value
 })
 
 const STAGE_LABELS = {
@@ -155,7 +160,7 @@ const STAGE_LABELS = {
   final: '完全体',
 } as const
 
-const stageLabel = computed(() => STAGE_LABELS[state.value.stage] ?? '幼体')
+const stageLabel = computed(() => STAGE_LABELS[activeStage.value] ?? '幼体')
 
 /** 装饰优先级：珊瑚 > 灯 > 巢 > 普通。买了就立刻换背景。 */
 const decor = computed<'plain' | 'nest' | 'lamp' | 'coral'>(() => {
@@ -228,7 +233,7 @@ const completedToday = computed(() => {
 })
 
 const questSubtitle = computed(() => {
-  if (!state.value.hatched) return '完成一组题，蛋就会孵化'
+  if (!activeHatched.value) return '完成一组题，蛋就会孵化'
   return completedToday.value > 0
     ? `今天已完成 ${completedToday.value} 组 · 继续下潜`
     : '每日一组题 · 攒积分养宠物'
@@ -245,11 +250,11 @@ async function runAction(action: () => Promise<void>): Promise<void> {
   busy.value = true
   actionError.value = ''
   try {
-    const beforeXp = state.value.xp
+    const beforeXp = activeXp.value
     await action()
     await load()
     now.value = clock()
-    const gained = state.value.xp - beforeXp
+    const gained = activeXp.value - beforeXp
     reaction.value = gained > 0 ? `+${gained} XP` : '它现在很满足'
     if (reactionTimer !== null) clearTimeout(reactionTimer)
     reactionTimer = setTimeout(() => { reaction.value = '' }, 1600)
@@ -261,11 +266,11 @@ async function runAction(action: () => Promise<void>): Promise<void> {
 }
 
 function onFeed(itemId: string): void {
-  void runAction(() => feed(itemId))
+  void runAction(() => feed(itemId, activePetId.value))
 }
 
 function onPlay(itemId: string): void {
-  void runAction(() => play(itemId))
+  void runAction(() => play(itemId, activePetId.value))
 }
 
 /**
@@ -275,12 +280,12 @@ function onPlay(itemId: string): void {
  * 提示而不是静默失败。
  */
 function onPetTap(): void {
-  if (!state.value.hatched) return
+  if (!activeHatched.value) return
   if (petAtCap.value) {
     actionError.value = `今天已经摸过 ${MAX_PET_PER_DAY} 次啦，明天再摸`
     return
   }
-  void runAction(() => petAction())
+  void runAction(() => petAction(activePetId.value))
 }
 
 function reload(): void {
@@ -388,7 +393,7 @@ onBeforeUnmount(() => {
             <button type="button" class="pet-room__switch-profile" data-testid="switch-profile" @click="emit('back-home')">切换档案</button>
           </div>
           <div class="pet-room__wallet">
-            <span class="pet-room__pill pet-room__pill--level">Lv.{{ state.level }}</span>
+            <span class="pet-room__pill pet-room__pill--level">Lv.{{ activeLevel }}</span>
             <span class="pet-room__pill pet-room__pill--points" data-testid="pet-points">
               <span class="pet-room__pill-icon" aria-hidden="true">🐚</span>
               积分 {{ state.points }}
@@ -441,7 +446,7 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="pet-room__status-foot">
-            <span class="pet-room__xp" data-testid="pet-xp">XP {{ state.xp }}</span>
+            <span class="pet-room__xp" data-testid="pet-xp">XP {{ activeXp }}</span>
             <span class="pet-room__status-note">饥饿值 0 最饱，100 最饿</span>
           </div>
         </section>
@@ -455,9 +460,9 @@ onBeforeUnmount(() => {
           </div>
           <div class="pet-room__nameplate">
             <span class="pet-room__nameplate-name">{{ displayName }}</span>
-            <span class="pet-room__nameplate-meta">{{ isWhale ? stageLabel : '伙伴' }} · Lv.{{ state.level }}</span>
+            <span class="pet-room__nameplate-meta">{{ isWhale ? stageLabel : '伙伴' }} · Lv.{{ activeLevel }}</span>
           </div>
-          <p v-if="!state.hatched" class="pet-room__hatch" data-testid="hatch-hint">
+          <p v-if="!activeHatched" class="pet-room__hatch" data-testid="hatch-hint">
             <span aria-hidden="true">🥚</span>
             完成一组题后孵化
           </p>
@@ -482,7 +487,7 @@ onBeforeUnmount(() => {
         <section class="pet-room__actions" aria-label="和宠物互动">
           <p v-if="actionError" class="pet-room__error" role="alert">{{ actionError }}</p>
 
-          <template v-if="state.adopted && state.hatched">
+          <template v-if="state.adopted && activeHatched">
             <div class="pet-room__group">
               <p class="pet-room__group-title">
                 <span>喂食</span>

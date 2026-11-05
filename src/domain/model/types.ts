@@ -535,23 +535,31 @@ export interface PetAdoptedEvent extends EventBase {
 /** 蛋孵化：完成第一组每日题后落一条。 */
 export interface PetHatchedEvent extends EventBase {
   type: 'pet-hatched'
+  /** 目标宠物；旧事件缺省为小鲸鱼。 */
+  petId?: string
 }
 
 /** 喂食：消耗一份食物。 */
 export interface PetFedEvent extends EventBase {
   type: 'pet-fed'
   itemId: string
+  /** 目标宠物；旧事件缺省为小鲸鱼。 */
+  petId?: string
 }
 
 /** 抚摸：每天有次数上限。 */
 export interface PetPettedEvent extends EventBase {
   type: 'pet-petted'
+  /** 目标宠物；旧事件缺省为小鲸鱼。 */
+  petId?: string
 }
 
 /** 玩耍：需要已拥有的玩具。 */
 export interface PetPlayedEvent extends EventBase {
   type: 'pet-played'
   itemId: string
+  /** 目标宠物；旧事件缺省为小鲸鱼。 */
+  petId?: string
 }
 
 /** 购买：价格以事件为准，重放时不看当前目录价。 */

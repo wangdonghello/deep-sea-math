@@ -214,6 +214,7 @@ describe('多宠物切换', () => {
     await view.get('[data-testid="pet-option-companion-cat"]').trigger('click')
     expect(view.get('[data-testid="pet-name"]').text()).toContain('小猫')
     expect(view.find('[data-testid="animal-avatar"]').exists()).toBe(true)
+    expect(view.get('[data-testid="pet-xp"]').text()).toContain('40')
     await view.get('[data-testid="set-main-pet"]').trigger('click')
     await flushPromises()
     expect(view.find('[data-testid="set-main-pet"]').exists()).toBe(false)

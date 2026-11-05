@@ -177,7 +177,7 @@ export function usePet(options: {
         await enqueue(async () => {
           if (toValue(options.profileId) !== profileId) return
           await append([{
-            eventId: `hatch-${profileId}`, profileId, occurredAt: clock(), type: 'pet-hatched',
+            eventId: `hatch-${profileId}`, profileId, occurredAt: clock(), type: 'pet-hatched', petId: 'baby-whale',
           }], profileId)
         })
       }
@@ -222,43 +222,52 @@ export function usePet(options: {
   }
 
   /** 喂食：每天最多 `MAX_FEED_PER_DAY` 次，且背包里必须有该食物。 */
-  function feed(itemId: string): Promise<void> {
+  function feed(itemId: string, targetPetId?: string): Promise<void> {
     const profileId = toValue(options.profileId)
     if (profileId === null) throw new Error('没有选择档案')
+    const petId = targetPetId ?? snapshot(profileId).mainPetId
     return enqueue(async () => {
       if (countToday('pet-fed', profileId) >= MAX_FEED_PER_DAY) {
         throw new Error(`今天已经喂过 ${MAX_FEED_PER_DAY} 次了`)
       }
-      if ((snapshot(profileId).inventory[itemId] ?? 0) <= 0) throw new Error('背包里没有这个食物')
+      const current = snapshot(profileId)
+      if (current.pets[petId] === undefined) throw new Error('还没有这只宠物')
+      if ((current.inventory[itemId] ?? 0) <= 0) throw new Error('背包里没有这个食物')
       await append([{
-        ...base(profileId), eventId: randomUuid(), type: 'pet-fed', itemId,
+        ...base(profileId), eventId: randomUuid(), type: 'pet-fed', itemId, petId,
       }], profileId)
     })
   }
 
   /** 抚摸：每天最多 `MAX_PET_PER_DAY` 次，且必须先有宠物。 */
-  function pet(): Promise<void> {
+  function pet(targetPetId?: string): Promise<void> {
     const profileId = toValue(options.profileId)
     if (profileId === null) throw new Error('没有选择档案')
+    const petId = targetPetId ?? snapshot(profileId).mainPetId
     return enqueue(async () => {
-      if (!snapshot(profileId).adopted) throw new Error('还没有宠物')
+      const current = snapshot(profileId)
+      if (!current.adopted) throw new Error('还没有宠物')
+      if (current.pets[petId] === undefined) throw new Error('还没有这只宠物')
       if (countToday('pet-petted', profileId) >= MAX_PET_PER_DAY) throw new Error('今天已经摸过很多次了')
-      await append([{ ...base(profileId), eventId: randomUuid(), type: 'pet-petted' }], profileId)
+      await append([{ ...base(profileId), eventId: randomUuid(), type: 'pet-petted', petId }], profileId)
     })
   }
 
   /** 玩耍：必须是已拥有的玩具（装饰也算 owned，但不能拿来玩），且每天最多 `MAX_PLAY_PER_DAY` 次。 */
-  function play(itemId: string): Promise<void> {
+  function play(itemId: string, targetPetId?: string): Promise<void> {
     const profileId = toValue(options.profileId)
     if (profileId === null) throw new Error('没有选择档案')
+    const petId = targetPetId ?? snapshot(profileId).mainPetId
     return enqueue(async () => {
       if (petItemById(itemId)?.kind !== 'toy') throw new Error('这不是玩具')
-      if (!snapshot(profileId).owned.includes(itemId)) throw new Error('还没有这个玩具')
+      const current = snapshot(profileId)
+      if (current.pets[petId] === undefined) throw new Error('还没有这只宠物')
+      if (!current.owned.includes(itemId)) throw new Error('还没有这个玩具')
       if (countToday('pet-played', profileId) >= MAX_PLAY_PER_DAY) {
         throw new Error(`今天已经玩过 ${MAX_PLAY_PER_DAY} 次了`)
       }
       await append([{
-        ...base(profileId), eventId: randomUuid(), type: 'pet-played', itemId,
+        ...base(profileId), eventId: randomUuid(), type: 'pet-played', itemId, petId,
       }], profileId)
     })
   }

@@ -313,3 +313,22 @@ describe('replayPet 成长来源', () => {
     expect(replayPet(events, 'p1', 100).xp).toBe(10 + 20 + 25)
   })
 })
+
+describe('replayPet 多宠物各自成长', () => {
+  it('喂不同宠物分别加各自的 XP', () => {
+    const events: DomainEvent[] = [
+      { eventId: 'a', profileId: 'p1', occurredAt: 1, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
+      { eventId: 'h', profileId: 'p1', occurredAt: 2, type: 'pet-hatched', petId: 'baby-whale' },
+      { eventId: 'c1', profileId: 'p1', occurredAt: 3, type: 'item-purchased', itemId: 'seaweed-cookie', price: 5 },
+      { eventId: 'c2', profileId: 'p1', occurredAt: 4, type: 'item-purchased', itemId: 'seaweed-cookie', price: 5 },
+      { eventId: 'cat', profileId: 'p1', occurredAt: 5, type: 'blind-box-opened', rewardId: 'companion-cat', rewardKind: 'animal' },
+      { eventId: 'f1', profileId: 'p1', occurredAt: 6, type: 'pet-fed', itemId: 'seaweed-cookie', petId: 'baby-whale' },
+      { eventId: 'f2', profileId: 'p1', occurredAt: 7, type: 'pet-fed', itemId: 'seaweed-cookie', petId: 'companion-cat' },
+    ]
+    const pet = replayPet(events, 'p1', 8)
+    expect(pet.pets['baby-whale']?.xp).toBe(8)
+    // 动物从 Lv1（40 XP）开始，再吃一份 +8。
+    expect(pet.pets['companion-cat']?.xp).toBe(48)
+    expect(pet.xp).toBe(8)
+  })
+})
