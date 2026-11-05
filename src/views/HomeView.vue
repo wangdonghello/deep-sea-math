@@ -17,7 +17,7 @@
  *   缺省值都在 `useHomeQuest` 里（系统时钟 / Web Crypto UUID）；测试注入固定
  *   值以锁定"刷新不换题"。
  */
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import type { Grade } from '@/domain/model/types'
 
 import MapPanel from '@/features/home/MapPanel.vue'
@@ -25,6 +25,7 @@ import QuestCard from '@/features/home/QuestCard.vue'
 import HomeProgressSummary from '@/features/home/HomeProgressSummary.vue'
 import HomeStatusBar from '@/features/home/HomeStatusBar.vue'
 import NextZoneHint from '@/features/home/NextZoneHint.vue'
+import SubjectTabs from '@/features/home/SubjectTabs.vue'
 import TabBar from '@/features/home/TabBar.vue'
 import { useHomeQuest } from '@/features/home/useHomeQuest'
 import { ZONES } from '@/features/home/zones'
@@ -74,6 +75,7 @@ const home = useHomeQuest({
 
 /** 任务卡模型；未加载完成时用占位态渲染，避免布局跳动。 */
 const card = computed(() => home.card.value)
+const activeSubject = ref<'math' | 'chinese'>('math')
 
 /**
  * 点「开始下潜」。
@@ -170,8 +172,10 @@ onMounted(async () => {
         :stage-progress="stageProgress"
       />
 
+      <SubjectTabs :active="activeSubject" @change="activeSubject = $event" />
+
       <QuestCard
-        v-if="card !== null"
+        v-if="card !== null && activeSubject === 'math'"
         :state="card.state"
         :nickname="card.nickname"
         :answered="card.answered"
@@ -184,8 +188,8 @@ onMounted(async () => {
         @claim="home.claimToday()"
       />
 
-      <button type="button" class="home__chinese" data-testid="start-chinese" @click="emit('start-chinese')">
-        🀄 语文探险 <small>每天 6 题</small>
+      <button v-if="activeSubject === 'chinese'" type="button" class="home__chinese" data-testid="start-chinese" @click="emit('start-chinese')">
+        🀄 语文探险 <small>每天 6 题 · 拼音/识字/阅读</small>
       </button>
 
       <button type="button" class="home__mistakes" data-testid="open-mistakes"

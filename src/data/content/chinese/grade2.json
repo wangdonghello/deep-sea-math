@@ -1,0 +1,1612 @@
+{
+  "questions": [
+    {
+      "id": "cn2-pinyin-001",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“长大” 的“长”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zhǎng"
+        },
+        {
+          "id": "B",
+          "label": "cháng"
+        },
+        {
+          "id": "C",
+          "label": "zhàng"
+        },
+        {
+          "id": "D",
+          "label": "chǎng"
+        }
+      ],
+      "answer": {
+        "value": "zhǎng",
+        "optionId": "A"
+      },
+      "explanation": "“长大” 的“长”表示生长，读 zhǎng。",
+      "hints": [
+        "想一想“生长”的意思。",
+        "和“长短”的读法不同。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-002",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“长短” 的“长”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "cháng"
+        },
+        {
+          "id": "B",
+          "label": "zhǎng"
+        },
+        {
+          "id": "C",
+          "label": "chàng"
+        },
+        {
+          "id": "D",
+          "label": "zhàng"
+        }
+      ],
+      "answer": {
+        "value": "cháng",
+        "optionId": "A"
+      },
+      "explanation": "“长短” 的“长”表示长度，读 cháng。",
+      "hints": [
+        "和“长度”有关。",
+        "第二声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-003",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“快乐” 的“乐”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "lè"
+        },
+        {
+          "id": "B",
+          "label": "yuè"
+        },
+        {
+          "id": "C",
+          "label": "lě"
+        },
+        {
+          "id": "D",
+          "label": "yào"
+        }
+      ],
+      "answer": {
+        "value": "lè",
+        "optionId": "A"
+      },
+      "explanation": "“快乐” 的“乐”读 lè。",
+      "hints": [
+        "和“高兴”有关。",
+        "第四声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-004",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-neutral",
+      "prompt": "“好了” 的“了”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "le（轻声）"
+        },
+        {
+          "id": "B",
+          "label": "liǎo"
+        },
+        {
+          "id": "C",
+          "label": "liào"
+        },
+        {
+          "id": "D",
+          "label": "lē"
+        }
+      ],
+      "answer": {
+        "value": "le（轻声）",
+        "optionId": "A"
+      },
+      "explanation": "“好了” 的“了”读轻声 le。",
+      "hints": [
+        "读得又轻又短。",
+        "不是第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-neutral"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-005",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-tone",
+      "prompt": "“yuè” 是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "label": "第四声"
+        },
+        {
+          "id": "B",
+          "label": "第二声"
+        },
+        {
+          "id": "C",
+          "label": "第一声"
+        },
+        {
+          "id": "D",
+          "label": "第三声"
+        }
+      ],
+      "answer": {
+        "value": "第四声",
+        "optionId": "A"
+      },
+      "explanation": "yuè 的声调符号在 e 上，读第四声。",
+      "hints": [
+        "看 è 的符号。",
+        "第四声往下走。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-tone"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-006",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-final",
+      "prompt": "“chuáng” 的韵母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "uang"
+        },
+        {
+          "id": "B",
+          "label": "ang"
+        },
+        {
+          "id": "C",
+          "label": "u"
+        },
+        {
+          "id": "D",
+          "label": "ch"
+        }
+      ],
+      "answer": {
+        "value": "uang",
+        "optionId": "A"
+      },
+      "explanation": "chuáng 的声母是 ch，韵母是 uang。",
+      "hints": [
+        "去掉声母 ch。",
+        "后面是 uang。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-final"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-007",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-initial",
+      "prompt": "“shū” 的声母是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "sh"
+        },
+        {
+          "id": "B",
+          "label": "s"
+        },
+        {
+          "id": "C",
+          "label": "zh"
+        },
+        {
+          "id": "D",
+          "label": "ch"
+        }
+      ],
+      "answer": {
+        "value": "sh",
+        "optionId": "A"
+      },
+      "explanation": "shū 的声母是 sh，韵母是 u。",
+      "hints": [
+        "读一读 shū。",
+        "不是平舌音 s。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-initial"
+      ]
+    },
+    {
+      "id": "cn2-pinyin-008",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "pinyin",
+      "skill": "pinyin-tone",
+      "prompt": "“xiě” 的声调是第几声？",
+      "options": [
+        {
+          "id": "A",
+          "label": "第三声"
+        },
+        {
+          "id": "B",
+          "label": "第二声"
+        },
+        {
+          "id": "C",
+          "label": "第四声"
+        },
+        {
+          "id": "D",
+          "label": "第一声"
+        }
+      ],
+      "answer": {
+        "value": "第三声",
+        "optionId": "A"
+      },
+      "explanation": "xiě 的 ě 是第三声。",
+      "hints": [
+        "看 e 上的符号。",
+        "先降后升。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-tone"
+      ]
+    },
+    {
+      "id": "cn2-character-001",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-structure",
+      "prompt": "“休” 由哪两部分组成？",
+      "options": [
+        {
+          "id": "A",
+          "label": "亻 和 木"
+        },
+        {
+          "id": "B",
+          "label": "氵 和 木"
+        },
+        {
+          "id": "C",
+          "label": "日 和 木"
+        },
+        {
+          "id": "D",
+          "label": "口 和 木"
+        }
+      ],
+      "answer": {
+        "value": "亻 和 木",
+        "optionId": "A"
+      },
+      "explanation": "“休” 左边是亻，右边是木，像人靠在树旁休息。",
+      "hints": [
+        "左边是单人旁。",
+        "右边是树木的木。"
+      ],
+      "tags": [
+        "character",
+        "character-structure"
+      ]
+    },
+    {
+      "id": "cn2-character-002",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-radical",
+      "prompt": "“河” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "氵"
+        },
+        {
+          "id": "B",
+          "label": "可"
+        },
+        {
+          "id": "C",
+          "label": "口"
+        },
+        {
+          "id": "D",
+          "label": "亻"
+        }
+      ],
+      "answer": {
+        "value": "氵",
+        "optionId": "A"
+      },
+      "explanation": "“河” 是三点水旁，和水的意思有关。",
+      "hints": [
+        "左边偏旁。",
+        "和水有关。"
+      ],
+      "tags": [
+        "character",
+        "character-radical"
+      ]
+    },
+    {
+      "id": "cn2-character-003",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-radical",
+      "prompt": "“晴” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "日"
+        },
+        {
+          "id": "B",
+          "label": "青"
+        },
+        {
+          "id": "C",
+          "label": "月"
+        },
+        {
+          "id": "D",
+          "label": "目"
+        }
+      ],
+      "answer": {
+        "value": "日",
+        "optionId": "A"
+      },
+      "explanation": "“晴” 是日字旁，和太阳、天气有关。",
+      "hints": [
+        "左边偏旁。",
+        "和太阳有关。"
+      ],
+      "tags": [
+        "character",
+        "character-radical"
+      ]
+    },
+    {
+      "id": "cn2-character-004",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-pinyin",
+      "prompt": "“清” 的读音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "qīng"
+        },
+        {
+          "id": "B",
+          "label": "qíng"
+        },
+        {
+          "id": "C",
+          "label": "qǐng"
+        },
+        {
+          "id": "D",
+          "label": "qìng"
+        }
+      ],
+      "answer": {
+        "value": "qīng",
+        "optionId": "A"
+      },
+      "explanation": "“清” 读 qīng，第一声。",
+      "hints": [
+        "三点水旁。",
+        "第一声是平的。"
+      ],
+      "tags": [
+        "character",
+        "character-pinyin"
+      ]
+    },
+    {
+      "id": "cn2-character-005",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“明” 表示什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "光亮、明亮"
+        },
+        {
+          "id": "B",
+          "label": "黑暗"
+        },
+        {
+          "id": "C",
+          "label": "寒冷"
+        },
+        {
+          "id": "D",
+          "label": "安静"
+        }
+      ],
+      "answer": {
+        "value": "光亮、明亮",
+        "optionId": "A"
+      },
+      "explanation": "“明” 由日和月组成，表示光亮。",
+      "hints": [
+        "日和月都有光。",
+        "和“亮”有关。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn2-character-006",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“森林” 都与什么有关？",
+      "options": [
+        {
+          "id": "A",
+          "label": "树木"
+        },
+        {
+          "id": "B",
+          "label": "水"
+        },
+        {
+          "id": "C",
+          "label": "火"
+        },
+        {
+          "id": "D",
+          "label": "鸟"
+        }
+      ],
+      "answer": {
+        "value": "树木",
+        "optionId": "A"
+      },
+      "explanation": "“森” 和“林” 都有很多木，和树木有关。",
+      "hints": [
+        "看三个木、两个木。",
+        "和树有关。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn2-character-007",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-recognition",
+      "prompt": "“跑” 的部首是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "足"
+        },
+        {
+          "id": "B",
+          "label": "包"
+        },
+        {
+          "id": "C",
+          "label": "口"
+        },
+        {
+          "id": "D",
+          "label": "走"
+        }
+      ],
+      "answer": {
+        "value": "足",
+        "optionId": "A"
+      },
+      "explanation": "“跑” 是足字旁，和脚的动作有关。",
+      "hints": [
+        "左边偏旁。",
+        "用脚跑。"
+      ],
+      "tags": [
+        "character",
+        "character-recognition"
+      ]
+    },
+    {
+      "id": "cn2-character-008",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "character",
+      "skill": "character-pinyin",
+      "prompt": "“园” 的读音是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "yuán"
+        },
+        {
+          "id": "B",
+          "label": "yuǎn"
+        },
+        {
+          "id": "C",
+          "label": "yán"
+        },
+        {
+          "id": "D",
+          "label": "yàn"
+        }
+      ],
+      "answer": {
+        "value": "yuán",
+        "optionId": "A"
+      },
+      "explanation": "“园” 读 yuán，第二声。",
+      "hints": [
+        "和“圆”同音。",
+        "第二声往上扬。"
+      ],
+      "tags": [
+        "character",
+        "character-pinyin"
+      ]
+    },
+    {
+      "id": "cn2-word-001",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“高兴” 的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "快乐"
+        },
+        {
+          "id": "B",
+          "label": "生气"
+        },
+        {
+          "id": "C",
+          "label": "难过"
+        },
+        {
+          "id": "D",
+          "label": "着急"
+        }
+      ],
+      "answer": {
+        "value": "快乐",
+        "optionId": "A"
+      },
+      "explanation": "高兴和快乐意思相近。",
+      "hints": [
+        "都是心情好。",
+        "和“开心”接近。"
+      ],
+      "tags": [
+        "word",
+        "synonym"
+      ]
+    },
+    {
+      "id": "cn2-word-002",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“寒冷” 的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "温暖"
+        },
+        {
+          "id": "B",
+          "label": "凉爽"
+        },
+        {
+          "id": "C",
+          "label": "冰冷"
+        },
+        {
+          "id": "D",
+          "label": "大风"
+        }
+      ],
+      "answer": {
+        "value": "温暖",
+        "optionId": "A"
+      },
+      "explanation": "寒冷和温暖意思相反。",
+      "hints": [
+        "冬天冷，春天呢？",
+        "和温度有关。"
+      ],
+      "tags": [
+        "word",
+        "antonym"
+      ]
+    },
+    {
+      "id": "cn2-word-003",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "idiom",
+      "prompt": "“一心一（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "意"
+        },
+        {
+          "id": "B",
+          "label": "义"
+        },
+        {
+          "id": "C",
+          "label": "议"
+        },
+        {
+          "id": "D",
+          "label": "艺"
+        }
+      ],
+      "answer": {
+        "value": "意",
+        "optionId": "A"
+      },
+      "explanation": "成语是“一心一意”，表示专心。",
+      "hints": [
+        "和心意有关。",
+        "不是“意义”的义。"
+      ],
+      "tags": [
+        "word",
+        "idiom"
+      ]
+    },
+    {
+      "id": "cn2-word-004",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "measure-word",
+      "prompt": "一（ ）马，应该填哪个量词？",
+      "options": [
+        {
+          "id": "A",
+          "label": "匹"
+        },
+        {
+          "id": "B",
+          "label": "头"
+        },
+        {
+          "id": "C",
+          "label": "只"
+        },
+        {
+          "id": "D",
+          "label": "条"
+        }
+      ],
+      "answer": {
+        "value": "匹",
+        "optionId": "A"
+      },
+      "explanation": "马用“匹”作量词：一匹马。",
+      "hints": [
+        "古时候说“一匹马”。",
+        "不是“一头马”。"
+      ],
+      "tags": [
+        "word",
+        "measure-word"
+      ]
+    },
+    {
+      "id": "cn2-word-005",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "collocation",
+      "prompt": "“明亮的（ ）” 最合适的是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "眼睛"
+        },
+        {
+          "id": "B",
+          "label": "声音"
+        },
+        {
+          "id": "C",
+          "label": "味道"
+        },
+        {
+          "id": "D",
+          "label": "风"
+        }
+      ],
+      "answer": {
+        "value": "眼睛",
+        "optionId": "A"
+      },
+      "explanation": "眼睛可以用“明亮”来形容。",
+      "hints": [
+        "明亮和光有关。",
+        "看东西用眼睛。"
+      ],
+      "tags": [
+        "word",
+        "collocation"
+      ]
+    },
+    {
+      "id": "cn2-word-006",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "collocation",
+      "prompt": "“慢慢地（ ）” 最合适的是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "走"
+        },
+        {
+          "id": "B",
+          "label": "跑"
+        },
+        {
+          "id": "C",
+          "label": "跳"
+        },
+        {
+          "id": "D",
+          "label": "飞"
+        }
+      ],
+      "answer": {
+        "value": "走",
+        "optionId": "A"
+      },
+      "explanation": "“慢慢地走”搭配自然，表示速度慢。",
+      "hints": [
+        "慢和快相对。",
+        "走路可以很慢。"
+      ],
+      "tags": [
+        "word",
+        "collocation"
+      ]
+    },
+    {
+      "id": "cn2-word-007",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“复杂” 的反义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "简单"
+        },
+        {
+          "id": "B",
+          "label": "困难"
+        },
+        {
+          "id": "C",
+          "label": "麻烦"
+        },
+        {
+          "id": "D",
+          "label": "仔细"
+        }
+      ],
+      "answer": {
+        "value": "简单",
+        "optionId": "A"
+      },
+      "explanation": "复杂和简单意思相反。",
+      "hints": [
+        "容易做的题很……",
+        "和“不复杂”有关。"
+      ],
+      "tags": [
+        "word",
+        "antonym"
+      ]
+    },
+    {
+      "id": "cn2-word-008",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“美丽” 的近义词是哪个？",
+      "options": [
+        {
+          "id": "A",
+          "label": "漂亮"
+        },
+        {
+          "id": "B",
+          "label": "难看"
+        },
+        {
+          "id": "C",
+          "label": "奇怪"
+        },
+        {
+          "id": "D",
+          "label": "普通"
+        }
+      ],
+      "answer": {
+        "value": "漂亮",
+        "optionId": "A"
+      },
+      "explanation": "美丽和漂亮意思相近。",
+      "hints": [
+        "都是好看。",
+        "花儿很好看。"
+      ],
+      "tags": [
+        "word",
+        "synonym"
+      ]
+    },
+    {
+      "id": "cn2-reading-001",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小蚂蚁发现了什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "一粒米"
+        },
+        {
+          "id": "B",
+          "label": "一块石头"
+        },
+        {
+          "id": "C",
+          "label": "一片叶子"
+        },
+        {
+          "id": "D",
+          "label": "一滴水"
+        }
+      ],
+      "answer": {
+        "value": "一粒米",
+        "optionId": "A"
+      },
+      "explanation": "短文说“发现了一粒米”。",
+      "hints": [
+        "读第一句。",
+        "和吃的有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn2-passage-001"
+    },
+    {
+      "id": "cn2-reading-002",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "小蚂蚁搬不动时是怎么做的？",
+      "options": [
+        {
+          "id": "A",
+          "label": "叫来伙伴一起搬"
+        },
+        {
+          "id": "B",
+          "label": "自己继续用力"
+        },
+        {
+          "id": "C",
+          "label": "把米丢掉"
+        },
+        {
+          "id": "D",
+          "label": "找别的食物"
+        }
+      ],
+      "answer": {
+        "value": "叫来伙伴一起搬",
+        "optionId": "A"
+      },
+      "explanation": "它“爬回家叫来了许多伙伴”。",
+      "hints": [
+        "看第二句。",
+        "大家一齐用力。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn2-passage-001"
+    },
+    {
+      "id": "cn2-reading-003",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "蜻蜓为什么飞得很低？",
+      "options": [
+        {
+          "id": "A",
+          "label": "要下雨了"
+        },
+        {
+          "id": "B",
+          "label": "天太热"
+        },
+        {
+          "id": "C",
+          "label": "它在找食物"
+        },
+        {
+          "id": "D",
+          "label": "它在睡觉"
+        }
+      ],
+      "answer": {
+        "value": "要下雨了",
+        "optionId": "A"
+      },
+      "explanation": "短文写“天阴沉沉的……不一会儿，雨点落了下来”。",
+      "hints": [
+        "联系后面的雨点。",
+        "下雨前空气潮湿。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn2-passage-002"
+    },
+    {
+      "id": "cn2-reading-004",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "下雨前蚂蚁在做什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "搬家"
+        },
+        {
+          "id": "B",
+          "label": "唱歌"
+        },
+        {
+          "id": "C",
+          "label": "睡觉"
+        },
+        {
+          "id": "D",
+          "label": "游泳"
+        }
+      ],
+      "answer": {
+        "value": "搬家",
+        "optionId": "A"
+      },
+      "explanation": "短文说“蚂蚁忙着搬家”。",
+      "hints": [
+        "找“蚂蚁”后面的词。",
+        "把家搬到高处。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn2-passage-002"
+    },
+    {
+      "id": "cn2-reading-005",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "小明每天给小树做什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "浇水"
+        },
+        {
+          "id": "B",
+          "label": "施肥"
+        },
+        {
+          "id": "C",
+          "label": "唱歌"
+        },
+        {
+          "id": "D",
+          "label": "剪枝"
+        }
+      ],
+      "answer": {
+        "value": "浇水",
+        "optionId": "A"
+      },
+      "explanation": "短文说“每天放学都给院子里的小树浇水”。",
+      "hints": [
+        "找“给小树”后面的词。",
+        "小树需要水。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn2-passage-003"
+    },
+    {
+      "id": "cn2-reading-006",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "小树后来怎么样了？",
+      "options": [
+        {
+          "id": "A",
+          "label": "长高了，叶子更绿"
+        },
+        {
+          "id": "B",
+          "label": "枯死了"
+        },
+        {
+          "id": "C",
+          "label": "被风吹倒了"
+        },
+        {
+          "id": "D",
+          "label": "开花了"
+        }
+      ],
+      "answer": {
+        "value": "长高了，叶子更绿",
+        "optionId": "A"
+      },
+      "explanation": "短文说“小树长高了，叶子也更绿了”。",
+      "hints": [
+        "读最后一句。",
+        "浇水有帮助。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn2-passage-003"
+    },
+    {
+      "id": "cn2-reading-007",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "影子什么时候跟着“我”？",
+      "options": [
+        {
+          "id": "A",
+          "label": "太阳出来时"
+        },
+        {
+          "id": "B",
+          "label": "下雨时"
+        },
+        {
+          "id": "C",
+          "label": "刮风时"
+        },
+        {
+          "id": "D",
+          "label": "天黑时"
+        }
+      ],
+      "answer": {
+        "value": "太阳出来时",
+        "optionId": "A"
+      },
+      "explanation": "短文开头说“太阳出来了，影子跟着我”。",
+      "hints": [
+        "读第一句。",
+        "有光才有影子。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn2-passage-004"
+    },
+    {
+      "id": "cn2-reading-008",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "影子为什么“总是学我的样子”？",
+      "options": [
+        {
+          "id": "A",
+          "label": "我走它也走，我停它也停"
+        },
+        {
+          "id": "B",
+          "label": "它会说话"
+        },
+        {
+          "id": "C",
+          "label": "它会飞"
+        },
+        {
+          "id": "D",
+          "label": "它喜欢我"
+        }
+      ],
+      "answer": {
+        "value": "我走它也走，我停它也停",
+        "optionId": "A"
+      },
+      "explanation": "短文用“我走，它也走；我停，它也停”说明影子跟着人动。",
+      "hints": [
+        "找“我走……我停……”的句子。",
+        "影子会跟着动。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn2-passage-004"
+    },
+    {
+      "id": "cn2-poem-001",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“碧玉妆成一树高，万条垂下绿丝绦。” 写的是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "柳树"
+        },
+        {
+          "id": "B",
+          "label": "松树"
+        },
+        {
+          "id": "C",
+          "label": "荷花"
+        },
+        {
+          "id": "D",
+          "label": "梅花"
+        }
+      ],
+      "answer": {
+        "value": "柳树",
+        "optionId": "A"
+      },
+      "explanation": "诗句写柳树垂下万条绿枝。",
+      "hints": [
+        "绿丝绦像柳条。",
+        "二月春风裁出细叶。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn2-poem-002",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“绿丝绦” 在诗中指什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "柳条"
+        },
+        {
+          "id": "B",
+          "label": "绿色的丝带"
+        },
+        {
+          "id": "C",
+          "label": "河水"
+        },
+        {
+          "id": "D",
+          "label": "小草"
+        }
+      ],
+      "answer": {
+        "value": "柳条",
+        "optionId": "A"
+      },
+      "explanation": "诗人把柳条比作绿色的丝带。",
+      "hints": [
+        "看题目《咏柳》。",
+        "柳枝细长下垂。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn2-poem-003",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“欲穷千里目，更上一（ ）楼。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "层"
+        },
+        {
+          "id": "B",
+          "label": "座"
+        },
+        {
+          "id": "C",
+          "label": "间"
+        },
+        {
+          "id": "D",
+          "label": "个"
+        }
+      ],
+      "answer": {
+        "value": "层",
+        "optionId": "A"
+      },
+      "explanation": "出自《登鹳雀楼》：“更上一层楼。”",
+      "hints": [
+        "想看得更远。",
+        "要再往上走。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn2-poem-004",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“欲穷千里目” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "想要看到很远的地方"
+        },
+        {
+          "id": "B",
+          "label": "想要走一千里路"
+        },
+        {
+          "id": "C",
+          "label": "想要爬一千座山"
+        },
+        {
+          "id": "D",
+          "label": "想要看一千只鸟"
+        }
+      ],
+      "answer": {
+        "value": "想要看到很远的地方",
+        "optionId": "A"
+      },
+      "explanation": "“千里目”指看到很远的地方。",
+      "hints": [
+        "穷是尽、达到极点。",
+        "和“更上一层楼”连起来。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn2-poem-005",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“谁知盘中餐，粒粒皆（ ）。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "辛苦"
+        },
+        {
+          "id": "B",
+          "label": "香甜"
+        },
+        {
+          "id": "C",
+          "label": "饱满"
+        },
+        {
+          "id": "D",
+          "label": "雪白"
+        }
+      ],
+      "answer": {
+        "value": "辛苦",
+        "optionId": "A"
+      },
+      "explanation": "出自《悯农》：“粒粒皆辛苦。”",
+      "hints": [
+        "农民种粮很累。",
+        "要爱惜粮食。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn2-poem-006",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "《悯农》告诉我们要怎么做？",
+      "options": [
+        {
+          "id": "A",
+          "label": "爱惜粮食"
+        },
+        {
+          "id": "B",
+          "label": "多吃饭"
+        },
+        {
+          "id": "C",
+          "label": "多睡觉"
+        },
+        {
+          "id": "D",
+          "label": "多跑步"
+        }
+      ],
+      "answer": {
+        "value": "爱惜粮食",
+        "optionId": "A"
+      },
+      "explanation": "诗写农民辛苦，提醒人们珍惜粮食。",
+      "hints": [
+        "粒粒皆辛苦。",
+        "不要浪费。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn2-poem-007",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“白日依山尽，黄河入（ ）流。” 填什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "海"
+        },
+        {
+          "id": "B",
+          "label": "江"
+        },
+        {
+          "id": "C",
+          "label": "湖"
+        },
+        {
+          "id": "D",
+          "label": "天"
+        }
+      ],
+      "answer": {
+        "value": "海",
+        "optionId": "A"
+      },
+      "explanation": "出自《登鹳雀楼》：“黄河入海流。”",
+      "hints": [
+        "黄河流到哪里？",
+        "大海。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation"
+      ]
+    },
+    {
+      "id": "cn2-poem-008",
+      "subject": "chinese",
+      "grade": 2,
+      "difficulty": 2,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“二月春风似剪刀” 把春风比作什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "剪刀"
+        },
+        {
+          "id": "B",
+          "label": "画笔"
+        },
+        {
+          "id": "C",
+          "label": "小船"
+        },
+        {
+          "id": "D",
+          "label": "丝带"
+        }
+      ],
+      "answer": {
+        "value": "剪刀",
+        "optionId": "A"
+      },
+      "explanation": "诗句说春风像剪刀，裁出柳叶。",
+      "hints": [
+        "看“似”字。",
+        "裁衣服用什么？"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    }
+  ]
+}
