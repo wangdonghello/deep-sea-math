@@ -386,6 +386,10 @@ export const EVENT_TYPES = [
 /** 事件类型字面量，与 {@link EVENT_TYPES} 一一对应。 */
 export type EventType = (typeof EVENT_TYPES)[number]
 
+/** 学科标识；旧题与旧事件缺省数学。 */
+export const SUBJECT_IDS = ['math', 'chinese', 'english'] as const
+export type SubjectId = (typeof SUBJECT_IDS)[number]
+
 /**
  * 全部事件的公共字段（spec `offline-event-log` §同步预留字段）。
  *
@@ -435,6 +439,8 @@ export interface SessionStartedEvent extends EventBase {
   grade?: Grade
   /** 生成时的主题快照；旧事件缺省深海。 */
   themeId?: ThemeId
+  /** 学科；旧事件缺省数学。 */
+  subject?: SubjectId
 }
 
 /** 提交一次答案（含重试）。 */
