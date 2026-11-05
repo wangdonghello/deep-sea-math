@@ -266,7 +266,8 @@ function foldEvent(
      * `claiming` 闸门；万一真撞上，两条写入完成后两个标签页读到的都是**最新**
      * 那条（都重新投影），不会各看一组题，收敛性与先到者胜一致。
      */
-    draft.dailyQuestIndex[day] = event.sessionId
+    // 只有数学题组参与“今日任务”索引；语文/英语有各自入口，不能顶掉数学。
+    if ((event.subject ?? 'math') === 'math') draft.dailyQuestIndex[day] = event.sessionId
     return draft
   }
 

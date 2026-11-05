@@ -365,12 +365,12 @@
       ],
       "photo": {
         "ref": "v3/lanternfish",
-        "creditSummary": "HulloThere · CC BY 4.0",
-        "attribution": "HulloThere (CC BY 4.0; https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg)",
-        "license": "CC BY 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg",
-        "note": "真实影像：灯笼鱼（Myctophum punctatum）标本照片，可见腹部发光器。"
+        "creditSummary": "NOAA Ocean Exploration · 公有领域",
+        "attribution": "NOAA Ocean Exploration (public domain; https://archive.oceanexplorer.noaa.gov/explorations/deepeast01/logs/sep20/media/lanternfish.html)",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://archive.oceanexplorer.noaa.gov/explorations/deepeast01/logs/sep20/media/lanternfish.html",
+        "note": "真实影像：深潜器在活体灯笼鱼群中拍摄，非标本摆拍。"
       }
     },
     {

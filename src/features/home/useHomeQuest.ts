@@ -108,17 +108,29 @@ export interface ProgressSummary {
  * `zone:*` 事件把整片海域的鱼算进来；旧口径在解锁 3 个区时会显示 24 条，
  * 而正确值是已通关 3 关 × 3 = 9 条。
  */
+/** 只统计数学题组：语文完成不能推进深海图鉴。 */
+function mathCompletedSessionIds(events: readonly DomainEvent[]): Set<string> {
+  const subjects = new Map<string, string>()
+  for (const event of events) {
+    if (event.type === 'session-started') subjects.set(event.sessionId, event.subject ?? 'math')
+  }
+  const completed = new Set<string>()
+  for (const event of events) {
+    if (event.type === 'session-completed' && (subjects.get(event.sessionId) ?? 'math') === 'math') {
+      completed.add(event.sessionId)
+    }
+  }
+  return completed
+}
+
 function summarizeProgress(
   events: readonly DomainEvent[],
   unlocks: Readonly<Record<string, unknown>>,
 ): ProgressSummary {
   let badgeCount = 0
-  const completedSessionIds = new Set<string>()
+  const completedSessionIds = mathCompletedSessionIds(events)
   for (const event of events) {
-    if (event.type === 'session-completed') {
-      badgeCount += event.rewards.length
-      completedSessionIds.add(event.sessionId)
-    }
+    if (event.type === 'session-completed') badgeCount += event.rewards.length
   }
   const completedStages = Math.min(completedSessionIds.size, DEEP_SEA_STAGES.length)
   return {
@@ -313,10 +325,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
         snapshot.events,
         snapshot.projections.bestiaryUnlock,
       )
-      themeStage.value = Math.min(
-        snapshot.events.filter((event) => event.type === 'session-completed').length,
-        4,
-      )
+      themeStage.value = Math.min(mathCompletedSessionIds(snapshot.events).size, 4)
     } catch (error) {
       card.value = null
       errorMessage.value = '今日任务打不开，请稍后再试'

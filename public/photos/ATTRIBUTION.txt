@@ -96,11 +96,11 @@
    署名:     (c) ttsquid, some rights reserved (CC BY) · CC BY 4.0
    说明:     真实影像：iNaturalist 研究级观测照片。
 
-13. v3/lanternfish.jpg —— 灯笼鱼（Myctophum punctatum）
-   素材页:   https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg
-   许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     HulloThere · CC BY 4.0
-   说明:     真实影像：灯笼鱼（Myctophum punctatum）标本照片，可见腹部发光器。
+13. v3/lanternfish.jpg —— 灯笼鱼（Myctophidae）
+   素材页:   https://archive.oceanexplorer.noaa.gov/explorations/deepeast01/logs/sep20/media/lanternfish.html
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Ocean Exploration · 公有领域
+   说明:     真实影像：深潜器在活体灯笼鱼群中拍摄，非标本摆拍。
 
 14. v3/viperfish.jpg —— 蝰鱼（Chauliodus sloani）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/
