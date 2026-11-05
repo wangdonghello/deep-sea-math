@@ -29,7 +29,7 @@ import type { PetItem } from '@/data/content/petCatalog'
 import { decayedHunger } from '@/domain/pet/growth'
 import { MAX_FEED_PER_DAY, MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
-import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
+import TabBar from '@/features/home/TabBar.vue'
 import PetAvatar from '@/features/pet/PetAvatar.vue'
 import { usePet } from '@/features/pet/usePet'
 import type { PetStore } from '@/features/pet/usePet'
@@ -63,6 +63,7 @@ const {
   pet: petAction,
   play,
   openBlindBox,
+  setMainPet,
 } = usePet({
   store: props.store,
   profileId: () => props.profileId,
@@ -83,6 +84,22 @@ const boxRolling = ref(false)
 const boxResult = ref<BlindBoxReward | null>(null)
 const boxConverted = ref('')
 const ownedAnimalIds = computed(() => state.value.ownedAnimals)
+const activePetId = ref('baby-whale')
+watch(() => state.value.mainPetId, (id) => { activePetId.value = id }, { immediate: true })
+const activeAnimal = computed(() => ANIMAL_REWARDS.find((animal) => animal.id === activePetId.value))
+const isWhale = computed(() => activePetId.value === 'baby-whale')
+const activePetName = computed(() => activeAnimal.value?.name ?? (state.value.name.trim() === '' ? '小海宠' : state.value.name))
+const petOptions = computed(() => [
+  { id: 'baby-whale', name: state.value.name.trim() === '' ? '小海宠' : state.value.name, emoji: '🐋' },
+  ...ANIMAL_REWARDS.filter((animal) => state.value.ownedAnimals.includes(animal.id))
+    .map((animal) => ({ id: animal.id, name: animal.name, emoji: animal.emoji })),
+])
+const isMainPet = computed(() => activePetId.value === state.value.mainPetId)
+async function onSetMainPet(): Promise<void> {
+  try { await setMainPet(activePetId.value) } catch (err) {
+    actionError.value = err instanceof Error ? err.message : '设置失败，再试一次吧'
+  }
+}
 const animalLabel = (id: string): string => ANIMAL_REWARDS.find((reward) => reward.id === id)?.name ?? id
 
 async function onOpenBox(): Promise<void> {
@@ -366,7 +383,9 @@ onBeforeUnmount(() => {
         <header class="pet-room__hud">
           <div class="pet-room__identity">
             <span class="pet-room__eyebrow">深海宠物房</span>
-            <strong class="pet-room__title" data-testid="pet-name">{{ displayName }}</strong>
+            <strong class="pet-room__title" data-testid="pet-name">{{ activePetName }}</strong>
+            <span v-if="isMainPet" class="pet-room__main-badge">主宠物</span>
+            <button type="button" class="pet-room__switch-profile" data-testid="switch-profile" @click="emit('back-home')">切换档案</button>
           </div>
           <div class="pet-room__wallet">
             <span class="pet-room__pill pet-room__pill--level">Lv.{{ state.level }}</span>
@@ -377,11 +396,16 @@ onBeforeUnmount(() => {
           </div>
         </header>
 
-    <nav class="pet-room__nav" aria-label="快捷入口">
-      <button type="button" data-testid="nav-learn" @click="emit('navigate', 'learn')">学习</button>
-      <button type="button" data-testid="nav-shop" @click="emit('navigate', 'shop')">商店</button>
-      <button type="button" data-testid="nav-bestiary" @click="emit('navigate', 'bestiary')">图鉴</button>
-    </nav>
+        <div class="pet-room__pets" data-testid="pet-switcher" aria-label="切换宠物">
+          <button v-for="option in petOptions" :key="option.id" type="button"
+            class="pet-room__pet-chip" :class="{ 'is-active': option.id === activePetId }"
+            :data-testid="`pet-option-${option.id}`" @click="activePetId = option.id">
+            <span aria-hidden="true">{{ option.emoji }}</span>{{ option.name }}
+            <small v-if="option.id === state.mainPetId">主</small>
+          </button>
+          <button v-if="!isMainPet" type="button" class="pet-room__set-main" data-testid="set-main-pet"
+            @click="onSetMainPet">设为主宠物</button>
+        </div>
 
         <section v-if="state.adopted" class="pet-room__status" aria-label="宠物状态">
           <div class="pet-room__bar-row">
@@ -424,11 +448,14 @@ onBeforeUnmount(() => {
 
         <section class="pet-room__stage" aria-label="宠物房间">
           <div class="pet-room__pet">
-            <PetAvatar :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
+            <PetAvatar v-if="isWhale" :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
+            <button v-else type="button" class="pet-room__animal-avatar" data-testid="animal-avatar" @click="onPetTap">
+              <span aria-hidden="true">{{ activeAnimal?.emoji }}</span>
+            </button>
           </div>
           <div class="pet-room__nameplate">
             <span class="pet-room__nameplate-name">{{ displayName }}</span>
-            <span class="pet-room__nameplate-meta">{{ stageLabel }} · Lv.{{ state.level }}</span>
+            <span class="pet-room__nameplate-meta">{{ isWhale ? stageLabel : '伙伴' }} · Lv.{{ state.level }}</span>
           </div>
           <p v-if="!state.hatched" class="pet-room__hatch" data-testid="hatch-hint">
             <span aria-hidden="true">🥚</span>
@@ -577,7 +604,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-      <BottomReturnButton label="切换档案" @back="emit('back-home')" />
+      <TabBar active="pet" @navigate="emit('navigate', $event)" />
     </div>
   </main>
 </template>
@@ -1527,4 +1554,42 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .pet-room::before, .pet-room::after { animation: none; }
 }
+
+.pet-room__main-badge {
+  padding: 1px 8px;
+  border-radius: var(--ds-radius-pill);
+  background: rgb(255 212 121 / 18%);
+  color: #ffd479;
+  font-size: .65rem;
+  font-weight: 700;
+}
+.pet-room__switch-profile {
+  padding: 2px 8px;
+  border: 1px solid var(--ds-glass-border);
+  border-radius: var(--ds-radius-pill);
+  background: transparent;
+  color: var(--ds-text-secondary);
+  font: inherit;
+  font-size: .65rem;
+}
+.pet-room__pets { display: flex; gap: var(--ds-space-sm); overflow-x: auto; padding: 2px 0; }
+.pet-room__pet-chip {
+  display: inline-flex; flex: 0 0 auto; align-items: center; gap: 4px;
+  padding: .35rem .7rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-pill);
+  background: rgb(8 30 52 / 60%); color: var(--ds-text-secondary); font: inherit; font-size: .8rem;
+}
+.pet-room__pet-chip.is-active { border-color: #ffd479; color: #ffe7b0; }
+.pet-room__pet-chip small { color: #ffd479; font-size: .6rem; }
+.pet-room__set-main {
+  flex: 0 0 auto; padding: .35rem .7rem; border: 1px dashed rgb(255 212 121 / 45%);
+  border-radius: var(--ds-radius-pill); background: transparent; color: #ffd479; font: inherit; font-size: .75rem;
+}
+.pet-room__animal-avatar {
+  width: min(58vw, 16rem); aspect-ratio: 1; display: grid; place-items: center;
+  border: 0; border-radius: 50%; background: radial-gradient(circle at 50% 40%, rgb(126 220 255 / 22%), transparent 65%);
+  font-size: clamp(5rem, 22vw, 9rem); line-height: 1; cursor: pointer;
+  animation: pet-room-float 3.4s ease-in-out infinite;
+}
+@keyframes pet-room-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@media (prefers-reduced-motion: reduce) { .pet-room__animal-avatar { animation: none; } }
 </style>

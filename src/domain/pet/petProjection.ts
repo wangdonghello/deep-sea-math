@@ -25,6 +25,8 @@ export interface PetState {
   readonly tickets: number
   /** 已拥有的动物伙伴 id（每种唯一）。 */
   readonly ownedAnimals: readonly string[]
+  /** 主宠物 id：进入房间时默认展示。 */
+  readonly mainPetId: string
   /**
    * 饱食度：**越高越饱、越低越饿**（不是饥饿值）。
    * 展示「饥饿」进度时用 `100 - hunger`。
@@ -91,6 +93,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   const owned = new Set<string>()
   const ownedAnimals = new Set<string>()
   let openedBoxes = 0
+  let mainPetId = 'baby-whale'
   const feedCount = new Map<string, number>()
   const petCount = new Map<string, number>()
   const playCount = new Map<string, number>()
@@ -125,6 +128,8 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
           mood = Math.min(100, mood + (item.kind === 'toy' ? 15 : 10))
         }
       }
+    } else if (event.type === 'main-pet-set') {
+      mainPetId = event.petId
     } else if (event.type === 'blind-box-opened') {
       openedBoxes += 1
       if (event.rewardKind === 'snack') {
@@ -199,6 +204,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     owned: [...owned].sort(),
     tickets: Math.max(0, completedDays.size - openedBoxes),
     ownedAnimals: [...ownedAnimals].sort(),
+    mainPetId,
     hunger,
     mood,
     lastUpdatedAt,

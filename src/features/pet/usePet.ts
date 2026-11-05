@@ -263,6 +263,18 @@ export function usePet(options: {
     })
   }
 
+  /** 把某只已拥有的宠物设为主宠物。 */
+  function setMainPet(petId: string): Promise<void> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
+    return enqueue(async () => {
+      const current = snapshot(profileId)
+      const owned = petId === 'baby-whale' || current.ownedAnimals.includes(petId)
+      if (!owned) throw new Error('还没有这只宠物')
+      await append([{ ...base(profileId), eventId: randomUuid(), type: 'main-pet-set', petId }], profileId)
+    })
+  }
+
   /** 开一次盲盒：扣一张券，随机结果由命令层决定并写入事件。 */
   function openBlindBox(): Promise<BlindBoxDraw> {
     const profileId = toValue(options.profileId)
@@ -282,5 +294,5 @@ export function usePet(options: {
   }
 
   watch(() => toValue(options.profileId), () => { void load() }, { immediate: true })
-  return { events, state, loading, error, load, buy, feed, pet, play, openBlindBox }
+  return { events, state, loading, error, load, buy, feed, pet, play, openBlindBox, setMainPet }
 }

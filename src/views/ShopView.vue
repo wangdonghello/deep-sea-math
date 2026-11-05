@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-import BottomReturnButton from '@/features/navigation/BottomReturnButton.vue'
+import TabBar from '@/features/home/TabBar.vue'
 import { usePet, type PetStore } from '@/features/pet/usePet'
 import { DECOR_ITEMS, FOOD_ITEMS, TOY_ITEMS, type PetItem } from '@/data/content/petCatalog'
 
@@ -131,7 +131,7 @@ async function buy(item: PetItem): Promise<void> {
       </ul>
     </section>
 
-    <BottomReturnButton label="回宠物房间" test-id="shop-back" @back="emit('back-home')" />
+    <TabBar active="shop" @navigate="emit('navigate', $event)" />
   </main>
 </template>
 

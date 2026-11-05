@@ -82,6 +82,7 @@ export function logicalEventKey(event: DomainEvent): string | null {
     case 'pet-played':
     case 'item-purchased':
     case 'blind-box-opened':
+    case 'main-pet-set':
       return null
   }
 }

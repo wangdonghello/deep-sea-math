@@ -379,6 +379,7 @@ export const EVENT_TYPES = [
   'pet-played',
   'item-purchased',
   'blind-box-opened',
+  'main-pet-set',
 ] as const
 
 /** 事件类型字面量，与 {@link EVENT_TYPES} 一一对应。 */
@@ -560,6 +561,13 @@ export interface ItemPurchasedEvent extends EventBase {
   price: number
 }
 
+/** 设置主宠物：进入宠物房间时默认展示它。 */
+export interface MainPetSetEvent extends EventBase {
+  type: 'main-pet-set'
+  /** 必须是已拥有的宠物 id（小鲸鱼或盲盒动物）。 */
+  petId: string
+}
+
 /** 开盲盒：结果落在事件里，重放时不再随机。 */
 export interface BlindBoxOpenedEvent extends EventBase {
   type: 'blind-box-opened'
@@ -634,3 +642,4 @@ export type DomainEvent =
   | PetPlayedEvent
   | ItemPurchasedEvent
   | BlindBoxOpenedEvent
+  | MainPetSetEvent

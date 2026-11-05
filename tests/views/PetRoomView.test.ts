@@ -20,7 +20,11 @@ function makeStore(seed: readonly DomainEvent[] = baseEvents) {
   const events = [...seed]
   return {
     async listEvents() { return [...events] },
-    async appendEvents(incoming: readonly DomainEvent[]) { events.push(...incoming); return incoming },
+    async appendEvents(incoming: readonly DomainEvent[]) {
+      const known = new Set(events.map((event) => event.eventId))
+      events.push(...incoming.filter((event) => !known.has(event.eventId)))
+      return events.filter((event) => event.profileId === (incoming[0]?.profileId ?? 'p1'))
+    },
   }
 }
 
@@ -164,7 +168,7 @@ describe('PetRoomView', () => {
     await flushPromises()
     await view.get('[data-testid="start-quest"]').trigger('click')
     await view.get('[data-testid="open-shop"]').trigger('click')
-    await view.get('[data-testid="page-return-home"]').trigger('click')
+    await view.get('[data-testid="switch-profile"]').trigger('click')
     expect(view.emitted('start-quest')).toHaveLength(1)
     expect(view.emitted('open-shop')).toHaveLength(1)
     expect(view.emitted('back-home')).toHaveLength(1)
@@ -195,5 +199,23 @@ describe('盲盒入口', () => {
     const close = view.find('[data-testid="blind-box-close"]')
     if (close.exists()) await close.trigger('click')
     expect(view.find('[data-testid="blind-box-overlay"]').exists()).toBe(false)
+  })
+})
+
+describe('多宠物切换', () => {
+  it('可在小鲸鱼与动物之间切换，并设为主宠物', async () => {
+    const seed = [
+      ...baseEvents,
+      { eventId: 'cat', profileId: 'p1', occurredAt: 6, type: 'blind-box-opened' as const, rewardId: 'companion-cat', rewardKind: 'animal' as const },
+    ]
+    const view = mount(PetRoomView, { props: { profileId: 'p1', store: makeStore(seed), clock: () => 20 } })
+    await flushPromises()
+    expect(view.find('[data-testid="pet-option-companion-cat"]').exists()).toBe(true)
+    await view.get('[data-testid="pet-option-companion-cat"]').trigger('click')
+    expect(view.get('[data-testid="pet-name"]').text()).toContain('小猫')
+    expect(view.find('[data-testid="animal-avatar"]').exists()).toBe(true)
+    await view.get('[data-testid="set-main-pet"]').trigger('click')
+    await flushPromises()
+    expect(view.find('[data-testid="set-main-pet"]').exists()).toBe(false)
   })
 })

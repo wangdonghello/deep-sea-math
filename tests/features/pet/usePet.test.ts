@@ -302,3 +302,25 @@ describe('盲盒', () => {
     await expect(pet.openBlindBox()).rejects.toThrow('还没有盲盒券')
   })
 })
+
+describe('多宠物', () => {
+  it('可以把已拥有的动物设为主宠物', async () => {
+    const store = memoryStore([
+      { ...adoption, occurredAt: 1 },
+      { eventId: 'b1', profileId: 'p1', occurredAt: 2, type: 'blind-box-opened', rewardId: 'companion-cat', rewardKind: 'animal' },
+    ])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 3 })
+    await pet.load()
+    expect(pet.state.value.ownedAnimals).toEqual(['companion-cat'])
+    expect(pet.state.value.mainPetId).toBe('baby-whale')
+    await pet.setMainPet('companion-cat')
+    expect(pet.state.value.mainPetId).toBe('companion-cat')
+  })
+
+  it('未拥有的宠物不能设为主宠物', async () => {
+    const store = memoryStore([{ ...adoption, occurredAt: 1 }])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 3 })
+    await pet.load()
+    await expect(pet.setMainPet('companion-dragon')).rejects.toThrow('还没有这只宠物')
+  })
+})
