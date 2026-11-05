@@ -97,10 +97,10 @@
    说明:     真实影像：iNaturalist 研究级观测照片。
 
 13. v3/lanternfish.jpg —— 灯笼鱼（Myctophum punctatum）
-   素材页:   https://www.inaturalist.org/observations/351054997
+   素材页:   https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg
    许可:     CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-   署名:     Julien Savoie · CC BY 4.0
-   说明:     真实影像：iNaturalist 深水观察记录，非捕捞摆拍。
+   署名:     HulloThere · CC BY 4.0
+   说明:     真实影像：灯笼鱼（Myctophum punctatum）标本照片，可见腹部发光器。
 
 14. v3/viperfish.jpg —— 蝰鱼（Chauliodus sloani）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/

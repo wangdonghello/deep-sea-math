@@ -33,6 +33,7 @@ function onSwitchProfile(): void {
   <PetRoomView
     :profile-id="profileId"
     :store="stores.pet"
+    :grade="session.projection?.grade ?? 3"
     @start-quest="router.push(LEARN_PATH)"
     @open-shop="router.push(SHOP_PATH)"
     @back-home="onSwitchProfile"

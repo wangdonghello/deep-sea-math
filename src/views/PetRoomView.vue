@@ -30,6 +30,7 @@ import { decayedHunger, levelFromXp, stageFromLevel } from '@/domain/pet/growth'
 import { MAX_FEED_PER_DAY, MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
+import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
 import PetAvatar from '@/features/pet/PetAvatar.vue'
 import { usePet } from '@/features/pet/usePet'
 import type { PetStore } from '@/features/pet/usePet'
@@ -41,6 +42,8 @@ const props = defineProps<{
   store: PetStore
   /** 可注入时钟；测试用固定值锁定每日上限与饱食度衰减。 */
   clock?: () => number
+  /** 当前年级，自由练习按年级出题。 */
+  grade?: number
 }>()
 
 const emit = defineEmits<{
@@ -64,6 +67,7 @@ const {
   play,
   openBlindBox,
   setMainPet,
+  answerFreePractice,
 } = usePet({
   store: props.store,
   profileId: () => props.profileId,
@@ -125,6 +129,21 @@ async function onOpenBox(): Promise<void> {
   }
 }
 
+async function onFreePracticeAnswer(questionId: string, correct: boolean): Promise<void> {
+  try {
+    await answerFreePractice(questionId, correct)
+    await load()
+    now.value = clock()
+    if (correct) {
+      reaction.value = '+2 XP · 积分半速累计'
+      if (reactionTimer !== null) clearTimeout(reactionTimer)
+      reactionTimer = setTimeout(() => { reaction.value = '' }, 1600)
+    }
+  } catch (err) {
+    actionError.value = err instanceof Error ? err.message : '这一题没记上，再试一次吧'
+  }
+}
+
 function closeBox(): void {
   boxOpen.value = false
   boxResult.value = null
@@ -134,6 +153,8 @@ function closeBox(): void {
 const busy = ref(false)
 
 const noProfile = computed(() => props.profileId === null)
+const practiceOpen = ref(false)
+const practiceGrade = computed(() => props.grade ?? 3)
 
 const displayName = computed(() => {
   if (!state.value.adopted) return '还没有宠物'
@@ -251,11 +272,16 @@ async function runAction(action: () => Promise<void>): Promise<void> {
   actionError.value = ''
   try {
     const beforeXp = activeXp.value
+    const beforeHunger = 100 - Math.round(decayedHunger(state.value.hunger, state.value.lastUpdatedAt, now.value))
     await action()
     await load()
     now.value = clock()
     const gained = activeXp.value - beforeXp
-    reaction.value = gained > 0 ? `+${gained} XP` : '它现在很满足'
+    const afterHunger = 100 - Math.round(decayedHunger(state.value.hunger, state.value.lastUpdatedAt, now.value))
+    const satietyGain = Math.max(0, beforeHunger - afterHunger)
+    reaction.value = gained > 0
+      ? `+${gained} XP${satietyGain > 0 ? ` · 饱食 +${satietyGain}` : ' · 已经吃饱'}`
+      : '它现在很满足'
     if (reactionTimer !== null) clearTimeout(reactionTimer)
     reactionTimer = setTimeout(() => { reaction.value = '' }, 1600)
   } catch (err) {
@@ -570,6 +596,13 @@ onBeforeUnmount(() => {
           </button>
         </section>
       </template>
+
+        <button type="button" class="pet-room__practice-open" data-testid="open-free-practice"
+          @click="practiceOpen = !practiceOpen">
+          ✏️ 自由练习 <small>奖励减半，随时可练</small>
+        </button>
+        <FreePracticePanel v-if="practiceOpen" :grade="practiceGrade"
+          @answer="onFreePracticeAnswer" @close="practiceOpen = false" />
 
         <section class="pet-room__blindbox" aria-label="盲盒">
           <header class="pet-room__blindbox-head">
@@ -1597,4 +1630,12 @@ onBeforeUnmount(() => {
 }
 @keyframes pet-room-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) { .pet-room__animal-avatar { animation: none; } }
+
+.pet-room__practice-open {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-sm);
+  min-height: 2.75rem; padding: 0 var(--ds-space-md);
+  border: 1px dashed var(--ds-glass-border); border-radius: var(--ds-radius-lg);
+  background: rgb(7 24 42 / 65%); color: var(--ds-text-primary); font: inherit;
+}
+.pet-room__practice-open small { color: var(--ds-text-secondary); font-size: .7rem; }
 </style>

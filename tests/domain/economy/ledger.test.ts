@@ -267,3 +267,13 @@ describe('resolveLedger', () => {
     expect(resolveLedger(events, 'p1')).toEqual({ balance: -30, earned: 0, spent: 30 })
   })
 })
+
+describe('自由练习积分', () => {
+  it('每答对 2 题记 1 分', () => {
+    const events: DomainEvent[] = Array.from({ length: 3 }, (_, i) => ({
+      eventId: `free-${i}`, profileId: 'p1', occurredAt: i, type: 'free-practice-answered',
+      questionId: `q${i}`, correct: true,
+    }))
+    expect(resolveLedger(events, 'p1').balance).toBe(1)
+  })
+})

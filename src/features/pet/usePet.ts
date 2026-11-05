@@ -272,6 +272,17 @@ export function usePet(options: {
     })
   }
 
+  /** 自由练习：答完一题落一条事件，积分/XP 由投影半速结算。 */
+  function answerFreePractice(questionId: string, correct: boolean): Promise<void> {
+    const profileId = toValue(options.profileId)
+    if (profileId === null) throw new Error('没有选择档案')
+    return enqueue(async () => {
+      await append([{
+        ...base(profileId), eventId: randomUuid(), type: 'free-practice-answered', questionId, correct,
+      }], profileId)
+    })
+  }
+
   /** 把某只已拥有的宠物设为主宠物。 */
   function setMainPet(petId: string): Promise<void> {
     const profileId = toValue(options.profileId)
@@ -303,5 +314,5 @@ export function usePet(options: {
   }
 
   watch(() => toValue(options.profileId), () => { void load() }, { immediate: true })
-  return { events, state, loading, error, load, buy, feed, pet, play, openBlindBox, setMainPet }
+  return { events, state, loading, error, load, buy, feed, pet, play, openBlindBox, setMainPet, answerFreePractice }
 }

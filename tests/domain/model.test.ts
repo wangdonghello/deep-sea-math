@@ -132,6 +132,7 @@ describe('domain/model: 事件 union', () => {
       'item-purchased': true,
       'blind-box-opened': true,
       'main-pet-set': true,
+      'free-practice-answered': true,
     }
 
     expect(Object.keys(exhaustive).sort()).toEqual([...EVENT_TYPES].sort())

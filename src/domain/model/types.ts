@@ -380,6 +380,7 @@ export const EVENT_TYPES = [
   'item-purchased',
   'blind-box-opened',
   'main-pet-set',
+  'free-practice-answered',
 ] as const
 
 /** 事件类型字面量，与 {@link EVENT_TYPES} 一一对应。 */
@@ -569,6 +570,15 @@ export interface ItemPurchasedEvent extends EventBase {
   price: number
 }
 
+/** 自由练习：每答完一题落一条，奖励按半速累计。 */
+export interface FreePracticeAnsweredEvent extends EventBase {
+  type: 'free-practice-answered'
+  /** 题目 id，用于家长报告与去重。 */
+  questionId: string
+  /** 是否独立答对。 */
+  correct: boolean
+}
+
 /** 设置主宠物：进入宠物房间时默认展示它。 */
 export interface MainPetSetEvent extends EventBase {
   type: 'main-pet-set'
@@ -651,3 +661,4 @@ export type DomainEvent =
   | ItemPurchasedEvent
   | BlindBoxOpenedEvent
   | MainPetSetEvent
+  | FreePracticeAnsweredEvent

@@ -6,7 +6,7 @@
 - v3/golden-trevally.jpg — 黄金鲹 — CC BY 4.0 — https://www.inaturalist.org/observations/340228678
 - v3/seahorse.jpg — 大腹海马 — CC BY 4.0 — https://www.inaturalist.org/observations/200640664
 - v3/leafy-seadragon.jpg — 叶海龙 — CC BY 4.0 — https://www.inaturalist.org/observations/279389471
-- v3/lanternfish.jpg — 灯笼鱼 — CC BY 4.0 — https://www.inaturalist.org/observations/351054997
+- v3/lanternfish.jpg — 灯笼鱼 — CC BY 4.0 — https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg
 - v3/viperfish.jpg — 蝰鱼 — 公有领域 — https://oceanexplorer.noaa.gov/multimedia/sloanes-viperfish/
 - v3/humpback-whale.jpg — 座头鲸 — 公有领域 — https://commons.wikimedia.org/wiki/File:HIHWNMS_-_humpback_whale_breaching_(31458927013).jpg
 - v3/whale-shark.jpg — 鲸鲨 — 公有领域 — https://commons.wikimedia.org/wiki/File:Rhincodon_typus_fgbnms.jpg

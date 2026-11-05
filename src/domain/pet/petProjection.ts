@@ -196,6 +196,8 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
         mood = Math.min(100, mood + 20)
         markPetEvent(event.occurredAt)
       }
+    } else if (event.type === 'free-practice-answered') {
+      if (event.correct) addPetXp(mainPetId, 2)
     } else if (event.type === 'session-completed') {
       const day = dayKey(event.occurredAt)
       if (!completedDays.has(day)) {

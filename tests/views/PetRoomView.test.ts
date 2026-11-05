@@ -45,6 +45,7 @@ describe('PetRoomView', () => {
     await flushPromises()
     expect(view.get('[data-testid="pet-xp"]').text()).toContain('8')
     expect(view.get('[data-testid="pet-reaction"]').text()).toContain('+8 XP')
+    expect(view.get('[data-testid="pet-hunger"]').text()).toContain('饥饿值 0/100')
   })
 
   it('把饱食度反着展示成饥饿值', async () => {

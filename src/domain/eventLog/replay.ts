@@ -291,7 +291,8 @@ function foldEvent(
     event.type === 'pet-played' ||
     event.type === 'item-purchased' ||
     event.type === 'blind-box-opened' ||
-    event.type === 'main-pet-set'
+    event.type === 'main-pet-set' ||
+    event.type === 'free-practice-answered'
   ) {
     return draft
   }

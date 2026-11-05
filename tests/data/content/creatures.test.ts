@@ -163,7 +163,7 @@ describe('creature content', () => {
   it('ships every optimized model and its license notice as local assets', () => {
     const bestiary = readCreatures() as { creatures: Array<Record<string, any>> }
     const modeled = bestiary.creatures.filter((creature) => creature.model !== undefined)
-    expect(modeled).toHaveLength(14)
+    expect(modeled).toHaveLength(13)
 
     /** 鮟鱇鱼的历史文件名不符合 `<ref>-license.txt` 约定，单独映射。 */
     const licenseFileByRef: Record<string, string> = {

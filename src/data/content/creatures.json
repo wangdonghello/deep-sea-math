@@ -365,21 +365,12 @@
       ],
       "photo": {
         "ref": "v3/lanternfish",
-        "creditSummary": "Julien Savoie · CC BY 4.0",
-        "attribution": "Julien Savoie (CC BY 4.0; https://www.inaturalist.org/observations/351054997)",
+        "creditSummary": "HulloThere · CC BY 4.0",
+        "attribution": "HulloThere (CC BY 4.0; https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg)",
         "license": "CC BY 4.0",
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/351054997",
-        "note": "真实影像：iNaturalist 深水观察记录，非捕捞摆拍。"
-      },
-      "model": {
-        "ref": "v3-lanternfish",
-        "creditSummary": "Fish · Quaternius · CC0",
-        "attribution": "\"Fish\" by Quaternius (https://poly.pizza/m/7V4gaDMQV8), licensed under CC0 (https://creativecommons.org/publicdomain/zero/1.0/). Downloaded from Poly Pizza.",
-        "license": "CC0",
-        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-        "sourceUrl": "https://poly.pizza/m/7V4gaDMQV8",
-        "note": "3D 示意模型：通用鱼低模，不代表灯笼鱼的发光器；不是物种级精确复原。"
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Myctophum_punctatum2.jpg",
+        "note": "真实影像：灯笼鱼（Myctophum punctatum）标本照片，可见腹部发光器。"
       }
     },
     {
