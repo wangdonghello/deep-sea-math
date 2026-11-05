@@ -72,6 +72,9 @@ const now = ref(clock())
 
 /** 动作失败（每日上限、库存不足等）的提示；与加载失败的 `error` 分开。 */
 const actionError = ref('')
+/** 动作成功后的即时反馈（+XP 浮字）；没有它，小数值变化很容易被忽略。 */
+const reaction = ref('')
+let reactionTimer: ReturnType<typeof setTimeout> | null = null
 /** 串行执行动作，避免连点造成两次写入与按钮状态闪烁。 */
 const busy = ref(false)
 
@@ -192,9 +195,14 @@ async function runAction(action: () => Promise<void>): Promise<void> {
   busy.value = true
   actionError.value = ''
   try {
+    const beforeXp = state.value.xp
     await action()
     await load()
     now.value = clock()
+    const gained = state.value.xp - beforeXp
+    reaction.value = gained > 0 ? `+${gained} XP` : '它现在很满足'
+    if (reactionTimer !== null) clearTimeout(reactionTimer)
+    reactionTimer = setTimeout(() => { reaction.value = '' }, 1600)
   } catch (err) {
     actionError.value = err instanceof Error ? err.message : '这次没成功，再试一次吧'
   } finally {
@@ -277,6 +285,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  if (reactionTimer !== null) clearTimeout(reactionTimer)
   if (ticker !== undefined) clearInterval(ticker)
   ticker = undefined
 })
@@ -393,6 +402,8 @@ onBeforeUnmount(() => {
             完成一组题后孵化
           </p>
         </section>
+
+        <p v-if="reaction !== ''" class="pet-room__reaction" data-testid="pet-reaction">{{ reaction }}</p>
 
         <button
           type="button"
@@ -1277,4 +1288,26 @@ onBeforeUnmount(() => {
 
 .pet-room__nav { display: flex; gap: var(--ds-space-sm); justify-content: center; }
 .pet-room__nav button { padding: 0.3rem 0.8rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-pill); background: rgb(8 30 52 / 60%); color: var(--ds-text-secondary); font: inherit; font-size: 0.8rem; }
+
+.pet-room__reaction {
+  justify-self: center;
+  margin: -0.5rem 0 0;
+  color: #ffd479;
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgb(255 196 92 / 45%);
+  animation: pet-reaction-pop 1.6s ease-out both;
+  pointer-events: none;
+}
+
+@keyframes pet-reaction-pop {
+  0% { opacity: 0; transform: translateY(8px) scale(.8); }
+  20% { opacity: 1; transform: translateY(0) scale(1); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-18px) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-room__reaction { animation: none; }
+}
 </style>

@@ -215,24 +215,22 @@ describe('usePet', () => {
     expect(pet.state.value.name).toBe('泡泡')
   })
 
-  it('迁移水位线：领养前的完成记录不触发孵化，领养后的才补 pet-hatched', async () => {
-    const store = memoryStore([
-      // v3 历史：这条 session-completed 发生在领养之前，不能算作「学会后的孵化条件」。
+  it('导入档案带着历史完成记录时立即孵化；没有完成记录则仍是蛋', async () => {
+    const imported = memoryStore([
+      // v3 历史：早于领养事件，但孩子确实已经学过——导入后直接破壳。
       { eventId: 'old-session', profileId: 'p1', occurredAt: 1, type: 'session-completed', sessionId: 's0', rewards: [] },
       { ...adoption, occurredAt: 100 },
     ])
-    const pet = usePet({ store, profileId: 'p1', clock: () => 300 })
-    await pet.load()
-    expect(store.events.some((event) => event.type === 'pet-hatched')).toBe(false)
-    expect(pet.state.value.hatched).toBe(false)
+    const importedPet = usePet({ store: imported, profileId: 'p1', clock: () => 300 })
+    await importedPet.load()
+    expect(imported.events.some((event) => event.type === 'pet-hatched')).toBe(true)
+    expect(importedPet.state.value.hatched).toBe(true)
 
-    store.events.push({
-      eventId: 'new-session', profileId: 'p1', occurredAt: 200,
-      type: 'session-completed', sessionId: 's1', rewards: [],
-    })
-    await pet.load()
-    expect(store.events.some((event) => event.type === 'pet-hatched')).toBe(true)
-    expect(pet.state.value.hatched).toBe(true)
+    const fresh = memoryStore([{ ...adoption, occurredAt: 100 }])
+    const freshPet = usePet({ store: fresh, profileId: 'p1', clock: () => 300 })
+    await freshPet.load()
+    expect(fresh.events.some((event) => event.type === 'pet-hatched')).toBe(false)
+    expect(freshPet.state.value.hatched).toBe(false)
   })
 
   it('同日喂食达 3 次后拒绝且不落事件', async () => {

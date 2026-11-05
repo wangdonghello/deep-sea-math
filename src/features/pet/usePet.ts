@@ -164,7 +164,13 @@ export function usePet(options: {
       const learnedSinceAdoption = events.value.some(
         (event) => event.profileId === profileId && event.type === 'session-completed' && event.occurredAt >= adoptedAt,
       )
-      if (!hatched && learnedSinceAdoption) {
+      // 从 v3 导入的档案，历史完成记录早于领养事件；这些孩子已经学过很多组，
+      // 不能让他们对着一个永远不破壳的蛋。历史完成只用于「破壳」，不补发 XP
+      // 或积分（水位线仍在 replayPet 里生效）。
+      const hasHistoricalCompletion = events.value.some(
+        (event) => event.profileId === profileId && event.type === 'session-completed',
+      )
+      if (!hatched && (learnedSinceAdoption || hasHistoricalCompletion)) {
         await enqueue(async () => {
           if (toValue(options.profileId) !== profileId) return
           await append([{
