@@ -182,6 +182,7 @@ export function useProfileSelect(options: ProfileSelectOptions) {
           avatarId: selectedProfile.value?.avatarId ?? '',
           grade: selectedProfile.value?.grade,
           themeId: selectedProfile.value?.themeId,
+          subjectGrades: selectedProfile.value?.subjectGrades,
         })
         navigate(HOME_PATH)
         return

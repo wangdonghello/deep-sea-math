@@ -15,6 +15,7 @@ export interface HomeProfile {
   nickname: string
   avatarId: string
   grade?: Grade
+  subjectGrades?: Partial<Record<'math' | 'chinese' | 'english', Grade>>
   themeId?: 'deep-sea' | 'dinosaur' | 'space'
 }
 

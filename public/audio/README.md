@@ -23,3 +23,11 @@
 - 如果使用孩子的声音，必须取得监护人书面同意；
 - 在 `ATTRIBUTION.txt` 记录录音者（可匿名，如“家长志愿者”）与日期；
 - 不录制可识别个人身份的信息（学校、住址、全名）。
+
+## 已接入的 Commons 录音
+
+`cn1-pinyin-002/003/004/005/006`、`cn1-character-001..006` 来自 Wikimedia Commons 的普通话发音（Wei Gao, Vion Nicolas / Yue Tan），已转 MP3、单声道、-16 LUFS。
+
+- 许可：CC BY 2.0 FR / CC BY-SA 3.0 US
+- 逐条来源见 `public/audio/ATTRIBUTION.txt`
+- `cn1-pinyin-001`（mā）暂无合适单条录音，仍为 `pending`

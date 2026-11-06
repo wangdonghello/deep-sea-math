@@ -1,0 +1,19 @@
+语文真人录音（Wikimedia Commons）
+
+以下文件源自 Wikimedia Commons 的普通话发音，已转换为 MP3 并统一响度：
+
+cn1-character-001.mp3  日  https://commons.wikimedia.org/wiki/File:Zh-r%C3%AC.ogg
+cn1-character-002.mp3  水  https://commons.wikimedia.org/wiki/File:Zh-shu%C7%90.ogg
+cn1-character-003.mp3  火  https://commons.wikimedia.org/wiki/File:Zh-hu%C7%92.oga
+cn1-character-004.mp3  山  https://commons.wikimedia.org/wiki/File:Zh-sh%C4%81n.ogg
+cn1-character-005.mp3  木  https://commons.wikimedia.org/wiki/File:Zh-m%C3%B9.ogg
+cn1-character-006.mp3  天  https://commons.wikimedia.org/wiki/File:Zh-ti%C4%81n.ogg
+cn1-pinyin-002.mp3     bà  https://commons.wikimedia.org/wiki/File:Zh-b%C3%A0.ogg
+cn1-pinyin-003.mp3     huā https://commons.wikimedia.org/wiki/File:Zh-hu%C4%81.ogg
+cn1-pinyin-004.mp3     xiǎo https://commons.wikimedia.org/wiki/File:Zh-xi%C7%8Eo.ogg
+cn1-pinyin-005.mp3     yú  https://commons.wikimedia.org/wiki/File:Zh-y%C3%BA.ogg
+cn1-pinyin-006.mp3     zì  https://commons.wikimedia.org/wiki/File:Zh-z%C3%AC.ogg
+
+署名：Wei Gao, Vion Nicolas（CC BY 2.0 FR）；Yue Tan（CC BY-SA 3.0 US）。
+许可：CC BY 2.0 FR / CC BY-SA 3.0 US。
+说明：真人普通话发音，非 TTS 合成；已做降噪/响度统一处理。

@@ -1,19 +1,112 @@
 {
   "version": 1,
-  "voice": "真人录音（普通话，女声/童声均可，需监护人同意）",
+  "voice": "真人录音（Wikimedia Commons，CC 许可）",
   "format": "mp3, 44.1kHz, mono, -16 LUFS",
   "entries": [
-    { "id": "cn1-pinyin-001", "text": "mā，第一声", "file": "chinese/cn1-pinyin-001.mp3", "status": "pending" },
-    { "id": "cn1-pinyin-002", "text": "bà，声母 b", "file": "chinese/cn1-pinyin-002.mp3", "status": "pending" },
-    { "id": "cn1-pinyin-003", "text": "huā，韵母 ua", "file": "chinese/cn1-pinyin-003.mp3", "status": "pending" },
-    { "id": "cn1-pinyin-004", "text": "xiǎo，第三声", "file": "chinese/cn1-pinyin-004.mp3", "status": "pending" },
-    { "id": "cn1-pinyin-005", "text": "yú，第二声", "file": "chinese/cn1-pinyin-005.mp3", "status": "pending" },
-    { "id": "cn1-pinyin-006", "text": "zì，声母 z", "file": "chinese/cn1-pinyin-006.mp3", "status": "pending" },
-    { "id": "cn1-character-001", "text": "日，太阳的日", "file": "chinese/cn1-character-001.mp3", "status": "pending" },
-    { "id": "cn1-character-002", "text": "水，河水的水", "file": "chinese/cn1-character-002.mp3", "status": "pending" },
-    { "id": "cn1-character-003", "text": "火，火苗的火", "file": "chinese/cn1-character-003.mp3", "status": "pending" },
-    { "id": "cn1-character-004", "text": "山，高山的山", "file": "chinese/cn1-character-004.mp3", "status": "pending" },
-    { "id": "cn1-character-005", "text": "木，树木的木", "file": "chinese/cn1-character-005.mp3", "status": "pending" },
-    { "id": "cn1-character-006", "text": "天，天空的天", "file": "chinese/cn1-character-006.mp3", "status": "pending" }
+    {
+      "id": "cn1-pinyin-001",
+      "text": "mā，第一声",
+      "file": "chinese/cn1-pinyin-001.mp3",
+      "status": "pending"
+    },
+    {
+      "id": "cn1-pinyin-002",
+      "text": "bà，声母 b",
+      "file": "chinese/cn1-pinyin-002.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-pinyin-003",
+      "text": "huā，韵母 ua",
+      "file": "chinese/cn1-pinyin-003.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-pinyin-004",
+      "text": "xiǎo，第三声",
+      "file": "chinese/cn1-pinyin-004.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-pinyin-005",
+      "text": "yú，第二声",
+      "file": "chinese/cn1-pinyin-005.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-pinyin-006",
+      "text": "zì，声母 z",
+      "file": "chinese/cn1-pinyin-006.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-character-001",
+      "text": "日，太阳的日",
+      "file": "chinese/cn1-character-001.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-character-002",
+      "text": "水，河水的水",
+      "file": "chinese/cn1-character-002.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-character-003",
+      "text": "火，火苗的火",
+      "file": "chinese/cn1-character-003.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-character-004",
+      "text": "山，高山的山",
+      "file": "chinese/cn1-character-004.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-character-005",
+      "text": "木，树木的木",
+      "file": "chinese/cn1-character-005.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn1-character-006",
+      "text": "天，天空的天",
+      "file": "chinese/cn1-character-006.mp3",
+      "status": "recorded",
+      "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
+      "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
+      "recordedAt": "2026-11-06"
+    }
   ]
 }

@@ -175,6 +175,7 @@ onMounted(async () => {
       <SubjectTabs :active="activeSubject" @change="activeSubject = $event" />
 
       <QuestCard
+        class="home__quest"
         v-if="card !== null && activeSubject === 'math'"
         :state="card.state"
         :nickname="card.nickname"
@@ -241,6 +242,8 @@ onMounted(async () => {
   font-size: 0.8rem;
   cursor: pointer;
 }
+
+.home__quest { margin-top: 0; }
 
 .home__chinese {
   display: flex; align-items: center; justify-content: space-between;

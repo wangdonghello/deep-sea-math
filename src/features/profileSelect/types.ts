@@ -22,6 +22,7 @@ export interface ProfileSummary {
   grade?: Grade
   /** 主兴趣主题；第一版旧档案缺省深海。 */
   themeId?: 'deep-sea' | 'dinosaur' | 'space'
+  subjectGrades?: Partial<Record<'math' | 'chinese' | 'english', Grade>>
 }
 
 /** 登录成功后载入的档案投影（当前档案的会话态）。 */
@@ -31,6 +32,7 @@ export interface ProfileProjection {
   avatarId: string
   grade?: Grade
   themeId?: 'deep-sea' | 'dinosaur' | 'space'
+  subjectGrades?: Partial<Record<'math' | 'chinese' | 'english', Grade>>
 }
 
 /**

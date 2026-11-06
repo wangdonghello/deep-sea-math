@@ -165,7 +165,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
    * 悬空题组要让位给“重新领取”，否则孩子会卡在“点开始下潜没反应”。
    */
   const activePool = computed(() => {
-    const grade = profile.value?.grade ?? 3
+    const grade = profile.value?.subjectGrades?.math ?? profile.value?.grade ?? 3
     return options.poolByGrade?.[grade] ?? options.pool
   })
   const poolIds = computed(() => new Set(activePool.value.map((question) => question.id)))
@@ -396,7 +396,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
         return
       }
 
-      const grade = current.grade ?? 3
+      const grade = current.subjectGrades?.math ?? current.grade ?? 3
       const themeId = current.themeId ?? 'deep-sea'
       const quest = buildDailyQuest({
         profileId: current.profileId,

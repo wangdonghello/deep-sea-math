@@ -63,6 +63,9 @@ function toggle(id: string): void {
     const profile = panel.profiles.value.find((item) => item.id === id)
     if (profile !== undefined) {
       panel.preferencesForm.grade.value = profile.grade ?? 3
+      panel.preferencesForm.mathGrade.value = profile.subjectGrades?.math ?? profile.grade ?? 3
+      panel.preferencesForm.chineseGrade.value = profile.subjectGrades?.chinese ?? profile.grade ?? 3
+      panel.preferencesForm.englishGrade.value = profile.subjectGrades?.english ?? profile.grade ?? 3
       panel.preferencesForm.themeId.value = profile.themeId ?? 'deep-sea'
     }
     void panel.selectProfile(id)
@@ -170,12 +173,28 @@ onMounted(() => {
           @submit.prevent="panel.updatePreferences()"
         >
           <h2>年级与主题</h2>
-          <p class="parent-hint">修改后从下一组任务起生效，当前题组保持原设置。</p>
+          <p class="parent-hint">数学从下一组任务起生效；语文需重新进入档案后生效。当前题组保持原设置。</p>
           <label>年级
             <select v-model.number="panel.preferencesForm.grade.value" data-testid="preferences-grade">
               <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>
             </select>
           </label>
+          <label>数学年级
+            <select v-model.number="panel.preferencesForm.mathGrade.value" data-testid="preferences-grade-math">
+              <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>
+            </select>
+          </label>
+          <label>语文年级
+            <select v-model.number="panel.preferencesForm.chineseGrade.value" data-testid="preferences-grade-chinese">
+              <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>
+            </select>
+          </label>
+          <label>英语年级
+            <select v-model.number="panel.preferencesForm.englishGrade.value" data-testid="preferences-grade-english">
+              <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>
+            </select>
+          </label>
+          <p class="parent-hint">未单独设置时，三个学科都跟随上面的“年级”。</p>
           <label>兴趣主题
             <select v-model="panel.preferencesForm.themeId.value" data-testid="preferences-theme">
               <option v-for="theme in THEME_OPTIONS" :key="theme.id" :value="theme.id">{{ theme.label }}</option>

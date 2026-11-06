@@ -19,7 +19,7 @@ const router = useRouter()
 const session = useProfileSessionStore()
 const stores = getProductionStores()
 const profileId = computed(() => session.activeProfileId ?? '')
-const grade = computed(() => session.projection?.grade ?? 1)
+const grade = computed(() => session.projection?.subjectGrades?.chinese ?? session.projection?.grade ?? 1)
 const questions = computed(() => {
   const bank = grade.value >= 3 ? grade3 : grade.value === 2 ? grade2 : grade1
   return pickChineseDaily(bank.questions as ChineseQuestion[], 6)

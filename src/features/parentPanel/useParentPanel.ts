@@ -32,7 +32,7 @@ export function useParentPanel(options: ParentPanelOptions) {
 
   const report = ref<ParentReport>({ ...emptyReport(), topicMasteryAvailable: topicMasteryAvailable.value })
   const reportPeriod = ref<'today' | '7days'>('7days')
-  const profiles = ref<Array<Pick<Profile, 'id' | 'nickname' | 'avatarId' | 'grade' | 'themeId'>>>([])
+  const profiles = ref<Array<Pick<Profile, 'id' | 'nickname' | 'avatarId' | 'grade' | 'themeId' | 'subjectGrades'>>>([])
   const loading = ref(false)
   const errorMessage = ref('')
   const successMessage = ref('')
@@ -41,7 +41,13 @@ export function useParentPanel(options: ParentPanelOptions) {
   const confirmDelete = ref(false)
   const createForm = { nickname: ref(''), avatarId: ref('avatar-1'), grade: ref<Grade>(3), themeId: ref<ThemeId>('deep-sea'), pin: ref(''), confirmPin: ref('') }
   const resetForm = { pin: ref(''), confirmPin: ref('') }
-  const preferencesForm = { grade: ref<Grade>(3), themeId: ref<ThemeId>('deep-sea') }
+  const preferencesForm = {
+    grade: ref<Grade>(3),
+    mathGrade: ref<Grade>(3),
+    chineseGrade: ref<Grade>(3),
+    englishGrade: ref<Grade>(3),
+    themeId: ref<ThemeId>('deep-sea'),
+  }
   const deleteForm = { nickname: ref('') }
   const resetProfileId = ref(options.profileId)
   /**
@@ -277,10 +283,16 @@ export function useParentPanel(options: ParentPanelOptions) {
     try {
       const profile = await options.store.profiles.get(profileId)
       if (profile === undefined) throw new Error('profile not found')
+      const subjectGrades = {
+        math: preferencesForm.mathGrade.value,
+        chinese: preferencesForm.chineseGrade.value,
+        english: preferencesForm.englishGrade.value,
+      }
       await options.store.profiles.save({
         ...profile,
         grade: preferencesForm.grade.value,
         themeId: preferencesForm.themeId.value,
+        subjectGrades,
       })
       await options.store.events.append([{
         type: 'profile-preferences-updated',
@@ -289,11 +301,12 @@ export function useParentPanel(options: ParentPanelOptions) {
         occurredAt: clock(),
         grade: preferencesForm.grade.value,
         themeId: preferencesForm.themeId.value,
+        subjectGrades,
       }])
       profiles.value = profiles.value.map((item) => item.id === profileId
-        ? { ...item, grade: preferencesForm.grade.value, themeId: preferencesForm.themeId.value }
+        ? { ...item, grade: preferencesForm.grade.value, themeId: preferencesForm.themeId.value, subjectGrades }
         : item)
-      successMessage.value = '年级与主题已保存，从下一组任务起生效。'
+      successMessage.value = '年级、分学科年级与主题已保存，从下一组任务起生效。'
     } catch (error) {
       errorMessage.value = '暂时无法保存年级与主题，请稍后重试。'
       logFailure('preferences', error)

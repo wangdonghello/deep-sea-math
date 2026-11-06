@@ -295,6 +295,8 @@ export interface Profile {
   grade?: Grade
   /** 主兴趣主题；第一版旧档案缺省按深海处理。 */
   themeId?: ThemeId
+  /** 分学科年级；缺省时跟随 `grade`。 */
+  subjectGrades?: Partial<Record<SubjectId, Grade>>
 }
 
 /** 图鉴生物条目（`data/content/creatures.json` 的同构类型）。 */
@@ -426,6 +428,8 @@ export interface ProfilePreferencesUpdatedEvent extends EventBase {
   type: 'profile-preferences-updated'
   grade: Grade
   themeId: ThemeId
+  /** 分学科年级；缺省时三个学科都跟随 `grade`。 */
+  subjectGrades?: Partial<Record<SubjectId, Grade>>
 }
 
 /** 开始当日题组：题序当场固定，刷新不重抽。 */

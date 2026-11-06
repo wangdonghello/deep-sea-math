@@ -42,7 +42,7 @@ function submitText(): void {
 
 function playAudio(): void {
   if (props.question.audio === undefined) return
-  if (audio.value === null) audio.value = new Audio(props.question.audio)
+  if (audio.value === null) audio.value = new Audio(`${import.meta.env.BASE_URL}audio/${props.question.audio}`)
   audio.value.currentTime = 0
   void audio.value.play().catch(() => {})
 }
