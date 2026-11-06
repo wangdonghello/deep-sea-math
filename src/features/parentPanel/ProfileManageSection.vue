@@ -173,7 +173,7 @@ onMounted(() => {
           @submit.prevent="panel.updatePreferences()"
         >
           <h2>年级与主题</h2>
-          <p class="parent-hint">数学从下一组任务起生效；语文需重新进入档案后生效。当前题组保持原设置。</p>
+          <p class="parent-hint">三个学科默认跟随上面的年级；单独设置后对下一次进入生效。当前题组保持原设置。</p>
           <label>年级
             <select v-model.number="panel.preferencesForm.grade.value" data-testid="preferences-grade">
               <option v-for="grade in GRADE_OPTIONS" :key="grade" :value="grade">{{ grade }} 年级</option>

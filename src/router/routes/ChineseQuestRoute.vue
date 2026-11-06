@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import ChineseQuestView from '@/views/ChineseQuestView.vue'
@@ -19,7 +19,7 @@ const router = useRouter()
 const session = useProfileSessionStore()
 const stores = getProductionStores()
 const profileId = computed(() => session.activeProfileId ?? '')
-const grade = computed(() => session.projection?.subjectGrades?.chinese ?? session.projection?.grade ?? 1)
+const grade = ref(session.projection?.subjectGrades?.chinese ?? session.projection?.grade ?? 1)
 const questions = computed(() => {
   const bank = grade.value >= 3 ? grade3 : grade.value === 2 ? grade2 : grade1
   return pickChineseDaily(bank.questions as ChineseQuestion[], 6)
@@ -29,8 +29,16 @@ const passageList = computed(() => {
   return bank as ChinesePassage[]
 })
 
-onMounted(() => {
-  if (profileId.value === '') void router.push(PROFILES_PATH)
+onMounted(async () => {
+  if (profileId.value === '') {
+    void router.push(PROFILES_PATH)
+    return
+  }
+  // 家长可能刚改过语文年级；以档案表为准，避免必须重新登录。
+  const profile = await stores.storage.profiles.get(profileId.value)
+  if (profile !== undefined) {
+    grade.value = profile.subjectGrades?.chinese ?? profile.grade ?? 1
+  }
 })
 </script>
 
