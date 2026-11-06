@@ -5,7 +5,7 @@
  * 都由调用方把 `now` 传进来，这样重放/测试都能得到确定结果。
  */
 
-export type PetStage = 'egg' | 'baby' | 'juvenile' | 'adult' | 'final'
+export type PetStage = 'egg' | 'baby' | 'child' | 'juvenile' | 'adult' | 'final'
 
 /** 每小时饱食度衰减点数。 */
 const DECAY_PER_HOUR = 2
@@ -56,10 +56,11 @@ export function levelFromXp(xp: number): number {
   return level
 }
 
-/** 等级 → 阶段：0 蛋、1–4 幼体、5–9 少年、10–14 成体、15 完全体。 */
+/** 等级 → 阶段：0 蛋、1 幼体、2–4 幼童、5–9 少年、10–14 成体、15 完全体。 */
 export function stageFromLevel(level: number): PetStage {
   if (level <= 0) return 'egg'
-  if (level < 5) return 'baby'
+  if (level < 2) return 'baby'
+  if (level < 5) return 'child'
   if (level < 10) return 'juvenile'
   if (level < 15) return 'adult'
   return 'final'

@@ -104,6 +104,7 @@ const lowMood = computed(() => mood.value < LOW_MOOD)
 const STAGE_NAMES: Record<PetStage, string> = {
   egg: '海蛋',
   baby: '幼体',
+  child: '幼童',
   juvenile: '少年',
   adult: '成体',
   final: '完全体',
@@ -196,6 +197,17 @@ const PALETTES: Record<PetStage, Palette> = {
     glow: '#7fe3ff',
     ink: '#06233c',
   },
+  child: {
+    bodyTop: '#c8ffd8',
+    bodyBottom: '#2f9f68',
+    bellyTop: '#fffdf0',
+    bellyBottom: '#ffe3a8',
+    fin: '#7fe3a5',
+    finLight: '#c9ffd9',
+    accent: '#ffb86b',
+    glow: '#9dffc4',
+    ink: '#073a23',
+  },
   juvenile: {
     bodyTop: '#9df5dc',
     bodyBottom: '#1c8f88',
@@ -283,6 +295,19 @@ const GEOMETRY: Record<PetStage, StageGeometry> = {
     mouthW: 9,
     blushCy: 160,
     finScale: 0.82,
+  },
+  child: {
+    bodyCx: 160,
+    bodyCy: 194,
+    bodyRx: 50,
+    bodyRy: 48,
+    eyeCy: 176,
+    eyeDx: 21,
+    eyeR: 11,
+    mouthCy: 198,
+    mouthW: 9,
+    blushCy: 200,
+    finScale: 0.9,
   },
   juvenile: {
     bodyCx: 160,
@@ -421,6 +446,7 @@ const mouthPath = computed(() => {
 const BLINK_DELAYS: Record<PetStage, string> = {
   egg: '0s',
   baby: '0.8s',
+  child: '1.4s',
   juvenile: '2.1s',
   adult: '3.4s',
   final: '4.6s',
@@ -725,6 +751,17 @@ const STAR_PATH =
             fill="#eafff9"
             opacity="0.5"
           />
+        </g>
+
+        <g v-if="stage === 'child'" class="pet-avatar__child-crest" aria-hidden="true">
+          <path
+            d="M136 156 Q144 130 160 128 Q176 130 184 156 Q172 148 160 148 Q148 148 136 156 Z"
+            :fill="palette.accent"
+            :stroke="palette.ink"
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+          <circle cx="160" cy="126" r="6" :fill="palette.finLight" :stroke="palette.ink" stroke-width="2" />
         </g>
 
         <g class="pet-avatar__face">

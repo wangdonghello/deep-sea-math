@@ -16,9 +16,11 @@ describe('pet growth', () => {
     expect(levelProgress(99999).level).toBe(15)
   })
 
-  it('阶段边界：Lv0 蛋、1–4 幼体、5–9 少年、10–14 成体、15 完全体', () => {
+  it('阶段边界：Lv0 蛋、1 幼体、2–4 幼童、5–9 少年、10–14 成体、15 完全体', () => {
     expect(stageFromLevel(0)).toBe('egg')
-    expect(stageFromLevel(4)).toBe('baby')
+    expect(stageFromLevel(1)).toBe('baby')
+    expect(stageFromLevel(2)).toBe('child')
+    expect(stageFromLevel(4)).toBe('child')
     expect(stageFromLevel(5)).toBe('juvenile')
     expect(stageFromLevel(9)).toBe('juvenile')
     expect(stageFromLevel(10)).toBe('adult')

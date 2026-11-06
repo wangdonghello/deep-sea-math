@@ -181,6 +181,7 @@ const avatarStage = computed(() => {
 const STAGE_LABELS = {
   egg: '蛋',
   baby: '幼体',
+  child: '幼童',
   juvenile: '少年',
   adult: '成体',
   final: '完全体',

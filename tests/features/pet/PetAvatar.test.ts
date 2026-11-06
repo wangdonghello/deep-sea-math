@@ -38,6 +38,13 @@ describe('PetAvatar', () => {
     expect(egg.find('[data-stage="egg"]').exists()).toBe(true)
   })
 
+  it('Lv.2 幼童形态有独立造型与名称', () => {
+    const view = mount(PetAvatar, { props: { stage: 'child', mood: 80 } })
+    expect(view.find('[data-stage="child"]').exists()).toBe(true)
+    expect(view.find('.pet-avatar__child-crest').exists()).toBe(true)
+    expect(buttonAccessibleName(view)).toContain('幼童')
+  })
+
   it('完全体渲染 final 形态', () => {
     const view = mount(PetAvatar, { props: { stage: 'final', mood: 80 } })
     expect(view.find('[data-stage="final"]').exists()).toBe(true)
