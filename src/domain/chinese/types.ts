@@ -9,7 +9,7 @@ export interface ChineseOption {
 export interface ChineseQuestion {
   id: string
   subject: 'chinese'
-  grade: 1 | 2 | 3
+  grade: 1 | 2 | 3 | 4 | 5 | 6
   difficulty: 1 | 2 | 3
   kind: ChineseKind
   skill: string
@@ -25,7 +25,7 @@ export interface ChineseQuestion {
 
 export interface ChinesePassage {
   id: string
-  grade: 1 | 2 | 3
+  grade: 1 | 2 | 3 | 4 | 5 | 6
   title: string
   body: string
   audio?: string

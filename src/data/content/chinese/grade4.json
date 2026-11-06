@@ -1,0 +1,890 @@
+{
+  "questions": [
+    {
+      "id": "cn4-pinyin-001",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“供给” 的“供”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "gōng"
+        },
+        {
+          "id": "B",
+          "label": "gòng"
+        },
+        {
+          "id": "C",
+          "label": "gǒng"
+        },
+        {
+          "id": "D",
+          "label": "gùng"
+        }
+      ],
+      "answer": {
+        "value": "gōng",
+        "optionId": "A"
+      },
+      "explanation": "“供给”表示提供，读 gōng。",
+      "hints": [
+        "和“提供”有关。",
+        "第一声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn4-pinyin-002",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“薄雾” 的“薄”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "bó"
+        },
+        {
+          "id": "B",
+          "label": "báo"
+        },
+        {
+          "id": "C",
+          "label": "bò"
+        },
+        {
+          "id": "D",
+          "label": "bāo"
+        }
+      ],
+      "answer": {
+        "value": "bó",
+        "optionId": "A"
+      },
+      "explanation": "“薄雾”指淡淡的雾，读 bó。",
+      "hints": [
+        "不是“薄饼”的薄。",
+        "第二声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn4-pinyin-003",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“折腾” 的“折”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zhē"
+        },
+        {
+          "id": "B",
+          "label": "zhé"
+        },
+        {
+          "id": "C",
+          "label": "shé"
+        },
+        {
+          "id": "D",
+          "label": "zhè"
+        }
+      ],
+      "answer": {
+        "value": "zhē",
+        "optionId": "A"
+      },
+      "explanation": "“折腾”表示反复做，读 zhē。",
+      "hints": [
+        "和“折断”不同。",
+        "第一声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn4-pinyin-004",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“处理” 的“处”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "chǔ"
+        },
+        {
+          "id": "B",
+          "label": "chù"
+        },
+        {
+          "id": "C",
+          "label": "chū"
+        },
+        {
+          "id": "D",
+          "label": "chú"
+        }
+      ],
+      "answer": {
+        "value": "chǔ",
+        "optionId": "A"
+      },
+      "explanation": "“处理”表示办理，读 chǔ。",
+      "hints": [
+        "不是“到处”的处。",
+        "第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn4-character-001",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“分（ ）是非” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "辨"
+        },
+        {
+          "id": "B",
+          "label": "辩"
+        },
+        {
+          "id": "C",
+          "label": "辫"
+        },
+        {
+          "id": "D",
+          "label": "瓣"
+        }
+      ],
+      "answer": {
+        "value": "辨",
+        "optionId": "A"
+      },
+      "explanation": "“分辨”表示区分，中间是点撇。",
+      "hints": [
+        "和“区分”有关。",
+        "中间不是言字旁。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn4-character-002",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“急（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "躁"
+        },
+        {
+          "id": "B",
+          "label": "燥"
+        },
+        {
+          "id": "C",
+          "label": "噪"
+        },
+        {
+          "id": "D",
+          "label": "操"
+        }
+      ],
+      "answer": {
+        "value": "躁",
+        "optionId": "A"
+      },
+      "explanation": "“急躁”表示性子急，是足字旁。",
+      "hints": [
+        "和心情/动作有关。",
+        "不是干燥的燥。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn4-character-003",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“（ ）工” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "竣"
+        },
+        {
+          "id": "B",
+          "label": "峻"
+        },
+        {
+          "id": "C",
+          "label": "俊"
+        },
+        {
+          "id": "D",
+          "label": "骏"
+        }
+      ],
+      "answer": {
+        "value": "竣",
+        "optionId": "A"
+      },
+      "explanation": "“竣工”表示工程完成，是立字旁。",
+      "hints": [
+        "和“完成”有关。",
+        "不是山字旁的峻。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn4-character-004",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“鼓（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "励"
+        },
+        {
+          "id": "B",
+          "label": "厉"
+        },
+        {
+          "id": "C",
+          "label": "历"
+        },
+        {
+          "id": "D",
+          "label": "利"
+        }
+      ],
+      "answer": {
+        "value": "励",
+        "optionId": "A"
+      },
+      "explanation": "“鼓励”是力字旁，表示使人上进。",
+      "hints": [
+        "和“力量”有关。",
+        "不是严厉的厉。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn4-word-001",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“一鼓作气” 是什么意思？",
+      "options": [
+        {
+          "id": "A",
+          "label": "趁劲头大的时候一口气做完"
+        },
+        {
+          "id": "B",
+          "label": "打鼓很有趣"
+        },
+        {
+          "id": "C",
+          "label": "一次又一次地做"
+        },
+        {
+          "id": "D",
+          "label": "先休息再做事"
+        }
+      ],
+      "answer": {
+        "value": "趁劲头大的时候一口气做完",
+        "optionId": "A"
+      },
+      "explanation": "古代作战击鼓进军，比喻趁劲头大时一下子把事情做完。",
+      "hints": [
+        "和“一口气”有关。",
+        "不要中途停。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn4-word-002",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“半途而废” 比喻什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "事情做到一半就放弃"
+        },
+        {
+          "id": "B",
+          "label": "走到一半休息"
+        },
+        {
+          "id": "C",
+          "label": "把路修一半"
+        },
+        {
+          "id": "D",
+          "label": "做事很慢"
+        }
+      ],
+      "answer": {
+        "value": "事情做到一半就放弃",
+        "optionId": "A"
+      },
+      "explanation": "“废”是停止，比喻中途放弃。",
+      "hints": [
+        "和“放弃”有关。",
+        "做事要有始有终。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn4-word-003",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“集思广益” 的意思是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "集中大家智慧，广泛听取意见"
+        },
+        {
+          "id": "B",
+          "label": "把东西集中起来"
+        },
+        {
+          "id": "C",
+          "label": "想很多办法"
+        },
+        {
+          "id": "D",
+          "label": "一个人思考"
+        }
+      ],
+      "answer": {
+        "value": "集中大家智慧，广泛听取意见",
+        "optionId": "A"
+      },
+      "explanation": "“集思”是集中思考，“广益”是广泛受益。",
+      "hints": [
+        "和“大家一起”有关。",
+        "多听意见。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn4-word-004",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“精益求精” 告诉我们什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "好了还要更好"
+        },
+        {
+          "id": "B",
+          "label": "差不多就行"
+        },
+        {
+          "id": "C",
+          "label": "只做一遍"
+        },
+        {
+          "id": "D",
+          "label": "不用改进"
+        }
+      ],
+      "answer": {
+        "value": "好了还要更好",
+        "optionId": "A"
+      },
+      "explanation": "“精益求精”指已经很好还要求更好。",
+      "hints": [
+        "和“追求更好”有关。",
+        "不满足于现状。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn4-reading-001",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "爬山虎的脚怎样巴住墙？",
+      "options": [
+        {
+          "id": "A",
+          "label": "细丝碰到墙变成小圆片"
+        },
+        {
+          "id": "B",
+          "label": "脚直接钻进墙里"
+        },
+        {
+          "id": "C",
+          "label": "用叶子粘住墙"
+        },
+        {
+          "id": "D",
+          "label": "靠风吹到墙上"
+        }
+      ],
+      "answer": {
+        "value": "细丝碰到墙变成小圆片",
+        "optionId": "A"
+      },
+      "explanation": "短文说“细丝碰到墙，就变成小圆片，巴住墙”。",
+      "hints": [
+        "找“碰到墙”后的变化。",
+        "不是叶子。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn4-passage-001"
+    },
+    {
+      "id": "cn4-reading-002",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-cause",
+      "prompt": "没碰到墙的脚为什么会枯萎？",
+      "options": [
+        {
+          "id": "A",
+          "label": "因为它没有巴住墙"
+        },
+        {
+          "id": "B",
+          "label": "因为太阳太晒"
+        },
+        {
+          "id": "C",
+          "label": "因为水太多"
+        },
+        {
+          "id": "D",
+          "label": "因为它被风吹走"
+        }
+      ],
+      "answer": {
+        "value": "因为它没有巴住墙",
+        "optionId": "A"
+      },
+      "explanation": "短文说“没碰到墙的脚，过几天就枯萎了”。",
+      "hints": [
+        "对比碰到墙的脚。",
+        "和“巴住墙”有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-cause"
+      ],
+      "passageId": "cn4-passage-001"
+    },
+    {
+      "id": "cn4-reading-003",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-main-idea",
+      "prompt": "从爬山虎的脚可以看出作者观察得怎样？",
+      "options": [
+        {
+          "id": "A",
+          "label": "非常细致"
+        },
+        {
+          "id": "B",
+          "label": "很随便"
+        },
+        {
+          "id": "C",
+          "label": "只看了远处"
+        },
+        {
+          "id": "D",
+          "label": "没有观察"
+        }
+      ],
+      "answer": {
+        "value": "非常细致",
+        "optionId": "A"
+      },
+      "explanation": "能写出细丝变圆片、没碰墙会枯萎，说明观察细致。",
+      "hints": [
+        "注意细节描写。",
+        "作者看了很多天。"
+      ],
+      "tags": [
+        "reading",
+        "reading-main-idea"
+      ],
+      "passageId": "cn4-passage-001"
+    },
+    {
+      "id": "cn4-reading-004",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-purpose",
+      "prompt": "长城在古代的主要作用是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "抵御外敌"
+        },
+        {
+          "id": "B",
+          "label": "供人参观"
+        },
+        {
+          "id": "C",
+          "label": "运输货物"
+        },
+        {
+          "id": "D",
+          "label": "储存粮食"
+        }
+      ],
+      "answer": {
+        "value": "抵御外敌",
+        "optionId": "A"
+      },
+      "explanation": "短文说“古代，它用来抵御外敌”。",
+      "hints": [
+        "找“古代”那一句。",
+        "和战争有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-purpose"
+      ],
+      "passageId": "cn4-passage-002"
+    },
+    {
+      "id": "cn4-reading-005",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "人们站在长城上为什么想起劳动人民？",
+      "options": [
+        {
+          "id": "A",
+          "label": "长城是劳动人民辛苦修建的"
+        },
+        {
+          "id": "B",
+          "label": "劳动人民住在长城上"
+        },
+        {
+          "id": "C",
+          "label": "长城是劳动人民买的"
+        },
+        {
+          "id": "D",
+          "label": "劳动人民在长城上打仗"
+        }
+      ],
+      "answer": {
+        "value": "长城是劳动人民辛苦修建的",
+        "optionId": "A"
+      },
+      "explanation": "修筑长城工程艰巨，凝聚着劳动人民的血汗。",
+      "hints": [
+        "联系“修筑”。",
+        "长城不是一个人建的。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn4-passage-002"
+    },
+    {
+      "id": "cn4-reading-006",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-main-idea",
+      "prompt": "这篇短文主要表达什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "赞美长城和劳动人民"
+        },
+        {
+          "id": "B",
+          "label": "介绍长城有多长"
+        },
+        {
+          "id": "C",
+          "label": "说明怎么修长城"
+        },
+        {
+          "id": "D",
+          "label": "记录一次游览"
+        }
+      ],
+      "answer": {
+        "value": "赞美长城和劳动人民",
+        "optionId": "A"
+      },
+      "explanation": "短文既写长城雄伟，又写对劳动人民的敬仰。",
+      "hints": [
+        "看结尾。",
+        "不只是写长度。"
+      ],
+      "tags": [
+        "reading",
+        "reading-main-idea"
+      ],
+      "passageId": "cn4-passage-002"
+    },
+    {
+      "id": "cn4-poem-001",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“不识庐山真面目，只缘身在此山中” 告诉我们什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "身处其中往往看不清全貌"
+        },
+        {
+          "id": "B",
+          "label": "庐山很难看"
+        },
+        {
+          "id": "C",
+          "label": "不要爬山"
+        },
+        {
+          "id": "D",
+          "label": "山里没有路"
+        }
+      ],
+      "answer": {
+        "value": "身处其中往往看不清全貌",
+        "optionId": "A"
+      },
+      "explanation": "因为人在山中，只能看到局部。",
+      "hints": [
+        "“只缘”是因为。",
+        "要跳出来看。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn4-poem-002",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“山重水复疑无路，柳暗花明又一村” 常用来形容什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "困境中出现新的希望"
+        },
+        {
+          "id": "B",
+          "label": "山路很难走"
+        },
+        {
+          "id": "C",
+          "label": "村子很漂亮"
+        },
+        {
+          "id": "D",
+          "label": "迷路了"
+        }
+      ],
+      "answer": {
+        "value": "困境中出现新的希望",
+        "optionId": "A"
+      },
+      "explanation": "前句写疑似无路，后句写忽然出现村庄。",
+      "hints": [
+        "“疑无路”之后呢？",
+        "和“希望”有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn4-poem-003",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-scene",
+      "prompt": "“一道残阳铺水中，半江瑟瑟半江红” 写的是什么时间？",
+      "options": [
+        {
+          "id": "A",
+          "label": "傍晚"
+        },
+        {
+          "id": "B",
+          "label": "清晨"
+        },
+        {
+          "id": "C",
+          "label": "中午"
+        },
+        {
+          "id": "D",
+          "label": "深夜"
+        }
+      ],
+      "answer": {
+        "value": "傍晚",
+        "optionId": "A"
+      },
+      "explanation": "“残阳”指快要落山的太阳。",
+      "hints": [
+        "残阳是什么时候？",
+        "太阳快落山。"
+      ],
+      "tags": [
+        "poem",
+        "poem-scene"
+      ]
+    },
+    {
+      "id": "cn4-poem-004",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“梅须逊雪三分白，雪却输梅一段香” 说明什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "各有长处和短处"
+        },
+        {
+          "id": "B",
+          "label": "梅花比雪好看"
+        },
+        {
+          "id": "C",
+          "label": "雪比梅花香"
+        },
+        {
+          "id": "D",
+          "label": "梅雪一样"
+        }
+      ],
+      "answer": {
+        "value": "各有长处和短处",
+        "optionId": "A"
+      },
+      "explanation": "梅不如雪白，雪不如梅香。",
+      "hints": [
+        "比白和比香。",
+        "各有所长。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    }
+  ]
+}

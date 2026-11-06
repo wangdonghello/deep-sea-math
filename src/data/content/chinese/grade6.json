@@ -1,0 +1,890 @@
+{
+  "questions": [
+    {
+      "id": "cn6-pinyin-001",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“单薄” 的“薄”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "bó"
+        },
+        {
+          "id": "B",
+          "label": "báo"
+        },
+        {
+          "id": "C",
+          "label": "bò"
+        },
+        {
+          "id": "D",
+          "label": "bāo"
+        }
+      ],
+      "answer": {
+        "value": "bó",
+        "optionId": "A"
+      },
+      "explanation": "“单薄”表示瘦弱、不厚实，读 bó。",
+      "hints": [
+        "书面语。",
+        "不是“薄纸”的薄。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn6-pinyin-002",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“更新” 的“更”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "gēng"
+        },
+        {
+          "id": "B",
+          "label": "gèng"
+        },
+        {
+          "id": "C",
+          "label": "gěng"
+        },
+        {
+          "id": "D",
+          "label": "gēng"
+        }
+      ],
+      "answer": {
+        "value": "gēng",
+        "optionId": "A"
+      },
+      "explanation": "“更新”表示旧的换成新的，读 gēng。",
+      "hints": [
+        "不是“更加”的更。",
+        "第一声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn6-pinyin-003",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“记载” 的“载”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zǎi"
+        },
+        {
+          "id": "B",
+          "label": "zài"
+        },
+        {
+          "id": "C",
+          "label": "zāi"
+        },
+        {
+          "id": "D",
+          "label": "zǎn"
+        }
+      ],
+      "answer": {
+        "value": "zǎi",
+        "optionId": "A"
+      },
+      "explanation": "“记载”表示记录，读 zǎi。",
+      "hints": [
+        "不是“载重”的载。",
+        "第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn6-pinyin-004",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“厌恶” 的“恶”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "wù"
+        },
+        {
+          "id": "B",
+          "label": "è"
+        },
+        {
+          "id": "C",
+          "label": "ě"
+        },
+        {
+          "id": "D",
+          "label": "wū"
+        }
+      ],
+      "answer": {
+        "value": "wù",
+        "optionId": "A"
+      },
+      "explanation": "“厌恶”表示讨厌，读 wù。",
+      "hints": [
+        "和“讨厌”有关。",
+        "第四声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn6-character-001",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“（ ）论” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "辩"
+        },
+        {
+          "id": "B",
+          "label": "辨"
+        },
+        {
+          "id": "C",
+          "label": "辫"
+        },
+        {
+          "id": "D",
+          "label": "瓣"
+        }
+      ],
+      "answer": {
+        "value": "辩",
+        "optionId": "A"
+      },
+      "explanation": "“辩论”是言字旁，和说话有关。",
+      "hints": [
+        "和“说话”有关。",
+        "中间是言字旁。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn6-character-002",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“（ ）使” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "即"
+        },
+        {
+          "id": "B",
+          "label": "既"
+        },
+        {
+          "id": "C",
+          "label": "继"
+        },
+        {
+          "id": "D",
+          "label": "寄"
+        }
+      ],
+      "answer": {
+        "value": "即",
+        "optionId": "A"
+      },
+      "explanation": "“即使”表示假设让步，用“即”。",
+      "hints": [
+        "和“即便”一样。",
+        "不是“既然”的既。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn6-character-003",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“狼（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "藉"
+        },
+        {
+          "id": "B",
+          "label": "籍"
+        },
+        {
+          "id": "C",
+          "label": "集"
+        },
+        {
+          "id": "D",
+          "label": "迹"
+        }
+      ],
+      "answer": {
+        "value": "藉",
+        "optionId": "A"
+      },
+      "explanation": "“狼藉”表示乱七八糟，是草字头。",
+      "hints": [
+        "和“杯盘狼藉”有关。",
+        "不是书籍的籍。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn6-character-004",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“（ ）摘” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "采"
+        },
+        {
+          "id": "B",
+          "label": "彩"
+        },
+        {
+          "id": "C",
+          "label": "菜"
+        },
+        {
+          "id": "D",
+          "label": "踩"
+        }
+      ],
+      "answer": {
+        "value": "采",
+        "optionId": "A"
+      },
+      "explanation": "“采摘”表示摘取，用“采”。",
+      "hints": [
+        "和“摘”意思相近。",
+        "不是彩色的彩。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn6-word-001",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“脍炙人口” 是什么意思？",
+      "options": [
+        {
+          "id": "A",
+          "label": "好的作品人人称赞传诵"
+        },
+        {
+          "id": "B",
+          "label": "肉很好吃"
+        },
+        {
+          "id": "C",
+          "label": "人口很多"
+        },
+        {
+          "id": "D",
+          "label": "菜很香"
+        }
+      ],
+      "answer": {
+        "value": "好的作品人人称赞传诵",
+        "optionId": "A"
+      },
+      "explanation": "脍炙指美味的肉，比喻好的诗文人人赞美。",
+      "hints": [
+        "和“作品”有关。",
+        "不是真的吃肉。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn6-word-002",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“栩栩如生” 形容什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "形象逼真，像活的一样"
+        },
+        {
+          "id": "B",
+          "label": "生活很幸福"
+        },
+        {
+          "id": "C",
+          "label": "画画很慢"
+        },
+        {
+          "id": "D",
+          "label": "人很有礼貌"
+        }
+      ],
+      "answer": {
+        "value": "形象逼真，像活的一样",
+        "optionId": "A"
+      },
+      "explanation": "栩栩：生动活泼的样子。多形容艺术形象逼真。",
+      "hints": [
+        "和“像活的一样”有关。",
+        "常形容画或雕塑。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn6-word-003",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“天籁之音” 形容什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "极其好听的声音"
+        },
+        {
+          "id": "B",
+          "label": "天上的音乐"
+        },
+        {
+          "id": "C",
+          "label": "很大的声音"
+        },
+        {
+          "id": "D",
+          "label": "奇怪的声音"
+        }
+      ],
+      "answer": {
+        "value": "极其好听的声音",
+        "optionId": "A"
+      },
+      "explanation": "籁指声音，天籁指自然界的声响，形容声音美妙。",
+      "hints": [
+        "和“好听”有关。",
+        "不是“很大声”。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn6-word-004",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "sentence-error",
+      "prompt": "“能否取得好成绩，关键在于努力。” 这句话的毛病是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "两面对一面"
+        },
+        {
+          "id": "B",
+          "label": "缺少主语"
+        },
+        {
+          "id": "C",
+          "label": "用词不当"
+        },
+        {
+          "id": "D",
+          "label": "重复啰嗦"
+        }
+      ],
+      "answer": {
+        "value": "两面对一面",
+        "optionId": "A"
+      },
+      "explanation": "“能否”是两面，“努力”是一面，前后不对应。",
+      "hints": [
+        "去掉“能否”。",
+        "前后要一致。"
+      ],
+      "tags": [
+        "word",
+        "sentence-error"
+      ]
+    },
+    {
+      "id": "cn6-reading-001",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "草原的特点是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "一碧千里"
+        },
+        {
+          "id": "B",
+          "label": "黄沙漫天"
+        },
+        {
+          "id": "C",
+          "label": "高楼林立"
+        },
+        {
+          "id": "D",
+          "label": "冰雪覆盖"
+        }
+      ],
+      "answer": {
+        "value": "一碧千里",
+        "optionId": "A"
+      },
+      "explanation": "短文开头说“草原一碧千里”。",
+      "hints": [
+        "看第一句。",
+        "和绿色有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn6-passage-001"
+    },
+    {
+      "id": "cn6-reading-002",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "蒙古族同胞怎样招待客人？",
+      "options": [
+        {
+          "id": "A",
+          "label": "端奶茶、捧手抓羊肉"
+        },
+        {
+          "id": "B",
+          "label": "唱歌跳舞"
+        },
+        {
+          "id": "C",
+          "label": "送哈达"
+        },
+        {
+          "id": "D",
+          "label": "骑马"
+        }
+      ],
+      "answer": {
+        "value": "端奶茶、捧手抓羊肉",
+        "optionId": "A"
+      },
+      "explanation": "短文说“端出奶茶，捧出手抓羊肉”。",
+      "hints": [
+        "找“端出”“捧出”。",
+        "和食物有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn6-passage-001"
+    },
+    {
+      "id": "cn6-reading-003",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-emotion",
+      "prompt": "“蒙汉情深何忍别” 表达什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "蒙汉两族人民依依不舍"
+        },
+        {
+          "id": "B",
+          "label": "草原很大"
+        },
+        {
+          "id": "C",
+          "label": "作者想回家"
+        },
+        {
+          "id": "D",
+          "label": "蒙古包很美"
+        }
+      ],
+      "answer": {
+        "value": "蒙汉两族人民依依不舍",
+        "optionId": "A"
+      },
+      "explanation": "诗句写两族人民情谊深厚，不忍分别。",
+      "hints": [
+        "“何忍别”是什么意思？",
+        "和“分别”有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-emotion"
+      ],
+      "passageId": "cn6-passage-001"
+    },
+    {
+      "id": "cn6-reading-004",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-device",
+      "prompt": "“燕子去了，有再来的时候……” 主要用了什么修辞？",
+      "options": [
+        {
+          "id": "A",
+          "label": "排比"
+        },
+        {
+          "id": "B",
+          "label": "比喻"
+        },
+        {
+          "id": "C",
+          "label": "夸张"
+        },
+        {
+          "id": "D",
+          "label": "反问"
+        }
+      ],
+      "answer": {
+        "value": "排比",
+        "optionId": "A"
+      },
+      "explanation": "三句结构相似，构成排比。",
+      "hints": [
+        "看三个“的时候”。",
+        "结构相同。"
+      ],
+      "tags": [
+        "reading",
+        "reading-device"
+      ],
+      "passageId": "cn6-passage-002"
+    },
+    {
+      "id": "cn6-reading-005",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-emotion",
+      "prompt": "作者对时间的态度是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "珍惜并感到无奈"
+        },
+        {
+          "id": "B",
+          "label": "无所谓"
+        },
+        {
+          "id": "C",
+          "label": "很喜欢浪费时间"
+        },
+        {
+          "id": "D",
+          "label": "害怕时间"
+        }
+      ],
+      "answer": {
+        "value": "珍惜并感到无奈",
+        "optionId": "A"
+      },
+      "explanation": "作者感叹日子一去不复返，流露珍惜与无奈。",
+      "hints": [
+        "看最后一句。",
+        "“一去不复返”说明什么？"
+      ],
+      "tags": [
+        "reading",
+        "reading-emotion"
+      ],
+      "passageId": "cn6-passage-002"
+    },
+    {
+      "id": "cn6-reading-006",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-main-idea",
+      "prompt": "这篇短文的主旨是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "珍惜时间"
+        },
+        {
+          "id": "B",
+          "label": "赞美春天"
+        },
+        {
+          "id": "C",
+          "label": "怀念燕子"
+        },
+        {
+          "id": "D",
+          "label": "描写桃花"
+        }
+      ],
+      "answer": {
+        "value": "珍惜时间",
+        "optionId": "A"
+      },
+      "explanation": "借燕子、杨柳、桃花反衬时间一去不回。",
+      "hints": [
+        "对比之后想说什么？",
+        "和“时间”有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-main-idea"
+      ],
+      "passageId": "cn6-passage-002"
+    },
+    {
+      "id": "cn6-poem-001",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-image",
+      "prompt": "“千磨万击还坚劲，任尔东西南北风” 赞美什么精神？",
+      "options": [
+        {
+          "id": "A",
+          "label": "坚韧不拔"
+        },
+        {
+          "id": "B",
+          "label": "随风摇摆"
+        },
+        {
+          "id": "C",
+          "label": "喜欢风雨"
+        },
+        {
+          "id": "D",
+          "label": "轻松自在"
+        }
+      ],
+      "answer": {
+        "value": "坚韧不拔",
+        "optionId": "A"
+      },
+      "explanation": "借竹子经受磨难仍坚强，赞美坚韧。",
+      "hints": [
+        "“还坚劲”是什么意思？",
+        "不是随风倒。"
+      ],
+      "tags": [
+        "poem",
+        "poem-image"
+      ]
+    },
+    {
+      "id": "cn6-poem-002",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“粉骨碎身浑不怕，要留清白在人间” 表达什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "坚守清白、不怕牺牲"
+        },
+        {
+          "id": "B",
+          "label": "害怕死亡"
+        },
+        {
+          "id": "C",
+          "label": "喜欢石灰"
+        },
+        {
+          "id": "D",
+          "label": "想留名"
+        }
+      ],
+      "answer": {
+        "value": "坚守清白、不怕牺牲",
+        "optionId": "A"
+      },
+      "explanation": "于谦借石灰表达坚守高洁品格的志向。",
+      "hints": [
+        "“清白”指什么？",
+        "不只是石灰白。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn6-poem-003",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-emotion",
+      "prompt": "“春风又绿江南岸，明月何时照我还” 表达什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "思念家乡、盼望归乡"
+        },
+        {
+          "id": "B",
+          "label": "喜欢春天"
+        },
+        {
+          "id": "C",
+          "label": "赞美江南"
+        },
+        {
+          "id": "D",
+          "label": "想去看月亮"
+        }
+      ],
+      "answer": {
+        "value": "思念家乡、盼望归乡",
+        "optionId": "A"
+      },
+      "explanation": "“何时照我还”直接表达归乡之盼。",
+      "hints": [
+        "“还”是回去。",
+        "诗人在外地。"
+      ],
+      "tags": [
+        "poem",
+        "poem-emotion"
+      ]
+    },
+    {
+      "id": "cn6-poem-004",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“谁言寸草心，报得三春晖” 赞美什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "母爱"
+        },
+        {
+          "id": "B",
+          "label": "春天"
+        },
+        {
+          "id": "C",
+          "label": "小草"
+        },
+        {
+          "id": "D",
+          "label": "阳光"
+        }
+      ],
+      "answer": {
+        "value": "母爱",
+        "optionId": "A"
+      },
+      "explanation": "以小草难报春晖比喻子女难报母爱。",
+      "hints": [
+        "“三春晖”比喻什么？",
+        "和母亲有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,890 @@
+{
+  "questions": [
+    {
+      "id": "cn5-pinyin-001",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“参差” 的“差”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "cī"
+        },
+        {
+          "id": "B",
+          "label": "chā"
+        },
+        {
+          "id": "C",
+          "label": "chāi"
+        },
+        {
+          "id": "D",
+          "label": "chà"
+        }
+      ],
+      "answer": {
+        "value": "cī",
+        "optionId": "A"
+      },
+      "explanation": "“参差”读 cēn cī，表示长短不齐。",
+      "hints": [
+        "和“参差不齐”有关。",
+        "第一声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn5-pinyin-002",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“积累” 的“累”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "lěi"
+        },
+        {
+          "id": "B",
+          "label": "lèi"
+        },
+        {
+          "id": "C",
+          "label": "léi"
+        },
+        {
+          "id": "D",
+          "label": "lēi"
+        }
+      ],
+      "answer": {
+        "value": "lěi",
+        "optionId": "A"
+      },
+      "explanation": "“积累”表示逐渐聚集，读 lěi。",
+      "hints": [
+        "不是“劳累”的累。",
+        "第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn5-pinyin-003",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“勉强” 的“强”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "qiǎng"
+        },
+        {
+          "id": "B",
+          "label": "qiáng"
+        },
+        {
+          "id": "C",
+          "label": "jiàng"
+        },
+        {
+          "id": "D",
+          "label": "qiāng"
+        }
+      ],
+      "answer": {
+        "value": "qiǎng",
+        "optionId": "A"
+      },
+      "explanation": "“勉强”读 miǎn qiǎng，表示不情愿或能力不够。",
+      "hints": [
+        "不是“强大”的强。",
+        "第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn5-pinyin-004",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“给予” 的“给”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "jǐ"
+        },
+        {
+          "id": "B",
+          "label": "gěi"
+        },
+        {
+          "id": "C",
+          "label": "jǐn"
+        },
+        {
+          "id": "D",
+          "label": "gài"
+        }
+      ],
+      "answer": {
+        "value": "jǐ",
+        "optionId": "A"
+      },
+      "explanation": "“给予”读 jǐ yǔ，表示给。",
+      "hints": [
+        "书面语。",
+        "第三声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone"
+      ]
+    },
+    {
+      "id": "cn5-character-001",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“险（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "峻"
+        },
+        {
+          "id": "B",
+          "label": "竣"
+        },
+        {
+          "id": "C",
+          "label": "俊"
+        },
+        {
+          "id": "D",
+          "label": "骏"
+        }
+      ],
+      "answer": {
+        "value": "峻",
+        "optionId": "A"
+      },
+      "explanation": "“险峻”形容山势高而险，是山字旁。",
+      "hints": [
+        "和山有关。",
+        "不是竣工的竣。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn5-character-002",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“夜（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "幕"
+        },
+        {
+          "id": "B",
+          "label": "慕"
+        },
+        {
+          "id": "C",
+          "label": "墓"
+        },
+        {
+          "id": "D",
+          "label": "暮"
+        }
+      ],
+      "answer": {
+        "value": "幕",
+        "optionId": "A"
+      },
+      "explanation": "“夜幕”指夜晚像幕布，下面是巾。",
+      "hints": [
+        "和布有关。",
+        "不是羡慕的慕。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn5-character-003",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“书（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "籍"
+        },
+        {
+          "id": "B",
+          "label": "藉"
+        },
+        {
+          "id": "C",
+          "label": "集"
+        },
+        {
+          "id": "D",
+          "label": "级"
+        }
+      ],
+      "answer": {
+        "value": "籍",
+        "optionId": "A"
+      },
+      "explanation": "“书籍”的籍是竹字头。",
+      "hints": [
+        "和书有关。",
+        "下面不是“来”。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn5-character-004",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“干（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "燥"
+        },
+        {
+          "id": "B",
+          "label": "躁"
+        },
+        {
+          "id": "C",
+          "label": "噪"
+        },
+        {
+          "id": "D",
+          "label": "操"
+        }
+      ],
+      "answer": {
+        "value": "燥",
+        "optionId": "A"
+      },
+      "explanation": "“干燥”是火字旁，表示缺少水分。",
+      "hints": [
+        "和火有关。",
+        "不是急躁的躁。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion"
+      ]
+    },
+    {
+      "id": "cn5-word-001",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“不计其数” 是什么意思？",
+      "options": [
+        {
+          "id": "A",
+          "label": "多得数不清"
+        },
+        {
+          "id": "B",
+          "label": "不计算数字"
+        },
+        {
+          "id": "C",
+          "label": "数量很少"
+        },
+        {
+          "id": "D",
+          "label": "不算数"
+        }
+      ],
+      "answer": {
+        "value": "多得数不清",
+        "optionId": "A"
+      },
+      "explanation": "“计”是计算，形容数量非常多。",
+      "hints": [
+        "和“数不清”有关。",
+        "不是“不算数”。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn5-word-002",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“安居乐业” 形容什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "生活安定，愉快劳动"
+        },
+        {
+          "id": "B",
+          "label": "住在家里不工作"
+        },
+        {
+          "id": "C",
+          "label": "搬家很快乐"
+        },
+        {
+          "id": "D",
+          "label": "工作很辛苦"
+        }
+      ],
+      "answer": {
+        "value": "生活安定，愉快劳动",
+        "optionId": "A"
+      },
+      "explanation": "安：安定；乐：喜爱。形容生活安定。",
+      "hints": [
+        "和“生活安定”有关。",
+        "不是“不工作”。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn5-word-003",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“呕心沥血” 形容什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "费尽心血"
+        },
+        {
+          "id": "B",
+          "label": "身体不好"
+        },
+        {
+          "id": "C",
+          "label": "吐了很多血"
+        },
+        {
+          "id": "D",
+          "label": "工作很轻松"
+        }
+      ],
+      "answer": {
+        "value": "费尽心血",
+        "optionId": "A"
+      },
+      "explanation": "比喻用尽心思，多形容创作或工作的辛苦。",
+      "hints": [
+        "和“费尽心思”有关。",
+        "不是真的吐血。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning"
+      ]
+    },
+    {
+      "id": "cn5-word-004",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "sentence-error",
+      "prompt": "“通过这次活动，使我明白了合作的重要。” 这句话的毛病是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "缺少主语"
+        },
+        {
+          "id": "B",
+          "label": "用词不当"
+        },
+        {
+          "id": "C",
+          "label": "前后矛盾"
+        },
+        {
+          "id": "D",
+          "label": "重复啰嗦"
+        }
+      ],
+      "answer": {
+        "value": "缺少主语",
+        "optionId": "A"
+      },
+      "explanation": "“通过”和“使”同时用，句子没有主语。",
+      "hints": [
+        "去掉“通过”或“使”。",
+        "谁明白了？"
+      ],
+      "tags": [
+        "word",
+        "sentence-error"
+      ]
+    },
+    {
+      "id": "cn5-reading-001",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "松鼠的尾巴像什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "一把伞"
+        },
+        {
+          "id": "B",
+          "label": "一把扇子"
+        },
+        {
+          "id": "C",
+          "label": "一根绳子"
+        },
+        {
+          "id": "D",
+          "label": "一朵花"
+        }
+      ],
+      "answer": {
+        "value": "一把伞",
+        "optionId": "A"
+      },
+      "explanation": "短文说“大尾巴，像一把伞”。",
+      "hints": [
+        "找“像”字。",
+        "和雨伞有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn5-passage-001"
+    },
+    {
+      "id": "cn5-reading-002",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "松鼠冬天会做什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "储藏食物"
+        },
+        {
+          "id": "B",
+          "label": "冬眠不动"
+        },
+        {
+          "id": "C",
+          "label": "飞到南方"
+        },
+        {
+          "id": "D",
+          "label": "换毛"
+        }
+      ],
+      "answer": {
+        "value": "储藏食物",
+        "optionId": "A"
+      },
+      "explanation": "短文说“冬天还会储藏食物”。",
+      "hints": [
+        "找“冬天”。",
+        "和食物有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn5-passage-001"
+    },
+    {
+      "id": "cn5-reading-003",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-device",
+      "prompt": "“大尾巴像一把伞” 用了什么说明方法？",
+      "options": [
+        {
+          "id": "A",
+          "label": "打比方"
+        },
+        {
+          "id": "B",
+          "label": "列数字"
+        },
+        {
+          "id": "C",
+          "label": "作比较"
+        },
+        {
+          "id": "D",
+          "label": "举例子"
+        }
+      ],
+      "answer": {
+        "value": "打比方",
+        "optionId": "A"
+      },
+      "explanation": "把尾巴比作伞，是打比方。",
+      "hints": [
+        "有“像”字。",
+        "把一种事物比作另一种。"
+      ],
+      "tags": [
+        "reading",
+        "reading-device"
+      ],
+      "passageId": "cn5-passage-001"
+    },
+    {
+      "id": "cn5-reading-004",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "圆明园是哪一年被烧毁的？",
+      "options": [
+        {
+          "id": "A",
+          "label": "1860年"
+        },
+        {
+          "id": "B",
+          "label": "1840年"
+        },
+        {
+          "id": "C",
+          "label": "1900年"
+        },
+        {
+          "id": "D",
+          "label": "1949年"
+        }
+      ],
+      "answer": {
+        "value": "1860年",
+        "optionId": "A"
+      },
+      "explanation": "短文说“1860年，英法联军……烧毁建筑”。",
+      "hints": [
+        "找年份。",
+        "和英法联军有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail"
+      ],
+      "passageId": "cn5-passage-002"
+    },
+    {
+      "id": "cn5-reading-005",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "残垣断壁“提醒我们”什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "不要忘记历史"
+        },
+        {
+          "id": "B",
+          "label": "这里很漂亮"
+        },
+        {
+          "id": "C",
+          "label": "来参观"
+        },
+        {
+          "id": "D",
+          "label": "重建圆明园"
+        }
+      ],
+      "answer": {
+        "value": "不要忘记历史",
+        "optionId": "A"
+      },
+      "explanation": "短文结尾说提醒我们不要忘记这段历史。",
+      "hints": [
+        "看最后一句。",
+        "和历史有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference"
+      ],
+      "passageId": "cn5-passage-002"
+    },
+    {
+      "id": "cn5-reading-006",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-emotion",
+      "prompt": "读这篇短文，会产生的感情是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "惋惜和愤慨"
+        },
+        {
+          "id": "B",
+          "label": "开心和骄傲"
+        },
+        {
+          "id": "C",
+          "label": "害怕和紧张"
+        },
+        {
+          "id": "D",
+          "label": "平静和轻松"
+        }
+      ],
+      "answer": {
+        "value": "惋惜和愤慨",
+        "optionId": "A"
+      },
+      "explanation": "圆明园被毁令人惋惜，侵略行为令人愤慨。",
+      "hints": [
+        "珍宝被抢、建筑被烧。",
+        "不是开心。"
+      ],
+      "tags": [
+        "reading",
+        "reading-emotion"
+      ],
+      "passageId": "cn5-passage-002"
+    },
+    {
+      "id": "cn5-poem-001",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-emotion",
+      "prompt": "“王师北定中原日，家祭无忘告乃翁” 表达什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "渴望收复失地、至死不忘国家"
+        },
+        {
+          "id": "B",
+          "label": "希望儿子祭祖"
+        },
+        {
+          "id": "C",
+          "label": "喜欢打仗"
+        },
+        {
+          "id": "D",
+          "label": "想念家乡"
+        }
+      ],
+      "answer": {
+        "value": "渴望收复失地、至死不忘国家",
+        "optionId": "A"
+      },
+      "explanation": "陆游临终仍盼国家统一。",
+      "hints": [
+        "“北定中原”是什么意思？",
+        "这是诗人的遗愿。"
+      ],
+      "tags": [
+        "poem",
+        "poem-emotion"
+      ]
+    },
+    {
+      "id": "cn5-poem-002",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-satire",
+      "prompt": "“暖风熏得游人醉，直把杭州作汴州” 讽刺什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "统治者苟且偷安"
+        },
+        {
+          "id": "B",
+          "label": "杭州风景太美"
+        },
+        {
+          "id": "C",
+          "label": "游人喝醉了"
+        },
+        {
+          "id": "D",
+          "label": "汴州很繁华"
+        }
+      ],
+      "answer": {
+        "value": "统治者苟且偷安",
+        "optionId": "A"
+      },
+      "explanation": "诗人讽刺南宋统治者沉迷享乐、不思收复失地。",
+      "hints": [
+        "“直把杭州作汴州”说明什么？",
+        "汴州是故都。"
+      ],
+      "tags": [
+        "poem",
+        "poem-satire"
+      ]
+    },
+    {
+      "id": "cn5-poem-003",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-meaning",
+      "prompt": "“我劝天公重抖擞，不拘一格降人才” 表达什么愿望？",
+      "options": [
+        {
+          "id": "A",
+          "label": "希望选拔更多人才"
+        },
+        {
+          "id": "B",
+          "label": "希望天气变好"
+        },
+        {
+          "id": "C",
+          "label": "希望神仙下凡"
+        },
+        {
+          "id": "D",
+          "label": "希望考试简单"
+        }
+      ],
+      "answer": {
+        "value": "希望选拔更多人才",
+        "optionId": "A"
+      },
+      "explanation": "诗人希望打破常规，任用人才。",
+      "hints": [
+        "“不拘一格”是什么意思？",
+        "和人才有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-meaning"
+      ]
+    },
+    {
+      "id": "cn5-poem-004",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-scene",
+      "prompt": "“空山新雨后，天气晚来秋” 写的是什么景象？",
+      "options": [
+        {
+          "id": "A",
+          "label": "秋雨初晴的山中"
+        },
+        {
+          "id": "B",
+          "label": "春天的早晨"
+        },
+        {
+          "id": "C",
+          "label": "夏天的雷雨"
+        },
+        {
+          "id": "D",
+          "label": "冬天的雪景"
+        }
+      ],
+      "answer": {
+        "value": "秋雨初晴的山中",
+        "optionId": "A"
+      },
+      "explanation": "“新雨后”和“晚来秋”点明秋雨初晴。",
+      "hints": [
+        "找“新雨后”。",
+        "有“秋”字。"
+      ],
+      "tags": [
+        "poem",
+        "poem-scene"
+      ]
+    }
+  ]
+}

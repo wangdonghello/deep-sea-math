@@ -31,7 +31,10 @@ const emit = defineEmits<{
 }>()
 
 const clock = props.clock ?? (() => Date.now())
-const gradeLabel = computed(() => ((props.grade ?? 1) >= 3 ? '三年级挑战' : `${props.grade ?? 1} 年级`))
+const gradeLabel = computed(() => {
+  const grade = Math.min(Math.max(props.grade ?? 1, 1), 6)
+  return grade >= 3 ? `${grade} 年级挑战` : `${grade} 年级`
+})
 const sessionId = `cn-${randomUuid()}`
 const index = ref(0)
 const started = ref(false)
