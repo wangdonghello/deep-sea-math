@@ -8,10 +8,10 @@ import { pickChineseDaily } from '@/domain/chinese/daily'
 import type { ChinesePassage, ChineseQuestion } from '@/domain/chinese/types'
 import grade1 from '@/data/content/chinese/grade1.json'
 import grade2 from '@/data/content/chinese/grade2.json'
-import grade3 from '@/data/content/chinese/grade3.json'
+import grade3 from '@/data/content/chinese/grade3-challenge.json'
 import passages1 from '@/data/content/chinese/passages.json'
 import passages2 from '@/data/content/chinese/passages-grade2.json'
-import passages3 from '@/data/content/chinese/passages-grade3.json'
+import passages3 from '@/data/content/chinese/passages-grade3-challenge.json'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
 import { HOME_PATH, PROFILES_PATH } from '@/router/nextRoute'
 
@@ -46,6 +46,7 @@ onMounted(async () => {
   <ChineseQuestView
     v-if="profileId !== ''"
     :profile-id="profileId"
+    :grade="grade"
     :store="stores.quiz"
     :questions="questions"
     :passages="passageList"

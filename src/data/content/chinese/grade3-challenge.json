@@ -1,0 +1,828 @@
+{
+  "questions": [
+    {
+      "id": "cn3x-pinyin-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“他跑得很快” 中的“得”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "de（轻声）"
+        },
+        {
+          "id": "B",
+          "label": "dé"
+        },
+        {
+          "id": "C",
+          "label": "děi"
+        },
+        {
+          "id": "D",
+          "label": "dè"
+        }
+      ],
+      "answer": {
+        "value": "de（轻声）",
+        "optionId": "A"
+      },
+      "explanation": "表示程度时，“跑得很快”的“得”读轻声 de。",
+      "hints": [
+        "读得又轻又短。",
+        "不是“得到”的得。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-pinyin-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“着火了” 中的“着”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zháo"
+        },
+        {
+          "id": "B",
+          "label": "zhe"
+        },
+        {
+          "id": "C",
+          "label": "zhuó"
+        },
+        {
+          "id": "D",
+          "label": "zhāo"
+        }
+      ],
+      "answer": {
+        "value": "zháo",
+        "optionId": "A"
+      },
+      "explanation": "“着火”表示燃烧，读 zháo。",
+      "hints": [
+        "和“燃烧”有关。",
+        "不是“看着”的着。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-pinyin-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“妈妈在和面” 中的“和”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "huó"
+        },
+        {
+          "id": "B",
+          "label": "hé"
+        },
+        {
+          "id": "C",
+          "label": "hè"
+        },
+        {
+          "id": "D",
+          "label": "huò"
+        }
+      ],
+      "answer": {
+        "value": "huó",
+        "optionId": "A"
+      },
+      "explanation": "“和面”指加水搅拌面粉，读 huó。",
+      "hints": [
+        "和面粉有关。",
+        "第二声。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-pinyin-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“爸爸出差了” 中的“差”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "chāi"
+        },
+        {
+          "id": "B",
+          "label": "chā"
+        },
+        {
+          "id": "C",
+          "label": "chà"
+        },
+        {
+          "id": "D",
+          "label": "cī"
+        }
+      ],
+      "answer": {
+        "value": "chāi",
+        "optionId": "A"
+      },
+      "explanation": "“出差”指外出办事，读 chāi。",
+      "hints": [
+        "和“差事”有关。",
+        "不是“差别”的差。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-character-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“立即” 的“即”和“既然” 的“既”，哪个表示“马上”？",
+      "options": [
+        {
+          "id": "A",
+          "label": "即"
+        },
+        {
+          "id": "B",
+          "label": "既"
+        },
+        {
+          "id": "C",
+          "label": "两个都行"
+        },
+        {
+          "id": "D",
+          "label": "都不行"
+        }
+      ],
+      "answer": {
+        "value": "即",
+        "optionId": "A"
+      },
+      "explanation": "“立即”的“即”表示马上；“既”表示已经。",
+      "hints": [
+        "看词语的意思。",
+        "“立即”是马上。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-character-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“（ ）帽子” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "戴"
+        },
+        {
+          "id": "B",
+          "label": "带"
+        },
+        {
+          "id": "C",
+          "label": "代"
+        },
+        {
+          "id": "D",
+          "label": "待"
+        }
+      ],
+      "answer": {
+        "value": "戴",
+        "optionId": "A"
+      },
+      "explanation": "帽子要“戴”在头上；“带”是携带。",
+      "hints": [
+        "和穿戴有关。",
+        "头上戴，手里带。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-character-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“严（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "厉"
+        },
+        {
+          "id": "B",
+          "label": "历"
+        },
+        {
+          "id": "C",
+          "label": "利"
+        },
+        {
+          "id": "D",
+          "label": "例"
+        }
+      ],
+      "answer": {
+        "value": "厉",
+        "optionId": "A"
+      },
+      "explanation": "“严厉”表示态度严格。",
+      "hints": [
+        "和“厉害”的厉一样。",
+        "不是经历的历。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-character-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“羡（ ）” 应该填哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "慕"
+        },
+        {
+          "id": "B",
+          "label": "幕"
+        },
+        {
+          "id": "C",
+          "label": "墓"
+        },
+        {
+          "id": "D",
+          "label": "暮"
+        }
+      ],
+      "answer": {
+        "value": "慕",
+        "optionId": "A"
+      },
+      "explanation": "“羡慕”的慕下面是小，表示心里向往。",
+      "hints": [
+        "和心情有关。",
+        "下面是“小”的变形。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-word-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-usage",
+      "prompt": "“小明一放学就（ ）地跑向操场。” 最合适的是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "迫不及待"
+        },
+        {
+          "id": "B",
+          "label": "鸦雀无声"
+        },
+        {
+          "id": "C",
+          "label": "胸有成竹"
+        },
+        {
+          "id": "D",
+          "label": "画龙点睛"
+        }
+      ],
+      "answer": {
+        "value": "迫不及待",
+        "optionId": "A"
+      },
+      "explanation": "“迫不及待”表示急迫得不能再等待。",
+      "hints": [
+        "小明很着急。",
+        "和“等不及”接近。"
+      ],
+      "tags": [
+        "word",
+        "idiom-usage",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-word-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-usage",
+      "prompt": "“教室里（ ），连一根针掉在地上都能听见。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "鸦雀无声"
+        },
+        {
+          "id": "B",
+          "label": "迫不及待"
+        },
+        {
+          "id": "C",
+          "label": "胸有成竹"
+        },
+        {
+          "id": "D",
+          "label": "画龙点睛"
+        }
+      ],
+      "answer": {
+        "value": "鸦雀无声",
+        "optionId": "A"
+      },
+      "explanation": "“鸦雀无声”形容非常安静。",
+      "hints": [
+        "连针掉地都能听见。",
+        "和声音有关。"
+      ],
+      "tags": [
+        "word",
+        "idiom-usage",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-word-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-usage",
+      "prompt": "“比赛前，他（ ），一点也不紧张。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "胸有成竹"
+        },
+        {
+          "id": "B",
+          "label": "鸦雀无声"
+        },
+        {
+          "id": "C",
+          "label": "迫不及待"
+        },
+        {
+          "id": "D",
+          "label": "画龙点睛"
+        }
+      ],
+      "answer": {
+        "value": "胸有成竹",
+        "optionId": "A"
+      },
+      "explanation": "“胸有成竹”比喻做事之前已有把握。",
+      "hints": [
+        "他很有把握。",
+        "和竹子有关，但比喻心里有数。"
+      ],
+      "tags": [
+        "word",
+        "idiom-usage",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-word-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "conjunction",
+      "prompt": "“（ ）天气很冷，（ ）他仍然坚持晨跑。” 填哪组关联词？",
+      "options": [
+        {
+          "id": "A",
+          "label": "虽然……但是……"
+        },
+        {
+          "id": "B",
+          "label": "因为……所以……"
+        },
+        {
+          "id": "C",
+          "label": "如果……就……"
+        },
+        {
+          "id": "D",
+          "label": "不但……而且……"
+        }
+      ],
+      "answer": {
+        "value": "虽然……但是……",
+        "optionId": "A"
+      },
+      "explanation": "前后是转折关系，用“虽然……但是……”。",
+      "hints": [
+        "前后意思相反。",
+        "冷和坚持晨跑是转折。"
+      ],
+      "tags": [
+        "word",
+        "conjunction",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-reading-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-cause",
+      "prompt": "露珠为什么最后不见了？",
+      "options": [
+        {
+          "id": "A",
+          "label": "变成了水蒸气"
+        },
+        {
+          "id": "B",
+          "label": "被小草喝掉了"
+        },
+        {
+          "id": "C",
+          "label": "被风吹走了"
+        },
+        {
+          "id": "D",
+          "label": "钻进土里了"
+        }
+      ],
+      "answer": {
+        "value": "变成了水蒸气",
+        "optionId": "A"
+      },
+      "explanation": "短文说露珠“变成了水蒸气，飞到天空中去了”。",
+      "hints": [
+        "看最后一句。",
+        "太阳晒热了露珠。"
+      ],
+      "tags": [
+        "reading",
+        "reading-cause",
+        "challenge"
+      ],
+      "passageId": "cn3x-passage-001"
+    },
+    {
+      "id": "cn3x-reading-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-inference",
+      "prompt": "从露珠的变化可以知道，太阳升起后温度会怎样？",
+      "options": [
+        {
+          "id": "A",
+          "label": "升高"
+        },
+        {
+          "id": "B",
+          "label": "降低"
+        },
+        {
+          "id": "C",
+          "label": "不变"
+        },
+        {
+          "id": "D",
+          "label": "忽高忽低"
+        }
+      ],
+      "answer": {
+        "value": "升高",
+        "optionId": "A"
+      },
+      "explanation": "太阳升起后露珠蒸发，说明温度升高。",
+      "hints": [
+        "联系“太阳升起”。",
+        "水遇热会蒸发。"
+      ],
+      "tags": [
+        "reading",
+        "reading-inference",
+        "challenge"
+      ],
+      "passageId": "cn3x-passage-001"
+    },
+    {
+      "id": "cn3x-reading-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-detail",
+      "prompt": "竹子前四年主要在做什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "把根扎深"
+        },
+        {
+          "id": "B",
+          "label": "长高"
+        },
+        {
+          "id": "C",
+          "label": "开花"
+        },
+        {
+          "id": "D",
+          "label": "结果"
+        }
+      ],
+      "answer": {
+        "value": "把根扎深",
+        "optionId": "A"
+      },
+      "explanation": "短文说前四年竹子“把根扎得很深”。",
+      "hints": [
+        "看第二句。",
+        "为后面生长积蓄力量。"
+      ],
+      "tags": [
+        "reading",
+        "reading-detail",
+        "challenge"
+      ],
+      "passageId": "cn3x-passage-002"
+    },
+    {
+      "id": "cn3x-reading-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-main-idea",
+      "prompt": "这篇短文告诉我们什么道理？",
+      "options": [
+        {
+          "id": "A",
+          "label": "要打好基础，厚积薄发"
+        },
+        {
+          "id": "B",
+          "label": "竹子长得很快"
+        },
+        {
+          "id": "C",
+          "label": "种竹子很容易"
+        },
+        {
+          "id": "D",
+          "label": "前四年不用管竹子"
+        }
+      ],
+      "answer": {
+        "value": "要打好基础，厚积薄发",
+        "optionId": "A"
+      },
+      "explanation": "竹子先扎根再快速生长，说明基础很重要。",
+      "hints": [
+        "前四年不是白长。",
+        "和“基础”有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-main-idea",
+        "challenge"
+      ],
+      "passageId": "cn3x-passage-002"
+    },
+    {
+      "id": "cn3x-poem-001",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-emotion",
+      "prompt": "《静夜思》表达了诗人怎样的感情？",
+      "options": [
+        {
+          "id": "A",
+          "label": "思念家乡"
+        },
+        {
+          "id": "B",
+          "label": "喜欢月亮"
+        },
+        {
+          "id": "C",
+          "label": "想去旅行"
+        },
+        {
+          "id": "D",
+          "label": "害怕夜晚"
+        }
+      ],
+      "answer": {
+        "value": "思念家乡",
+        "optionId": "A"
+      },
+      "explanation": "“低头思故乡”直接表达思乡。",
+      "hints": [
+        "看“思故乡”。",
+        "诗人不在家乡。"
+      ],
+      "tags": [
+        "poem",
+        "poem-emotion",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-poem-002",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-culture",
+      "prompt": "《九月九日忆山东兄弟》中的“佳节”指哪个节日？",
+      "options": [
+        {
+          "id": "A",
+          "label": "重阳节"
+        },
+        {
+          "id": "B",
+          "label": "春节"
+        },
+        {
+          "id": "C",
+          "label": "中秋节"
+        },
+        {
+          "id": "D",
+          "label": "端午节"
+        }
+      ],
+      "answer": {
+        "value": "重阳节",
+        "optionId": "A"
+      },
+      "explanation": "农历九月初九是重阳节，有登高、插茱萸的习俗。",
+      "hints": [
+        "看题目“九月九日”。",
+        "九月初九。"
+      ],
+      "tags": [
+        "poem",
+        "poem-culture",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-poem-003",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-device",
+      "prompt": "“飞流直下三千尺” 主要用了什么写法？",
+      "options": [
+        {
+          "id": "A",
+          "label": "夸张"
+        },
+        {
+          "id": "B",
+          "label": "拟人"
+        },
+        {
+          "id": "C",
+          "label": "排比"
+        },
+        {
+          "id": "D",
+          "label": "反问"
+        }
+      ],
+      "answer": {
+        "value": "夸张",
+        "optionId": "A"
+      },
+      "explanation": "“三千尺”不是实数，用夸张写瀑布之高。",
+      "hints": [
+        "真的只有三千尺吗？",
+        "为了突出瀑布高。"
+      ],
+      "tags": [
+        "poem",
+        "poem-device",
+        "challenge"
+      ]
+    },
+    {
+      "id": "cn3x-poem-004",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-device",
+      "prompt": "“霜叶红于二月花” 把霜叶和什么作比较？",
+      "options": [
+        {
+          "id": "A",
+          "label": "二月花"
+        },
+        {
+          "id": "B",
+          "label": "春风"
+        },
+        {
+          "id": "C",
+          "label": "江水"
+        },
+        {
+          "id": "D",
+          "label": "月亮"
+        }
+      ],
+      "answer": {
+        "value": "二月花",
+        "optionId": "A"
+      },
+      "explanation": "诗句说霜叶比二月的花还红。",
+      "hints": [
+        "看“红于”。",
+        "和春天的花比。"
+      ],
+      "tags": [
+        "poem",
+        "poem-device",
+        "challenge"
+      ]
+    }
+  ]
+}

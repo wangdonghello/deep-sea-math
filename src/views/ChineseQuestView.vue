@@ -21,6 +21,7 @@ const props = defineProps<{
   store: AppendableStore
   questions: readonly ChineseQuestion[]
   passages: readonly ChinesePassage[]
+  grade?: number
   clock?: () => number
 }>()
 
@@ -30,6 +31,7 @@ const emit = defineEmits<{
 }>()
 
 const clock = props.clock ?? (() => Date.now())
+const gradeLabel = computed(() => ((props.grade ?? 1) >= 3 ? '三年级挑战' : `${props.grade ?? 1} 年级`))
 const sessionId = `cn-${randomUuid()}`
 const index = ref(0)
 const started = ref(false)
@@ -121,7 +123,7 @@ async function next(): Promise<void> {
   <main class="cn-quest" data-testid="chinese-quest">
     <header class="cn-quest__head">
       <button type="button" class="cn-quest__back" data-testid="chinese-quest-exit" @click="emit('exit')">← 返回</button>
-      <span class="cn-quest__title">语文探险</span>
+      <span class="cn-quest__title">语文探险 · {{ gradeLabel }}</span>
       <span class="cn-quest__progress">{{ progress }}</span>
     </header>
 
