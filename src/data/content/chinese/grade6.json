@@ -885,6 +885,1241 @@
         "poem",
         "poem-meaning"
       ]
+    },
+    {
+      "id": "cn6-x-idiom-01",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“别具一格” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "另有一种独特的风格"
+        },
+        {
+          "id": "B",
+          "label": "人工技艺高超，胜过天然"
+        },
+        {
+          "id": "C",
+          "label": "歌声或音乐优美，令人回味"
+        },
+        {
+          "id": "D",
+          "label": "文化水平高的人和普通人都能欣赏"
+        }
+      ],
+      "answer": {
+        "value": "另有一种独特的风格",
+        "optionId": "A"
+      },
+      "explanation": "“别具一格” 比喻/表示另有一种独特的风格。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-idiom-02",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“巧夺天工” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "另有一种独特的风格"
+        },
+        {
+          "id": "B",
+          "label": "歌声或音乐优美，令人回味"
+        },
+        {
+          "id": "C",
+          "label": "文化水平高的人和普通人都能欣赏"
+        },
+        {
+          "id": "D",
+          "label": "人工技艺高超，胜过天然"
+        }
+      ],
+      "answer": {
+        "value": "人工技艺高超，胜过天然",
+        "optionId": "D"
+      },
+      "explanation": "“巧夺天工” 比喻/表示人工技艺高超，胜过天然。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-idiom-03",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“余音绕梁” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "人工技艺高超，胜过天然"
+        },
+        {
+          "id": "B",
+          "label": "文化水平高的人和普通人都能欣赏"
+        },
+        {
+          "id": "C",
+          "label": "歌声或音乐优美，令人回味"
+        },
+        {
+          "id": "D",
+          "label": "另有一种独特的风格"
+        }
+      ],
+      "answer": {
+        "value": "歌声或音乐优美，令人回味",
+        "optionId": "C"
+      },
+      "explanation": "“余音绕梁” 比喻/表示歌声或音乐优美，令人回味。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-idiom-04",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“雅俗共赏” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "歌声或音乐优美，令人回味"
+        },
+        {
+          "id": "B",
+          "label": "文化水平高的人和普通人都能欣赏"
+        },
+        {
+          "id": "C",
+          "label": "另有一种独特的风格"
+        },
+        {
+          "id": "D",
+          "label": "人工技艺高超，胜过天然"
+        }
+      ],
+      "answer": {
+        "value": "文化水平高的人和普通人都能欣赏",
+        "optionId": "B"
+      },
+      "explanation": "“雅俗共赏” 比喻/表示文化水平高的人和普通人都能欣赏。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-idiom-05",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“独具匠心” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "在技巧和艺术上有独到的构思"
+        },
+        {
+          "id": "B",
+          "label": "另有一种独特的风格"
+        },
+        {
+          "id": "C",
+          "label": "人工技艺高超，胜过天然"
+        },
+        {
+          "id": "D",
+          "label": "歌声或音乐优美，令人回味"
+        }
+      ],
+      "answer": {
+        "value": "在技巧和艺术上有独到的构思",
+        "optionId": "A"
+      },
+      "explanation": "“独具匠心” 比喻/表示在技巧和艺术上有独到的构思。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-idiom-06",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“引人入胜” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "另有一种独特的风格"
+        },
+        {
+          "id": "B",
+          "label": "人工技艺高超，胜过天然"
+        },
+        {
+          "id": "C",
+          "label": "歌声或音乐优美，令人回味"
+        },
+        {
+          "id": "D",
+          "label": "十分吸引人"
+        }
+      ],
+      "answer": {
+        "value": "十分吸引人",
+        "optionId": "D"
+      },
+      "explanation": "“引人入胜” 比喻/表示十分吸引人。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poly-01",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“单薄” 中的“薄”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "bó"
+        },
+        {
+          "id": "B",
+          "label": "báo"
+        },
+        {
+          "id": "C",
+          "label": "bò"
+        },
+        {
+          "id": "D",
+          "label": "bāo"
+        }
+      ],
+      "answer": {
+        "value": "bó",
+        "optionId": "A"
+      },
+      "explanation": "“单薄” 中“薄”读 bó。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poly-02",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“更新” 中的“更”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "gèng"
+        },
+        {
+          "id": "B",
+          "label": "gěng"
+        },
+        {
+          "id": "C",
+          "label": "gēng"
+        },
+        {
+          "id": "D",
+          "label": "gēng"
+        }
+      ],
+      "answer": {
+        "value": "gēng",
+        "optionId": "C"
+      },
+      "explanation": "“更新” 中“更”读 gēng。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poly-03",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“记载” 中的“载”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zāi"
+        },
+        {
+          "id": "B",
+          "label": "zǎn"
+        },
+        {
+          "id": "C",
+          "label": "zǎi"
+        },
+        {
+          "id": "D",
+          "label": "zài"
+        }
+      ],
+      "answer": {
+        "value": "zǎi",
+        "optionId": "C"
+      },
+      "explanation": "“记载” 中“载”读 zǎi。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poly-04",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“厌恶” 中的“恶”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "wū"
+        },
+        {
+          "id": "B",
+          "label": "wù"
+        },
+        {
+          "id": "C",
+          "label": "è"
+        },
+        {
+          "id": "D",
+          "label": "ě"
+        }
+      ],
+      "answer": {
+        "value": "wù",
+        "optionId": "B"
+      },
+      "explanation": "“厌恶” 中“恶”读 wù。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poly-05",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“处置” 中的“处”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "chǔ"
+        },
+        {
+          "id": "B",
+          "label": "chù"
+        },
+        {
+          "id": "C",
+          "label": "chū"
+        },
+        {
+          "id": "D",
+          "label": "chú"
+        }
+      ],
+      "answer": {
+        "value": "chǔ",
+        "optionId": "A"
+      },
+      "explanation": "“处置” 中“处”读 chǔ。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poly-06",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“供品” 中的“供”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "gōng"
+        },
+        {
+          "id": "B",
+          "label": "gǒng"
+        },
+        {
+          "id": "C",
+          "label": "gūng"
+        },
+        {
+          "id": "D",
+          "label": "gòng"
+        }
+      ],
+      "answer": {
+        "value": "gòng",
+        "optionId": "D"
+      },
+      "explanation": "“供品” 中“供”读 gòng。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-word-01",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“严峻” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "温和"
+        },
+        {
+          "id": "B",
+          "label": "严厉"
+        },
+        {
+          "id": "C",
+          "label": "寒冷"
+        },
+        {
+          "id": "D",
+          "label": "紧张"
+        }
+      ],
+      "answer": {
+        "value": "温和",
+        "optionId": "A"
+      },
+      "explanation": "“严峻” 的近义词是“温和”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-word-02",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“详细” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "具体"
+        },
+        {
+          "id": "B",
+          "label": "清楚"
+        },
+        {
+          "id": "C",
+          "label": "复杂"
+        },
+        {
+          "id": "D",
+          "label": "简略"
+        }
+      ],
+      "answer": {
+        "value": "简略",
+        "optionId": "D"
+      },
+      "explanation": "“详细” 的近义词是“简略”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-word-03",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“精致” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "细致"
+        },
+        {
+          "id": "B",
+          "label": "漂亮"
+        },
+        {
+          "id": "C",
+          "label": "粗糙"
+        },
+        {
+          "id": "D",
+          "label": "精美"
+        }
+      ],
+      "answer": {
+        "value": "粗糙",
+        "optionId": "C"
+      },
+      "explanation": "“精致” 的近义词是“粗糙”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-word-04",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“辽阔” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "空旷"
+        },
+        {
+          "id": "B",
+          "label": "狭窄"
+        },
+        {
+          "id": "C",
+          "label": "宽广"
+        },
+        {
+          "id": "D",
+          "label": "遥远"
+        }
+      ],
+      "answer": {
+        "value": "狭窄",
+        "optionId": "B"
+      },
+      "explanation": "“辽阔” 的反义词是“狭窄”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-word-05",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“谨慎” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "马虎"
+        },
+        {
+          "id": "B",
+          "label": "小心"
+        },
+        {
+          "id": "C",
+          "label": "认真"
+        },
+        {
+          "id": "D",
+          "label": "仔细"
+        }
+      ],
+      "answer": {
+        "value": "马虎",
+        "optionId": "A"
+      },
+      "explanation": "“谨慎” 的反义词是“马虎”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-word-06",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“果断” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "坚决"
+        },
+        {
+          "id": "B",
+          "label": "勇敢"
+        },
+        {
+          "id": "C",
+          "label": "迅速"
+        },
+        {
+          "id": "D",
+          "label": "犹豫"
+        }
+      ],
+      "answer": {
+        "value": "犹豫",
+        "optionId": "D"
+      },
+      "explanation": "“果断” 的反义词是“犹豫”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-char-01",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“辩论” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "辩"
+        },
+        {
+          "id": "B",
+          "label": "辨"
+        },
+        {
+          "id": "C",
+          "label": "论"
+        },
+        {
+          "id": "D",
+          "label": "的"
+        }
+      ],
+      "answer": {
+        "value": "辩",
+        "optionId": "A"
+      },
+      "explanation": "“辩论” 用“辩”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-char-02",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“即使” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "既"
+        },
+        {
+          "id": "B",
+          "label": "使"
+        },
+        {
+          "id": "C",
+          "label": "的"
+        },
+        {
+          "id": "D",
+          "label": "即"
+        }
+      ],
+      "answer": {
+        "value": "即",
+        "optionId": "D"
+      },
+      "explanation": "“即使” 用“即”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ],
+      "audio": "chinese/cn6-x-char-02.mp3"
+    },
+    {
+      "id": "cn6-x-char-03",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“狼藉” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "的"
+        },
+        {
+          "id": "B",
+          "label": "地"
+        },
+        {
+          "id": "C",
+          "label": "藉"
+        },
+        {
+          "id": "D",
+          "label": "籍"
+        }
+      ],
+      "answer": {
+        "value": "藉",
+        "optionId": "C"
+      },
+      "explanation": "“狼藉” 用“藉”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-char-04",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“采摘” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "的"
+        },
+        {
+          "id": "B",
+          "label": "采"
+        },
+        {
+          "id": "C",
+          "label": "彩"
+        },
+        {
+          "id": "D",
+          "label": "摘"
+        }
+      ],
+      "answer": {
+        "value": "采",
+        "optionId": "B"
+      },
+      "explanation": "“采摘” 用“采”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-read-01",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "灯塔的灯光在夜里有什么作用？",
+      "options": [
+        {
+          "id": "A",
+          "label": "为船只指路"
+        },
+        {
+          "id": "B",
+          "label": "照亮城市"
+        },
+        {
+          "id": "C",
+          "label": "装饰海岸"
+        },
+        {
+          "id": "D",
+          "label": "吸引飞鸟"
+        }
+      ],
+      "answer": {
+        "value": "为船只指路",
+        "optionId": "A"
+      },
+      "explanation": "短文说船只看见灯光就知道礁石和靠岸处。",
+      "hints": [
+        "看第二句。",
+        "和航行有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn6-x-p1"
+    },
+    {
+      "id": "cn6-x-read-02",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "“灯光不说话，却给迷路的人带来方向”用了什么写法？",
+      "options": [
+        {
+          "id": "A",
+          "label": "拟人"
+        },
+        {
+          "id": "B",
+          "label": "夸张"
+        },
+        {
+          "id": "C",
+          "label": "排比"
+        },
+        {
+          "id": "D",
+          "label": "反问"
+        }
+      ],
+      "answer": {
+        "value": "拟人",
+        "optionId": "A"
+      },
+      "explanation": "把灯光当作会“不说话”的人。",
+      "hints": [
+        "灯光会说话吗？",
+        "把物当人。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn6-x-p1"
+    },
+    {
+      "id": "cn6-x-read-03",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "短文中的“迷路的人”可以理解为？",
+      "options": [
+        {
+          "id": "A",
+          "label": "找不到方向的船只"
+        },
+        {
+          "id": "B",
+          "label": "走路迷路的人"
+        },
+        {
+          "id": "C",
+          "label": "灯塔看守人"
+        },
+        {
+          "id": "D",
+          "label": "海边的孩子"
+        }
+      ],
+      "answer": {
+        "value": "找不到方向的船只",
+        "optionId": "A"
+      },
+      "explanation": "结合航行语境，指需要指引的船只。",
+      "hints": [
+        "联系船只航行。",
+        "不是真的行人。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn6-x-p1"
+    },
+    {
+      "id": "cn6-x-read-04",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "这篇短文赞美了什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "默默奉献、给人指引的精神"
+        },
+        {
+          "id": "B",
+          "label": "灯光的颜色"
+        },
+        {
+          "id": "C",
+          "label": "夜晚的安静"
+        },
+        {
+          "id": "D",
+          "label": "大海的辽阔"
+        }
+      ],
+      "answer": {
+        "value": "默默奉献、给人指引的精神",
+        "optionId": "A"
+      },
+      "explanation": "灯光不张扬却带来方向，象征默默奉献。",
+      "hints": [
+        "看结尾。",
+        "不只是写灯。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn6-x-p1"
+    },
+    {
+      "id": "cn6-x-poem-01",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“月出惊山鸟，时鸣春（ ）中。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "涧"
+        },
+        {
+          "id": "B",
+          "label": "山"
+        },
+        {
+          "id": "C",
+          "label": "林"
+        },
+        {
+          "id": "D",
+          "label": "夜"
+        }
+      ],
+      "answer": {
+        "value": "涧",
+        "optionId": "A"
+      },
+      "explanation": "王维《鸟鸣涧》写春涧中鸟鸣。",
+      "hints": [
+        "题目有“涧”。",
+        "山间的水沟。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poem-02",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“本是同根生，相煎何太（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "急"
+        },
+        {
+          "id": "B",
+          "label": "忙"
+        },
+        {
+          "id": "C",
+          "label": "快"
+        },
+        {
+          "id": "D",
+          "label": "狠"
+        }
+      ],
+      "answer": {
+        "value": "急",
+        "optionId": "A"
+      },
+      "explanation": "曹植《七步诗》写兄弟相逼。",
+      "hints": [
+        "和“急”有关。",
+        "何必这么急。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poem-03",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“洛阳亲友如相问，一片冰心在玉（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "壶"
+        },
+        {
+          "id": "B",
+          "label": "杯"
+        },
+        {
+          "id": "C",
+          "label": "盘"
+        },
+        {
+          "id": "D",
+          "label": "瓶"
+        }
+      ],
+      "answer": {
+        "value": "壶",
+        "optionId": "A"
+      },
+      "explanation": "王昌龄以玉壶冰心表明清白。",
+      "hints": [
+        "和容器有关。",
+        "玉做的壶。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn6-x-poem-04",
+      "subject": "chinese",
+      "grade": 6,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“若到江南赶上春，千万和春（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "住"
+        },
+        {
+          "id": "B",
+          "label": "归"
+        },
+        {
+          "id": "C",
+          "label": "游"
+        },
+        {
+          "id": "D",
+          "label": "看"
+        }
+      ],
+      "answer": {
+        "value": "住",
+        "optionId": "A"
+      },
+      "explanation": "王观词希望友人与春天同住。",
+      "hints": [
+        "和“留下”有关。",
+        "不是“看”。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
     }
   ]
 }

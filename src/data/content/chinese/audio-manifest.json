@@ -107,6 +107,33 @@
       "speaker": "Wei Gao, Vion Nicolas / Yue Tan",
       "license": "CC BY 2.0 FR / CC BY-SA 3.0 US",
       "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn3-x-poly-03",
+      "text": "重新",
+      "file": "chinese/cn3-x-poly-03.mp3",
+      "status": "recorded",
+      "speaker": "CanonNi (Lingua Libre)",
+      "license": "CC BY-SA 4.0",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn4-x-char-04",
+      "text": "鼓励",
+      "file": "chinese/cn4-x-char-04.mp3",
+      "status": "recorded",
+      "speaker": "CanonNi (Lingua Libre)",
+      "license": "CC BY-SA 4.0",
+      "recordedAt": "2026-11-06"
+    },
+    {
+      "id": "cn6-x-char-02",
+      "text": "即使",
+      "file": "chinese/cn6-x-char-02.mp3",
+      "status": "recorded",
+      "speaker": "CanonNi (Lingua Libre)",
+      "license": "CC BY-SA 4.0",
+      "recordedAt": "2026-11-06"
     }
   ]
 }

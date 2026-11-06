@@ -17,3 +17,11 @@ cn1-pinyin-006.mp3     zì  https://commons.wikimedia.org/wiki/File:Zh-z%C3%AC.o
 署名：Wei Gao, Vion Nicolas（CC BY 2.0 FR）；Yue Tan（CC BY-SA 3.0 US）。
 许可：CC BY 2.0 FR / CC BY-SA 3.0 US。
 说明：真人普通话发音，非 TTS 合成；已做降噪/响度统一处理。
+
+Lingua Libre（普通话，cmn）录音：
+
+cn3-x-poly-03.mp3  重新  https://commons.wikimedia.org/wiki/File:LL-Q9192_(cmn)-CanonNi-重新.wav
+cn4-x-char-04.mp3  鼓励  https://commons.wikimedia.org/wiki/File:LL-Q9192_(cmn)-CanonNi-鼓励.wav
+cn6-x-char-02.mp3  即使  https://commons.wikimedia.org/wiki/File:LL-Q9192_(cmn)-CanonNi-即使.wav
+
+署名：CanonNi（Lingua Libre）；许可：CC BY-SA 4.0。

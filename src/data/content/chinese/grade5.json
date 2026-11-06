@@ -885,6 +885,1240 @@
         "poem",
         "poem-scene"
       ]
+    },
+    {
+      "id": "cn5-x-idiom-01",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“雪中送炭” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "在别人困难时给予帮助"
+        },
+        {
+          "id": "B",
+          "label": "在美好的基础上再增添美好"
+        },
+        {
+          "id": "C",
+          "label": "想出的办法与众不同"
+        },
+        {
+          "id": "D",
+          "label": "全世界都知道，非常有名"
+        }
+      ],
+      "answer": {
+        "value": "在别人困难时给予帮助",
+        "optionId": "A"
+      },
+      "explanation": "“雪中送炭” 比喻/表示在别人困难时给予帮助。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-idiom-02",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“锦上添花” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "在别人困难时给予帮助"
+        },
+        {
+          "id": "B",
+          "label": "想出的办法与众不同"
+        },
+        {
+          "id": "C",
+          "label": "全世界都知道，非常有名"
+        },
+        {
+          "id": "D",
+          "label": "在美好的基础上再增添美好"
+        }
+      ],
+      "answer": {
+        "value": "在美好的基础上再增添美好",
+        "optionId": "D"
+      },
+      "explanation": "“锦上添花” 比喻/表示在美好的基础上再增添美好。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-idiom-03",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“别出心裁” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "在美好的基础上再增添美好"
+        },
+        {
+          "id": "B",
+          "label": "全世界都知道，非常有名"
+        },
+        {
+          "id": "C",
+          "label": "想出的办法与众不同"
+        },
+        {
+          "id": "D",
+          "label": "在别人困难时给予帮助"
+        }
+      ],
+      "answer": {
+        "value": "想出的办法与众不同",
+        "optionId": "C"
+      },
+      "explanation": "“别出心裁” 比喻/表示想出的办法与众不同。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-idiom-04",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“举世闻名” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "想出的办法与众不同"
+        },
+        {
+          "id": "B",
+          "label": "全世界都知道，非常有名"
+        },
+        {
+          "id": "C",
+          "label": "在别人困难时给予帮助"
+        },
+        {
+          "id": "D",
+          "label": "在美好的基础上再增添美好"
+        }
+      ],
+      "answer": {
+        "value": "全世界都知道，非常有名",
+        "optionId": "B"
+      },
+      "explanation": "“举世闻名” 比喻/表示全世界都知道，非常有名。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-idiom-05",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“众星拱月” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "许多事物围绕着一个中心"
+        },
+        {
+          "id": "B",
+          "label": "在别人困难时给予帮助"
+        },
+        {
+          "id": "C",
+          "label": "在美好的基础上再增添美好"
+        },
+        {
+          "id": "D",
+          "label": "想出的办法与众不同"
+        }
+      ],
+      "answer": {
+        "value": "许多事物围绕着一个中心",
+        "optionId": "A"
+      },
+      "explanation": "“众星拱月” 比喻/表示许多事物围绕着一个中心。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-idiom-06",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“毫不犹豫” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "在别人困难时给予帮助"
+        },
+        {
+          "id": "B",
+          "label": "在美好的基础上再增添美好"
+        },
+        {
+          "id": "C",
+          "label": "想出的办法与众不同"
+        },
+        {
+          "id": "D",
+          "label": "一点也不迟疑"
+        }
+      ],
+      "answer": {
+        "value": "一点也不迟疑",
+        "optionId": "D"
+      },
+      "explanation": "“毫不犹豫” 比喻/表示一点也不迟疑。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poly-01",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“参差” 中的“差”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "cī"
+        },
+        {
+          "id": "B",
+          "label": "chā"
+        },
+        {
+          "id": "C",
+          "label": "chāi"
+        },
+        {
+          "id": "D",
+          "label": "chà"
+        }
+      ],
+      "answer": {
+        "value": "cī",
+        "optionId": "A"
+      },
+      "explanation": "“参差” 中“差”读 cī。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poly-02",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“积累” 中的“累”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "lèi"
+        },
+        {
+          "id": "B",
+          "label": "léi"
+        },
+        {
+          "id": "C",
+          "label": "lēi"
+        },
+        {
+          "id": "D",
+          "label": "lěi"
+        }
+      ],
+      "answer": {
+        "value": "lěi",
+        "optionId": "D"
+      },
+      "explanation": "“积累” 中“累”读 lěi。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poly-03",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“勉强” 中的“强”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "jiàng"
+        },
+        {
+          "id": "B",
+          "label": "qiāng"
+        },
+        {
+          "id": "C",
+          "label": "qiǎng"
+        },
+        {
+          "id": "D",
+          "label": "qiáng"
+        }
+      ],
+      "answer": {
+        "value": "qiǎng",
+        "optionId": "C"
+      },
+      "explanation": "“勉强” 中“强”读 qiǎng。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poly-04",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“给予” 中的“给”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "gài"
+        },
+        {
+          "id": "B",
+          "label": "jǐ"
+        },
+        {
+          "id": "C",
+          "label": "gěi"
+        },
+        {
+          "id": "D",
+          "label": "jǐn"
+        }
+      ],
+      "answer": {
+        "value": "jǐ",
+        "optionId": "B"
+      },
+      "explanation": "“给予” 中“给”读 jǐ。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poly-05",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“方便” 中的“便”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "biàn"
+        },
+        {
+          "id": "B",
+          "label": "pián"
+        },
+        {
+          "id": "C",
+          "label": "bian"
+        },
+        {
+          "id": "D",
+          "label": "bèn"
+        }
+      ],
+      "answer": {
+        "value": "biàn",
+        "optionId": "A"
+      },
+      "explanation": "“方便” 中“便”读 biàn。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poly-06",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“教书” 中的“教”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "jiào"
+        },
+        {
+          "id": "B",
+          "label": "jiáo"
+        },
+        {
+          "id": "C",
+          "label": "xiào"
+        },
+        {
+          "id": "D",
+          "label": "jiāo"
+        }
+      ],
+      "answer": {
+        "value": "jiāo",
+        "optionId": "D"
+      },
+      "explanation": "“教书” 中“教”读 jiāo。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-word-01",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“珍贵” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "宝贵"
+        },
+        {
+          "id": "B",
+          "label": "普通"
+        },
+        {
+          "id": "C",
+          "label": "便宜"
+        },
+        {
+          "id": "D",
+          "label": "常见"
+        }
+      ],
+      "answer": {
+        "value": "宝贵",
+        "optionId": "A"
+      },
+      "explanation": "“珍贵” 的近义词是“宝贵”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-word-02",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“崎岖” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "陡峭"
+        },
+        {
+          "id": "B",
+          "label": "弯曲"
+        },
+        {
+          "id": "C",
+          "label": "狭窄"
+        },
+        {
+          "id": "D",
+          "label": "平坦"
+        }
+      ],
+      "answer": {
+        "value": "平坦",
+        "optionId": "D"
+      },
+      "explanation": "“崎岖” 的近义词是“平坦”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-word-03",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“坚强” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "坚定"
+        },
+        {
+          "id": "B",
+          "label": "强壮"
+        },
+        {
+          "id": "C",
+          "label": "软弱"
+        },
+        {
+          "id": "D",
+          "label": "勇敢"
+        }
+      ],
+      "answer": {
+        "value": "软弱",
+        "optionId": "C"
+      },
+      "explanation": "“坚强” 的近义词是“软弱”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-word-04",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“敏捷” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "轻快"
+        },
+        {
+          "id": "B",
+          "label": "迟钝"
+        },
+        {
+          "id": "C",
+          "label": "迅速"
+        },
+        {
+          "id": "D",
+          "label": "灵活"
+        }
+      ],
+      "answer": {
+        "value": "迟钝",
+        "optionId": "B"
+      },
+      "explanation": "“敏捷” 的反义词是“迟钝”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-word-05",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“慷慨” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "吝啬"
+        },
+        {
+          "id": "B",
+          "label": "大方"
+        },
+        {
+          "id": "C",
+          "label": "热情"
+        },
+        {
+          "id": "D",
+          "label": "慷慨"
+        }
+      ],
+      "answer": {
+        "value": "吝啬",
+        "optionId": "A"
+      },
+      "explanation": "“慷慨” 的反义词是“吝啬”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-word-06",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“熟悉” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "了解"
+        },
+        {
+          "id": "B",
+          "label": "亲近"
+        },
+        {
+          "id": "C",
+          "label": "常见"
+        },
+        {
+          "id": "D",
+          "label": "陌生"
+        }
+      ],
+      "answer": {
+        "value": "陌生",
+        "optionId": "D"
+      },
+      "explanation": "“熟悉” 的反义词是“陌生”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-char-01",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“险峻” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "峻"
+        },
+        {
+          "id": "B",
+          "label": "竣"
+        },
+        {
+          "id": "C",
+          "label": "的"
+        },
+        {
+          "id": "D",
+          "label": "地"
+        }
+      ],
+      "answer": {
+        "value": "峻",
+        "optionId": "A"
+      },
+      "explanation": "“险峻” 用“峻”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-char-02",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“夜幕” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "慕"
+        },
+        {
+          "id": "B",
+          "label": "的"
+        },
+        {
+          "id": "C",
+          "label": "地"
+        },
+        {
+          "id": "D",
+          "label": "幕"
+        }
+      ],
+      "answer": {
+        "value": "幕",
+        "optionId": "D"
+      },
+      "explanation": "“夜幕” 用“幕”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-char-03",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“书籍” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "的"
+        },
+        {
+          "id": "B",
+          "label": "地"
+        },
+        {
+          "id": "C",
+          "label": "籍"
+        },
+        {
+          "id": "D",
+          "label": "藉"
+        }
+      ],
+      "answer": {
+        "value": "籍",
+        "optionId": "C"
+      },
+      "explanation": "“书籍” 用“籍”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-char-04",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“干燥” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "地"
+        },
+        {
+          "id": "B",
+          "label": "燥"
+        },
+        {
+          "id": "C",
+          "label": "躁"
+        },
+        {
+          "id": "D",
+          "label": "的"
+        }
+      ],
+      "answer": {
+        "value": "燥",
+        "optionId": "B"
+      },
+      "explanation": "“干燥” 用“燥”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-read-01",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "胡杨生活在哪里？",
+      "options": [
+        {
+          "id": "A",
+          "label": "沙漠边缘"
+        },
+        {
+          "id": "B",
+          "label": "海边"
+        },
+        {
+          "id": "C",
+          "label": "高山"
+        },
+        {
+          "id": "D",
+          "label": "草原"
+        }
+      ],
+      "answer": {
+        "value": "沙漠边缘",
+        "optionId": "A"
+      },
+      "explanation": "短文说“胡杨生活在沙漠边缘”。",
+      "hints": [
+        "看第一句。",
+        "和沙漠有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn5-x-p1"
+    },
+    {
+      "id": "cn5-x-read-02",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "胡杨为什么被称为“沙漠的守护者”？",
+      "options": [
+        {
+          "id": "A",
+          "label": "它能防风固沙"
+        },
+        {
+          "id": "B",
+          "label": "它长得高"
+        },
+        {
+          "id": "C",
+          "label": "它会开花"
+        },
+        {
+          "id": "D",
+          "label": "它有香味"
+        }
+      ],
+      "answer": {
+        "value": "它能防风固沙",
+        "optionId": "A"
+      },
+      "explanation": "根抓沙土、防止风沙侵蚀。",
+      "hints": [
+        "看最后一句。",
+        "和“守护”有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn5-x-p1"
+    },
+    {
+      "id": "cn5-x-read-03",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "胡杨的根有什么特点？",
+      "options": [
+        {
+          "id": "A",
+          "label": "扎得很深"
+        },
+        {
+          "id": "B",
+          "label": "很短"
+        },
+        {
+          "id": "C",
+          "label": "浮在表面"
+        },
+        {
+          "id": "D",
+          "label": "会开花"
+        }
+      ],
+      "answer": {
+        "value": "扎得很深",
+        "optionId": "A"
+      },
+      "explanation": "短文说“根能扎得很深”。",
+      "hints": [
+        "找“根”。",
+        "为了抓住沙土。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn5-x-p1"
+    },
+    {
+      "id": "cn5-x-read-04",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "这篇短文主要说明胡杨的什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "耐旱和固沙作用"
+        },
+        {
+          "id": "B",
+          "label": "花朵很美"
+        },
+        {
+          "id": "C",
+          "label": "果实能吃"
+        },
+        {
+          "id": "D",
+          "label": "生长很快"
+        }
+      ],
+      "answer": {
+        "value": "耐旱和固沙作用",
+        "optionId": "A"
+      },
+      "explanation": "全文写胡杨适应沙漠、保护沙土。",
+      "hints": [
+        "看“耐旱、耐盐碱”。",
+        "不是写花。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn5-x-p1"
+    },
+    {
+      "id": "cn5-x-poem-01",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“复恐匆匆说不尽，行人临发又（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "开封"
+        },
+        {
+          "id": "B",
+          "label": "开船"
+        },
+        {
+          "id": "C",
+          "label": "回头"
+        },
+        {
+          "id": "D",
+          "label": "挥手"
+        }
+      ],
+      "answer": {
+        "value": "开封",
+        "optionId": "A"
+      },
+      "explanation": "张籍《秋思》写信写好后再次打开。",
+      "hints": [
+        "和信有关。",
+        "把封好的信打开。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poem-02",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“聒碎乡心梦不成，故园无此（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "声"
+        },
+        {
+          "id": "B",
+          "label": "景"
+        },
+        {
+          "id": "C",
+          "label": "情"
+        },
+        {
+          "id": "D",
+          "label": "人"
+        }
+      ],
+      "answer": {
+        "value": "声",
+        "optionId": "A"
+      },
+      "explanation": "纳兰性德《长相思》写风雪声扰了乡梦。",
+      "hints": [
+        "前面写风声雪声。",
+        "和声音有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poem-03",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“归来饱饭黄昏后，不脱蓑衣卧（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "月明"
+        },
+        {
+          "id": "B",
+          "label": "草地"
+        },
+        {
+          "id": "C",
+          "label": "牛背"
+        },
+        {
+          "id": "D",
+          "label": "溪边"
+        }
+      ],
+      "answer": {
+        "value": "月明",
+        "optionId": "A"
+      },
+      "explanation": "吕岩《牧童》写牧童月夜卧。",
+      "hints": [
+        "看“黄昏后”。",
+        "和月亮有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn5-x-poem-04",
+      "subject": "chinese",
+      "grade": 5,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“怪生无雨都张伞，不是遮头是（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "使风"
+        },
+        {
+          "id": "B",
+          "label": "遮阳"
+        },
+        {
+          "id": "C",
+          "label": "挡雨"
+        },
+        {
+          "id": "D",
+          "label": "玩耍"
+        }
+      ],
+      "answer": {
+        "value": "使风",
+        "optionId": "A"
+      },
+      "explanation": "杨万里《舟过安仁》写孩子张伞使风。",
+      "hints": [
+        "没有雨为什么打伞？",
+        "和风有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
     }
   ]
 }

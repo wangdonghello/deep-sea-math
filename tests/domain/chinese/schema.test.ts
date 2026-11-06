@@ -36,20 +36,20 @@ describe('chinese content', () => {
     expect(new Set(g2.map((q) => q.kind)).size).toBe(5)
   })
 
-  it('20 道三年级挑战题通过校验', () => {
+  it('50 道三年级挑战题通过校验', () => {
     expect(() => validateChineseContent({ questions: g3, passages: p3 })).not.toThrow()
-    expect(g3).toHaveLength(20)
+    expect(g3).toHaveLength(50)
     expect(new Set(g3.map((q) => q.kind)).size).toBe(5)
   })
 
-  it('4–6 年级题都通过校验且各 22 题', () => {
+  it('4–6 年级题都通过校验且各 52 题', () => {
     for (const [questions, passages] of [
       [grade4.questions, passages4],
       [grade5.questions, passages5],
       [grade6.questions, passages6],
     ] as const) {
       expect(() => validateChineseContent({ questions: questions as ChineseQuestion[], passages: passages as ChinesePassage[] })).not.toThrow()
-      expect(questions).toHaveLength(22)
+      expect(questions).toHaveLength(52)
     }
   })
 

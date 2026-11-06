@@ -823,6 +823,1241 @@
         "poem-device",
         "challenge"
       ]
+    },
+    {
+      "id": "cn3-x-idiom-01",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“掩耳盗铃” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "自己欺骗自己"
+        },
+        {
+          "id": "B",
+          "label": "行动和目的相反"
+        },
+        {
+          "id": "C",
+          "label": "不懂得随情况变化"
+        },
+        {
+          "id": "D",
+          "label": "表面喜欢，实际害怕"
+        }
+      ],
+      "answer": {
+        "value": "自己欺骗自己",
+        "optionId": "A"
+      },
+      "explanation": "“掩耳盗铃” 比喻/表示自己欺骗自己。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-idiom-02",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“南辕北辙” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "自己欺骗自己"
+        },
+        {
+          "id": "B",
+          "label": "不懂得随情况变化"
+        },
+        {
+          "id": "C",
+          "label": "表面喜欢，实际害怕"
+        },
+        {
+          "id": "D",
+          "label": "行动和目的相反"
+        }
+      ],
+      "answer": {
+        "value": "行动和目的相反",
+        "optionId": "D"
+      },
+      "explanation": "“南辕北辙” 比喻/表示行动和目的相反。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-idiom-03",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“刻舟求剑” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "行动和目的相反"
+        },
+        {
+          "id": "B",
+          "label": "表面喜欢，实际害怕"
+        },
+        {
+          "id": "C",
+          "label": "不懂得随情况变化"
+        },
+        {
+          "id": "D",
+          "label": "自己欺骗自己"
+        }
+      ],
+      "answer": {
+        "value": "不懂得随情况变化",
+        "optionId": "C"
+      },
+      "explanation": "“刻舟求剑” 比喻/表示不懂得随情况变化。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-idiom-04",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“叶公好龙” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "不懂得随情况变化"
+        },
+        {
+          "id": "B",
+          "label": "表面喜欢，实际害怕"
+        },
+        {
+          "id": "C",
+          "label": "自己欺骗自己"
+        },
+        {
+          "id": "D",
+          "label": "行动和目的相反"
+        }
+      ],
+      "answer": {
+        "value": "表面喜欢，实际害怕",
+        "optionId": "B"
+      },
+      "explanation": "“叶公好龙” 比喻/表示表面喜欢，实际害怕。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-idiom-05",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“滥竽充数” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "没有真本事却混在行家里"
+        },
+        {
+          "id": "B",
+          "label": "自己欺骗自己"
+        },
+        {
+          "id": "C",
+          "label": "行动和目的相反"
+        },
+        {
+          "id": "D",
+          "label": "不懂得随情况变化"
+        }
+      ],
+      "answer": {
+        "value": "没有真本事却混在行家里",
+        "optionId": "A"
+      },
+      "explanation": "“滥竽充数” 比喻/表示没有真本事却混在行家里。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-idiom-06",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“自相矛盾” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "自己欺骗自己"
+        },
+        {
+          "id": "B",
+          "label": "行动和目的相反"
+        },
+        {
+          "id": "C",
+          "label": "不懂得随情况变化"
+        },
+        {
+          "id": "D",
+          "label": "言行前后不一致"
+        }
+      ],
+      "answer": {
+        "value": "言行前后不一致",
+        "optionId": "D"
+      },
+      "explanation": "“自相矛盾” 比喻/表示言行前后不一致。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poly-01",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“银行” 中的“行”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "háng"
+        },
+        {
+          "id": "B",
+          "label": "xíng"
+        },
+        {
+          "id": "C",
+          "label": "hàng"
+        },
+        {
+          "id": "D",
+          "label": "xìng"
+        }
+      ],
+      "answer": {
+        "value": "háng",
+        "optionId": "A"
+      },
+      "explanation": "“银行” 中“行”读 háng。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poly-02",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“数学” 中的“数”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "shǔ"
+        },
+        {
+          "id": "B",
+          "label": "shuò"
+        },
+        {
+          "id": "C",
+          "label": "sù"
+        },
+        {
+          "id": "D",
+          "label": "shù"
+        }
+      ],
+      "answer": {
+        "value": "shù",
+        "optionId": "D"
+      },
+      "explanation": "“数学” 中“数”读 shù。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poly-03",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“重新” 中的“重”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "chōng"
+        },
+        {
+          "id": "B",
+          "label": "zhōng"
+        },
+        {
+          "id": "C",
+          "label": "chóng"
+        },
+        {
+          "id": "D",
+          "label": "zhòng"
+        }
+      ],
+      "answer": {
+        "value": "chóng",
+        "optionId": "C"
+      },
+      "explanation": "“重新” 中“重”读 chóng。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ],
+      "audio": "chinese/cn3-x-poly-03.mp3"
+    },
+    {
+      "id": "cn3-x-poly-04",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“好学” 中的“好”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "hāo"
+        },
+        {
+          "id": "B",
+          "label": "hào"
+        },
+        {
+          "id": "C",
+          "label": "hǎo"
+        },
+        {
+          "id": "D",
+          "label": "háo"
+        }
+      ],
+      "answer": {
+        "value": "hào",
+        "optionId": "B"
+      },
+      "explanation": "“好学” 中“好”读 hào。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poly-05",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“处理” 中的“处”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "chǔ"
+        },
+        {
+          "id": "B",
+          "label": "chù"
+        },
+        {
+          "id": "C",
+          "label": "chū"
+        },
+        {
+          "id": "D",
+          "label": "chú"
+        }
+      ],
+      "answer": {
+        "value": "chǔ",
+        "optionId": "A"
+      },
+      "explanation": "“处理” 中“处”读 chǔ。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poly-06",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“音乐” 中的“乐”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "lè"
+        },
+        {
+          "id": "B",
+          "label": "yào"
+        },
+        {
+          "id": "C",
+          "label": "lě"
+        },
+        {
+          "id": "D",
+          "label": "yuè"
+        }
+      ],
+      "answer": {
+        "value": "yuè",
+        "optionId": "D"
+      },
+      "explanation": "“音乐” 中“乐”读 yuè。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-word-01",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“忽然” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "突然"
+        },
+        {
+          "id": "B",
+          "label": "慢慢"
+        },
+        {
+          "id": "C",
+          "label": "渐渐"
+        },
+        {
+          "id": "D",
+          "label": "经常"
+        }
+      ],
+      "answer": {
+        "value": "突然",
+        "optionId": "A"
+      },
+      "explanation": "“忽然” 的近义词是“突然”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-word-02",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“著名” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "普通"
+        },
+        {
+          "id": "B",
+          "label": "安静"
+        },
+        {
+          "id": "C",
+          "label": "奇怪"
+        },
+        {
+          "id": "D",
+          "label": "有名"
+        }
+      ],
+      "answer": {
+        "value": "有名",
+        "optionId": "D"
+      },
+      "explanation": "“著名” 的近义词是“有名”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-word-03",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“美丽” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "普通"
+        },
+        {
+          "id": "B",
+          "label": "奇怪"
+        },
+        {
+          "id": "C",
+          "label": "漂亮"
+        },
+        {
+          "id": "D",
+          "label": "难看"
+        }
+      ],
+      "answer": {
+        "value": "漂亮",
+        "optionId": "C"
+      },
+      "explanation": "“美丽” 的近义词是“漂亮”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-word-04",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“危险” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "困难"
+        },
+        {
+          "id": "B",
+          "label": "安全"
+        },
+        {
+          "id": "C",
+          "label": "害怕"
+        },
+        {
+          "id": "D",
+          "label": "小心"
+        }
+      ],
+      "answer": {
+        "value": "安全",
+        "optionId": "B"
+      },
+      "explanation": "“危险” 的反义词是“安全”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-word-05",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“复杂” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "简单"
+        },
+        {
+          "id": "B",
+          "label": "困难"
+        },
+        {
+          "id": "C",
+          "label": "麻烦"
+        },
+        {
+          "id": "D",
+          "label": "仔细"
+        }
+      ],
+      "answer": {
+        "value": "简单",
+        "optionId": "A"
+      },
+      "explanation": "“复杂” 的反义词是“简单”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-word-06",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“明亮” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "光亮"
+        },
+        {
+          "id": "B",
+          "label": "宽敞"
+        },
+        {
+          "id": "C",
+          "label": "干净"
+        },
+        {
+          "id": "D",
+          "label": "黑暗"
+        }
+      ],
+      "answer": {
+        "value": "黑暗",
+        "optionId": "D"
+      },
+      "explanation": "“明亮” 的反义词是“黑暗”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-char-01",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“立即” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "即"
+        },
+        {
+          "id": "B",
+          "label": "既"
+        },
+        {
+          "id": "C",
+          "label": "的"
+        },
+        {
+          "id": "D",
+          "label": "地"
+        }
+      ],
+      "answer": {
+        "value": "即",
+        "optionId": "A"
+      },
+      "explanation": "“立即” 用“即”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-char-02",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“戴帽子” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "带"
+        },
+        {
+          "id": "B",
+          "label": "子"
+        },
+        {
+          "id": "C",
+          "label": "的"
+        },
+        {
+          "id": "D",
+          "label": "戴"
+        }
+      ],
+      "answer": {
+        "value": "戴",
+        "optionId": "D"
+      },
+      "explanation": "“戴帽子” 用“戴”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-char-03",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“严厉” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "的"
+        },
+        {
+          "id": "B",
+          "label": "地"
+        },
+        {
+          "id": "C",
+          "label": "厉"
+        },
+        {
+          "id": "D",
+          "label": "历"
+        }
+      ],
+      "answer": {
+        "value": "厉",
+        "optionId": "C"
+      },
+      "explanation": "“严厉” 用“厉”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-char-04",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“羡慕” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "地"
+        },
+        {
+          "id": "B",
+          "label": "慕"
+        },
+        {
+          "id": "C",
+          "label": "幕"
+        },
+        {
+          "id": "D",
+          "label": "的"
+        }
+      ],
+      "answer": {
+        "value": "慕",
+        "optionId": "B"
+      },
+      "explanation": "“羡慕” 用“慕”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-read-01",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "蒲公英的种子像什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "小伞"
+        },
+        {
+          "id": "B",
+          "label": "小船"
+        },
+        {
+          "id": "C",
+          "label": "小鸟"
+        },
+        {
+          "id": "D",
+          "label": "小灯"
+        }
+      ],
+      "answer": {
+        "value": "小伞",
+        "optionId": "A"
+      },
+      "explanation": "短文说种子“像小伞”。",
+      "hints": [
+        "找“像”字。",
+        "和伞有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn3-x-p1"
+    },
+    {
+      "id": "cn3-x-read-02",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "蒲公英的种子靠什么飞走？",
+      "options": [
+        {
+          "id": "A",
+          "label": "风"
+        },
+        {
+          "id": "B",
+          "label": "雨"
+        },
+        {
+          "id": "C",
+          "label": "鸟"
+        },
+        {
+          "id": "D",
+          "label": "水"
+        }
+      ],
+      "answer": {
+        "value": "风",
+        "optionId": "A"
+      },
+      "explanation": "短文说“风一吹，它们就飞向远方”。",
+      "hints": [
+        "找“风一吹”。",
+        "不是动物带走的。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn3-x-p1"
+    },
+    {
+      "id": "cn3-x-read-03",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "种子落在不同的地方，第二年春天会怎样？",
+      "options": [
+        {
+          "id": "A",
+          "label": "开出新的蒲公英"
+        },
+        {
+          "id": "B",
+          "label": "变成大树"
+        },
+        {
+          "id": "C",
+          "label": "消失不见"
+        },
+        {
+          "id": "D",
+          "label": "飞回原处"
+        }
+      ],
+      "answer": {
+        "value": "开出新的蒲公英",
+        "optionId": "A"
+      },
+      "explanation": "短文说“那里就开出新的蒲公英”。",
+      "hints": [
+        "看最后一句。",
+        "和蒲公英生长有关。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn3-x-p1"
+    },
+    {
+      "id": "cn3-x-read-04",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "这篇短文主要写什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "蒲公英种子的传播"
+        },
+        {
+          "id": "B",
+          "label": "蒲公英的味道"
+        },
+        {
+          "id": "C",
+          "label": "怎样种蒲公英"
+        },
+        {
+          "id": "D",
+          "label": "蒲公英的颜色"
+        }
+      ],
+      "answer": {
+        "value": "蒲公英种子的传播",
+        "optionId": "A"
+      },
+      "explanation": "全文围绕种子被风吹走、落地生长。",
+      "hints": [
+        "看种子怎么到远方。",
+        "不是写味道。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn3-x-p1"
+    },
+    {
+      "id": "cn3-x-poem-01",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“不知细叶谁裁出，二月春风似（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "剪刀"
+        },
+        {
+          "id": "B",
+          "label": "画笔"
+        },
+        {
+          "id": "C",
+          "label": "小船"
+        },
+        {
+          "id": "D",
+          "label": "丝带"
+        }
+      ],
+      "answer": {
+        "value": "剪刀",
+        "optionId": "A"
+      },
+      "explanation": "把春风比作剪刀，裁出柳叶。",
+      "hints": [
+        "看“裁”字。",
+        "裁衣服用什么？"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poem-02",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“等闲识得东风面，万紫千红总是（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "春"
+        },
+        {
+          "id": "B",
+          "label": "花"
+        },
+        {
+          "id": "C",
+          "label": "风"
+        },
+        {
+          "id": "D",
+          "label": "红"
+        }
+      ],
+      "answer": {
+        "value": "春",
+        "optionId": "A"
+      },
+      "explanation": "朱熹《春日》写万紫千红都是春色。",
+      "hints": [
+        "题目是《春日》。",
+        "和季节有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poem-03",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“七夕今宵看碧霄，牵牛织女渡（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "河桥"
+        },
+        {
+          "id": "B",
+          "label": "银河"
+        },
+        {
+          "id": "C",
+          "label": "鹊桥"
+        },
+        {
+          "id": "D",
+          "label": "小桥"
+        }
+      ],
+      "answer": {
+        "value": "河桥",
+        "optionId": "A"
+      },
+      "explanation": "林杰《乞巧》写牛郎织女渡河桥。",
+      "hints": [
+        "看“渡”字。",
+        "七夕的传说。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn3-x-poem-04",
+      "subject": "chinese",
+      "grade": 3,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“嫦娥应悔偷灵药，碧海青天夜夜（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "心"
+        },
+        {
+          "id": "B",
+          "label": "明"
+        },
+        {
+          "id": "C",
+          "label": "寒"
+        },
+        {
+          "id": "D",
+          "label": "飞"
+        }
+      ],
+      "answer": {
+        "value": "心",
+        "optionId": "A"
+      },
+      "explanation": "李商隐《嫦娥》写嫦娥夜夜孤寂。",
+      "hints": [
+        "和心情有关。",
+        "夜夜思念。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
     }
   ]
 }

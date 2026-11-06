@@ -885,6 +885,1241 @@
         "poem",
         "poem-meaning"
       ]
+    },
+    {
+      "id": "cn4-x-idiom-01",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“胸有成竹” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "做事前已有把握"
+        },
+        {
+          "id": "B",
+          "label": "在关键处点明，使内容更生动"
+        },
+        {
+          "id": "C",
+          "label": "对不懂的人讲道理"
+        },
+        {
+          "id": "D",
+          "label": "条理分明，一点也不乱"
+        }
+      ],
+      "answer": {
+        "value": "做事前已有把握",
+        "optionId": "A"
+      },
+      "explanation": "“胸有成竹” 比喻/表示做事前已有把握。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-idiom-02",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“画龙点睛” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "做事前已有把握"
+        },
+        {
+          "id": "B",
+          "label": "对不懂的人讲道理"
+        },
+        {
+          "id": "C",
+          "label": "条理分明，一点也不乱"
+        },
+        {
+          "id": "D",
+          "label": "在关键处点明，使内容更生动"
+        }
+      ],
+      "answer": {
+        "value": "在关键处点明，使内容更生动",
+        "optionId": "D"
+      },
+      "explanation": "“画龙点睛” 比喻/表示在关键处点明，使内容更生动。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-idiom-03",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“对牛弹琴” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "在关键处点明，使内容更生动"
+        },
+        {
+          "id": "B",
+          "label": "条理分明，一点也不乱"
+        },
+        {
+          "id": "C",
+          "label": "对不懂的人讲道理"
+        },
+        {
+          "id": "D",
+          "label": "做事前已有把握"
+        }
+      ],
+      "answer": {
+        "value": "对不懂的人讲道理",
+        "optionId": "C"
+      },
+      "explanation": "“对牛弹琴” 比喻/表示对不懂的人讲道理。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-idiom-04",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“井井有条” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "对不懂的人讲道理"
+        },
+        {
+          "id": "B",
+          "label": "条理分明，一点也不乱"
+        },
+        {
+          "id": "C",
+          "label": "做事前已有把握"
+        },
+        {
+          "id": "D",
+          "label": "在关键处点明，使内容更生动"
+        }
+      ],
+      "answer": {
+        "value": "条理分明，一点也不乱",
+        "optionId": "B"
+      },
+      "explanation": "“井井有条” 比喻/表示条理分明，一点也不乱。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-idiom-05",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“水泄不通” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "拥挤得连水都流不出去"
+        },
+        {
+          "id": "B",
+          "label": "做事前已有把握"
+        },
+        {
+          "id": "C",
+          "label": "在关键处点明，使内容更生动"
+        },
+        {
+          "id": "D",
+          "label": "对不懂的人讲道理"
+        }
+      ],
+      "answer": {
+        "value": "拥挤得连水都流不出去",
+        "optionId": "A"
+      },
+      "explanation": "“水泄不通” 比喻/表示拥挤得连水都流不出去。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-idiom-06",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "idiom-meaning",
+      "prompt": "“一丝不苟” 的意思是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "做事前已有把握"
+        },
+        {
+          "id": "B",
+          "label": "在关键处点明，使内容更生动"
+        },
+        {
+          "id": "C",
+          "label": "对不懂的人讲道理"
+        },
+        {
+          "id": "D",
+          "label": "做事认真，连细小处也不马虎"
+        }
+      ],
+      "answer": {
+        "value": "做事认真，连细小处也不马虎",
+        "optionId": "D"
+      },
+      "explanation": "“一丝不苟” 比喻/表示做事认真，连细小处也不马虎。",
+      "hints": [
+        "先理解字面意思。",
+        "再联系比喻义。"
+      ],
+      "tags": [
+        "word",
+        "idiom-meaning",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poly-01",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“供给” 中的“供”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "gōng"
+        },
+        {
+          "id": "B",
+          "label": "gòng"
+        },
+        {
+          "id": "C",
+          "label": "gǒng"
+        },
+        {
+          "id": "D",
+          "label": "gūng"
+        }
+      ],
+      "answer": {
+        "value": "gōng",
+        "optionId": "A"
+      },
+      "explanation": "“供给” 中“供”读 gōng。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poly-02",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“薄雾” 中的“薄”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "báo"
+        },
+        {
+          "id": "B",
+          "label": "bò"
+        },
+        {
+          "id": "C",
+          "label": "bāo"
+        },
+        {
+          "id": "D",
+          "label": "bó"
+        }
+      ],
+      "answer": {
+        "value": "bó",
+        "optionId": "D"
+      },
+      "explanation": "“薄雾” 中“薄”读 bó。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poly-03",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“折腾” 中的“折”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "shé"
+        },
+        {
+          "id": "B",
+          "label": "zhè"
+        },
+        {
+          "id": "C",
+          "label": "zhē"
+        },
+        {
+          "id": "D",
+          "label": "zhé"
+        }
+      ],
+      "answer": {
+        "value": "zhē",
+        "optionId": "C"
+      },
+      "explanation": "“折腾” 中“折”读 zhē。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poly-04",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“出差” 中的“差”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "cī"
+        },
+        {
+          "id": "B",
+          "label": "chāi"
+        },
+        {
+          "id": "C",
+          "label": "chā"
+        },
+        {
+          "id": "D",
+          "label": "chà"
+        }
+      ],
+      "answer": {
+        "value": "chāi",
+        "optionId": "B"
+      },
+      "explanation": "“出差” 中“差”读 chāi。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poly-05",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“和面” 中的“和”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "huó"
+        },
+        {
+          "id": "B",
+          "label": "hé"
+        },
+        {
+          "id": "C",
+          "label": "hè"
+        },
+        {
+          "id": "D",
+          "label": "huò"
+        }
+      ],
+      "answer": {
+        "value": "huó",
+        "optionId": "A"
+      },
+      "explanation": "“和面” 中“和”读 huó。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poly-06",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "pinyin",
+      "skill": "pinyin-polyphone",
+      "prompt": "“着火” 中的“着”读什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "zhe"
+        },
+        {
+          "id": "B",
+          "label": "zhuó"
+        },
+        {
+          "id": "C",
+          "label": "zhāo"
+        },
+        {
+          "id": "D",
+          "label": "zháo"
+        }
+      ],
+      "answer": {
+        "value": "zháo",
+        "optionId": "D"
+      },
+      "explanation": "“着火” 中“着”读 zháo。",
+      "hints": [
+        "把这个词读一遍。",
+        "注意多音字在词语中的读音。"
+      ],
+      "tags": [
+        "pinyin",
+        "pinyin-polyphone",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-word-01",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“鼓励” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "鼓舞"
+        },
+        {
+          "id": "B",
+          "label": "批评"
+        },
+        {
+          "id": "C",
+          "label": "阻止"
+        },
+        {
+          "id": "D",
+          "label": "嘲笑"
+        }
+      ],
+      "answer": {
+        "value": "鼓舞",
+        "optionId": "A"
+      },
+      "explanation": "“鼓励” 的近义词是“鼓舞”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-word-02",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“清晰” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "模糊"
+        },
+        {
+          "id": "B",
+          "label": "杂乱"
+        },
+        {
+          "id": "C",
+          "label": "遥远"
+        },
+        {
+          "id": "D",
+          "label": "清楚"
+        }
+      ],
+      "answer": {
+        "value": "清楚",
+        "optionId": "D"
+      },
+      "explanation": "“清晰” 的近义词是“清楚”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-word-03",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "synonym",
+      "prompt": "“容易” 的近义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "方便"
+        },
+        {
+          "id": "B",
+          "label": "轻松"
+        },
+        {
+          "id": "C",
+          "label": "困难"
+        },
+        {
+          "id": "D",
+          "label": "简单"
+        }
+      ],
+      "answer": {
+        "value": "困难",
+        "optionId": "C"
+      },
+      "explanation": "“容易” 的近义词是“困难”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "synonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-word-04",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“平静” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "冷清"
+        },
+        {
+          "id": "B",
+          "label": "热闹"
+        },
+        {
+          "id": "C",
+          "label": "安静"
+        },
+        {
+          "id": "D",
+          "label": "平稳"
+        }
+      ],
+      "answer": {
+        "value": "热闹",
+        "optionId": "B"
+      },
+      "explanation": "“平静” 的反义词是“热闹”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-word-05",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“仔细” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "粗心"
+        },
+        {
+          "id": "B",
+          "label": "认真"
+        },
+        {
+          "id": "C",
+          "label": "细心"
+        },
+        {
+          "id": "D",
+          "label": "耐心"
+        }
+      ],
+      "answer": {
+        "value": "粗心",
+        "optionId": "A"
+      },
+      "explanation": "“仔细” 的反义词是“粗心”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-word-06",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "word",
+      "skill": "antonym",
+      "prompt": "“宽阔” 的反义词是？",
+      "options": [
+        {
+          "id": "A",
+          "label": "宽广"
+        },
+        {
+          "id": "B",
+          "label": "辽阔"
+        },
+        {
+          "id": "C",
+          "label": "平坦"
+        },
+        {
+          "id": "D",
+          "label": "狭窄"
+        }
+      ],
+      "answer": {
+        "value": "狭窄",
+        "optionId": "D"
+      },
+      "explanation": "“宽阔” 的反义词是“狭窄”。",
+      "hints": [
+        "想一想词义。",
+        "和它意思相近/相反。"
+      ],
+      "tags": [
+        "word",
+        "antonym",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-char-01",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“分辨” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "辨"
+        },
+        {
+          "id": "B",
+          "label": "辩"
+        },
+        {
+          "id": "C",
+          "label": "的"
+        },
+        {
+          "id": "D",
+          "label": "地"
+        }
+      ],
+      "answer": {
+        "value": "辨",
+        "optionId": "A"
+      },
+      "explanation": "“分辨” 用“辨”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-char-02",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“急躁” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "燥"
+        },
+        {
+          "id": "B",
+          "label": "的"
+        },
+        {
+          "id": "C",
+          "label": "地"
+        },
+        {
+          "id": "D",
+          "label": "躁"
+        }
+      ],
+      "answer": {
+        "value": "躁",
+        "optionId": "D"
+      },
+      "explanation": "“急躁” 用“躁”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-char-03",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“竣工” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "工"
+        },
+        {
+          "id": "B",
+          "label": "的"
+        },
+        {
+          "id": "C",
+          "label": "竣"
+        },
+        {
+          "id": "D",
+          "label": "峻"
+        }
+      ],
+      "answer": {
+        "value": "竣",
+        "optionId": "C"
+      },
+      "explanation": "“竣工” 用“竣”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-char-04",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "character",
+      "skill": "character-confusion",
+      "prompt": "“鼓励” 应该用哪个字？",
+      "options": [
+        {
+          "id": "A",
+          "label": "地"
+        },
+        {
+          "id": "B",
+          "label": "励"
+        },
+        {
+          "id": "C",
+          "label": "厉"
+        },
+        {
+          "id": "D",
+          "label": "的"
+        }
+      ],
+      "answer": {
+        "value": "励",
+        "optionId": "B"
+      },
+      "explanation": "“鼓励” 用“励”。",
+      "hints": [
+        "根据词义判断。",
+        "注意形近字。"
+      ],
+      "tags": [
+        "character",
+        "character-confusion",
+        "extra"
+      ],
+      "audio": "chinese/cn4-x-char-04.mp3"
+    },
+    {
+      "id": "cn4-x-read-01",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "荷花有的全开，有的还是什么？",
+      "options": [
+        {
+          "id": "A",
+          "label": "花骨朵"
+        },
+        {
+          "id": "B",
+          "label": "莲蓬"
+        },
+        {
+          "id": "C",
+          "label": "荷叶"
+        },
+        {
+          "id": "D",
+          "label": "莲藕"
+        }
+      ],
+      "answer": {
+        "value": "花骨朵",
+        "optionId": "A"
+      },
+      "explanation": "短文说“有的还是花骨朵”。",
+      "hints": [
+        "找“有的……有的……”。",
+        "还没开的花。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn4-x-p1"
+    },
+    {
+      "id": "cn4-x-read-02",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "“饱胀得马上要破裂似的”写出花骨朵怎样？",
+      "options": [
+        {
+          "id": "A",
+          "label": "饱满，将要开放"
+        },
+        {
+          "id": "B",
+          "label": "已经凋谢"
+        },
+        {
+          "id": "C",
+          "label": "被虫咬坏"
+        },
+        {
+          "id": "D",
+          "label": "很小很干"
+        }
+      ],
+      "answer": {
+        "value": "饱满，将要开放",
+        "optionId": "A"
+      },
+      "explanation": "“饱胀”说明花骨朵鼓鼓的，即将绽放。",
+      "hints": [
+        "联系“马上要破裂”。",
+        "不是枯萎。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn4-x-p1"
+    },
+    {
+      "id": "cn4-x-read-03",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "“满池荷花随风舞蹈”用了什么写法？",
+      "options": [
+        {
+          "id": "A",
+          "label": "拟人"
+        },
+        {
+          "id": "B",
+          "label": "比喻"
+        },
+        {
+          "id": "C",
+          "label": "夸张"
+        },
+        {
+          "id": "D",
+          "label": "排比"
+        }
+      ],
+      "answer": {
+        "value": "拟人",
+        "optionId": "A"
+      },
+      "explanation": "把荷花当作人来“舞蹈”，是拟人。",
+      "hints": [
+        "荷花会跳舞吗？",
+        "把物当人写。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn4-x-p1"
+    },
+    {
+      "id": "cn4-x-read-04",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "reading",
+      "skill": "reading-comprehension",
+      "prompt": "这篇短文表达作者怎样的感情？",
+      "options": [
+        {
+          "id": "A",
+          "label": "喜爱荷花"
+        },
+        {
+          "id": "B",
+          "label": "讨厌夏天"
+        },
+        {
+          "id": "C",
+          "label": "想念冬天"
+        },
+        {
+          "id": "D",
+          "label": "害怕风"
+        }
+      ],
+      "answer": {
+        "value": "喜爱荷花",
+        "optionId": "A"
+      },
+      "explanation": "细致描写荷花，表达喜爱。",
+      "hints": [
+        "看描写的语气。",
+        "不是讨厌。"
+      ],
+      "tags": [
+        "reading",
+        "reading-comprehension",
+        "extra"
+      ],
+      "passageId": "cn4-x-p1"
+    },
+    {
+      "id": "cn4-x-poem-01",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“白银盘里一青（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "螺"
+        },
+        {
+          "id": "B",
+          "label": "山"
+        },
+        {
+          "id": "C",
+          "label": "水"
+        },
+        {
+          "id": "D",
+          "label": "船"
+        }
+      ],
+      "answer": {
+        "value": "螺",
+        "optionId": "A"
+      },
+      "explanation": "刘禹锡《望洞庭》把君山比作青螺。",
+      "hints": [
+        "和洞庭湖中的君山有关。",
+        "是一种小动物。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poem-02",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“日出江花红胜火，春来江水绿如（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "蓝"
+        },
+        {
+          "id": "B",
+          "label": "绿"
+        },
+        {
+          "id": "C",
+          "label": "青"
+        },
+        {
+          "id": "D",
+          "label": "碧"
+        }
+      ],
+      "answer": {
+        "value": "蓝",
+        "optionId": "A"
+      },
+      "explanation": "白居易《忆江南》写江水绿如蓝。",
+      "hints": [
+        "看“绿如”。",
+        "一种颜色。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poem-03",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“相看两不厌，只有敬亭（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "山"
+        },
+        {
+          "id": "B",
+          "label": "楼"
+        },
+        {
+          "id": "C",
+          "label": "水"
+        },
+        {
+          "id": "D",
+          "label": "云"
+        }
+      ],
+      "answer": {
+        "value": "山",
+        "optionId": "A"
+      },
+      "explanation": "李白《独坐敬亭山》写人与山相看。",
+      "hints": [
+        "题目有“山”。",
+        "和山有关。"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
+    },
+    {
+      "id": "cn4-x-poem-04",
+      "subject": "chinese",
+      "grade": 4,
+      "difficulty": 3,
+      "kind": "poem",
+      "skill": "poem-recitation",
+      "prompt": "“乡村四月闲人少，才了蚕桑又插（ ）。”",
+      "options": [
+        {
+          "id": "A",
+          "label": "田"
+        },
+        {
+          "id": "B",
+          "label": "秧"
+        },
+        {
+          "id": "C",
+          "label": "花"
+        },
+        {
+          "id": "D",
+          "label": "柳"
+        }
+      ],
+      "answer": {
+        "value": "田",
+        "optionId": "A"
+      },
+      "explanation": "翁卷《乡村四月》写农忙插田。",
+      "hints": [
+        "和农事有关。",
+        "水稻种在哪里？"
+      ],
+      "tags": [
+        "poem",
+        "poem-recitation",
+        "extra"
+      ]
     }
   ]
 }
