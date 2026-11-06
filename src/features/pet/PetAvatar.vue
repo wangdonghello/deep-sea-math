@@ -198,15 +198,15 @@ const PALETTES: Record<PetStage, Palette> = {
     ink: '#06233c',
   },
   child: {
-    bodyTop: '#b9f4ff',
-    bodyBottom: '#0d4f86',
-    bellyTop: '#f7feff',
-    bellyBottom: '#c7ecff',
-    fin: '#2fb9e8',
-    finLight: '#bdf6ff',
+    bodyTop: '#2d4f73',
+    bodyBottom: '#061522',
+    bellyTop: '#ffffff',
+    bellyBottom: '#cfe8f7',
+    fin: '#17324c',
+    finLight: '#8fd8f5',
     accent: '#ffd479',
-    glow: '#63ddff',
-    ink: '#031d35',
+    glow: '#5bd7ff',
+    ink: '#020b14',
   },
   juvenile: {
     bodyTop: '#9df5dc',
@@ -298,17 +298,17 @@ const GEOMETRY: Record<PetStage, StageGeometry> = {
   },
   child: {
     bodyCx: 160,
-    bodyCy: 196,
-    bodyRx: 50,
-    bodyRy: 42,
-    head: { cx: 160, cy: 140, rx: 60, ry: 54 },
-    eyeCy: 140,
+    bodyCy: 208,
+    bodyRx: 46,
+    bodyRy: 34,
+    head: { cx: 160, cy: 138, rx: 62, ry: 56 },
+    eyeCy: 138,
     eyeDx: 22,
-    eyeR: 10.5,
-    mouthCy: 162,
+    eyeR: 11,
+    mouthCy: 160,
     mouthW: 9,
-    blushCy: 164,
-    finScale: 0.88,
+    blushCy: 162,
+    finScale: 0.84,
   },
   juvenile: {
     bodyCx: 160,
@@ -754,25 +754,16 @@ const STAR_PATH =
           />
         </g>
 
-        <g v-if="stage === 'child'" class="pet-avatar__child-fin" aria-hidden="true">
-          <path
-            d="M146 102 Q170 68 208 80 Q188 92 181 112 Q164 104 146 102 Z"
-            :fill="palette.fin"
-            :stroke="palette.ink"
-            stroke-width="3"
-            stroke-linejoin="round"
-          />
-          <path d="M162 96 Q180 84 198 84" fill="none" :stroke="palette.finLight" stroke-width="3" stroke-linecap="round" />
+
+
+        <g v-if="stage === 'child'" class="pet-avatar__child-patches" aria-hidden="true">
+          <ellipse v-for="(x, index) in eyeXs" :key="index" :cx="x" :cy="geometry.eyeCy - 2" :rx="geometry.eyeR + 7" :ry="geometry.eyeR + 5" fill="#f7feff" opacity="0.95" />
         </g>
+
         <g v-if="stage === 'child' && !lowMood" class="pet-avatar__child-brows" aria-hidden="true">
-          <path
-            v-for="(x, index) in eyeXs"
-            :key="index"
-            :d="`M${x - 10} ${geometry.eyeCy - 18} L${x + 9} ${geometry.eyeCy - 22}`"
-            :stroke="palette.ink"
-            stroke-width="3.5"
-            stroke-linecap="round"
-          />
+          <path v-for="(x, index) in eyeXs" :key="index"
+            :d="`M${x - 10} ${geometry.eyeCy - 20} L${x + 8} ${geometry.eyeCy - 24}`"
+            stroke="#ffd479" stroke-width="3" stroke-linecap="round" />
         </g>
 
         <g class="pet-avatar__face">

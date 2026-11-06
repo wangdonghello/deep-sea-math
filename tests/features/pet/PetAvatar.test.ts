@@ -41,7 +41,7 @@ describe('PetAvatar', () => {
   it('Lv.2 幼童形态有独立造型与名称', () => {
     const view = mount(PetAvatar, { props: { stage: 'child', mood: 80 } })
     expect(view.find('[data-stage="child"]').exists()).toBe(true)
-    expect(view.find('.pet-avatar__child-fin').exists()).toBe(true)
+    expect(view.find('.pet-avatar__child-patches').exists()).toBe(true)
     expect(buttonAccessibleName(view)).toContain('幼童')
   })
 
