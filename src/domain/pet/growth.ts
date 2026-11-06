@@ -82,3 +82,22 @@ export function decayedHunger(hunger: number, updatedAt: number, now: number): n
   const hours = Math.max(0, (now - updatedAt) / MS_PER_HOUR)
   return Math.max(MIN_STAT, Math.min(MAX_STAT, hunger - hours * DECAY_PER_HOUR))
 }
+
+/** 当前等级的 XP 进度：`into` 是这一级已获得，`needed` 是升下一级所需。 */
+export interface LevelProgress {
+  level: number
+  into: number
+  needed: number
+}
+
+/**
+ * 把累计 XP 换算成“这一级练了多少 / 升级还差多少”。
+ *
+ * 满级时 `needed` 为 `Infinity`，调用方应显示“已满级”而不是算百分比。
+ */
+export function levelProgress(xp: number): LevelProgress {
+  const level = levelFromXp(xp)
+  let spent = 0
+  for (let current = 0; current < level; current += 1) spent += xpForNextLevel(current)
+  return { level, into: Math.max(0, xp - spent), needed: xpForNextLevel(level) }
+}

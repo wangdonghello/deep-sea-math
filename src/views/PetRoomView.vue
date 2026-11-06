@@ -26,7 +26,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { ANIMAL_REWARDS, type BlindBoxReward } from '@/data/content/blindBox'
 import { FOOD_ITEMS, TOY_ITEMS } from '@/data/content/petCatalog'
 import type { PetItem } from '@/data/content/petCatalog'
-import { decayedHunger, levelFromXp, stageFromLevel } from '@/domain/pet/growth'
+import { decayedHunger, levelFromXp, levelProgress, stageFromLevel } from '@/domain/pet/growth'
 import { MAX_FEED_PER_DAY, MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
@@ -95,6 +95,11 @@ const activeProgress = computed(() => state.value.pets[activePetId.value] ?? { x
 const activeXp = computed(() => activeProgress.value.xp)
 const activeLevel = computed(() => levelFromXp(activeXp.value))
 const activeStage = computed(() => stageFromLevel(activeLevel.value))
+const activeLevelInfo = computed(() => levelProgress(activeXp.value))
+const levelPercent = computed(() => {
+  const info = activeLevelInfo.value
+  return Number.isFinite(info.needed) ? Math.min(100, Math.round((info.into / info.needed) * 100)) : 100
+})
 const activeHatched = computed(() => activeProgress.value.hatched)
 const isWhale = computed(() => activePetId.value === 'baby-whale')
 const activePetName = computed(() => activeAnimal.value?.name ?? (state.value.name.trim() === '' ? '小海宠' : state.value.name))
@@ -181,7 +186,7 @@ const STAGE_LABELS = {
   final: '完全体',
 } as const
 
-const stageLabel = computed(() => STAGE_LABELS[activeStage.value] ?? '幼体')
+const stageLabel = computed(() => (activeLevel.value === 0 && activeHatched.value ? '幼体' : STAGE_LABELS[activeStage.value] ?? '幼体'))
 
 /** 装饰优先级：珊瑚 > 灯 > 巢 > 普通。买了就立刻换背景。 */
 const decor = computed<'plain' | 'nest' | 'lamp' | 'coral'>(() => {
@@ -272,16 +277,25 @@ async function runAction(action: () => Promise<void>): Promise<void> {
   actionError.value = ''
   try {
     const beforeXp = activeXp.value
+    const beforeLevel = activeLevel.value
+    const beforeStage = activeStage.value
     const beforeHunger = 100 - Math.round(decayedHunger(state.value.hunger, state.value.lastUpdatedAt, now.value))
     await action()
     await load()
     now.value = clock()
     const gained = activeXp.value - beforeXp
+    const afterLevel = activeLevel.value
+    const afterStage = activeStage.value
     const afterHunger = 100 - Math.round(decayedHunger(state.value.hunger, state.value.lastUpdatedAt, now.value))
     const satietyGain = Math.max(0, beforeHunger - afterHunger)
-    reaction.value = gained > 0
-      ? `+${gained} XP${satietyGain > 0 ? ` · 饱食 +${satietyGain}` : ' · 已经吃饱'}`
-      : '它现在很满足'
+    if (afterLevel > beforeLevel) {
+      const stageText = afterStage !== beforeStage ? ` · 进化到${STAGE_LABELS[afterStage]}` : ''
+      reaction.value = `升级！Lv.${afterLevel}${stageText}`
+    } else {
+      reaction.value = gained > 0
+        ? `+${gained} XP${satietyGain > 0 ? ` · 饱食 +${satietyGain}` : ' · 已经吃饱'}`
+        : '它现在很满足'
+    }
     if (reactionTimer !== null) clearTimeout(reactionTimer)
     reactionTimer = setTimeout(() => { reaction.value = '' }, 1600)
   } catch (err) {
@@ -472,8 +486,17 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="pet-room__status-foot">
-            <span class="pet-room__xp" data-testid="pet-xp">XP {{ activeXp }}</span>
+            <span class="pet-room__xp" data-testid="pet-xp">Lv.{{ activeLevel }} · {{ activeLevelInfo.into }}/{{ Number.isFinite(activeLevelInfo.needed) ? activeLevelInfo.needed : 'MAX' }} XP</span>
             <span class="pet-room__status-note">饥饿值 0 最饱，100 最饿</span>
+          </div>
+          <div class="pet-room__level" data-testid="pet-level-progress">
+            <div class="pet-room__level-bar" role="progressbar" aria-label="升级进度" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="levelPercent">
+              <span :style="{ width: `${levelPercent}%` }"></span>
+            </div>
+            <p class="pet-room__level-hint">
+              {{ Number.isFinite(activeLevelInfo.needed) ? `还差 ${activeLevelInfo.needed - activeLevelInfo.into} XP 升到 Lv.${activeLevel + 1}` : '已经满级 Lv.15' }}
+              · 喂食/抚摸/玩耍/做题都能获得 XP · Lv.5 少年 / Lv.10 成体 / Lv.15 完全体
+            </p>
           </div>
         </section>
 
@@ -1638,4 +1661,9 @@ onBeforeUnmount(() => {
   background: rgb(7 24 42 / 65%); color: var(--ds-text-primary); font: inherit;
 }
 .pet-room__practice-open small { color: var(--ds-text-secondary); font-size: .7rem; }
+
+.pet-room__level { display: grid; gap: 4px; margin-top: var(--ds-space-sm); }
+.pet-room__level-bar { height: 8px; border-radius: var(--ds-radius-pill); background: rgb(255 255 255 / 10%); overflow: hidden; }
+.pet-room__level-bar span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #7ee0ff, #ffd479); transition: width .3s ease; }
+.pet-room__level-hint { margin: 0; color: var(--ds-text-secondary); font-size: .68rem; line-height: 1.5; }
 </style>
