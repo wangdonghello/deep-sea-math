@@ -51,7 +51,6 @@ export interface PetState {
 }
 
 /** 每日喂食上限：与动作层（`usePet`）共用，避免两处各写一个 3。 */
-export const MAX_FEED_PER_DAY = 3
 /** 每日抚摸上限。 */
 export const MAX_PET_PER_DAY = 5
 /** 每日玩耍上限。 */
@@ -102,7 +101,6 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   const ownedAnimals = new Set<string>()
   let openedBoxes = 0
   let mainPetId = 'baby-whale'
-  const feedCount = new Map<string, number>()
   const petCount = new Map<string, number>()
   const playCount = new Map<string, number>()
   const completedDays = new Set<string>()
@@ -157,12 +155,10 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
       }
     } else if (event.type === 'pet-fed') {
       const item = petItemById(event.itemId)
-      const day = dayKey(event.occurredAt)
-      const used = feedCount.get(day) ?? 0
       const target = event.petId ?? 'baby-whale'
-      if (item?.kind === 'food' && used < MAX_FEED_PER_DAY && (inventory[item.id] ?? 0) > 0 && pets[target] !== undefined) {
+      // 喂食不限每日次数：只要背包里还有这种食物就能继续喂。
+      if (item?.kind === 'food' && (inventory[item.id] ?? 0) > 0 && pets[target] !== undefined) {
         inventory[item.id] = (inventory[item.id] ?? 0) - 1
-        feedCount.set(day, used + 1)
         addPetXp(target, item.xp)
         hunger = Math.min(100, hunger + item.hunger)
         mood = Math.min(100, mood + 10)

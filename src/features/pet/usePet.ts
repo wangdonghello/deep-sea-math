@@ -21,7 +21,6 @@ import { drawBlindBox, type BlindBoxDraw } from '@/data/content/blindBox'
 import { petItemById } from '@/data/content/petCatalog'
 import { randomUuid } from '@/domain/crypto/randomUuid'
 import {
-  MAX_FEED_PER_DAY,
   MAX_PET_PER_DAY,
   MAX_PLAY_PER_DAY,
   replayPet,
@@ -221,15 +220,12 @@ export function usePet(options: {
     })
   }
 
-  /** 喂食：每天最多 `MAX_FEED_PER_DAY` 次，且背包里必须有该食物。 */
+  /** 喂食：不限每日次数，但背包里必须有该食物。 */
   function feed(itemId: string, targetPetId?: string): Promise<void> {
     const profileId = toValue(options.profileId)
     if (profileId === null) throw new Error('没有选择档案')
     const petId = targetPetId ?? snapshot(profileId).mainPetId
     return enqueue(async () => {
-      if (countToday('pet-fed', profileId) >= MAX_FEED_PER_DAY) {
-        throw new Error(`今天已经喂过 ${MAX_FEED_PER_DAY} 次了`)
-      }
       const current = snapshot(profileId)
       if (current.pets[petId] === undefined) throw new Error('还没有这只宠物')
       if ((current.inventory[itemId] ?? 0) <= 0) throw new Error('背包里没有这个食物')

@@ -233,17 +233,19 @@ describe('usePet', () => {
     expect(freshPet.state.value.hatched).toBe(false)
   })
 
-  it('同日喂食达 3 次后拒绝且不落事件', async () => {
+  it('同日可以连续喂食，背包空了才拒绝', async () => {
     const store = memoryStore([
       adoption,
-      { eventId: 'fed-1', profileId: 'p1', occurredAt: 2, type: 'pet-fed', itemId: 'seaweed-cookie' },
-      { eventId: 'fed-2', profileId: 'p1', occurredAt: 3, type: 'pet-fed', itemId: 'seaweed-cookie' },
-      { eventId: 'fed-3', profileId: 'p1', occurredAt: 4, type: 'pet-fed', itemId: 'seaweed-cookie' },
+      ...Array.from({ length: 5 }, (_, i) => ({
+        eventId: `buy-${i}`, profileId: 'p1', occurredAt: 2, type: 'item-purchased' as const,
+        itemId: 'seaweed-cookie', price: 5,
+      })),
     ])
     const pet = usePet({ store, profileId: 'p1', clock: () => 5 })
     await pet.load()
-    await expect(pet.feed('seaweed-cookie')).rejects.toThrow('今天已经喂过 3 次了')
-    expect(store.events.filter((event) => event.type === 'pet-fed')).toHaveLength(3)
+    for (let i = 0; i < 5; i += 1) await pet.feed('seaweed-cookie')
+    expect(store.events.filter((event) => event.type === 'pet-fed')).toHaveLength(5)
+    await expect(pet.feed('seaweed-cookie')).rejects.toThrow('背包里没有这个食物')
   })
 
   it('已拥有的玩具再次购买抛「已经拥有」', async () => {

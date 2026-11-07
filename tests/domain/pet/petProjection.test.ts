@@ -100,31 +100,23 @@ describe('replayPet', () => {
     expect(pet.inventory['mystery-box']).toBeUndefined()
   })
 
-  it('喂食每天最多 3 次，跨天重置', () => {
+  it('喂食不限每日次数，直到背包里的食物用完', () => {
     const events: DomainEvent[] = [
       { ...base, eventId: 'adopt', occurredAt: 0, type: 'pet-adopted', petId: 'baby-whale', name: '小蓝' },
       ...Array.from({ length: 5 }, (_, i) => ({
         ...base, eventId: `buy-${i}`, occurredAt: 1, type: 'item-purchased' as const,
         itemId: 'seaweed-cookie', price: 5,
       })),
-      ...Array.from({ length: 4 }, (_, i) => ({
+      ...Array.from({ length: 6 }, (_, i) => ({
         ...base, eventId: `feed-${i}`, occurredAt: 2 + i, type: 'pet-fed' as const,
         itemId: 'seaweed-cookie',
       })),
     ]
-    const sameDay = replayPet(events, 'p1', 6)
-    expect(sameDay.xp).toBe(24)
-    expect(sameDay.inventory['seaweed-cookie']).toBe(2)
-    // 第 4 次喂食没有生效，锚点仍停在第 3 次。
-    expect(sameDay.lastUpdatedAt).toBe(4)
-
-    const nextDay = replayPet(
-      [...events, { ...base, eventId: 'feed-next', occurredAt: day + 1, type: 'pet-fed', itemId: 'seaweed-cookie' }],
-      'p1',
-      day + 2,
-    )
-    expect(nextDay.xp).toBe(32)
-    expect(nextDay.inventory['seaweed-cookie']).toBe(1)
+    const pet = replayPet(events, 'p1', 10)
+    // 5 份食物都能喂，第 6 次缺货不生效。
+    expect(pet.xp).toBe(40)
+    expect(pet.inventory['seaweed-cookie']).toBe(0)
+    expect(pet.lastUpdatedAt).toBe(6)
   })
 
   it('缺货喂食不消耗、不加 XP，也不推进衰减锚点', () => {

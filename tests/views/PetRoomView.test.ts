@@ -123,8 +123,8 @@ describe('PetRoomView', () => {
     expect(empty.text()).toContain('背包里没有食物了')
   })
 
-  it('到达每日上限后按钮禁用并给出提示', async () => {
-    const purchases = Array.from({ length: 3 }, (_, i) => ({
+  it('喂食不再受每日次数限制', async () => {
+    const purchases = Array.from({ length: 4 }, (_, i) => ({
       eventId: `buy-${i}`, profileId: 'p1', occurredAt: 10 + i, type: 'item-purchased' as const,
       itemId: 'seaweed-cookie', price: 5,
     }))
@@ -136,8 +136,8 @@ describe('PetRoomView', () => {
       props: { profileId: 'p1', store: makeStore([...baseEvents, ...purchases, ...feeds]), clock: () => 20 },
     })
     await flushPromises()
-    expect(feed.get('[data-testid="feed-seaweed-cookie"]').attributes('disabled')).toBeDefined()
-    expect(feed.text()).toContain('今天的喂食次数用完啦')
+    expect(feed.get('[data-testid="feed-seaweed-cookie"]').attributes('disabled')).toBeUndefined()
+    expect(feed.text()).toContain('已喂 3 次')
 
     const pets = Array.from({ length: 5 }, (_, i) => ({
       eventId: `pet-${i}`, profileId: 'p1', occurredAt: 10 + i, type: 'pet-petted' as const,

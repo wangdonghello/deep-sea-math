@@ -27,7 +27,7 @@ import { ANIMAL_REWARDS, type BlindBoxReward } from '@/data/content/blindBox'
 import { FOOD_ITEMS, TOY_ITEMS } from '@/data/content/petCatalog'
 import type { PetItem } from '@/data/content/petCatalog'
 import { decayedHunger, levelFromXp, levelProgress, stageFromLevel } from '@/domain/pet/growth'
-import { MAX_FEED_PER_DAY, MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
+import { MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
 import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
@@ -225,7 +225,6 @@ const feedUsed = computed(() => countToday('pet-fed'))
 const petUsed = computed(() => countToday('pet-petted'))
 const playUsed = computed(() => countToday('pet-played'))
 
-const feedAtCap = computed(() => feedUsed.value >= MAX_FEED_PER_DAY)
 const petAtCap = computed(() => petUsed.value >= MAX_PET_PER_DAY)
 const playAtCap = computed(() => playUsed.value >= MAX_PLAY_PER_DAY)
 
@@ -541,7 +540,7 @@ onBeforeUnmount(() => {
             <div class="pet-room__group">
               <p class="pet-room__group-title">
                 <span>喂食</span>
-                <span class="pet-room__cap">{{ feedUsed }}/{{ MAX_FEED_PER_DAY }}</span>
+                <span class="pet-room__cap">已喂 {{ feedUsed }} 次</span>
               </p>
               <div v-if="foodInBag.length > 0" class="pet-room__buttons">
                 <button
@@ -550,7 +549,7 @@ onBeforeUnmount(() => {
                   type="button"
                   class="pet-action"
                   :data-testid="`feed-${entry.item.id}`"
-                  :disabled="feedAtCap || busy"
+                  :disabled="busy"
                   @click="onFeed(entry.item.id)"
                 >
                   <span class="pet-action__icon" aria-hidden="true">{{ entry.item.icon }}</span>
@@ -559,7 +558,6 @@ onBeforeUnmount(() => {
                 </button>
               </div>
               <p v-else class="pet-room__empty">背包里没有食物了，去商店补一点吧。</p>
-              <p v-if="feedAtCap" class="pet-room__cap-hint">今天的喂食次数用完啦，明天再喂它。</p>
             </div>
 
             <div class="pet-room__group">
