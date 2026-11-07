@@ -30,6 +30,7 @@ import { decayedHunger, levelFromXp, levelProgress, stageFromLevel } from '@/dom
 import { MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
+import DogAvatar from '@/features/pet/DogAvatar.vue'
 import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
 import PetAvatar from '@/features/pet/PetAvatar.vue'
 import { usePet } from '@/features/pet/usePet'
@@ -503,6 +504,7 @@ onBeforeUnmount(() => {
         <section class="pet-room__stage" aria-label="宠物房间">
           <div class="pet-room__pet">
             <PetAvatar v-if="isWhale" :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
+            <DogAvatar v-else-if="activeAnimal?.id === 'companion-dog'" :mood="state.mood" @tap="onPetTap" />
             <button v-else type="button" class="pet-room__animal-avatar" data-testid="animal-avatar" @click="onPetTap">
               <span aria-hidden="true">{{ activeAnimal?.emoji }}</span>
             </button>
