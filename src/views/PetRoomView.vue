@@ -89,6 +89,7 @@ const boxRolling = ref(false)
 const boxResult = ref<BlindBoxReward | null>(null)
 const boxConverted = ref('')
 const ownedAnimalIds = computed(() => state.value.ownedAnimals)
+const allAnimalsOwned = computed(() => ownedAnimalIds.value.length >= ANIMAL_REWARDS.length)
 const activePetId = ref('baby-whale')
 watch(() => state.value.mainPetId, (id) => { activePetId.value = id }, { immediate: true })
 const activeAnimal = computed(() => ANIMAL_REWARDS.find((animal) => animal.id === activePetId.value))
@@ -643,8 +644,8 @@ onBeforeUnmount(() => {
             </span>
           </div>
           <button type="button" class="pet-room__blindbox-open" data-testid="open-blind-box"
-            :disabled="state.tickets <= 0 || boxRolling" @click="onOpenBox">
-            {{ state.tickets > 0 ? '开一个盲盒' : '完成今日题组得券' }}
+            :disabled="state.tickets <= 0 || boxRolling || allAnimalsOwned" @click="onOpenBox">
+            {{ allAnimalsOwned ? '伙伴已集齐，等新伙伴' : state.tickets > 0 ? '开一个盲盒' : '完成今日题组得券' }}
           </button>
         </section>
 
@@ -653,14 +654,13 @@ onBeforeUnmount(() => {
           <div class="pet-room__box-card"
             :class="{ 'is-rolling': boxRolling, 'is-revealed': !boxRolling && boxResult !== null, 'is-dragon': boxResult?.id === 'companion-dragon' }">
             <span v-for="spark in 6" :key="spark" class="pet-room__box-spark" :class="`pet-room__box-spark--${spark}`" aria-hidden="true">✦</span>
-            <div class="pet-room__box-art" aria-hidden="true">{{ boxRolling ? '🎁' : (boxResult?.emoji ?? '🎁') }}</div>
+            <div class="pet-room__box-art" aria-hidden="true">{{ boxRolling ? '🎁' : (boxResult ? '🥚' : '🎁') }}</div>
             <template v-if="boxRolling">
               <p>盒子在晃动…</p>
             </template>
             <template v-else-if="boxResult">
-              <h2>{{ boxResult.name }}</h2>
-              <p v-if="boxConverted !== ''" class="pet-room__box-note">已经拥有 {{ boxConverted }}，这次变成零食</p>
-              <p v-else-if="boxResult.kind === 'animal'" class="pet-room__box-note">新伙伴加入收藏！</p>
+              <h2>{{ boxResult.name }}蛋</h2>
+              <p class="pet-room__box-note">孵化后成为新伙伴！</p>
               <button type="button" class="pet-room__box-close" data-testid="blind-box-close" @click="closeBox">收下</button>
             </template>
           </div>

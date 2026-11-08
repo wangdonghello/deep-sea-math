@@ -276,24 +276,25 @@ describe('usePet', () => {
 
 describe('盲盒', () => {
   const day = 86_400_000
-  it('完成两天得两张券；抽到重复动物转零食', async () => {
+  it('完成两天得两张券；只出不同的宠物蛋', async () => {
     const store = memoryStore([
       { ...adoption, occurredAt: 1 },
       { eventId: 's1', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 'a', rewards: [] },
       { eventId: 's2', profileId: 'p1', occurredAt: day + 2, type: 'session-completed', sessionId: 'b', rewards: [] },
     ])
-    const pet = usePet({ store, profileId: 'p1', clock: () => day * 2, random: () => 0.65 })
+    const pet = usePet({ store, profileId: 'p1', clock: () => day * 2, random: () => 0.1 })
     await pet.load()
     expect(pet.state.value.tickets).toBe(2)
 
     const first = await pet.openBlindBox()
     expect(first.reward.id).toBe('companion-cat')
+    expect(first.reward.kind).toBe('animal')
     expect(pet.state.value.ownedAnimals).toContain('companion-cat')
     expect(pet.state.value.tickets).toBe(1)
 
     const second = await pet.openBlindBox()
-    expect(second.reward.id).toBe('seaweed-cookie')
-    expect(second.convertedFrom).toBe('companion-cat')
+    expect(second.reward.id).toBe('companion-dog')
+    expect(pet.state.value.ownedAnimals).toEqual(['companion-cat', 'companion-dog'])
     expect(pet.state.value.tickets).toBe(0)
   })
 
@@ -302,6 +303,18 @@ describe('盲盒', () => {
     const pet = usePet({ store, profileId: 'p1', clock: () => 2 })
     await pet.load()
     await expect(pet.openBlindBox()).rejects.toThrow('还没有盲盒券')
+  })
+
+  it('集齐全部伙伴后拒绝开盒', async () => {
+    const ids = ['companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger', 'companion-dragon']
+    const store = memoryStore([
+      { ...adoption, occurredAt: 1 },
+      ...ids.map((id, i) => ({ eventId: `b${i}`, profileId: 'p1', occurredAt: 2, type: 'blind-box-opened' as const, rewardId: id, rewardKind: 'animal' as const })),
+      ...Array.from({ length: 7 }, (_, i) => ({ eventId: `s${i}`, profileId: 'p1', occurredAt: (i + 1) * day, type: 'session-completed' as const, sessionId: `s${i}`, rewards: [] })),
+    ])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 8 * day })
+    await pet.load()
+    await expect(pet.openBlindBox()).rejects.toThrow('伙伴已经集齐')
   })
 })
 
