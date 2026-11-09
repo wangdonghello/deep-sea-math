@@ -30,7 +30,7 @@ import { decayedHunger, levelFromXp, levelProgress, stageFromLevel } from '@/dom
 import { MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
-import DogAvatar from '@/features/pet/DogAvatar.vue'
+import CompanionAvatar, { type CompanionId } from '@/features/pet/CompanionAvatar.vue'
 import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
 import PetAvatar from '@/features/pet/PetAvatar.vue'
 import { usePet } from '@/features/pet/usePet'
@@ -104,6 +104,7 @@ const levelPercent = computed(() => {
 })
 const activeHatched = computed(() => activeProgress.value.hatched)
 const isWhale = computed(() => activePetId.value === 'baby-whale')
+const activeCompanionId = computed<CompanionId>(() => (activeAnimal.value?.id ?? 'companion-dog') as CompanionId)
 const activePetName = computed(() => activeAnimal.value?.name ?? (state.value.name.trim() === '' ? '小海宠' : state.value.name))
 const petOptions = computed(() => [
   { id: 'baby-whale', name: state.value.name.trim() === '' ? '小海宠' : state.value.name, emoji: '🐋' },
@@ -505,10 +506,7 @@ onBeforeUnmount(() => {
         <section class="pet-room__stage" aria-label="宠物房间">
           <div class="pet-room__pet">
             <PetAvatar v-if="isWhale" :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
-            <DogAvatar v-else-if="activeAnimal?.id === 'companion-dog'" :mood="state.mood" @tap="onPetTap" />
-            <button v-else type="button" class="pet-room__animal-avatar" data-testid="animal-avatar" @click="onPetTap">
-              <span aria-hidden="true">{{ activeAnimal?.emoji }}</span>
-            </button>
+            <CompanionAvatar v-else :animal-id="activeCompanionId" :mood="state.mood" @tap="onPetTap" />
           </div>
           <div class="pet-room__nameplate">
             <span class="pet-room__nameplate-name">{{ displayName }}</span>
