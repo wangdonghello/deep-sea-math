@@ -15,6 +15,29 @@ describe('CompanionAvatar', () => {
     expect(view.findAll('circle').length).toBeGreaterThan(4)
   })
 
+  it('小猫使用猫科脸型，明显区别于小狗', () => {
+    const cat = mount(CompanionAvatar, { props: { animalId: 'companion-cat', mood: 80, level: 1 } })
+    expect(cat.find('[data-feature="cat-triangle-nose"]').exists()).toBe(true)
+    expect(cat.find('[data-feature="cat-whisker-pads"]').exists()).toBe(true)
+    expect(cat.find('[data-feature="cat-vertical-pupils"]').exists()).toBe(true)
+    expect(cat.find('[data-feature="cat-inner-ears"]').exists()).toBe(true)
+    expect(cat.find('[data-feature="generic-dog-muzzle"]').exists()).toBe(false)
+
+    const dog = mount(CompanionAvatar, { props: { animalId: 'companion-dog', mood: 80, level: 1 } })
+    expect(dog.find('[data-feature="generic-dog-muzzle"]').exists()).toBe(true)
+    expect(dog.find('[data-feature="cat-triangle-nose"]').exists()).toBe(false)
+    expect(dog.find('[data-feature="cat-whisker-pads"]').exists()).toBe(false)
+    expect(dog.find('[data-feature="cat-vertical-pupils"]').exists()).toBe(false)
+  })
+
+  it('低心情时保留猫特征并显示困倦眼线', () => {
+    const cat = mount(CompanionAvatar, { props: { animalId: 'companion-cat', mood: 10, level: 10 } })
+    expect(cat.find('[data-feature="cat-triangle-nose"]').exists()).toBe(true)
+    expect(cat.find('[data-feature="cat-whisker-pads"]').exists()).toBe(true)
+    expect(cat.find('[data-feature="cat-vertical-pupils"]').exists()).toBe(false)
+    expect(cat.find('.companion__cat-sleepy-eyes').exists()).toBe(true)
+  })
+
   it('等级驱动体型与徽章，Lv.12 起出现王冠，Lv.15 有光环', () => {
     const baby = mount(CompanionAvatar, { props: { animalId: 'companion-lion', mood: 80, level: 1 } })
     const adult = mount(CompanionAvatar, { props: { animalId: 'companion-lion', mood: 80, level: 15 } })

@@ -42,6 +42,7 @@ const squish = ref(false)
 let timer: number | undefined
 
 const look = computed(() => LOOKS[props.animalId] ?? LOOKS['companion-dog'])
+const isCat = computed(() => props.animalId === 'companion-cat')
 const mood = computed(() => {
   const raw = Number.isFinite(props.mood) ? props.mood : 0
   return Math.min(100, Math.max(0, Math.round(raw)))
@@ -204,60 +205,105 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
         <path d="M70 96 Q26 112 34 166 Q40 186 62 176 Q78 164 84 136 Z" :fill="look.dark" :stroke="look.dark" stroke-width="3" />
         <path d="M138 94 Q182 108 176 164 Q170 186 148 176 Q132 164 126 136 Z" :fill="look.dark" :stroke="look.dark" stroke-width="3" />
       </g>
-      <g v-else-if="look.ear === 'round'">
+      <g v-else-if="!isCat && look.ear === 'round'">
         <circle cx="56" cy="94" r="19" :fill="look.body" :stroke="look.dark" stroke-width="3" />
         <circle cx="144" cy="94" r="19" :fill="look.body" :stroke="look.dark" stroke-width="3" />
         <circle cx="56" cy="94" r="10" :fill="look.accent" />
         <circle cx="144" cy="94" r="10" :fill="look.accent" />
       </g>
-      <g v-else>
+      <g v-else-if="!isCat">
         <path d="M68 92 Q54 44 82 36 Q84 70 96 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
         <path d="M132 92 Q146 44 118 36 Q116 70 104 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
       </g>
 
-      <!-- 猫成体颊毛 -->
-      <g v-if="look.ear === 'pointed' && level >= 10" class="companion__cat-tufts" aria-hidden="true">
-        <path d="M54 152 L26 142 L44 164 L24 170 L50 178 Z" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
-        <path d="M148 152 L176 142 L158 164 L178 170 L152 178 Z" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
+      <!-- 猫专属圆脸：短吻、分离胡须垫、三角鼻、竖瞳 -->
+      <g v-if="isCat" class="companion__cat-face">
+        <g class="companion__cat-ears" aria-hidden="true">
+          <path d="M52 112 L37 45 Q36 38 44 42 L91 77 Z" :fill="look.body" :stroke="look.dark" stroke-width="3.5" stroke-linejoin="round" />
+          <path d="M117 77 L164 42 Q172 38 171 45 L156 112 Z" :fill="look.body" :stroke="look.dark" stroke-width="3.5" stroke-linejoin="round" />
+        </g>
+        <circle cx="102" cy="138" r="56" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+        <!-- 内耳粉瓣 -->
+        <g data-feature="cat-inner-ears" aria-hidden="true">
+          <path d="M49 89 L44 53 L72 78 Z M132 78 L160 53 L155 89 Z" :fill="look.accent" />
+        </g>
+        <!-- Lv10 后的颊毛放在脸外沿，不遮眼鼻 -->
+        <g v-if="level >= 10" class="companion__cat-tufts" aria-hidden="true">
+          <path d="M54 151 L31 145 L46 161 L29 169 L53 177 Z" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
+          <path d="M150 151 L173 145 L158 161 L175 169 L151 177 Z" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
+        </g>
+        <!-- 猫咪额心斑 -->
+        <path d="M102 89 Q96 106 100 116 Q102 120 104 116 Q108 106 102 89 Z" :fill="look.belly" opacity="0.48" />
+        <!-- 分开的左右胡须垫 -->
+        <g data-feature="cat-whisker-pads">
+          <ellipse cx="70" cy="160" rx="16" ry="12" :fill="look.belly" :stroke="look.dark" stroke-width="1.8" />
+          <ellipse cx="116" cy="160" rx="16" ry="12" :fill="look.belly" :stroke="look.dark" stroke-width="1.8" />
+        </g>
+        <!-- 两侧各三根猫须，从垫外侧发出 -->
+        <g class="companion__cat-whiskers" :stroke="look.dark" stroke-width="1.7" stroke-linecap="round" opacity="0.82">
+          <path d="M55 156 L25 148 M54 161 L19 161 M55 166 L27 176" />
+          <path d="M127 156 L159 148 M128 161 L165 161 M127 166 L157 176" />
+        </g>
+        <!-- 倒三角猫鼻和短小猫嘴 -->
+        <path data-feature="cat-triangle-nose" d="M87 151 Q93 147 99 151 L93 160 Z" :fill="look.dark" />
+        <path d="M93 160 L93 165 M93 165 Q86 172 79 167 M93 165 Q100 172 107 167" fill="none" :stroke="look.dark" stroke-width="2.4" stroke-linecap="round" />
+        <path v-if="!low" d="M86 177 Q93 190 100 177 Q93 184 86 177 Z" :fill="look.accent" />
+        <!-- 竖瞳猫眼 -->
+        <g v-if="!low" data-feature="cat-vertical-pupils">
+          <ellipse cx="76" cy="127" rx="10" ry="12" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
+          <ellipse cx="118" cy="127" rx="10" ry="12" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
+          <ellipse cx="76" cy="128" rx="3.2" ry="8" :fill="look.dark" />
+          <ellipse cx="118" cy="128" rx="3.2" ry="8" :fill="look.dark" />
+          <circle cx="77" cy="124" r="2" fill="#fff" />
+          <circle cx="119" cy="124" r="2" fill="#fff" />
+        </g>
+        <g v-else class="companion__cat-sleepy-eyes">
+          <path d="M66 130 Q76 123 86 130 M108 130 Q118 123 128 130" fill="none" :stroke="look.dark" stroke-width="2.8" stroke-linecap="round" />
+        </g>
       </g>
 
-      <!-- 头 -->
-      <circle cx="102" cy="138" r="56" :fill="look.body" :stroke="look.dark" stroke-width="3" />
-      <path d="M102 84 Q88 112 92 138 Q98 154 110 160 Q122 148 122 126 Q120 100 102 84 Z" :fill="look.belly" opacity="0.9" />
-
-      <!-- 老虎额头条纹 -->
-      <g v-if="look.stripes" :stroke="look.dark" stroke-width="4" stroke-linecap="round" opacity="0.9">
-        <path d="M78 100 l-6 16 M96 96 l0 14 M114 100 l6 16" />
-      </g>
-
-      <!-- 口鼻 -->
-      <ellipse cx="74" cy="166" rx="34" ry="25" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-      <ellipse cx="57" cy="154" rx="11" ry="8" :fill="look.dark" />
-      <ellipse cx="54" cy="151" rx="3.5" ry="2.5" fill="#ffffff" opacity="0.55" />
-      <path d="M74 170 Q64 182 54 174 M74 170 Q84 182 94 174" fill="none" :stroke="look.dark" stroke-width="2.5" stroke-linecap="round" />
-      <path v-if="!low" d="M84 184 Q92 198 100 184 Q92 190 84 184 Z" :fill="look.accent" />
-
-      <!-- 仓鼠腮红 -->
-      <circle v-if="look.cheeks" cx="50" cy="170" r="9" :fill="look.accent" opacity="0.6" />
-      <circle v-if="look.cheeks" cx="100" cy="172" r="9" :fill="look.accent" opacity="0.6" />
-
-      <!-- 眼睛 -->
-      <g v-if="!low">
-        <circle cx="80" cy="130" :r="eyeR" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-        <circle cx="118" cy="130" :r="eyeR" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-        <circle cx="82" cy="132" :r="eyeR * 0.55" :fill="look.dark" />
-        <circle cx="120" cy="132" :r="eyeR * 0.55" :fill="look.dark" />
-        <circle cx="84" cy="129" r="2.2" fill="#ffffff" />
-        <circle cx="122" cy="129" r="2.2" fill="#ffffff" />
-      </g>
-      <g v-else>
-        <path d="M69 132 Q80 124 91 132 M107 132 Q118 124 129 132" fill="none" :stroke="look.dark" stroke-width="3" stroke-linecap="round" />
-      </g>
-
-      <!-- 胡须 -->
-      <g v-if="look.whiskers" :stroke="look.dark" stroke-width="2" stroke-linecap="round" opacity="0.7">
-        <path d="M46 158 L18 150 M46 166 L16 166 M48 174 L20 182" />
-        <path d="M96 158 L124 150 M96 166 L126 166 M94 174 L122 182" />
+      <!-- 非猫伙伴保持原有犬科圆鼻/宽吻与各自耳型 -->
+      <g v-else class="companion__generic-face">
+        <!-- 狮子鬃毛 -->
+        <circle v-if="look.mane" cx="102" cy="138" :r="maneR" :fill="look.dark" opacity="0.95" />
+        <!-- 耳朵 -->
+        <g v-if="look.ear === 'floppy'">
+          <path d="M70 96 Q26 112 34 166 Q40 186 62 176 Q78 164 84 136 Z" :fill="look.dark" :stroke="look.dark" stroke-width="3" />
+          <path d="M138 94 Q182 108 176 164 Q170 186 148 176 Q132 164 126 136 Z" :fill="look.dark" :stroke="look.dark" stroke-width="3" />
+        </g>
+        <g v-else-if="!isCat && look.ear === 'round'">
+          <circle cx="56" cy="94" r="19" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+          <circle cx="144" cy="94" r="19" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+          <circle cx="56" cy="94" r="10" :fill="look.accent" />
+          <circle cx="144" cy="94" r="10" :fill="look.accent" />
+        </g>
+        <g v-else>
+          <path d="M68 92 Q54 44 82 36 Q84 70 96 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
+          <path d="M132 92 Q146 44 118 36 Q116 70 104 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
+        </g>
+        <circle cx="102" cy="138" r="56" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+        <path d="M102 84 Q88 112 92 138 Q98 154 110 160 Q122 148 122 126 Q120 100 102 84 Z" :fill="look.belly" opacity="0.9" />
+        <g v-if="look.stripes" :stroke="look.dark" stroke-width="4" stroke-linecap="round" opacity="0.9">
+          <path d="M78 100 l-6 16 M96 96 l0 14 M114 100 l6 16" />
+        </g>
+        <ellipse data-feature="generic-dog-muzzle" cx="74" cy="166" rx="34" ry="25" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
+        <ellipse cx="57" cy="154" rx="11" ry="8" :fill="look.dark" />
+        <ellipse cx="54" cy="151" rx="3.5" ry="2.5" fill="#ffffff" opacity="0.55" />
+        <path d="M74 170 Q64 182 54 174 M74 170 Q84 182 94 174" fill="none" :stroke="look.dark" stroke-width="2.5" stroke-linecap="round" />
+        <path v-if="!low" d="M84 184 Q92 198 100 184 Q92 190 84 184 Z" :fill="look.accent" />
+        <circle v-if="look.cheeks" cx="50" cy="170" r="9" :fill="look.accent" opacity="0.6" />
+        <circle v-if="look.cheeks" cx="100" cy="172" r="9" :fill="look.accent" opacity="0.6" />
+        <g v-if="!low">
+          <circle cx="80" cy="130" :r="eyeR" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
+          <circle cx="118" cy="130" :r="eyeR" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
+          <circle cx="82" cy="132" :r="eyeR * 0.55" :fill="look.dark" />
+          <circle cx="120" cy="132" :r="eyeR * 0.55" :fill="look.dark" />
+          <circle cx="84" cy="129" r="2.2" fill="#ffffff" />
+          <circle cx="122" cy="129" r="2.2" fill="#ffffff" />
+        </g>
+        <g v-else>
+          <path d="M69 132 Q80 124 91 132 M107 132 Q118 124 129 132" fill="none" :stroke="look.dark" stroke-width="3" stroke-linecap="round" />
+        </g>
       </g>
 
       <!-- 龙角尖光 -->
