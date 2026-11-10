@@ -22,15 +22,40 @@ interface Look {
   whiskers?: boolean
   cheeks?: boolean
   wings?: boolean
+  build: {
+    body: { cx: number; cy: number; rx: number; ry: number }
+    belly: { cx: number; cy: number; rx: number; ry: number }
+    head: { cx: number; cy: number; r: number }
+    legs: readonly { x: number; y: number; w: number; h: number }[]
+    tailWidth: number
+  }
 }
 
 const LOOKS: Record<CompanionId, Look> = {
-  'companion-cat': { name: '小猫', body: '#e8a25a', belly: '#fff3df', dark: '#8a5a2b', accent: '#ff9db0', ear: 'pointed', tail: 'curl', whiskers: true },
-  'companion-dog': { name: '小狗', body: '#c98a4b', belly: '#f7e6cf', dark: '#6b421f', accent: '#2fb9e8', ear: 'floppy', tail: 'up' },
-  'companion-hamster': { name: '仓鼠', body: '#d9a45b', belly: '#fff7e6', dark: '#8a5a2b', accent: '#ffb3c1', ear: 'round', tail: 'short', cheeks: true },
-  'companion-lion': { name: '狮子', body: '#d9a24f', belly: '#fff0d2', dark: '#6b421f', accent: '#ffd479', ear: 'round', tail: 'tuft', mane: true },
-  'companion-tiger': { name: '老虎', body: '#e08a3c', belly: '#fff1d6', dark: '#3a2412', accent: '#ffd479', ear: 'round', tail: 'striped', stripes: true },
-  'companion-dragon': { name: '龙', body: '#4fae8a', belly: '#e9fff4', dark: '#1d5a48', accent: '#ffd479', ear: 'horn', tail: 'spiked', wings: true },
+  'companion-cat': {
+    name: '小猫', body: '#e8a25a', belly: '#fff3df', dark: '#8a5a2b', accent: '#ff9db0', ear: 'pointed', tail: 'curl', whiskers: true,
+    build: { body: { cx: 176, cy: 198, rx: 78, ry: 52 }, belly: { cx: 166, cy: 214, rx: 48, ry: 32 }, head: { cx: 102, cy: 138, r: 56 }, legs: [{ x: 212, y: 222, w: 24, h: 50 }, { x: 240, y: 218, w: 24, h: 54 }, { x: 122, y: 226, w: 24, h: 48 }, { x: 152, y: 230, w: 24, h: 44 }], tailWidth: 15 },
+  },
+  'companion-dog': {
+    name: '小狗', body: '#c98a4b', belly: '#f7e6cf', dark: '#6b421f', accent: '#2fb9e8', ear: 'floppy', tail: 'up',
+    build: { body: { cx: 176, cy: 198, rx: 78, ry: 52 }, belly: { cx: 166, cy: 214, rx: 48, ry: 32 }, head: { cx: 102, cy: 138, r: 56 }, legs: [{ x: 212, y: 222, w: 24, h: 50 }, { x: 240, y: 218, w: 24, h: 54 }, { x: 122, y: 226, w: 24, h: 48 }, { x: 152, y: 230, w: 24, h: 44 }], tailWidth: 15 },
+  },
+  'companion-hamster': {
+    name: '仓鼠', body: '#d9a45b', belly: '#fff7e6', dark: '#8a5a2b', accent: '#ffb3c1', ear: 'round', tail: 'short', cheeks: true,
+    build: { body: { cx: 168, cy: 210, rx: 64, ry: 56 }, belly: { cx: 168, cy: 222, rx: 46, ry: 38 }, head: { cx: 108, cy: 156, r: 50 }, legs: [{ x: 198, y: 240, w: 20, h: 28 }, { x: 220, y: 242, w: 20, h: 26 }, { x: 134, y: 242, w: 20, h: 26 }, { x: 154, y: 244, w: 20, h: 24 }], tailWidth: 8 },
+  },
+  'companion-lion': {
+    name: '狮子', body: '#d9a24f', belly: '#fff0d2', dark: '#6b421f', accent: '#ffd479', ear: 'round', tail: 'tuft', mane: true,
+    build: { body: { cx: 182, cy: 198, rx: 86, ry: 54 }, belly: { cx: 172, cy: 214, rx: 52, ry: 34 }, head: { cx: 102, cy: 142, r: 58 }, legs: [{ x: 208, y: 220, w: 28, h: 52 }, { x: 238, y: 216, w: 28, h: 56 }, { x: 116, y: 224, w: 28, h: 48 }, { x: 148, y: 228, w: 28, h: 44 }], tailWidth: 15 },
+  },
+  'companion-tiger': {
+    name: '老虎', body: '#e08a3c', belly: '#fff1d6', dark: '#3a2412', accent: '#ffd479', ear: 'round', tail: 'striped', stripes: true,
+    build: { body: { cx: 180, cy: 194, rx: 88, ry: 46 }, belly: { cx: 170, cy: 208, rx: 52, ry: 30 }, head: { cx: 100, cy: 136, r: 58 }, legs: [{ x: 208, y: 216, w: 26, h: 56 }, { x: 238, y: 212, w: 26, h: 60 }, { x: 116, y: 220, w: 26, h: 52 }, { x: 148, y: 224, w: 26, h: 48 }], tailWidth: 17 },
+  },
+  'companion-dragon': {
+    name: '龙', body: '#4fae8a', belly: '#e9fff4', dark: '#1d5a48', accent: '#ffd479', ear: 'horn', tail: 'spiked', wings: true,
+    build: { body: { cx: 184, cy: 200, rx: 86, ry: 42 }, belly: { cx: 174, cy: 214, rx: 52, ry: 28 }, head: { cx: 100, cy: 146, r: 48 }, legs: [{ x: 206, y: 222, w: 24, h: 48 }, { x: 236, y: 218, w: 24, h: 52 }, { x: 120, y: 226, w: 24, h: 44 }, { x: 150, y: 230, w: 24, h: 40 }], tailWidth: 15 },
+  },
 }
 
 const props = defineProps<{ animalId: CompanionId; mood: number; level?: number }>()
@@ -43,6 +68,9 @@ let timer: number | undefined
 
 const look = computed(() => LOOKS[props.animalId] ?? LOOKS['companion-dog'])
 const isCat = computed(() => props.animalId === 'companion-cat')
+const isFeline = computed(() => isCat.value || props.animalId === 'companion-tiger' || props.animalId === 'companion-lion')
+const isHamster = computed(() => props.animalId === 'companion-hamster')
+const isDragon = computed(() => props.animalId === 'companion-dragon')
 const mood = computed(() => {
   const raw = Number.isFinite(props.mood) ? props.mood : 0
   return Math.min(100, Math.max(0, Math.round(raw)))
@@ -82,6 +110,9 @@ const wingTransform = computed(() => `translate(250 170) scale(${0.35 + params.v
 const svgStyle = computed(() => ({ filter: `saturate(${0.9 + params.value.feature * 0.3}) brightness(${1.02 - params.value.feature * 0.06})` }))
 const eyeR = computed(() => 11 - params.value.sharp * 1.5)
 const maneR = computed(() => 40 + params.value.feature * 60)
+
+const build = computed(() => look.value.build)
+const headOffsetTransform = computed(() => `translate(${build.value.head.cx - 102} ${build.value.head.cy - 138})`)
 
 const tailPath = computed(() => {
   switch (look.value.tail) {
@@ -123,7 +154,7 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
   >
     <svg viewBox="0 0 320 300" role="img" :style="svgStyle" :aria-label="`站立的${look.name}，Lv.${level}，心情 ${mood}/100`">
       <ellipse class="companion__shadow" cx="166" cy="278" rx="96" ry="11" />
-      <circle v-if="level >= 15" class="companion__aura" cx="160" cy="178" r="116" />
+      <circle v-if="level >= 15" class="companion__aura" cx="160" cy="178" r="116" fill="rgba(255,212,121,0.16)" />
 
       <!-- 龙翼（身体后面） -->
       <g v-if="look.wings" :transform="wingTransform">
@@ -136,7 +167,7 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
       <!-- 尾巴 -->
       <g :transform="tailTransform">
         <g class="companion__tail">
-        <path :d="tailPath" fill="none" :stroke="look.body" stroke-width="15" stroke-linecap="round" />
+        <path :d="tailPath" fill="none" :stroke="look.body" :stroke-width="build.tailWidth" stroke-linecap="round" />
         <path v-if="look.tail === 'spiked'" d="M270 196 l12 -15 l2 18 l13 -11" fill="none" :stroke="look.accent" stroke-width="4" stroke-linecap="round" />
         <circle v-if="look.tail === 'tuft'" cx="284" cy="160" r="14" :fill="look.dark" />
         <path v-if="look.tail === 'striped'" d="M262 194 l8 12 M274 178 l8 12 M284 160 l8 12" :stroke="look.dark" stroke-width="5" stroke-linecap="round" />
@@ -145,17 +176,24 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
 
       <!-- 后腿 -->
       <g :transform="legTransform" class="companion__legs companion__legs--back">
-        <rect x="212" y="222" width="24" height="50" rx="12" :fill="look.body" :stroke="look.dark" stroke-width="2" />
-        <rect x="240" y="218" width="24" height="54" rx="12" :fill="look.body" :stroke="look.dark" stroke-width="2" />
-        <ellipse cx="224" cy="273" rx="17" ry="9" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-        <ellipse cx="252" cy="273" rx="17" ry="9" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-        <path d="M216 274 v5 M224 274 v6 M232 274 v5 M244 274 v5 M252 274 v6 M260 274 v5" :stroke="look.dark" stroke-width="2" stroke-linecap="round" />
+        <template v-for="(leg, index) in build.legs.slice(0, 2)" :key="index">
+          <rect :x="leg.x" :y="leg.y" :width="leg.w" :height="leg.h" :rx="leg.w / 2" :fill="look.body" :stroke="look.dark" stroke-width="2" />
+          <ellipse :cx="leg.x + leg.w / 2" :cy="leg.y + leg.h - 1" :rx="leg.w * 0.7" :ry="8" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
+          <path :d="`M${leg.x + 4} ${leg.y + leg.h + 1} v5 M${leg.x + leg.w / 2} ${leg.y + leg.h + 1} v6 M${leg.x + leg.w - 4} ${leg.y + leg.h + 1} v5`" :stroke="look.dark" stroke-width="2" stroke-linecap="round" />
+        </template>
+      </g>
+
+      <!-- 龙的脖子与背刺，拉长爬行动物轮廓 -->
+      <g v-if="isDragon" class="companion__dragon-neck" aria-hidden="true">
+        <path d="M112 162 Q132 184 168 194" fill="none" :stroke="look.body" stroke-width="38" stroke-linecap="round" />
+        <path d="M150 168 l8 -18 l10 16 l8 -20 l10 18" fill="none" :stroke="look.accent" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M178 166 l8 -20 l10 18 l8 -22 l10 20" fill="none" :stroke="look.accent" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
       </g>
 
       <!-- 身体 -->
       <g :transform="bodyTransform">
-      <ellipse cx="176" cy="198" rx="78" ry="52" :fill="look.body" :stroke="look.dark" stroke-width="3" />
-      <ellipse cx="166" cy="214" rx="48" ry="32" :fill="look.belly" opacity="0.95" />
+      <ellipse :cx="build.body.cx" :cy="build.body.cy" :rx="build.body.rx" :ry="build.body.ry" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+      <ellipse :cx="build.belly.cx" :cy="build.belly.cy" :rx="build.belly.rx" :ry="build.belly.ry" :fill="look.belly" opacity="0.95" />
 
       <!-- 老虎条纹 -->
       <g v-if="look.stripes" :stroke="look.dark" stroke-width="4" stroke-linecap="round" :opacity="0.25 + params.feature * 0.75">
@@ -179,18 +217,21 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
 
       <!-- 前腿 -->
       <g :transform="legTransform" class="companion__legs companion__legs--front">
-        <rect x="122" y="226" width="24" height="48" rx="12" :fill="look.body" :stroke="look.dark" stroke-width="2" />
-        <rect x="152" y="230" width="24" height="44" rx="12" :fill="look.body" :stroke="look.dark" stroke-width="2" />
-        <ellipse cx="134" cy="274" rx="17" ry="9" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-        <ellipse cx="164" cy="274" rx="17" ry="9" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
-        <path d="M126 275 v5 M134 275 v6 M142 275 v5 M156 275 v5 M164 275 v6 M172 275 v5" :stroke="look.dark" stroke-width="2" stroke-linecap="round" />
+        <template v-for="(leg, index) in build.legs.slice(2, 4)" :key="index">
+          <rect :x="leg.x" :y="leg.y" :width="leg.w" :height="leg.h" :rx="leg.w / 2" :fill="look.body" :stroke="look.dark" stroke-width="2" />
+          <ellipse :cx="leg.x + leg.w / 2" :cy="leg.y + leg.h - 1" :rx="leg.w * 0.7" :ry="8" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
+          <path :d="`M${leg.x + 4} ${leg.y + leg.h + 1} v5 M${leg.x + leg.w / 2} ${leg.y + leg.h + 1} v6 M${leg.x + leg.w - 4} ${leg.y + leg.h + 1} v5`" :stroke="look.dark" stroke-width="2" stroke-linecap="round" />
+        </template>
       </g>
 
-      <!-- 项圈 -->
-      <path d="M124 168 Q150 188 186 172" fill="none" :stroke="look.accent" stroke-width="12" stroke-linecap="round" />
-      <circle cx="155" cy="184" r="6" :fill="look.accent" :stroke="look.dark" stroke-width="2" />
+      <!-- 项圈只给家养伙伴（猫/狗），野生伙伴不戴 -->
+      <g v-if="isCat || animalId === 'companion-dog'">
+        <path d="M124 168 Q150 188 186 172" fill="none" :stroke="look.accent" stroke-width="12" stroke-linecap="round" />
+        <circle cx="155" cy="184" r="6" :fill="look.accent" :stroke="look.dark" stroke-width="2" />
+      </g>
 
       <g :transform="headTransform">
+      <g :transform="headOffsetTransform">
       <!-- 狮子鬃毛 -->
       <circle v-if="look.mane" cx="102" cy="138" :r="maneR" :fill="look.dark" opacity="0.95" />
 
@@ -217,30 +258,37 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
       </g>
 
       <!-- 猫专属圆脸：短吻、分离胡须垫、三角鼻、竖瞳 -->
-      <g v-if="isCat" class="companion__cat-face">
-        <g class="companion__cat-ears" aria-hidden="true">
+      <g v-if="isFeline" class="companion__cat-face">
+        <g v-if="isCat" class="companion__cat-ears" aria-hidden="true">
           <path d="M52 112 L37 45 Q36 38 44 42 L91 77 Z" :fill="look.body" :stroke="look.dark" stroke-width="3.5" stroke-linejoin="round" />
           <path d="M117 77 L164 42 Q172 38 171 45 L156 112 Z" :fill="look.body" :stroke="look.dark" stroke-width="3.5" stroke-linejoin="round" />
         </g>
-        <circle cx="102" cy="138" r="56" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+        <g v-else class="companion__feline-round-ears" aria-hidden="true">
+          <circle cx="62" cy="99" r="17" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+          <circle cx="142" cy="99" r="17" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+          <circle cx="62" cy="99" r="9" :fill="look.accent" />
+          <circle cx="142" cy="99" r="9" :fill="look.accent" />
+        </g>
+        <circle v-if="look.mane" cx="102" cy="138" :r="maneR" :fill="look.dark" opacity="0.95" />
+        <circle cx="102" cy="138" :r="build.head.r" :fill="look.body" :stroke="look.dark" stroke-width="3" />
         <!-- 内耳粉瓣 -->
-        <g data-feature="cat-inner-ears" aria-hidden="true">
+        <g v-if="isCat" data-feature="cat-inner-ears" aria-hidden="true">
           <path d="M49 89 L44 53 L72 78 Z M132 78 L160 53 L155 89 Z" :fill="look.accent" />
         </g>
         <!-- Lv10 后的颊毛放在脸外沿，不遮眼鼻 -->
-        <g v-if="level >= 10" class="companion__cat-tufts" aria-hidden="true">
+        <g v-if="isCat && level >= 10" class="companion__cat-tufts" aria-hidden="true">
           <path d="M54 151 L31 145 L46 161 L29 169 L53 177 Z" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
           <path d="M150 151 L173 145 L158 161 L175 169 L151 177 Z" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
         </g>
         <!-- 猫咪额心斑 -->
-        <path d="M102 89 Q96 106 100 116 Q102 120 104 116 Q108 106 102 89 Z" :fill="look.belly" opacity="0.48" />
+        <path v-if="isCat" d="M102 89 Q96 106 100 116 Q102 120 104 116 Q108 106 102 89 Z" :fill="look.belly" opacity="0.48" />
         <!-- 分开的左右胡须垫 -->
         <g data-feature="cat-whisker-pads">
           <ellipse cx="70" cy="160" rx="16" ry="12" :fill="look.belly" :stroke="look.dark" stroke-width="1.8" />
           <ellipse cx="116" cy="160" rx="16" ry="12" :fill="look.belly" :stroke="look.dark" stroke-width="1.8" />
         </g>
         <!-- 两侧各三根猫须，从垫外侧发出 -->
-        <g class="companion__cat-whiskers" :stroke="look.dark" stroke-width="1.7" stroke-linecap="round" opacity="0.82">
+        <g v-if="isCat" class="companion__cat-whiskers" :stroke="look.dark" stroke-width="1.7" stroke-linecap="round" opacity="0.82">
           <path d="M55 156 L25 148 M54 161 L19 161 M55 166 L27 176" />
           <path d="M127 156 L159 148 M128 161 L165 161 M127 166 L157 176" />
         </g>
@@ -249,7 +297,7 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
         <path d="M93 160 L93 165 M93 165 Q86 172 79 167 M93 165 Q100 172 107 167" fill="none" :stroke="look.dark" stroke-width="2.4" stroke-linecap="round" />
         <path v-if="!low" d="M86 177 Q93 190 100 177 Q93 184 86 177 Z" :fill="look.accent" />
         <!-- 竖瞳猫眼 -->
-        <g v-if="!low" data-feature="cat-vertical-pupils">
+        <g v-if="!low && isCat" data-feature="cat-vertical-pupils">
           <ellipse cx="76" cy="127" rx="10" ry="12" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
           <ellipse cx="118" cy="127" rx="10" ry="12" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
           <ellipse cx="76" cy="128" rx="3.2" ry="8" :fill="look.dark" />
@@ -257,12 +305,63 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
           <circle cx="77" cy="124" r="2" fill="#fff" />
           <circle cx="119" cy="124" r="2" fill="#fff" />
         </g>
+        <g v-else-if="!low" class="companion__feline-round-pupils">
+          <ellipse cx="76" cy="127" rx="10" ry="12" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
+          <ellipse cx="118" cy="127" rx="10" ry="12" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
+          <circle cx="77" cy="128" r="5" :fill="look.dark" />
+          <circle cx="119" cy="128" r="5" :fill="look.dark" />
+          <circle cx="78" cy="124" r="2" fill="#fff" />
+          <circle cx="120" cy="124" r="2" fill="#fff" />
+        </g>
         <g v-else class="companion__cat-sleepy-eyes">
           <path d="M66 130 Q76 123 86 130 M108 130 Q118 123 128 130" fill="none" :stroke="look.dark" stroke-width="2.8" stroke-linecap="round" />
         </g>
       </g>
 
-      <!-- 非猫伙伴保持原有犬科圆鼻/宽吻与各自耳型 -->
+      <!-- 仓鼠：圆脸、小米粒耳、鼓腮 -->
+      <g v-else-if="isHamster" class="companion__hamster-face">
+        <circle cx="58" cy="104" r="13" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
+        <circle cx="146" cy="104" r="13" :fill="look.body" :stroke="look.dark" stroke-width="2.5" />
+        <circle cx="58" cy="104" r="6" :fill="look.accent" />
+        <circle cx="146" cy="104" r="6" :fill="look.accent" />
+        <circle cx="102" cy="138" :r="build.head.r" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+        <ellipse cx="62" cy="160" rx="28" ry="22" :fill="look.belly" :stroke="look.dark" stroke-width="1.8" />
+        <ellipse cx="142" cy="160" rx="28" ry="22" :fill="look.belly" :stroke="look.dark" stroke-width="1.8" />
+        <ellipse cx="102" cy="160" rx="24" ry="18" :fill="look.belly" />
+        <ellipse cx="102" cy="153" rx="6" ry="5" :fill="look.accent" :stroke="look.dark" stroke-width="1.5" />
+        <path d="M102 158 L102 164 M102 164 Q96 170 90 166 M102 164 Q108 170 114 166" fill="none" :stroke="look.dark" stroke-width="2.4" stroke-linecap="round" />
+        <path d="M96 166 L96 172 M108 166 L108 172" :stroke="look.belly" stroke-width="3" stroke-linecap="round" />
+        <g v-if="!low">
+          <circle cx="82" cy="128" r="9" :fill="look.belly" :stroke="look.dark" stroke-width="1.6" />
+          <circle cx="122" cy="128" r="9" :fill="look.belly" :stroke="look.dark" stroke-width="1.6" />
+          <circle cx="83" cy="129" r="5" :fill="look.dark" />
+          <circle cx="123" cy="129" r="5" :fill="look.dark" />
+          <circle cx="84" cy="126" r="1.8" fill="#fff" />
+          <circle cx="124" cy="126" r="1.8" fill="#fff" />
+        </g>
+        <g v-else><path d="M73 130 Q82 124 91 130 M113 130 Q122 124 131 130" fill="none" :stroke="look.dark" stroke-width="2.6" stroke-linecap="round" /></g>
+      </g>
+
+      <!-- 龙：长吻爬行动物头，不用狗耳狗鼻 -->
+      <g v-else-if="isDragon" class="companion__dragon-face">
+        <path d="M70 94 Q54 48 82 40 Q84 72 96 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
+        <path d="M134 94 Q150 48 122 40 Q120 72 108 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
+        <ellipse cx="102" cy="142" rx="52" ry="42" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+        <ellipse cx="74" cy="160" rx="36" ry="23" :fill="look.belly" :stroke="look.dark" stroke-width="2" />
+        <ellipse cx="50" cy="153" rx="4" ry="3" :fill="look.dark" />
+        <ellipse cx="62" cy="153" rx="4" ry="3" :fill="look.dark" />
+        <path d="M72 170 Q84 178 96 170 M96 170 Q104 176 112 168" fill="none" :stroke="look.dark" stroke-width="2.4" stroke-linecap="round" />
+        <g v-if="!low">
+          <ellipse cx="82" cy="128" rx="9" ry="11" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
+          <ellipse cx="120" cy="128" rx="9" ry="11" fill="#fff8e8" :stroke="look.dark" stroke-width="1.6" />
+          <ellipse cx="82" cy="129" rx="2.4" ry="8" :fill="look.dark" />
+          <ellipse cx="120" cy="129" rx="2.4" ry="8" :fill="look.dark" />
+        </g>
+        <g v-else><path d="M73 130 Q82 124 91 130 M111 130 Q120 124 129 130" fill="none" :stroke="look.dark" stroke-width="2.6" stroke-linecap="round" /></g>
+        <path d="M52 182 Q102 196 152 182" fill="none" :stroke="look.dark" stroke-width="2" opacity="0.5" />
+      </g>
+
+      <!-- 其余伙伴保持原有犬科圆鼻/宽吻与各自耳型 -->
       <g v-else class="companion__generic-face">
         <!-- 狮子鬃毛 -->
         <circle v-if="look.mane" cx="102" cy="138" :r="maneR" :fill="look.dark" opacity="0.95" />
@@ -281,7 +380,7 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
           <path d="M68 92 Q54 44 82 36 Q84 70 96 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
           <path d="M132 92 Q146 44 118 36 Q116 70 104 86 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" />
         </g>
-        <circle cx="102" cy="138" r="56" :fill="look.body" :stroke="look.dark" stroke-width="3" />
+        <circle cx="102" cy="138" :r="build.head.r" :fill="look.body" :stroke="look.dark" stroke-width="3" />
         <path d="M102 84 Q88 112 92 138 Q98 154 110 160 Q122 148 122 126 Q120 100 102 84 Z" :fill="look.belly" opacity="0.9" />
         <g v-if="look.stripes" :stroke="look.dark" stroke-width="4" stroke-linecap="round" opacity="0.9">
           <path d="M78 100 l-6 16 M96 96 l0 14 M114 100 l6 16" />
@@ -308,12 +407,13 @@ onBeforeUnmount(() => { if (timer !== undefined) window.clearTimeout(timer) })
 
       <!-- 龙角尖光 -->
       <circle v-if="look.wings" cx="292" cy="144" r="4" :fill="look.accent" />
-      </g>
 
-      <!-- 等级徽记 -->
-      <g v-if="level >= 12" class="companion__crest" aria-hidden="true">
-        <path d="M124 62 L138 92 L160 76 L182 92 L196 62 L186 112 L134 112 Z" :fill="look.accent" :stroke="look.dark" stroke-width="2.5" stroke-linejoin="round" />
-        <circle cx="160" cy="96" r="4" :fill="look.dark" />
+      <!-- 皇冠固定在头顶，随头围缩放 -->
+      <g v-if="level >= 12" class="companion__crest" aria-hidden="true" :transform="`translate(102 ${138 - build.head.r - 8}) scale(${build.head.r / 56})`">
+        <path d="M-28 -8 L-14 14 L0 2 L14 14 L28 -8 L22 30 L-22 30 Z" :fill="look.accent" :stroke="look.dark" stroke-width="3" stroke-linejoin="round" />
+        <circle cx="0" cy="16" r="4" :fill="look.dark" />
+      </g>
+      </g>
       </g>
     </svg>
   </button>

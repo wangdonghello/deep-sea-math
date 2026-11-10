@@ -12,7 +12,7 @@ describe('CompanionAvatar', () => {
     expect(view.findAll('.companion__legs rect')).toHaveLength(4)
     expect(view.find('.companion__tail').exists()).toBe(true)
     expect(view.findAll('ellipse').length).toBeGreaterThan(4)
-    expect(view.findAll('circle').length).toBeGreaterThan(4)
+    expect(view.findAll('circle, ellipse').length).toBeGreaterThan(8)
   })
 
   it('小猫使用猫科脸型，明显区别于小狗', () => {
