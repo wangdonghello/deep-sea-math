@@ -157,10 +157,10 @@
    说明:     真实影像：灰鲭鲨在蓝色海水中侧身游动，尖吻与流线型身体清晰。
 
 23. v3/giant-squid.jpg —— 大王乌贼（Architeuthis dux）
-   素材页:   https://www.inaturalist.org/observations/327393268
-   许可:     CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/)
-   署名:     (c) marcm13 · CC BY-NC 4.0
-   说明:     真实影像：加那利群岛附近海面记录的大王乌贼，触腕与吸盘清晰可见；仅限非商业使用。
+   素材页:   https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/
+   许可:     公有领域 (https://www.noaa.gov/)
+   署名:     NOAA Ocean Exploration / Smithsonian Ocean · 公有领域
+   说明:     真实影像：NOAA 深潜器在深海拍摄的活体大王乌贼，触腕在蓝色海水中展开。
 
 24. v3/giant-tube-worm.jpg —— 巨型管虫（Riftia pachyptila）
    素材页:   https://oceanexplorer.noaa.gov/multimedia/tubeworms-2/
