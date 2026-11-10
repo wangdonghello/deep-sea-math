@@ -715,12 +715,12 @@
       ],
       "photo": {
         "ref": "v3/giant-squid",
-        "creditSummary": "(c) marcm13 · CC BY-NC 4.0",
-        "attribution": "(c) marcm13, CC BY-NC 4.0 (https://www.inaturalist.org/observations/327393268)",
-        "license": "CC BY-NC 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/",
-        "sourceUrl": "https://www.inaturalist.org/observations/327393268",
-        "note": "真实影像：加那利群岛附近海面记录的大王乌贼，触腕与吸盘清晰可见；仅限非商业使用。"
+        "creditSummary": "NOAA Ocean Exploration / Smithsonian Ocean · 公有领域",
+        "attribution": "NOAA Ocean Exploration (public domain; https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/), via Smithsonian Ocean.",
+        "license": "公有领域",
+        "licenseUrl": "https://www.noaa.gov/",
+        "sourceUrl": "https://oceanexplorer.noaa.gov/expedition-feature/19biolum-logs-jun20/",
+        "note": "真实影像：NOAA 深潜器在深海拍摄的活体大王乌贼，触腕在蓝色海水中展开。"
       },
       "model": {
         "ref": "v3-giant-squid",
