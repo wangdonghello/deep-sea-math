@@ -1,15 +1,11 @@
-name: Deploy v3 and v4 to GitHub Pages
+name: Deploy v4 to GitHub Pages
 
-# v1（根路径）与 v2（/v2/）已停用，不再构建或发布。
-# 当前只保留：
-# - /v3/：第三版，独立数据库 deep-sea-math-v3；
-# - /v4/：第四版，独立数据库 deep-sea-math-v4。
-#
-# 旧地址 / 与 /v2/ 不再有入口文件，访问时走本站 404 页面。
+# v1（根路径）、v2（/v2/）、v3（/v3/）均已停用，只保留 v4。
+# 旧地址访问时走 404 页面或 /v3/ 跳转页，不再构建旧版本。
 
 on:
   push:
-    branches: [v3, v4]
+    branches: [v4]
   workflow_dispatch:
 
 permissions:
@@ -25,12 +21,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout third version
-        uses: actions/checkout@v4
-        with:
-          ref: v3
-          path: v3
-
       - name: Checkout fourth version
         uses: actions/checkout@v4
         with:
@@ -41,22 +31,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: |
-            v3/package-lock.json
-            v4/package-lock.json
-
-      - name: Install and test third version
-        working-directory: v3
-        run: |
-          npm ci
-          npm run test
-
-      - name: Build third version under /v3/
-        working-directory: v3
-        run: npm run build
-        env:
-          VITE_BASE: /deep-sea-math/v3/
-          VITE_DB_NAME: deep-sea-math-v3
+          cache-dependency-path: v4/package-lock.json
 
       - name: Install and test fourth version
         working-directory: v4
@@ -71,11 +46,25 @@ jobs:
           VITE_BASE: /deep-sea-math/v4/
           VITE_DB_NAME: deep-sea-math-v4
 
-      - name: Assemble v3 and v4
+      - name: Assemble v4 and retired-version notice
         run: |
-          mkdir -p site/v3 site/v4
-          cp -R v3/dist/. site/v3/
+          mkdir -p site/v4 site/v3
           cp -R v4/dist/. site/v4/
+          cat > site/v3/index.html <<'HTML'
+          <!doctype html>
+          <html lang="zh-CN">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <meta http-equiv="refresh" content="0; url=/deep-sea-math/v4/" />
+              <link rel="canonical" href="/deep-sea-math/v4/" />
+              <title>v3 已停用，正在前往 v4</title>
+            </head>
+            <body>
+              <p>v3 已停用，正在前往 <a href="/deep-sea-math/v4/">v4</a>。</p>
+            </body>
+          </html>
+          HTML
           cat > site/404.html <<'HTML'
           <!doctype html>
           <html lang="zh-CN">
@@ -94,9 +83,8 @@ jobs:
             <body>
               <main>
                 <h1>这个旧地址已停用</h1>
-                <p>v1 与 v2 已下线，请使用当前版本。孩子的进度保存在各自版本的本地数据库中。</p>
+                <p>v1、v2、v3 已下线，现在只保留 v4。孩子的进度保存在各自版本的本地数据库中。</p>
                 <a href="/deep-sea-math/v4/">进入 v4</a>
-                <a href="/deep-sea-math/v3/">进入 v3</a>
               </main>
             </body>
           </html>
