@@ -33,3 +33,21 @@ describe('daily quest type balance on real banks', () => {
     })
   }
 })
+
+describe('grade 3 daily mix', () => {
+  it('mixes grade 2 review, grade 3 core and grade 4 preview', () => {
+    const pool = Object.values(QUESTION_BANK_BY_GRADE).flatMap((bank) => bank.questions)
+    const quest = buildDailyQuest({
+      profileId: 'mix', settings, pool, grade: 3, themeId: 'deep-sea',
+      history: { profileId: 'mix', events: [], now: Date.UTC(2026, 10, 11) },
+      clock: () => Date.UTC(2026, 10, 11), idGenerator: (() => { let n = 0; return () => `mix-${++n}` })(),
+    })
+    const byId = new Map(pool.map((question) => [question.id, question]))
+    const grades = new Set(quest.questionIds.map((id) => byId.get(id)?.grade))
+    const types = new Set(quest.questionIds.map((id) => byId.get(id)?.type))
+    expect(grades.has(2)).toBe(true)
+    expect(grades.has(3)).toBe(true)
+    expect(grades.has(4)).toBe(true)
+    expect(types.size).toBeGreaterThanOrEqual(5)
+  })
+})

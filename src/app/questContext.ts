@@ -119,7 +119,12 @@ export function buildQuestContext(
   const themeId = startedForSession?.themeId ?? options.themeId ?? 'deep-sea'
   // 自定义题只参与“按题号取题”，不参与每日组题；把 grade 的题库放前面，
   // 同名 id 以内置题库为准（正常不会重名，自定义 id 带 custom- 前缀）。
-  const pool = [...QUESTION_BANK_BY_GRADE[grade].questions, ...(options.customQuestions ?? [])]
+  // 每日题组会混入相邻年级的温故/知新题，查题池必须覆盖全部年级；
+  // 否则 session 里出现二年级/四年级题时会被守卫判定为“找不到题”。
+  const pool = [
+    ...Object.values(QUESTION_BANK_BY_GRADE).flatMap((bank) => bank.questions),
+    ...(options.customQuestions ?? []),
+  ]
   const questions = pickQuestions(rawIds, pool)
 
   const similarIds = new Set(questions.flatMap((question) => question.similarQuestionIds))

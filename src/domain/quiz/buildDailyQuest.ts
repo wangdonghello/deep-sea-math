@@ -165,6 +165,35 @@ function compareQuestions(left: Question, right: Question): number {
  * 题型顺序按题库中的首次出现顺序固定；再用日期做一次轮转，避免每天
  * 都从同一个题型开始。全组题必须确定性可重放，因此不使用随机数。
  */
+/**
+ * 同一题型内按知识点（skill-*）交错。
+ *
+ * 题库每个题型都有多个知识点（时间、测量、分数、面积……）。只按题型轮转
+ * 时，同一天仍可能连续出现两三道“时间换算”；这里把每个题型的题按 skill
+ * 标签分组后轮流展开，题型覆盖不变，但同一题型内部的考点也被打散。
+ *
+ * 没有 skill 标签的旧题/测试 fixture 保持原顺序，避免改变既有确定性契约。
+ */
+function interleaveBySkill(bucket: readonly Question[]): Question[] {
+  const groups = new Map<string, Question[]>()
+  for (const question of bucket) {
+    const skill = question.tags.find((tag) => tag.startsWith('skill-')) ?? question.type
+    const group = groups.get(skill)
+    if (group === undefined) groups.set(skill, [question])
+    else group.push(question)
+  }
+  if (groups.size <= 1) return [...bucket]
+  const lists = [...groups.values()]
+  const out: Question[] = []
+  for (let index = 0; out.length < bucket.length; index += 1) {
+    for (const list of lists) {
+      const question = list[index]
+      if (question !== undefined) out.push(question)
+    }
+  }
+  return out
+}
+
 function pickBalanced(
   available: readonly Question[],
   effectiveDifficulty: number,
@@ -191,7 +220,7 @@ function pickBalanced(
       const bucket = groups.get(type) ?? []
       if (bucket.length < 2) continue
       const offset = (dayIndex + typeIndex + categoryIndex) % bucket.length
-      groups.set(type, [...bucket.slice(offset), ...bucket.slice(0, offset)])
+      groups.set(type, interleaveBySkill([...bucket.slice(offset), ...bucket.slice(0, offset)]))
     }
   }
 
@@ -273,6 +302,25 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     candidates[category].sort(compareQuestions)
   }
 
+  /**
+   * 邻近年级题：每天混入少量“温故/知新”题。
+   *
+   * 二年级题放基础槽，四年级题放应用槽，各最多 1 道；只有目标年级池里
+   * 确实有该槽位题时才替换，不与目标年级抢满整组。题池里没有邻近年级时
+   * （单年级测试 fixture、只传一个 bank 的调用）行为与旧版完全一致。
+   */
+  function neighborCandidates(neighborGrade: number): Record<QuestCategory, Question[]> {
+    const partitioned: Record<QuestCategory, Question[]> = { basic: [], applied: [], probe: [] }
+    for (const question of pool) {
+      if (question.grade !== neighborGrade || isMastered(question.id, input.masteryByQuestion)) continue
+      partitioned[question.category].push(question)
+    }
+    for (const category of QUEST_SLOT_ORDER) partitioned[category].sort(compareQuestions)
+    return partitioned
+  }
+  const reviewCandidates = grade > 1 ? neighborCandidates(grade - 1) : null
+  const previewCandidates = grade < 6 ? neighborCandidates(grade + 1) : null
+
   const fallbackEvents: DifficultyFallbackEvent[] = []
   const questionIds: string[] = []
   let repeatCount = 0
@@ -311,20 +359,32 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     // 取生效档的题；不足时从池头按同一排序键循环取用（不随机）。
     const atEffectiveTier = available.filter((question) => question.difficulty === effective.difficulty)
 
-    // 该类整个池子都空（题库里没有这个 category 的题）时无题可取：既不能
-    // 编一道题，也不能从别的 category 借（那会让「5 基础 / 3 应用」的口径
-    // 失真）。跳过该槽位，三类齐全由 Task 8 的题库内容校验保证。
-    if (atEffectiveTier.length === 0) {
-      difficultyTrace.push(effective.difficulty)
-      continue
-    }
-
     const dayIndex = Math.floor(startedAt / 86_400_000)
-    const balanced = pickBalanced(atEffectiveTier, effective.difficulty, needed, dayIndex, categoryIndex)
+    const reviewAvailable = category === 'basic' ? reviewCandidates?.basic ?? [] : []
+    const previewAvailable = category === 'applied' ? previewCandidates?.applied ?? [] : []
+    const reviewQuota = reviewAvailable.length > 0 && needed > 1 ? 1 : 0
+    const previewQuota = previewAvailable.length > 0 && needed - reviewQuota > 1 ? 1 : 0
+    const targetNeeded = Math.max(0, needed - reviewQuota - previewQuota)
+
+    const balanced = atEffectiveTier.length > 0
+      ? pickBalanced(atEffectiveTier, effective.difficulty, targetNeeded, dayIndex, categoryIndex)
+      : { picked: [] as Question[], repeats: 0 }
     questionIds.push(...balanced.picked.map((question) => question.id))
     repeatCount += balanced.repeats
 
-    difficultyTrace.push(effective.difficulty)
+    const pickNeighbors = (neighborPool: readonly Question[], quota: number, offset: number): Question[] => {
+      if (quota <= 0) return []
+      const tier = neighborPool.filter((question) => question.difficulty === effective.difficulty)
+      const use = tier.length > 0 ? tier : neighborPool
+      return pickBalanced(use, effective.difficulty, quota, dayIndex, categoryIndex + offset).picked
+    }
+    const reviewPicked = pickNeighbors(reviewAvailable, reviewQuota, 3)
+    const previewPicked = pickNeighbors(previewAvailable, previewQuota, 5)
+    questionIds.push(...reviewPicked.map((question) => question.id), ...previewPicked.map((question) => question.id))
+
+    if (balanced.picked.length + reviewPicked.length + previewPicked.length > 0) {
+      difficultyTrace.push(effective.difficulty)
+    }
   }
 
   // 主题题保障：默认题组至少 2 道带当前主题情境的题；不足时用同年级同槽位

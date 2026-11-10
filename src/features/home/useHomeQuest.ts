@@ -166,6 +166,11 @@ export function useHomeQuest(options: HomeQuestOptions) {
    */
   const activePool = computed(() => {
     const grade = profile.value?.subjectGrades?.math ?? profile.value?.grade ?? 3
+    // 每日组题需要同时看到相邻年级：二年级题用于温故，四年级题用于知新。
+    // 把各年级池合并后交给 buildDailyQuest，由它按 grade 做难度与配额筛选；
+    // 只传单个年级时（旧调用/测试）仍保持原行为。
+    const allGrades = Object.values(options.poolByGrade ?? {}).flatMap((questions) => [...(questions ?? [])])
+    if (allGrades.length > 0) return allGrades
     return options.poolByGrade?.[grade] ?? options.pool
   })
   const poolIds = computed(() => new Set(activePool.value.map((question) => question.id)))
