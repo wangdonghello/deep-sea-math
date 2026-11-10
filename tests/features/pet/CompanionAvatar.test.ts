@@ -15,6 +15,18 @@ describe('CompanionAvatar', () => {
     expect(view.findAll('circle').length).toBeGreaterThan(4)
   })
 
+  it('等级驱动体型与徽章，Lv.12 起出现王冠，Lv.15 有光环', () => {
+    const baby = mount(CompanionAvatar, { props: { animalId: 'companion-lion', mood: 80, level: 1 } })
+    const adult = mount(CompanionAvatar, { props: { animalId: 'companion-lion', mood: 80, level: 15 } })
+    expect(baby.get('[data-level]').attributes('data-level')).toBe('1')
+    expect(baby.text()).toContain('1')
+    expect(adult.text()).toContain('15')
+    expect(baby.find('.companion__crest').exists()).toBe(false)
+    expect(adult.find('.companion__crest').exists()).toBe(true)
+    expect(adult.find('.companion__aura').exists()).toBe(true)
+    expect(baby.get('svg').attributes('style')).not.toBe(adult.get('svg').attributes('style'))
+  })
+
   it('点击 emit tap，心情低时表情变化', async () => {
     const view = mount(CompanionAvatar, { props: { animalId: 'companion-cat', mood: 80 } })
     await view.get('[data-testid="animal-avatar"]').trigger('click')

@@ -506,7 +506,7 @@ onBeforeUnmount(() => {
         <section class="pet-room__stage" aria-label="宠物房间">
           <div class="pet-room__pet">
             <PetAvatar v-if="isWhale" :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
-            <CompanionAvatar v-else :animal-id="activeCompanionId" :mood="state.mood" @tap="onPetTap" />
+            <CompanionAvatar v-else :animal-id="activeCompanionId" :level="activeLevel" :mood="state.mood" @tap="onPetTap" />
           </div>
           <div class="pet-room__nameplate">
             <span class="pet-room__nameplate-name">{{ displayName }}</span>
