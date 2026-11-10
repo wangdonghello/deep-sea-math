@@ -305,9 +305,10 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
   /**
    * 邻近年级题：每天混入少量“温故/知新”题。
    *
-   * 二年级题放基础槽，四年级题放应用槽，各最多 1 道；只有目标年级池里
-   * 确实有该槽位题时才替换，不与目标年级抢满整组。题池里没有邻近年级时
-   * （单年级测试 fixture、只传一个 bank 的调用）行为与旧版完全一致。
+   * 低一年级取难题放基础槽，高一年级取简单题放应用槽，各最多 1 道；
+   * 只有目标年级池里确实有该槽位题时才替换，不与目标年级抢满整组。
+   * 题池里没有邻近年级时（单年级测试 fixture、只传一个 bank 的调用）
+   * 行为与旧版完全一致。
    */
   function neighborCandidates(neighborGrade: number): Record<QuestCategory, Question[]> {
     const partitioned: Record<QuestCategory, Question[]> = { basic: [], applied: [], probe: [] }
@@ -372,14 +373,25 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     questionIds.push(...balanced.picked.map((question) => question.id))
     repeatCount += balanced.repeats
 
-    const pickNeighbors = (neighborPool: readonly Question[], quota: number, offset: number): Question[] => {
+    /**
+     * 邻近年级按固定难度取题，不跟随当前难度档：
+     * - 低一年级取 difficulty 3（难题）做“温故”；
+     * - 高一年级取 difficulty 1（简单题）做“知新”。
+     * 这样五年级孩子不会因为当前档位低，就拿到简单的四年级复习题。
+     */
+    const pickNeighbors = (
+      neighborPool: readonly Question[],
+      quota: number,
+      offset: number,
+      forcedDifficulty: 1 | 3,
+    ): Question[] => {
       if (quota <= 0) return []
-      const tier = neighborPool.filter((question) => question.difficulty === effective.difficulty)
+      const tier = neighborPool.filter((question) => question.difficulty === forcedDifficulty)
       const use = tier.length > 0 ? tier : neighborPool
-      return pickBalanced(use, effective.difficulty, quota, dayIndex, categoryIndex + offset).picked
+      return pickBalanced(use, forcedDifficulty, quota, dayIndex, categoryIndex + offset).picked
     }
-    const reviewPicked = pickNeighbors(reviewAvailable, reviewQuota, 3)
-    const previewPicked = pickNeighbors(previewAvailable, previewQuota, 5)
+    const reviewPicked = pickNeighbors(reviewAvailable, reviewQuota, 3, 3)
+    const previewPicked = pickNeighbors(previewAvailable, previewQuota, 5, 1)
     questionIds.push(...reviewPicked.map((question) => question.id), ...previewPicked.map((question) => question.id))
 
     if (balanced.picked.length + reviewPicked.length + previewPicked.length > 0) {
