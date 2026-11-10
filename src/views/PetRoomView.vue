@@ -30,7 +30,7 @@ import { decayedHunger, levelFromXp, levelProgress, stageFromLevel } from '@/dom
 import { MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
-import CompanionAvatar, { type CompanionId } from '@/features/pet/CompanionAvatar.vue'
+import CompanionAvatar, { type CompanionAnimation, type CompanionId } from '@/features/pet/CompanionAvatar.vue'
 import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
 import PetAvatar from '@/features/pet/PetAvatar.vue'
 import { usePet } from '@/features/pet/usePet'
@@ -268,13 +268,21 @@ const questSubtitle = computed(() => {
     : '每日一组题 · 攒积分养宠物'
 })
 
+const avatarAction = ref<CompanionAnimation | null>(null)
+const avatarNonce = ref(0)
+
+function pulseAvatar(action: CompanionAnimation): void {
+  avatarAction.value = action
+  avatarNonce.value += 1
+}
+
 /**
  * 执行一次宠物动作。
  *
  * 动作成功后重新加载全量事件：每日次数、背包与 XP 都以日志为准，不在组件里
  * 手工推算第二份状态。失败只把文案放到 `actionError`，不打断页面。
  */
-async function runAction(action: () => Promise<void>): Promise<void> {
+async function runAction(action: () => Promise<void>, avatarAnimation?: CompanionAnimation): Promise<void> {
   if (busy.value) return
   busy.value = true
   actionError.value = ''
@@ -284,6 +292,7 @@ async function runAction(action: () => Promise<void>): Promise<void> {
     const beforeStage = activeStage.value
     const beforeHunger = 100 - Math.round(decayedHunger(state.value.hunger, state.value.lastUpdatedAt, now.value))
     await action()
+    if (avatarAnimation) pulseAvatar(avatarAnimation)
     await load()
     now.value = clock()
     const gained = activeXp.value - beforeXp
@@ -309,11 +318,11 @@ async function runAction(action: () => Promise<void>): Promise<void> {
 }
 
 function onFeed(itemId: string): void {
-  void runAction(() => feed(itemId, activePetId.value))
+  void runAction(() => feed(itemId, activePetId.value), 'eat')
 }
 
 function onPlay(itemId: string): void {
-  void runAction(() => play(itemId, activePetId.value))
+  void runAction(() => play(itemId, activePetId.value), 'play')
 }
 
 /**
@@ -328,7 +337,7 @@ function onPetTap(): void {
     actionError.value = `今天已经摸过 ${MAX_PET_PER_DAY} 次啦，明天再摸`
     return
   }
-  void runAction(() => petAction(activePetId.value))
+  void runAction(() => petAction(activePetId.value), 'pet')
 }
 
 function reload(): void {
@@ -506,7 +515,7 @@ onBeforeUnmount(() => {
         <section class="pet-room__stage" aria-label="宠物房间">
           <div class="pet-room__pet">
             <PetAvatar v-if="isWhale" :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
-            <CompanionAvatar v-else :animal-id="activeCompanionId" :level="activeLevel" :mood="state.mood" @tap="onPetTap" />
+            <CompanionAvatar v-else :animal-id="activeCompanionId" :level="activeLevel" :mood="state.mood" :action="avatarAction" :action-nonce="avatarNonce" @tap="onPetTap" />
           </div>
           <div class="pet-room__nameplate">
             <span class="pet-room__nameplate-name">{{ displayName }}</span>
