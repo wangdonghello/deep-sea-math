@@ -44,6 +44,7 @@ const ready = computed(() => context.value !== undefined && context.value.sessio
     :profile-id="profileId"
     :questions="context.questions"
     :similar-question-pool="context.similarQuestionPool"
+    :fallback-pool="context.fallbackPool"
     :creature-id="context.creatureId"
     :zone-id="context.zoneId"
     :theme-id="context.themeId"

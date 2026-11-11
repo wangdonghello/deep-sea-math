@@ -28,10 +28,9 @@ export function useMistakeBook(
     questionTypeById: questionTypeById.value,
   }))
 
-  const items = computed<MistakeBookItem[]>(() => Object.values(projections.value.mistakeBook)
-    .filter((entry) => !projections.value.practiceProgress.fixedQuestionIds.includes(entry.questionId))
+  const allItems = computed<MistakeBookItem[]>(() => Object.values(projections.value.mistakeBook)
     .map((entry) => {
-    const question = catalog[entry.questionId]
+      const question = catalog[entry.questionId]
       return {
         ...entry,
         type: question?.type ?? null,
@@ -40,6 +39,10 @@ export function useMistakeBook(
         ...(question?.story === undefined ? {} : { title: question.story.title }),
       }
     }))
+  const fixedIds = computed(() => new Set(projections.value.practiceProgress.fixedQuestionIds))
+  const items = computed(() => allItems.value.filter((entry) => !fixedIds.value.has(entry.questionId)))
+  /** 已订正（原题 + 相似题都做对）的“总错题集”，保留留痕但不再要求练习。 */
+  const fixedItems = computed(() => allItems.value.filter((entry) => fixedIds.value.has(entry.questionId)))
   const visibleItems = computed(() => filterMistakes(items.value, filter.value))
 
   async function load(id: string | null): Promise<void> {
@@ -79,5 +82,5 @@ export function useMistakeBook(
   }
 
   watch(activeProfileId, (id) => { void load(id) }, { immediate: true })
-  return { activeProfileId, loading, loaded, errorMessage, filter, items, visibleItems, practiceProgress, practicePayload }
+  return { activeProfileId, loading, loaded, errorMessage, filter, items, fixedItems, visibleItems, practiceProgress, practicePayload }
 }

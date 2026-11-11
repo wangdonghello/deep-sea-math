@@ -64,3 +64,30 @@ describe('practiceProgress projection', () => {
     expect(progress.decorationIds).toEqual(['mistake-star-5', 'mistake-star-10'])
   })
 })
+
+describe('correction-done into total mistake book', () => {
+  it('原题订正完成后计入已修复并加一颗错题星', () => {
+    const events: DomainEvent[] = [
+      answer('e1', 'session-daily', 'q1', { correct: false }),
+      {
+        eventId: 'e2', profileId: 'p1', occurredAt: 2, type: 'correction-done',
+        sessionId: 'session-daily', questionId: 'q1', similarQuestionId: 'q1-sim',
+      },
+    ]
+    const progress = replayProjections(events).practiceProgress
+    expect(progress.fixedQuestionIds).toEqual(['q1'])
+    expect(progress.stars).toBe(1)
+  })
+
+  it('已修复的题再次答错会重新回到待订正', () => {
+    const events: DomainEvent[] = [
+      {
+        eventId: 'e1', profileId: 'p1', occurredAt: 1, type: 'correction-done',
+        sessionId: 'session-daily', questionId: 'q1', similarQuestionId: 'q1-sim',
+      },
+      answer('e2', 'session-daily-2', 'q1', { correct: false }),
+    ]
+    const progress = replayProjections(events).practiceProgress
+    expect(progress.fixedQuestionIds).toEqual([])
+  })
+})

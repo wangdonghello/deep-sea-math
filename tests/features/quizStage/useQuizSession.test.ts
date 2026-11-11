@@ -116,6 +116,20 @@ describe('useQuizSession', () => {
     expect(session.practiceFixedQuestionIds.value).toEqual(['q1'])
   })
 
+  it('历史错题重练：原题首次做对就补相似题，相似题做对后记录订正并移入已修复', async () => {
+    const seed: DomainEvent[] = [{
+      eventId: 'old-wrong', profileId: 'profile-1', occurredAt: 1, type: 'answer-submitted',
+      sessionId: 'practice-q1-old', questionId: 'q1', submitted: '6', correct: false,
+      usedHintLevel: 0, retryCount: 0, ms: 10,
+    }]
+    const { session, events } = setupPractice([makeQuestion('q1', ['q1-sim']), makeQuestion('q1-sim')], seed)
+    await session.submitAnswer('7')
+    expect(session.currentQuestion.value?.id).toBe('q1-sim')
+    await session.submitAnswer('7')
+    expect(events.some((event) => event.type === 'correction-done' && event.questionId === 'q1')).toBe(true)
+    expect(session.practiceFixedQuestionIds.value).toEqual(['q1'])
+  })
+
   it('每次提交都追加 answer-submitted，答错保持正向反馈', async () => {
     const { session, events } = setup([makeQuestion('q1')])
     await session.submitAnswer('6')

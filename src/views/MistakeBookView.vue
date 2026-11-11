@@ -22,7 +22,7 @@ const emit = defineEmits<{
 
 const session = useProfileSessionStore()
 const profileId = computed(() => session.activeProfileId)
-const { activeProfileId, loading, loaded, errorMessage, filter, items, visibleItems, practiceProgress, practicePayload } =
+const { activeProfileId, loading, loaded, errorMessage, filter, items, fixedItems, visibleItems, practiceProgress, practicePayload } =
   useMistakeBook(profileId, props.store, props.catalog, props.logger)
 
 function practice(questionId: string): void {
@@ -50,13 +50,13 @@ function practice(questionId: string): void {
         <p v-else class="mistake-book__next">再独立改对几道题，就能解锁修复徽章和图鉴装饰。</p>
       </section>
       <MistakeFilter v-model="filter" />
-      <p v-if="items.length === 0" data-testid="mistake-empty">
+      <p v-if="items.length === 0 && fixedItems.length === 0" data-testid="mistake-empty">
         这里还没有错题，继续探索时遇到的题目会收集在这里。
       </p>
-      <p v-else-if="visibleItems.length === 0" data-testid="mistake-filter-empty">
-        当前条件下没有错题，试试调整筛选吧。
+      <p v-else-if="items.length > 0 && visibleItems.length === 0" data-testid="mistake-filter-empty">
+        当前条件下没有待订正错题，试试调整筛选吧。
       </p>
-      <template v-else>
+      <template v-if="visibleItems.length > 0">
         <button
           type="button"
           data-testid="print-mistakes"
@@ -64,6 +64,11 @@ function practice(questionId: string): void {
         >打印错题</button>
         <MistakeList :entries="visibleItems" @practice="practice" />
       </template>
+      <section v-if="fixedItems.length > 0" class="mistake-book__fixed" data-testid="fixed-mistakes">
+        <h2>总错题集 · 已修复 {{ fixedItems.length }} 道</h2>
+        <p class="mistake-book__next">原题和相似题都做对后，题目会保留在这里作成长记录。</p>
+        <MistakeList :entries="fixedItems" readonly />
+      </section>
     </template>
     <BottomReturnButton @back="emit('back-home')" />
   </main>
@@ -77,5 +82,7 @@ function practice(questionId: string): void {
 .mistake-book__reward { display: grid; gap: 6px; color: var(--ds-accent-text); font-weight: 600; }
 .mistake-book__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .mistake-book__chip { padding: 2px 10px; border: 1px solid var(--ds-accent-500); border-radius: 999px; font-size: var(--ds-font-size-caption); }
+.mistake-book__fixed { display: grid; gap: 8px; margin-top: 1rem; }
+.mistake-book__fixed h2 { font-size: 1.05rem; }
 .mistake-book__next { color: var(--ds-text-secondary); font-weight: 400; font-size: var(--ds-font-size-caption); }
 </style>

@@ -44,6 +44,8 @@ export interface QuizSessionOptions {
   questions: readonly Question[]
   /** 相似题池：本组题目 `similarQuestionIds` 引到的题。 */
   similarQuestionPool?: readonly Question[]
+  /** 兜底相似题池：题目没有声明相似题时，按同题型/同知识点找一道。 */
+  fallbackPool?: readonly Question[]
   /** Optional target metadata consumed by T7's reward rules. */
   creatureId?: string
   zoneId?: string
@@ -56,7 +58,7 @@ export interface QuizSessionOptions {
 
 export function useQuizSession(options: QuizSessionOptions) {
   const rootQuestions = options.questions
-  const questionPool = [...rootQuestions, ...(options.similarQuestionPool ?? [])]
+  const questionPool = [...rootQuestions, ...(options.similarQuestionPool ?? []), ...(options.fallbackPool ?? [])]
   const events = ref<readonly DomainEvent[]>([])
   const feedback = ref('')
   const submitting = ref(false)
@@ -116,17 +118,42 @@ export function useQuizSession(options: QuizSessionOptions) {
     projections.value.questProgress[options.sessionId]?.correctQuestionIds ?? [],
   ))
 
+  function sharesSkill(left: Question, right: Question): boolean {
+    return left.tags.some((tag) => tag.startsWith('skill-') && right.tags.includes(tag))
+  }
+
+  /**
+   * 没有显式 similarQuestionIds 时，按同题型、同难度、共享知识点找一道兜底相似题。
+   * 题库里不少题没有人工标注相似题；不兜底的话，孩子做错后只会原地订正，
+   * 拿不到第二道练习。
+   */
+  function fallbackSimilar(question: Question): Question | undefined {
+    return (options.fallbackPool ?? []).find((candidate) =>
+      candidate.id !== question.id &&
+      candidate.type === question.type &&
+      candidate.difficulty === question.difficulty &&
+      sharesSkill(question, candidate) &&
+      !roots.value.some((root) => root.id === candidate.id),
+    )
+  }
+
   /** Similar questions are derived from a corrected root answer, never recursively added. */
   const queue = computed(() => {
     const byId = new Map(questionPool.map((question) => [question.id, question]))
     const result: Question[] = []
     for (const question of roots.value) {
       result.push(question)
+      // 错题练习里只要原题这次做对，就补一道相似题；每日题组仍要求“先答错、
+      // 再订正正确”，避免把每道答对的日常题都扩成两题。
+      const isPractice = options.sessionId.startsWith('practice-')
       const corrected = answerEvents.value.some((event) =>
-        event.questionId === question.id && event.correct && event.retryCount > 0,
+        event.questionId === question.id &&
+        event.correct &&
+        (isPractice || event.retryCount > 0),
       )
       const similarId = question.similarQuestionIds.find((id) => byId.has(id))
-      const similar = corrected && similarId !== undefined ? byId.get(similarId) : undefined
+      const explicitSimilar = similarId !== undefined ? byId.get(similarId) : undefined
+      const similar = corrected ? (explicitSimilar ?? fallbackSimilar(question)) : undefined
       const isAnotherRoot = similar !== undefined && roots.value.some((root) => root.id === similar.id)
       if (similar !== undefined && !isAnotherRoot && !result.some((entry) => entry.id === similar.id)) result.push(similar)
     }
@@ -207,8 +234,12 @@ export function useQuizSession(options: QuizSessionOptions) {
         counts[event.questionId] = (counts[event.questionId] ?? 0) + 1
       }
     }
+    const corrected = new Set(events.value.flatMap((event) =>
+      event.type === 'correction-done' && event.profileId === options.profileId
+        ? [event.questionId] : [],
+    ))
     return [...new Set(answerEvents.value.map((event) => event.questionId))]
-      .filter((questionId) => (counts[questionId] ?? 0) >= 2)
+      .filter((questionId) => (counts[questionId] ?? 0) >= 2 || corrected.has(questionId))
   })
   const currentPosition = computed(() => {
     const index = queue.value.findIndex((question) => question.id === displayedQuestion.value?.id)
@@ -357,10 +388,23 @@ export function useQuizSession(options: QuizSessionOptions) {
       phase.value = 'correct'
       practiceQuestionId.value = null
       feedback.value = retryCount > 0 ? '很好，我们再练一道差不多的' : '太棒了，继续下潜！'
-      const parent = roots.value.find((candidate) => candidate.similarQuestionIds.includes(question.id))
-      if (parent !== undefined && answerEvents.value.some((item) =>
-        item.questionId === parent.id && !item.correct,
-      )) {
+      const parent = roots.value.find((candidate) => candidate.similarQuestionIds.includes(question.id)) ??
+        roots.value.find((candidate) =>
+          candidate.id !== question.id &&
+          candidate.type === question.type &&
+          sharesSkill(candidate, question),
+        )
+      // 原题可能在之前的会话里答错（错题本重新练习），因此查全量事件而不是
+      // 只看本次会话；否则“历史错题 + 相似题做对”不会写 correction-done，
+      // 原题也就永远移不进总错题集。
+      const parentWasWrong = parent !== undefined && events.value.some((item) =>
+        item.type === 'answer-submitted' && item.questionId === parent.id && !item.correct,
+      )
+      const alreadyCorrected = parent !== undefined && events.value.some((item) =>
+        item.type === 'correction-done' && item.questionId === parent.id &&
+        item.similarQuestionId === question.id,
+      )
+      if (parent !== undefined && parentWasWrong && !alreadyCorrected) {
         await append({
           ...baseEvent(), type: 'correction-done', sessionId: options.sessionId,
           questionId: parent.id, similarQuestionId: question.id,

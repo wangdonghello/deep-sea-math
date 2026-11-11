@@ -3,7 +3,7 @@ import type { MasteryLevel } from '@/domain/model/types'
 import { quizTypeLabel } from '@/shared/quizTypeLabel'
 import type { MistakeBookItem } from './types'
 
-defineProps<{ entries: readonly MistakeBookItem[] }>()
+defineProps<{ entries: readonly MistakeBookItem[]; readonly?: boolean }>()
 const emit = defineEmits<{ (event: 'practice', questionId: string): void }>()
 
 const masteryLabels: Record<MasteryLevel, string> = {
@@ -25,9 +25,13 @@ function displayTime(value: number | null): string {
         <p>题型掌握状态：{{ entry.topicMasteryLevel === null ? '待补充' : masteryLabels[entry.topicMasteryLevel] }}</p>
         <p>答错次数：{{ entry.wrongCount }}</p>
         <p>最近答错：{{ displayTime(entry.lastWrongAt) }}</p>
-        <button type="button" :data-testid="`practice-${entry.questionId}`" @click="emit('practice', entry.questionId)">
-          重新练习
-        </button>
+        <button
+          v-if="!readonly"
+          type="button"
+          :data-testid="`practice-${entry.questionId}`"
+          @click="emit('practice', entry.questionId)"
+        >重新练习</button>
+        <p v-else class="mistake-list__fixed">已修复 · 已移入总错题集</p>
       </article>
     </li>
   </ul>

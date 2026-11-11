@@ -341,6 +341,7 @@ function incrementalProjections(
           mistake.lastWrongAt = event.occurredAt
           mistake.lastWrongAnswer = event.submitted
           mistake.corrected = false
+          fixed.delete(event.questionId)
         }
         break
       }
@@ -381,6 +382,8 @@ function incrementalProjections(
         if (!mistake.correctedSimilarQuestionIds.includes(event.similarQuestionId)) {
           mistake.correctedSimilarQuestionIds.push(event.similarQuestionId)
         }
+        fixed.add(event.questionId)
+        practiceStars += 1
         break
       }
       case 'session-completed':

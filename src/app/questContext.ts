@@ -32,6 +32,8 @@ export interface QuestRouteContext {
   questions: readonly Question[]
   /** 相似题池（本组题目 `similarQuestionIds` 引到的题）。 */
   similarQuestionPool: readonly Question[]
+  /** 兜底相似题池：没有显式相似题时按同题型/知识点取一道。 */
+  fallbackPool: readonly Question[]
   /** 本组对应的生物（题目包装里的主角），供答题完成时发放图鉴卡。 */
   creatureId?: string
   /** 本题组对应的下潜区域 id。 */
@@ -145,6 +147,7 @@ export function buildQuestContext(
     sessionId,
     questions,
     similarQuestionPool,
+    fallbackPool: pool,
     grade,
     themeId,
     ...deriveQuestTargets(questions, unlockedZoneIds, unlockedCreatureIds),

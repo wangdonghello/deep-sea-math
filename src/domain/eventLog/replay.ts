@@ -334,6 +334,8 @@ function foldEvent(
         mistake.lastWrongAnswer = event.submitted
         // 重新答错意味着之前的订正作废，错题重新开放。
         mistake.corrected = false
+        // 重新答错，之前“已移入总错题集”的标记作废，重新回到待订正。
+        draft.practiceProgress.fixed.delete(event.questionId)
       }
       return draft
     }
@@ -355,6 +357,10 @@ function foldEvent(
       const mistake = mistakeOf(draft, event.questionId)
       mistake.corrected = true
       pushUnique(mistake.correctedSimilarQuestionIds, event.similarQuestionId)
+      // 原题 + 相似题都做对：原题移入“总错题集”（已修复），并计入修复徽章进度。
+      // correction-done 由 useQuizSession 在原题曾答错、相似题答对后写入。
+      draft.practiceProgress.fixed.add(event.questionId)
+      draft.practiceProgress.stars += 1
       return draft
     }
     case 'session-completed': {

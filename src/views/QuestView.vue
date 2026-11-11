@@ -17,6 +17,7 @@ const props = defineProps<{
   /** 本组题目（必填，来自正式题库；见 `useQuizSession` 的说明）。 */
   questions: readonly Question[]
   similarQuestionPool?: readonly Question[]
+  fallbackPool?: readonly Question[]
   creatureId?: string
   zoneId?: string
   themeId?: ThemeId
@@ -34,6 +35,7 @@ const emit = defineEmits<{
 const session = useQuizSession({
   sessionId: props.sessionId, profileId: props.profileId, questions: props.questions,
   similarQuestionPool: props.similarQuestionPool,
+  fallbackPool: props.fallbackPool,
   creatureId: props.creatureId, zoneId: props.zoneId, themeId: props.themeId,
   store: props.store, clock: props.clock, idGenerator: props.idGenerator,
 })
