@@ -67,6 +67,31 @@ export function canRecognizeImage(): boolean {
 }
 
 /**
+ * 手机照片动辄 4000px，直接交给 OCR 会非常慢甚至看起来“没反应”。
+ * 先等比缩到最长边 1600px 的 JPEG；失败时回退原图，不阻断识别。
+ */
+async function prepareImage(file: Blob): Promise<Blob> {
+  if (typeof createImageBitmap !== 'function') return file
+  try {
+    const bitmap = await createImageBitmap(file)
+    const scale = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height))
+    const width = Math.max(1, Math.round(bitmap.width * scale))
+    const height = Math.max(1, Math.round(bitmap.height * scale))
+    const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
+    const context = canvas.getContext('2d')
+    if (context === null) { bitmap.close(); return file }
+    context.drawImage(bitmap, 0, 0, width, height)
+    bitmap.close()
+    const resized = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.9))
+    return resized ?? file
+  } catch {
+    return file
+  }
+}
+
+/**
  * 识别一张图片中的文字。
  *
  * @param file 家长选择的图片。
@@ -80,8 +105,10 @@ export async function recognizeMistakeImage(
   if (!canRecognizeImage()) throw new Error('当前环境不支持图片识别，请改用粘贴文本')
   onProgress({ status: '正在准备识别引擎…', progress: 0 })
   const worker = await getWorker(onProgress)
-  onProgress({ status: '正在识别图片…', progress: 0.1 })
-  const result = await worker.recognize(file)
+  onProgress({ status: '正在处理图片…', progress: 0.1 })
+  const prepared = await prepareImage(file)
+  onProgress({ status: '正在识别图片…', progress: 0.2 })
+  const result = await worker.recognize(prepared)
   onProgress({ status: '识别完成', progress: 1 })
   return cleanOcrText(result.data.text)
 }
