@@ -49,6 +49,9 @@ function practice(questionId: string): void {
         </ul>
         <p v-else class="mistake-book__next">再独立改对几道题，就能解锁修复徽章和图鉴装饰。</p>
       </section>
+      <p class="mistake-book__summary" data-testid="mistake-summary">
+        待订正 {{ items.length }} 道 · 总错题集 {{ fixedItems.length }} 道
+      </p>
       <MistakeFilter v-model="filter" />
       <p v-if="items.length === 0 && fixedItems.length === 0" data-testid="mistake-empty">
         这里还没有错题，继续探索时遇到的题目会收集在这里。
@@ -64,10 +67,13 @@ function practice(questionId: string): void {
         >打印错题</button>
         <MistakeList :entries="visibleItems" @practice="practice" />
       </template>
-      <section v-if="fixedItems.length > 0" class="mistake-book__fixed" data-testid="fixed-mistakes">
+      <section class="mistake-book__fixed" data-testid="fixed-mistakes">
         <h2>总错题集 · 已修复 {{ fixedItems.length }} 道</h2>
-        <p class="mistake-book__next">原题和相似题都做对后，题目会保留在这里作成长记录。</p>
-        <MistakeList :entries="fixedItems" readonly />
+        <p v-if="fixedItems.length === 0" class="mistake-book__next">
+          还没有已修复题目。原题订正正确、再做对一道相似题后，就会出现在这里。
+        </p>
+        <p v-else class="mistake-book__next">原题和相似题都做对后，题目会保留在这里作成长记录。</p>
+        <MistakeList v-if="fixedItems.length > 0" :entries="fixedItems" readonly />
       </section>
     </template>
     <BottomReturnButton @back="emit('back-home')" />
@@ -82,6 +88,7 @@ function practice(questionId: string): void {
 .mistake-book__reward { display: grid; gap: 6px; color: var(--ds-accent-text); font-weight: 600; }
 .mistake-book__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .mistake-book__chip { padding: 2px 10px; border: 1px solid var(--ds-accent-500); border-radius: 999px; font-size: var(--ds-font-size-caption); }
+.mistake-book__summary { margin: 0; color: var(--ds-text-secondary); font-weight: 600; }
 .mistake-book__fixed { display: grid; gap: 8px; margin-top: 1rem; }
 .mistake-book__fixed h2 { font-size: 1.05rem; }
 .mistake-book__next { color: var(--ds-text-secondary); font-weight: 400; font-size: var(--ds-font-size-caption); }
