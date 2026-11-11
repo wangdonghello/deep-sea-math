@@ -17,18 +17,20 @@ export interface OcrProgress {
   readonly progress: number
 }
 
-/** 语言：中文简体 + 英文/数字，覆盖小学数学题干。 */
-const LANGUAGES = 'chi_sim+eng'
+/** 语言：中文简体。数字与算式由中文模型一并识别，避免再下载英文包。 */
+const LANGUAGES = 'chi_sim'
 
 /**
- * 资源走公开 CDN；worker/core 不进入应用构建产物。
+ * 资源随应用一起发布，不再依赖 unpkg / tessdata 外网。
  *
- * 用 unpkg 而不是 jsdelivr：实测国内网络对 jsdelivr 可能直接 reset，
- * unpkg 与 tessdata 站点可访问。core 是独立 npm 包，版本要与 worker 对齐。
+ * 之前 worker、core 与 20MB 中文语言包都走 CDN，国内网络或校园网下经常
+ * 卡在“正在准备识别引擎…”没有任何反馈。现在放到 `public/tesseract` 与
+ * `public/tessdata`，首次识别只需从本站下载，失败原因也能明确显示。
  */
-const TESSERACT_VERSION = '7.0.0'
-const WORKER_BASE = `https://unpkg.com/tesseract.js@${TESSERACT_VERSION}/dist`
-const CORE_BASE = `https://unpkg.com/tesseract.js-core@${TESSERACT_VERSION}/`
+const ASSET_BASE = import.meta.env.BASE_URL
+const WORKER_BASE = `${ASSET_BASE}tesseract`
+const CORE_BASE = `${ASSET_BASE}tesseract/`
+const LANG_BASE = `${ASSET_BASE}tessdata/`
 
 type Worker = {
   recognize: (image: Blob | string) => Promise<{ data: { text: string } }>
@@ -44,7 +46,7 @@ async function getWorker(onProgress: (progress: OcrProgress) => void): Promise<W
     const worker = await createWorker(LANGUAGES, 1, {
       workerPath: `${WORKER_BASE}/worker.min.js`,
       corePath: CORE_BASE,
-      langPath: 'https://tessdata.projectnaptha.com/4.0.0',
+      langPath: LANG_BASE,
       logger: (message: { status?: string; progress?: number }) => {
         onProgress({ status: message.status ?? '识别中', progress: message.progress ?? 0 })
       },

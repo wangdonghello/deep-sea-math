@@ -38,6 +38,8 @@ const photoName = ref('')
 const photoUrl = ref('')
 const ocrStatus = ref('')
 const ocrError = ref('')
+const ocrBusy = ref(false)
+const ocrPercent = ref(0)
 
 const TYPE_OPTIONS: ReadonlyArray<{ id: QuizType; label: string }> = [
   { id: 'add-sub', label: '加减法' },
@@ -67,20 +69,37 @@ async function onPhoto(event: Event): Promise<void> {
   if (photoUrl.value !== '') URL.revokeObjectURL(photoUrl.value)
   photoUrl.value = URL.createObjectURL(file)
   ocrError.value = ''
-  ocrStatus.value = ''
+  ocrStatus.value = '已选择图片，正在准备识别引擎…'
+  ocrPercent.value = 0
+  ocrBusy.value = true
   try {
     const recognize = props.recognize ?? recognizeMistakeImage
-    const recognized = await recognize(file, (progress) => {
-      ocrStatus.value = `${progress.status}${progress.progress > 0 ? ` ${Math.round(progress.progress * 100)}%` : ''}`
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    const timeout = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => reject(new Error('识别超时：首次需要加载约 20MB 语言包，请检查网络后重试，或改用手动输入')), 120_000)
     })
-    // OCR 结果只覆盖文本框，让家长先校对再解析入库。
-    text.value = recognized
-    ocrStatus.value = '识别完成，请校对后再点“解析预览”'
-    parse()
+    try {
+      const recognized = await Promise.race([
+        recognize(file, (progress) => {
+          ocrPercent.value = Math.round(progress.progress * 100)
+          ocrStatus.value = `${progress.status}${progress.progress > 0 ? ` ${ocrPercent.value}%` : ''}`
+        }),
+        timeout,
+      ])
+      // OCR 结果只覆盖文本框，让家长先校对再解析入库。
+      text.value = recognized
+      if (recognized.trim() === '') throw new Error('没有识别到文字，请拍清楚一点，或改用手动输入')
+      ocrStatus.value = '识别完成，请校对后再点“解析预览”'
+      ocrPercent.value = 100
+      parse()
+    } finally {
+      if (timeoutId !== undefined) clearTimeout(timeoutId)
+    }
   } catch (error) {
     ocrError.value = error instanceof Error ? error.message : '识别失败，请改用手动输入'
     ocrStatus.value = ''
   } finally {
+    ocrBusy.value = false
     input.value = ''
   }
 }
@@ -181,9 +200,9 @@ defineExpose({ parse, save })
         上传 CSV
         <input type="file" accept=".csv,text/csv,text/plain" data-testid="mistake-import-file" @change="onFile">
       </label>
-      <label v-if="canRecognizeImage()" class="parent-button mistake-import__file">
-        拍照 / 选图片识别
-        <input type="file" accept="image/*" capture="environment" data-testid="mistake-import-photo" @change="onPhoto">
+      <label v-if="canRecognizeImage()" class="parent-button mistake-import__file" :class="{ 'is-busy': ocrBusy }">
+        {{ ocrBusy ? '识别中…' : '拍照 / 选图片识别' }}
+        <input type="file" accept="image/*" capture="environment" data-testid="mistake-import-photo" :disabled="ocrBusy" @change="onPhoto">
       </label>
       <button
         type="button"
@@ -195,11 +214,15 @@ defineExpose({ parse, save })
     </div>
 
     <p v-if="savedMessage" role="status" data-testid="mistake-import-message">{{ savedMessage }}</p>
+    <div v-if="ocrBusy || ocrStatus" class="mistake-import__ocr" role="status" data-testid="mistake-import-ocr-status">
+      <p>{{ ocrStatus }}</p>
+      <div class="mistake-import__ocr-bar" aria-hidden="true"><span :style="{ width: `${ocrPercent}%` }"></span></div>
+      <p v-if="ocrBusy" class="mistake-import__ocr-hint">首次识别需要加载约 20MB 中文语言包，请稍候。</p>
+    </div>
     <figure v-if="photoUrl !== ''" class="mistake-import__photo">
       <img :src="photoUrl" :alt="photoName" data-testid="mistake-import-photo-preview">
       <figcaption>{{ photoName }}</figcaption>
     </figure>
-    <p v-if="ocrStatus" role="status" data-testid="mistake-import-ocr-status">{{ ocrStatus }}</p>
     <p v-if="ocrError" role="alert" data-testid="mistake-import-ocr-error">{{ ocrError }}</p>
 
     <ul v-if="preview.length > 0" class="mistake-import__preview" data-testid="mistake-import-preview">
@@ -226,6 +249,12 @@ defineExpose({ parse, save })
 .mistake-import__preview, .mistake-import__issues { display: grid; gap: 4px; margin: 0; padding-left: 1.25rem; font-size: var(--ds-font-size-caption); }
 .mistake-import__preview li { display: flex; justify-content: space-between; gap: var(--ds-space-sm); }
 .mistake-import__issues { color: var(--ds-accent-text); }
+.mistake-import__ocr { display: grid; gap: 6px; padding: .7rem .8rem; border-radius: var(--ds-radius-md); background: rgb(255 255 255 / 7%); }
+.mistake-import__ocr p { margin: 0; font-size: var(--ds-font-size-caption); }
+.mistake-import__ocr-bar { height: 6px; overflow: hidden; border-radius: 999px; background: rgb(255 255 255 / 12%); }
+.mistake-import__ocr-bar span { display: block; height: 100%; border-radius: inherit; background: var(--ds-accent-500); transition: width .2s ease; }
+.mistake-import__ocr-hint { color: var(--ds-text-secondary); }
+.mistake-import__file.is-busy { opacity: .7; pointer-events: none; }
 .mistake-import__photo { margin: 0; display: grid; gap: 4px; }
 .mistake-import__photo img { max-width: 100%; max-height: 12rem; object-fit: contain; border-radius: var(--ds-radius-md); }
 .mistake-import__photo figcaption { color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); }
