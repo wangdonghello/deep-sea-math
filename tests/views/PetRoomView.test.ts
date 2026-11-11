@@ -38,6 +38,17 @@ describe('PetRoomView', () => {
     expect(view.get('[data-testid="pet-room"]').attributes('data-decor')).toBe('plain')
   })
 
+  it('新档案没有宠物时显示做题换盲盒券的引导，不显示蛋或互动按钮', async () => {
+    const view = mount(PetRoomView, { props: { profileId: 'p1', store: makeStore([]), clock: () => 10 } })
+    await flushPromises()
+    expect(view.find('[data-testid="pet-onboarding"]').exists()).toBe(true)
+    expect(view.find('[data-testid="pet-switcher"]').exists()).toBe(false)
+    expect(view.find('svg[data-stage]').exists()).toBe(false)
+    expect(view.find('[data-testid="feed-seaweed-cookie"]').exists()).toBe(false)
+    expect(view.get('[data-testid="blind-box-tickets"]').text()).toContain('0')
+    expect(view.get('[data-testid="pet-name"]').text()).toContain('还没有宠物')
+  })
+
   it('点喂食后食物数量减少、XP 增加', async () => {
     const view = mount(PetRoomView, { props: { profileId: 'p1', store: makeStore(), clock: () => 20 } })
     await flushPromises()

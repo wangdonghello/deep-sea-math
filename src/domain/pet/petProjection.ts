@@ -87,6 +87,12 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   // resolveLedger 自己会按 profileId 过滤，这里只负责按水位线裁剪。
   const ledger = resolveLedger(active, profileId)
   const scoped = active.filter((event) => event.profileId === profileId)
+  // 盲盒券按“完成过题组的天数”发，不受领养水位线影响：新档案先做题、后领养，
+  // 第一张券不能因为还没有宠物就消失。历史完成也会计入，作为老档案的迁移补偿。
+  const ticketDays = new Set<string>()
+  for (const event of sorted) {
+    if (event.profileId === profileId && event.type === 'session-completed') ticketDays.add(dayKey(event.occurredAt))
+  }
   let adopted = false
   let hatched = false
   let petId: string | null = null
@@ -222,7 +228,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     points: ledger.balance,
     inventory,
     owned: [...owned].sort(),
-    tickets: Math.max(0, completedDays.size - openedBoxes),
+    tickets: Math.max(0, ticketDays.size - openedBoxes),
     ownedAnimals: [...ownedAnimals].sort(),
     mainPetId,
     pets,

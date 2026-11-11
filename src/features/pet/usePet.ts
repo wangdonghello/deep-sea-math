@@ -150,16 +150,8 @@ export function usePet(options: {
       // 加载期间切换了档案：这份结果已经没有归属，丢弃。
       if (toValue(options.profileId) !== profileId) return
       events.value = loaded
-      if (!loaded.some((event) => event.profileId === profileId && event.type === 'pet-adopted')) {
-        await enqueue(async () => {
-          if (toValue(options.profileId) !== profileId) return
-          await append([{
-            eventId: `adopt-${profileId}`, profileId, occurredAt: clock(),
-            type: 'pet-adopted', petId: 'baby-whale', name: options.name ?? '小蓝',
-          }], profileId)
-        })
-        if (toValue(options.profileId) !== profileId) return
-      }
+      // 新档案不再自动领养：孩子先完成题组拿盲盒券，再由盲盒开出第一只宠物。
+      // 只有已经领养过的老档案才继续走“历史完成 -> 孵化”的迁移逻辑。
       const adoption = events.value.find((event) => event.profileId === profileId && event.type === 'pet-adopted')
       const adoptedAt = adoption?.occurredAt ?? clock()
       const hatched = events.value.some((event) => event.profileId === profileId && event.type === 'pet-hatched')
@@ -172,7 +164,7 @@ export function usePet(options: {
       const hasHistoricalCompletion = events.value.some(
         (event) => event.profileId === profileId && event.type === 'session-completed',
       )
-      if (!hatched && (learnedSinceAdoption || hasHistoricalCompletion)) {
+      if (adoption !== undefined && !hatched && (learnedSinceAdoption || hasHistoricalCompletion)) {
         await enqueue(async () => {
           if (toValue(options.profileId) !== profileId) return
           await append([{
@@ -297,15 +289,25 @@ export function usePet(options: {
     if (profileId === null) throw new Error('没有选择档案')
     return enqueue(async () => {
       const current = snapshot(profileId)
-      if (!current.adopted) throw new Error('还没有宠物')
       if (current.tickets <= 0) throw new Error('还没有盲盒券，先完成今天的题组吧')
       if (current.ownedAnimals.length >= ANIMAL_REWARDS.length) throw new Error('伙伴已经集齐了，把券留给新伙伴吧')
       const draw = drawBlindBox(options.random ?? Math.random, current.ownedAnimals)
-      await append([{
+      const now = clock()
+      const incoming: DomainEvent[] = [{
         ...base(profileId), eventId: randomUuid(), type: 'blind-box-opened',
         rewardId: draw.reward.id, rewardKind: draw.reward.kind,
         ...(draw.convertedFrom === undefined ? {} : { convertedFrom: draw.convertedFrom }),
-      }], profileId)
+      }]
+      // 第一次开盒：抽到的动物蛋同时成为第一只宠物，直接破壳并设为主宠物。
+      // 这样新档案不需要“先领养一只鲸鱼”这一层，也不会出现空宠物页。
+      if (!current.adopted && draw.reward.kind === 'animal') {
+        incoming.push(
+          { ...base(profileId), eventId: `adopt-${profileId}`, occurredAt: now, type: 'pet-adopted', petId: draw.reward.id, name: draw.reward.name },
+          { ...base(profileId), eventId: `hatch-${profileId}`, occurredAt: now, type: 'pet-hatched', petId: draw.reward.id },
+          { ...base(profileId), eventId: randomUuid(), occurredAt: now, type: 'main-pet-set', petId: draw.reward.id },
+        )
+      }
+      await append(incoming, profileId)
       return draw
     })
   }

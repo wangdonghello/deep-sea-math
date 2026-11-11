@@ -52,12 +52,13 @@ function deferred() {
 }
 
 describe('usePet', () => {
-  it('首次加载自动补 pet-adopted 事件', async () => {
+  it('新档案首次加载不自动送宠物', async () => {
     const store = memoryStore()
     const pet = usePet({ store, profileId: 'p1', clock: () => 10, name: '小蓝' })
     await pet.load()
-    expect(store.events.some((event) => event.type === 'pet-adopted')).toBe(true)
-    expect(pet.state.value.name).toBe('小蓝')
+    expect(store.events.some((event) => event.type === 'pet-adopted')).toBe(false)
+    expect(pet.state.value.adopted).toBe(false)
+    expect(pet.state.value.pets['baby-whale']).toBeUndefined()
   })
 
   it('余额不足时购买抛错且不落事件', async () => {
@@ -70,13 +71,11 @@ describe('usePet', () => {
     expect(store.events.some((event) => event.type === 'item-purchased')).toBe(false)
   })
 
-  it('并发加载只补一条领养事件', async () => {
-    // watch immediate 已经触发一次加载；再并发等两次 load，既不能重复补领养，
-    // 也不能各写一条同 id 的 pet-adopted。
+  it('并发加载不会补领养事件', async () => {
     const store = memoryStore()
     const pet = usePet({ store, profileId: 'p1', clock: () => 10 })
     await Promise.all([pet.load(), pet.load()])
-    expect(store.events.filter((event) => event.type === 'pet-adopted')).toHaveLength(1)
+    expect(store.events.filter((event) => event.type === 'pet-adopted')).toHaveLength(0)
   })
 
   it('同一毫秒内的多次抚摸使用不同事件 id', async () => {
@@ -296,6 +295,22 @@ describe('盲盒', () => {
     expect(second.reward.id).toBe('companion-dog')
     expect(pet.state.value.ownedAnimals).toEqual(['companion-cat', 'companion-dog'])
     expect(pet.state.value.tickets).toBe(0)
+  })
+
+  it('新档案第一张券开盒时领养、孵化并设为主宠物', async () => {
+    const store = memoryStore([
+      { eventId: 's1', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 'a', rewards: [] },
+    ])
+    const pet = usePet({ store, profileId: 'p1', clock: () => 3, random: () => 0.1 })
+    await pet.load()
+    expect(pet.state.value.adopted).toBe(false)
+    expect(pet.state.value.tickets).toBe(1)
+    const draw = await pet.openBlindBox()
+    expect(draw.reward.id).toBe('companion-cat')
+    expect(pet.state.value.adopted).toBe(true)
+    expect(pet.state.value.pets['companion-cat']?.hatched).toBe(true)
+    expect(pet.state.value.mainPetId).toBe('companion-cat')
+    expect(store.events.filter((event) => event.type === 'pet-adopted')).toHaveLength(1)
   })
 
   it('没有券时拒绝开盒', async () => {

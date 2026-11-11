@@ -105,12 +105,21 @@ const levelPercent = computed(() => {
 const activeHatched = computed(() => activeProgress.value.hatched)
 const isWhale = computed(() => activePetId.value === 'baby-whale')
 const activeCompanionId = computed<CompanionId>(() => (activeAnimal.value?.id ?? 'companion-dog') as CompanionId)
-const activePetName = computed(() => activeAnimal.value?.name ?? (state.value.name.trim() === '' ? '小海宠' : state.value.name))
-const petOptions = computed(() => [
-  { id: 'baby-whale', name: state.value.name.trim() === '' ? '小海宠' : state.value.name, emoji: '🐋' },
-  ...ANIMAL_REWARDS.filter((animal) => state.value.ownedAnimals.includes(animal.id))
-    .map((animal) => ({ id: animal.id, name: animal.name, emoji: animal.emoji })),
-])
+const activePetName = computed(() => {
+  if (!state.value.adopted) return '还没有宠物'
+  return activeAnimal.value?.name ?? (state.value.name.trim() === '' ? '小海宠' : state.value.name)
+})
+const petOptions = computed(() => {
+  if (!state.value.adopted) return []
+  const whale = state.value.pets['baby-whale'] === undefined
+    ? []
+    : [{ id: 'baby-whale', name: state.value.name.trim() === '' ? '小海宠' : state.value.name, emoji: '🐋' }]
+  return [
+    ...whale,
+    ...ANIMAL_REWARDS.filter((animal) => state.value.ownedAnimals.includes(animal.id))
+      .map((animal) => ({ id: animal.id, name: animal.name, emoji: animal.emoji })),
+  ]
+})
 const isMainPet = computed(() => activePetId.value === state.value.mainPetId)
 async function onSetMainPet(): Promise<void> {
   try { await setMainPet(activePetId.value) } catch (err) {
@@ -445,7 +454,7 @@ onBeforeUnmount(() => {
             <button type="button" class="pet-room__switch-profile" data-testid="switch-profile" @click="emit('back-home')">切换档案</button>
           </div>
           <div class="pet-room__wallet">
-            <span class="pet-room__pill pet-room__pill--level">Lv.{{ activeLevel }}</span>
+            <span v-if="state.adopted" class="pet-room__pill pet-room__pill--level">Lv.{{ activeLevel }}</span>
             <span class="pet-room__pill pet-room__pill--points" data-testid="pet-points">
               <span class="pet-room__pill-icon" aria-hidden="true">🐚</span>
               积分 {{ state.points }}
@@ -453,7 +462,7 @@ onBeforeUnmount(() => {
           </div>
         </header>
 
-        <div class="pet-room__pets" data-testid="pet-switcher" aria-label="切换宠物">
+        <div v-if="state.adopted" class="pet-room__pets" data-testid="pet-switcher" aria-label="切换宠物">
           <button v-for="option in petOptions" :key="option.id" type="button"
             class="pet-room__pet-chip" :class="{ 'is-active': option.id === activePetId }"
             :data-testid="`pet-option-${option.id}`" @click="activePetId = option.id">
@@ -512,7 +521,7 @@ onBeforeUnmount(() => {
           </div>
         </section>
 
-        <section class="pet-room__stage" aria-label="宠物房间">
+        <section v-if="state.adopted" class="pet-room__stage" aria-label="宠物房间">
           <div class="pet-room__pet">
             <PetAvatar v-if="isWhale" :stage="avatarStage" :mood="state.mood" @tap="onPetTap" />
             <CompanionAvatar v-else :animal-id="activeCompanionId" :level="activeLevel" :mood="state.mood" :action="avatarAction" :action-nonce="avatarNonce" @tap="onPetTap" />
@@ -525,6 +534,19 @@ onBeforeUnmount(() => {
             <span aria-hidden="true">🥚</span>
             完成一组题后孵化
           </p>
+        </section>
+
+        <section v-else class="pet-room__onboarding" data-testid="pet-onboarding">
+          <div class="pet-room__onboarding-egg" aria-hidden="true">🥚</div>
+          <h2>先做今天的题，换一张盲盒券</h2>
+          <p>完成今天的题组就能得到 1 张盲盒券。打开盲盒，才会得到属于你的宠物蛋。</p>
+          <button type="button" class="pet-room__onboarding-quest" data-testid="onboarding-start-quest" @click="emit('start-quest')">
+            去完成今日题组
+          </button>
+          <button v-if="state.tickets > 0" type="button" class="pet-room__onboarding-open" data-testid="onboarding-open-box" @click="onOpenBox">
+            用 {{ state.tickets }} 张券开盲盒
+          </button>
+          <p class="pet-room__onboarding-note">做完题后回到这里，盲盒就在页面下方。</p>
         </section>
 
         <p v-if="reaction !== ''" class="pet-room__reaction" data-testid="pet-reaction">{{ reaction }}</p>
@@ -614,7 +636,7 @@ onBeforeUnmount(() => {
             </div>
           </template>
 
-          <p v-else-if="!state.adopted" class="pet-room__empty">先领养一只小海宠吧。</p>
+          <p v-else-if="!state.adopted" class="pet-room__empty">完成今日题组拿到盲盒券，开出第一只宠物后就能喂食、抚摸和玩耍。</p>
           <p v-else class="pet-room__empty">孵化后就能喂食、抚摸和玩耍啦。</p>
 
           <button
@@ -667,7 +689,7 @@ onBeforeUnmount(() => {
             </template>
             <template v-else-if="boxResult">
               <h2>{{ boxResult.name }}蛋</h2>
-              <p class="pet-room__box-note">孵化后成为新伙伴！</p>
+              <p class="pet-room__box-note">收下它，它就是你的新伙伴！</p>
               <button type="button" class="pet-room__box-close" data-testid="blind-box-close" @click="closeBox">收下</button>
             </template>
           </div>
@@ -1477,6 +1499,15 @@ onBeforeUnmount(() => {
 @media (prefers-reduced-motion: reduce) {
   .pet-room__reaction { animation: none; }
 }
+
+.pet-room__onboarding { display: grid; justify-items: center; gap: .65rem; margin: 1rem 0; padding: 1.4rem 1rem; border: 1px dashed rgb(126 220 255 / 35%); border-radius: 1.2rem; background: rgb(8 35 58 / 55%); text-align: center; }
+.pet-room__onboarding-egg { font-size: 3.2rem; line-height: 1; filter: drop-shadow(0 8px 14px rgb(0 0 0 / 35%)); }
+.pet-room__onboarding h2 { margin: 0; font-size: 1.1rem; }
+.pet-room__onboarding p { margin: 0; max-width: 28rem; color: var(--ds-text-secondary); line-height: 1.6; }
+.pet-room__onboarding-quest, .pet-room__onboarding-open { min-height: 2.75rem; padding: .6rem 1.2rem; border: 0; border-radius: 999px; font-weight: 700; }
+.pet-room__onboarding-quest { background: #2b7a9b; color: white; }
+.pet-room__onboarding-open { background: #ffd479; color: #3a2412; }
+.pet-room__onboarding-note { font-size: var(--ds-font-size-caption); }
 
 .pet-room__blindbox {
   display: grid;
