@@ -14,10 +14,10 @@ const DIRS: Record<CompanionId, string> = {
   'companion-hamster': 'hamster',
   'companion-lion': 'lion',
   'companion-tiger': 'tiger',
-  'companion-dragon': 'dragon',
-  'companion-yinglong': 'dragon',
-  'companion-zhulong': 'dragon',
-  'companion-qinglong': 'dragon',
+  'companion-dragon': 'donghai',
+  'companion-yinglong': 'yinglong',
+  'companion-zhulong': 'zhulong',
+  'companion-qinglong': 'qinglong',
 }
 
 function frame(): Promise<void> {
