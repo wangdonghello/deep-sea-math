@@ -154,6 +154,12 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
         inventory[event.rewardId] = (inventory[event.rewardId] ?? 0) + 1
       } else if (event.rewardKind === 'xp') {
         addPetXp(mainPetId, 25)
+      } else if (event.rewardKind === 'toy') {
+        if (!owned.has(event.rewardId)) {
+          owned.add(event.rewardId)
+          addPetXp(mainPetId, 10)
+          mood = Math.min(100, mood + 15)
+        }
       } else if (event.rewardKind === 'animal') {
         ownedAnimals.add(event.rewardId)
         // 新动物从 Lv1 开始（40 XP），并且可以直接互动。

@@ -23,7 +23,7 @@
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import { ANIMAL_REWARDS, type BlindBoxReward } from '@/data/content/blindBox'
+import { ANIMAL_REWARDS, BLIND_BOX_REWARDS, type BlindBoxReward } from '@/data/content/blindBox'
 import { FOOD_ITEMS, TOY_ITEMS } from '@/data/content/petCatalog'
 import type { PetItem } from '@/data/content/petCatalog'
 import { decayedHunger, levelFromXp, levelProgress, stageFromLevel } from '@/domain/pet/growth'
@@ -89,7 +89,6 @@ const boxRolling = ref(false)
 const boxResult = ref<BlindBoxReward | null>(null)
 const boxConverted = ref('')
 const ownedAnimalIds = computed(() => state.value.ownedAnimals)
-const allAnimalsOwned = computed(() => ownedAnimalIds.value.length >= ANIMAL_REWARDS.length)
 const activePetId = ref('baby-whale')
 watch(() => state.value.mainPetId, (id) => { activePetId.value = id }, { immediate: true })
 const activeAnimal = computed(() => ANIMAL_REWARDS.find((animal) => animal.id === activePetId.value))
@@ -672,9 +671,19 @@ onBeforeUnmount(() => {
               <small>{{ ownedAnimalIds.includes(animal.id) ? animal.name : '???' }}</small>
             </span>
           </div>
+          <details class="pet-room__odds">
+            <summary>查看概率</summary>
+            <ul>
+              <li v-for="reward in BLIND_BOX_REWARDS" :key="reward.id">
+                <span>{{ reward.emoji }} {{ reward.name }}</span>
+                <span>{{ reward.weight }}%</span>
+              </li>
+            </ul>
+            <p>第一次开盒必出宠物；动物不会重复，食物、玩具、经验可重复获得。</p>
+          </details>
           <button type="button" class="pet-room__blindbox-open" data-testid="open-blind-box"
-            :disabled="state.tickets <= 0 || boxRolling || allAnimalsOwned" @click="onOpenBox">
-            {{ allAnimalsOwned ? '伙伴已集齐，等新伙伴' : state.tickets > 0 ? '开一个盲盒' : '完成今日题组得券' }}
+            :disabled="state.tickets <= 0 || boxRolling" @click="onOpenBox">
+            {{ state.tickets > 0 ? '开一个盲盒' : '完成今日题组得券' }}
           </button>
         </section>
 
@@ -683,13 +692,16 @@ onBeforeUnmount(() => {
           <div class="pet-room__box-card"
             :class="{ 'is-rolling': boxRolling, 'is-revealed': !boxRolling && boxResult !== null, 'is-dragon': boxResult?.id === 'companion-dragon' }">
             <span v-for="spark in 6" :key="spark" class="pet-room__box-spark" :class="`pet-room__box-spark--${spark}`" aria-hidden="true">✦</span>
-            <div class="pet-room__box-art" aria-hidden="true">{{ boxRolling ? '🎁' : (boxResult ? '🥚' : '🎁') }}</div>
+            <div class="pet-room__box-art" aria-hidden="true">{{ boxRolling ? '🎁' : (boxResult?.emoji ?? '🎁') }}</div>
             <template v-if="boxRolling">
               <p>盒子在晃动…</p>
             </template>
             <template v-else-if="boxResult">
-              <h2>{{ boxResult.name }}蛋</h2>
-              <p class="pet-room__box-note">收下它，它就是你的新伙伴！</p>
+              <h2>{{ boxResult.kind === 'animal' ? `${boxResult.name}蛋` : boxResult.name }}</h2>
+              <p v-if="boxResult.kind === 'animal'" class="pet-room__box-note">收下它，它就是你的新伙伴！</p>
+              <p v-else-if="boxResult.kind === 'snack'" class="pet-room__box-note">食物已放进背包，去喂宠物吧。</p>
+              <p v-else-if="boxResult.kind === 'toy'" class="pet-room__box-note">玩具已放进玩具箱，可以陪它玩啦。</p>
+              <p v-else class="pet-room__box-note">经验已加到宠物身上。</p>
               <button type="button" class="pet-room__box-close" data-testid="blind-box-close" @click="closeBox">收下</button>
             </template>
           </div>
@@ -1524,6 +1536,10 @@ onBeforeUnmount(() => {
 .pet-room__collection-item.is-owned { opacity: 1; }
 .pet-room__collection-item span { font-size: 1.5rem; }
 .pet-room__collection-item small { color: var(--ds-text-secondary); font-size: .65rem; }
+.pet-room__odds { font-size: var(--ds-font-size-caption); color: var(--ds-text-secondary); }
+.pet-room__odds summary { cursor: pointer; }
+.pet-room__odds ul { display: grid; gap: 2px; margin: 6px 0; padding: 0; list-style: none; }
+.pet-room__odds li { display: flex; justify-content: space-between; gap: 1rem; }
 .pet-room__blindbox-open {
   min-height: 2.75rem;
   border: 1px solid rgb(255 212 121 / 45%);

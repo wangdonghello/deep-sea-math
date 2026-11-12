@@ -3,25 +3,32 @@ import { describe, expect, it } from 'vitest'
 import { ANIMAL_REWARDS, BLIND_BOX_REWARDS, drawBlindBox } from '@/data/content/blindBox'
 
 describe('blind box catalog', () => {
-  it('只出宠物蛋，权重合计 100 且从高到低', () => {
-    expect(BLIND_BOX_REWARDS.every((reward) => reward.kind === 'animal')).toBe(true)
+  it('奖励按概率从大到小排列，权重合计 100', () => {
     expect(BLIND_BOX_REWARDS.reduce((sum, reward) => sum + reward.weight, 0)).toBe(100)
     const weights = BLIND_BOX_REWARDS.map((reward) => reward.weight)
     expect([...weights].sort((a, b) => b - a)).toEqual(weights)
+    expect(BLIND_BOX_REWARDS.slice(0, 3).map((reward) => reward.kind)).toEqual(['xp', 'snack', 'toy'])
   })
 
-  it('动物共 6 种，龙权重最低', () => {
-    expect(ANIMAL_REWARDS).toHaveLength(6)
-    expect(ANIMAL_REWARDS.at(-1)?.name).toBe('龙')
+  it('九种动物，神龙在最末且概率最低', () => {
+    expect(ANIMAL_REWARDS).toHaveLength(9)
+    expect(ANIMAL_REWARDS.slice(-4).map((reward) => reward.name)).toEqual(['东海龙王', '应龙', '烛龙', '青龙'])
   })
 
-  it('按随机值命中对应蛋', () => {
-    expect(drawBlindBox(() => 0.0, []).reward.id).toBe('companion-cat')
-    expect(drawBlindBox(() => 0.999, []).reward.name).toBe('龙')
+  it('第一次开盒只抽动物，保证新档案先拿到宠物', () => {
+    const draw = drawBlindBox(() => 0.1, [], true)
+    expect(draw.reward.kind).toBe('animal')
   })
 
-  it('已拥有的动物不进入抽取池，集齐后拒绝', () => {
-    expect(drawBlindBox(() => 0.0, ['companion-cat']).reward.id).toBe('companion-dog')
-    expect(() => drawBlindBox(() => 0.5, ANIMAL_REWARDS.map((reward) => reward.id))).toThrow('伙伴已经集齐')
+  it('后续可以抽到经验、食物、玩具，动物不重复', () => {
+    expect(drawBlindBox(() => 0.0, []).reward.kind).toBe('xp')
+    expect(drawBlindBox(() => 0.3, []).reward.kind).toBe('snack')
+    expect(drawBlindBox(() => 0.45, []).reward.kind).toBe('toy')
+    expect(drawBlindBox(() => 0.6, []).reward.id).toBe('companion-dog')
+    expect(drawBlindBox(() => 0.7, []).reward.id).toBe('companion-cat')
+
+    const owned = ANIMAL_REWARDS.map((reward) => reward.id)
+    const draw = drawBlindBox(() => 0.5, owned)
+    expect(draw.reward.kind).not.toBe('animal')
   })
 })

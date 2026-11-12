@@ -7,7 +7,9 @@
  */
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
-export type CompanionId = 'companion-cat' | 'companion-dog' | 'companion-hamster' | 'companion-lion' | 'companion-tiger' | 'companion-dragon'
+export type CompanionId =
+  | 'companion-cat' | 'companion-dog' | 'companion-hamster' | 'companion-lion' | 'companion-tiger'
+  | 'companion-dragon' | 'companion-yinglong' | 'companion-zhulong' | 'companion-qinglong'
 export type CompanionAnimation = 'eat' | 'pet' | 'play'
 
 interface CompanionLook {
@@ -21,7 +23,11 @@ const LOOKS: Record<CompanionId, CompanionLook> = {
   'companion-hamster': { name: '仓鼠', dir: 'hamster' },
   'companion-lion': { name: '狮子', dir: 'lion' },
   'companion-tiger': { name: '老虎', dir: 'tiger' },
-  'companion-dragon': { name: '龙', dir: 'dragon' },
+  'companion-dragon': { name: '东海龙王', dir: 'dragon' },
+  // 三神龙的形象等用户提供后替换；先用东海龙王图占位，避免抽到空头像。
+  'companion-yinglong': { name: '应龙', dir: 'dragon' },
+  'companion-zhulong': { name: '烛龙', dir: 'dragon' },
+  'companion-qinglong': { name: '青龙', dir: 'dragon' },
 }
 
 const props = defineProps<{

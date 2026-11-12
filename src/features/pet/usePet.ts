@@ -17,7 +17,7 @@
 
 import { computed, ref, toValue, watch, type MaybeRefOrGetter } from 'vue'
 
-import { ANIMAL_REWARDS, drawBlindBox, type BlindBoxDraw } from '@/data/content/blindBox'
+import { drawBlindBox, type BlindBoxDraw } from '@/data/content/blindBox'
 import { petItemById } from '@/data/content/petCatalog'
 import { randomUuid } from '@/domain/crypto/randomUuid'
 import {
@@ -290,8 +290,7 @@ export function usePet(options: {
     return enqueue(async () => {
       const current = snapshot(profileId)
       if (current.tickets <= 0) throw new Error('还没有盲盒券，先完成今天的题组吧')
-      if (current.ownedAnimals.length >= ANIMAL_REWARDS.length) throw new Error('伙伴已经集齐了，把券留给新伙伴吧')
-      const draw = drawBlindBox(options.random ?? Math.random, current.ownedAnimals)
+      const draw = drawBlindBox(options.random ?? Math.random, current.ownedAnimals, !current.adopted)
       const now = clock()
       const incoming: DomainEvent[] = [{
         ...base(profileId), eventId: randomUuid(), type: 'blind-box-opened',

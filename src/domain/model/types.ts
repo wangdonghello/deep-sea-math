@@ -602,7 +602,7 @@ export interface BlindBoxOpenedEvent extends EventBase {
   /** 实际获得的奖励 id（动物重复时已由命令层换成零食）。 */
   rewardId: string
   /** 奖励类别，避免重放时反查目录。 */
-  rewardKind: 'snack' | 'xp' | 'animal'
+  rewardKind: 'snack' | 'xp' | 'toy' | 'animal'
   /** 动物重复时记录原动物，供 UI 说明“已拥有 → 零食”。 */
   convertedFrom?: string
 }

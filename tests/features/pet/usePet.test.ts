@@ -275,25 +275,26 @@ describe('usePet', () => {
 
 describe('盲盒', () => {
   const day = 86_400_000
-  it('完成两天得两张券；只出不同的宠物蛋', async () => {
+  it('完成两天得两张券；可以抽到经验、食物、玩具', async () => {
+    let roll = 0
     const store = memoryStore([
       { ...adoption, occurredAt: 1 },
       { eventId: 's1', profileId: 'p1', occurredAt: 2, type: 'session-completed', sessionId: 'a', rewards: [] },
       { eventId: 's2', profileId: 'p1', occurredAt: day + 2, type: 'session-completed', sessionId: 'b', rewards: [] },
     ])
-    const pet = usePet({ store, profileId: 'p1', clock: () => day * 2, random: () => 0.1 })
+    const pet = usePet({ store, profileId: 'p1', clock: () => day * 2, random: () => roll })
     await pet.load()
     expect(pet.state.value.tickets).toBe(2)
 
+    roll = 0
     const first = await pet.openBlindBox()
-    expect(first.reward.id).toBe('companion-cat')
-    expect(first.reward.kind).toBe('animal')
-    expect(pet.state.value.ownedAnimals).toContain('companion-cat')
+    expect(first.reward.kind).toBe('xp')
     expect(pet.state.value.tickets).toBe(1)
 
+    roll = 0.3
     const second = await pet.openBlindBox()
-    expect(second.reward.id).toBe('companion-dog')
-    expect(pet.state.value.ownedAnimals).toEqual(['companion-cat', 'companion-dog'])
+    expect(second.reward.kind).toBe('snack')
+    expect(pet.state.value.inventory['krill-pudding']).toBe(1)
     expect(pet.state.value.tickets).toBe(0)
   })
 
@@ -306,10 +307,10 @@ describe('盲盒', () => {
     expect(pet.state.value.adopted).toBe(false)
     expect(pet.state.value.tickets).toBe(1)
     const draw = await pet.openBlindBox()
-    expect(draw.reward.id).toBe('companion-cat')
+    expect(draw.reward.id).toBe('companion-dog')
     expect(pet.state.value.adopted).toBe(true)
-    expect(pet.state.value.pets['companion-cat']?.hatched).toBe(true)
-    expect(pet.state.value.mainPetId).toBe('companion-cat')
+    expect(pet.state.value.pets['companion-dog']?.hatched).toBe(true)
+    expect(pet.state.value.mainPetId).toBe('companion-dog')
     expect(store.events.filter((event) => event.type === 'pet-adopted')).toHaveLength(1)
   })
 
@@ -320,16 +321,17 @@ describe('盲盒', () => {
     await expect(pet.openBlindBox()).rejects.toThrow('还没有盲盒券')
   })
 
-  it('集齐全部伙伴后拒绝开盒', async () => {
-    const ids = ['companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger', 'companion-dragon']
+  it('集齐全部伙伴后仍能抽到食物、玩具或经验', async () => {
+    const ids = ['companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger', 'companion-dragon', 'companion-yinglong', 'companion-zhulong', 'companion-qinglong']
     const store = memoryStore([
       { ...adoption, occurredAt: 1 },
       ...ids.map((id, i) => ({ eventId: `b${i}`, profileId: 'p1', occurredAt: 2, type: 'blind-box-opened' as const, rewardId: id, rewardKind: 'animal' as const })),
-      ...Array.from({ length: 7 }, (_, i) => ({ eventId: `s${i}`, profileId: 'p1', occurredAt: (i + 1) * day, type: 'session-completed' as const, sessionId: `s${i}`, rewards: [] })),
+      ...Array.from({ length: 12 }, (_, i) => ({ eventId: `s${i}`, profileId: 'p1', occurredAt: (i + 1) * day, type: 'session-completed' as const, sessionId: `s${i}`, rewards: [] })),
     ])
-    const pet = usePet({ store, profileId: 'p1', clock: () => 8 * day })
+    const pet = usePet({ store, profileId: 'p1', clock: () => 13 * day, random: () => 0.5 })
     await pet.load()
-    await expect(pet.openBlindBox()).rejects.toThrow('伙伴已经集齐')
+    const draw = await pet.openBlindBox()
+    expect(draw.reward.kind).not.toBe('animal')
   })
 })
 

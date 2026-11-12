@@ -4,7 +4,10 @@ import { nextTick } from 'vue'
 
 import CompanionAvatar, { type CompanionId } from '@/features/pet/CompanionAvatar.vue'
 
-const IDS: CompanionId[] = ['companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger', 'companion-dragon']
+const IDS: CompanionId[] = [
+  'companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger',
+  'companion-dragon', 'companion-yinglong', 'companion-zhulong', 'companion-qinglong',
+]
 const DIRS: Record<CompanionId, string> = {
   'companion-cat': 'cat',
   'companion-dog': 'dog',
@@ -12,6 +15,9 @@ const DIRS: Record<CompanionId, string> = {
   'companion-lion': 'lion',
   'companion-tiger': 'tiger',
   'companion-dragon': 'dragon',
+  'companion-yinglong': 'dragon',
+  'companion-zhulong': 'dragon',
+  'companion-qinglong': 'dragon',
 }
 
 function frame(): Promise<void> {
