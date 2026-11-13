@@ -20,6 +20,7 @@ import { computed, ref, toValue, watch, type MaybeRefOrGetter } from 'vue'
 import { drawBlindBox, type BlindBoxDraw } from '@/data/content/blindBox'
 import { petItemById } from '@/data/content/petCatalog'
 import { randomUuid } from '@/domain/crypto/randomUuid'
+import { trackPetAdopted } from '@/shared/analytics'
 import {
   MAX_PET_PER_DAY,
   MAX_PLAY_PER_DAY,
@@ -307,6 +308,7 @@ export function usePet(options: {
         )
       }
       await append(incoming, profileId)
+      if (!current.adopted && draw.reward.kind === 'animal') trackPetAdopted(draw.reward.id)
       return draw
     })
   }

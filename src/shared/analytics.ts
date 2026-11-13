@@ -64,6 +64,13 @@ export function trackProfileCreated(grade: number, themeId: string): void {
   trackAnonymous(`profile-created-g${grade}-${themeId}`)
 }
 
+/** 领养/孵化宠物：只按动物种类聚合，不含档案或昵称。 */
+export function trackPetAdopted(animalId: string): void {
+  const safe = animalId.replace(/[^a-z0-9-]/gi, '-').toLowerCase()
+  trackAnonymous('pet-adopted-total')
+  trackAnonymous(`pet-adopted-${safe}`)
+}
+
 /** 完成题组：只按年级 + 主题聚合。 */
 export function trackSessionCompleted(grade: number | undefined, themeId: string | undefined): void {
   trackAnonymous(`session-completed-g${grade ?? 'unknown'}-${themeId ?? 'unknown'}`)
