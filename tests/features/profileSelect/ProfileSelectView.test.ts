@@ -74,6 +74,22 @@ async function mountView(options: {
 }
 
 describe('views: ProfileSelectView', () => {
+  it('打开系统介绍与操作说明，关闭后回到选档案', async () => {
+    const clock = new ManualClock()
+    const store: ProfileStore = {
+      async list() { return profiles },
+      async verify() { return false },
+    }
+    const view = await mountView({ store, clock })
+    expect(view.find('[data-testid="profile-help"]').exists()).toBe(false)
+    await view.get('[data-testid="profile-help-open"]').trigger('click')
+    expect(view.find('[data-testid="profile-help"]').text()).toContain('欢迎来到深海数学探险')
+    expect(view.find('[data-testid="profile-help"]').text()).toContain('第一次开盒必得宠物')
+    expect(view.find('[data-testid="profile-help"]').text()).toContain('原题订正正确')
+    await view.get('[data-testid="profile-help-ok"]').trigger('click')
+    expect(view.find('[data-testid="profile-help"]').exists()).toBe(false)
+  })
+
   it('渲染档案列表，选中档案后出现该档案的 PIN 盘', async () => {
     const clock = new ManualClock()
     const store: ProfileStore = {

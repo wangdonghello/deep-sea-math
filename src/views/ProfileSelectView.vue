@@ -15,7 +15,7 @@
  *
  * 路由挂载由 Task 17 负责（`/` 重定向到本页），此处不注册路由。
  */
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import ProfileCard from '@/features/profileSelect/ProfileCard.vue'
 import PinPad from '@/features/profileSelect/PinPad.vue'
@@ -27,6 +27,8 @@ const props = defineProps<{
   clock?: Clock
   navigate?: (path: string) => void
 }>()
+
+const helpOpen = ref(false)
 
 const select = useProfileSelect({
   store: props.store,
@@ -45,7 +47,31 @@ onMounted(async () => {
     <header class="profile-select__header">
       <h1 class="profile-select__title">选择你的档案</h1>
       <p class="profile-select__subtitle">点头像，再输入你的密码</p>
+      <button type="button" class="profile-select__help-button" data-testid="profile-help-open" @click="helpOpen = true">
+        🧭 系统介绍 / 怎么玩
+      </button>
     </header>
+
+    <section v-if="helpOpen" class="profile-select__help" data-testid="profile-help" role="dialog" aria-modal="true" aria-labelledby="profile-help-title" @click.self="helpOpen = false">
+      <div class="profile-select__help-card">
+        <header class="profile-select__help-head">
+          <h2 id="profile-help-title">欢迎来到深海数学探险</h2>
+          <button type="button" class="profile-select__help-close" data-testid="profile-help-close" aria-label="关闭介绍" @click="helpOpen = false">✕</button>
+        </header>
+        <p class="profile-select__help-lead">
+          每天完成一组数学题，按孩子当前年级出题，并穿插低年级温故题和高年级知新题；做题可以养宠物、开盲盒、收集神兽。
+        </p>
+        <ol class="profile-select__help-steps">
+          <li><strong>选档案</strong><span>点头像，输入 4 位密码进入。</span></li>
+          <li><strong>完成今日题组</strong><span>点“今日探险”，做完当天数学题，获得 1 张盲盒券。</span></li>
+          <li><strong>开盲盒</strong><span>到宠物房开盒，可能获得经验、食物、玩具或宠物。第一次开盒必得宠物。</span></li>
+          <li><strong>订正错题</strong><span>原题订正正确、再做对一道相似题，错题就会移入“总错题集”，还能攒积分和徽章。</span></li>
+          <li><strong>家长区</strong><span>家长可以建档案、设置年级和题量、查看学习报告。</span></li>
+        </ol>
+        <p class="profile-select__help-note">第一次进入还没有宠物，先完成今天的题组拿盲盒券吧。</p>
+        <button type="button" class="profile-select__help-ok" data-testid="profile-help-ok" @click="helpOpen = false">知道了，开始探险</button>
+      </div>
+    </section>
 
     <p v-if="select.loading.value" class="profile-select__loading" data-testid="profile-loading">
       正在打开档案…
@@ -142,6 +168,19 @@ onMounted(async () => {
 }
 
 .profile-select__header { display: grid; justify-items: center; gap: var(--ds-space-xs); text-align: center; }
+.profile-select__help-button { margin-top: 2px; padding: .45rem .9rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-pill); background: rgb(255 255 255 / 7%); color: var(--ds-text-primary); font: inherit; font-size: var(--ds-font-size-caption); cursor: pointer; }
+.profile-select__help { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: var(--ds-space-lg); background: rgb(2 10 20 / 72%); backdrop-filter: blur(6px); }
+.profile-select__help-card { display: grid; gap: var(--ds-space-sm); width: min(100%, 34rem); max-height: min(86dvh, 46rem); overflow-y: auto; padding: var(--ds-space-lg); border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-lg); background: linear-gradient(145deg, rgb(13 37 60 / 98%), rgb(7 23 42 / 98%)); box-shadow: var(--ds-shadow-card); }
+.profile-select__help-head { display: flex; align-items: start; justify-content: space-between; gap: var(--ds-space-sm); }
+.profile-select__help-head h2 { margin: 0; font-size: var(--ds-font-size-title); }
+.profile-select__help-close { width: 2rem; height: 2rem; border: 1px solid var(--ds-glass-border); border-radius: 50%; background: transparent; color: var(--ds-text-secondary); cursor: pointer; }
+.profile-select__help-lead, .profile-select__help-note { margin: 0; color: var(--ds-text-secondary); line-height: var(--ds-line-height-body); }
+.profile-select__help-steps { display: grid; gap: var(--ds-space-sm); margin: 0; padding-left: 1.25rem; }
+.profile-select__help-steps li { padding-left: 2px; }
+.profile-select__help-steps strong { display: block; color: var(--ds-text-primary); }
+.profile-select__help-steps span { color: var(--ds-text-secondary); font-size: var(--ds-font-size-caption); line-height: 1.6; }
+.profile-select__help-note { padding: .6rem .75rem; border-radius: var(--ds-radius-md); background: rgb(255 212 121 / 9%); color: var(--ds-accent-text); font-size: var(--ds-font-size-caption); }
+.profile-select__help-ok { justify-self: end; min-height: 2.75rem; padding: .55rem 1.1rem; border: 0; border-radius: var(--ds-radius-pill); background: var(--ds-accent-500); color: white; font: inherit; font-weight: 700; cursor: pointer; }
 .profile-select__title { margin: 0; font-size: clamp(1.65rem, 7vw, 2.2rem); letter-spacing: .01em; }
 .profile-select__subtitle { margin: 0; color: var(--ds-text-secondary); }
 .profile-select__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-md); margin: 0; padding: 0; list-style: none; }
