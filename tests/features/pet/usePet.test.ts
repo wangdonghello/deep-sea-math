@@ -322,13 +322,13 @@ describe('盲盒', () => {
   })
 
   it('集齐全部伙伴后仍能抽到食物、玩具或经验', async () => {
-    const ids = ['companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger', 'companion-dragon', 'companion-yinglong', 'companion-zhulong', 'companion-qinglong']
+    const ids = ['companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger', 'companion-dragon', 'companion-yinglong', 'companion-zhulong', 'companion-qinglong', 'companion-baihu', 'companion-zhuque', 'companion-xuanwu']
     const store = memoryStore([
       { ...adoption, occurredAt: 1 },
       ...ids.map((id, i) => ({ eventId: `b${i}`, profileId: 'p1', occurredAt: 2, type: 'blind-box-opened' as const, rewardId: id, rewardKind: 'animal' as const })),
-      ...Array.from({ length: 12 }, (_, i) => ({ eventId: `s${i}`, profileId: 'p1', occurredAt: (i + 1) * day, type: 'session-completed' as const, sessionId: `s${i}`, rewards: [] })),
+      ...Array.from({ length: 15 }, (_, i) => ({ eventId: `s${i}`, profileId: 'p1', occurredAt: (i + 1) * day, type: 'session-completed' as const, sessionId: `s${i}`, rewards: [] })),
     ])
-    const pet = usePet({ store, profileId: 'p1', clock: () => 13 * day, random: () => 0.5 })
+    const pet = usePet({ store, profileId: 'p1', clock: () => 16 * day, random: () => 0.5 })
     await pet.load()
     const draw = await pet.openBlindBox()
     expect(draw.reward.kind).not.toBe('animal')

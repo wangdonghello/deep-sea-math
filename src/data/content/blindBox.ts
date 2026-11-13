@@ -2,7 +2,8 @@
  * 盲盒奖励表与抽取规则（v4.3）。
  *
  * 奖励按概率从大到小：经验 21、食物 18、玩具 15、小狗 12、小猫 10、仓鼠 8、
- * 狮子 6、老虎 5、东海龙王 2、应龙 1.5、烛龙 1、青龙 0.5。
+ * 狮子 6、老虎 4.5、东海龙王 2、应龙 1.5、烛龙 1、青龙 0.5、
+ * 白虎 0.3、朱雀 0.15、玄武 0.05。
  *
  * - 动物唯一：已拥有的动物不再进入抽取池；食物、玩具、经验可以重复抽到。
  * - 第一只宠物由第一次开盒保证抽出动物，避免新档案抽到食物后没有宠物。
@@ -33,11 +34,14 @@ export const BLIND_BOX_REWARDS: readonly BlindBoxReward[] = [
   { id: 'companion-cat', kind: 'animal', name: '小猫', emoji: '🐱', weight: 10 },
   { id: 'companion-hamster', kind: 'animal', name: '仓鼠', emoji: '🐹', weight: 8 },
   { id: 'companion-lion', kind: 'animal', name: '狮子', emoji: '🦁', weight: 6 },
-  { id: 'companion-tiger', kind: 'animal', name: '老虎', emoji: '🐯', weight: 5 },
+  { id: 'companion-tiger', kind: 'animal', name: '老虎', emoji: '🐯', weight: 4.5 },
   { id: 'companion-dragon', kind: 'animal', name: '东海龙王', emoji: '🐉', weight: 2 },
   { id: 'companion-yinglong', kind: 'animal', name: '应龙', emoji: '🐲', weight: 1.5 },
   { id: 'companion-zhulong', kind: 'animal', name: '烛龙', emoji: '🔥', weight: 1 },
   { id: 'companion-qinglong', kind: 'animal', name: '青龙', emoji: '🐍', weight: 0.5 },
+  { id: 'companion-baihu', kind: 'animal', name: '白虎', emoji: '🐯', weight: 0.3 },
+  { id: 'companion-zhuque', kind: 'animal', name: '朱雀', emoji: '🦅', weight: 0.15 },
+  { id: 'companion-xuanwu', kind: 'animal', name: '玄武', emoji: '🐢', weight: 0.05 },
 ]
 
 export const ANIMAL_REWARDS: readonly BlindBoxReward[] = BLIND_BOX_REWARDS.filter(

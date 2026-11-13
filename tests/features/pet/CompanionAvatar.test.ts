@@ -7,6 +7,7 @@ import CompanionAvatar, { type CompanionId } from '@/features/pet/CompanionAvata
 const IDS: CompanionId[] = [
   'companion-cat', 'companion-dog', 'companion-hamster', 'companion-lion', 'companion-tiger',
   'companion-dragon', 'companion-yinglong', 'companion-zhulong', 'companion-qinglong',
+  'companion-baihu', 'companion-zhuque', 'companion-xuanwu',
 ]
 const DIRS: Record<CompanionId, string> = {
   'companion-cat': 'cat',
@@ -18,6 +19,9 @@ const DIRS: Record<CompanionId, string> = {
   'companion-yinglong': 'yinglong',
   'companion-zhulong': 'zhulong',
   'companion-qinglong': 'qinglong',
+  'companion-baihu': 'baihu',
+  'companion-zhuque': 'zhuque',
+  'companion-xuanwu': 'xuanwu',
 }
 
 function frame(): Promise<void> {

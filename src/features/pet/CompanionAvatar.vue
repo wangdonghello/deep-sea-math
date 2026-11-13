@@ -10,6 +10,7 @@ import { computed, onBeforeUnmount, ref, watch } from 'vue'
 export type CompanionId =
   | 'companion-cat' | 'companion-dog' | 'companion-hamster' | 'companion-lion' | 'companion-tiger'
   | 'companion-dragon' | 'companion-yinglong' | 'companion-zhulong' | 'companion-qinglong'
+  | 'companion-baihu' | 'companion-zhuque' | 'companion-xuanwu'
 export type CompanionAnimation = 'eat' | 'pet' | 'play'
 
 interface CompanionLook {
@@ -27,6 +28,9 @@ const LOOKS: Record<CompanionId, CompanionLook> = {
   'companion-yinglong': { name: '应龙', dir: 'yinglong' },
   'companion-zhulong': { name: '烛龙', dir: 'zhulong' },
   'companion-qinglong': { name: '青龙', dir: 'qinglong' },
+  'companion-baihu': { name: '白虎', dir: 'baihu' },
+  'companion-zhuque': { name: '朱雀', dir: 'zhuque' },
+  'companion-xuanwu': { name: '玄武', dir: 'xuanwu' },
 }
 
 const props = defineProps<{

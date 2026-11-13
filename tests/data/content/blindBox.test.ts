@@ -10,9 +10,9 @@ describe('blind box catalog', () => {
     expect(BLIND_BOX_REWARDS.slice(0, 3).map((reward) => reward.kind)).toEqual(['xp', 'snack', 'toy'])
   })
 
-  it('九种动物，神龙在最末且概率最低', () => {
-    expect(ANIMAL_REWARDS).toHaveLength(9)
-    expect(ANIMAL_REWARDS.slice(-4).map((reward) => reward.name)).toEqual(['东海龙王', '应龙', '烛龙', '青龙'])
+  it('十二种动物，四象神兽在最末且概率最低', () => {
+    expect(ANIMAL_REWARDS).toHaveLength(12)
+    expect(ANIMAL_REWARDS.slice(-7).map((reward) => reward.name)).toEqual(['东海龙王', '应龙', '烛龙', '青龙', '白虎', '朱雀', '玄武'])
   })
 
   it('第一次开盒只抽动物，保证新档案先拿到宠物', () => {
