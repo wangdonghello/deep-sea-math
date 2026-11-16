@@ -85,8 +85,20 @@ export function trackProfileCreated(grade: number, themeId: string): void {
 }
 
 /** 领养/孵化宠物：只按动物种类聚合，不含档案或昵称。 */
-export function trackPetAdopted(animalId: string): void {
+export function trackPetAdopted(animalId: string, profileId?: string): void {
+  if (!hasAnalyticsConsent()) return
   const safe = animalId.replace(/[^a-z0-9-]/gi, '-').toLowerCase()
+  // 同一档案、同一只宠物只上报一次；这样老档案下次打开宠物房时也能补记，
+  // 又不会因为刷新/切换页面重复增加。
+  if (profileId !== undefined) {
+    try {
+      const key = `dsm.analytics-pet-${profileId}-${safe}`
+      if (globalThis.localStorage?.getItem(key) === '1') return
+      globalThis.localStorage?.setItem(key, '1')
+    } catch {
+      return
+    }
+  }
   trackAnonymous('pet-adopted-total')
   trackAnonymous(`pet-adopted-${safe}`)
 }

@@ -154,6 +154,14 @@ export function usePet(options: {
       // 新档案不再自动领养：孩子先完成题组拿盲盒券，再由盲盒开出第一只宠物。
       // 只有已经领养过的老档案才继续走“历史完成 -> 孵化”的迁移逻辑。
       const adoption = events.value.find((event) => event.profileId === profileId && event.type === 'pet-adopted')
+      // 老档案在统计上线前已经养了宠物：打开宠物房时按已有事件补记一次。
+      // trackPetAdopted 内部按“档案 + 动物”做本地去重，刷新不会重复。
+      for (const event of events.value) {
+        if (event.profileId !== profileId) continue
+        if (event.type === 'pet-adopted' || (event.type === 'blind-box-opened' && event.rewardKind === 'animal')) {
+          trackPetAdopted(event.type === 'pet-adopted' ? event.petId : event.rewardId, profileId)
+        }
+      }
       const adoptedAt = adoption?.occurredAt ?? clock()
       const hatched = events.value.some((event) => event.profileId === profileId && event.type === 'pet-hatched')
       const learnedSinceAdoption = events.value.some(
@@ -308,7 +316,7 @@ export function usePet(options: {
         )
       }
       await append(incoming, profileId)
-      if (!current.adopted && draw.reward.kind === 'animal') trackPetAdopted(draw.reward.id)
+      if (draw.reward.kind === 'animal') trackPetAdopted(draw.reward.id, profileId)
       return draw
     })
   }

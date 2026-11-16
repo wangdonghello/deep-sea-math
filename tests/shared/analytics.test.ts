@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { hasAnalyticsConsent, setAnalyticsConsent, trackPage, trackProfileCreated, trackSessionCompleted, trackSessionStart } from '@/shared/analytics'
+import { hasAnalyticsConsent, setAnalyticsConsent, trackPage, trackProfileCreated, trackPetAdopted, trackSessionCompleted, trackSessionStart } from '@/shared/analytics'
 
 const fetchMock = vi.fn(async (_url: string): Promise<Response> => new Response('{}'))
 
@@ -50,6 +50,15 @@ describe('anonymous analytics', () => {
     const urls = fetchMock.mock.calls.map(([url]) => String(url))
     expect(urls.filter((url) => url.includes('/visit-session-total')).length).toBe(1)
     expect(urls.filter((url) => /\/visit-session-\d{4}-\d{2}-\d{2}/.test(url)).length).toBe(1)
+  })
+
+  it('tracks each adopted pet once per profile', () => {
+    setAnalyticsConsent(true)
+    trackPetAdopted('companion-cat', 'p1')
+    trackPetAdopted('companion-cat', 'p1')
+    const urls = fetchMock.mock.calls.map(([url]) => String(url))
+    expect(urls.filter((url) => url.endsWith('/pet-adopted-total')).length).toBe(1)
+    expect(urls.filter((url) => url.endsWith('/pet-adopted-companion-cat')).length).toBe(1)
   })
 
   it('respects Do Not Track even after consent', () => {
