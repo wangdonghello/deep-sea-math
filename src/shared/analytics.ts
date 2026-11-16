@@ -54,6 +54,26 @@ export function trackAnonymous(key: string): void {
   })
 }
 
+/**
+ * 本次浏览器标签页的首次打开：每个标签页每天只计一次。
+ *
+ * 页面访问计数器会把每次路由切换都算一次；这个计数器用来近似“有多少次
+ * 独立打开”，刷新页面不会重复计（sessionStorage 在同标签页内保留）。
+ */
+export function trackSessionStart(): void {
+  if (!hasAnalyticsConsent()) return
+  const day = new Date().toISOString().slice(0, 10)
+  try {
+    const key = 'dsm.analytics-session'
+    if (globalThis.sessionStorage?.getItem(key) === day) return
+    globalThis.sessionStorage?.setItem(key, day)
+  } catch {
+    return
+  }
+  trackAnonymous('visit-session-total')
+  trackAnonymous(`visit-session-${day}`)
+}
+
 /** 页面访问：只使用路由名，不带 query、session 或题目 id。 */
 export function trackPage(routeName: string): void {
   trackAnonymous(`page-${routeName.replace(/[^a-z0-9-]/gi, '-').toLowerCase()}`)

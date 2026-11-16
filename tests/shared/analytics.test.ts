@@ -1,11 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { hasAnalyticsConsent, setAnalyticsConsent, trackPage, trackProfileCreated, trackSessionCompleted } from '@/shared/analytics'
+import { hasAnalyticsConsent, setAnalyticsConsent, trackPage, trackProfileCreated, trackSessionCompleted, trackSessionStart } from '@/shared/analytics'
 
 const fetchMock = vi.fn(async (_url: string): Promise<Response> => new Response('{}'))
 
 beforeEach(() => {
   localStorage.clear()
+  sessionStorage.clear()
   vi.stubGlobal('fetch', fetchMock)
   Object.defineProperty(navigator, 'doNotTrack', { value: '0', configurable: true })
 })
@@ -13,6 +14,7 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals()
   localStorage.clear()
+  sessionStorage.clear()
 })
 
 describe('anonymous analytics', () => {
@@ -39,6 +41,15 @@ describe('anonymous analytics', () => {
     expect(urls.some((url) => url.endsWith('/page-home'))).toBe(true)
     expect(urls.join(' ')).not.toContain('小深')
     expect(urls.join(' ')).not.toContain('session=')
+  })
+
+  it('counts one session per browser tab per day', () => {
+    setAnalyticsConsent(true)
+    trackSessionStart()
+    trackSessionStart()
+    const urls = fetchMock.mock.calls.map(([url]) => String(url))
+    expect(urls.filter((url) => url.includes('/visit-session-total')).length).toBe(1)
+    expect(urls.filter((url) => /\/visit-session-\d{4}-\d{2}-\d{2}/.test(url)).length).toBe(1)
   })
 
   it('respects Do Not Track even after consent', () => {

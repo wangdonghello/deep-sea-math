@@ -5,7 +5,7 @@ import { initProductionStores } from '@/app/productionStores'
 import { buildQuestContext } from '@/app/questContext'
 import { findUnlockedCreature } from '@/app/unlockedCreature'
 import { useProfileSessionStore } from '@/features/profileSelect/profileSessionStore'
-import { trackPage } from '@/shared/analytics'
+import { trackPage, trackSessionStart } from '@/shared/analytics'
 import { useParentSessionStore } from '@/features/parentPanel/parentSessionStore'
 import {
   HOME_PATH,
@@ -99,6 +99,7 @@ const router = createRouter({
  *    档案上下文，且都要读事件。
  */
 router.afterEach((to) => {
+  trackSessionStart()
   trackPage(typeof to.name === 'string' ? to.name : 'unknown')
 })
 
