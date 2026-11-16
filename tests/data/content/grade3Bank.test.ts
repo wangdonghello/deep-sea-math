@@ -4,12 +4,12 @@ import { QUESTION_BANK, QUESTION_INDEX } from '@/data/content'
 import { assertValidQuestionBank } from '@/data/content/schema'
 
 describe('grade 3 question bank', () => {
-  it('has 216 grade 3 questions and at least 72 choice questions', () => {
+  it('has 240 grade 3 questions and at least 72 choice questions', () => {
     const questions = QUESTION_BANK.questions
-    expect(questions).toHaveLength(216)
+    expect(questions).toHaveLength(240)
     expect(questions.every((question) => question.grade === 3)).toBe(true)
     expect(questions.filter((question) => question.format === 'choice')).toHaveLength(72)
-    expect(questions.filter((question) => question.category === 'applied')).toHaveLength(72)
+    expect(questions.filter((question) => question.category === 'applied').length).toBeGreaterThanOrEqual(72)
   })
 
   it('keeps all choice questions valid and unique', () => {
@@ -23,7 +23,7 @@ describe('grade 3 question bank', () => {
   })
 
   it('exposes a grade 3 index bucket', () => {
-    expect(QUESTION_INDEX.byGrade[3]).toHaveLength(216)
+    expect(QUESTION_INDEX.byGrade[3]).toHaveLength(240)
     expect(QUESTION_INDEX.byGrade[1]).toHaveLength(0)
     expect(QUESTION_INDEX.byGrade[2]).toHaveLength(0)
   })

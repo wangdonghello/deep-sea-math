@@ -36,6 +36,8 @@ export const QUESTION_BANK_LIMITS = {
   minQuestions: 200,
   maxQuestions: 648,
   perGrade: 216,
+  /** 三年级在基础 216 题之外增加了分数/周长面积/年月日/钱币/有余数除法题。 */
+  perGradeOverrides: { 3: 240 } as Readonly<Partial<Record<number, number>>>,
   minPerCell: 8,
 } as const
 
@@ -52,6 +54,11 @@ const STANDARDS_BY_SKILL: Record<string, readonly string[]> = {
   'skill-constant-difference-sequence': ['3.OA.9'], 'skill-doubling-sequence': ['3.OA.9'],
   'skill-second-difference-sequence': ['3.OA.9'], 'skill-square-number-sequence': ['3.OA.9'],
   'skill-double-and-add-one-sequence': ['3.OA.9'],
+  'skill-fraction-basic': ['3.NF.1'], 'skill-fraction-compare': ['3.NF.3'],
+  'skill-fraction-of-quantity': ['3.NF.3'],
+  'skill-perimeter': ['3.MD.8'], 'skill-area': ['3.MD.7'],
+  'skill-calendar': ['3.MD.1'], 'skill-money': ['3.NBT.2'],
+  'skill-estimation': ['3.NBT.1'], 'skill-division-remainder': ['3.OA.7'],
 }
 
 const DEFAULT_STANDARDS_BY_TYPE: Partial<Record<QuizType, readonly string[]>> = {
@@ -226,7 +233,7 @@ function validateQuestionSources(
   if (declaredStandards.some((standard) => !standards.includes(standard))) throw new Error(`${path}: standard tag does not match question skill`)
   for (const standard of standards) {
     if (!tags.includes(`standard:${standard}`)) throw new Error(`${path}: missing standard:${standard} tag for skill`)
-    const domain = standard.includes('NBT') ? 'NBT' : standard.includes('OA') ? 'OA' : 'MD'
+    const domain = /^\d+\.([A-Z]+)\./.exec(standard)?.[1] ?? 'MD'
     const domainUrl = new RegExp(`^https?://www\\.thecorestandards\\.org/Math/Content/3/${domain}/?$`, 'i')
     if (!sources.some((source) => domainUrl.test(source))) throw new Error(`${path}: missing matching standards domain URL`)
   }
@@ -451,7 +458,7 @@ export function assertValidQuestionBank(
 ): asserts value is QuestionBank {
   const bank = record(value, 'questionBank')
   nonEmptyString(bank.version, 'questionBank.version')
-  const { minQuestions, maxQuestions, perGrade, minPerCell } = QUESTION_BANK_LIMITS
+  const { minQuestions, maxQuestions, perGrade, perGradeOverrides, minPerCell } = QUESTION_BANK_LIMITS
   if (!Array.isArray(bank.questions)) throw new Error('questionBank.questions: expected an array')
   const ids = new Set<string>()
   const questions = bank.questions.map((question, index) => {
@@ -485,8 +492,9 @@ export function assertValidQuestionBank(
           }
         }
       }
-      if (gradeQuestions.length !== perGrade) {
-        throw new Error(`questionBank.questions: grade ${grade} needs exactly ${perGrade} questions`)
+      const expected = perGradeOverrides[grade] ?? perGrade
+      if (gradeQuestions.length !== expected) {
+        throw new Error(`questionBank.questions: grade ${grade} needs exactly ${expected} questions`)
       }
     }
   }
