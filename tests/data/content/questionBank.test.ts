@@ -27,6 +27,7 @@ const PATTERN_SEQUENCE_SKILLS = [
   'skill-square-number-sequence',
   'skill-doubling-sequence',
   'skill-double-and-add-one-sequence',
+  'skill-cyclic-pattern',
 ] as const
 
 /** 技能 → 独立声明的 Common Core 标准（与 schema 的真源对拍）。 */
@@ -47,7 +48,7 @@ const EXPECTED_STANDARDS_BY_SKILL: Record<string, string[]> = {
   'skill-fraction-of-quantity': ['3.NF.3'], 'skill-perimeter': ['3.MD.8'],
   'skill-area': ['3.MD.7'], 'skill-calendar': ['3.MD.1'],
   'skill-money': ['3.NBT.2'], 'skill-estimation': ['3.NBT.1'],
-  'skill-division-remainder': ['3.OA.7'],
+  'skill-division-remainder': ['3.OA.7'], 'skill-cyclic-pattern': ['3.OA.9'],
 }
 
 type RawQuestion = Record<string, any>
@@ -99,10 +100,10 @@ function byId(id: string): RawQuestion {
 }
 
 describe('question bank content', () => {
-  it('contains 240 complete questions spanning every type × difficulty cell', () => {
+  it('contains 246 complete questions spanning every type × difficulty cell', () => {
     const bank = readQuestionBank()
-    expect(bank.questions).toHaveLength(240)
-    expect(QUESTION_BANK_LIMITS.maxQuestions).toBeGreaterThanOrEqual(240)
+    expect(bank.questions).toHaveLength(246)
+    expect(QUESTION_BANK_LIMITS.maxQuestions).toBeGreaterThanOrEqual(246)
     assertValidQuestionBank(bank)
 
     for (const { type, difficulty } of CELLS) {
@@ -111,8 +112,8 @@ describe('question bank content', () => {
       const split = QUEST_CATEGORIES.map((category) => cell.filter((question) => question.category === category).length)
       expect(split.reduce((sum, count) => sum + count, 0), `${type} difficulty ${difficulty} category split`).toBe(cell.length)
     }
-    expect(QUESTION_INDEX.byCategory.basic.length + QUESTION_INDEX.byCategory.applied.length + QUESTION_INDEX.byCategory.probe.length).toBe(240)
-    expect(QUESTION_INDEX.byDifficulty[1].length + QUESTION_INDEX.byDifficulty[2].length + QUESTION_INDEX.byDifficulty[3].length).toBe(240)
+    expect(QUESTION_INDEX.byCategory.basic.length + QUESTION_INDEX.byCategory.applied.length + QUESTION_INDEX.byCategory.probe.length).toBe(246)
+    expect(QUESTION_INDEX.byDifficulty[1].length + QUESTION_INDEX.byDifficulty[2].length + QUESTION_INDEX.byDifficulty[3].length).toBe(246)
 
     const creatureIds = new Set(CREATURE_BANK.creatures.map((creature) => creature.id))
     expect(bank.questions.every((question) => question.creatureRef === undefined || creatureIds.has(question.creatureRef))).toBe(true)
@@ -163,7 +164,7 @@ describe('question bank content', () => {
   it('maps every pattern sequence skill to 3.OA.9 even when presented as a data table', () => {
     const bank = readQuestionBank()
     const patternQuestions = bank.questions.filter((question) => question.type === 'pattern-data')
-    expect(patternQuestions).toHaveLength(36)
+    expect(patternQuestions).toHaveLength(42)
     expect(patternQuestions.every((question) => question.tags.some((tag: string) => (PATTERN_SEQUENCE_SKILLS as readonly string[]).includes(tag)))).toBe(true)
 
     for (const skill of PATTERN_SEQUENCE_SKILLS) {

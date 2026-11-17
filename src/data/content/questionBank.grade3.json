@@ -10794,6 +10794,342 @@
       "sources": [
         "https://www.thecorestandards.org/Math/Content/3/OA/"
       ]
+    },
+    {
+      "id": "g3x-25",
+      "grade": 3,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 1,
+      "category": "basic",
+      "story": {
+        "title": "彩灯·五种颜色循环",
+        "body": "彩灯按「红、黄、蓝、绿、橙」5 种颜色循环排列。第 43 盏是什么颜色？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先找出颜色循环的周期。",
+        "用序号除以周期，看余数。",
+        "余数对应循环中的第几种颜色。",
+        "如果余数为零，就是循环的最后一盏。",
+        "比如每三盏一循环，第四盏就回到第一种颜色。"
+      ],
+      "answer": {
+        "value": 3,
+        "unit": "种",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-1",
+        "basic",
+        "skill-cyclic-pattern",
+        "standard:3.OA.9",
+        "theme:roco",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/3/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "红色"
+        },
+        {
+          "id": "B",
+          "label": "黄色"
+        },
+        {
+          "id": "C",
+          "label": "蓝色"
+        },
+        {
+          "id": "D",
+          "label": "绿色"
+        }
+      ]
+    },
+    {
+      "id": "g3x-26",
+      "grade": 3,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "气球·四种颜色循环",
+        "body": "气球按「红、黄、蓝、绿」4 种颜色循环排列。第 38 个气球是什么颜色？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先数清一个循环有几种颜色。",
+        "用总数除以每种循环的个数。",
+        "看余数落在循环的第几个。",
+        "余数是几，就数到第几个颜色。",
+        "比如四个一循环，数到第五个又回到第一个。"
+      ],
+      "answer": {
+        "value": 2,
+        "unit": "种",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "application",
+        "skill-cyclic-pattern",
+        "standard:3.OA.9",
+        "theme:roco",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/3/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "红色"
+        },
+        {
+          "id": "B",
+          "label": "黄色"
+        },
+        {
+          "id": "C",
+          "label": "蓝色"
+        },
+        {
+          "id": "D",
+          "label": "绿色"
+        }
+      ]
+    },
+    {
+      "id": "g3x-27",
+      "grade": 3,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 2,
+      "category": "applied",
+      "story": {
+        "title": "积木·三种形状循环",
+        "body": "积木按「圆形、三角形、正方形」3 种形状循环排列。第 50 块是什么形状？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先确定循环里有几种形状。",
+        "把序号除以循环的种数。",
+        "余数对应循环中的形状位置。",
+        "余数是零时取最后一种。",
+        "比如两种形状循环，单数对应第一种。"
+      ],
+      "answer": {
+        "value": 2,
+        "unit": "种",
+        "optionId": "B"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-2",
+        "application",
+        "skill-cyclic-pattern",
+        "standard:3.OA.9",
+        "theme:roco",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/3/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "圆形"
+        },
+        {
+          "id": "B",
+          "label": "三角形"
+        },
+        {
+          "id": "C",
+          "label": "正方形"
+        },
+        {
+          "id": "D",
+          "label": "长方形"
+        }
+      ]
+    },
+    {
+      "id": "g3x-28",
+      "grade": 3,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "灯笼·六种颜色循环",
+        "body": "灯笼按「红、黄、蓝、绿、紫、橙」6 种颜色循环排列。第 52 盏是什么颜色？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先找出一组循环有几盏。",
+        "用序号除以六。",
+        "余数决定是第几盏。",
+        "余数为零时是循环的最后一盏。",
+        "比如每四盏一循环，第五盏回到第一盏。"
+      ],
+      "answer": {
+        "value": 4,
+        "unit": "种",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "application",
+        "skill-cyclic-pattern",
+        "standard:3.OA.9",
+        "theme:roco",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/3/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "红色"
+        },
+        {
+          "id": "B",
+          "label": "黄色"
+        },
+        {
+          "id": "C",
+          "label": "蓝色"
+        },
+        {
+          "id": "D",
+          "label": "绿色"
+        }
+      ]
+    },
+    {
+      "id": "g3x-29",
+      "grade": 3,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "值日表·星期循环",
+        "body": "值日表按星期一到星期日循环。第 60 天是星期几？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "一星期有七天。",
+        "用总天数除以七。",
+        "余数对应星期几。",
+        "余数为零时是星期日。",
+        "比如第八天又回到星期一。"
+      ],
+      "answer": {
+        "value": 4,
+        "unit": "种",
+        "optionId": "D"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "application",
+        "skill-cyclic-pattern",
+        "standard:3.OA.9",
+        "theme:roco",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/3/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "星期一"
+        },
+        {
+          "id": "B",
+          "label": "星期二"
+        },
+        {
+          "id": "C",
+          "label": "星期三"
+        },
+        {
+          "id": "D",
+          "label": "星期四"
+        }
+      ]
+    },
+    {
+      "id": "g3x-30",
+      "grade": 3,
+      "format": "choice",
+      "type": "pattern-data",
+      "difficulty": 3,
+      "category": "probe",
+      "story": {
+        "title": "生肖·十二种循环",
+        "body": "生肖按「鼠、牛、虎、兔、龙、蛇、马、羊、猴、鸡、狗、猪」12 种循环。第 35 个是什么生肖？"
+      },
+      "requiresFiveStep": false,
+      "hints": [
+        "先数清生肖循环有几种。",
+        "用序号除以十二。",
+        "余数对应生肖的顺序。",
+        "余数为零时是最后一个生肖。",
+        "比如第十三个又回到鼠。"
+      ],
+      "answer": {
+        "value": 3,
+        "unit": "种",
+        "optionId": "C"
+      },
+      "similarQuestionIds": [],
+      "tags": [
+        "pattern-data",
+        "difficulty-3",
+        "application",
+        "skill-cyclic-pattern",
+        "standard:3.OA.9",
+        "theme:roco",
+        "form:choice"
+      ],
+      "sources": [
+        "https://www.thecorestandards.org/Math/Content/3/OA/"
+      ],
+      "options": [
+        {
+          "id": "A",
+          "label": "猴"
+        },
+        {
+          "id": "B",
+          "label": "鸡"
+        },
+        {
+          "id": "C",
+          "label": "狗"
+        },
+        {
+          "id": "D",
+          "label": "猪"
+        }
+      ]
     }
   ]
 }

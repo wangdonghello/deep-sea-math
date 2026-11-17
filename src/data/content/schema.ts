@@ -16,7 +16,7 @@ import { tokenizeExpression, unitAliases } from '../../domain/quiz/answerJudgeme
 /** Supported mathematical answer units, including curriculum counting units. */
 const QUESTION_UNITS = new Set([
   ...Object.values(unitAliases).flat(),
-  '份', '项', '格', '瓶', '节', '次', '轮', '人', '毫升', '组',
+  '份', '项', '格', '瓶', '节', '次', '轮', '人', '毫升', '组', '种',
   '平方厘米', '平方分米', '平方米', '立方厘米', '立方分米', '立方米', '度', '厘米/秒', '千米/时',
 ])
 
@@ -37,7 +37,7 @@ export const QUESTION_BANK_LIMITS = {
   maxQuestions: 648,
   perGrade: 216,
   /** 三年级在基础 216 题之外增加了分数/周长面积/年月日/钱币/有余数除法题。 */
-  perGradeOverrides: { 3: 240 } as Readonly<Partial<Record<number, number>>>,
+  perGradeOverrides: { 3: 246 } as Readonly<Partial<Record<number, number>>>,
   minPerCell: 8,
 } as const
 
@@ -59,6 +59,7 @@ const STANDARDS_BY_SKILL: Record<string, readonly string[]> = {
   'skill-perimeter': ['3.MD.8'], 'skill-area': ['3.MD.7'],
   'skill-calendar': ['3.MD.1'], 'skill-money': ['3.NBT.2'],
   'skill-estimation': ['3.NBT.1'], 'skill-division-remainder': ['3.OA.7'],
+  'skill-cyclic-pattern': ['3.OA.9'],
 }
 
 const DEFAULT_STANDARDS_BY_TYPE: Partial<Record<QuizType, readonly string[]>> = {
