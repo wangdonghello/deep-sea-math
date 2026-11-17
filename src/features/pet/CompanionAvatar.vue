@@ -53,7 +53,7 @@ const mood = computed(() => {
   return Math.min(100, Math.max(0, Math.round(raw)))
 })
 const low = computed(() => mood.value < 40)
-const src = computed(() => `${import.meta.env.BASE_URL}pets/${look.value.dir}/lv${level.value}.webp?v=20261118`)
+const src = computed(() => `${import.meta.env.BASE_URL}pets/${look.value.dir}/lv${level.value}.webp?v=20261119`)
 
 const animation = ref<CompanionAnimation | null>(null)
 let timer: number | undefined
