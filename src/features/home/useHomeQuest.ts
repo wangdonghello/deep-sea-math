@@ -253,7 +253,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
    * 那会让首页持有一份与图鉴内容必然漂移的清单。
    */
   function rewardLabel(): string {
-    return '下一区图鉴卡 + 徽章'
+    return '图鉴卡+徽章+积分+盲盒（正确率100%）'
   }
 
   /**

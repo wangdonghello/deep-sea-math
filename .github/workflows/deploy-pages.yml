@@ -71,7 +71,7 @@ jobs:
             <head>
               <meta charset="utf-8" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <title>页面已停用 · 深海数学探险</title>
+              <title>页面已停用 · 自主学习潜航</title>
               <style>
                 body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #071a2e; color: #eaf6ff; font-family: system-ui, sans-serif; }
                 main { max-width: 32rem; padding: 2rem; text-align: center; }

@@ -191,7 +191,7 @@ describe('views: HomeView', () => {
     expect(view.get('[data-testid="map-panel"]').attributes('data-theme')).toBe('space')
     expect(view.text()).toContain('近地轨道')
     expect(view.get('[data-testid="summary-zones"]').text()).toBe('0 / 4')
-    expect(view.text()).toContain('下一站太空图鉴')
+    expect(view.text()).toContain('图鉴卡+徽章+积分+盲盒（正确率100%）')
     expect(view.get('[data-testid="tab-bestiary"]').text()).toContain('🪐')
   })
 

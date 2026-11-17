@@ -55,7 +55,7 @@ onMounted(async () => {
     <section v-if="helpOpen" class="profile-select__help" data-testid="profile-help" role="dialog" aria-modal="true" aria-labelledby="profile-help-title" @click.self="helpOpen = false">
       <div class="profile-select__help-card">
         <header class="profile-select__help-head">
-          <h2 id="profile-help-title">欢迎来到深海数学探险</h2>
+          <h2 id="profile-help-title">欢迎来到自主学习潜航</h2>
           <button type="button" class="profile-select__help-close" data-testid="profile-help-close" aria-label="关闭介绍" @click="helpOpen = false">✕</button>
         </header>
         <p class="profile-select__help-lead">

@@ -33,7 +33,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>深海数学探险 · 匿名使用统计</title>
+<title>自主学习潜航 · 匿名使用统计</title>
 <style>
 :root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#07101f;color:#e9f3ff;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}
 main{max-width:920px;margin:0 auto;padding:28px 20px 60px}h1{font-size:26px;margin:0 0 6px}.muted{color:#8ea6c4;margin:0}

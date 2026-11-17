@@ -79,6 +79,8 @@ const home = useHomeQuest({
 /** 任务卡模型；未加载完成时用占位态渲染，避免布局跳动。 */
 const card = computed(() => home.card.value)
 const activeSubject = ref<'math' | 'chinese'>('math')
+/** 今日任务卡的目标奖励：完成整组后按正确率结算。 */
+const QUEST_REWARD_LABEL = '图鉴卡+徽章+积分+盲盒（正确率100%）'
 const freePracticeOpen = ref(false)
 const specialPracticeOpen = ref(false)
 const practiceError = ref('')
@@ -220,7 +222,7 @@ onMounted(async () => {
         :answered="card.answered"
         :total="card.total"
         :estimated-minutes="card.estimatedMinutes"
-        :reward-label="theme.rewardLabel"
+        :reward-label="QUEST_REWARD_LABEL"
         :done-label="theme.doneLabel"
         :claiming="home.claiming.value"
         @start="onStart"
