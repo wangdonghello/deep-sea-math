@@ -270,12 +270,13 @@ export function usePet(options: {
   }
 
   /** 自由练习：答完一题落一条事件，积分/XP 由投影半速结算。 */
-  function answerFreePractice(questionId: string, correct: boolean): Promise<void> {
+  function answerFreePractice(questionId: string, correct: boolean, special = false): Promise<void> {
     const profileId = toValue(options.profileId)
     if (profileId === null) throw new Error('没有选择档案')
     return enqueue(async () => {
       await append([{
         ...base(profileId), eventId: randomUuid(), type: 'free-practice-answered', questionId, correct,
+        ...(special ? { special: true } : {}),
       }], profileId)
     })
   }

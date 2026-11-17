@@ -31,7 +31,6 @@ import { MAX_PET_PER_DAY, MAX_PLAY_PER_DAY } from '@/domain/pet/petProjection'
 import type { DomainEvent } from '@/domain/model/types'
 import TabBar from '@/features/home/TabBar.vue'
 import CompanionAvatar, { type CompanionAnimation, type CompanionId } from '@/features/pet/CompanionAvatar.vue'
-import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
 import PetAvatar from '@/features/pet/PetAvatar.vue'
 import { usePet } from '@/features/pet/usePet'
 import type { PetStore } from '@/features/pet/usePet'
@@ -68,7 +67,6 @@ const {
   play,
   openBlindBox,
   setMainPet,
-  answerFreePractice,
 } = usePet({
   store: props.store,
   profileId: () => props.profileId,
@@ -145,21 +143,6 @@ async function onOpenBox(): Promise<void> {
   }
 }
 
-async function onFreePracticeAnswer(questionId: string, correct: boolean): Promise<void> {
-  try {
-    await answerFreePractice(questionId, correct)
-    await load()
-    now.value = clock()
-    if (correct) {
-      reaction.value = '+2 XP · 积分半速累计'
-      if (reactionTimer !== null) clearTimeout(reactionTimer)
-      reactionTimer = setTimeout(() => { reaction.value = '' }, 1600)
-    }
-  } catch (err) {
-    actionError.value = err instanceof Error ? err.message : '这一题没记上，再试一次吧'
-  }
-}
-
 function closeBox(): void {
   boxOpen.value = false
   boxResult.value = null
@@ -169,8 +152,6 @@ function closeBox(): void {
 const busy = ref(false)
 
 const noProfile = computed(() => props.profileId === null)
-const practiceOpen = ref(false)
-const practiceGrade = computed(() => props.grade ?? 3)
 
 const displayName = computed(() => {
   if (!state.value.adopted) return '还没有宠物'
@@ -649,13 +630,6 @@ onBeforeUnmount(() => {
           </button>
         </section>
       </template>
-
-        <button type="button" class="pet-room__practice-open" data-testid="open-free-practice"
-          @click="practiceOpen = !practiceOpen">
-          ✏️ 自由练习 <small>奖励减半，随时可练</small>
-        </button>
-        <FreePracticePanel v-if="practiceOpen" :grade="practiceGrade"
-          @answer="onFreePracticeAnswer" @close="practiceOpen = false" />
 
         <section class="pet-room__blindbox" aria-label="盲盒">
           <header class="pet-room__blindbox-head">

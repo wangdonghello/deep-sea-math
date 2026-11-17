@@ -32,7 +32,10 @@ import { ZONES } from '@/features/home/zones'
 import { homeThemeById } from '@/features/home/homeThemes'
 import { resolveDeepSeaProgress } from '@/features/bestiary/deepSeaProgress'
 import type { HomeStore } from '@/features/home/types'
-import type { Question } from '@/domain/model/types'
+import type { DomainEvent, Question } from '@/domain/model/types'
+import { randomUuid } from '@/domain/crypto/randomUuid'
+import FreePracticePanel from '@/features/pet/FreePracticePanel.vue'
+import SpecialPracticePanel from '@/features/mathPractice/SpecialPracticePanel.vue'
 
 const props = defineProps<{
   store: HomeStore
@@ -76,6 +79,41 @@ const home = useHomeQuest({
 /** 任务卡模型；未加载完成时用占位态渲染，避免布局跳动。 */
 const card = computed(() => home.card.value)
 const activeSubject = ref<'math' | 'chinese'>('math')
+const freePracticeOpen = ref(false)
+const specialPracticeOpen = ref(false)
+const practiceError = ref('')
+const practiceGrade = computed(() => home.profile.value?.grade ?? 3)
+
+function toggleFreePractice(): void {
+  freePracticeOpen.value = !freePracticeOpen.value
+  if (freePracticeOpen.value) specialPracticeOpen.value = false
+}
+
+function toggleSpecialPractice(): void {
+  specialPracticeOpen.value = !specialPracticeOpen.value
+  if (specialPracticeOpen.value) freePracticeOpen.value = false
+}
+
+/** 自由练习/专项练习都写同一种事件；专项标记让账本按双倍结算。 */
+async function onPracticeAnswer(questionId: string, correct: boolean, special: boolean): Promise<void> {
+  const profileId = home.profile.value?.profileId
+  if (profileId === undefined) return
+  practiceError.value = ''
+  const event: DomainEvent = {
+    eventId: (props.idGenerator ?? randomUuid)(),
+    profileId,
+    occurredAt: (props.clock ?? Date.now)(),
+    type: 'free-practice-answered',
+    questionId,
+    correct,
+    ...(special ? { special: true } : {}),
+  }
+  try {
+    await props.store.appendEvents([event])
+  } catch {
+    practiceError.value = '练习记录没保存成功，再试一次吧。'
+  }
+}
 
 /**
  * 点「开始下潜」。
@@ -189,6 +227,24 @@ onMounted(async () => {
         @claim="home.claimToday()"
       />
 
+      <section v-if="activeSubject === 'math'" class="home__practice" data-testid="math-practice">
+        <button type="button" class="home__practice-open" data-testid="open-free-practice" @click="toggleFreePractice">
+          <span aria-hidden="true">✏️</span>
+          自由练习 <small>答对 2 题 = 1 积分（半速）</small>
+        </button>
+        <FreePracticePanel v-if="freePracticeOpen" :grade="practiceGrade"
+          @answer="(id, correct) => void onPracticeAnswer(id, correct, false)"
+          @close="freePracticeOpen = false" />
+        <button type="button" class="home__practice-open home__practice-open--special" data-testid="open-special-practice" @click="toggleSpecialPractice">
+          <span aria-hidden="true">🧠</span>
+          专项练习 <small>三年级 8 类 80 题 · 答对 1 题 = 2 积分（双倍）</small>
+        </button>
+        <SpecialPracticePanel v-if="specialPracticeOpen" :grade="practiceGrade"
+          @answer="(id, correct) => void onPracticeAnswer(id, correct, true)"
+          @close="specialPracticeOpen = false" />
+        <p v-if="practiceError !== ''" class="home__practice-error" role="alert">{{ practiceError }}</p>
+      </section>
+
       <button v-if="activeSubject === 'chinese'" type="button" class="home__chinese" data-testid="start-chinese" @click="emit('start-chinese')">
         🀄 语文探险 <small>每天 6 题 · 拼音/识字/阅读</small>
       </button>
@@ -252,4 +308,9 @@ onMounted(async () => {
   background: rgb(8 30 52 / 72%); color: var(--ds-text-primary); font: inherit; font-weight: 700;
 }
 .home__chinese small { color: var(--ds-text-secondary); font-size: .72rem; font-weight: 400; }
+.home__practice { display: grid; gap: var(--ds-space-sm); margin-top: var(--ds-space-sm); }
+.home__practice-open { display: flex; flex-wrap: wrap; gap: .35rem .6rem; align-items: center; justify-content: flex-start; width: 100%; min-height: 3rem; padding: .65rem .85rem; border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-lg); background: rgb(7 24 42 / 82%); color: var(--ds-text-primary); font: inherit; text-align: left; }
+.home__practice-open small { color: var(--ds-text-secondary); font-size: .72rem; }
+.home__practice-open--special { border-color: rgb(168 140 255 / 45%); }
+.home__practice-error { margin: 0; color: #ffd0a6; font-size: .8rem; }
 </style>

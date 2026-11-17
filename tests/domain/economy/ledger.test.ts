@@ -276,4 +276,15 @@ describe('自由练习积分', () => {
     }))
     expect(resolveLedger(events, 'p1').balance).toBe(1)
   })
+
+  it('专项练习每答对 1 题记 2 分，且不与自由练习混算', () => {
+    const events: DomainEvent[] = [
+      ...Array.from({ length: 2 }, (_, i) => ({
+        eventId: `special-${i}`, profileId: 'p1', occurredAt: i, type: 'free-practice-answered' as const,
+        questionId: `sp${i}`, correct: true, special: true,
+      })),
+      { eventId: 'free-0', profileId: 'p1', occurredAt: 2, type: 'free-practice-answered', questionId: 'q0', correct: true },
+    ]
+    expect(resolveLedger(events, 'p1').balance).toBe(4)
+  })
 })

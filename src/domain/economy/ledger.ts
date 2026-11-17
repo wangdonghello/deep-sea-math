@@ -130,11 +130,14 @@ export function resolveLedger(events: readonly DomainEvent[], profileId: string)
     if (event.type === 'item-purchased') spent += event.price
   }
 
-  // 自由练习半速：每答对 2 题记 1 分（等价于每题 0.5 分，但余额保持整数）。
+  // 自由练习半速：每答对 2 题记 1 分；专项练习双倍：每答对 1 题记 2 分。
   const freeCorrect = scoped.filter(
-    (event) => event.type === 'free-practice-answered' && event.correct,
+    (event) => event.type === 'free-practice-answered' && event.correct && event.special !== true,
   ).length
-  earned += Math.floor(freeCorrect / 2)
+  const specialCorrect = scoped.filter(
+    (event) => event.type === 'free-practice-answered' && event.correct && event.special === true,
+  ).length
+  earned += Math.floor(freeCorrect / 2) + specialCorrect * 2
 
   return { balance: earned - spent, earned, spent }
 }
