@@ -1,21 +1,48 @@
 <script setup lang="ts">
 /** 专项思维练习：8 类 × 10 题，答对一题双倍积分。 */
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { SPECIAL_CATEGORIES, SPECIAL_QUESTIONS } from '@/data/content/specialPractice'
 
-const props = defineProps<{ grade?: number }>()
+const props = defineProps<{
+  grade?: number
+  /** 今天每个专项已经答过的题数（父组件从事件里读）。 */
+  answered?: Readonly<Record<string, number>>
+}>()
 const emit = defineEmits<{
-  (event: 'answer', questionId: string, correct: boolean): void
+  (event: 'answer', questionId: string, correct: boolean, category: string): void
   (event: 'close'): void
 }>()
 
 const category = ref<string>(SPECIAL_CATEGORIES[0])
 const questions = computed(() => SPECIAL_QUESTIONS.filter((item) => item.category === category.value))
 const index = ref(0)
-const question = computed(() => questions.value[index.value])
+const localAnswered = ref(0)
 const input = ref('')
 const result = ref<'correct' | 'wrong' | null>(null)
+
+/** 每个专项每天一轮：最多 10 题，题目不足 10 道时以实际题数为准。 */
+const roundSize = computed(() => Math.min(10, questions.value.length))
+const answeredCount = computed(() => Math.max(localAnswered.value, props.answered?.[category.value] ?? 0))
+const locked = computed(() => questions.value.length > 0 && answeredCount.value >= roundSize.value)
+
+/** 按天轮换题目顺序，避免每天总是前 10 题。 */
+const orderedQuestions = computed(() => {
+  const list = questions.value
+  if (list.length === 0) return list
+  const offset = Math.floor(Date.now() / 86400000) % list.length
+  return [...list.slice(offset), ...list.slice(0, offset)]
+})
+const question = computed(() => orderedQuestions.value[index.value])
+
+function countFor(name: string): number {
+  return name === category.value ? answeredCount.value : (props.answered?.[name] ?? 0)
+}
+
+function isCategoryDone(name: string): boolean {
+  const size = Math.min(10, SPECIAL_QUESTIONS.filter((item) => item.category === name).length)
+  return size > 0 && countFor(name) >= size
+}
 
 function normalize(value: string): string {
   return value
@@ -40,24 +67,38 @@ function isCorrect(submitted: string, answer: string): boolean {
   return actual !== '' && (actual === expected || actual.includes(expected))
 }
 
-function chooseCategory(next: string): void {
-  category.value = next
-  index.value = 0
+function syncCategory(): void {
+  localAnswered.value = props.answered?.[category.value] ?? 0
+  index.value = localAnswered.value % Math.max(1, orderedQuestions.value.length)
   input.value = ''
   result.value = null
 }
+
+function chooseCategory(next: string): void {
+  category.value = next
+  syncCategory()
+}
+
+watch(() => props.answered?.[category.value], (value) => {
+  if (typeof value === 'number' && value > localAnswered.value) localAnswered.value = value
+})
 
 function submit(): void {
   const current = question.value
   if (current === undefined || input.value.trim() === '' || result.value !== null) return
   const correct = isCorrect(input.value, current.answer)
   result.value = correct ? 'correct' : 'wrong'
-  emit('answer', current.id, correct)
+  localAnswered.value += 1
+  emit('answer', current.id, correct, category.value)
 }
 
 function next(): void {
   if (questions.value.length === 0) return
-  index.value = (index.value + 1) % questions.value.length
+  if (localAnswered.value >= roundSize.value) {
+    result.value = null
+    return
+  }
+  index.value = (index.value + 1) % orderedQuestions.value.length
   input.value = ''
   result.value = null
 }
@@ -68,7 +109,7 @@ function next(): void {
     <header class="special-practice__head">
       <div>
         <strong>专项思维练习</strong>
-        <span>三年级 · 8 类 80 题 · 答对 1 题 = 2 积分</span>
+        <span>三年级 · {{ SPECIAL_CATEGORIES.length }} 类 {{ SPECIAL_QUESTIONS.length }} 题 · 答对 1 题 = 2 积分</span>
       </div>
       <button type="button" class="special-practice__close" data-testid="special-practice-close" @click="emit('close')">收起</button>
     </header>
@@ -85,15 +126,32 @@ function next(): void {
         role="tab"
         :aria-selected="item === category"
         class="special-practice__cat"
-        :class="{ 'is-active': item === category }"
+        :class="{ 'is-active': item === category, 'is-done': isCategoryDone(item) }"
         @click="chooseCategory(item)"
-      >{{ item }}</button>
+      >{{ item }}{{ isCategoryDone(item) ? ' ✓' : '' }}</button>
     </div>
 
-    <template v-if="question">
+    <template v-if="result !== null && question">
       <div class="special-practice__meta">
         <span>{{ '★'.repeat(question.stars) }}</span>
-        <span>{{ index + 1 }} / {{ questions.length }}</span>
+        <span>{{ answeredCount }} / {{ roundSize }}</span>
+      </div>
+      <p class="special-practice__prompt">{{ question.prompt }}</p>
+      <div class="special-practice__feedback" :class="`is-${result}`" data-testid="special-practice-result">
+        <strong>{{ result === 'correct' ? '答对了！+2 积分' : '再想想，看看思路' }}</strong>
+        <p>答案：{{ question.answer }}</p>
+        <p>{{ question.explanation }}</p>
+        <p v-if="locked" class="special-practice__done">今天这个专项已经完成，明天再来。</p>
+        <button v-else type="button" class="special-practice__next" data-testid="special-practice-next" @click="next">下一题</button>
+      </div>
+    </template>
+    <p v-else-if="locked" class="special-practice__locked" data-testid="special-practice-locked">
+      今天这个专项已经完成一轮（{{ roundSize }} 题），明天再来。
+    </p>
+    <template v-else-if="question">
+      <div class="special-practice__meta">
+        <span>{{ '★'.repeat(question.stars) }}</span>
+        <span>{{ answeredCount + 1 }} / {{ roundSize }}</span>
       </div>
       <p class="special-practice__prompt">{{ question.prompt }}</p>
       <form class="special-practice__form" @submit.prevent="submit">
@@ -107,12 +165,6 @@ function next(): void {
         >
         <button type="submit" class="special-practice__submit" data-testid="special-practice-submit" :disabled="result !== null">检查</button>
       </form>
-      <div v-if="result !== null" class="special-practice__feedback" :class="`is-${result}`" data-testid="special-practice-result">
-        <strong>{{ result === 'correct' ? '答对了！+2 积分' : '再想想，看看思路' }}</strong>
-        <p>答案：{{ question.answer }}</p>
-        <p>{{ question.explanation }}</p>
-        <button type="button" class="special-practice__next" data-testid="special-practice-next" @click="next">下一题</button>
-      </div>
     </template>
   </section>
 </template>
@@ -127,6 +179,8 @@ function next(): void {
 .special-practice__cats { display: flex; flex-wrap: wrap; gap: .35rem; }
 .special-practice__cat { border: 1px solid var(--ds-glass-border); border-radius: var(--ds-radius-pill); background: transparent; color: var(--ds-text-secondary); font: inherit; font-size: .72rem; padding: .25rem .55rem; }
 .special-practice__cat.is-active { border-color: var(--ds-glow-primary); background: rgb(24 78 116 / 65%); color: var(--ds-text-primary); }
+.special-practice__cat.is-done { border-color: rgb(126 224 168 / 55%); color: #9ef0b8; }
+.special-practice__locked, .special-practice__done { margin: 0; color: #9ef0b8; font-size: .82rem; }
 .special-practice__meta { display: flex; justify-content: space-between; color: var(--ds-accent-300); font-size: .75rem; }
 .special-practice__prompt { margin: 0; color: var(--ds-text-primary); line-height: 1.6; }
 .special-practice__form { display: flex; gap: var(--ds-space-sm); }

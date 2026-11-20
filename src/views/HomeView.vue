@@ -85,6 +85,30 @@ const freePracticeOpen = ref(false)
 const specialPracticeOpen = ref(false)
 const practiceError = ref('')
 const practiceGrade = computed(() => home.profile.value?.grade ?? 3)
+/** 今天各专项已答题数：每个专项完成 10 题（不足 10 题则全部）后锁定。 */
+const specialAnswered = ref<Record<string, number>>({})
+
+function utcDayKey(at: number): string {
+  return new Date(at).toISOString().slice(0, 10)
+}
+
+async function loadSpecialProgress(): Promise<void> {
+  const profileId = home.profile.value?.profileId
+  if (profileId === undefined) return
+  try {
+    const events = await props.store.listEvents(profileId)
+    const today = utcDayKey((props.clock ?? Date.now)())
+    const counts: Record<string, number> = {}
+    for (const event of events) {
+      if (event.type !== 'free-practice-answered' || event.special !== true) continue
+      if (utcDayKey(event.occurredAt) !== today || event.specialCategory === undefined) continue
+      counts[event.specialCategory] = (counts[event.specialCategory] ?? 0) + 1
+    }
+    specialAnswered.value = counts
+  } catch {
+    // 统计失败不影响练习入口；面板会从 0 开始，服务端仍以事件为准。
+  }
+}
 
 function toggleFreePractice(): void {
   freePracticeOpen.value = !freePracticeOpen.value
@@ -97,7 +121,7 @@ function toggleSpecialPractice(): void {
 }
 
 /** 自由练习/专项练习都写同一种事件；专项标记让账本按双倍结算。 */
-async function onPracticeAnswer(questionId: string, correct: boolean, special: boolean): Promise<void> {
+async function onPracticeAnswer(questionId: string, correct: boolean, special: boolean, category?: string): Promise<void> {
   const profileId = home.profile.value?.profileId
   if (profileId === undefined) return
   practiceError.value = ''
@@ -109,9 +133,16 @@ async function onPracticeAnswer(questionId: string, correct: boolean, special: b
     questionId,
     correct,
     ...(special ? { special: true } : {}),
+    ...(category === undefined ? {} : { specialCategory: category }),
   }
   try {
     await props.store.appendEvents([event])
+    if (special && category !== undefined) {
+      specialAnswered.value = {
+        ...specialAnswered.value,
+        [category]: (specialAnswered.value[category] ?? 0) + 1,
+      }
+    }
   } catch {
     practiceError.value = '练习记录没保存成功，再试一次吧。'
   }
@@ -163,6 +194,7 @@ const currentZoneForStatus = computed(() =>
 
 onMounted(async () => {
   await home.load()
+  await loadSpecialProgress()
 })
 </script>
 
@@ -239,10 +271,11 @@ onMounted(async () => {
           @close="freePracticeOpen = false" />
         <button type="button" class="home__practice-open home__practice-open--special" data-testid="open-special-practice" @click="toggleSpecialPractice">
           <span aria-hidden="true">🧠</span>
-          专项练习 <small>三年级 8 类 80 题 · 答对 1 题 = 2 积分（双倍）</small>
+          专项练习 <small>三年级 14 类 180 题 · 答对 1 题 = 2 积分（双倍）</small>
         </button>
         <SpecialPracticePanel v-if="specialPracticeOpen" :grade="practiceGrade"
-          @answer="(id, correct) => void onPracticeAnswer(id, correct, true)"
+          @answer="(id, correct, category) => void onPracticeAnswer(id, correct, true, category)"
+          :answered="specialAnswered"
           @close="specialPracticeOpen = false" />
         <p v-if="practiceError !== ''" class="home__practice-error" role="alert">{{ practiceError }}</p>
       </section>

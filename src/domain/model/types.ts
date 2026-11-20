@@ -589,6 +589,8 @@ export interface FreePracticeAnsweredEvent extends EventBase {
   correct: boolean
   /** 专项练习标记：积分按双倍结算；缺省为自由练习（半速）。 */
   special?: boolean
+  /** 专项类别；用于每个专项每天只能完成一轮的限额。 */
+  specialCategory?: string
 }
 
 /** 设置主宠物：进入宠物房间时默认展示它。 */
