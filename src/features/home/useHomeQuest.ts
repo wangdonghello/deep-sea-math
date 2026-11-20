@@ -415,6 +415,7 @@ export function useHomeQuest(options: HomeQuestOptions) {
         masteryByQuestion: snapshot.projections.masteryByQuestion,
         clock,
         idGenerator,
+        shuffleDaily: options.shuffleDaily === true,
       })
 
       await store.appendEvents([quest.sessionStartedEvent, ...quest.fallbackEvents])

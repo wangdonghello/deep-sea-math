@@ -63,6 +63,7 @@ function onNavigate(tabId: string): void {
     :store="stores.home"
     :pool="POOL"
     :pool-by-grade="POOL_BY_GRADE"
+    :shuffle-daily="true"
     @start="(sessionId) => router.push(`/quest?session=${sessionId}`)"
     @start-chinese="onStartChinese"
     @navigate="onNavigate"

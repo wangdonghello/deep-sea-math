@@ -77,6 +77,8 @@ export interface DailyQuestInput {
   clock?: () => number
   /** 注入的 ID 发生器，依次产出 session ID 与组题事件 ID。缺省 `crypto.randomUUID()`。 */
   idGenerator?: () => string
+  /** 生产环境按天洗牌选题；测试缺省关闭以保持题序可回归。 */
+  shuffleDaily?: boolean
 }
 
 /** 当日题组产物。 */
@@ -194,12 +196,34 @@ function interleaveBySkill(bucket: readonly Question[]): Question[] {
   return out
 }
 
+function hashSeed(text: string): number {
+  let hash = 2166136261
+  for (let i = 0; i < text.length; i += 1) {
+    hash ^= text.charCodeAt(i)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+
+function shuffledForDay<T>(list: readonly T[], seedText: string): T[] {
+  const out = [...list]
+  let state = hashSeed(seedText)
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0
+    const j = state % (i + 1)
+    ;[out[i], out[j]] = [out[j], out[i]]
+  }
+  return out
+}
+
 function pickBalanced(
   available: readonly Question[],
   effectiveDifficulty: number,
   needed: number,
   dayIndex: number,
   categoryIndex: number,
+  shuffleDaily = false,
+  seedPrefix = '',
 ): { picked: Question[]; repeats: number } {
   const tier = available.filter((question) => question.difficulty === effectiveDifficulty)
   const pool = tier.length === 0 ? [...available] : tier
@@ -212,15 +236,21 @@ function pickBalanced(
   const typeOrder = [...groups.keys()]
   if (typeOrder.length === 0) return { picked: [], repeats: 0 }
   const start = (((dayIndex + categoryIndex * 2) % typeOrder.length) + typeOrder.length) % typeOrder.length
-  const rotated = [...typeOrder.slice(start), ...typeOrder.slice(0, start)]
+  const rotated = shuffleDaily
+    ? shuffledForDay(typeOrder, `${seedPrefix}:${dayIndex}:${categoryIndex}:types`)
+    : [...typeOrder.slice(start), ...typeOrder.slice(0, start)]
   // 只要题池包含多个类型，每天也从各类型的不同题目位置开始轮转；
   // 单类型 fixture/小池维持原排序，兼容既有确定性契约。
   if (typeOrder.length > 1) {
     for (const [typeIndex, type] of rotated.entries()) {
       const bucket = groups.get(type) ?? []
       if (bucket.length < 2) continue
-      const offset = (dayIndex + typeIndex + categoryIndex) % bucket.length
-      groups.set(type, interleaveBySkill([...bucket.slice(offset), ...bucket.slice(0, offset)]))
+      if (shuffleDaily) {
+        groups.set(type, shuffledForDay(interleaveBySkill(bucket), `${seedPrefix}:${dayIndex}:${categoryIndex}:${type}`))
+      } else {
+        const offset = (dayIndex + typeIndex + categoryIndex) % bucket.length
+        groups.set(type, interleaveBySkill([...bucket.slice(offset), ...bucket.slice(0, offset)]))
+      }
     }
   }
 
@@ -368,7 +398,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
     const targetNeeded = Math.max(0, needed - reviewQuota - previewQuota)
 
     const balanced = atEffectiveTier.length > 0
-      ? pickBalanced(atEffectiveTier, effective.difficulty, targetNeeded, dayIndex, categoryIndex)
+      ? pickBalanced(atEffectiveTier, effective.difficulty, targetNeeded, dayIndex, categoryIndex, input.shuffleDaily === true, profileId)
       : { picked: [] as Question[], repeats: 0 }
     questionIds.push(...balanced.picked.map((question) => question.id))
     repeatCount += balanced.repeats
@@ -388,7 +418,7 @@ export function buildDailyQuest(input: DailyQuestInput): DailyQuest {
       if (quota <= 0) return []
       const tier = neighborPool.filter((question) => question.difficulty === forcedDifficulty)
       const use = tier.length > 0 ? tier : neighborPool
-      return pickBalanced(use, forcedDifficulty, quota, dayIndex, categoryIndex + offset).picked
+      return pickBalanced(use, forcedDifficulty, quota, dayIndex, categoryIndex + offset, input.shuffleDaily === true, profileId).picked
     }
     const reviewPicked = pickNeighbors(reviewAvailable, reviewQuota, 3, 3)
     const previewPicked = pickNeighbors(previewAvailable, previewQuota, 5, 1)

@@ -52,6 +52,8 @@ const props = defineProps<{
   clock?: () => number
   idGenerator?: () => string
   logger?: (entry: Record<string, unknown>) => void
+  /** 生产环境按天洗牌选题，避免每天题序固定。 */
+  shuffleDaily?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -74,6 +76,7 @@ const home = useHomeQuest({
   clock: props.clock,
   idGenerator: props.idGenerator,
   logger: props.logger,
+  shuffleDaily: props.shuffleDaily === true,
 })
 
 /** 任务卡模型；未加载完成时用占位态渲染，避免布局跳动。 */
@@ -85,7 +88,7 @@ const freePracticeOpen = ref(false)
 const specialPracticeOpen = ref(false)
 const practiceError = ref('')
 const practiceGrade = computed(() => home.profile.value?.grade ?? 3)
-/** 今天各专项已答题数：每个专项完成 10 题（不足 10 题则全部）后锁定。 */
+/** 今天各专项已答题数：每个专项完成 5 题（不足 5 题则全部）后锁定。 */
 const specialAnswered = ref<Record<string, number>>({})
 
 function utcDayKey(at: number): string {

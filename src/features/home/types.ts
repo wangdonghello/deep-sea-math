@@ -73,6 +73,8 @@ export interface HomeQuestOptions {
   pool: readonly Question[]
   /** 按年级提供的题池；缺省回落到 `pool`（测试与第一版调用兼容）。 */
   poolByGrade?: Partial<Record<Grade, readonly Question[]>>
+  /** 生产环境按天洗牌选题；测试缺省关闭以保持题序可回归。 */
+  shuffleDaily?: boolean
   /**
    * 日志出口；发出的对象先经 `redact()` 脱敏。
    *

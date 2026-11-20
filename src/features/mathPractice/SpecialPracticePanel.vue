@@ -21,17 +21,39 @@ const localAnswered = ref(0)
 const input = ref('')
 const result = ref<'correct' | 'wrong' | null>(null)
 
-/** 每个专项每天一轮：最多 10 题，题目不足 10 道时以实际题数为准。 */
-const roundSize = computed(() => Math.min(10, questions.value.length))
+/** 每个专项每天一轮：最多 5 题，题目不足 5 道时以实际题数为准。 */
+const roundSize = computed(() => Math.min(5, questions.value.length))
 const answeredCount = computed(() => Math.max(localAnswered.value, props.answered?.[category.value] ?? 0))
 const locked = computed(() => questions.value.length > 0 && answeredCount.value >= roundSize.value)
 
-/** 按天轮换题目顺序，避免每天总是前 10 题。 */
+/** 每个专项一副固定洗牌顺序；按天切 5 题，一个周期内不重复。 */
+function hashText(text: string): number {
+  let hash = 2166136261
+  for (let i = 0; i < text.length; i += 1) {
+    hash ^= text.charCodeAt(i)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+
+function seededShuffle<T>(list: readonly T[], seed: number): T[] {
+  const out = [...list]
+  let state = seed >>> 0
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0
+    const j = state % (i + 1)
+    ;[out[i], out[j]] = [out[j], out[i]]
+  }
+  return out
+}
+
 const orderedQuestions = computed(() => {
   const list = questions.value
   if (list.length === 0) return list
-  const offset = Math.floor(Date.now() / 86400000) % list.length
-  return [...list.slice(offset), ...list.slice(0, offset)]
+  const deck = seededShuffle(list, hashText(category.value))
+  const dayIndex = Math.floor(Date.now() / 86400000)
+  const offset = (dayIndex * roundSize.value) % deck.length
+  return [...deck.slice(offset), ...deck.slice(0, offset)]
 })
 const question = computed(() => orderedQuestions.value[index.value])
 
@@ -40,7 +62,7 @@ function countFor(name: string): number {
 }
 
 function isCategoryDone(name: string): boolean {
-  const size = Math.min(10, SPECIAL_QUESTIONS.filter((item) => item.category === name).length)
+  const size = Math.min(5, SPECIAL_QUESTIONS.filter((item) => item.category === name).length)
   return size > 0 && countFor(name) >= size
 }
 

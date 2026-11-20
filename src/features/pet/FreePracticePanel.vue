@@ -24,8 +24,19 @@ const pool = computed<readonly Question[]>(() => {
   )
 })
 
-const index = ref(pool.value.length === 0 ? 0 : Math.floor(Math.random() * pool.value.length))
-const question = computed<Question | undefined>(() => pool.value[index.value % Math.max(1, pool.value.length)])
+function shuffled<T>(list: readonly T[]): T[] {
+  const out = [...list]
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[out[i], out[j]] = [out[j], out[i]]
+  }
+  return out
+}
+
+/** 每次打开都重新洗牌，避免每天/每次看到同一批题和同一顺序。 */
+const deck = ref<Question[]>(shuffled(pool.value))
+const index = ref(0)
+const question = computed<Question | undefined>(() => deck.value[index.value % Math.max(1, deck.value.length)])
 const input = ref('')
 const result = ref<'correct' | 'wrong' | null>(null)
 
@@ -40,8 +51,8 @@ function submit(): void {
 defineExpose({ question })
 
 function next(): void {
-  if (pool.value.length === 0) return
-  index.value = (index.value + 1) % pool.value.length
+  if (deck.value.length === 0) return
+  index.value = (index.value + 1) % deck.value.length
   input.value = ''
   result.value = null
 }
