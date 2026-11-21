@@ -48,6 +48,11 @@ export const ANIMAL_REWARDS: readonly BlindBoxReward[] = BLIND_BOX_REWARDS.filte
   (reward) => reward.kind === 'animal',
 )
 
+/** 四条神龙：正确率 100% 的券让它们的权重各 ×10。 */
+export const DRAGON_REWARD_IDS: readonly string[] = [
+  'companion-dragon', 'companion-yinglong', 'companion-zhulong', 'companion-qinglong',
+]
+
 export interface BlindBoxDraw {
   readonly reward: BlindBoxReward
   /** 兼容旧日志：历史事件里可能记录过重复动物转换。 */
@@ -76,16 +81,38 @@ function pickWeighted(random: () => number, pool: readonly BlindBoxReward[]): Bl
  * @param random 返回 [0, 1) 的随机源；测试注入固定值。
  * @param ownedAnimalIds 已拥有的动物 id，重复的不进入抽取池。
  * @param firstPet 第一次开盒：只在动物池里抽，保证新档案先拿到宠物。
+ * @param dragonBoost 该券来自正确率 100% 的题组：龙的权重 ×10。
  */
 export function drawBlindBox(
   random: () => number,
   ownedAnimalIds: readonly string[],
   firstPet = false,
+  dragonBoost = false,
 ): BlindBoxDraw {
   const unownedAnimals = ANIMAL_REWARDS.filter((reward) => !ownedAnimalIds.includes(reward.id))
   const pool = firstPet
     ? unownedAnimals
     : BLIND_BOX_REWARDS.filter((reward) => reward.kind !== 'animal' || !ownedAnimalIds.includes(reward.id))
   if (pool.length === 0) throw new Error('盲盒里暂时没有可抽的奖励')
-  return { reward: pickWeighted(random, pool) }
+  if (!dragonBoost) return { reward: pickWeighted(random, pool) }
+
+  // 把「龙的总概率」精确放大到原来的 10 倍，而不是简单把权重 ×10：
+  // 权重 ×10 会被总和归一化稀释，实际只提升约 7 倍。
+  const total = pool.reduce((sum, reward) => sum + reward.weight, 0)
+  const dragonWeight = pool
+    .filter((reward) => DRAGON_REWARD_IDS.includes(reward.id))
+    .reduce((sum, reward) => sum + reward.weight, 0)
+  if (dragonWeight === 0) return { reward: pickWeighted(random, pool) }
+  const target = dragonWeight * 10
+  if (target >= total) {
+    const onlyDragons = pool.map((reward) =>
+      DRAGON_REWARD_IDS.includes(reward.id) ? reward : { ...reward, weight: 0 },
+    )
+    return { reward: pickWeighted(random, onlyDragons) }
+  }
+  const factor = (10 * (total - dragonWeight)) / (total - 10 * dragonWeight)
+  const weighted = pool.map((reward) =>
+    DRAGON_REWARD_IDS.includes(reward.id) ? { ...reward, weight: reward.weight * factor } : reward,
+  )
+  return { reward: pickWeighted(random, weighted) }
 }

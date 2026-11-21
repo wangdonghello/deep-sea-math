@@ -1,4 +1,4 @@
-import { resolveLedger } from '@/domain/economy/ledger'
+import { isSessionPerfect, resolveLedger } from '@/domain/economy/ledger'
 import { petItemById } from '@/data/content/petCatalog'
 import { levelFromXp, stageFromLevel, type PetStage } from './growth'
 import type { DomainEvent } from '@/domain/model/types'
@@ -29,6 +29,8 @@ export interface PetState {
   readonly owned: readonly string[]
   /** 盲盒券：完成过的天数减去已开盒次数。 */
   readonly tickets: number
+  /** 下一张券是否来自正确率 100% 的题组（抽到龙的概率 ×10）。 */
+  readonly nextTicketBoost: boolean
   /** 已拥有的动物伙伴 id（每种唯一）。 */
   readonly ownedAnimals: readonly string[]
   /** 主宠物 id：进入房间时默认展示。 */
@@ -90,8 +92,14 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   // 盲盒券按“完成过题组的天数”发，不受领养水位线影响：新档案先做题、后领养，
   // 第一张券不能因为还没有宠物就消失。历史完成也会计入，作为老档案的迁移补偿。
   const ticketDays = new Set<string>()
+  const completedSessionsByDay = new Map<string, string[]>()
   for (const event of sorted) {
-    if (event.profileId === profileId && event.type === 'session-completed') ticketDays.add(dayKey(event.occurredAt))
+    if (event.profileId !== profileId || event.type !== 'session-completed') continue
+    const day = dayKey(event.occurredAt)
+    ticketDays.add(day)
+    const sessions = completedSessionsByDay.get(day) ?? []
+    sessions.push(event.sessionId)
+    completedSessionsByDay.set(day, sessions)
   }
   let adopted = false
   let hatched = false
@@ -223,6 +231,13 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
   if (!hasPetStateEvent) lastUpdatedAt = now
 
   const level = levelFromXp(xp)
+  const sortedTicketDays = [...ticketDays].sort()
+  const nextTicketDay = sortedTicketDays[openedBoxes]
+  const nextTicketBoost = nextTicketDay !== undefined &&
+    (completedSessionsByDay.get(nextTicketDay) ?? []).some((sessionId) =>
+      isSessionPerfect(sorted, profileId, sessionId),
+    )
+
   return {
     adopted,
     hatched,
@@ -235,6 +250,7 @@ export function replayPet(events: readonly DomainEvent[], profileId: string, now
     inventory,
     owned: [...owned].sort(),
     tickets: Math.max(0, ticketDays.size - openedBoxes),
+    nextTicketBoost,
     ownedAnimals: [...ownedAnimals].sort(),
     mainPetId,
     pets,

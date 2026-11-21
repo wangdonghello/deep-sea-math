@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { ANIMAL_REWARDS, BLIND_BOX_REWARDS, drawBlindBox } from '@/data/content/blindBox'
+import { ANIMAL_REWARDS, BLIND_BOX_REWARDS, DRAGON_REWARD_IDS, drawBlindBox } from '@/data/content/blindBox'
 
 describe('blind box catalog', () => {
   it('奖励按概率从大到小排列，权重合计 100', () => {
@@ -18,6 +18,11 @@ describe('blind box catalog', () => {
   it('第一次开盒只抽动物，保证新档案先拿到宠物', () => {
     const draw = drawBlindBox(() => 0.1, [], true)
     expect(draw.reward.kind).toBe('animal')
+  })
+
+  it('全对券让四条龙的权重各 ×10，更容易抽到龙', () => {
+    expect(drawBlindBox(() => 0.7, []).reward.id).toBe('companion-cat')
+    expect(DRAGON_REWARD_IDS).toContain(drawBlindBox(() => 0.7, [], false, true).reward.id)
   })
 
   it('后续可以抽到经验、食物、玩具，动物不重复', () => {

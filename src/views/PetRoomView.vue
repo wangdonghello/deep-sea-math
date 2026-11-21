@@ -636,6 +636,9 @@ onBeforeUnmount(() => {
             <span>🎁 盲盒</span>
             <span class="pet-room__blindbox-tickets" data-testid="blind-box-tickets">券 {{ state.tickets }}</span>
           </header>
+          <p v-if="state.nextTicketBoost" class="pet-room__boost" data-testid="blind-box-boost">
+            这张券来自全对题组：抽到龙的概率 ×10
+          </p>
           <div class="pet-room__collection" data-testid="animal-collection">
             <span v-for="animal in ANIMAL_REWARDS" :key="animal.id"
               class="pet-room__collection-item"
@@ -1505,6 +1508,7 @@ onBeforeUnmount(() => {
 }
 .pet-room__blindbox-head { display: flex; justify-content: space-between; color: var(--ds-text-primary); font-weight: 700; }
 .pet-room__blindbox-tickets { color: #ffd479; font-variant-numeric: tabular-nums; }
+.pet-room__boost { margin: 0; color: #9ef0b8; font-size: .78rem; }
 .pet-room__collection { display: flex; gap: var(--ds-space-sm); overflow-x: auto; padding-bottom: 2px; }
 .pet-room__collection-item { display: grid; flex: 0 0 auto; justify-items: center; width: 3.2rem; opacity: .45; }
 .pet-room__collection-item.is-owned { opacity: 1; }

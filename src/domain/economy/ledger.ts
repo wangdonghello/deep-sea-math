@@ -79,6 +79,16 @@ function collectSessionAccuracy(scoped: readonly DomainEvent[]): Map<string, Ses
   return bySession
 }
 
+/** 该题组是否所有声明题目都独立答对（正确率 100%）。 */
+export function isSessionPerfect(
+  events: readonly DomainEvent[],
+  profileId: string,
+  sessionId: string,
+): boolean {
+  const stats = collectSessionAccuracy(events.filter((event) => event.profileId === profileId)).get(sessionId)
+  return stats !== undefined && stats.declared > 0 && stats.independentCorrect.size >= stats.declared
+}
+
 /**
  * 从事件推导积分余额；购买价格以事件为准。
  *

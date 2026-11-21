@@ -300,7 +300,7 @@ export function usePet(options: {
     return enqueue(async () => {
       const current = snapshot(profileId)
       if (current.tickets <= 0) throw new Error('还没有盲盒券，先完成今天的题组吧')
-      const draw = drawBlindBox(options.random ?? Math.random, current.ownedAnimals, !current.adopted)
+      const draw = drawBlindBox(options.random ?? Math.random, current.ownedAnimals, !current.adopted, current.nextTicketBoost)
       const now = clock()
       const incoming: DomainEvent[] = [{
         ...base(profileId), eventId: randomUuid(), type: 'blind-box-opened',

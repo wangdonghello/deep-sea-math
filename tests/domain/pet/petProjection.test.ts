@@ -272,6 +272,20 @@ describe('replayPet 盲盒', () => {
     expect(pet.inventory['seaweed-cookie']).toBe(1)
   })
 
+  it('正确率 100% 的题组让下一张券带双倍龙概率标记', () => {
+    const events: DomainEvent[] = [
+      { eventId: 'st', profileId: 'p1', occurredAt: 1, type: 'session-started', sessionId: 's1', questionIds: ['q1', 'q2'], difficultyTrace: [1] },
+      { eventId: 'a1', profileId: 'p1', occurredAt: 2, type: 'answer-submitted', sessionId: 's1', questionId: 'q1', submitted: '1', correct: true, usedHintLevel: 0, retryCount: 0, ms: 10 },
+      { eventId: 'a2', profileId: 'p1', occurredAt: 3, type: 'answer-submitted', sessionId: 's1', questionId: 'q2', submitted: '1', correct: true, usedHintLevel: 0, retryCount: 0, ms: 10 },
+      { eventId: 'done', profileId: 'p1', occurredAt: 4, type: 'session-completed', sessionId: 's1', rewards: [] },
+    ]
+    expect(replayPet(events, 'p1', 10).nextTicketBoost).toBe(true)
+    const imperfect = structuredClone(events)
+    const second = imperfect.find((event) => event.type === 'answer-submitted' && event.questionId === 'q2')!
+    if (second.type === 'answer-submitted') second.correct = false
+    expect(replayPet(imperfect, 'p1', 10).nextTicketBoost).toBe(false)
+  })
+
   it('经验与动物奖励生效，动物不重复', () => {
     const events: DomainEvent[] = [
       adopted,
